@@ -110,10 +110,10 @@ void makeRooDataSet_psi2S_Data(
     hEffPt[2] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_20_to_200_absy1p6_1p8",isTnP,isPtW));
     hEffPt[3] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_20_to_200_absy1p8_2p4",isTnP,isPtW));}
   */
-    hEffPt[0] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_20_to_200_absy0_1p2",isTnP,isPtW));
-    hEffPt[1] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_20_to_200_absy1p2_1p6",isTnP,isPtW));
-    hEffPt[2] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_20_to_200_absy1p6_1p8",isTnP,isPtW));
-    hEffPt[3] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_20_to_200_absy1p8_2p4",isTnP,isPtW));
+    hEffPt[0] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_0_to_200_absy0_1p2",isTnP,isPtW));
+    hEffPt[1] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_0_to_200_absy1p2_1p6",isTnP,isPtW));
+    hEffPt[2] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_0_to_200_absy1p6_1p8",isTnP,isPtW));
+    hEffPt[3] = (TH1D*) fEff -> Get(Form("mc_eff_vs_pt_TnP%d_PtW%d_cent_0_to_200_absy1p8_2p4",isTnP,isPtW));
 
   TFile *fAcc = new TFile(Form("./Eff_Acc/acceptance_Prompt_Psi2s_GenOnly_wgt%d_20220125.root",isPtW),"read");
   TH1D* hAccPt[3];
@@ -300,13 +300,13 @@ void makeRooDataSet_psi2S_Data(
               && IsAcceptanceQQ(pt1[j],eta1[j]) && IsAcceptanceQQ(pt2[j],eta2[j])){
             weight_acc=1;
             weight_eff=1;
-			cout << "pt : " << pt[j] << " y : " << y[j] << endl;
+		//	cout << "pt : " << pt[j] << " y : " << y[j] << endl;
             if(fAccW){
               if ( abs((double)y[j])<1.6 ) {weight_acc = getAccWeight(hAccPt[1], pt[j]);}
               else if ( abs((double)y[j])>1.6 && abs((double)y[j])<2.4 ) { weight_acc = getAccWeight(hAccPt[2], pt[j]);}
             }
             if(fEffW){
-              if ( abs((double)y[j])>=0.0 && abs((double)y[j])<1.2 ) { weight_eff = getEffWeight(hEffPt[0], pt[j]); cout << "HERE" << endl; }
+              if ( abs((double)y[j])>=0.0 && abs((double)y[j])<1.2 ) { weight_eff = getEffWeight(hEffPt[0], pt[j]);  }
               else if ( abs((double)y[j])>=1.2 && abs((double)y[j])<1.6 ) { weight_eff = getEffWeight(hEffPt[1], pt[j]); }
               else if ( abs((double)y[j])>=1.6 && abs((double)y[j])<1.8 ) { weight_eff = getEffWeight(hEffPt[2], pt[j]); }
               else if ( abs((double)y[j])>=1.8 && abs((double)y[j])<2.4 ) { weight_eff = getEffWeight(hEffPt[3], pt[j]); }
