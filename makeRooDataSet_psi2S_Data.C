@@ -30,6 +30,7 @@ void Get2DHistSqrt(TH2D* h1 =0, TH2D* h2=0);
 void GetHistBkg(TH1D* h1 =0, TH1D* h2=0);
 
 void makeRooDataSet_psi2S_Data(
+	double yLow=0, double yHigh=1.6,
     int cLow = 0, int cHigh = 200,
     float massLow = 3.3, float massHigh =4.1, 
     bool dimusign=true, bool isMC = false, 
@@ -238,10 +239,11 @@ void makeRooDataSet_psi2S_Data(
   RooRealVar* recoQQ = new RooRealVar("recoQQsign","qq sign",-1,3,"");
   RooRealVar* ctau3DVar    = new RooRealVar("ctau3D","c_{#tau}", -100000.0, 100000.0, "mm");
   RooRealVar* ctau3DErrVar = new RooRealVar("ctau3DErr","#sigma_{c#tau}", -100000.0, 100000.0, "mm");
-  RooRealVar* ctau3DResVar = new RooRealVar("ctau3DRes","c_{#tau}", -100000.0, 100000.0, "");
+  //RooRealVar* ctau3DResVar = new RooRealVar("ctau3DRes","c_{#tau}", -100000.0, 100000.0, "");
   RooRealVar* NumDimu = new RooRealVar("NumDimu","number of dimuon",0,100,"");
   RooArgSet* argSet    = new RooArgSet(*massVar, *ptVar, *yVar, *pt1Var, *pt2Var, *eta1Var, *eta2Var,*evtWeight);
-  argSet->add(*cBinVar); argSet->add(*recoQQ); argSet->add(*NumDimu); argSet->add(*ctau3DVar); argSet->add(*ctau3DErrVar); argSet->add(*ctau3DResVar);
+  argSet->add(*cBinVar); argSet->add(*recoQQ); argSet->add(*NumDimu); argSet->add(*ctau3DVar); argSet->add(*ctau3DErrVar); 
+  //argSet->add(*ctau3DResVar);
   RooDataSet* dataSet  = new RooDataSet("dataset", " a dataset", *argSet);
 
   ////////////////////////////////////////////////////////////////////////
@@ -252,7 +254,7 @@ void makeRooDataSet_psi2S_Data(
   else if(hiHFBinEdge==-1) fCentSelHF = "HFDown";
 
   TFile* newfile;
-  //newfile = new TFile(Form("OniaFlowSkim_isMC%d_%s_%s_220311.root", isMC,kineLabel.Data(),fCentSelHF.Data()),"recreate");
+  newfile = new TFile(Form("./skimmedFiles/OniaFlowSkim_isMC%d_%s_220311.root", isMC,fCentSelHF.Data()),"recreate");
 
   const static int nMaxDimu_ = 1000;
   int nDimu_;
@@ -286,7 +288,7 @@ void makeRooDataSet_psi2S_Data(
       if(cBin>=cLow&&cBin<cHigh){ 
         for(int j=0; j<nDimu; j++){
           //cout<<"Evt: "<<i<<", Cent: "<<cBin<<", mass: "<<mass[j]<<", pt: "<<pt[j]<<", pt1:"<<pt1[j]<<", pt2: "<<pt2[j]<<", eta1: "<<eta1[j]<<", eta2: "<<eta2[j]<<", vz: "<<vz<<endl;
-          if(! ((double)pt[j]<50 && recoQQsign[j]==0 && abs((double)y[j])<2.4 
+          if(! ((double)pt[j]<50 && recoQQsign[j]==0 && abs((double)y[j])>yLow && abs((double)y[j])<yHigh
                 && IsAcceptanceQQ(pt1[j],eta1[j]) && IsAcceptanceQQ(pt2[j],eta2[j])) ) continue;
           nDimuPass++;
         }
@@ -296,7 +298,7 @@ void makeRooDataSet_psi2S_Data(
         // Fill Dimuon Loop
         nDimu_=0;
         for(int j=0; j<nDimu; j++){
-          if((double)pt[j]<50&&recoQQsign[j]==0&&mass[j]>massLow&&mass[j]<massHigh&&abs(y[j])<2.4
+          if((double)pt[j]<50&&recoQQsign[j]==0&&mass[j]>massLow&&mass[j]<massHigh&&abs(y[j])>yLow&&abs(y[j])<yHigh
               && IsAcceptanceQQ(pt1[j],eta1[j]) && IsAcceptanceQQ(pt2[j],eta2[j])){
             weight_acc=1;
             weight_eff=1;
@@ -325,7 +327,7 @@ void makeRooDataSet_psi2S_Data(
             cBinVar->setVal( (double)cBin ) ;
             ctau3DVar->setVal( (double)ctau3D[j] ) ;
             ctau3DErrVar->setVal( (double)ctau3DErr[j] ) ;
-            ctau3DResVar->setVal( (double)ctau3D[j]/ctau3DErr[j] ) ;
+            //ctau3DResVar->setVal( (double)ctau3D[j]/ctau3DErr[j] ) ;
             evtWeight->setVal( (double)weight_ ) ;
             NumDimu->setVal((int)nDimu);
             //cout<<"Evt: "<<j<<", Cent: "<<cBin<<", mass: "<<mass[j]<<", pt: "<<pt[j]<<", pt1:"<<pt1[j]<<", pt2: "<<pt2[j]<<", eta1: "<<eta1[j]<<", eta2: "<<eta2[j]<<", vz: "<<vz<<endl;
@@ -345,8 +347,8 @@ void makeRooDataSet_psi2S_Data(
     mmevttree->Write();
     newfile->Close();
 
-    TFile *wf = new TFile(Form("skimmedFiles/OniaRooDataSet_isMC%d_Psi2S_cent%i_%i_Effw%d_Accw%d_PtW%d_TnP%d_221117.root", 
-          isMC,cLow,cHigh,fEffW,fAccW,isPtW,isTnP),"recreate");  wf->cd();
+    TFile *wf = new TFile(Form("skimmedFiles/OniaRooDataSet_isMC%d_Psi2S_y%.2f_%.2f_cent%i_%i_Effw%d_Accw%d_PtW%d_TnP%d_221117.root", 
+          isMC,yLow,yHigh,cLow,cHigh,fEffW,fAccW,isPtW,isTnP),"recreate");  wf->cd();
     dataSet->Write();
 
     cout<<"How many Jpsi??: "<<nDimu_one<<endl;
