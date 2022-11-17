@@ -43,7 +43,7 @@ void get_Eff_psi_pbpb_dh_v5(
 
   //input files
   //PbPb
-  TString inputMC1 = "../OniatreeMC_Psi2S_pThat-2_TuneCP5_HydjetDrumMB_5p02TeV_pythia8.root";
+  TString inputMC1 = "/work2/Oniatree/Psi2S/OniatreeMC_Psi2S_pThat-2_TuneCP5_HydjetDrumMB_5p02TeV_pythia8.root";
   if(state==2) inputMC1 = "/work2/Oniatree/JPsi/OniatreeMC_BToJpsi_pThat-2_TuneCP5-EvtGen_HydjetDrumMB_5p02TeV_pythia8.root";	//PbPb_non prompt
   TChain* mytree = new TChain("myTree"); 
   mytree->Add(inputMC1.Data());
@@ -614,7 +614,7 @@ void get_Eff_psi_pbpb_dh_v5(
   hy_eff ->SetName(Form("mc_eff_vs_rap_TnP%d_PtW%d",isTnP, isPtWeight));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20220125.root",cLow,cHigh,isPtWeight,isTnP);
+  TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20221116.root",cLow,cHigh,isPtWeight,isTnP);
   if(state==2) outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20211207.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
