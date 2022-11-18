@@ -26,7 +26,7 @@ using namespace RooFit;
 void MassFit_FixPar_Data(
     double ptLow=3, double ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
-    int cLow=20, int cHigh=120,
+    int cLow=0, int cHigh=200,
     int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
     )
 {
@@ -63,7 +63,7 @@ void MassFit_FixPar_Data(
   //massLow=2.75;
 
 //  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_JPsi_PRw_Effw1_Accw1_PtW1_TnP1_220107.root"));
+  f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
   //f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_220808.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
 //  f1 = new TFile("../../skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
 //  f1 = new TFile("/Users/hwan/tools/2019/CMS/JPsi/Jpsi_v2_PbPb2018/skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
@@ -225,9 +225,12 @@ void MassFit_FixPar_Data(
   //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,1400000);
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
-  if (ptLow==6.5&&ptHigh==50)  {
-	   NBkg_limit = 1000000;
-	   NJpsi_limit = 30000; }
+  if (ptLow==12&&ptHigh==15)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
+  else if (ptLow==15&&ptHigh==20)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
