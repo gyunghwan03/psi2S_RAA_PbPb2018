@@ -13,12 +13,12 @@
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
 #include "RooStats/SPlot.h"
-#include "../cutsAndBin.h"
-#include "../CMS_lumi_v2mass.C"
-#include "../tdrstyle.C"
-#include "../rootFitHeaders.h"
-#include "../commonUtility.h"
-#include "../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
 
 using namespace std;
 using namespace RooFit;
@@ -57,7 +57,7 @@ void Final2DFit(
   TString kineCut; TString OS; 
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
   
-  f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f && cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, massLow, massHigh, cLow, cHigh);
   OS="recoQQsign==0 &&";
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
@@ -68,9 +68,9 @@ void Final2DFit(
   fCRes = new TFile(Form("roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   fCBkg = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   //fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root","Corr",kineLabel.Data()));
-  if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
-  else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
-  else fCTrue = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
+  //if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
+  //else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
+  fCTrue = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
