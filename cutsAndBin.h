@@ -42,8 +42,9 @@ int selGlbTrkSoftID = 14;
 int selGlbNTrkSoftID = 15;
 int selGlbOTrkSoftID = 16;
 
-const int Ntrig = 4;
+const int Ntrig = 5;
 int kTrigJpsi = 12;
+int kTrigJpsipp = 3;
 int kTrigUps = 13;
 int kTrigL1DBOS40100 = 0;
 int kTrigL1DB50100 = 2;
@@ -268,6 +269,10 @@ TString getKineLabelJpsi(float ptLow, float ptHigh, float yLow, float yHigh, int
 TString getKineLabel(float ptLow, float ptHigh, float yLow, float yHigh, float muPtCut_, int cLow, int cHigh) {
   TString kineLabel = Form("pt%.1f-%.1f_y%.1f-%.1f_muPt%.1f",ptLow,ptHigh, yLow, yHigh, (float)muPtCut_) ;
     kineLabel = kineLabel+ Form("_centrality%d-%d",(int)cLow, (int)cHigh) ;
+  return kineLabel;
+}
+TString getKineLabelpp(float ptLow, float ptHigh, float yLow, float yHigh, float muPtCut_) {
+  TString kineLabel = Form("pt%.1f-%.1f_y%.1f-%.1f_muPt%.1f",ptLow,ptHigh, yLow, yHigh, (float)muPtCut_) ;
   return kineLabel;
 }
 
