@@ -21,10 +21,10 @@ void dndpt_y1p6_2p4_pp(int PR=0, int WRITE=1) {
   TH1::SetDefaultSumw2();
 
   //// modify by hand according to the pt range of the sample
-  const int nPtBins=6;
-  double ptBin[nPtBins+1]={4,5,6,7,8,10,12};
-  const int nPtBinsMC=6;
-  double ptBinMC[nPtBinsMC+1]={4,5,6,7,8,10,12};
+  const int nPtBins=7;
+  double ptBin[nPtBins+1]={3,4,5,6,7,8,10,12};
+  const int nPtBinsMC=7;
+  double ptBinMC[nPtBinsMC+1]={3,4,5,6,7,8,10,12};
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double frac[nPtBins];
