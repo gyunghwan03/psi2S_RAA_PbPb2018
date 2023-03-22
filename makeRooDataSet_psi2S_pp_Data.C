@@ -34,7 +34,7 @@ void makeRooDataSet_psi2S_pp_Data(
     float massLow = 3.3, float massHigh =4.1, 
     bool dimusign=true, bool isMC = false, 
     bool fAccW = false, bool fEffW = false,
-    bool isTnP = true, bool isPtW = true,
+    bool isTnP = false, bool isPtW = false,
     int hiHFBinEdge = 0,
     int dtype = 1, 
     int weight_PR = 0
@@ -188,10 +188,10 @@ void makeRooDataSet_psi2S_pp_Data(
   RooRealVar* recoQQ = new RooRealVar("recoQQsign","qq sign",-1,3,"");
   RooRealVar* ctau3DVar    = new RooRealVar("ctau3D","c_{#tau}", -100000.0, 100000.0, "mm");
   RooRealVar* ctau3DErrVar = new RooRealVar("ctau3DErr","#sigma_{c#tau}", -100000.0, 100000.0, "mm");
-  //RooRealVar* ctau3DResVar = new RooRealVar("ctau3DRes","c_{#tau}", -100000.0, 100000.0, "");
+  RooRealVar* ctau3DResVar = new RooRealVar("ctau3DRes","c_{#tau}", -100000.0, 100000.0, "");
   RooRealVar* NumDimu = new RooRealVar("NumDimu","number of dimuon",0,100,"");
   RooArgSet* argSet    = new RooArgSet(*massVar, *ptVar, *yVar, *pt1Var, *pt2Var, *eta1Var, *eta2Var,*evtWeight);
-  //argSet->add(*ctau3DResVar);
+  argSet->add(*ctau3DResVar); argSet->add(*ctau3DVar); argSet->add(*ctau3DErrVar);
   RooDataSet* dataSet  = new RooDataSet("dataset", " a dataset", *argSet);
 
   ////////////////////////////////////////////////////////////////////////
@@ -247,6 +247,8 @@ void makeRooDataSet_psi2S_pp_Data(
         for(int j=0; j<nDimu; j++){
           if((double)pt[j]<50&&recoQQsign[j]==0&&mass[j]>massLow&&mass[j]<massHigh&&abs(y[j])>yLow&&abs(y[j])<yHigh
               && IsAcceptanceQQ(pt1[j],eta1[j]) && IsAcceptanceQQ(pt2[j],eta2[j])){
+			  //if((double)pt[j]>3&&(double)pt[j]<4.5) { cout << "HERE" << " pt : " << (double)pt[j] << endl; }
+			  if((double)pt[j]==3) { cout << "HERE" << " pt : " << (double)pt[j] << endl; }
             weight_acc=1;
             weight_eff=1;
 		//	cout << "pt : " << pt[j] << " y : " << y[j] << endl;
@@ -273,7 +275,7 @@ void makeRooDataSet_psi2S_pp_Data(
             eta2Var->setVal( (double)eta2[j] );
             ctau3DVar->setVal( (double)ctau3D[j] ) ;
             ctau3DErrVar->setVal( (double)ctau3DErr[j] ) ;
-            //ctau3DResVar->setVal( (double)ctau3D[j]/ctau3DErr[j] ) ;
+            ctau3DResVar->setVal( (double)ctau3D[j]/ctau3DErr[j] ) ;
             evtWeight->setVal( (double)weight_ ) ;
             NumDimu->setVal((int)nDimu);
             //cout<<"Evt: "<<j<<", Cent: "<<cBin<<", mass: "<<mass[j]<<", pt: "<<pt[j]<<", pt1:"<<pt1[j]<<", pt2: "<<pt2[j]<<", eta1: "<<eta1[j]<<", eta2: "<<eta2[j]<<", vz: "<<vz<<endl;
@@ -292,7 +294,7 @@ void makeRooDataSet_psi2S_pp_Data(
     mmevttree->Write();
     newfile->Close();
 
-    TFile *wf = new TFile(Form("skimmedFiles/OniaRooDataSet_isMC%d_Psi2S_pp_y%.2f_%.2f_Effw%d_Accw%d_PtW%d_TnP%d_230117.root", 
+    TFile *wf = new TFile(Form("skimmedFiles/OniaRooDataSet_isMC%d_Psi2S_pp_y%.2f_%.2f_Effw%d_Accw%d_PtW%d_TnP%d_230227.root", 
           isMC,yLow,yHigh,fEffW,fAccW,isPtW,isTnP),"recreate");  wf->cd();
     dataSet->Write();
 
