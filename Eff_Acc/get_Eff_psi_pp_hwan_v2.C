@@ -57,7 +57,7 @@ void get_Eff_psi_pp_hwan_v2(
   //pT reweighting function
   //ratioDataMC_AA_Jpsi_DATA_y0.0-2.4_210915.root
   TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root","read");
-  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230321.root","read");
+  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230420.root","read");
   if(state==2) TFile *fPtW = new TFile("ratioDataMC_AA_btojpsi_DATA_1s.root","read");
   TF1* fptw1 = (TF1*) fPtW1->Get("dataMC_Ratio1");
   TF1* fptw2 = (TF1*) fPtW2->Get("dataMC_Ratio1");
@@ -271,7 +271,8 @@ void get_Eff_psi_pp_hwan_v2(
 		if(isPtWeight && fabs(JP_Gen->Rapidity()) < 1.6) pt_weight = fptw1->Eval(JP_Gen->Pt());
 		if(isPtWeight && fabs(JP_Gen->Rapidity()) > 1.6 && fabs(JP_Gen->Rapidity() < 2.4) ) pt_weight = fptw2->Eval(JP_Gen->Pt());
 	    if(JP_Gen->Pt() > 6.5) hy_gen->Fill(Rapidity_g, weight*pt_weight);
-	    if(Rapidity_g > 1.6 && Rapidity_g <2.4) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_1->Fill(1,weight*pt_weight); }
+		if(Rapidity_g > 1.6 && Rapidity_g <2.4) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); }
+	    if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3 && JP_Gen->Pt()<50) { hInt_gen_1->Fill(1,weight*pt_weight); }
 	    if(Rapidity_g < 1.6 ) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
 
 	    //if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -410,7 +411,8 @@ void get_Eff_psi_pp_hwan_v2(
 
       //cout<<"pt_Weight in reco : "<<pt_weight<<endl;
       if(HLTPass==true && HLTFilterPass==true){
-	      if(Rapidity > 1.6 && Rapidity < 2.4) { hpt_reco_1->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_1->Fill(1, weight*tnp_weight*pt_weight); }
+	      if(Rapidity > 1.6 && Rapidity < 2.4) { hpt_reco_1->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight);}
+		  if(Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt()>3 && JP_Reco->Pt()<50) { hInt_reco_1->Fill(1, weight*tnp_weight*pt_weight); }
 	      if(Rapidity < 1.6) { hpt_reco_2->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_2->Fill(1, weight*tnp_weight*pt_weight); }
           
           //if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -503,7 +505,7 @@ void get_Eff_psi_pp_hwan_v2(
   legend->AddEntry("hpt_eff_2","|y|: 0-1.6","lep");
   legend->SetBorderSize( 0);
   legend->Draw("E");
-  cpt_eff->SaveAs("Eff_pt_noweight_230416.png");
+  cpt_eff->SaveAs("./figs/Eff_pt_noweight_230416.png");
 
   TCanvas * cy_eff = new TCanvas("cy_eff","cy_eff",0,0,900,800);
   cy_eff->cd();
@@ -517,7 +519,7 @@ void get_Eff_psi_pp_hwan_v2(
   lt1->SetTextSize(0.03);
   if(state==1) lt1->DrawLatex(0.13,0.84,"Prompt #psi(2S) (pp)");
   else if(state==2) lt1->DrawLatex(0.13,0.84,"Non-Prompt #psi(2S) (pp)");
-  cy_eff->SaveAs("Eff_absy_noweight_230416.png");
+  cy_eff->SaveAs("./figs/Eff_absy_noweight_230416.png");
 
   //Save efficiency files for later use.
 
@@ -528,7 +530,7 @@ void get_Eff_psi_pp_hwan_v2(
   hy_eff ->SetName(Form("mc_eff_vs_rap_TnP%d_PtW%d",isTnP, isPtWeight));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp%d_20230416.root",isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp%d_20230416.root",isPtWeight,isTnP);
 //  if(state==2) outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20211207.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();

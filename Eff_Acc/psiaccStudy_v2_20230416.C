@@ -45,7 +45,7 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
   TTree *tree = (TTree*) rf -> Get("hionia/myTree");
 
   TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root","read");
-  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230321.root","read");
+  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230420.root","read");
   TF1* fptw1 = (TF1*) fPtW1->Get("dataMC_Ratio1");
   TF1* fptw2 = (TF1*) fPtW2->Get("dataMC_Ratio1");
 
@@ -238,6 +238,14 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
   TH1F *hNumPt_Nocut = new TH1F("hNumPt_Nocut",";p_{T} (GeV/c);",200,0.0,100.0);
   TH1F *hAccPt_Nocut = new TH1F("hAccPt_Nocut",";p_{T} (GeV/c);",200,0.0,100.0);
 
+  TH1F *hDenPt_2021_Fory_Int = new TH1F("hDenPt_2021_Fory_Int",";p_{T} (GeV/c};",1,0,50);
+  TH1F *hNumPt_2021_Fory_Int = new TH1F("hNumPt_2021_Fory_Int",";p_{T} (GeV/c};",1,0,50);
+  TH1F *hAccPt_2021_Fory_Int = new TH1F("hAccPt_2021_Fory_Int",";p_{T} (GeV/c};",1,0,50);
+
+  TH1F *hDenPt_2021_midy_Int = new TH1F("hDenPt_2021_midy_Int",";p_{T} (GeV/c};",1,0,50);
+  TH1F *hNumPt_2021_midy_Int = new TH1F("hNumPt_2021_midy_Int",";p_{T} (GeV/c};",1,0,50);
+  TH1F *hAccPt_2021_midy_Int = new TH1F("hAccPt_2021_midy_Int",";p_{T} (GeV/c};",1,0,50);
+
   TH2F *hDen2D_Nocut = new TH2F("hDen2D_Nocut",";y;p_{T} (GeV/c)",100,-2.5,2.5,200,0.0,100.0);
   TH2F *hNum2D_Nocut = new TH2F("hNum2D_Nocut",";y;p_{T} (GeV/c)",100,-2.5,2.5,200,0.0,100.0);
   TH2F *hAcc2D_Nocut = new TH2F("hAcc2D_Nocut",";y;p_{T} (GeV/c)",100,-2.5,2.5,200,0.0,100.0);
@@ -254,6 +262,14 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
   hDen2D_Nocut->Sumw2();
   hNum2D_Nocut->Sumw2();
   hAcc2D_Nocut->Sumw2();
+
+  hDenPt_2021_Fory_Int->Sumw2();
+  hNumPt_2021_Fory_Int->Sumw2();
+  hAccPt_2021_Fory_Int->Sumw2();
+
+  hDenPt_2021_midy_Int->Sumw2();
+  hNumPt_2021_midy_Int->Sumw2();
+  hAccPt_2021_midy_Int->Sumw2();
 
   Int_t nEvt = tree->GetEntries();
   cout << "nEvt : " << nEvt << endl;
@@ -303,23 +319,26 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
       double wt1 = 1.0;
       double wt2 = 1.0;
       if (wtopt==1) {
-        wt1 = fptw1->Eval(pt);
-        wt2 = fptw2->Eval(pt);
+        if(fabs(y)<1.6) wt1 = fptw1->Eval(pt);
         if(1.6<=fabs(y) && fabs(y)<2.4) wt2 = fptw2->Eval(pt);
       }
       //else if (wtopt==2) wt = fptw2->Eval(pt);
 
 
       hDenPt_2021_ally->Fill(pt,wt1); 
-      if (1.6<=fabs(y) && fabs(y)<2.4) hDenPt_2021_Fory->Fill(pt,wt2);
-      else if (fabs(y)<1.6) hDenPt_2021_midy->Fill(pt,wt1);
+      if (1.6<=fabs(y) && fabs(y)<2.4) { hDenPt_2021_Fory->Fill(pt,wt2); }
+	  if (1.6<=fabs(y) && fabs(y)<2.4 && pt > 3 && pt < 50)  {hDenPt_2021_Fory_Int->Fill(1,wt2); }
+      if (fabs(y)<1.6) { hDenPt_2021_midy->Fill(pt,wt1); }
+      if (fabs(y)<1.6 && pt >6.5 && pt < 50) { hDenPt_2021_midy_Int->Fill(1,wt1); }
       bool mu1pass = IsAcceptable(mu1_pt,mu1_eta);
       bool mu2pass = IsAcceptable(mu2_pt,mu2_eta);
 
       if (mu1pass!=true || mu2pass!=true) continue;
       hNumPt_2021_ally->Fill(pt,wt1); 
-      if (1.6<=fabs(y) && fabs(y)<2.4) hNumPt_2021_Fory->Fill(pt,wt2);
-      else if (fabs(y)<1.6) hNumPt_2021_midy->Fill(pt,wt1);
+      if (1.6<=fabs(y) && fabs(y)<2.4) { hNumPt_2021_Fory->Fill(pt,wt2); }
+	  if (1.6<=fabs(y) && fabs(y)<2.4 && pt>3 && pt<50) {hNumPt_2021_Fory_Int->Fill(1,wt2); }
+      if (fabs(y)<1.6) { hNumPt_2021_midy->Fill(pt,wt1); }
+      if (fabs(y)<1.6 && pt > 6.5 && pt < 50) { hNumPt_2021_midy_Int->Fill(1,wt1); }
 
       hNumY_Nocut->Fill(y);
       hNumPt_Nocut->Fill(pt);
@@ -336,6 +355,8 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
   hAccPt_2021_ally->Divide(hNumPt_2021_ally,hDenPt_2021_ally,1,1,"B");
   hAccPt_2021_midy->Divide(hNumPt_2021_midy,hDenPt_2021_midy,1,1,"B");
   hAccPt_2021_Fory->Divide(hNumPt_2021_Fory,hDenPt_2021_Fory,1,1,"B");
+  hAccPt_2021_midy_Int->Divide(hNumPt_2021_midy_Int,hDenPt_2021_midy_Int,1,1,"B");
+  hAccPt_2021_Fory_Int->Divide(hNumPt_2021_Fory_Int,hDenPt_2021_Fory_Int,1,1,"B");
 
   TCanvas* cpt = new TCanvas("cpt","",1200,400);
   cpt->Divide(3,1);
@@ -356,7 +377,7 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
   leg_pt->AddEntry(hAccPt_2021_ally,"|y| < 2.4","lp");
   leg_pt->Draw();
 
-  cpt->SaveAs(Form("AccPt_AllY_wgt%d_%s.png",wtopt,rmk.Data()));
+  cpt->SaveAs(Form("./figs/AccPt_AllY_wgt%d_%s.png",wtopt,rmk.Data()));
 
   TCanvas* cpt3 = new TCanvas("cpt3","",1200,400);
   cpt3->Divide(3,1);
@@ -377,7 +398,7 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
   leg_pt3->AddEntry(hAccPt_2021_midy,"|y| < 1.6","lp");
   leg_pt3->Draw();
 
-  cpt->SaveAs(Form("AccPt_MidY_wgt%d_%s.png",wtopt,rmk.Data()));
+  cpt->SaveAs(Form("./figs/AccPt_MidY_wgt%d_%s.png",wtopt,rmk.Data()));
 
 
   TCanvas* cpt2 = new TCanvas("cpt2","",1200,400);
@@ -440,12 +461,18 @@ void psiaccStudy_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="202304
   std::cout << std::endl;
 
 
-  TFile *wf = new TFile(Form("acceptance_Prompt_psi2s_GenOnly_wgt%d_%s_SysUp%d_20230416.root",wtopt,rmk.Data(),isPtWgtUp),"RECREATE");
+  TFile *wf = new TFile(Form("./roots/acceptance_Prompt_psi2s_GenOnly_wgt%d_%s_SysUp%d_20230416.root",wtopt,"pp",isPtWgtUp),"RECREATE");
   wf->cd();
 
   hAccPt_2021_ally->Write();
   hAccPt_2021_midy->Write();
   hAccPt_2021_Fory->Write();
+  hDenPt_2021_midy_Int->Write();
+  hDenPt_2021_Fory_Int->Write();
+  hNumPt_2021_midy_Int->Write();
+  hNumPt_2021_Fory_Int->Write();
+  hAccPt_2021_midy_Int->Write();
+  hAccPt_2021_Fory_Int->Write();
 
 
   wf->Write();

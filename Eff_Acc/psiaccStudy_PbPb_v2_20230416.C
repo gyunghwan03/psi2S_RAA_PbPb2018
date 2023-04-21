@@ -48,8 +48,8 @@ void psiaccStudy_PbPb_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="2
 
   //TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root","read");
   //TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230321.root","read");
-  TFile *fPtW1 = new TFile("ratioDataMC_AA_Jpsi_DATA_y0_1p6_211201.root","read");
-  TFile *fPtW2 = new TFile("ratioDataMC_AA_Jpsi_DATA_Forward_y_211218.root","read");
+  TFile *fPtW1 = new TFile("./roots/ratioDataMC_AA_Jpsi_DATA_y0_1p6_211201.root","read");
+  TFile *fPtW2 = new TFile("./roots/ratioDataMC_AA_Jpsi_DATA_Forward_y_211218.root","read");
   TF1* fptw1 = (TF1*) fPtW1->Get("dataMC_Ratio1");
   TF1* fptw2 = (TF1*) fPtW2->Get("dataMC_Ratio1");
 
@@ -333,14 +333,18 @@ void psiaccStudy_PbPb_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="2
       //else if (wtopt==2) wt = fptw2->Eval(pt);
 
 
-      if (1.6<=fabs(y) && fabs(y)<2.4) { hDenPt_2021_Fory->Fill(pt,wt2); hDenPt_2021_Fory_Int->Fill(1,wt2); }
-      else if (fabs(y)<1.6) { hDenPt_2021_midy->Fill(pt,wt1); hDenPt_2021_midy_Int->Fill(1,wt1); }
+      if (1.6<=fabs(y) && fabs(y)<2.4) { hDenPt_2021_Fory->Fill(pt,wt2); } 
+	  if (1.6<=fabs(y) && fabs(y)<2.4 && pt > 3 && pt < 50){ hDenPt_2021_Fory_Int->Fill(1,wt2); }
+      if (fabs(y)<1.6) { hDenPt_2021_midy->Fill(pt,wt1); } 
+	  if (fabs(y)<1.6 && pt > 6.5 && pt < 50){hDenPt_2021_midy_Int->Fill(1,wt1); }
       bool mu1pass = IsAcceptable(mu1_pt,mu1_eta);
       bool mu2pass = IsAcceptable(mu2_pt,mu2_eta);
 
       if (mu1pass!=true || mu2pass!=true) continue;
-      if (1.6<=fabs(y) && fabs(y)<2.4){  hNumPt_2021_Fory->Fill(pt,wt2); hNumPt_2021_Fory_Int->Fill(1,wt2); }
-      else if (fabs(y)<1.6) { hNumPt_2021_midy->Fill(pt,wt1); hNumPt_2021_midy_Int->Fill(1,wt1); }
+      if (1.6<=fabs(y) && fabs(y)<2.4){  hNumPt_2021_Fory->Fill(pt,wt2); } 
+	  if (1.6<=fabs(y) && fabs(y)<2.4 && pt > 3 && pt < 50){ hNumPt_2021_Fory_Int->Fill(1,wt2); }
+      if (fabs(y)<1.6) { hNumPt_2021_midy->Fill(pt,wt1);} 
+	  if (fabs(y)<1.6 && pt >6.5 && pt < 50){hNumPt_2021_midy_Int->Fill(1,wt1); }
 
       hNumY_Nocut->Fill(y);
       hNumPt_Nocut->Fill(pt);

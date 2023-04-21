@@ -56,8 +56,8 @@ void get_Eff_psi_pbpb_hwan_v1(
 
   //pT reweighting function
   //ratioDataMC_AA_Jpsi_DATA_y0.0-2.4_210915.root
-  TFile *fPtW1 = new TFile("ratioDataMC_AA_Jpsi_DATA_y0_1p6_211201.root","read");
-  TFile *fPtW2 = new TFile("ratioDataMC_AA_Jpsi_DATA_Forward_y_211218.root","read");
+  TFile *fPtW1 = new TFile("./roots/ratioDataMC_AA_Jpsi_DATA_y0_1p6_211201.root","read");
+  TFile *fPtW2 = new TFile("./roots/ratioDataMC_AA_Jpsi_DATA_Forward_y_211218.root","read");
   if(state==2) TFile *fPtW = new TFile("ratioDataMC_AA_btojpsi_DATA_1s.root","read");
   TF1* fptw1 = (TF1*) fPtW1->Get("dataMC_Ratio1");
   TF1* fptw2 = (TF1*) fPtW2->Get("dataMC_Ratio1");
@@ -277,7 +277,7 @@ void get_Eff_psi_pbpb_hwan_v1(
 			if(Rapidity_g < 1.6 ) hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); }
 		if(Rapidity_g > 1.6 && Rapidity_g <2.4){
 			hcent_gen_1->Fill( Centrality,weight*pt_weight);
-			hInt_gen_1->Fill(1,weight*pt_weight);
+			if(JP_Gen->Pt() > 3 && JP_Gen->Pt() < 50) { hInt_gen_1->Fill(1,weight*pt_weight); }
 		}
 		if(Rapidity_g < 1.6){
 			hcent_gen_2->Fill( Centrality,weight*pt_weight);
@@ -464,7 +464,7 @@ void get_Eff_psi_pbpb_hwan_v1(
 
 		  if(Rapidity > 1.6 && Rapidity <2.4){
 			  hcent_reco_1->Fill( Centrality,weight*tnp_weight*pt_weight);
-			  hInt_reco_1->Fill(1,weight*tnp_weight*pt_weight);
+			  if (JP_Reco->Pt() > 3 && JP_Reco->Pt() < 50 ) { hInt_reco_1->Fill(1,weight*tnp_weight*pt_weight); }
 		  }
 		  if(Rapidity < 1.6){
 			  hcent_reco_2->Fill( Centrality,weight*tnp_weight*pt_weight);
@@ -611,7 +611,7 @@ void get_Eff_psi_pbpb_hwan_v1(
   legend->AddEntry("hcent_eff_2",Form("|y|: 0-1.6, p_{T} : 6.5-50 GeV/c"),"lep");
   legend->SetBorderSize( 0);
   legend->Draw("E");
-  ccent_eff->SaveAs("Eff_cent_noweight2.png");
+  ccent_eff->SaveAs("./figs/Eff_cent_noweight2.png");
 
   TCanvas * cy_eff = new TCanvas("cy_eff","cy_eff",0,0,900,800);
   cy_eff->cd();
@@ -625,7 +625,7 @@ void get_Eff_psi_pbpb_hwan_v1(
   lt1->SetTextSize(0.03);
   if(state==1) lt1->DrawLatex(0.13,0.84,"Prompt #psi(2S) (PbPb)");
   else if(state==2) lt1->DrawLatex(0.13,0.84,"Non-Prompt #psi(2S) (PbPb)");
-  cy_eff->SaveAs("Eff_absy_noweight2.png");
+  cy_eff->SaveAs("./figs/Eff_absy_noweight2.png");
 
   //Save efficiency files for later use.
 
@@ -638,7 +638,7 @@ void get_Eff_psi_pbpb_hwan_v1(
   hInt_eff_2 ->SetName(Form("mc_eff_Integrated_TnP%d_PtW%d_cent_%0.0f_to_%0.0f_absy0_1p6  ",isTnP, isPtWeight, cLow, cHigh));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20230417.root",cLow,cHigh,isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20230417.root",cLow,cHigh,isPtWeight,isTnP);
   if(state==2) outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20230417.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
