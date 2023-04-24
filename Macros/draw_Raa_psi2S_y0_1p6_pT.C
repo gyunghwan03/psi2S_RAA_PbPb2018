@@ -41,10 +41,10 @@ void draw_Raa_psi2S_y0_1p6_pT()
     TFile *fPbPb[nPtBins+1];
     TFile *fpp[nPtBins+1];
 
-	TFile *fEff_PbPb = new TFile("../Eff_Acc/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20230417.root");
-	TFile *fEff_pp = new TFile("../Eff_Acc/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230416.root");
-	TFile *fAcc_PbPb = new TFile("../Eff_Acc/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230416.root");
-	TFile *fAcc_pp = new TFile("../Eff_Acc/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230416.root");
+	TFile *fEff_PbPb = new TFile("../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20230423.root");
+	TFile *fEff_pp = new TFile("../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230416.root");
+	TFile *fAcc_PbPb = new TFile("../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230416.root");
+	TFile *fAcc_pp = new TFile("../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230416.root");
 
 	TH1D *hEff_PbPb = (TH1D*) fEff_PbPb -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy0_1p6");
     TH1D *hEff_pp = (TH1D*) fEff_pp -> Get("mc_eff_vs_pt_TnP1_PtW1_absy0_1p6");
@@ -247,7 +247,7 @@ void draw_Raa_psi2S_y0_1p6_pT()
 	TLegend *legPR = new TLegend(0.68,0.72,0.8,0.82);
     SetLegendStyle(legPR);
 	legPR->AddEntry(gXpp_PR,"pp", "p");
-	legPR->AddEntry(gXPbPb_PR,"PbPb, Cent. 0-100%", "p");
+	legPR->AddEntry(gXPbPb_PR,"PbPb, Cent. 0-90%", "p");
 	legPR->Draw("SAME");
 	jumSun(0,1,50,1);
 
@@ -285,7 +285,7 @@ void draw_Raa_psi2S_y0_1p6_pT()
 	TLegend *legNP = new TLegend(0.68,0.72,0.8,0.82);
     SetLegendStyle(legNP);
 	legNP->AddEntry(gXpp_NP,"pp", "p");
-	legNP->AddEntry(gXPbPb_NP,"PbPb, Cent. 0-100%", "p");
+	legNP->AddEntry(gXPbPb_NP,"PbPb, Cent. 0-90%", "p");
 	legNP->Draw("SAME");
 	jumSun(0,1,50,1);
 
@@ -326,7 +326,7 @@ void draw_Raa_psi2S_y0_1p6_pT()
 	leg->Draw("SAME");
 	jumSun(0,1,50,1);
 
-	drawText("Cent. 0-100%", pos_x, pos_y, text_color, text_size);
+	drawText("Cent. 0-90%", pos_x, pos_y, text_color, text_size);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cRAA,iPeriod,iPos);	
 
