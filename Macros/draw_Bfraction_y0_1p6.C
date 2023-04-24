@@ -124,7 +124,7 @@ valErr getFrac_psi2S_PbPb(int i) {
 	double ptBin[6] = {6.5,9,12,15,20,50};
 	TString kineLabel[6];
 	kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],0,1.6,0.0,0,200);
-	TFile* inf = new TFile(Form("./psi2S_Corr/roots/2DFit_230324/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;
@@ -136,7 +136,7 @@ valErr getFrac_psi2S_pp(int i) {
 	double ptBin[6] = {6.5,9,12,15,20,50};
 	TString kineLabel[6];
 	kineLabel[i] = getKineLabelpp(ptBin[i],ptBin[i+1],0,1.6,0.0);
-	TFile* inf = new TFile(Form("./pp_psi2S_Corr/roots/2DFit_230323/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	TFile* inf = new TFile(Form("./pp_psi2S_Corr/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;

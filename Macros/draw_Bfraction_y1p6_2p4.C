@@ -33,11 +33,11 @@ void draw_Bfraction_y1p6_2p4()
 	int iPeriod = 101;
 	int iPos = 33;
 
-	const int nPtBins=4;
+	const int nPtBins=3;
 	TFile *fPbPb[nPtBins+1];
 	TFile *fpp[nPtBins+1];
 
-	double ptBin[nPtBins+1] = {3,4.5,6.5,12,50};
+	double ptBin[nPtBins+1] = {3,6.5,12,50};
 	double fracPP[nPtBins]; double fracPbPb[nPtBins];
 	double fracErrPP[nPtBins]; double fracErrPbPb[nPtBins];
 	double x[nPtBins]; double binWidth[nPtBins];
@@ -120,10 +120,10 @@ void draw_Bfraction_y1p6_2p4()
 
 }
 valErr getFrac_psi2S_PbPb(int i) {
-	double ptBin[5] = {3,4.5,6.5,12,50};
-	TString kineLabel[5];
+	double ptBin[4] = {3,6.5,12,50};
+	TString kineLabel[4];
 	kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],1.6,2.4,0.0,0,200);
-	TFile* inf = new TFile(Form("./psi2S_Corr/roots/2DFit_230324/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;
@@ -132,10 +132,10 @@ valErr getFrac_psi2S_PbPb(int i) {
 	return ret;
 }
 valErr getFrac_psi2S_pp(int i) {
-	double ptBin[5] = {3,4.5,6.5,12,50};
-	TString kineLabel[5];
+	double ptBin[4] = {3,6.5,12,50};
+	TString kineLabel[4];
 	kineLabel[i] = getKineLabelpp(ptBin[i],ptBin[i+1],1.6,2.4,0.0);
-	TFile* inf = new TFile(Form("./pp_psi2S_Corr/roots/2DFit_230323/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	TFile* inf = new TFile(Form("./pp_psi2S_Corr/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;
