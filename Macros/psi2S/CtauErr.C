@@ -1,7 +1,10 @@
 #include <iostream>
-#include "../rootFitHeaders.h"
-#include "../commonUtility.h"
-#include "../JpsiUtility.h"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -12,9 +15,6 @@
 #include "TText.h"
 #include "TArrow.h"
 #include "TFile.h"
-#include "../cutsAndBin.h"
-#include "../CMS_lumi_v2mass.C"
-#include "../tdrstyle.C"
 #include "RooDataHist.h"
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
@@ -37,7 +37,7 @@ void CtauErr(
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="221116";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
@@ -60,7 +60,7 @@ void CtauErr(
   TString BkgCut;
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
 
-  f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
   fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f&& cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, massLow, massHigh, cLow, cHigh);
 
@@ -80,25 +80,25 @@ void CtauErr(
   ws->import(*pdfMASS_Tot);
   RooArgSet *argSet = new RooArgSet( *(ws->var("ctau3D")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y")), *(ws->var("weight")), *(ws->var("ctau3DRes")), *(ws->var("ctau3DErr")) );
   argSet->add(*(ws->var("pt1")) ); argSet->add(*(ws->var("pt2")) ); argSet->add(*(ws->var("eta1")) );  argSet->add(*(ws->var("eta2")) ); argSet->add(*(ws->var("recoQQsign")) ); argSet->add(*(ws->var("cBin"))); 
-  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",
-		  *argSet,
-		  Import(*dataset),WeightVar(*ws->var("weight")));
-  RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample",
+//  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",
+//		  *argSet,
+//		  Import(*dataset),WeightVar(*ws->var("weight")));
+  RooDataSet *datasetW = new RooDataSet("datasetWo","A sample",
 		  *argSet,
 		  Import(*dataset));
   ws->import(*datasetW);
-  ws->import(*datasetWo);
+//  ws->import(*datasetWo);
 
   RooDataSet *dsAB = (RooDataSet*)datasetW->reduce(*argSet, kineCut.Data() );
-  RooDataSet *dsAB1 = (RooDataSet*)datasetWo->reduce(*argSet, kineCut.Data() );
+//  RooDataSet *dsAB1 = (RooDataSet*)datasetWo->reduce(*argSet, kineCut.Data() );
   dsAB->Print();
   cout << "Weight : " << ws->var("weight")->getVal() << endl;
   cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow<<"-"<<cHigh<<"%"<<endl;
   cout << "####################################" << endl;
   dsAB->SetName("dsAB");
-  dsAB1->SetName("dsAB1");
+ // dsAB1->SetName("dsAB1");
   ws->import(*dsAB);
-  ws->import(*dsAB1);
+  //ws->import(*dsAB1);
 
   //ws->var("ctau3DErr")->setRange(0,0.25);
     ws->var("ctau3DErr")->setRange(ctauErrLow, ctauHigh);
@@ -138,7 +138,7 @@ void CtauErr(
   yieldList.add(*ws->var("N_Bkg"));
   cout<<"Sig Yield: "<<sigYield->getVal()<<" +/- "<<sigYield->getError()<<endl;
   cout<<"Bkg Yield: "<<bkgYield->getVal()<<" +/- "<<bkgYield->getError()<<endl;
-  RooDataSet* data = (RooDataSet*)ws->data("dsAB1")->Clone("TMP_DATA");
+  RooDataSet* data = (RooDataSet*)ws->data("dsAB")->Clone("TMP_DATA");
   RooArgSet* cloneSet = (RooArgSet*)RooArgSet(*ws->pdf("pdfMASS_Tot"),"pdfMASS_Tot").snapshot(kTRUE);
   auto clone_mass_pdf = (RooAbsPdf*)cloneSet->find("pdfMASS_Tot");
   clone_mass_pdf->setOperMode(RooAbsArg::ADirty, kTRUE);
@@ -150,11 +150,11 @@ void CtauErr(
   //create weighted data sets
   //total
   RooPlot* myPlot_B = ws->var("ctau3DErr")->frame(Range(ctauErrLow,ctauErrHigh));
-  TH1D* hTot = (TH1D*)ws->data("dsAB1")->createHistogram(("hTot"), *ws->var("ctau3DErr"),
+  TH1D* hTot = (TH1D*)ws->data("dsAB")->createHistogram(("hTot"), *ws->var("ctau3DErr"),
 		  //Binning(myPlot_B->GetNbinsX(), myPlot_B->GetXaxis()->GetXmin(), myPlot_B->GetXaxis()->GetXmax()));
           Binning(myPlot_B->GetNbinsX(), myPlot_B->GetXaxis()->GetXmin(), myPlot_B->GetXaxis()->GetXmax()));
   double ctauErrMin; double ctauErrMax;
-  TH1D* hTot_M = (TH1D*)ws->data("dsAB1")->createHistogram(("hTot_M"), *ws->var("ctau3DErr"),Binning(nBins,ctauErrLow,ctauErrHigh));
+  TH1D* hTot_M = (TH1D*)ws->data("dsAB")->createHistogram(("hTot_M"), *ws->var("ctau3DErr"),Binning(nBins,ctauErrLow,ctauErrHigh));
   //Bkg
   RooDataSet* dataw_Bkg_b = new RooDataSet("dataw_Bkg_b","TMP_BKG_DATA", (RooDataSet*)ws->data("dataset_SPLOT"),
       RooArgSet(*ws->var("ctau3DErr"), *ws->var("N_Bkg_sw"), *ws->var("ctau3DRes"), *ws->var("ctau3D"), *ws->var("mass")), 0, "N_Bkg_sw");
@@ -198,6 +198,10 @@ void CtauErr(
   if(ptLow==3&&ptHigh==6.5) ctauErrMax=0.1476;
   else if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.1278;
   else if(ptLow==15&&ptHigh==20) ctauErrMax=0.0378;
+  else if(cLow==40&&cHigh==80) ctauErrMax=0.1476;
+  else if(cLow==0&&cHigh==20) ctauErrMax=0.0914;
+  else if(cLow==100&&cHigh==180) ctauErrMax=0.0628;
+  else if(cLow==100&&cHigh==200) ctauErrMax=0.063;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
@@ -255,6 +259,26 @@ void CtauErr(
       RooArgSet(*ws->var("ctau3DErr"), *ws->var("N_Bkg_sw"), *ws->var("ctau3DRes"), *ws->var("ctau3D"), *ws->var("mass")),   0, "N_Bkg_sw");
   RooDataSet* dataw_Sig = new RooDataSet("dataw_Sig","TMP_SIG_DATA", (RooDataSet*)ws->data("dataset_SPLOT"),
       RooArgSet(*ws->var("ctau3DErr"), *ws->var("N_Jpsi_sw"), *ws->var("ctau3DRes"), *ws->var("ctau3D"), *ws->var("mass")),  0, "N_Jpsi_sw");
+
+  TCanvas *cTest = new TCanvas("cTest","",700,700);
+  cTest->cd();
+  cTest->SetLogy(); 
+  TH1D *hMass_s = (TH1D*)dataw_Sig_b->createHistogram(("hMass_s"), *ws->var("mass"), Binning(nMassBin,massLow,massHigh));
+  TH1D *hMass_b = (TH1D*)dataw_Bkg_b->createHistogram(("hMass_b"), *ws->var("mass"), Binning(nMassBin,massLow,massHigh));
+  TH1D *hMass_Tot = (TH1D*)dsAB->createHistogram(("hMass_Tot"), *ws->var("mass"), Binning(nMassBin,massLow,massHigh));
+  hMass_s->SetLineColor(kRed);
+  hMass_b->SetLineColor(kBlue);
+  hMass_s->SetMarkerColor(kRed);
+  hMass_b->SetMarkerColor(kBlue);
+  hMass_Tot->SetLineColor(kBlack);
+  hMass_Tot->SetMarkerColor(kBlack);
+  hMass_s->GetYaxis()->SetRangeUser(1,1e+5);
+  hMass_b->GetYaxis()->SetRangeUser(1,1e+5);
+  hMass_Tot->GetYaxis()->SetRangeUser(1,1e+5);
+  hMass_s->Draw("PE");
+  hMass_b->Draw("PE SAME");
+  hMass_Tot->Draw("PE SAME");
+
 
   //import
   ws->import(*dataw_Sig);
@@ -324,7 +348,7 @@ void CtauErr(
   myPlot2_B->addObject(maxline);
   
   myPlot2_B->GetXaxis()->CenterTitle();
-  myPlot2_B->GetXaxis()->SetTitle("#font[12]{l}_{J/#psi} Error (mm)");
+  myPlot2_B->GetXaxis()->SetTitle("#font[12]{l}_{#psi(2S)} Error (mm)");
   myPlot2_B->SetFillStyle(4000);
   myPlot2_B->GetYaxis()->SetTitleOffset(1.43);
   myPlot2_B->GetXaxis()->SetLabelSize(0);
@@ -376,7 +400,7 @@ void CtauErr(
   pullFrame_B->GetYaxis()->SetRangeUser(-3.8,3.8);
   pullFrame_B->GetYaxis()->CenterTitle();
 
-  pullFrame_B->GetXaxis()->SetTitle("#font[12]{l}_{J/#psi} Error (mm)");
+  pullFrame_B->GetXaxis()->SetTitle("#font[12]{l}_{#psi(2S)} Error (mm)");
   pullFrame_B->GetXaxis()->SetTitleOffset(1.05) ;
   pullFrame_B->GetXaxis()->SetLabelOffset(0.04) ;
   pullFrame_B->GetXaxis()->SetLabelSize(0.15) ;
