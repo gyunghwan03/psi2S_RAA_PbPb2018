@@ -73,8 +73,6 @@ void MassFit_FixPar_Data(
 
   TString OS="recoQQsign==0 &&";
 
-  //TString SglMuPt="pt1>0.5&&pt2>0.5"
-
   TString nan_cut = "&& !TMath::IsNaN(ctau3D) && !TMath::IsNaN(ctau3DRes)";
   kineCut = OS+accCut+kineCut + nan_cut;
 
