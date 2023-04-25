@@ -1,7 +1,10 @@
 #include <iostream>
-#include "../rootFitHeaders.h"
-#include "../commonUtility.h"
-#include "../JpsiUtility.h"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -12,9 +15,6 @@
 #include "TText.h"
 #include "TArrow.h"
 #include "TFile.h"
-#include "../cutsAndBin.h"
-#include "../CMS_lumi_v2mass.C"
-#include "../tdrstyle.C"
 #include "RooDataHist.h"
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
@@ -67,7 +67,7 @@ void CtauTrue_Psi2S(
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f2 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f1 = new TFile("../../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
-  f1 = new TFile("../skimmedFiles/OniaRooDataSet_psi2S_GENONLY_NonPrompt_20220906_root618.root","read");
+  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_psi2S_GENONLY_NonPrompt_20220906_root618.root","read");
   
   kineCutMC = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1" ,ptLow, ptHigh, yLow, yHigh);
   
@@ -107,7 +107,7 @@ void CtauTrue_Psi2S(
   //Double_t ctau3DTrueMax; Double_t ctau3DTrueMin;
   //ctau3DTrueMax = (double)(ceil(ctauTrueMax));
   //ctau3DTrueMin = (double)(floor(ctauTrueMin));
-  Double_t ctau3DTrueMin=0.1; Double_t ctau3DTrueMax =3;
+  Double_t ctau3DTrueMin=1e-6; Double_t ctau3DTrueMax =3;
 
   //ws->var("ctau3Dtrue")->setRange("ctauTrueRange", ctauTrueMin, ctauTrueMax);
   //ws->var("ctau3Dtrue")->setRange(ctau3DTrueMin, ctau3DTrueMax);
@@ -121,12 +121,20 @@ void CtauTrue_Psi2S(
   cout << endl << "************ Start MC Ctau True Fit ***************" << endl << endl;
   //MC NP ctau true
   double entries_True = ws->data("reducedDS_MC")->numEntries();
+  if(ptLow==6.5&&ptHigh==9){
   ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
-  ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]");
+  ws->factory("lambdaDSS[0.5, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.3, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.2, 1e-6, 1.0]");
+  ws->factory("fDSS[0.8, 0., 1.]");
+  ws->factory("fDSS1[0.8, 0.,1.]");}
+  else {
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.34, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.362, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.241, 1e-6, 1.0]");
+  ws->factory("fDSS[0.8, 0., 1.]");
+  ws->factory("fDSS1[0.8, 0., 1.]");}
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");

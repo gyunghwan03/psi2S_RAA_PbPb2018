@@ -9,12 +9,12 @@
 #include "TText.h"
 #include "TArrow.h"
 #include "TFile.h"
-#include "../rootFitHeaders.h"
-#include "../commonUtility.h"
-#include "../JpsiUtility.h"
-#include "../cutsAndBin.h"
-#include "../CMS_lumi_v2mass.C"
-#include "../tdrstyle.C"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include "RooDataHist.h"
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
@@ -34,7 +34,7 @@ void MassFit_FixPar_Data(
   //TString DATE = "20_40";
   //TString DATE = "0_180";
   TString DATE;
-  DATE="221116";
+  DATE="No_Weight";
   //if(ptLow==6.5&&ptHigh==50) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
   gStyle->SetEndErrorSize(0);
@@ -63,7 +63,7 @@ void MassFit_FixPar_Data(
   //massLow=2.75;
 
 //  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
   //f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_220808.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
 //  f1 = new TFile("../../skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
 //  f1 = new TFile("/Users/hwan/tools/2019/CMS/JPsi/Jpsi_v2_PbPb2018/skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
@@ -84,8 +84,8 @@ void MassFit_FixPar_Data(
   ws->data("dataset")->Print();
   cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow<<"-"<<cHigh<<"%"<<endl;
   cout << "####################################" << endl;
-  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset),WeightVar(*ws->var("weight")));
-  //RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset));
+  //RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset),WeightVar(*ws->var("weight")));
+  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset));
   RooDataSet *dsAB = (RooDataSet*)datasetW->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), kineCut.Data() );
   cout << "******** New Combined Dataset ***********" << endl;
   dsAB->SetName("dsAB");
@@ -228,14 +228,32 @@ void MassFit_FixPar_Data(
   if (ptLow==12&&ptHigh==15)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
+  else if (ptLow==6.5&&ptHigh==12)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==15&&ptHigh==20)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
+  else if (ptLow==12&&ptHigh==50)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
+  else if (ptLow==30&&ptHigh==50)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (ptLow==20&&ptHigh==50)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (cLow==40&&cHigh==60)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (cLow==80&&cHigh==100)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
   /*RooRealVar *N_Jpsi;
-    RooRealVar *N_Bkg;
+	RooRealVar *N_Bkg;
   //RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,700000);
   //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,700000);
   if(ptLow==3&&cLow==40){

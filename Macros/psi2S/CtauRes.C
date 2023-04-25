@@ -1,7 +1,10 @@
 #include <iostream>
-#include "../rootFitHeaders.h"
-#include "../commonUtility.h"
-#include "../JpsiUtility.h"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -12,9 +15,6 @@
 #include "TText.h"
 #include "TArrow.h"
 #include "TFile.h"
-#include "../cutsAndBin.h"
-#include "../CMS_lumi_v2mass.C"
-#include "../tdrstyle.C"
 #include "RooDataHist.h"
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
@@ -38,7 +38,7 @@ void CtauRes(
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="221116";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauRes",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauRes",DATE.Data()),kTRUE);
@@ -86,9 +86,16 @@ void CtauRes(
   ws->import(*ctauResCutDS);
   cout<<"N_Jpsi: "<<ws->var("N_Jpsi")->getVal()<<"+/-"<<ws->var("N_Jpsi")->getError()<<endl;
   // create the variables for this model
-  int nGauss = 3;
+  int nGauss = 2;
   if (ptLow==15&&ptHigh==20) {nGauss=2;}
-  else if (ptLow==20&&ptHigh==50) {nGauss=2;}
+  else if (ptLow==3&&ptHigh==6.5) {nGauss=3;}
+  else if (ptLow==6.5&&ptHigh==9) {nGauss=3;}
+  else if (ptLow==6.5&&ptHigh==12) {nGauss=3;}
+  else if (ptLow==9&&ptHigh==12) {nGauss=3;}
+//  else if (ptLow==12&&ptHigh==15) {nGauss=3;}
+  else if (cLow==0&&cHigh==40) nGauss=3;
+  else if (cLow==40&&cHigh==80) nGauss=3;
+  //else if (cLow==0&&cHigh==20) nGauss=3;
   ws->factory("One[1.0]");
   ws->factory("ctauRes_mean[0.0]");
   //if(ptLow==6.5&&cLow==40) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.5, 0.01, 1.3]");}
@@ -102,9 +109,9 @@ void CtauRes(
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.7, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.5, 1.0, 5.0]");
-  ws->factory("rS32_CtauRes[2.5, 1.0, 5.0]");
+  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[2.0, 1.5, 3.0]");
+  ws->factory("rS32_CtauRes[2.5, 2.3, 5.0]");
 
   ws->factory("rS43_CtauRes[1.5, 1.0, 10.0]");
   ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");
@@ -113,7 +120,7 @@ void CtauRes(
  
   //if(ptLow==6.5&&ptHigh==7&&cLow==20&&cHigh==120){
   //  ws->factory("f_CtauRes[0.4, 1e-6, 1.]");ws->factory("f2_CtauRes[0.2, 1e-6, 1.]");ws->factory("f3_CtauRes[0.7, 0., 1.]");}
-  ws->factory("f_CtauRes[0.2, 0., 1.]");ws->factory("f2_CtauRes[0.2, 0., 1.]");ws->factory("f3_CtauRes[0.5, 0., 1.]");
+  ws->factory("f_CtauRes[0.4, 0., 1.]");ws->factory("f2_CtauRes[0.4, 0., 1.]");ws->factory("f3_CtauRes[0.5, 0., 1.]");
   // create the three PDFs
   TString varName="ctau3DRes";
   ws->factory(Form("GaussModel::%s(%s, %s, %s,One,One)", "GaussModel1_ctauRes", varName.Data(),
@@ -230,7 +237,7 @@ void CtauRes(
     maxline->SetLineWidth(3);
     myPlot2_C->addObject(maxline);}
   myPlot2_C->GetXaxis()->CenterTitle();
-  myPlot2_C->GetXaxis()->SetTitle("#frac{#font[12]{l}_{J/#psi}}{#sigma_{#font[12]{l}_{J/#psi}}}");
+  myPlot2_C->GetXaxis()->SetTitle("#frac{#font[12]{l}_{#psi(2S)}}{#sigma_{#font[12]{l}_{#psi(2S)}}}");
   myPlot2_C->SetFillStyle(4000);
   myPlot2_C->GetYaxis()->SetTitleOffset(1.43);
   myPlot2_C->GetXaxis()->SetLabelSize(0);
@@ -295,7 +302,7 @@ void CtauRes(
   pullFrame_C->GetYaxis()->SetRangeUser(-3.8,3.8);
   pullFrame_C->GetYaxis()->CenterTitle();
 
-  pullFrame_C->GetXaxis()->SetTitle("#frac{#font[12]{l}_{J/#psi}}{#sigma_{#font[12]{l}_{J/#psi}}}");
+  pullFrame_C->GetXaxis()->SetTitle("#frac{#font[12]{l}_{#psi(2S)}}{#sigma_{#font[12]{l}_{#psi(2S)}}}");
   pullFrame_C->GetXaxis()->SetTitleOffset(1.05) ;
   pullFrame_C->GetXaxis()->SetLabelOffset(0.04) ;
   pullFrame_C->GetXaxis()->SetLabelSize(0.15) ;
