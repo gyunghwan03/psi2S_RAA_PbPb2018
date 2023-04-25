@@ -27,7 +27,6 @@ using namespace RooFit;
 void CtauTrue_Psi2S(
     float ptLow=4.5, float ptHigh=6.5,
     float yLow=1.6, float yHigh=2.4,
-    int cLow=20, int cHigh=120,
     float muPtCut=0.0,
     int PR=2, //0=PR, 1=NP, 2=Inc.
     float ctauCut=0.08
@@ -36,7 +35,7 @@ void CtauTrue_Psi2S(
   TStopwatch *t = new TStopwatch;
   t->Start();
   
-  TString DATE="221116";
+  TString DATE="230320";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
@@ -59,7 +58,7 @@ void CtauTrue_Psi2S(
   TString kineCutMC;
   TString SigCut;
   TString BkgCut;
-  TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, muPtCut, cLow, cHigh);
+  TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, muPtCut);
   cout << kineLabel << endl;
 
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco_3_6p5_201005.root");
@@ -67,7 +66,7 @@ void CtauTrue_Psi2S(
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f2 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f1 = new TFile("../../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
-  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_psi2S_GENONLY_NonPrompt_20220906_root618.root","read");
+  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_psi2S_noNCollw_GENONLY_NonPrompt_230130.root","read");
   
   kineCutMC = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1" ,ptLow, ptHigh, yLow, yHigh);
   
@@ -241,7 +240,6 @@ void CtauTrue_Psi2S(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
-  drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
 
   //drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x+0.5,text_y,text_color,text_size);
   //if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x+0.5,text_y-y_diff,text_color,text_size);

@@ -24,9 +24,8 @@ using namespace std;
 using namespace RooFit;
 
 void CtauBkg_LowPt(
-    float ptLow=3, float ptHigh=4.5,
-    float yLow=1.6, float yHigh=2.4,
-    int cLow=0, int cHigh=200,
+    double ptLow=3, double ptHigh=4.5,
+    double yLow=1.6, double yHigh=2.4,
     int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
     )
 {
@@ -35,7 +34,7 @@ void CtauBkg_LowPt(
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="221213";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauBkg",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauBkg",DATE.Data()),kTRUE);
@@ -53,7 +52,7 @@ void CtauBkg_LowPt(
   RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
 
   TFile* f1; TFile* fMass; TFile* fCErr; TFile* fCRes;
-  TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
+  TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
 
   fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   fCErr = new TFile(Form("roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
@@ -74,7 +73,7 @@ void CtauBkg_LowPt(
   double ctauErrMin, ctauErrMax;
   ws->data("dataw_Bkg")->getRange(*ws->var("ctau3DErr"), ctauErrMin, ctauErrMax);
   cout<<"####################################" <<endl;
-  cout<<"pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow/2<<"-"<<cHigh/2<<"%"<<endl;
+  cout<<"pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<endl;
 
   cout <<"******** New Combined Dataset ***********" <<endl;
   ws->var("ctau3D")->setRange(ctauLow, ctauHigh);
@@ -102,12 +101,12 @@ void CtauBkg_LowPt(
   ws->factory("fDLIV[0.4, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.03, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.051, 1e-6, 1.]");
   ws->factory("fDSS12[0.5, 0., 1.]");
   ws->factory("fDF12[0.5, 0., 1.]");}
-  if(ptLow==3&&ptHigh==50){
+  else if(ptLow==3&&ptHigh==50){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
   ws->factory("fDLIV[0.4, 0., 1]");
@@ -126,6 +125,28 @@ void CtauBkg_LowPt(
   ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
   ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
+  ws->factory("fDSS12[0.5, 0., 1.]");
+  ws->factory("fDF12[0.5, 0., 1.]");}
+  else if(ptLow==6.5&&ptHigh==12){
+  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
+  ws->factory("fDSS12[0.5, 0., 1.]");
+  ws->factory("fDF12[0.5, 0., 1.]");}
+  else if(ptLow==20&&ptHigh==50){
+  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.037, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.01, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.1, 1e-6, 1.]");
   ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
   ws->factory("fDSS12[0.5, 0., 1.]");
   ws->factory("fDF12[0.5, 0., 1.]");}
@@ -197,15 +218,16 @@ void CtauBkg_LowPt(
 
   TH1D* hTot = (TH1D*)ws->data("dataw_Bkg")->createHistogram(("hTot"), *ws->var("ctau3D"),Binning(nCtauBins,ctauLow,ctauHigh));
   double ctauMin=hTot->GetBinLowEdge(hTot->FindFirstBinAbove(1,1));
-  //if (cLow==80&&cHigh==100) ctauMin=-1.0;
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
   //if(ptLow>=15) { ctauMin=-1.5;}
-  if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
-  else if(ptLow==6.5&&ptHigh==9) ctauMin = -2.65;
-  else if(ptLow>=15) ctauMin = -1;
-  else if(cLow==80&&cHigh==100) ctauMin=-0.8;
-  else if(cLow==100&&cHigh==200) ctauMin=-0.55;
+//  if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
+  if (ptLow==9&&ptHigh==12) ctauMin=-1.1;
+  else if(ptLow==6.5&&ptHigh==12) ctauMin = -2;
+  else if(ptLow==6.5&&ptHigh==9) ctauMax = 3;
+  else if(ptLow==12&&ptHigh==50) ctauMin = -0.7;
+  else if(ptLow==20&&ptHigh==50) ctauMin = -1.5;
+  else if(ptLow==15&&ptHigh==50) ctauMin = -1.;
 
   TCanvas* c_E =  new TCanvas("canvas_E","My plots",1108,4,550,520);
   c_E->cd();
@@ -229,6 +251,8 @@ void CtauBkg_LowPt(
   if (ws->data("dataToFit")){normDSTot = ws->data("dataToFit")->sumEntries()/ws->data("dataToFit")->sumEntries();}
   double normBkg = 1.0;
   if (ws->data("dataw_Bkg")){normBkg = ws->data("dataToFit")->sumEntries()*normDSTot/ws->data("dataw_Bkg")->sumEntries();}
+
+  cout << "normDSTot = " << normDSTot << " normBkg : " << normBkg << endl;
 
   bool isWeighted = ws->data("dataw_Bkg")->isWeighted();
   //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataw_Bkg, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
@@ -286,7 +310,6 @@ void CtauBkg_LowPt(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
-  drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
 
   drawText(Form("N_{Bkg} = %.f #pm %.f", ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y,text_color,text_size);
   drawText(Form("b_{Bkg} = %.4f #pm %.4f", ws->var("b_Bkg")->getVal(), ws->var("b_Bkg")->getError() ),text_x+0.5,text_y-y_diff*1,text_color,text_size);

@@ -24,8 +24,7 @@ using namespace std;
 using namespace RooFit;
 void CtauErr(
     double ptLow=3, double ptHigh=4.5,
-    float yLow=1.6, float yHigh=2.4,
-    int cLow=0, int cHigh=200,
+    double yLow=1.6, double yHigh=2.4,
     int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
     )
 {
@@ -37,7 +36,7 @@ void CtauErr(
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="221213";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
@@ -58,17 +57,18 @@ void CtauErr(
   TString kineCut;
   TString SigCut;
   TString BkgCut;
-  TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
+  TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
 
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw1_Accw1_PtW1_TnP1_230323.root"));
   fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f&& cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, massLow, massHigh, cLow, cHigh);
+  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
 
   TString OS="recoQQsign==0 &&";
 
-  kineCut = OS+accCut+kineCut;
+  TString nan_cut = "&& !TMath::IsNaN(ctau3D) && !TMath::IsNaN(ctau3DRes)";
+  kineCut = OS+accCut+kineCut + nan_cut;
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
@@ -79,21 +79,24 @@ void CtauErr(
   ws->import(*datasetMass);
   ws->import(*pdfMASS_Tot);
   RooArgSet *argSet = new RooArgSet( *(ws->var("ctau3D")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y")), *(ws->var("weight")), *(ws->var("ctau3DRes")), *(ws->var("ctau3DErr")) );
-  argSet->add(*(ws->var("pt1")) ); argSet->add(*(ws->var("pt2")) ); argSet->add(*(ws->var("eta1")) );  argSet->add(*(ws->var("eta2")) ); argSet->add(*(ws->var("recoQQsign")) ); argSet->add(*(ws->var("cBin"))); 
+  argSet->add(*(ws->var("pt1")) ); argSet->add(*(ws->var("pt2")) ); argSet->add(*(ws->var("eta1")) );  argSet->add(*(ws->var("eta2")) ); argSet->add(*(ws->var("recoQQsign")) );
   RooDataSet *datasetW = new RooDataSet("datasetW","A sample",
 		  *argSet,
-		  Import(*dataset),WeightVar(*ws->var("weight")));
+		  Import(*dataset));//,WeightVar(*ws->var("weight")));
   RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample",
 		  *argSet,
 		  Import(*dataset));
   ws->import(*datasetW);
   ws->import(*datasetWo);
 
+  datasetW->Print("V");
+
   RooDataSet *dsAB = (RooDataSet*)datasetW->reduce(*argSet, kineCut.Data() );
   RooDataSet *dsAB1 = (RooDataSet*)datasetWo->reduce(*argSet, kineCut.Data() );
-  dsAB->Print();
+  cout << "################## dsAB ################## " << endl;
+  dsAB->Print("V");
   cout << "Weight : " << ws->var("weight")->getVal() << endl;
-  cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow<<"-"<<cHigh<<"%"<<endl;
+  cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<endl;
   cout << "####################################" << endl;
   dsAB->SetName("dsAB");
   dsAB1->SetName("dsAB1");
@@ -102,6 +105,7 @@ void CtauErr(
 
   //ws->var("ctau3DErr")->setRange(0,0.25);
     ws->var("ctau3DErr")->setRange(ctauErrLow, ctauHigh);
+	cout << "ctauErrLow : " << ctauErrLow << " ctauErrHigh : " << ctauErrHigh << endl;
   /*
   TCanvas* c_D =  new TCanvas("canvas_D","My plots",4,420,550,520);
   c_D->cd();
@@ -138,7 +142,7 @@ void CtauErr(
   yieldList.add(*ws->var("N_Bkg"));
   cout<<"Sig Yield: "<<sigYield->getVal()<<" +/- "<<sigYield->getError()<<endl;
   cout<<"Bkg Yield: "<<bkgYield->getVal()<<" +/- "<<bkgYield->getError()<<endl;
-  RooDataSet* data = (RooDataSet*)ws->data("dsAB1")->Clone("TMP_DATA");
+  RooDataSet* data = (RooDataSet*)ws->data("dsAB")->Clone("TMP_DATA");
   RooArgSet* cloneSet = (RooArgSet*)RooArgSet(*ws->pdf("pdfMASS_Tot"),"pdfMASS_Tot").snapshot(kTRUE);
   auto clone_mass_pdf = (RooAbsPdf*)cloneSet->find("pdfMASS_Tot");
   clone_mass_pdf->setOperMode(RooAbsArg::ADirty, kTRUE);
@@ -150,11 +154,11 @@ void CtauErr(
   //create weighted data sets
   //total
   RooPlot* myPlot_B = ws->var("ctau3DErr")->frame(Range(ctauErrLow,ctauErrHigh));
-  TH1D* hTot = (TH1D*)ws->data("dsAB1")->createHistogram(("hTot"), *ws->var("ctau3DErr"),
+  TH1D* hTot = (TH1D*)ws->data("dsAB")->createHistogram(("hTot"), *ws->var("ctau3DErr"),
 		  //Binning(myPlot_B->GetNbinsX(), myPlot_B->GetXaxis()->GetXmin(), myPlot_B->GetXaxis()->GetXmax()));
           Binning(myPlot_B->GetNbinsX(), myPlot_B->GetXaxis()->GetXmin(), myPlot_B->GetXaxis()->GetXmax()));
   double ctauErrMin; double ctauErrMax;
-  TH1D* hTot_M = (TH1D*)ws->data("dsAB1")->createHistogram(("hTot_M"), *ws->var("ctau3DErr"),Binning(nBins,ctauErrLow,ctauErrHigh));
+  TH1D* hTot_M = (TH1D*)ws->data("dsAB")->createHistogram(("hTot_M"), *ws->var("ctau3DErr"),Binning(nBins,ctauErrLow,ctauErrHigh));
   //Bkg
   RooDataSet* dataw_Bkg_b = new RooDataSet("dataw_Bkg_b","TMP_BKG_DATA", (RooDataSet*)ws->data("dataset_SPLOT"),
       RooArgSet(*ws->var("ctau3DErr"), *ws->var("N_Bkg_sw"), *ws->var("ctau3DRes"), *ws->var("ctau3D"), *ws->var("mass")), 0, "N_Bkg_sw");
@@ -195,13 +199,18 @@ void CtauErr(
     else { ctauErrMax = hTot_M->GetBinLowEdge(i); }
   }
 
-  if(ptLow==3&&ptHigh==6.5) ctauErrMax=0.1476;
-  else if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.1278;
-  else if(ptLow==15&&ptHigh==20) ctauErrMax=0.0378;
-  else if(cLow==40&&cHigh==80) ctauErrMax=0.1476;
-  else if(cLow==0&&cHigh==20) ctauErrMax=0.0914;
-  else if(cLow==100&&cHigh==180) ctauErrMax=0.0666;
-  else if(cLow==100&&cHigh==200) ctauErrMax=0.063;
+  if(ptLow==6.5&&ptHigh==12) ctauErrMax = 0.1512;
+  else if(ptLow==3&&ptHigh==6.5) { ctauErrMin = 0.0198; ctauErrMax=0.16; }
+  else if(ptLow==6.5&&ptHigh==9) ctauErrMax = 0.1618;
+  else if(ptLow==6.5&&ptHigh==7) ctauErrMax = 0.1332;
+  else if(ptLow==6.&&ptHigh==7) ctauErrMax = 0.153;
+  else if(ptLow==7.&&ptHigh==8) ctauErrMax = 0.1365;
+  else if(ptLow==7&&ptHigh==7.5) {ctauErrMin = 0.01354; ctauErrMax = 0.1318;}
+  else if(ptLow==7.5&&ptHigh==8) ctauErrMax = 0.1205;
+  else if(ptLow==8&&ptHigh==9) ctauErrMax = 0.1098;
+  else if(ptLow==9&&ptHigh==10) ctauErrMax = 0.1147;
+  else if(ptLow==12&&ptHigh==50) ctauErrMax = 0.088;
+
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
@@ -315,6 +324,10 @@ void CtauErr(
     cout<<"Tot evt: ("<<outTot<<")"<<endl;
     cout<<"Res evt: ("<<outRes<<")"<<endl;
     cout<<"lost evt: ("<<((outTot-outRes)*100)/outTot<<")%, "<<outRes<<"evts"<<endl;
+    ws->var("ctau3D")->Print();
+    ws->var("ctau3DRes")->Print();
+	dataw_Sig->Print("V");
+	ctauResCutDS->Print("V");
 
   TLine   *minline = new TLine(ctauErrMin, 0.0, ctauErrMin, (Ydown*TMath::Power((Yup/Ydown),0.5)));
   minline->SetLineStyle(2);
@@ -348,7 +361,6 @@ void CtauErr(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
-  drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
   //drawText(Form("n_{J/#psi} = %.f #pm %.f",sData.GetYieldFromSWeight("N_Jpsi"),ws->var("N_Jpsi")->getError()),text_x,text_y-y_diff*3,text_color,text_size);
   //drawText(Form("n_{Bkg} = %.f #pm %.f",sData.GetYieldFromSWeight("N_Bkg"), ws->var("N_Bkg")->getError()),text_x,text_y-y_diff*4,text_color,text_size);
   drawText(Form("Loss: (%.4f%s) %.f evts", (outTot-outRes)*100/outTot, "%", outTot-outRes),text_x,text_y-y_diff*4,text_color,text_size);

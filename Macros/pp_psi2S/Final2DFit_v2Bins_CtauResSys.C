@@ -13,36 +13,37 @@
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
 #include "RooStats/SPlot.h"
-#include "../../cutsAndBin.h"
-#include "../../CMS_lumi_v2mass.C"
-#include "../../tdrstyle.C"
-#include "../../rootFitHeaders.h"
-#include "../../commonUtility.h"
-#include "../../JpsiUtility.h"
+#include "../../../../cutsAndBin.h"
+#include "../../../../CMS_lumi_v2mass.C"
+#include "../../../../tdrstyle.C"
+#include "../../../../rootFitHeaders.h"
+#include "../../../../commonUtility.h"
+#include "../../../../JpsiUtility.h"
 
 using namespace std;
 using namespace RooFit;
 
-void Final2DFit(
-    double ptLow=3, double ptHigh=4.5,
-    double yLow=1.6, double yHigh=2.4,
+void Final2DFit_v2Bins_CtauResSys(
+    double v2=0,
+    float ptLow=3, float ptHigh=4.5,
+    float yLow=1.6, float yHigh=2.4,
+    int cLow=20, int cHigh=120,
     int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
     )
 {
 
   TString DATE;
-  //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
-  //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="No_Weight";
+  if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
+  else DATE=Form("%i_%i",cLow/2,cHigh/2);
   gStyle->SetEndErrorSize(0);
-  gSystem->mkdir(Form("roots/2DFit_%s/Final",DATE.Data()),kTRUE);
-  gSystem->mkdir(Form("figs/2DFit_%s/Final", DATE.Data()),kTRUE);
+  gSystem->mkdir(Form("roots/2DFit_%s/Final_v2Bins_CtauResSys",DATE.Data()),kTRUE);
+  gSystem->mkdir(Form("figs/2DFit_%s/Final_v2Bins_CtauResSys", DATE.Data()),kTRUE);
 
   TString fname;
   if (PRw==1) fname="PR";
   else if (PRw==2) fname="NP";
 
-  cout<<"pt: "<<ptLow<<" - "<<ptHigh<<", y: "<<yLow<<" - "<<yHigh<<endl;
+  cout<<"pt: "<<ptLow<<" - "<<ptHigh<<", y: "<<yLow<<" - "<<yHigh<<", Cent: "<<cLow/2<<" - "<<cHigh/2<<"%"<<endl;
 
   RooMsgService::instance().getStream(0).removeTopic(Caching);
   RooMsgService::instance().getStream(1).removeTopic(Caching);
@@ -53,26 +54,35 @@ void Final2DFit(
   RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
 
   TFile* f1; TFile* fMass; TFile* fCErr; TFile* fCRes; TFile* fCBkg; TFile* fCTrue;
-  TString kineCut; TString OS; 
-  TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
+  TString kineCut; TString OS; TString v2Cut;
+  TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
   
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw1_Accw1_PtW1_TnP1_230323.root"));
-  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
+  f1 = new TFile(Form("../../../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_JPsi_%s_m2.6-3.5_OS_Effw%d_Accw%d_PtW%d_TnP%d_%s_220113.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP,DATE.Data()));
+  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>2.6 && mass<3.5 && cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
+
+  if (ptLow<20&&v2==2.1) v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.6);
+  else if (ptLow>=20&&abs(v2)>=1.8)  v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.9);
+  else if (ptLow>=20&&abs(v2)>=1.2&&abs(v2)<1.8)  v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.6);
+  //else if (ptLow==25&&ptHigh==50&&v2==1.8)  v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.9);
+  //else if (ptLow==25&&ptHigh==50&&v2==-2.7)  v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.9);
+  //else if (ptLow==25&&ptHigh==50&&v2==-1.8)  v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.6);
+  //else if (ptLow==25&&ptHigh==50&&v2==1.2)  v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.6);
+  //else if (v2==-2.7) v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,v2+0.6);
+  else if (v2==-10) v2Cut = Form("&& v2>%.2f && v2<%.2f",v2,10.0);
+  else v2Cut = Form("&& v2>%.2f && v2<%.2f", v2, v2+0.3);
+
   OS="recoQQsign==0 &&";
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
-  //kineCut = OS+accCut+kineCut;
-  TString nan_cut = "&& !TMath::IsNaN(ctau3D) && !TMath::IsNaN(ctau3DRes)";
-  kineCut = OS+accCut+kineCut + nan_cut;
+  kineCut = OS+accCut+kineCut+v2Cut;
 
-  fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  fCErr = new TFile(Form("roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  fCRes = new TFile(Form("roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  fCBkg = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fMass = new TFile(Form("../../Nominal/roots/2DFit_%s/Mass_v2Bins/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_v2_%.2f.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP, v2));
+  fCErr = new TFile(Form("../../Nominal/roots/2DFit_%s/CtauErr_v2Bins/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_v2_%.2f.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP, v2));
+  fCRes = new TFile(Form("roots/2DFit_%s/CtauRes_v2Bins_CtauResSys/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_v2_%.2f.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP, v2));
+  fCBkg = new TFile(Form("roots/2DFit_%s/CtauBkg_v2Bins_CtauResSys/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_v2_%.2f.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP, v2));
   //fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root","Corr",kineLabel.Data()));
-  //if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
-  //else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
-  if (ptLow==6.5&&ptHigh==50) fCTrue = new TFile(Form("./roots/2DFit_No_Weight/CtauTrue/CtauTrueResult_Inclusive_%s.root",kineLabel.Data()));
-  else fCTrue = new TFile(Form("./roots/2DFit_No_Weight/CtauTrue/CtauTrueResult_Inclusive_%s.root",kineLabel.Data()));
+  if(DATE=="0_180") fCTrue = new TFile(Form("../../../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
+  else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../../../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
+  else fCTrue = new TFile(Form("../../../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
@@ -86,12 +96,23 @@ void Final2DFit(
   RooAddPdf* TrueModel_Tot = (RooAddPdf*)fCTrue->Get("TrueModel_Tot");
   RooAddPdf* pdfCTAU_Bkg_Tot = (RooAddPdf*)fCBkg->Get("pdfCTAU_Bkg_Tot");
 
-
   RooWorkspace *ws = new RooWorkspace("workspace");
   ws->import(*dataw_Bkg);
   double ctauErrMin;
   double ctauErrMax;
   ctauErrMin = ws->var("ctau3DErr")->getMin();  ctauErrMax = ws->var("ctau3DErr")->getMax();
+//  if (cLow==100 && cHigh==180){
+//  ctauErrMin = 0.014;//0.0143889
+//  ctauErrMax = 0.06;}//0.124872
+  //if (ptLow==7.5 && cLow==40){
+  //ctauErrMin = 0.015;//0.0143889
+  //ctauErrMax = 0.09;}//0.124872
+  //else if (ptLow==9 && ptHigh==12 && cLow==20 && cHigh==120){
+  //ctauErrMin = 0.01;//0.0143889
+  //ctauErrMax = 0.1;}//0.124872
+  //else if (ptLow==12 && ptHigh==50 && cLow==40){
+  //ctauErrMin = 0.01;//0.0143889
+  //ctauErrMax = 0.05;}//0.124872
   ws->import(*dataset); //total
   ws->import(*datasetMass);
   ws->import(*pdfMASS_Tot);
@@ -108,16 +129,13 @@ void Final2DFit(
   cout << "####################################" << endl;
   RooArgSet *argSet = new RooArgSet( *(ws->var("ctau3D")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y")), *(ws->var("weight")), *(ws->var("ctau3DRes")), *(ws->var("ctau3DErr")) );
   argSet->add(*(ws->var("pt1")) ); argSet->add(*(ws->var("pt2")) ); argSet->add(*(ws->var("eta1")) );  argSet->add(*(ws->var("eta2")) ); 
-  argSet->add(*(ws->var("recoQQsign")) ); //argSet->add(*(ws->var("cBin")) ); 
-  //RooDataSet *datasetW = new RooDataSet("datasetW","A sample",   *argSet, Import(*dataset),WeightVar(*ws->var("weight")));
-  RooDataSet *datasetW = new RooDataSet("datasetWo","A sample", *argSet, Import(*dataset));
+  argSet->add(*(ws->var("recoQQsign")) ); argSet->add(*(ws->var("cBin")) ); argSet->add(*(ws->var("v2")));
+  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",   *argSet, Import(*dataset),WeightVar(*ws->var("weight")));
   RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample", *argSet, Import(*dataset));
   ws->import(*datasetW);
   ws->import(*datasetWo);
   
-  //RooDataSet *dsTot = (RooDataSet*)datasetW->reduce(*argSet, kineCut.Data() );
-  //RooDataSet *dsTot = (RooDataSet*)datasetWo->reduce(*argSet, kineCut.Data() );
-  RooDataSet *dsTot = (RooDataSet*)datasetW->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f&&%s", ctauErrMin, ctauErrMax, kineCut.Data()) );
+  RooDataSet *dsTot = (RooDataSet*)datasetW->reduce(*argSet, kineCut.Data() );
   //RooDataSet *dsTot = (RooDataSet*)dataset->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), kineCut.Data());
   //RooDataSet *dsToFit = (RooDataSet*)dataset->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f&&%s", ctauErrMin, ctauErrMax, kineCut.Data()) );
   //RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",0.009, 0.3))->Clone("dsTot");
@@ -135,7 +153,6 @@ void Final2DFit(
   ws->var("ctau3D")->Print();
   ws->var("ctau3DErr")->Print();
   ws->var("ctau3DRes")->Print();
-  dsTot->Print("V");
   //***********************************************************************
   //*************************** DRAW CTAU FIT *****************************
   //***********************************************************************
@@ -161,16 +178,16 @@ void Final2DFit(
   //double lambda2 = ws->var("lambdaDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
-  //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
-  //ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*2));
-  //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*2));
-  //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
-  //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
-  ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
-  ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
-  ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
-  ws->factory(Form("fDSS1_test[%.4f]", fdss));
-  ws->factory(Form("fDSS2_test[%.4f]", fdss1));
+  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*10));
+  ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*10));
+  ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*10));
+  ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
+  ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
+  //ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
+  //ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
+  //ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
+  //ws->factory(Form("fDSS1_test[%.4f]", fdss));
+  //ws->factory(Form("fDSS2_test[%.4f]", fdss1));
 
   ws->var("lambdaDSS_test1")->setConstant();
   ws->var("lambdaDSS_test2")->setConstant();
@@ -191,17 +208,23 @@ void Final2DFit(
   //PR
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_JpsiPR", "pdfCTAURES"));
   //3-4.5
-  //if(ptLow==6.5 && ptHigh==9) ws->factory("b_Jpsi[0.38, 0.32, 0.4]");
-  //else if(ptLow==3 && ptHigh==6.5) ws->factory("b_Jpsi[0.26, 0.21, 0.35]");
-  //else if(ptLow==7.5 && ptHigh==8) ws->factory("b_Jpsi[0.29, 0.28, 0.3]");
-  //else if(ptLow==7 && ptHigh==8) ws->factory("b_Jpsi[0.284, 0.23, 0.3]");
-  //else if(ptLow==8 && ptHigh==9) ws->factory("b_Jpsi[0.321, 0.28, 0.33]");
-  //else if(ptLow==8 && ptHigh==10) ws->factory("b_Jpsi[0.32, 0.28, 0.33]");
-  //else if(ptLow==9 && ptHigh==10) ws->factory("b_Jpsi[0.35, 0.3, 0.37]");
-  //else if(ptLow==9 && ptHigh==12) ws->factory("b_Jpsi[0.38, 0.36, 0.4]");
-  //else if(ptLow==12 && ptHigh==50) ws->factory("b_Jpsi[0.48, 0.41, 0.49]");
-  //else if(ptLow==15 && ptHigh==20) ws->factory("b_Jpsi[0.547, 0.5, 0.56]");
-  ws->factory("b_Jpsi[0.22, 1e-8, 1.0]");//NP fraction for Sig
+  //if(ptLow==4.5&&ptHigh==6.5&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.22, 1e-8, 1.0]");//NP fraction for Sig
+  if(ptLow==3&&ptHigh==4.5&&cLow==20&&cHigh==120&&v2==1.5) ws->factory("b_Jpsi[0.25, 1e-6, 0.2]");//NP fraction for Sig
+  //else if(ptLow==6.5&&ptHigh==7.5&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.23, 0., 1.]");//NP fraction for Sig
+  else if(ptLow==6.5&&ptHigh==7.5&&cLow==20&&cHigh==120&&v2==-0.3) ws->factory("b_Jpsi[0.23, .22, .26]");//NP fraction for Sig
+  else if(ptLow==7.5&&ptHigh==9&&cLow==20&&cHigh==120&&v2==-0.9) ws->factory("b_Jpsi[0.30, 1e-6, 0.50]");//NP fraction for Sig
+  else if(ptLow==7.5&&ptHigh==9&&cLow==20&&cHigh==120&&v2==-1.5) ws->factory("b_Jpsi[0.30, 1e-6, 0.70]");//NP fraction for Sig
+  else if(ptLow==6.5&&ptHigh==9&&cLow==20&&cHigh==120&&v2==2.1) ws->factory("b_Jpsi[0.1, ., 1.]");//NP fraction for Sig
+  else if(ptLow==7.5&&ptHigh==9&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.30, .20, .40]");//NP fraction for Sig
+  else if(ptLow==4.5&&ptHigh==6.5&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.5, 0., 1.]");//NP fraction for Sig
+  else if(ptLow==9&&ptHigh==12&&cLow==20&&cHigh==120&&v2==-1.5) ws->factory("b_Jpsi[0.36, 0., .4]");//NP fraction for Sig
+  else if(ptLow==12&&ptHigh==15&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.40, 0., 1.0]");//NP fraction for Sig
+  else if(ptLow==15&&ptHigh==50&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.49, 0., 1.0]");//NP fraction for Sig
+  //else if(ptLow==15&&ptHigh==50) ws->factory("b_Jpsi[0.48, 0.41, 0.53]");//NP fraction for Sig
+  //else if(ptLow==12&&ptHigh==50) ws->factory("b_Jpsi[0.49, 0.4, 0.6]");//NP fraction for Sig
+  else if(ptLow==6.5&&ptHigh==50&&cLow==0&&cHigh==20) ws->factory("b_Jpsi[0.31, 0., 1.]");//NP fraction for Sig
+//  else if(ptLow==6.5&&ptHigh==50&&cLow==100&&cHigh==180) ws->factory("b_Jpsi[0.31, 0.3, 1.]");//NP fraction for Sig
+  else ws->factory("b_Jpsi[0.261, 1e-8, 1.0]");//NP fraction for Sig
 
   //RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
   //    Conditional( *ws->pdf("pdfCTAUCOND_BkgPR"), RooArgList(*ws->var("ctau3D"))));
@@ -246,20 +269,16 @@ void Final2DFit(
         ));
   RooAbsPdf *themodel =NULL;
 
-  double njpsi = ws->var("N_Jpsi")->getVal();
-  ws->factory(Form("N_Jpsi_3[%.3f, %.3f, %.3f]",njpsi*0.9, njpsi*0.8, njpsi*0.99));
-  double nbkg = ws->var("N_Bkg")->getVal();
-  ws->factory(Form("N_Bkg_3[%.3f, %.3f, %.3f]",nbkg*0.9, nbkg*0.8, nbkg*0.99));
-  cout<<"######"<<ws->var("N_Jpsi")->getError()<<endl;
+  //double njpsi = ws->var("N_Jpsi")->getVal();
+  //ws->factory(Form("N_Jpsi[%.3f, %.3f, %.3f]",njpsi, njpsi*0.9, njpsi*1.1));
 
-  RooRealVar *N_Jpsi_2= new RooRealVar("N_Jpsi_2","inclusive Jpsi signals",njpsi*0.5,njpsi*0.86);
-  RooRealVar *N_Bkg_2 = new RooRealVar("N_Bkg_2","fraction of component 1 in bkg",nbkg*0.9,nbkg*1.0);
-  
+  ws->var("N_Jpsi")->setConstant(kTRUE);
+  ws->var("N_Bkg")->setConstant(kTRUE); 
+
   themodel = new RooAddPdf("pdfCTAUMASS_Tot", "pdfCTAUMASS_Tot",
-      RooArgList(*ws->pdf("pdfCTAUMASS_Jpsi"), *ws->pdf("pdfCTAUMASS_Bkg")),
-      RooArgList(*ws->var("N_Jpsi"), *ws->var("N_Bkg")) );
+      RooArgList(*ws->pdf("pdfCTAUMASS_Bkg"), *ws->pdf("pdfCTAUMASS_Jpsi")),
+      RooArgList(*ws->var("N_Bkg"), *ws->var("N_Jpsi")) );
   ws->import(*themodel);
-
   //ws->pdf("pdfMASS_Tot")->getParameters(RooArgSet(*ws->var("mass")))->setAttribAll("Constant", kTRUE);
   std::vector< std::string > objs = {"Bkg", "Jpsi"};
   RooArgSet pdfList = RooArgSet("ConstraionPdfList");
@@ -276,8 +295,7 @@ void Final2DFit(
     }
   }
   ws->defineSet("ConstrainPdfList", pdfList);
-  //ws->pdf("pdfCTAURES")->getParameters(RooArgSet(*ws->var("ctau3DRes"), *ws->var("ctau3D"), *ws->var("ctau3DErr")))->setAttribAll("Constant", kTRUE);
-  ws->pdf("pdfCTAURES")->getParameters(RooArgSet(*ws->var("ctau3D"), *ws->var("ctau3DErr")))->setAttribAll("Constant", kTRUE);
+  ws->pdf("pdfCTAURES")->getParameters(RooArgSet(*ws->var("ctau3DRes"), *ws->var("ctau3D"), *ws->var("ctau3DErr")))->setAttribAll("Constant", kTRUE);
   cout<<ws->pdf("pdfCTAURES")->getVal()<<endl;
   ws->pdf("pdfCTAU_JpsiPR")->getParameters(RooArgSet(*ws->var("ctau3D"), *ws->var("ctau3DErr")))->setAttribAll("Constant", kTRUE);
   ws->pdf("pdfCTAU_BkgPR")->getParameters(RooArgSet(*ws->var("ctau3D"), *ws->var("ctau3DErr")))->setAttribAll("Constant", kTRUE);
@@ -303,21 +321,20 @@ void Final2DFit(
   c_G->SetLogy();
   pad_G_1->cd();
 
-  RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",ctauErrMin, ctauErrMax))->Clone("dsTot");
-  //RooDataSet* dsToFit = (RooDataSet*)dsTot->Clone("dsTot");
+  //RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",ctauErrMin, ctauErrMax))->Clone("dsTot");
+  RooDataSet* dsToFit = (RooDataSet*)dsTot->Clone("dsTot");
   dsToFit->SetName("dsToFit");
   ws->import(*dsToFit);
-  double normDSTot = ws->data("dsToFit")->sumEntries()/ws->data("dsTot")->sumEntries();
-  cout<<normDSTot<<": "<<ws->data("dsToFit")->sumEntries()<<"/"<<ws->data("dsTot")->sumEntries()<<endl;
-  //double normDSTot = (ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal())/ws->data("dsToFit")->sumEntries();
-  //cout<<normDSTot<<": "<<ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal()<<"/"<<ws->data("dsToFit")->sumEntries()<<endl;
+  //double normDSTot = ws->data("dsToFit")->sumEntries()/ws->data("dsTot")->sumEntries();
+  //cout<<normDSTot<<": "<<ws->data("dsToFit")->sumEntries()<<"/"<<ws->data("dsTot")->sumEntries()<<endl;
+  double normDSTot = (ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal())/ws->data("dsToFit")->sumEntries();
+  cout<<normDSTot<<": "<<ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal()<<"/"<<ws->data("dsToFit")->sumEntries()<<endl;
   //double normBkg = ws->data("dsToFit")->sumEntries()*normDSTot/ws->data("dataw_Bkg")->sumEntries();
   //double normJpsi =ws->data("dsToFit")->sumEntries()*normDSTot/ws->data("dataw_Sig")->sumEntries();
 
   cout<<"##############START TOTAL CTAU FIT############"<<endl;
-  bool isWeighted = ws->data("dsToFit")->isWeighted();
+  bool isWeighted = ws->data("dsTot")->isWeighted();
   RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
-  //RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   ws->import(*fitResult, "fitResult_pdfCTAUMASS_Tot");
 
   //DRAW
@@ -379,6 +396,13 @@ void Final2DFit(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
+  drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
+
+  if(ptLow<20&&v2==2.1) drawText(Form("%.1f < v_{2} < %.1f", v2, v2+0.6),text_x,text_y-y_diff*3,text_color,text_size);
+  else if(ptLow>=20&&(abs(v2)>=1.8)) drawText(Form("%.1f < v_{2} < %.1f", v2, v2+0.9),text_x,text_y-y_diff*3,text_color,text_size);
+  else if(ptLow>=20&&(abs(v2)>=1.2&&abs(v2)<1.8)) drawText(Form("%.1f < v_{2}< %.1f", v2, v2+0.6),text_x,text_y-y_diff*3,text_color,text_size);
+  else drawText(Form("%.1f < v_{2} < %.1f", v2, v2+0.3),text_x,text_y-y_diff*3,text_color,text_size);
+
   drawText(Form("N_{J/#psi} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(), ws->var("N_Jpsi")->getError()),text_x+0.5,text_y+0.05-y_diff,text_color,text_size);
   drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y+0.05-y_diff*2,text_color,text_size);
   drawText(Form("b_{J/#psi} = %.4f #pm %.4f",ws->var("b_Jpsi")->getVal(),ws->var("b_Jpsi")->getError()),text_x+0.5,text_y+0.05-y_diff*3,text_color,text_size);
@@ -450,7 +474,7 @@ void Final2DFit(
   Ydown = YMin/(TMath::Power((YMax/YMin), (0.1/(1.0-0.1-0.4))));
   Yup = YMax*TMath::Power((YMax/YMin), (0.4/(1.0-0.1-0.4)));
   myPlot2_H->GetYaxis()->SetRangeUser(Ydown,Yup);
-  myPlot2_H->GetXaxis()->SetRangeUser(massLow, massHigh);
+  myPlot2_H->GetXaxis()->SetRangeUser(2.6, 3.5);
   myPlot2_H->GetXaxis()->SetTitle("m_{#mu^{+}#mu^{-} (GeV/c^{2})}");
   myPlot2_H->SetFillStyle(4000);
   myPlot2_H->GetXaxis()->SetLabelSize(0);
@@ -468,6 +492,13 @@ void Final2DFit(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
+  drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
+
+  if(ptLow<20&&v2==2.1) drawText(Form("%.1f < v_{2} < %.1f", v2, v2+0.6),text_x,text_y-y_diff*3,text_color,text_size);
+  else if(ptLow>=20&&(abs(v2)>=1.8)) drawText(Form("%.1f < v_{2} < %.1f", v2, v2+0.9),text_x,text_y-y_diff*3,text_color,text_size);
+  else if(ptLow>=20&&(abs(v2)>=1.2&&abs(v2)<1.8)) drawText(Form("%.1f < v_{2} < %.1f", v2, v2+0.6),text_x,text_y-y_diff*3,text_color,text_size);
+  else drawText(Form("%.1f < v_{2} < %.1f", v2, v2+0.3),text_x,text_y-y_diff*3,text_color,text_size);
+
   drawText(Form("N_{J/#psi} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(), ws->var("N_Jpsi")->getError()),text_x+0.5,text_y-y_diff,text_color,text_size);
   drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
   drawText(Form("b_{J/#psi} = %.4f #pm %.4f",ws->var("b_Jpsi")->getVal(),ws->var("b_Jpsi")->getError()),text_x+0.5,text_y-y_diff*3,text_color,text_size);
@@ -478,7 +509,7 @@ void Final2DFit(
   pullDist(ws, pad_H_2, c_H, frameTMP_H, hpull_H, "data_Mass", "Mass_Tot", "mass", nMassBin, massLow, massHigh, "m_{#mu^{+}#mu^{-} (GeV/c^{2})}");
   pad_H_2->Update();
   printChi2(ws, pad_H_2, frameTMP_H, fitResult, "mass", "data_Mass", "Mass_Tot", nMassBin, false);
- /* 
+  
   cout << "############################################################################" << endl;
   const int NCUT = 2001;
 
@@ -498,9 +529,9 @@ void Final2DFit(
   outh4->SetBinContent(0,fraction);
   outh4->SetBinError(0,ws->var("b_Jpsi")->getError());
 
-  ofstream of1(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_Left.txt", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  ofstream of2(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_Righ.txt", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  ofstream of3(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_Cent.txt", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  ofstream of1(Form("figs/2DFit_%s/Final_v2Bins/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_Left.txt", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  ofstream of2(Form("figs/2DFit_%s/Final_v2Bins/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_Righ.txt", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  ofstream of3(Form("figs/2DFit_%s/Final_v2Bins/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_Cent.txt", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   cout<<"test"<<endl;
   cout<<"total: "<<ws->var("N_Jpsi")->getVal()<<", 1/3: "<<ws->var("N_Jpsi")->getVal()/3<<endl;
@@ -515,6 +546,7 @@ void Final2DFit(
   double residualPR;
   double residualNP;
   if(ptLow==12&&ptHigh==50){residualPR=0.03;residualNP=0.05;}
+  else if(ptLow==15&&ptHigh==50&&cLow==40&&cHigh==80){residualPR=0.01;residualNP=0.04;}
   else {residualPR=0.10;residualNP=0.05;}
   double CutLeft;
   for(int i = 0; i<NCUT; i++){
@@ -584,11 +616,65 @@ void Final2DFit(
   of3<<"CUT LOW: "<<CutLeft<<", CUT HIGH: "<<CutRight<<endl;
   of3<<"BJpsi Fraction: "<<NP_Integral->getVal()*ws->var("b_Jpsi")->getVal()/(ws->var("b_Jpsi")->getVal()*NP_Integral->getVal()+(1-ws->var("b_Jpsi")->getVal())*PR_Integral->getVal())<<"\n"<<endl;
   
-*/
+  //for(int i = 0; i<NCUT; i++){
+  //  ws->var("ctau3D")->setRange("ctauLeft", ctauLow, IntegralCut[i]);
+  //  RooAbsPdf* test1 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiPR");
+  //  RooAbsPdf* test2 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiNoPR");
+  //  RooAbsReal* PR_Integral = test1->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauLeft"));
+  //  RooAbsReal* NP_Integral = test2->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauLeft"));
+
+  //  of1 << "[INFO] ctau Cut: "<<IntegralCut[i]<<endl;
+  //  of1 << "[INFO] PR Integral: "<< PR_Integral->getVal() <<endl;
+  //  of1 << "[INFO] NP Integral: "<< NP_Integral->getVal() <<endl;
+  //  of1 << "[INFO] BJpsi Fraction: "<<NP_Integral->getVal()*ws->var("b_Jpsi")->getVal()/(ws->var("b_Jpsi")->getVal()*NP_Integral->getVal()+(1-ws->var("b_Jpsi")->getVal())*PR_Integral->getVal())<<"\n"<<endl;
+  //}
+
+  //for(int i = 0; i<NCUT; i++){
+  //  ws->var("ctau3D")->setRange("ctauRight", IntegralCut[i], ctauHigh);
+  //  RooAbsPdf* test1 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiPR");
+  //  RooAbsPdf* test2 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiNoPR");
+  //  RooAbsReal* PR_Integral = test1->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauRight"));
+  //  RooAbsReal* NP_Integral = test2->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauRight"));
+
+  //  temp1=NP_Integral->getVal()*fraction/(fraction*NP_Integral->getVal()+(1-fraction)*PR_Integral->getVal());
+  //  outh2->SetBinContent(i,temp1);
+  //  of2 << "[INFO] ctau Cut: "<<IntegralCut[i]<<endl;
+  //  of2 << "[INFO] PR Integral: "<< PR_Integral->getVal() <<endl;
+  //  of2 << "[INFO] NP Integral: "<< NP_Integral->getVal() <<endl;
+  //  of2 << "[INFO] BJpsi Fraction: "<<NP_Integral->getVal()*ws->var("b_Jpsi")->getVal()/(ws->var("b_Jpsi")->getVal()*NP_Integral->getVal()+(1-ws->var("b_Jpsi")->getVal())*PR_Integral->getVal())<<"\n"<<endl;
+  //}
+
+  //for(int i = 0; i<NCUT; i++){
+  //  ws->var("ctau3D")->setRange("ctauCent", IntegralCut[i], IntegralCut[i+1]);
+  //  RooAbsPdf* test1 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiPR");
+  //  RooAbsPdf* test2 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiNoPR");
+  //  RooAbsReal* PR_Integral = test1->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauCent"));
+  //  RooAbsReal* NP_Integral = test2->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauCent"));
+
+  //  temp1=NP_Integral->getVal()*fraction/(fraction*NP_Integral->getVal()+(1-fraction)*PR_Integral->getVal());
+  //  outh3->SetBinContent(i,temp1);
+  //  of3 << "[INFO] ctau Cut: "<<IntegralCut[i]<<"-"<<IntegralCut[i+1]<<endl;
+  //  of3 << "[INFO] PR Integral: "<< PR_Integral->getVal() <<endl;
+  //  of3 << "[INFO] NP Integral: "<< NP_Integral->getVal() <<endl;
+  //  of3 << "[INFO] BJpsi Fraction: "<<NP_Integral->getVal()*ws->var("b_Jpsi")->getVal()/(ws->var("b_Jpsi")->getVal()*NP_Integral->getVal()+(1-ws->var("b_Jpsi")->getVal())*PR_Integral->getVal())<<"\n"<<endl;
+  //}
+
+  //cout << "Find cut 3\n" << endl;
+  //ws->var("ctau3D")->setRange("ctauFix", -0.01, 0.036); // Input Left, Right l_jpsi
+  //////ws->var("ctau3D")->setRange("ctauCent", 0.03, 0.11); // Input Left, Right l_jpsi
+  //RooAbsPdf* test1 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiPR");
+  //RooAbsPdf* test2 = (RooAbsPdf*) ws->pdf("pdfCTAUMASS_JpsiNoPR");
+  //RooAbsReal* PR_Integral = test1->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauFix"));
+  //RooAbsReal* NP_Integral = test2->createIntegral(*ws->var("ctau3D"), NormSet(*ws->var("ctau3D")), Range("ctauFix"));
+
+  //cout << "[INFO] PR Integral: "<< PR_Integral->getVal() <<endl;
+  //cout << "[INFO] NP Integral: "<< NP_Integral->getVal() <<endl;
+  //cout << "[INFO] Centter BJpsi Fraction: "<<NP_Integral->getVal()*ws->var("b_Jpsi")->getVal()/(ws->var("b_Jpsi")->getVal()*NP_Integral->getVal()+(1-ws->var("b_Jpsi")->getVal())*PR_Integral->getVal())<<"\n"<<endl;
+
   c_G->Update();
-  c_G->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_G->SaveAs(Form("figs/2DFit_%s/Final_v2Bins_CtauResSys/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_v2_%.2f.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP, v2));
   c_H->Update();
-  c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_H->SaveAs(Form("figs/2DFit_%s/Final_v2Bins_CtauResSys/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_v2_%.2f.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP, v2));
 
   TH1D* outh = new TH1D("2DfitResults","fit result",20,0,20);
 
@@ -601,13 +687,13 @@ void Final2DFit(
   fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final_v2Bins_CtauResSys/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d_v2_%.2f.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP, v2),"recreate");
   //ws->Write();
   outFile->cd();
   outh->Write();
-  //outh1->Write();
-  //outh2->Write();
-  //outh3->Write();
-  //outh4->Write();
+  outh1->Write();
+  outh2->Write();
+  outh3->Write();
+  outh4->Write();
   outFile->Close();
 }
