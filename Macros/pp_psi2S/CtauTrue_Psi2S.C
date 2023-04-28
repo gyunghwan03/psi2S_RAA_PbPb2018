@@ -35,7 +35,7 @@ void CtauTrue_Psi2S(
   TStopwatch *t = new TStopwatch;
   t->Start();
   
-  TString DATE="230320";
+  TString DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
@@ -124,8 +124,8 @@ void CtauTrue_Psi2S(
   ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]");
+  ws->factory("fDSS[0.8, 0., 1.]");
+  ws->factory("fDSS1[0.8, 0., 1.]");
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");
@@ -171,7 +171,7 @@ void CtauTrue_Psi2S(
   cout << endl << "************ 4 ***************" << endl << endl;
   //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE2", "pdfCTAUTRUEDSS2", "pdfCTAUTRUEDSS3", "fDSS2"));
   ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS3", "fDSS1"));
-  ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUE", "N_Jpsi_MC"));
+  ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUEDSS1", "N_Jpsi_MC"));
   cout << endl << "************ 5 ***************" << endl << endl;
 
   //ws->var("ctau3Dtrue")->setRange(0.1, 6);

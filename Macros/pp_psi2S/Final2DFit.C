@@ -110,10 +110,10 @@ void Final2DFit(
   argSet->add(*(ws->var("pt1")) ); argSet->add(*(ws->var("pt2")) ); argSet->add(*(ws->var("eta1")) );  argSet->add(*(ws->var("eta2")) ); 
   argSet->add(*(ws->var("recoQQsign")) ); //argSet->add(*(ws->var("cBin")) ); 
   //RooDataSet *datasetW = new RooDataSet("datasetW","A sample",   *argSet, Import(*dataset),WeightVar(*ws->var("weight")));
-  RooDataSet *datasetW = new RooDataSet("datasetWo","A sample", *argSet, Import(*dataset));
-  RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample", *argSet, Import(*dataset));
+  RooDataSet *datasetW = new RooDataSet("datasetW","A sample", *argSet, Import(*dataset));
+  //RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample", *argSet, Import(*dataset));
   ws->import(*datasetW);
-  ws->import(*datasetWo);
+  //ws->import(*datasetWo);
   
   //RooDataSet *dsTot = (RooDataSet*)datasetW->reduce(*argSet, kineCut.Data() );
   //RooDataSet *dsTot = (RooDataSet*)datasetWo->reduce(*argSet, kineCut.Data() );
@@ -154,10 +154,10 @@ void Final2DFit(
         ))->setAttribAll("Constant", kTRUE);
   //ws->var("lambdaDSS1")->setConstant(kTRUE);//make it as a initial value..
   double lambda = ws->var("lambdaDSS")->getVal();
-  double lambda1 = ws->var("lambdaDSS2")->getVal();
-  double lambda2 = ws->var("lambdaDSS3")->getVal();
-  double fdss = ws->var("fDSS")->getVal();
-  double fdss1 = ws->var("fDSS1")->getVal();
+  //double lambda1 = ws->var("lambdaDSS2")->getVal();
+  //double lambda2 = ws->var("lambdaDSS3")->getVal();
+  //double fdss = ws->var("fDSS")->getVal();
+  //double fdss1 = ws->var("fDSS1")->getVal();
   //double lambda2 = ws->var("lambdaDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
@@ -167,31 +167,31 @@ void Final2DFit(
   //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
   //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
   ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
-  ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
-  ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
-  ws->factory(Form("fDSS1_test[%.4f]", fdss));
-  ws->factory(Form("fDSS2_test[%.4f]", fdss1));
+  //ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
+  //ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
+  //ws->factory(Form("fDSS1_test[%.4f]", fdss));
+  //ws->factory(Form("fDSS2_test[%.4f]", fdss1));
 
   ws->var("lambdaDSS_test1")->setConstant();
-  ws->var("lambdaDSS_test2")->setConstant();
-  ws->var("lambdaDSS_test3")->setConstant();
-  ws->var("fDSS1_test")->setConstant();
-  ws->var("fDSS2_test")->setConstant();
+  //ws->var("lambdaDSS_test2")->setConstant();
+  //ws->var("lambdaDSS_test3")->setConstant();
+  //ws->var("fDSS1_test")->setConstant();
+  //ws->var("fDSS2_test")->setConstant();
 
 
   //NoPR{
   //1exp
   //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS", "pdfCTAURES")); //NP
   //3exp
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test1", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test2", "ctau3D", "lambdaDSS_test2", "pdfCTAURES")); //NP
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test3", "ctau3D", "lambdaDSS_test3", "pdfCTAURES")); //NP
-  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test1", "pdfCTAUTRUE_test2", "fDSS1_test"));
-  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUCOND_JpsiNoPR", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test3", "fDSS2_test"));//}
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
+  //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test2", "ctau3D", "lambdaDSS_test2", "pdfCTAURES")); //NP
+  //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test3", "ctau3D", "lambdaDSS_test3", "pdfCTAURES")); //NP
+  //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test1", "pdfCTAUTRUE_test2", "fDSS1_test"));
+  //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUCOND_JpsiNoPR", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test3", "fDSS2_test"));//}
   //PR
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_JpsiPR", "pdfCTAURES"));
   //3-4.5
-  //if(ptLow==6.5 && ptHigh==9) ws->factory("b_Jpsi[0.38, 0.32, 0.4]");
+  //if(ptLow==6.5 && ptHigh==9) ws->factory("b_Jpsi[0.30, 0.28, 0.32]");
   //else if(ptLow==3 && ptHigh==6.5) ws->factory("b_Jpsi[0.26, 0.21, 0.35]");
   //else if(ptLow==7.5 && ptHigh==8) ws->factory("b_Jpsi[0.29, 0.28, 0.3]");
   //else if(ptLow==7 && ptHigh==8) ws->factory("b_Jpsi[0.284, 0.23, 0.3]");
@@ -201,7 +201,7 @@ void Final2DFit(
   //else if(ptLow==9 && ptHigh==12) ws->factory("b_Jpsi[0.38, 0.36, 0.4]");
   //else if(ptLow==12 && ptHigh==50) ws->factory("b_Jpsi[0.48, 0.41, 0.49]");
   //else if(ptLow==15 && ptHigh==20) ws->factory("b_Jpsi[0.547, 0.5, 0.56]");
-  ws->factory("b_Jpsi[0.22, 1e-8, 1.0]");//NP fraction for Sig
+  ws->factory("b_Jpsi[0.3, 1e-8, 1.]");//NP fraction for Sig
 
   //RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
   //    Conditional( *ws->pdf("pdfCTAUCOND_BkgPR"), RooArgList(*ws->var("ctau3D"))));
@@ -247,9 +247,13 @@ void Final2DFit(
   RooAbsPdf *themodel =NULL;
 
   double njpsi = ws->var("N_Jpsi")->getVal();
-  ws->factory(Form("N_Jpsi_3[%.3f, %.3f, %.3f]",njpsi*0.9, njpsi*0.8, njpsi*0.99));
+  //ws->factory(Form("N_Jpsi_3[%.3f, %.3f, %.3f]",njpsi, njpsi*0.95, njpsi*1.05));
+  //ws->factory(Form("N_Jpsi_3[ %.3f, %.3f]", 1e-6, 5e+7));
+  ws->factory(Form("N_Jpsi_3[%.3f, %.3f, %.3f]",njpsi, 1e-6, 5e+7));
   double nbkg = ws->var("N_Bkg")->getVal();
-  ws->factory(Form("N_Bkg_3[%.3f, %.3f, %.3f]",nbkg*0.9, nbkg*0.8, nbkg*0.99));
+  //ws->factory(Form("N_Bkg_3[%.3f, %.3f, %.3f]",nbkg, nbkg*0.95, nbkg*1.05));
+  ws->factory(Form("N_Bkg_3[%.3f, %.3f, %.3f]",nbkg, 1e-6, 5e+7));
+  //ws->factory(Form("N_Bkg_3[ %.3f, %.3f]", 1e-6, 5e+7));
   cout<<"######"<<ws->var("N_Jpsi")->getError()<<endl;
 
   RooRealVar *N_Jpsi_2= new RooRealVar("N_Jpsi_2","inclusive Jpsi signals",njpsi*0.5,njpsi*0.86);
@@ -257,22 +261,22 @@ void Final2DFit(
   
   themodel = new RooAddPdf("pdfCTAUMASS_Tot", "pdfCTAUMASS_Tot",
       RooArgList(*ws->pdf("pdfCTAUMASS_Jpsi"), *ws->pdf("pdfCTAUMASS_Bkg")),
-      RooArgList(*ws->var("N_Jpsi"), *ws->var("N_Bkg")) );
+      RooArgList(*ws->var("N_Jpsi_3"), *ws->var("N_Bkg_3")) );
   ws->import(*themodel);
 
   //ws->pdf("pdfMASS_Tot")->getParameters(RooArgSet(*ws->var("mass")))->setAttribAll("Constant", kTRUE);
   std::vector< std::string > objs = {"Bkg", "Jpsi"};
   RooArgSet pdfList = RooArgSet("ConstraionPdfList");
   for (auto obj : objs) {
-    if (ws->var(Form("N_%s", obj.c_str())))  {
+    if (ws->var(Form("N_%s_3", obj.c_str())))  {
       ws->factory(Form("Gaussian::%s_Gauss(%s,%s_Mean[%f],%s_Sigma[%f])",
-            Form("N_%s", obj.c_str()), Form("N_%s", obj.c_str()),
-            Form("N_%s", obj.c_str()), ws->var(Form("N_%s", obj.c_str()))->getValV(),
-            Form("N_%s", obj.c_str()), ws->var(Form("N_%s", obj.c_str()))->getError()));
+            Form("N_%s_3", obj.c_str()), Form("N_%s", obj.c_str()),
+            Form("N_%s_3", obj.c_str()), ws->var(Form("N_%s", obj.c_str()))->getValV(),
+            Form("N_%s_3", obj.c_str()), ws->var(Form("N_%s", obj.c_str()))->getError()));
 
-      pdfList.add(*ws->pdf(Form("N_%s_Gauss", obj.c_str())), kFALSE);
-      std::cout << "[INFO] Constraining N_" << obj << " with Mean : " << ws->var(Form("N_%s_Mean", obj.c_str()))->getVal()
-        << " and Sigma: " << ws->var(Form("N_%s_Sigma", obj.c_str()))->getVal() << std::endl;
+      pdfList.add(*ws->pdf(Form("N_%s_3_Gauss", obj.c_str())), kFALSE);
+      std::cout << "[INFO] Constraining N_" << obj << " with Mean : " << ws->var(Form("N_%s_3_Mean", obj.c_str()))->getVal()
+        << " and Sigma: " << ws->var(Form("N_%s_3_Sigma", obj.c_str()))->getVal() << std::endl;
     }
   }
   ws->defineSet("ConstrainPdfList", pdfList);
@@ -303,13 +307,13 @@ void Final2DFit(
   c_G->SetLogy();
   pad_G_1->cd();
 
-  RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",ctauErrMin, ctauErrMax))->Clone("dsTot");
-  //RooDataSet* dsToFit = (RooDataSet*)dsTot->Clone("dsTot");
+  //RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",ctauErrMin, ctauErrMax))->Clone("dsTot");
+  RooDataSet* dsToFit = (RooDataSet*)dsTot->Clone("dsTot");
   dsToFit->SetName("dsToFit");
   ws->import(*dsToFit);
-  double normDSTot = ws->data("dsToFit")->sumEntries()/ws->data("dsTot")->sumEntries();
-  cout<<normDSTot<<": "<<ws->data("dsToFit")->sumEntries()<<"/"<<ws->data("dsTot")->sumEntries()<<endl;
-  //double normDSTot = (ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal())/ws->data("dsToFit")->sumEntries();
+  //double normDSTot = ws->data("dsToFit")->sumEntries()/ws->data("dsTot")->sumEntries();
+  //cout<<normDSTot<<": "<<ws->data("dsToFit")->sumEntries()<<"/"<<ws->data("dsTot")->sumEntries()<<endl;
+  double normDSTot = (ws->var("N_Jpsi_3_Mean")->getVal()+ws->var("N_Bkg_3_Mean")->getVal())/ws->data("dsToFit")->sumEntries();
   //cout<<normDSTot<<": "<<ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal()<<"/"<<ws->data("dsToFit")->sumEntries()<<endl;
   //double normBkg = ws->data("dsToFit")->sumEntries()*normDSTot/ws->data("dataw_Bkg")->sumEntries();
   //double normJpsi =ws->data("dsToFit")->sumEntries()*normDSTot/ws->data("dataw_Sig")->sumEntries();
@@ -379,8 +383,8 @@ void Final2DFit(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
-  drawText(Form("N_{J/#psi} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(), ws->var("N_Jpsi")->getError()),text_x+0.5,text_y+0.05-y_diff,text_color,text_size);
-  drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y+0.05-y_diff*2,text_color,text_size);
+  drawText(Form("N_{J/#psi} = %.f #pm %.f",ws->var("N_Jpsi_3")->getVal(), ws->var("N_Jpsi_3")->getError()),text_x+0.5,text_y+0.05-y_diff,text_color,text_size);
+  drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg_3")->getVal(), ws->var("N_Bkg_3")->getError() ),text_x+0.5,text_y+0.05-y_diff*2,text_color,text_size);
   drawText(Form("b_{J/#psi} = %.4f #pm %.4f",ws->var("b_Jpsi")->getVal(),ws->var("b_Jpsi")->getError()),text_x+0.5,text_y+0.05-y_diff*3,text_color,text_size);
 
   TPad *pad_G_2 = new TPad("pad_G_2", "pad_G_2", 0, 0.006, 0.98, 0.227);
@@ -468,8 +472,8 @@ void Final2DFit(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
-  drawText(Form("N_{J/#psi} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(), ws->var("N_Jpsi")->getError()),text_x+0.5,text_y-y_diff,text_color,text_size);
-  drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
+  drawText(Form("N_{J/#psi} = %.f #pm %.f",ws->var("N_Jpsi_3")->getVal(), ws->var("N_Jpsi_3")->getError()),text_x+0.5,text_y-y_diff,text_color,text_size);
+  drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg_3")->getVal(), ws->var("N_Bkg_3")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
   drawText(Form("b_{J/#psi} = %.4f #pm %.4f",ws->var("b_Jpsi")->getVal(),ws->var("b_Jpsi")->getError()),text_x+0.5,text_y-y_diff*3,text_color,text_size);
 
   TPad *pad_H_2 = new TPad("pad_H_2", "pad_H_2", 0, 0.006, 0.98, 0.227);
