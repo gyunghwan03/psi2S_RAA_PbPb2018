@@ -76,7 +76,7 @@ void Final2DFit(
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
-  RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
+  //RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
   RooDataSet *dataw_Bkg = (RooDataSet*)fCErr->Get("dataw_Bkg");
   //RooDataSet *dataw_Sig = (RooDataSet*)fCErr->Get("dataw_Sig");
   RooHistPdf* pdfCTAUERR_Tot = (RooHistPdf*)fCErr->Get("pdfCTAUERR_Tot");
@@ -105,7 +105,7 @@ void Final2DFit(
   //ctauErrMax = 0.05;}//0.124872
   ws->import(*dataset); //total
   ws->import(*datasetMass);
-  ws->import(*pdfMASS_Tot);
+  //ws->import(*pdfMASS_Tot);
   //ws->import(*dataw_Sig);
   //ws->import(*GaussModel_Tot);
   ws->import(*TrueModel_Tot);
@@ -148,9 +148,9 @@ void Final2DFit(
   //*************************** DRAW CTAU FIT *****************************
   //***********************************************************************
   //ws->pdf("pdfMASS_Tot")->getParameters(RooArgSet(*ws->var("mass")))->setAttribAll("Constant", kTRUE);
-  ws->pdf("pdfMASS_Tot")->getParameters(
-      RooArgSet(*ws->var("mass"), *ws->pdf("pdfMASS_Jpsi"), *ws->pdf("pdfMASS_bkg")
-        ))->setAttribAll("Constant", kTRUE);
+  //ws->pdf("pdfMASS_Tot")->getParameters(
+  //    RooArgSet(*ws->var("mass"), *ws->pdf("pdfMASS_Jpsi"), *ws->pdf("pdfMASS_bkg")
+  //      ))->setAttribAll("Constant", kTRUE);
   //ws->pdf("GaussModelCOND_ctauRes")->getParameters(
   //    RooArgSet(*ws->var("ctau1_CtauRes"),*ws->var("ctau2_CtauRes"),*ws->var("ctau3_CtauRes"),
   //      *ws->var("s1_CtauRes"), *ws->var("rS21_CtauRes"), *ws->var("rS32_CtauRes"),
@@ -162,6 +162,119 @@ void Final2DFit(
         ))->setAttribAll("Constant", kTRUE);
   //ws->var("lambdaDSS1")->setConstant(kTRUE);//make it as a initial value..
   
+  TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
+  RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
+  ws_fit->import(*dataset_fit);
+
+  Double_t alpha_MC_value = ws_fit->var("alpha_1_A")->getVal();
+  Double_t alpha_MC_value_err = ws_fit->var("alpha_1_A")->getError();
+  Double_t n_MC_value = ws_fit->var("n_1_A")->getVal();
+  Double_t n_MC_value_err = ws_fit->var("n_1_A")->getError();
+  Double_t xA_MC_value = ws_fit->var("x_A")->getVal();
+  Double_t xA_MC_value_err =  ws_fit->var("x_A")->getError();
+  Double_t f_MC_value = ws_fit->var("f")->getVal();
+  Double_t f_MC_value_err = ws_fit->var("f")->getError();
+  Double_t sigma_MC_value = ws_fit->var("sigma_1_A")->getVal();
+  Double_t sigma_MC_value_err = ws_fit->var("sigma_1_A")->getError();
+
+  double sigma_index = 5;
+
+  Double_t alpha_lower = alpha_MC_value-(sigma_index*alpha_MC_value_err);
+  Double_t alpha_higher = alpha_MC_value+(sigma_index*alpha_MC_value_err);
+  Double_t xA_lower = xA_MC_value-(sigma_index*xA_MC_value_err);
+  Double_t xA_higher = xA_MC_value+(sigma_index*xA_MC_value_err);
+  Double_t n_lower = n_MC_value-(sigma_index*n_MC_value_err);
+  Double_t n_higher = n_MC_value+(sigma_index*n_MC_value_err);
+  Double_t f_lower = f_MC_value-(sigma_index*f_MC_value_err);
+  Double_t f_higher = f_MC_value+(sigma_index*f_MC_value_err);
+  Double_t sigma_lower = sigma_MC_value-(sigma_index*sigma_MC_value_err);
+  Double_t sigma_higher = sigma_MC_value+(sigma_index*sigma_MC_value_err);
+
+  if (f_higher>1.0) f_higher=1.0;
+  if (f_lower<0.0) f_lower=0.0;
+  double paramslower[6] = {alpha_lower, n_lower, 0.0, xA_lower, 0.0,  0.0};
+  double paramsupper[6] = {alpha_higher, n_higher, 0.1, xA_higher, 1.0, 25.0};
+
+  double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
+  double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
+
+  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
+  //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
+  RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
+  RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
+  //RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init);
+  RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
+  //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init, paramslower[0], paramsupper[0]);
+  RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
+  //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init,alpha_1_init*0.9,alpha_1_init*1.1);
+  RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
+  RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
+  //RooRealVar    n_1_A("n_1_A","power order", n_1_init,n_1_init*0.9,n_1_init*1.1);
+  //RooRealVar    n_1_A("n_1_A","power order", n_1_init);
+  RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
+  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
+  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init*0.99,f_init*1.01);
+  RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
+  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
+  //Set up crystal ball shapes
+  RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
+  RooAddPdf*  pdfMASS_Jpsi;
+  //DOUBLE CRYSTAL BALL
+  RooCBShape* cb_2_A = new RooCBShape("cball_2_A", "cystal Ball", *(ws->var("mass")), mean, sigma_2_A, alpha_2_A, n_2_A);
+  //RooGaussian* gauss = new RooGaussian("gauss","gaussian PDF",*(ws->var("mass")),mean,sigma_2_A);
+  pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
+  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal",RooArgList(*cb_1_A,*gauss), RooArgList(*f) );
+
+  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
+  //BACKGROUND
+  //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.0, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.0, -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.0, -1., 1.);
+  RooRealVar *sl4 = new RooRealVar("sl4","sl4", 0.0, -1., 1.);
+  RooRealVar *sl5 = new RooRealVar("sl5","sl5", 0.0, -1., 1.);
+  RooRealVar *sl6 = new RooRealVar("sl6","sl6", 0.0, -1., 1.);
+
+  RooChebychev *pdfMASS_bkg;
+  pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
+  Double_t NBkg_limit = 2.0e+07;
+  Double_t NJpsi_limit = 10.0e+06;
+  if (ptLow==12&&ptHigh==15)  {
+       NBkg_limit = 500000;
+       NJpsi_limit = 10000; }
+  else if (ptLow==6.5&&ptHigh==12)  {
+       NBkg_limit = 500000;
+       NJpsi_limit = 10000; }
+  else if (ptLow==15&&ptHigh==20)  {
+       NBkg_limit = 500000;
+       NJpsi_limit = 10000; }
+  else if (ptLow==12&&ptHigh==50)  {
+       NBkg_limit = 500000;
+       NJpsi_limit = 10000; }
+  else if (ptLow==30&&ptHigh==50)  {
+      NBkg_limit = 500000;
+      NJpsi_limit = 10000; }
+  else if (ptLow==20&&ptHigh==50)  {
+      NBkg_limit = 500000;
+      NJpsi_limit = 10000; }
+  else if (cLow==40&&cHigh==60)  {
+      NBkg_limit = 500000;
+      NJpsi_limit = 10000; }
+  else if (cLow==80&&cHigh==100)  {
+      NBkg_limit = 500000;
+      NJpsi_limit = 10000; }
+
+  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
+  RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
+
+  RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
+  ws->import(*pdfMASS_Tot);
+
+  RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsTot,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(0), NumCPU(nCPU));
+  
+  ws->import(*pdfMASS_Tot);
+
   double lambda = ws->var("lambdaDSS")->getVal();
   double lambda1 = ws->var("lambdaDSS2")->getVal();
   double lambda2 = ws->var("lambdaDSS3")->getVal();
@@ -647,9 +760,9 @@ void Final2DFit(
   //cout << "[INFO] Centter BJpsi Fraction: "<<NP_Integral->getVal()*ws->var("b_Jpsi")->getVal()/(ws->var("b_Jpsi")->getVal()*NP_Integral->getVal()+(1-ws->var("b_Jpsi")->getVal())*PR_Integral->getVal())<<"\n"<<endl;
 
   c_G->Update();
-  c_G->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_G->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "230502", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   c_H->Update();
-  c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "230502", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   TH1D* outh = new TH1D("2DfitResults","fit result",20,0,20);
 
@@ -662,7 +775,7 @@ void Final2DFit(
   fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", "230502", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   //ws->Write();
   outFile->cd();
   outh->Write();
