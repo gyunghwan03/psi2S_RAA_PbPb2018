@@ -331,6 +331,7 @@ void CtauRes(
 
   TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   ctauResModel->Write();
+  fitCtauRes->Write(); 
   //GaussModel_Tot->Write();
   //	ctauResCutDS->Write();
   //datasetRes->Write();
