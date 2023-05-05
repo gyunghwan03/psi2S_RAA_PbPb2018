@@ -601,7 +601,7 @@ void Final2DFit_LowPt_freeMass(
   fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", "230502", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", "No_Weight", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   //ws->Write();
   outFile->cd();
   outh->Write();
