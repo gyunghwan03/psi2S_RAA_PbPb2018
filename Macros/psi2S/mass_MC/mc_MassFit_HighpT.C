@@ -344,7 +344,7 @@ void mc_MassFit_HighpT(
     datasetMass->Write();
     outh->Write();
     // ws->Write();
-
+    fitMass->Write();
     outFile->Close();
         fitMass->Print("v");
     // Get # of entries for every bins.
