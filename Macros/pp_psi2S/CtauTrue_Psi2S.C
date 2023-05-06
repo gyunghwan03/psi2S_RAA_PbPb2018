@@ -302,6 +302,7 @@ void CtauTrue_Psi2S(
   RooArgSet* fitargs = new RooArgSet();
   fitargs->add(fitCtauTrue->floatParsFinal());
   ctauTrueModel->Write();
+  fitCtauTrue->Write();
   outFile->Close();
   //TFile *hFile = new TFile(Form("ctauTreuHist_%s.root",kineLabel.Data()),"recreate");
   //hCTrue->Write();

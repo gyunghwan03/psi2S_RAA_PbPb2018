@@ -494,6 +494,7 @@ void Final2DFit_LowPt(
   TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   //ws->Write();
   outFile->cd();
+  fitResult->Write();
   outh->Write();
   outFile->Close();
 }
