@@ -670,5 +670,6 @@ void Final2DFit(
   outh2->Write();
   outh3->Write();
   outh4->Write();
+  fitResult->Write();
   outFile->Close();
 }

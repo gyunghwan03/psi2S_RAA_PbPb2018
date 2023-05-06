@@ -27,7 +27,7 @@ void Final2DFit_LowPt(
     float ptLow=3, float ptHigh=6.5,
     float yLow=1.6, float yHigh=2.4,
     int cLow=0, int cHigh=180,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
 
@@ -660,5 +660,6 @@ void Final2DFit_LowPt(
   outh2->Write();
   outh3->Write();
   outh4->Write();
+  fitResult->Write();
   outFile->Close();
 }
