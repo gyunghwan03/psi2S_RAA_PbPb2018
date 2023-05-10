@@ -27,7 +27,7 @@ void Final2DFit_LowPt_freeMass(
     double ptLow=3, double ptHigh=6.5,
     double yLow=1.6, double yHigh=2.4,
     int cLow=0, int cHigh=180,
-    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
+    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
     )
 {
 
@@ -154,10 +154,6 @@ void Final2DFit_LowPt_freeMass(
   //      *ws->var("s1_CtauRes"), *ws->var("rS21_CtauRes"), *ws->var("rS32_CtauRes"),
   //      *ws->var("f_CtauRes"), *ws->var("f2_CtauRes")
   //      ))->setAttribAll("Constant", kTRUE);
-  ws->pdf("pdfCTAU_Bkg_Tot")->getParameters(
-      //RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"),  *ws->pdf("pdfCTAUCOND_Bkg"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
-      RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
-        ))->setAttribAll("Constant", kTRUE);
 
 
   //***********************************************************************
@@ -257,6 +253,10 @@ void Final2DFit_LowPt_freeMass(
   fitMass->Print("V");
   pdfMASS_Tot->Print("V");
   //ws->import(*pdfMASS_Tot);
+  ws->pdf("pdfCTAU_Bkg_Tot")->getParameters(
+      //RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"),  *ws->pdf("pdfCTAUCOND_Bkg"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
+      RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
+        ))->setAttribAll("Constant", kTRUE);
 
   //ws->var("lambdaDSS1")->setConstant(kTRUE);//make it as a initial value..
   double lambda = ws->var("lambdaDSS")->getVal();
@@ -267,22 +267,22 @@ void Final2DFit_LowPt_freeMass(
   //double lambda2 = ws->var("lambdaDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
-  //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
-  //ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*2));
-  //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*2));
-  //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
-  //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
-  ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
-  ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
-  ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
-  ws->factory(Form("fDSS1_test[%.4f]", fdss));
-  ws->factory(Form("fDSS2_test[%.4f]", fdss1));
+  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda,  lambda*0.9,  lambda*1.1));
+  ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, lambda1*0.9, lambda1*1.1));
+  ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, lambda2*0.9, lambda2*1.1));
+  ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
+  ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
+  //ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
+  //ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
+  //ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
+  //ws->factory(Form("fDSS1_test[%.4f]", fdss));
+  //ws->factory(Form("fDSS2_test[%.4f]", fdss1));
 
-  ws->var("lambdaDSS_test1")->setConstant();
-  ws->var("lambdaDSS_test2")->setConstant();
-  ws->var("lambdaDSS_test3")->setConstant();
-  ws->var("fDSS1_test")->setConstant();
-  ws->var("fDSS2_test")->setConstant();
+  //ws->var("lambdaDSS_test1")->setConstant();
+  //ws->var("lambdaDSS_test2")->setConstant();
+  //ws->var("lambdaDSS_test3")->setConstant();
+  //ws->var("fDSS1_test")->setConstant();
+  //ws->var("fDSS2_test")->setConstant();
 
 
   //NoPR{
@@ -297,7 +297,7 @@ void Final2DFit_LowPt_freeMass(
   //PR
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_JpsiPR", "pdfCTAURES"));
   //3-4.5
-  if(cLow==40&&cHigh==80) ws->factory("b_Jpsi[0.13, 1e-3, 0.15]");//NP fraction for Sig
+  if(cLow==40&&cHigh==80) ws->factory("b_Jpsi[0.13, 1e-3, 0.5]");//NP fraction for Sig
   else ws->factory("b_Jpsi[0.22, 1e-8, 1.0]");//NP fraction for Sig
 
   //RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
@@ -586,9 +586,9 @@ void Final2DFit_LowPt_freeMass(
 
 
   c_G->Update();
-  c_G->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "No_Weight", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_G->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "230502", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   c_H->Update();
-  c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "No_Weight", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "230502", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   TH1D* outh = new TH1D("2DfitResults","fit result",20,0,20);
 
@@ -598,14 +598,24 @@ void Final2DFit_LowPt_freeMass(
   outh->SetBinContent(1,temp);
   outh->SetBinError(1,temperr);
 
+  TH1D* hmass = new TH1D("MassResults","Mass Fit",20,0,20);
+  hmass->GetXaxis()->SetBinLabel(1,"Jpsi");
+
+  float temp1 = ws->var("N_Jpsi")->getVal();
+  float temp1err=ws->var("N_Jpsi")->getError();
+
+  hmass->SetBinContent(1,temp1);
+  hmass->SetBinError(1,temp1err);
+
   fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", "No_Weight", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", "230502", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   //ws->Write();
   outFile->cd();
   outh->Write();
   fitResult->Write();
+  hmass->Write();
   //outh1->Write();
   //outh2->Write();
   //outh3->Write();

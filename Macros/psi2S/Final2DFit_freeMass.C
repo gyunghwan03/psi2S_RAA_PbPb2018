@@ -23,7 +23,7 @@
 using namespace std;
 using namespace RooFit;
 
-void Final2DFit(
+void Final2DFit_freeMass(
     float ptLow=3, float ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
     int cLow=20, int cHigh=120,
@@ -156,10 +156,6 @@ void Final2DFit(
   //      *ws->var("s1_CtauRes"), *ws->var("rS21_CtauRes"), *ws->var("rS32_CtauRes"),
   //      *ws->var("f_CtauRes"), *ws->var("f2_CtauRes")
   //      ))->setAttribAll("Constant", kTRUE);
-  ws->pdf("pdfCTAU_Bkg_Tot")->getParameters(
-      //RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"),  *ws->pdf("pdfCTAUCOND_Bkg"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
-      RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
-        ))->setAttribAll("Constant", kTRUE);
   //ws->var("lambdaDSS1")->setConstant(kTRUE);//make it as a initial value..
   
   TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
@@ -275,6 +271,11 @@ void Final2DFit(
   
   ws->import(*pdfMASS_Tot);
 
+  ws->pdf("pdfCTAU_Bkg_Tot")->getParameters(
+      //RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"),  *ws->pdf("pdfCTAUCOND_Bkg"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
+      RooArgSet(*ws->var("ctau3D"), *ws->pdf("pdfCTAU_BkgPR"), *ws->pdf("pdfCTAU_BkgNoPR"), *ws->pdf("pdfCTAUCOND_BkgPR"), *ws->pdf("pdfCTAUCOND_BkgNoPR")
+        ))->setAttribAll("Constant", kTRUE);
+
   double lambda = ws->var("lambdaDSS")->getVal();
   double lambda1 = ws->var("lambdaDSS2")->getVal();
   double lambda2 = ws->var("lambdaDSS3")->getVal();
@@ -283,22 +284,22 @@ void Final2DFit(
   //double lambda2 = ws->var("lambdaDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
-  //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
-  //ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*2));
-  //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*2));
-  //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
-  //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
-  ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
-  ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
-  ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
-  ws->factory(Form("fDSS1_test[%.4f]", fdss));
-  ws->factory(Form("fDSS2_test[%.4f]", fdss1));
+  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda,  lambda*0.9,  lambda*1.1));
+  ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, lambda1*0.9, lambda1*1.1));
+  ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, lambda2*0.9, lambda2*1.1));
+  ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
+  ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
+  //ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
+  //ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
+  //ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
+  //ws->factory(Form("fDSS1_test[%.4f]", fdss));
+  //ws->factory(Form("fDSS2_test[%.4f]", fdss1));
 
-  ws->var("lambdaDSS_test1")->setConstant();
-  ws->var("lambdaDSS_test2")->setConstant();
-  ws->var("lambdaDSS_test3")->setConstant();
-  ws->var("fDSS1_test")->setConstant();
-  ws->var("fDSS2_test")->setConstant();
+  //ws->var("lambdaDSS_test1")->setConstant();
+  //ws->var("lambdaDSS_test2")->setConstant();
+  //ws->var("lambdaDSS_test3")->setConstant();
+  //ws->var("fDSS1_test")->setConstant();
+  //ws->var("fDSS2_test")->setConstant();
 
 
   //NoPR{
@@ -772,6 +773,15 @@ void Final2DFit(
   outh->SetBinContent(1,temp);
   outh->SetBinError(1,temperr);
 
+  TH1D* hmass = new TH1D("MassResults","Mass Fit",20,0,20);
+  hmass->GetXaxis()->SetBinLabel(1,"Jpsi");
+
+  double temp2 = ws->var("N_Jpsi")->getVal();
+  double temp2err=ws->var("N_Jpsi")->getError();
+
+  hmass->SetBinContent(1,temp2);
+  hmass->SetBinError(1,temp2err);
+
   fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();
@@ -783,6 +793,7 @@ void Final2DFit(
   outh2->Write();
   outh3->Write();
   outh4->Write();
+  hmass->Write();
   fitResult->Write();
   outFile->Close();
 }

@@ -94,6 +94,8 @@ void CtauRes(
   else if (ptLow==9&&ptHigh==12) {nGauss=3;}
 //  else if (ptLow==12&&ptHigh==15) {nGauss=3;}
   else if (cLow==0&&cHigh==40) nGauss=3;
+  else if (cLow==0&&cHigh==20) nGauss=3;
+  else if (cLow==20&&cHigh==40) nGauss=3;
   else if (cLow==40&&cHigh==80) nGauss=3;
   //else if (cLow==0&&cHigh==20) nGauss=3;
   ws->factory("One[1.0]");
@@ -111,7 +113,7 @@ void CtauRes(
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
   ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[2.0, 1.5, 3.0]");
-  ws->factory("rS32_CtauRes[2.5, 2.3, 5.0]");
+  ws->factory("rS32_CtauRes[2.5, 2.2, 5.0]");
 
   ws->factory("rS43_CtauRes[1.5, 1.0, 10.0]");
   ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");

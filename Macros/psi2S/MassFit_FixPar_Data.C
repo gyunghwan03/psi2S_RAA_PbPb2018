@@ -34,7 +34,7 @@ void MassFit_FixPar_Data(
   //TString DATE = "20_40";
   //TString DATE = "0_180";
   TString DATE;
-  DATE="No_Weight";
+  DATE="230427";
   //if(ptLow==6.5&&ptHigh==50) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
   gStyle->SetEndErrorSize(0);
@@ -157,6 +157,7 @@ void MassFit_FixPar_Data(
   //double m_lambda_init = 5;
   //SIGNAL
   RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
+  cout << "psi 2S MASS : " << pdgMass.Psi2S << endl;
   //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
   RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
@@ -166,9 +167,9 @@ void MassFit_FixPar_Data(
   RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
   //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init,alpha_1_init*0.9,alpha_1_init*1.1);
   RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
-  //RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
+  RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
   //RooRealVar    n_1_A("n_1_A","power order", n_1_init,n_1_init*0.9,n_1_init*1.1);
-  RooRealVar    n_1_A("n_1_A","power order", n_1_init);
+  //RooRealVar    n_1_A("n_1_A","power order", n_1_init);
   RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
   //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
   //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init*0.99,f_init*1.01);
