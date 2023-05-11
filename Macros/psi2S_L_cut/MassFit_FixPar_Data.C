@@ -27,6 +27,7 @@ void MassFit_FixPar_Data(
     double ptLow=3, double ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
     int cLow=0, int cHigh=200,
+    double l_cut = 1.,
     int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
     )
 {
@@ -34,7 +35,7 @@ void MassFit_FixPar_Data(
   //TString DATE = "20_40";
   //TString DATE = "0_180";
   TString DATE;
-  DATE="230427";
+  DATE="No_Weight";
   //if(ptLow==6.5&&ptHigh==50) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
   gStyle->SetEndErrorSize(0);
@@ -68,7 +69,7 @@ void MassFit_FixPar_Data(
 //  f1 = new TFile("../../skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
 //  f1 = new TFile("/Users/hwan/tools/2019/CMS/JPsi/Jpsi_v2_PbPb2018/skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
 
-  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1 && cBin>=%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
+  kineCut = Form("ctau3D<%.5f && pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1 && cBin>=%d && cBin<%d",l_cut, ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
 
@@ -157,7 +158,6 @@ void MassFit_FixPar_Data(
   //double m_lambda_init = 5;
   //SIGNAL
   RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
-  cout << "psi 2S MASS : " << pdgMass.Psi2S << endl;
   //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
   RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
@@ -167,9 +167,9 @@ void MassFit_FixPar_Data(
   RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
   //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init,alpha_1_init*0.9,alpha_1_init*1.1);
   RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
-  RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
+  //RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
   //RooRealVar    n_1_A("n_1_A","power order", n_1_init,n_1_init*0.9,n_1_init*1.1);
-  //RooRealVar    n_1_A("n_1_A","power order", n_1_init);
+  RooRealVar    n_1_A("n_1_A","power order", n_1_init);
   RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
   //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
   //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init*0.99,f_init*1.01);
@@ -187,9 +187,10 @@ void MassFit_FixPar_Data(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.28, -10., 10.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.0, -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.0, -1., 1.);
+  //RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.28, -10., 10.); // setting 1 230510
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.01, -10., 10.); // setting 2 230510
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.01, -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.01, -1., 1.);
   RooRealVar *sl4 = new RooRealVar("sl4","sl4", 0.0, -1., 1.);
   RooRealVar *sl5 = new RooRealVar("sl5","sl5", 0.0, -1., 1.);
   RooRealVar *sl6 = new RooRealVar("sl6","sl6", 0.0, -1., 1.);
@@ -250,6 +251,17 @@ void MassFit_FixPar_Data(
   else if (cLow==80&&cHigh==100)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  if (cLow==20&&cHigh==40)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  if (cLow==60&&cHigh==80)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  if (cLow==0&&cHigh==40)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+
+
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);

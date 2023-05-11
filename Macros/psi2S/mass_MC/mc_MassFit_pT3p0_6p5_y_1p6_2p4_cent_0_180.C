@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../../rootFitHeaders.h"
-#include "../../commonUtility.h"
-#include "../../JpsiUtility.h"
+#include "../../../rootFitHeaders.h"
+#include "../../../commonUtility.h"
+#include "../../../JpsiUtility.h"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -12,9 +12,9 @@
 #include "TText.h"
 #include "TArrow.h"
 #include "TFile.h"
-#include "../../cutsAndBin.h"
-#include "../../CMS_lumi_v2mass.C"
-#include "../../tdrstyle.C"
+#include "../../../cutsAndBin.h"
+#include "../../../CMS_lumi_v2mass.C"
+#include "../../../tdrstyle.C"
 #include "RooDataHist.h"
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
@@ -315,6 +315,7 @@ void mc_MassFit_pT3p0_6p5_y_1p6_2p4_cent_0_180(
 	datasetMass->Write();
 	outh->Write();
 	// ws->Write();
+	fitMass->Write();
 
 	outFile->Close();
         fitMass->Print("v");	
