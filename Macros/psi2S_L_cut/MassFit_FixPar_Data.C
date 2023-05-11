@@ -191,9 +191,6 @@ void MassFit_FixPar_Data(
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.01, -10., 10.); // setting 2 230510
   RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.01, -1., 1.);
   RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.01, -1., 1.);
-  RooRealVar *sl4 = new RooRealVar("sl4","sl4", 0.0, -1., 1.);
-  RooRealVar *sl5 = new RooRealVar("sl5","sl5", 0.0, -1., 1.);
-  RooRealVar *sl6 = new RooRealVar("sl6","sl6", 0.0, -1., 1.);
   //RooRealVar *sl7 = new RooRealVar("sl7","sl7", .2, -2., 2.);
   //RooRealVar *sl1 = new RooRealVar("sl1","sl1", .1, -25., 25.);
   //RooRealVar *sl2 = new RooRealVar("sl2","sl2", .1, -25., 25.);
@@ -260,8 +257,15 @@ void MassFit_FixPar_Data(
   if (cLow==0&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
-
-
+  if (ptLow==6.5 && ptHigh==50 && cLow==100&&cHigh==180)  {
+	  NBkg_limit = 50000;
+	  NJpsi_limit = 200; }
+  if (ptLow==9 && ptHigh==12 && cLow==0&&cHigh==180)  {
+	  NBkg_limit = 50000;
+	  NJpsi_limit = 1000; }
+  if (ptLow==6.5 && ptHigh==12 && cLow==0&&cHigh==180)  {
+	  NBkg_limit = 50000;
+	  NJpsi_limit = 1000; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
