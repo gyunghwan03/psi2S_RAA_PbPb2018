@@ -173,12 +173,32 @@ void MassFit_FixPar_Data_LowPt(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", -0.08, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", -0.08, -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", -0.08, -1., 1.);
-  RooRealVar *sl4 = new RooRealVar("sl4","sl4", 0.0, -1., 1.);
-  RooRealVar *sl5 = new RooRealVar("sl5","sl5", 0.0, -1., 1.);
-  RooRealVar *sl6 = new RooRealVar("sl6","sl6", 0.0, -1., 1.);
+
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", -0.02, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", -0.01, -1., 1.);
+  Double_t NBkg_limit = 500000;
+  Double_t NJpsi_limit = 5000;
+  if (ptLow==3 && ptHigh==6.5 && cLow==0&&cHigh==180)  {
+	  NBkg_limit = 800000;
+	  NJpsi_limit = 5000;
+    // sl1, 2: 0.5, 0.1
+     }
+  if (ptLow==3 && ptHigh==50 && cLow==0&&cHigh==40)  {
+	  NBkg_limit = 140000;
+	  NJpsi_limit = 9000;
+    // sl1, 2: -0.05, -0.01
+     }
+  if (ptLow==3 && ptHigh==50 && cLow==40&&cHigh==80)  {
+	  NBkg_limit = 140000;
+	  NJpsi_limit = 5000;
+    // sl1, 2: -0.02, -0.01
+     }
+  if (ptLow==3 && ptHigh==50 && cLow==80&&cHigh==180)  {
+	  NBkg_limit = 140000;
+	  NJpsi_limit = 5000;
+    // sl1, 2: -0.02, -0.01
+     }
+
   //RooRealVar *sl7 = new RooRealVar("sl7","sl7", .2, -2., 2.);
   //RooRealVar *sl1 = new RooRealVar("sl1","sl1", .1, -25., 25.);
   //RooRealVar *sl2 = new RooRealVar("sl2","sl2", .1, -25., 25.);
@@ -203,19 +223,7 @@ void MassFit_FixPar_Data_LowPt(
 //  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
   //else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
   pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
-  Double_t NBkg_limit = 500000;
-  Double_t NJpsi_limit = 5000;
-  if (ptLow == 4.5) {
-    NJpsi_limit = 3000;
-  }
-  if (ptHigh ==50 && cLow==80) {
-      NBkg_limit = 500000;
-      NJpsi_limit = 2000;
-  }
-  if (ptHigh ==50 && cLow==0) {
-      NBkg_limit = 1000000;
-      NJpsi_limit = 1500;
-    }
+
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals", 0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
