@@ -26,13 +26,16 @@ void mc_MassFit_pT3p0_50_y_1p6_2p4_cent_0_180(
 		float ptLow=3.0, float ptHigh=50,
 		float yLow=1.6, float yHigh=2.4,
 		int PR=0, //0=PR, 1=NP, 2=Inc.
-		int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+		int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
 		)
 {
-    TString DATE = "230118";
+    TString DATE = "No_Weight";
     gStyle->SetEndErrorSize(0);
-    gSystem->mkdir(Form("roots/%s",DATE.Data()),kTRUE);
-    gSystem->mkdir(Form("figs/%s",DATE.Data()),kTRUE);
+    gSystem->mkdir(Form("../roots_MC"));
+    gSystem->mkdir(Form("../roots_MC/Mass"));
+    gSystem->mkdir(Form("../figs"));
+    gSystem->mkdir(Form("../figs/2DFit_%s",DATE.Data()),kTRUE);
+	gSystem->mkdir(Form("../figs/2DFit_%s/mc_Mass",DATE.Data()),kTRUE);
 
 	TString bCont;
 	if(PR==0) bCont="Prompt";
@@ -315,16 +318,16 @@ void mc_MassFit_pT3p0_50_y_1p6_2p4_cent_0_180(
 	c_A->Update();
 	TString kineLabel = getKineLabelpp (ptLow, ptHigh,yLow, yHigh, 0.0);
     
-	TFile* outFile;
-    outFile = new TFile(Form("roots/%s/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-    c_A->SaveAs(Form("figs/%s/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+    TFile* outFile;
+    outFile = new TFile(Form("../roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+    c_A->SaveAs(Form("../figs/2DFit_%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
 
 	pdfMASS_Tot->Write();
 	datasetMass->Write();
 	outh->Write();
 	// ws->Write();
-
+	fitMass->Write();
 	outFile->Close();
         fitMass->Print("v");	
 	// Get # of entries for every bins.
