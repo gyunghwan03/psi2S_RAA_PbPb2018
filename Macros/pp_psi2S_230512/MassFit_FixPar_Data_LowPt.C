@@ -391,7 +391,7 @@ void MassFit_FixPar_Data_LowPt(
   pdfMASS_Tot->Write();
   pdfMASS_bkg->Write();
   datasetMass->Write();
-  ws->Write();
+  //ws->Write();
   outh->Write();
   fitMass->Write();
   outFile->Close();

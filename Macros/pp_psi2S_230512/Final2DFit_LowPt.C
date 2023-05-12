@@ -26,7 +26,7 @@ using namespace RooFit;
 void Final2DFit_LowPt(
     float ptLow=3, float ptHigh=6.5,
     float yLow=1.6, float yHigh=2.4,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
 
@@ -111,7 +111,7 @@ void Final2DFit_LowPt(
   ws->import(*pdfCTAUERR_Jpsi);
   //ws->import(*pdfCTAUERR_Bkg);
   ws->import(*pdfCTAU_Bkg_Tot);
-  
+    
   cout<<"CtauErr Min: "<<ctauErrMin<<", Max: "<<ctauErrMax<<endl;
   
   cout << "####################################" << endl;
@@ -120,9 +120,7 @@ void Final2DFit_LowPt(
   argSet->add(*(ws->var("recoQQsign")) ); 
 //  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",   *argSet, Import(*dataset),WeightVar(*ws->var("weight")));
   RooDataSet *datasetW = new RooDataSet("datasetWo","A sample", *argSet, Import(*dataset));
-  RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample", *argSet, Import(*dataset));
   ws->import(*datasetW);
-  ws->import(*datasetWo);
   
   RooDataSet *dsTot = (RooDataSet*)datasetW->reduce(*argSet, kineCut.Data() );
   //RooDataSet *dsTot = (RooDataSet*)dataset->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), kineCut.Data());
@@ -226,7 +224,7 @@ void Final2DFit_LowPt(
         "pdfCTAUMASS_BkgNoPR",
         "pdfCTAUMASS_BkgPR"
         ));
-
+    
   RooProdPdf pdfJpsiPR("pdfCTAU_JpsiPR","",*ws->pdf("pdfCTAUERR_Jpsi"),
       Conditional(*ws->pdf("pdfCTAUCOND_JpsiPR"),RooArgList(*ws->var("ctau3D"))));
   ws->import(pdfJpsiPR);
@@ -314,7 +312,7 @@ void Final2DFit_LowPt(
 
   cout<<"##############START TOTAL CTAU FIT############"<<endl;
   bool isWeighted = ws->data("dsTot")->isWeighted();
-  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
+  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(4), SumW2Error(isWeighted), PrintLevel(3), Save());
   ws->import(*fitResult, "fitResult_pdfCTAUMASS_Tot");
 
   //DRAW
