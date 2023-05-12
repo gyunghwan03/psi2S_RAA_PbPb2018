@@ -428,6 +428,4 @@ void CtauErr(
   pdfCTAUERR_Bkg->Write();
   pdfCTAUERR_Jpsi->Write();
   outFile->Close();
-
-
 }

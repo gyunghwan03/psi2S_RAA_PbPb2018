@@ -27,7 +27,7 @@ void CtauRes(
     float ptLow=3, float ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
     int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
   //TString DATE="210507";

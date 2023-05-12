@@ -78,6 +78,7 @@ def check_fit_status(file_name):
         return ('sPlot', 'no fit')
     else:
         infile = TFile(file_path)
+        print(file_path)
         fit_result = infile.Get(fit_store)
         hesse_code = fit_result.status() # Hesse code
         edm_temp = format(fit_result.edm(), '.5E') # Define edm_temp for formatting
