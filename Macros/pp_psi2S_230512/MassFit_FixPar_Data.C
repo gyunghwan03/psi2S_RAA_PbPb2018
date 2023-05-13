@@ -188,9 +188,32 @@ void MassFit_FixPar_Data(
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.0, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
   RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.0, -1., 1.);
   RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.0, -1., 1.);
-  RooRealVar *sl4 = new RooRealVar("sl4","sl4", 0.0, -1., 1.);
-  RooRealVar *sl5 = new RooRealVar("sl5","sl5", 0.0, -1., 1.);
-  RooRealVar *sl6 = new RooRealVar("sl6","sl6", 0.0, -1., 1.);
+
+  Double_t NBkg_limit = 2.0e+08;
+  Double_t NJpsi_limit = 1.0e+08;
+
+  if(ptLow==9&&ptHigh==12) NJpsi_limit = 1e+06;
+  else if(ptLow==6.5&&ptHigh==9) NJpsi_limit = 5e+05;
+  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+05;
+  else if(ptLow==8&&ptHigh==9) NJpsi_limit = 4e+06;
+  else if(ptLow==9&&ptHigh==10) NJpsi_limit = 3e+06;
+  else if(ptLow==10&&ptHigh==12) NJpsi_limit = 4e+06;
+  else if(ptLow==12&&ptHigh==15) NJpsi_limit = 6e+06;
+  else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
+  
+  if(ptLow==12&&ptHigh==50) {
+    NJpsi_limit = 20000;
+    NBkg_limit = 200000;
+    //sl1,2,3: 0.08 Ditto 0.01
+  }
+  if(ptLow==15&&ptHigh==20) {
+    NJpsi_limit = 1e+06;
+    NBkg_limit = 2.0e+08;
+  }
+  if(ptLow==20&&ptHigh==50) {
+    NJpsi_limit = 8000;
+    NBkg_limit = 20000;
+  }
   //RooRealVar *sl7 = new RooRealVar("sl7","sl7", .2, -2., 2.);
   //RooRealVar *sl1 = new RooRealVar("sl1","sl1", .1, -25., 25.);
   //RooRealVar *sl2 = new RooRealVar("sl2","sl2", .1, -25., 25.);
@@ -222,19 +245,7 @@ void MassFit_FixPar_Data(
   //Build the model
   //RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,700000);
   //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,1400000);
-  Double_t NBkg_limit = 2.0e+08;
-  Double_t NJpsi_limit = 1.0e+08;
 
-  if(ptLow==9&&ptHigh==12) NJpsi_limit = 1e+06;
-  else if(ptLow==6.5&&ptHigh==9) NJpsi_limit = 5e+05;
-  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+05;
-  else if(ptLow==8&&ptHigh==9) NJpsi_limit = 4e+06;
-  else if(ptLow==9&&ptHigh==10) NJpsi_limit = 3e+06;
-  else if(ptLow==10&&ptHigh==12) NJpsi_limit = 4e+06;
-  else if(ptLow==12&&ptHigh==15) NJpsi_limit = 6e+06;
-  else if(ptLow==12&&ptHigh==50) NJpsi_limit = 1e+05;
-  else if(ptLow==20&&ptHigh==50) NJpsi_limit = 6e+06;
-  else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);

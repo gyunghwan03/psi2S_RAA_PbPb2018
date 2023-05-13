@@ -407,6 +407,7 @@ void CtauBkg_LowPt(
 
   TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   fitCtauBkg->Write();
+  fitCtauBkg->Print("V");
   pdfCTAU_Bkg_Tot->Write();
   //pdfCTAUCOND_Bkg->Write();
   //pdfTot_Bkg->Write();

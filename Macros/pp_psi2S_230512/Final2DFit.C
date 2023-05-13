@@ -601,14 +601,13 @@ void Final2DFit(
 
   outh->SetBinContent(1,temp);
   outh->SetBinError(1,temperr);
-
-  fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();
   TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   //ws->Write();
   outFile->cd();
   fitResult->Write();
+  fitResult->Print("V");
   outh->Write();
   //outh1->Write();
   //outh2->Write();

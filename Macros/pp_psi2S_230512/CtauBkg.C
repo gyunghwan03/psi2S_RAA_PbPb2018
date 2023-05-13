@@ -148,6 +148,20 @@ void CtauBkg(
   ws->factory("lambdaDDS_Bkg[0.5, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg[0.01, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
+  else if(ptLow==6.5&&ptHigh==12){
+  ws->factory("b_Bkg[0.5, 1e-6, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.8, 1e-6, 1.]");
+  ws->factory("fDLIV[0.22, 1e-6, 1]");
+  ws->factory("lambdaDDS_Bkg[0.076, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg[0.88, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.3468, 1e-6, 1.]");}
+  else if(ptLow==15&&ptHigh==20){
+  ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.3, 0., 1.]");
+  ws->factory("fDLIV[0.2, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.1, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg[0.2, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.1, 1e-6, 1.]");}
   else if(yLow==0&&yHigh==0.4){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
@@ -437,6 +451,7 @@ void CtauBkg(
 
   TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   fitCtauBkg->Write();
+  fitCtauBkg->Print("V");
   pdfCTAU_Bkg_Tot->Write();
   //pdfCTAUCOND_Bkg->Write();
   //pdfTot_Bkg->Write();

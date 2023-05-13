@@ -114,9 +114,7 @@ void mc_MassFit_HighpT(
 	sigma_up=0.4; x_up=1; alpha_up=3; n_up=5; f_up=1;
 	sigma_lo=0.; x_lo=0; alpha_lo=0; n_lo=0.; f_lo=0;
 	if(ptLow==12&&ptHigh==15) { n_up=10; alpha_up=2; }
-	else if(ptLow==20&&ptHigh==50) {alpha_up=5; n_up=10; n_lo=1;}
-	else if(ptLow==7&&ptHigh==7.5) {alpha_up=5; n_up=5; n_lo=1;}
-
+    else if(ptLow==7&&ptHigh==7.5) {alpha_up=5; n_up=5; n_lo=1;}
 	else if(ptLow==7&&ptHigh==8) { n_lo=1; n_up=10; sigma_up=0.4; f_lo=0.05;}
 	else if(ptLow==8&&ptHigh==9) { n_up=100;  alpha_up=100; sigma_up=0.4; }
 	else if(ptLow==9&&ptHigh==10) { n_lo=1; n_up=10; sigma_up=0.4; }
@@ -125,7 +123,6 @@ void mc_MassFit_HighpT(
 	else if(ptLow==8&&ptHigh==10) {alpha_up=5; n_up=10; n_lo=1;}
 	else if(ptLow==10&&ptHigh==12) {alpha_up=100; n_up=100;}
 	else if(ptLow==12&&ptHigh==20) {n_up=20; n_lo=3;}
-	else if(ptLow==12&&ptHigh==50) {n_up=10; n_lo=3;}
 	else if(ptLow==6.5&&ptHigh==12) {n_up=5; n_lo=1;}
 
 	else if(yLow==2.0&&yHigh==2.4) {n_up=10;}
@@ -144,9 +141,25 @@ void mc_MassFit_HighpT(
 	double N_Bkg_high = 200000;
     double fit_limit = 3.86;
 
-	if(ptLow==12&&ptHigh==50) {alpha_up=5; n_up=6; n_lo=2; f_init=0.81;}
-	else if(ptLow==8&&ptHigh==12) { n_1_init = 5.3;}
-	else if(ptLow==12&&ptHigh==20) { n_1_init = 4.6;}
+	if(ptLow==8&&ptHigh==12) { n_1_init = 5.3;}
+	if(ptLow==12&&ptHigh==20) { n_1_init = 4.6;}
+
+    if(ptLow==6.5&&ptHigh==9) {
+        N_Jpsi_high = 12000; // 2500000
+    }
+    if(ptLow==6.5&&ptHigh==50) {
+        N_Jpsi_high = 400000; // 2500000
+    }
+    if(ptLow==12&&ptHigh==50) {
+        N_Jpsi_high = 400000; // 2500000
+        alpha_up=100; n_up=100; n_lo=1; f_init=0.21;
+        n_1_init=2;
+    }
+    if(ptLow==20&&ptHigh==50) {
+        N_Jpsi_high = 100000; // 2500000
+        alpha_up=100; n_up=100; n_lo=1; f_init=0.951;
+        sigma_1_init = 0.0255, n_1_init=50;
+    }
 
 
 	double m_lambda_init = 5;
