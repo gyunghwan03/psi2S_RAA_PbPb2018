@@ -30,12 +30,11 @@ void Get2DHistSqrt(TH2D* h1 =0, TH2D* h2=0);
 void GetHistBkg(TH1D* h1 =0, TH1D* h2=0);
 
 void makeRooDataSet_psi2S_Data(
-	double yLow=0, double yHigh=1.6,
     int cLow = 0, int cHigh = 200,
     float massLow = 3.3, float massHigh =4.1, 
     bool dimusign=true, bool isMC = false, 
-    bool fAccW = true, bool fEffW = true,
-    bool isTnP = true, bool isPtW = true,
+    bool fAccW = false, bool fEffW = false,
+    bool isTnP = false, bool isPtW = false,
     int hiHFBinEdge = 0,
     int dtype = 1, 
     int weight_PR = 0
@@ -75,7 +74,7 @@ void makeRooDataSet_psi2S_Data(
 
   TChain *tree = new TChain("mmepevt");
   if(!isMC){
-    TString f1 = "./skimmedFiles/OniaFlowSkim_JpsiTrig_DBAllPD_isMC0_HFNom_201127.root";
+    TString f1 = "./skimmedFiles/OniaFlowSkim_JpsiTrig_DBAllPD_miniADO_isMC0_HFNom_230513.root";
     tree->Add(f1.Data());
     sample="RD";}
   else if(dtype==1){
@@ -130,14 +129,6 @@ void makeRooDataSet_psi2S_Data(
   int recoQQsign[nMaxDimu];
   float vz;
   float mass[nMaxDimu];
-  float qxa[nMaxDimu];
-  float qya[nMaxDimu];
-  float qxb[nMaxDimu]; 
-  float qyb[nMaxDimu];
-  float qxc[nMaxDimu];
-  float qyc[nMaxDimu];
-  float qxdimu[nMaxDimu];
-  float qydimu[nMaxDimu];
   float pt[nMaxDimu];
   float y[nMaxDimu]; 
   float pt1[nMaxDimu];
@@ -147,6 +138,9 @@ void makeRooDataSet_psi2S_Data(
   float eta2[nMaxDimu];
   float ctau3D[nMaxDimu];
   float ctau3DErr[nMaxDimu];
+  float ctau3D2S[nMaxDimu];
+  float ctau3DErr2S[nMaxDimu];
+  float ctau3DRes2S[nMaxDimu];
   double weight;
 
   TBranch *b_event;
@@ -162,16 +156,11 @@ void makeRooDataSet_psi2S_Data(
   TBranch *b_eta2;
   TBranch *b_ctau3D;
   TBranch *b_ctau3DErr;
+  TBranch *b_ctau3D2S;
+  TBranch *b_ctau3DErr2S;
+  TBranch *b_ctau3DRes2S;
   TBranch *b_pt1;
   TBranch *b_pt2;
-  TBranch *b_qxa;
-  TBranch *b_qxb;
-  TBranch *b_qxc;
-  TBranch *b_qxdimu;
-  TBranch *b_qya;
-  TBranch *b_qyb;
-  TBranch *b_qyc;
-  TBranch *b_qydimu;
   TBranch *b_weight;
 
   tree->SetBranchAddress("event", &event, &b_event);
@@ -189,14 +178,9 @@ void makeRooDataSet_psi2S_Data(
   tree->SetBranchAddress("eta2", eta2, &b_eta2);
   tree->SetBranchAddress("ctau3D", ctau3D, &b_ctau3D);
   tree->SetBranchAddress("ctau3DErr", ctau3DErr, &b_ctau3DErr);
-  tree->SetBranchAddress("qxa", qxa, &b_qxa);
-  tree->SetBranchAddress("qxb", qxb, &b_qxb);
-  tree->SetBranchAddress("qxc", qxc, &b_qxc);
-  tree->SetBranchAddress("qxdimu", qxdimu, &b_qxdimu);
-  tree->SetBranchAddress("qya", qya, &b_qya);
-  tree->SetBranchAddress("qyb", qyb, &b_qyb);
-  tree->SetBranchAddress("qyc", qyc, &b_qyc);
-  tree->SetBranchAddress("qydimu", qydimu, &b_qydimu);
+  tree->SetBranchAddress("ctau3D2S", ctau3D2S, &b_ctau3D2S);
+  tree->SetBranchAddress("ctau3DErr2S", ctau3DErr2S, &b_ctau3DErr2S);
+  tree->SetBranchAddress("ctau3DRes2S", ctau3DRes2S, &b_ctau3DRes2S);
   tree->SetBranchAddress("weight", &weight, &b_weight);
 
   const int nV2Bin = 6;
@@ -239,11 +223,14 @@ void makeRooDataSet_psi2S_Data(
   RooRealVar* recoQQ = new RooRealVar("recoQQsign","qq sign",-1,3,"");
   RooRealVar* ctau3DVar    = new RooRealVar("ctau3D","c_{#tau}", -100000.0, 100000.0, "mm");
   RooRealVar* ctau3DErrVar = new RooRealVar("ctau3DErr","#sigma_{c#tau}", -100000.0, 100000.0, "mm");
-  //RooRealVar* ctau3DResVar = new RooRealVar("ctau3DRes","c_{#tau}", -100000.0, 100000.0, "");
+  RooRealVar* ctau3DResVar = new RooRealVar("ctau3DRes","c_{#tau}", -100000.0, 100000.0, "");
+  RooRealVar* ctau3D2SVar    = new RooRealVar("ctau3D2S","c_{#tau}", -100000.0, 100000.0, "mm");
+  RooRealVar* ctau3DErr2SVar = new RooRealVar("ctau3DErr2S","#sigma_{c#tau}", -100000.0, 100000.0, "mm");
+  RooRealVar* ctau3DRes2SVar = new RooRealVar("ctau3DRes2S","c_{#tau}", -100000.0, 100000.0, "");
   RooRealVar* NumDimu = new RooRealVar("NumDimu","number of dimuon",0,100,"");
   RooArgSet* argSet    = new RooArgSet(*massVar, *ptVar, *yVar, *pt1Var, *pt2Var, *eta1Var, *eta2Var,*evtWeight);
-  argSet->add(*cBinVar); argSet->add(*recoQQ); argSet->add(*NumDimu); argSet->add(*ctau3DVar); argSet->add(*ctau3DErrVar); 
-  //argSet->add(*ctau3DResVar);
+  argSet->add(*cBinVar); argSet->add(*recoQQ); argSet->add(*NumDimu); argSet->add(*ctau3DVar); argSet->add(*ctau3DErrVar); argSet->add(*ctau3DResVar);
+  argSet->add(*ctau3D2SVar); argSet->add(*ctau3DErr2SVar); argSet->add(*ctau3DRes2SVar);
   RooDataSet* dataSet  = new RooDataSet("dataset", " a dataset", *argSet);
 
   ////////////////////////////////////////////////////////////////////////
@@ -254,7 +241,7 @@ void makeRooDataSet_psi2S_Data(
   else if(hiHFBinEdge==-1) fCentSelHF = "HFDown";
 
   TFile* newfile;
-  newfile = new TFile(Form("./skimmedFiles/OniaFlowSkim_isMC%d_%s_220311.root", isMC,fCentSelHF.Data()),"recreate");
+  newfile = new TFile(Form("./skimmedFiles/OniaFlowSkim_isMC%d_%s_230119.root", isMC,fCentSelHF.Data()),"recreate");
 
   const static int nMaxDimu_ = 1000;
   int nDimu_;
@@ -288,7 +275,7 @@ void makeRooDataSet_psi2S_Data(
       if(cBin>=cLow&&cBin<cHigh){ 
         for(int j=0; j<nDimu; j++){
           //cout<<"Evt: "<<i<<", Cent: "<<cBin<<", mass: "<<mass[j]<<", pt: "<<pt[j]<<", pt1:"<<pt1[j]<<", pt2: "<<pt2[j]<<", eta1: "<<eta1[j]<<", eta2: "<<eta2[j]<<", vz: "<<vz<<endl;
-          if(! ((double)pt[j]<50 && recoQQsign[j]==0 && abs((double)y[j])>yLow && abs((double)y[j])<yHigh
+          if(! ((double)pt[j]<50 && recoQQsign[j]==0 && abs((double)y[j])<2.4
                 && IsAcceptanceQQ(pt1[j],eta1[j]) && IsAcceptanceQQ(pt2[j],eta2[j])) ) continue;
           nDimuPass++;
         }
@@ -298,7 +285,7 @@ void makeRooDataSet_psi2S_Data(
         // Fill Dimuon Loop
         nDimu_=0;
         for(int j=0; j<nDimu; j++){
-          if((double)pt[j]<50&&recoQQsign[j]==0&&mass[j]>massLow&&mass[j]<massHigh&&abs(y[j])>yLow&&abs(y[j])<yHigh
+          if((double)pt[j]<50&&recoQQsign[j]==0&&mass[j]>massLow&&mass[j]<massHigh&&abs(y[j])<2.4
               && IsAcceptanceQQ(pt1[j],eta1[j]) && IsAcceptanceQQ(pt2[j],eta2[j])){
             weight_acc=1;
             weight_eff=1;
@@ -327,7 +314,10 @@ void makeRooDataSet_psi2S_Data(
             cBinVar->setVal( (double)cBin ) ;
             ctau3DVar->setVal( (double)ctau3D[j] ) ;
             ctau3DErrVar->setVal( (double)ctau3DErr[j] ) ;
-            //ctau3DResVar->setVal( (double)ctau3D[j]/ctau3DErr[j] ) ;
+            ctau3DResVar->setVal( (double)ctau3D[j]/ctau3DErr[j] ) ;
+            ctau3D2SVar->setVal( (double)ctau3D[j] ) ;
+            ctau3DErr2SVar->setVal( (double)ctau3DErr[j] ) ;
+            ctau3DRes2SVar->setVal( (double)ctau3D2S[j] ) ;
             evtWeight->setVal( (double)weight_ ) ;
             NumDimu->setVal((int)nDimu);
             //cout<<"Evt: "<<j<<", Cent: "<<cBin<<", mass: "<<mass[j]<<", pt: "<<pt[j]<<", pt1:"<<pt1[j]<<", pt2: "<<pt2[j]<<", eta1: "<<eta1[j]<<", eta2: "<<eta2[j]<<", vz: "<<vz<<endl;
@@ -347,8 +337,8 @@ void makeRooDataSet_psi2S_Data(
     mmevttree->Write();
     newfile->Close();
 
-    TFile *wf = new TFile(Form("skimmedFiles/OniaRooDataSet_isMC%d_Psi2S_y%.2f_%.2f_cent%i_%i_Effw%d_Accw%d_PtW%d_TnP%d_221117.root", 
-          isMC,yLow,yHigh,cLow,cHigh,fEffW,fAccW,isPtW,isTnP),"recreate");  wf->cd();
+    TFile *wf = new TFile(Form("skimmedFiles/OniaRooDataSet_miniAOD_isMC%d_Psi2S_cent%i_%i_Effw%d_Accw%d_PtW%d_TnP%d_230513.root", 
+          isMC,cLow,cHigh,fEffW,fAccW,isPtW,isTnP),"recreate");  wf->cd();
     dataSet->Write();
 
     cout<<"How many Jpsi??: "<<nDimu_one<<endl;
