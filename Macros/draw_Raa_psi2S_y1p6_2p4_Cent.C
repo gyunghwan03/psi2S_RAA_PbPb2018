@@ -380,9 +380,10 @@ valErr getYield_PbPb(int i){
     double centBin[4] = {0,40,80,180};
     TString kineLabel[4];
     kineLabel[i] = getKineLabel(3,50,1.6,2.4,0.0,centBin[i],centBin[i+1]);
-    TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+    //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+    TFile* inf = new TFile(Form("./psi2S/roots/2DFit_230502/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
 	//cout << "File Name : " << Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()) << endl;
-    TH1D* fitResults = (TH1D*)inf->Get("fitResults");
+    TH1D* fitResults = (TH1D*)inf->Get("MassResults");
 
     valErr ret;
     ret.val = fitResults->GetBinContent(1);
@@ -393,7 +394,7 @@ valErr getFrac_PbPb(int i) {
     double centBin[4] = {0,40,80,180};
     TString kineLabel[4];
     kineLabel[i] = getKineLabel(3,50,1.6,2.4,0.0,centBin[i],centBin[i+1]);
-    TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+    TFile* inf = new TFile(Form("./psi2S/roots/2DFit_230502/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
     valErr ret;

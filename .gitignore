@@ -1,0 +1,23 @@
+# ignore mac's folder info file (DS_Store)
+*.DS_Store
+
+# txt files: Be careful not to upload experiments datasets
+#*.txt
+#*.csv
+#*.docx
+#*.xlsx
+#*.dat
+
+#*.gz
+#*.tar.gz
+#*.tar
+#*.zip
+
+# Ignore outpur of CtauErr -> 3 - 20 MB
+/Macros/psi2S_230512/roots/2DFit_No_Weight/CtauErr/
+/Macros/pp_psi2S_230512/roots/2DFit_No_Weight/CtauErr/
+/Macros/**/roots/2DFit_No_Weight/CtauErr/
+
+
+# Ignore root inputs - 8 GB
+skimmedFiles/*.root
