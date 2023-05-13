@@ -178,44 +178,30 @@ void MassFit_FixPar_Data_LowPt(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.0, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.0, -1., 1.);
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.01, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.01, -1., 1.);
   RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.0, -1., 1.);
-  RooRealVar *sl4 = new RooRealVar("sl4","sl4", 0.0, -1., 1.);
-  RooRealVar *sl5 = new RooRealVar("sl5","sl5", 0.0, -1., 1.);
-  RooRealVar *sl6 = new RooRealVar("sl6","sl6", 0.0, -1., 1.);
-  //RooRealVar *sl7 = new RooRealVar("sl7","sl7", .2, -2., 2.);
-  //RooRealVar *sl1 = new RooRealVar("sl1","sl1", .1, -25., 25.);
-  //RooRealVar *sl2 = new RooRealVar("sl2","sl2", .1, -25., 25.);
-  //RooRealVar *sl3 = new RooRealVar("sl3","sl3", .1, -25., 25.);
-  //RooRealVar *sl4 = new RooRealVar("sl4","sl4", .4, -5., 5.);
-  //THIS IS THE BACKGROUND FUNCTION
-  //RooGenericPdf *pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background","TMath::Exp(-@0/@1)",RooArgList(*(ws->var("mass")),m_lambda_A));
-  //RooGenericPdf *pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background","TMath::Exp(-@0/@1)*@2+@3",RooArgList(*(ws->var("mass")), m_lambda_A, *sl1, *sl2));
-  //RooGenericPdf *pdfMASS_bkg = new RooGenericPdf("bkg","Background","@0*@1+@2",RooArgList( *(ws->var("mass")), sl1, cnst1) );
-  RooChebychev *pdfMASS_bkg;
-  //RooExponential *pdfMASS_bkg;
-  //if(ptLow==3){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));}
-  //if(ptLow!=3){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));}
-  //  if(ptLow=15){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2, *sl3));}
-  /*if(ptLow<=6.5){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));}
-    else if(ptLow<=6.5&&ptHigh==50){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));}
-    else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));*/
-  //pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
-  //*sl1, *sl2, *sl3, *sl4, *sl5, *sl6
-  //pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList());
-  //pdfMASS_bkg = new RooExponential("pdfMASS_bkg","Background",*(ws->var("mass")),*sl1);
-//  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
-  //else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
-  pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2));
+
   Double_t NBkg_limit;
   Double_t NJpsi_limit;
-
+  
   NBkg_limit = 5.0e+06;
-  //NJpsi_limit = 5.0e+08;
   NJpsi_limit = 5.0e+06;
+  if (ptLow==3&&ptHigh==6.5) {
+    NBkg_limit = 5.0e+06;
+    NJpsi_limit = 5.0e+06;
+    //sl1,2: 0.01 ditto
+  }
   if(ptLow==3.5&&ptHigh==4.5) {NJpsi_limit = 4.0e+04;}
   if(ptLow==3.&&ptHigh==4.) {NJpsi_limit = 4.0e+04;}
+  //THIS IS THE BACKGROUND FUNCTION
+  RooChebychev *pdfMASS_bkg;
+  //RooExponential *pdfMASS_bkg;
+  //pdfMASS_bkg = new RooExponential("pdfMASS_bkg","Background",*(ws->var("mass")),*sl1);
+  pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2));
+
+
+
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
