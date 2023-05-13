@@ -16,6 +16,8 @@
 # Ignore outpur of CtauErr -> 3 - 20 MB
 /Macros/psi2S_230512/roots/2DFit_No_Weight/CtauErr/
 /Macros/pp_psi2S_230512/roots/2DFit_No_Weight/CtauErr/
+/Macros/**/roots/2DFit_No_Weight/CtauErr/
+
 
 # Ignore root inputs - 8 GB
 skimmedFiles/*.root
