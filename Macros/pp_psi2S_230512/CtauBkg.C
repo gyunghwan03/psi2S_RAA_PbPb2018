@@ -89,44 +89,7 @@ void CtauBkg(
   cout <<endl <<"************** Start BKG Ctau Fit *****************" <<endl <<endl;
   //make parameter 3 exp
   ws->factory("zeroMean[0.0]");
-  //ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.5, 1e-6, 1.]");
-  //ws->factory("fDLIV[0.5, 1e-6, 1.]");
-  //ws->factory("lambdaDDS_Bkg[0.2, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");
-  //if(ptLow==3&&ptHigh==6.5){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.03, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.051, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
-  //else if(ptLow==3&&ptHigh==50){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
-  //else if(ptLow==6.5&&ptHigh==9){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");}
+
   if(ptLow==9&&ptHigh==12){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
@@ -155,6 +118,13 @@ void CtauBkg(
   ws->factory("lambdaDDS_Bkg[0.076, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg[0.88, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg[0.3468, 1e-6, 1.]");}
+  else if(ptLow==12&&ptHigh==15){
+  ws->factory("b_Bkg[0.2, 1e-6, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.3, 1e-6, 1.]");
+  ws->factory("fDLIV[0.82, 1e-6, 1]");
+  ws->factory("lambdaDDS_Bkg[0.076, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");}
   else if(ptLow==15&&ptHigh==20){
   ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.3, 0., 1.]");
@@ -197,40 +167,6 @@ void CtauBkg(
   ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg[0.1, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
-  //else if(ptLow==6.5&&ptHigh==12){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
-  //else if(ptLow==20&&ptHigh==50){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.037, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.01, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.1, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
-  //else {
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
-  //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
   //ws->var("ctau3_CtauRes")->setConstant(kTRUE);	ws->var("rS32_CtauRes")->setConstant(kTRUE);

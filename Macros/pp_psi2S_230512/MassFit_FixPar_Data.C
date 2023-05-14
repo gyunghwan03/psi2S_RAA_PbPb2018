@@ -201,6 +201,11 @@ void MassFit_FixPar_Data(
   else if(ptLow==12&&ptHigh==15) NJpsi_limit = 6e+06;
   else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
   
+  if(ptLow==12&&ptHigh==15) {
+    NJpsi_limit = 20000;
+    NBkg_limit = 200000;
+    //sl1,2,3: 0.08 Ditto 0.01
+  }
   if(ptLow==12&&ptHigh==50) {
     NJpsi_limit = 10000;
     NBkg_limit = 200000;
