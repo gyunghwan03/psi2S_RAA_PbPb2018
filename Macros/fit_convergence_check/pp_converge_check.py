@@ -2,17 +2,17 @@ import os
 import ROOT
 from ROOT import TFile, RooFit
 
-dir_path = './pp_psi2S/'# need slash at last
+dir_path = '../pp_psi2S_230512/'# need slash at last
 
 def make_pt_file_list(rapi_low, rapi_high, bin_tags, file_list):
     for pt_low, pt_high in zip(bin_tags, bin_tags[1:]):
-        mc_mass = mass = f'mc_Mass_FitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        mass = f'Mass_FixedFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        ctau_err = f'CtauErrResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        ctau_res= f'CtauResResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        ctau_bkg= f'CtauBkgResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
+        mc_mass = mass = f'mc_MassFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        mass = f'Mass_FixedFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        ctau_err = f'CtauErrResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        ctau_res= f'CtauResResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        ctau_bkg= f'CtauBkgResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
         ctau_true= f'CtauTrueResult_Inclusive_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0.root'
-        final= f'2DFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
+        final= f'2DFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
         file_list.append(mc_mass)
         file_list.append(mass)
         file_list.append(ctau_err)
@@ -23,13 +23,13 @@ def make_pt_file_list(rapi_low, rapi_high, bin_tags, file_list):
 
 def make_cent_file_list(rapi_low, rapi_high, pt_low, pt_high, bin_tags, file_list):
     for cent_low, cent_high in zip(bin_tags, bin_tags[1:]):
-        mc_mass = f'mc_Mass_FitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        mass = f'Mass_FixedFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        ctau_err = f'CtauErrResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        ctau_res= f'CtauResResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
-        ctau_bkg= f'CtauBkgResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
+        mc_mass = f'mc_MassFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        mass = f'Mass_FixedFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        ctau_err = f'CtauErrResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        ctau_res= f'CtauResResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
+        ctau_bkg= f'CtauBkgResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
         ctau_true= f'CtauTrueResult_Inclusive_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0.root'
-        final= f'2DFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw1_Accw1_PtW1_TnP1.root'
+        final= f'2DFitResult_pt{pt_low}-{pt_high}_y{rapi_low}-{rapi_high}_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root'
         file_list.append(mc_mass)
         file_list.append(mass)
         file_list.append(ctau_err)
@@ -40,27 +40,28 @@ def make_cent_file_list(rapi_low, rapi_high, pt_low, pt_high, bin_tags, file_lis
 
 def check_fit_status(file_name):
     # check fitting step
-    #if 'mc_Mass_FitResult' in file_name:
-    #    step = 'roots_MC/Mass/'
-    #    fit_store = 'fitresult_pdfMASS_Tot_dsAB'
-    if 'Mass_FixedFitResult' in file_name:
+
+    if 'mc_MassFitResult' in file_name:
+        step = 'roots_MC/Mass/'
+        fit_store = 'fitresult_pdfMASS_Tot_dsAB'
+    elif 'Mass_FixedFitResult' in file_name:
         step = 'roots/2DFit_No_Weight/Mass/'
         fit_store = 'fitresult_pdfMASS_Tot_dsAB'
     elif 'CtauErrResult' in file_name:
         step = 'roots/2DFit_No_Weight/CtauErr/'
         fit_store = 'sPlot doesn\'t make a fit'
-    #elif 'CtauResResult' in file_name:
-    #    step = 'roots/2DFit_No_Weight/CtauRes/'
-    #    fit_store = 'fitresult_GaussModel_Tot_ctauResCutDS'
+    elif 'CtauResResult' in file_name:
+        step = 'roots/2DFit_No_Weight/CtauRes/'
+        fit_store = 'fitresult_GaussModel_Tot_ctauResCutDS'
     elif 'CtauBkgResult' in file_name:
         step = 'roots/2DFit_No_Weight/CtauBkg/'
         fit_store = 'fitresult_pdfTot_Bkg_dataw_Bkg'
-    #elif 'CtauTrueResult' in file_name:
-    #    step = 'roots/2DFit_No_Weight/CtauTrue/'
-    #    fit_store = 'fitresult_TrueModel_Tot_reducedDS_MC'
-    #elif '2DFitResult' in file_name:
-    #    step = 'roots/2DFit_No_Weight/Final/'
-    #    fit_store = 'fitresult_pdfCTAUMASS_Tot_dsToFit'
+    elif 'CtauTrueResult' in file_name:
+        step = 'roots/2DFit_No_Weight/CtauTrue/'
+        fit_store = 'fitresult_TrueModel_Tot_reducedDS_MC'
+    elif '2DFitResult' in file_name:
+        step = 'roots/2DFit_No_Weight/Final/'
+        fit_store = 'fitresult_pdfCTAUMASS_Tot_dsToFit'
     else:
         step = 'No_file'
         #print('Error: No step matched')
