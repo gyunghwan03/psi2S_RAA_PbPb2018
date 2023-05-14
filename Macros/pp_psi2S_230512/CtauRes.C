@@ -135,9 +135,9 @@ void CtauRes(
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.1, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1, 1.5, 10.0]");
-  ws->factory("rS32_CtauRes[1, 2., 10.0]");}
+  ws->factory("s1_CtauRes[0.3, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[3, 1.5, 10.0]");
+  ws->factory("rS32_CtauRes[3, 2., 10.0]");}
 
 
   else if(ptLow==12&&ptHigh==50){
@@ -145,9 +145,9 @@ void CtauRes(
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-6, 1]");
-  ws->factory("rS21_CtauRes[8, 1e-6, 100]");
-  ws->factory("rS32_CtauRes[8, 1e-6, 100]");}
+  ws->factory("s1_CtauRes[0.86, 1e-3, 1]");
+  ws->factory("rS21_CtauRes[1.02, 1e-3, 10]");
+  ws->factory("rS32_CtauRes[1, 1e-3, 10]");}
 
 
   else if(ptLow==15&&ptHigh==20){
@@ -214,16 +214,16 @@ void CtauRes(
  
   //  ws->factory("f_CtauRes[0.4, 1e-6, 1.]");ws->factory("f2_CtauRes[0.2, 1e-6, 1.]");ws->factory("f3_CtauRes[0.7, 0., 1.]");}
   if(ptLow==6.5&&ptHigh==9) {ws->factory("f_CtauRes[0.28, 1e-6, 1.]");ws->factory("f2_CtauRes[0.3, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  if(ptLow==6.5&&ptHigh==12) {ws->factory("f_CtauRes[0.28, 1e-6, 1.]");ws->factory("f2_CtauRes[0.3, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
+  else if(ptLow==6.5&&ptHigh==12) {ws->factory("f_CtauRes[0.28, 1e-6, 1.]");ws->factory("f2_CtauRes[0.3, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
 
 
-  if (ptLow==12&&ptHigh==50) {
-    ws->factory("f_CtauRes[0.25, 1e-6, 1.]");ws->factory("f2_CtauRes[0.2, 1e-6, 1.]");ws->factory("f3_CtauRes[0.3, 1e-6, 1.]");
+  else if (ptLow==12&&ptHigh==50) {
+    ws->factory("f_CtauRes[0.54, 1e-6, 1.]");ws->factory("f2_CtauRes[0.6, 1e-6, 1.]");ws->factory("f3_CtauRes[0.6, 1e-6, 1.]");
     }
 
 
   else if (ptLow==15&&ptHigh==20) {
-    ws->factory("f_CtauRes[0.8, 1e-6, 1.]");ws->factory("f2_CtauRes[0.34, 1e-6, 1.]");ws->factory("f3_CtauRes[0.65, 1e-6, 1.]");
+    ws->factory("f_CtauRes[0.3, 1e-6, 1.]");ws->factory("f2_CtauRes[0.6, 1e-6, 1.]");ws->factory("f3_CtauRes[0.85, 1e-6, 1.]");
     }
   else {
     ws->factory("f_CtauRes[0.28, 0., 1.]");ws->factory("f2_CtauRes[0.3, 0., 1.]");ws->factory("f3_CtauRes[0.5, 0., 1.]");

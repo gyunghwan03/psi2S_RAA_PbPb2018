@@ -111,8 +111,8 @@ void mc_MassFit_HighpT(
 	Double_t sigma_up, x_up, alpha_up, n_up, f_up;
 	Double_t sigma_lo, x_lo, alpha_lo, n_lo, f_lo;
 
-	sigma_up=0.4; x_up=1; alpha_up=3; n_up=5; f_up=1;
-	sigma_lo=0.; x_lo=0; alpha_lo=0; n_lo=0.; f_lo=0;
+	sigma_up=1; x_up=1; alpha_up=10; n_up=10; f_up=1;
+	sigma_lo=1e-3; x_lo=0; alpha_lo=0; n_lo=0.; f_lo=0;
 	if(ptLow==12&&ptHigh==15) { n_up=10; alpha_up=2; }
     else if(ptLow==7&&ptHigh==7.5) {alpha_up=5; n_up=5; n_lo=1;}
 	else if(ptLow==7&&ptHigh==8) { n_lo=1; n_up=10; sigma_up=0.4; f_lo=0.05;}
@@ -151,16 +151,15 @@ void mc_MassFit_HighpT(
         N_Jpsi_high = 400000; // 2500000
     }
     if(ptLow==12&&ptHigh==50) {
-        N_Jpsi_high = 400000; // 2500000
-        alpha_up=100; n_up=100; n_lo=1; f_init=0.21;
-        n_1_init=2;
+        N_Jpsi_high = 80000000; // 2500000
+        alpha_up=100; n_up=100; n_lo=1; f_init=0.251;
+        sigma_1_init = 0.0255, n_1_init=2;
     }
     if(ptLow==20&&ptHigh==50) {
-        N_Jpsi_high = 100000; // 2500000
+        N_Jpsi_high = 200000; // 2500000
         alpha_up=100; n_up=100; n_lo=1; f_init=0.951;
         sigma_1_init = 0.0255, n_1_init=50;
     }
-
 
 	double m_lambda_init = 5;
 	double psi_2S_mass = pdgMass.Psi2S;

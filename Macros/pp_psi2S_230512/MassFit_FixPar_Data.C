@@ -185,9 +185,9 @@ void MassFit_FixPar_Data(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.0, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.0, -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.0, -1., 1.);
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", -0.02, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.02, -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.02, -1., 1.);
 
   Double_t NBkg_limit = 2.0e+08;
   Double_t NJpsi_limit = 1.0e+08;
@@ -202,7 +202,7 @@ void MassFit_FixPar_Data(
   else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
   
   if(ptLow==12&&ptHigh==50) {
-    NJpsi_limit = 20000;
+    NJpsi_limit = 10000;
     NBkg_limit = 200000;
     //sl1,2,3: 0.08 Ditto 0.01
   }

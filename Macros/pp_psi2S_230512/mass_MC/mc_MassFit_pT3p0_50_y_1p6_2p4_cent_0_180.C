@@ -118,7 +118,7 @@ void mc_MassFit_pT3p0_50_y_1p6_2p4_cent_0_180(
 	double n_1_init = 3.21;
 	double f_init = 0.2;
     double sl1_mean = .0558, sl2_mean = 0.4558, sl3_mean = -0.0658;
-    double N_Jpsi_high = 5e+8, N_Bkg_high = 10000;
+    double N_Jpsi_high = 100000, N_Bkg_high = 10000;
     
 	double m_lambda_init = 5;
 	double psi_2S_mass = 3.686097;
