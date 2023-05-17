@@ -92,7 +92,7 @@ def main():
     # list to make bin list
     forward_pt = ['3.0', '6.5', '12.0', '50.0']
     forward_cent = ['', ''] # pp doesn't have centrality. Leave two empty string to run this code.
-    mid_pt = ['6.5', '9.0', '12.0', '15.0', '20.0', '50.0']
+    mid_pt = ['6.5', '9.0', '12.0', '15.0', '50.0']
     mid_cent = ['', '']
 
     # list to save file names
