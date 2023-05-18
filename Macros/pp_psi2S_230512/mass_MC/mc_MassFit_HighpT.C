@@ -63,8 +63,7 @@ void mc_MassFit_HighpT(
 	RooMsgService::instance().setSilentMode(true);
 
     // MC
-	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw1_Accw1_PtW1_TnP1_230323.root", "read");
-
+	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 
 	// cout << "Input file: "
 	// << Form("../data/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20210111.root",
@@ -112,23 +111,8 @@ void mc_MassFit_HighpT(
 	Double_t sigma_lo, x_lo, alpha_lo, n_lo, f_lo;
 
 	sigma_up=1; x_up=1; alpha_up=10; n_up=10; f_up=1;
-	sigma_lo=1e-3; x_lo=0; alpha_lo=0; n_lo=0.; f_lo=0;
-	if(ptLow==12&&ptHigh==15) { n_up=10; alpha_up=2; }
-    else if(ptLow==7&&ptHigh==7.5) {alpha_up=5; n_up=5; n_lo=1;}
-	else if(ptLow==7&&ptHigh==8) { n_lo=1; n_up=10; sigma_up=0.4; f_lo=0.05;}
-	else if(ptLow==8&&ptHigh==9) { n_up=100;  alpha_up=100; sigma_up=0.4; }
-	else if(ptLow==9&&ptHigh==10) { n_lo=1; n_up=10; sigma_up=0.4; }
-	else if(ptLow==8&&ptHigh==12) {alpha_up=5; n_up=10; n_lo=1;}
-	else if(ptLow==8&&ptHigh==12) {alpha_up=5; n_up=10; n_lo=1;}
-	else if(ptLow==8&&ptHigh==10) {alpha_up=5; n_up=10; n_lo=1;}
-	else if(ptLow==10&&ptHigh==12) {alpha_up=100; n_up=100;}
-	else if(ptLow==12&&ptHigh==20) {n_up=20; n_lo=3;}
-	else if(ptLow==6.5&&ptHigh==12) {n_up=5; n_lo=1;}
+	sigma_lo=1e-3; x_lo=1e-3; alpha_lo=1e-3; n_lo=1e-3; f_lo=1e-3;
 
-	else if(yLow==2.0&&yHigh==2.4) {n_up=10;}
-
-    double paramsupper[8] = {sigma_up, x_up, alpha_up, n_up, f_up,  25.0};
-    double paramslower[8] = {sigma_lo, x_lo, alpha_lo, n_lo, f_lo,  -5.0};
     
 	//SIGNAL: initial params
 	double sigma_1_init = 0.0555;
@@ -140,29 +124,51 @@ void mc_MassFit_HighpT(
     double N_Jpsi_high = 2e+5; // 2500000
 	double N_Bkg_high = 200000;
     double fit_limit = 3.86;
+	double m_lambda_init = 5;
+	double psi_2S_mass = pdgMass.Psi2S;
 
 	if(ptLow==8&&ptHigh==12) { n_1_init = 5.3;}
 	if(ptLow==12&&ptHigh==20) { n_1_init = 4.6;}
 
     if(ptLow==6.5&&ptHigh==9) {
-        N_Jpsi_high = 12000; // 2500000
+        N_Jpsi_high = 50000; // 2500000
     }
+
+    if(ptLow==6.5&&ptHigh==12) {
+        N_Jpsi_high = 200000;
+        f_init=0.25; sigma_1_init = 0.04; n_1_init = 2;
+        x_init = 0.71; alpha_1_init = 2;
+        m_lambda_init=2;
+    }
+
     if(ptLow==6.5&&ptHigh==50) {
         N_Jpsi_high = 400000; // 2500000
     }
-    if(ptLow==12&&ptHigh==50) {
-        N_Jpsi_high = 80000000; // 2500000
-        alpha_up=100; n_up=100; n_lo=1; f_init=0.251;
-        sigma_1_init = 0.0255, n_1_init=2;
-    }
-    if(ptLow==20&&ptHigh==50) {
-        N_Jpsi_high = 200000; // 2500000
-        alpha_up=100; n_up=100; n_lo=1; f_init=0.951;
-        sigma_1_init = 0.0255, n_1_init=50;
+    if(ptLow==12&&ptHigh==15) {
+        N_Jpsi_high = 400000; // 2500000
     }
 
-	double m_lambda_init = 5;
-	double psi_2S_mass = pdgMass.Psi2S;
+
+    if(ptLow==12&&ptHigh==50) {
+        N_Jpsi_high = 20000;
+        f_init=0.4; sigma_1_init = 0.03; n_1_init = 2;
+        x_init = 0.4; alpha_1_init = 2;
+    }
+    if(ptLow==15&&ptHigh==20) {
+        N_Jpsi_high = 500000;
+        sigma_up=0.07;
+        f_init=0.2766; sigma_1_init = 0.0527; n_1_init = 4.116;
+        x_init = 0.8; alpha_1_init = 1.57;
+        m_lambda_init=2;
+    }
+    if(ptLow==20&&ptHigh==50) {
+        N_Jpsi_high = 100000;
+        f_init=0.866; sigma_1_init = 0.0327; n_1_init = 1;
+        x_init = 0.8; alpha_1_init = 1;
+    }
+    double paramsupper[8] = {sigma_up, x_up, alpha_up, n_up, f_up,  25.0};
+    double paramslower[8] = {sigma_lo, x_lo, alpha_lo, n_lo, f_lo,  -5.0};
+
     // cout << psi_2S_mass << endl;
     // exit(1);
 
@@ -176,6 +182,8 @@ void mc_MassFit_HighpT(
     RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[3], paramsupper[3]);
     RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
     RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
+    //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init, f_init);
+    //f->setConstant(kTRUE);
 
     //Set up crystal ball shapes
     RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
@@ -223,7 +231,6 @@ void mc_MassFit_HighpT(
     dsAB->plotOn(myPlot2_A,Name("dataOS"),MarkerSize(.8));
     bool isWeighted = ws->data("dsAB")->isWeighted();
     cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
-    // RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
     RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), Range(3.4, fit_limit), NumCPU(nCPU));
     cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
 	fitMass->Print("V");
@@ -272,7 +279,7 @@ void mc_MassFit_HighpT(
     double Yup;
     Ydown = YMin/(TMath::Power((YMax/YMin), (0.1/(1.0-0.1-0.4))));
     Yup = YMax*TMath::Power((YMax/YMin), (0.4/(1.0-0.1-0.4)));
-    myPlot2_A->GetYaxis()->SetRangeUser(Ydown,Yup);
+    //myPlot2_A->GetYaxis()->SetRangeUser(Ydown,Yup);
 
 
     myPlot2_A->GetXaxis()->SetLabelSize(0);
@@ -283,7 +290,7 @@ void mc_MassFit_HighpT(
     //    myPlot2_A->SetMaximum(10000000000);
     //}
     //else {
-    //    myPlot2_A->GetYaxis()->SetRangeUser(0,280000);
+    //    myPlot2_A->GetYaxis()->SetRangeUser(0,YMax);
     //}
 	myPlot2_A->GetYaxis()->SetRangeUser(Ydown,Yup);
     

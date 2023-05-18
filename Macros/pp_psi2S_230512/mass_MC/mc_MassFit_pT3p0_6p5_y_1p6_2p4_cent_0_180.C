@@ -23,7 +23,7 @@ using namespace std;
 using namespace RooFit;
 
 void mc_MassFit_pT3p0_6p5_y_1p6_2p4_cent_0_180(
-		float ptLow=3, float ptHigh=6.5,
+		float ptLow=3.0, float ptHigh=6.5,
 		float yLow=1.6, float yHigh=2.4,
 		int PR=0, //0=PR, 1=NP, 2=Inc.
 		int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
@@ -63,7 +63,7 @@ void mc_MassFit_pT3p0_6p5_y_1p6_2p4_cent_0_180(
 	RooMsgService::instance().setSilentMode(true);
 	
 	// MC
-	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230126.root", "read");
+	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 	
 	// cout << "Input file: "
 	// << Form("../data/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20210111.root",
@@ -115,7 +115,7 @@ void mc_MassFit_pT3p0_6p5_y_1p6_2p4_cent_0_180(
 	double sigma_1_init = 0.035;
 	double x_init = 1.5;
 	double alpha_1_init = 2.1;
-	double n_1_init = 3.21;
+	double n_1_init = 1.21;
 	double f_init = 0.2;
     double sl1_mean = .0558, sl2_mean = 0.4558, sl3_mean = -0.0658;
     double N_Jpsi_high = 4.5e+8, N_Bkg_high = 10000;
@@ -321,7 +321,6 @@ void mc_MassFit_pT3p0_6p5_y_1p6_2p4_cent_0_180(
     TFile* outFile;
     outFile = new TFile(Form("../roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
     c_A->SaveAs(Form("../figs/2DFit_%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-
 
 
 	pdfMASS_Tot->Write();

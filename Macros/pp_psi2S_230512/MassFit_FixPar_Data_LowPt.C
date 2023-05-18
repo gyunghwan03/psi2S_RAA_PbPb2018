@@ -61,12 +61,8 @@ void MassFit_FixPar_Data_LowPt(
   massLow=3.3;
   massHigh=4.1;
   //massLow=2.75;
-
-//  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw1_Accw1_PtW1_TnP1_230323.root"));
-  //f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_220808.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-//  f1 = new TFile("../../skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
-//  f1 = new TFile("/Users/hwan/tools/2019/CMS/JPsi/Jpsi_v2_PbPb2018/skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
+  
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
 
   kineCut = Form("pt>%.2f && pt<%.2f && fabs(y)>%.2f && fabs(y)<%.2f && mass>3.3 && mass<4.1",ptLow, ptHigh, yLow, yHigh);
   cout << kineCut << endl;
@@ -125,25 +121,12 @@ void MassFit_FixPar_Data_LowPt(
   Double_t sigma_higher = sigma_MC_value+(sigma_index*sigma_MC_value_err);
 
 
-
-
-
   double paramslower[6] = {alpha_lower,   n_lower, 0.0, 0.0,  0.0,  0.0};
   double paramsupper[6] = {alpha_higher, n_higher, 1.0, 1.0, 1.0, 25.0};
-
-  //double alpha_1_init = 2.1; double n_1_init = 1.65;
-  //double sigma_1_init = 0.04; double x_init = 2.15; double f_init = 0.75;
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; //double x_init = xA_MC_value; double f_init = f_MC_value;
-  //double alpha_1_init = 2.1; double n_1_init = 1.3;
-  //double sigma_1_init = 0.035; double x_init = 1.9; double f_içnit = 0.65;
-  //double alpha_1_init = 2.0; double n_1_init = 1.65;
-  //double sigma_1_init = 0.04; double x_init = 1.35; double f_init = 0.5;
-  //pt.3-4.5, y.1.6-2.4, Cent.10-60????
-  //double paramslower[6] = {1.1, 0.6, 0.01, 0.0, 0.0,  0.0};
-  //double paramsupper[6] = {4.1, 3.1, 0.9,  1.0, 1.0, 25.0};
-  //double alpha_1_init = 2.1; double n_1_init = 1.4;
-  //double sigma_1_init = 0.04; double x_init = 0.35; double f_init = 0.4;
+
+
   //SIGNAL: initial params
   //double m_lambda_init = 5;
   //SIGNAL
@@ -160,12 +143,6 @@ void MassFit_FixPar_Data_LowPt(
   //RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
   //RooRealVar    n_1_A("n_1_A","power order", n_1_init,n_1_init*0.9,n_1_init*1.1);
   RooRealVar    n_1_A("n_1_A","power order", n_1_init);
-  //RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
-  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
-  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init*0.99,f_init*1.01);
-  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
-  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
-  //Set up crystal ball shapes
   RooCBShape* pdfMASS_Jpsi = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
   //RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
   //RooAddPdf*  pdfMASS_Jpsi;
@@ -185,11 +162,11 @@ void MassFit_FixPar_Data_LowPt(
   Double_t NBkg_limit;
   Double_t NJpsi_limit;
   
-  NBkg_limit = 5.0e+06;
-  NJpsi_limit = 5.0e+06;
+  NBkg_limit = 1000000;
+  NJpsi_limit = 500000;
   if (ptLow==3&&ptHigh==6.5) {
-    NBkg_limit = 5.0e+06;
-    NJpsi_limit = 5.0e+06;
+  NBkg_limit = 1000000;
+  NJpsi_limit = 500000;
     //sl1,2: 0.01 ditto
   }
   if(ptLow==3.5&&ptHigh==4.5) {NJpsi_limit = 4.0e+04;}

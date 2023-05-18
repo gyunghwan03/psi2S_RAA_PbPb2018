@@ -63,7 +63,7 @@ void mc_MassFit_pT3p0_50_y_1p6_2p4_cent_0_180(
 	RooMsgService::instance().setSilentMode(true);
 	
 	// MC
-	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230126.root", "read");
+	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 	
 	// cout << "Input file: "
 	// << Form("../data/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20210111.root",
@@ -104,8 +104,8 @@ void mc_MassFit_pT3p0_50_y_1p6_2p4_cent_0_180(
 	Double_t sigma_up, x_up, alpha_up, n_up, f_up;
     Double_t sigma_lo, x_lo, alpha_lo, n_lo, f_lo;
 
-    sigma_up=0.1; x_up=4; alpha_up=5; n_up=105; f_up=1;
-    sigma_lo=0.; x_lo=0; alpha_lo=1; n_lo=1; f_lo=0;
+    sigma_up=1; x_up=1; alpha_up=10; n_up=10; f_up=1;
+    sigma_lo=0.; x_lo=0; alpha_lo=0; n_lo=0; f_lo=0;
 
 
 	double paramsupper[8] = {sigma_up, x_up, alpha_up, n_up, f_up,  25.0};
@@ -113,12 +113,12 @@ void mc_MassFit_pT3p0_50_y_1p6_2p4_cent_0_180(
     
 	//SIGNAL: initial params
 	double sigma_1_init = 0.035;
-	double x_init = 1.5;
-	double alpha_1_init = 2.1;
-	double n_1_init = 3.21;
-	double f_init = 0.2;
+	double x_init = 0.2;
+	double alpha_1_init = 2;
+	double n_1_init = 1;
+	double f_init = 0.8;
     double sl1_mean = .0558, sl2_mean = 0.4558, sl3_mean = -0.0658;
-    double N_Jpsi_high = 100000, N_Bkg_high = 10000;
+    double N_Jpsi_high = 1000000, N_Bkg_high = 10000;
     
 	double m_lambda_init = 5;
 	double psi_2S_mass = 3.686097;

@@ -62,8 +62,8 @@ void mc_MassFit_pT3p0_4p0_y_1p6_2p4_cent_0_180(
 	RooMsgService::instance().setGlobalKillBelow(ERROR);
 	RooMsgService::instance().setSilentMode(true);
 	
-	// MC
-	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230126.root", "read");
+    // MC
+	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 	
 	// cout << "Input file: "
 	// << Form("../data/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20210111.root",

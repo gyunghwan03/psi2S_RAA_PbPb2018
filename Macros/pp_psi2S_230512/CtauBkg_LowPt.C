@@ -112,82 +112,13 @@ void CtauBkg_LowPt(
   ws->factory("fDLIV[0.4, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  ws->factory("fDSS12[0.5, 0., 1.]");
-  ws->factory("fDF12[0.5, 0., 1.]");}
-  //else if(ptLow==6.5&&ptHigh==9){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");}
-  //if(ptLow==9&&ptHigh==12){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
-  //else if(ptLow==3&&ptHigh==6.5){
-  //ws->factory("b_Bkg[0.6, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.9, 0., 1.]");
-  //ws->factory("fDLIV[0.8, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.6, 0.1, 1.]");
-  //ws->factory("lambdaDF_Bkg[0.3, 1e-6, 0.1]");
-  //ws->factory("lambdaDSS_Bkg[0.6, 1e-6, 1.]");}
-  //else if(ptLow==6.5&&ptHigh==8){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.5, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg[0.01, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
-  //else {
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
-  //else if(ptLow==6.5&&ptHigh==12){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
-  //else if(ptLow==20&&ptHigh==50){
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.037, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.01, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.1, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
-  //else {
-  //ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.6, 0., 1.]");
-  //ws->factory("fDLIV[0.4, 0., 1]");
-  //ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
-  //ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  //ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  //ws->factory("fDSS12[0.5, 0., 1.]");
-  //ws->factory("fDF12[0.5, 0., 1.]");}
+  ws->factory("lambdaDF_Bkg2[0.2, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.5, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.3, 1e-6, 1.]");
+  ws->factory("fDSS12[0.8, 0., 1.]");
+  ws->factory("fDF12[0.8, 0., 1.]");}
+
+
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);

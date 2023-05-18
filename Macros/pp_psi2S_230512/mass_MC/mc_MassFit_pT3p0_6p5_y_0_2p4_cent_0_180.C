@@ -63,7 +63,7 @@ void mc_MassFit_pT3p0_6p5_y_0_2p4_cent_0_180(
 	RooMsgService::instance().setSilentMode(true);
 	
 	// MC
-	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230126.root", "read");
+	TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 	
 	// cout << "Input file: "
 	// << Form("../data/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20210111.root",
@@ -118,7 +118,7 @@ void mc_MassFit_pT3p0_6p5_y_0_2p4_cent_0_180(
 	double n_1_init = 1.21;
 	double f_init = 0.2;
     double sl1_mean = .0558, sl2_mean = 0.4558, sl3_mean = -0.0658;
-    double N_Jpsi_high = 4.5e+8, N_Bkg_high = 10000;
+    double N_Jpsi_high = 5000000, N_Bkg_high = 10000;
     
 	double m_lambda_init = 5;
 	double psi_2S_mass = 3.686097;
