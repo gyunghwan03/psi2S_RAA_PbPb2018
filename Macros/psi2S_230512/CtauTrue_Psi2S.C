@@ -67,7 +67,7 @@ void CtauTrue_Psi2S(
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f2 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f1 = new TFile("../../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
-  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_psi2S_GENONLY_NonPrompt_20220906_root618.root","read");
+  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_Psi2S_miniAOD_GENONLY_NonPrompt_20230517.root","read");
   
   kineCutMC = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1" ,ptLow, ptHigh, yLow, yHigh);
   
@@ -89,6 +89,7 @@ void CtauTrue_Psi2S(
   RooCategory tp("tp","tp");
   tp.defineType("C");
   //tp.defineType("D");
+  //RooDataSet *datasetMCW = new RooDataSet("datasetW","A sample",RooArgSet(*(wsmc->var("ctau3Dtrue")), *(wsmc->var("mass")), *(wsmc->var("pt")), *(wsmc->var("y")), *(wsmc->var("pt1")), *(wsmc->var("pt2")), *(wsmc->var("eta1")), *(wsmc->var("eta2"))), Import(*datasetMC) );
   RooDataSet *datasetMCW = new RooDataSet("datasetW","A sample",RooArgSet(*(wsmc->var("ctau3Dtrue")), *(wsmc->var("mass")), *(wsmc->var("pt")), *(wsmc->var("y")), *(wsmc->var("weight")), *(wsmc->var("pt1")), *(wsmc->var("pt2")), *(wsmc->var("eta1")), *(wsmc->var("eta2"))), Import(*datasetMC), WeightVar(*wsmc->var("weight")));
   wsmc->import(*datasetMCW);
   RooDataSet *reducedDS_MC = (RooDataSet*)datasetMCW->reduce(RooArgSet(*(wsmc->var("ctau3Dtrue")), *(wsmc->var("mass")), *(wsmc->var("pt")), *(wsmc->var("y"))), kineCutMC.Data() );
@@ -123,11 +124,67 @@ void CtauTrue_Psi2S(
   double entries_True = ws->data("reducedDS_MC")->numEntries();
   if(ptLow==6.5&&ptHigh==9){
   ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
-  ws->factory("lambdaDSS[0.5, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.3, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[.2, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 1.]");
-  ws->factory("fDSS1[0.8, 0.,1.]");}
+  ws->factory("lambdaDSS[0.42, 1e-6, .9]");
+  ws->factory("lambdaDSS2[0.24, 1e-6, .9]");
+  ws->factory("lambdaDSS3[0.1, 1e-6, .9]");
+  ws->factory("fDSS[0.3, 1e-6, 1.]");
+  ws->factory("fDSS1[0.3, 1e-6.,1.]");}
+  else if(ptLow==4&&ptHigh==6.5){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.3, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.4, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.5, 1e-6, 1.0]");
+  ws->factory("fDSS[0.5, 1e-6, 1.]");
+  ws->factory("fDSS1[0.5, 1e-6.,1.]");}
+  else if(ptLow==6.5&&ptHigh==12){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.2, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.4, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.5, 1e-6, 1.0]");
+  ws->factory("fDSS[0.43, 1e-6, 1.]");
+  ws->factory("fDSS1[0.5, 1e-6.,1.]");}
+  else if(ptLow==9&&ptHigh==12){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.8, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.42, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.8, 1e-6, 1.0]");
+  ws->factory("fDSS[0.7, 1e-6, 1.]");
+  ws->factory("fDSS1[0.6, 1e-6.,1.]");}
+  else if(ptLow==12&&ptHigh==15){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.3568, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.2, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.8, 1e-6, 1.0]");
+  ws->factory("fDSS[0.7, 1e-6, 1.]");
+  ws->factory("fDSS1[0.6, 1e-6.,1.]");}
+  else if(ptLow==15&&ptHigh==20){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.3568, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.2, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.8, 1e-6, 1.0]");
+  ws->factory("fDSS[0.7, 1e-6, 1.]");
+  ws->factory("fDSS1[0.6, 1e-6.,1.]");}
+  else if(ptLow==20&&ptHigh==50){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.2953, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.459, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.3204, 1e-6, 1.0]");
+  ws->factory("fDSS[0.3546, 1e-6, 1.]");
+  ws->factory("fDSS1[0.7351, 1e-6.,1.]");}
+  else if(ptLow==3&&ptHigh==50){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.13, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.4749, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.21, 1e-6, 1.0]");
+  ws->factory("fDSS[0.5, 1e-6, 1.]");
+  ws->factory("fDSS1[0.8, 1e-6.,1.]");}
+  else if(ptLow==6.5&&ptHigh==50){
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory("lambdaDSS[0.13, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.4749, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[.21, 1e-6, 1.0]");
+  ws->factory("fDSS[0.5, 1e-6, 1.]");
+  ws->factory("fDSS1[0.8, 1e-6.,1.]");}
   else {
   ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
   ws->factory("lambdaDSS[0.34, 1e-6, 1.0]");
@@ -178,9 +235,12 @@ void CtauTrue_Psi2S(
   cout << endl << "************ 3 ***************" << endl << endl;
   ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS1", "pdfCTAUTRUEDSS2", "fDSS"));
   cout << endl << "************ 4 ***************" << endl << endl;
-  //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE2", "pdfCTAUTRUEDSS2", "pdfCTAUTRUEDSS3", "fDSS2"));
   ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS3", "fDSS1"));
-  ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUE", "N_Jpsi_MC"));
+//  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE2", "pdfCTAUTRUEDSS3", "fDSS1"));
+  // 1 expo
+  ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUEDSS1", "N_Jpsi_MC"));
+  //3 expo
+  //ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUE", "N_Jpsi_MC"));
   cout << endl << "************ 5 ***************" << endl << endl;
 
   //ws->var("ctau3Dtrue")->setRange(0.1, 6);

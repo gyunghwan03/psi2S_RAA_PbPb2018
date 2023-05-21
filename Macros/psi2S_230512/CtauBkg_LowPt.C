@@ -23,7 +23,7 @@
 using namespace std;
 using namespace RooFit;
 
-void CtauBkg(
+void CtauBkg_LowPt(
     double ptLow=3, double ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
     int cLow=0, int cHigh=200,
@@ -101,50 +101,45 @@ void CtauBkg(
   ws->factory("fDFSS[0.6, 0., 1.]");
   ws->factory("fDLIV[0.4, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.0327, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
-  else if(ptLow==6.5&&ptHigh==9){
-  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.6, 0., 1.]");
-  ws->factory("fDLIV[0.4, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.3, 0.2, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
-  else if(ptLow==6.5&&ptHigh==12){
-  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.6, 0., 1.]");
-  ws->factory("fDLIV[0.4, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.3, 0.2, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
-  else if(ptLow==9&&ptHigh==12){
-  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.6, 0., 1.]");
-  ws->factory("fDLIV[0.4, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.3, 0.2, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  ws->factory("lambdaDF_Bkg1[0.0327, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.0327, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.3, 1e-6, 1.]");
+  ws->factory("fDSS12[0.5, 0., 1.]");
+  ws->factory("fDF12[0.5, 0., 1.]");}
   else if(cLow==0&&cHigh==40){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
   ws->factory("fDLIV[0.4, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.5, 0.2, 1.]");
-  ws->factory("lambdaDF_Bkg[0.4, 0.3, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.0327, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.5, 1e-6, 1.]");
+  ws->factory("fDSS12[0.5, 0., 1.]");
+  ws->factory("fDF12[0.5, 0., 1.]");}
   else if(cLow==40&&cHigh==80){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
   ws->factory("fDLIV[0.4, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.5, 0.23, 1.]");
-  ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.0327, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.5, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.3, 1e-6, 1.]");
+  ws->factory("fDSS12[0.5, 0., 1.]");
+  ws->factory("fDF12[0.5, 0., 1.]");}
   else {
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
   ws->factory("fDLIV[0.4, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.0327, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.4, 1e-6, 1.]");
+  ws->factory("fDSS12[0.5, 0., 1.]");
+  ws->factory("fDF12[0.5, 0., 1.]");}
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
@@ -177,7 +172,6 @@ void CtauBkg(
   //ws->factory(Form("AddModel::%s({%s, %s}, {%s})", "ctauRes32", "ctauRes3", "ctauRes2", "f2_CtauRes"));
   ws->factory(Form("AddModel::%s({%s, %s}, {%s})", "pdfCTAURES", "ctauRes1", "ctauRes2", "f_CtauRes"));
   //make 3 exp
-  /*
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUDSS1", "ctau3D", "lambdaDSS_Bkg1", "pdfCTAURES"));
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUDSS2", "ctau3D", "lambdaDSS_Bkg2", "pdfCTAURES"));
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::Flipped)", "pdfCTAUDF1", "ctau3D", "lambdaDF_Bkg1", "pdfCTAURES"));
@@ -190,16 +184,7 @@ void CtauBkg(
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_BkgPR","pdfCTAURES"));//PR
   ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUCOND_Bkg", "b_Bkg", "pdfCTAUCOND_BkgNoPR", "pdfCTAUCOND_BkgPR"));
   ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfTot_Bkg", "pdfCTAUCOND_Bkg", "N_Bkg"));//N_Bkg is number of bkg from dataw_Bkg
-	*/																					 //
-  //1 exp
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUDSS", "ctau3D", "lambdaDSS_Bkg", "pdfCTAURES"));
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::Flipped)", "pdfCTAUDF", "ctau3D", "lambdaDF_Bkg", "pdfCTAURES"));
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::DoubleSided)", "pdfCTAUDDS", "ctau3D", "lambdaDDS_Bkg", "pdfCTAURES"));
-  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAU1", "fDFSS", "pdfCTAUDSS", "pdfCTAUDF"));
-  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUCOND_BkgNoPR", "fDLIV", "pdfCTAU1", "pdfCTAUDDS"));//NP
-  ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_BkgPR","pdfCTAURES"));//PR
-  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUCOND_Bkg", "b_Bkg", "pdfCTAUCOND_BkgNoPR", "pdfCTAUCOND_BkgPR"));
-  ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfTot_Bkg", "pdfCTAUCOND_Bkg", "N_Bkg"));//N_Bkg is number of bkg from dataw_Bkg
+																					 //
 
   RooProdPdf pdfPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"), Conditional( *ws->pdf("pdfCTAUCOND_BkgPR"), RooArgList(*ws->var("ctau3D")) ));
   ws->import(pdfPR);
@@ -220,7 +205,7 @@ void CtauBkg(
   if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
   else if(ptLow==3&&ptHigh==4.5) {ctauMax=2.65;}
   else if(ptLow==6.5&&ptHigh==9) ctauMin = -2.65;
-  else if(ptLow==4&&ptHigh==6.5) ctauMax=2.;
+  else if(ptLow==4&&ptHigh==6.5) ctauMax=4.;
   else if(ptLow==6.5&&ptHigh==12&&yLow==1.6) ctauMin = -2.;
   else if(ptLow==12&&ptHigh==15&&yLow==1.6) ctauMin = -2.;
   else if(ptLow>=15) ctauMin = -1;
@@ -312,7 +297,6 @@ void CtauBkg(
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
   drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
 
-  /*
   drawText(Form("N_{Bkg} = %.f #pm %.f", ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y,text_color,text_size);
   drawText(Form("b_{Bkg} = %.4f #pm %.4f", ws->var("b_Bkg")->getVal(), ws->var("b_Bkg")->getError() ),text_x+0.5,text_y-y_diff*1,text_color,text_size);
   drawText(Form("fDFSS = %.4f #pm %.4f", ws->var("fDFSS")->getVal(), ws->var("fDFSS")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
@@ -322,15 +306,6 @@ void CtauBkg(
   drawText(Form("#lambdaDF2_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDF_Bkg2")->getVal(), ws->var("lambdaDF_Bkg2")->getError() ),text_x+0.5,text_y-y_diff*6,text_color,text_size);
   drawText(Form("#lambdaDSS1_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg1")->getVal(), ws->var("lambdaDSS_Bkg1")->getError() ),text_x+0.5,text_y-y_diff*7,text_color,text_size);
   drawText(Form("#lambdaDSS2_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg2")->getVal(), ws->var("lambdaDSS_Bkg2")->getError() ),text_x+0.5,text_y-y_diff*8,text_color,text_size);
-  //pullDist(ws, pad_E_2, c_E, frameTMP_E, hpull_E, "data_ctauBkg", "ctauBkg_Tot", "ctau3D", nCtauBins, ctauLow, ctauHigh, "#font[12]{l}_{J/#psi} (mm)");
-  */
-  drawText(Form("N_{Bkg} = %.f #pm %.f", ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y,text_color,text_size);
-  drawText(Form("b_{Bkg} = %.4f #pm %.4f", ws->var("b_Bkg")->getVal(), ws->var("b_Bkg")->getError() ),text_x+0.5,text_y-y_diff*1,text_color,text_size);
-  drawText(Form("fDFSS = %.4f #pm %.4f", ws->var("fDFSS")->getVal(), ws->var("fDFSS")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
-  drawText(Form("fDLIV = %.4f #pm %.4f", ws->var("fDLIV")->getVal(), ws->var("fDLIV")->getError() ),text_x+0.5,text_y-y_diff*3,text_color,text_size);
-  drawText(Form("#lambdaDDS_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDDS_Bkg")->getVal(), ws->var("lambdaDDS_Bkg")->getError() ),text_x+0.5,text_y-y_diff*4,text_color,text_size);
-  drawText(Form("#lambdaDF_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDF_Bkg")->getVal(), ws->var("lambdaDF_Bkg")->getError() ),text_x+0.5,text_y-y_diff*5,text_color,text_size);
-  drawText(Form("#lambdaDSS_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg")->getVal(), ws->var("lambdaDSS_Bkg")->getError() ),text_x+0.5,text_y-y_diff*6,text_color,text_size);
 
   TPad *pad_E_2 = new TPad("pad_E_2", "pad_E_2", 0, 0.006, 0.98, 0.227);
   c_E->cd();
