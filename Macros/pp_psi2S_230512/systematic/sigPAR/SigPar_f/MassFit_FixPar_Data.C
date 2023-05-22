@@ -9,12 +9,12 @@
 #include "TText.h"
 #include "TArrow.h"
 #include "TFile.h"
-#include "../../rootFitHeaders.h"
-#include "../../commonUtility.h"
-#include "../../JpsiUtility.h"
-#include "../../cutsAndBin.h"
-#include "../../CMS_lumi_v2mass.C"
-#include "../../tdrstyle.C"
+#include "../../../../../rootFitHeaders.h"
+#include "../../../../../commonUtility.h"
+#include "../../../../../JpsiUtility.h"
+#include "../../../../../cutsAndBin.h"
+#include "../../../../../CMS_lumi_v2mass.C"
+#include "../../../../../tdrstyle.C"
 #include "RooDataHist.h"
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
@@ -62,7 +62,7 @@ void MassFit_FixPar_Data(
   //massLow=2.75;
 
 //  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
+  f1 = new TFile(Form("../../../../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
 
 
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1",ptLow, ptHigh, yLow, yHigh);
@@ -94,7 +94,7 @@ void MassFit_FixPar_Data(
   //****************************** MASS FIT *******************************
   //***********************************************************************
 
-  TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  TFile * f_fit = new TFile(Form("../../../roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
   RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
   ws_fit->import(*dataset_fit);
@@ -141,16 +141,16 @@ void MassFit_FixPar_Data(
   //RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init);
   RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
   //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init, paramslower[0], paramsupper[0]);
-  RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
+  //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
   //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init,alpha_1_init*0.9,alpha_1_init*1.1);
   RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
   //RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
   //RooRealVar    n_1_A("n_1_A","power order", n_1_init,n_1_init*0.9,n_1_init*1.1);
   RooRealVar    n_1_A("n_1_A","power order", n_1_init);
   RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
-  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
+  RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
   //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init*0.99,f_init*1.01);
-  RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
+  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
   //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
   //Set up crystal ball shapes
   RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
@@ -334,7 +334,7 @@ void MassFit_FixPar_Data(
   //drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg")->getVal(),ws->var("N_Bkg")->getError()),text_x,text_y-y_diff*3,text_color,text_size);
   drawText(Form("m_{#psi(2S)} = %.4f #pm %.4f",ws->var("m_{J/#Psi}")->getVal(),ws->var("m_{J/#Psi}")->getError()),text_x,text_y-y_diff*2,text_color,text_size);
   drawText(Form("#alpha_{#psi(2S)} = %.4f (fixed)",ws->var("alpha_1_A")->getVal()),text_x,text_y-y_diff*3,text_color,text_size);
-  drawText(Form("f_{#psi(2S)} = %.4f (fixed)",ws->var("f")->getVal()),text_x,text_y-y_diff*4,text_color,text_size);
+  drawText(Form("f_{#psi(2S)} = %.4f #pm %.4f",ws->var("f")->getVal(),ws->var("f")->getError()),text_x,text_y-y_diff*4,text_color,text_size);
   drawText(Form("n_{#psi(2S)} = %.4f (fixed)",ws->var("n_1_A")->getVal()),text_x,text_y-y_diff*5,text_color,text_size);
   drawText(Form("#sigma1_{#psi(2S)} = %.2f #pm %.2f MeV/c^{2}, (#sigma2/#sigma1)_{#psi(2S)} = %.3f (fixed)",(ws->var("sigma_1_A")->getVal())*1000,(ws->var("sigma_1_A")->getError())*1000,ws->var("x_A")->getVal()),text_x,text_y-y_diff*6,text_color,text_size);
   //drawText(Form("(#sigma2/#sigma1)_{#psi(2S)} = %.3f (fixed)",ws->var("x_A")->getVal()),text_x,text_y-y_diff*7,text_color,text_size);
