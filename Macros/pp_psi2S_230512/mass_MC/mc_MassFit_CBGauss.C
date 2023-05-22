@@ -385,8 +385,8 @@ void mc_MassFit_CBGauss(
     TString kineLabel = getKineLabelpp (ptLow, ptHigh,yLow, yHigh, 0.0);
     
     TFile* outFile;
-    outFile = new TFile(Form("../roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-    c_A->SaveAs(Form("../figs/2DFit_%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+    outFile = new TFile(Form("../roots_MC/Mass_CBGauss/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+    c_A->SaveAs(Form("../figs/2DFit_%s/mc_Mass_CBGauss/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
 
     pdfMASS_Tot->Write();
