@@ -94,7 +94,7 @@ void MassFit_FixPar_Data(
   //****************************** MASS FIT *******************************
   //***********************************************************************
 
-  TFile * f_fit = new TFile(Form("../../roots_MC/Mass_CBGauss/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  TFile * f_fit = new TFile(Form("./roots_MC/Mass_CBGauss/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
   RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
   ws_fit->import(*dataset_fit);
