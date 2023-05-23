@@ -62,13 +62,12 @@ void MassFit_FixPar_Data(
   //massLow=2.75;
 
 //  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
+  f1 = new TFile(Form("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
 
 
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1",ptLow, ptHigh, yLow, yHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
-
   TString OS="recoQQsign==0 &&";
 
   TString nan_cut = "&& !TMath::IsNaN(ctau3D) && !TMath::IsNaN(ctau3DRes)";
@@ -94,7 +93,8 @@ void MassFit_FixPar_Data(
   //****************************** MASS FIT *******************************
   //***********************************************************************
 
-  TFile * f_fit = new TFile(Form("./roots_MC/Mass_CBGauss/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  // TFile * f_fit = new TFile(Form("./roots_MC/Mass_CBGauss/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  TFile * f_fit = new TFile(Form("./roots_MC/Mass_CBGauss/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
   RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
   ws_fit->import(*dataset_fit);
@@ -173,13 +173,17 @@ void MassFit_FixPar_Data(
 
   if(ptLow==9&&ptHigh==12) NJpsi_limit = 1e+06;
   else if(ptLow==6.5&&ptHigh==9) NJpsi_limit = 5e+05;
-  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+05;
+  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+04;
   else if(ptLow==8&&ptHigh==9) NJpsi_limit = 4e+06;
   else if(ptLow==9&&ptHigh==10) NJpsi_limit = 3e+06;
   else if(ptLow==10&&ptHigh==12) NJpsi_limit = 4e+06;
   else if(ptLow==12&&ptHigh==15) NJpsi_limit = 6e+06;
   else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
   if(ptLow==3&&ptHigh==6.5) {
+    NJpsi_limit = 500000;
+    NBkg_limit = 2000000;
+    //sl1,2,3: 0.01
+  }if(ptLow==3&&ptHigh==6.5) {
     NJpsi_limit = 500000;
     NBkg_limit = 2000000;
     //sl1,2,3: 0.01

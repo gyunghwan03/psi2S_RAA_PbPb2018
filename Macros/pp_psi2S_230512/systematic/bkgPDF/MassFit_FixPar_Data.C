@@ -62,7 +62,8 @@ void MassFit_FixPar_Data(
   //massLow=2.75;
 
 //  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
+  // f1 = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
+  f1 = new TFile(Form("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
 
 
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1",ptLow, ptHigh, yLow, yHigh);
@@ -172,8 +173,9 @@ void MassFit_FixPar_Data(
   Double_t NJpsi_limit = 1.0e+08;
 
   if(ptLow==9&&ptHigh==12) NJpsi_limit = 1e+06;
-  else if(ptLow==6.5&&ptHigh==9) NJpsi_limit = 5e+05;
-  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+05;
+  else if(ptLow==6.5&&ptHigh==9) NJpsi_limit = 9e+06;
+  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+06;
+  else if(ptLow==6.5&&ptHigh==50) NJpsi_limit = 5e+06;
   else if(ptLow==8&&ptHigh==9) NJpsi_limit = 4e+06;
   else if(ptLow==9&&ptHigh==10) NJpsi_limit = 3e+06;
   else if(ptLow==10&&ptHigh==12) NJpsi_limit = 4e+06;
@@ -209,7 +211,7 @@ void MassFit_FixPar_Data(
     NBkg_limit = 200000;
   }
   if(ptLow==20&&ptHigh==50) {
-    NJpsi_limit = 80000;
+    NJpsi_limit = 100000;
     NBkg_limit = 200000;
   }
 
