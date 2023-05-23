@@ -132,71 +132,42 @@ void MassFit_FixPar_Data(
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
-
-  //SIGNAL
-  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
-  //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
-  RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
-  RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
-  //RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init);
-  RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
-  //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init, paramslower[0], paramsupper[0]);
-  RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
-  //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init,alpha_1_init*0.9,alpha_1_init*1.1);
-  RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
-  RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
-  //RooRealVar    n_1_A("n_1_A","power order", n_1_init,n_1_init*0.9,n_1_init*1.1);
-  //RooRealVar    n_1_A("n_1_A","power order", n_1_init);
-  RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
-  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
-  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init*0.99,f_init*1.01);
-  RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
-  //Set up crystal ball shapes
-  RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
-  RooAddPdf*  pdfMASS_Jpsi;
-  //DOUBLE CRYSTAL BALL
-  RooCBShape* cb_2_A = new RooCBShape("cball_2_A", "cystal Ball", *(ws->var("mass")), mean, sigma_2_A, alpha_2_A, n_2_A);
-  //RooGaussian* gauss = new RooGaussian("gauss","gaussian PDF",*(ws->var("mass")),mean,sigma_2_A);
-  pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
-  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal",RooArgList(*cb_1_A,*gauss), RooArgList(*f) );
-
-  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
-  //BACKGROUND
-  //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.05, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.05, -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.05, -1., 1.);
-
-  Double_t NBkg_limit = 2.0e+08;
-  Double_t NJpsi_limit = 1.0e+08;
-
-  if(ptLow==9&&ptHigh==12) NJpsi_limit = 1e+06;
-  else if(ptLow==6.5&&ptHigh==9) NJpsi_limit = 5e+05;
-  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+05;
-  else if(ptLow==8&&ptHigh==9) NJpsi_limit = 4e+06;
-  else if(ptLow==9&&ptHigh==10) NJpsi_limit = 3e+06;
-  else if(ptLow==10&&ptHigh==12) NJpsi_limit = 4e+06;
-  else if(ptLow==12&&ptHigh==15) NJpsi_limit = 6e+06;
-  else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
+  Double_t NJpsi_limit = 100000;
+  Double_t NBkg_limit = 500000;
   if(ptLow==3&&ptHigh==6.5) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
+    NJpsi_limit = 100000;
+    NBkg_limit = 450000;
     //sl1,2,3: 0.01
   }
-  if(ptLow==9&&ptHigh==12) {
+  if(ptLow==3&&ptHigh==50) {
+    NJpsi_limit = 150000;
+    NBkg_limit = 1000000;
+    //sl1,2,3: 0.2, 0.1, 0.5
+  }
+  if(ptLow==6.5&&ptHigh==12) {
+    NJpsi_limit = 60000;
+    NBkg_limit = 200000;
+    //sl1,2,3:     
+  }
+  if(ptLow==6.5&&ptHigh==50) {
     NJpsi_limit = 500000;
     NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
+    //sl1,2,3: 0.05
+  }
+  if(ptLow==9&&ptHigh==12) {
+    NJpsi_limit = 40000;
+    NBkg_limit = 70000;
+    //sl1,2,3: 0.4, 0.08, 0.3
   }
   if(ptLow==12&&ptHigh==15) {
     NJpsi_limit = 20000;
     NBkg_limit = 200000;
-    //sl1,2,3: 0.08 Ditto 0.01
+    //sl1,2,3: 0.4, 0.08, 0.3
   }
   if(ptLow==12&&ptHigh==50) {
-    NJpsi_limit = 10000;
-    NBkg_limit = 50000;
-    //sl1,2,3: 0.08 Ditto 0.01
+    NJpsi_limit = 20000;
+    NBkg_limit = 500000;
+    //sl1,2,3: 
   }
   if(ptLow==15&&ptHigh==20) {
     NJpsi_limit = 100000;
@@ -208,9 +179,37 @@ void MassFit_FixPar_Data(
     NBkg_limit = 200000;
   }
   if(ptLow==20&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
+    NJpsi_limit = 10000;
+    NBkg_limit = 20000;
+    sigma_1_init = 0.05;
   }
+
+  //BACKGROUND
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.25, -1., 1.);
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.18, -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.18, -1., 1.);
+
+  //SIGNAL
+  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
+  RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
+  RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
+  RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
+  RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
+  RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
+  RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
+  //cout << n_1_init << paramslower[1]<< paramsupper[1] << endl;
+  RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
+  RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
+  
+  //Set up crystal ball shapes
+  RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);  
+  RooCBShape* cb_2_A = new RooCBShape("cball_2_A", "cystal Ball", *(ws->var("mass")), mean, sigma_2_A, alpha_2_A, n_2_A);
+  RooAddPdf*  pdfMASS_Jpsi;
+  pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
+
+
+
+
 
 
   //THIS IS THE BACKGROUND FUNCTION
