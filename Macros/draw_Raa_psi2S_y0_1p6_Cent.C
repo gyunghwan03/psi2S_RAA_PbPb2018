@@ -78,6 +78,9 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 	TH1D *hXPbPb_PR = new TH1D("hXPbPb_PR",";Centrality (%);",nCentBins, centBin);
 	TH1D *hXPbPb_NP = new TH1D("hXPbPb_NP",";Centrality (%);",nCentBins, centBin);
 
+	TH1D *hRAA_PR = new TH1D("hRAA_PR",";p_{T} (GeV/c);", nCentBins,NpartBin);
+	TH1D *hRAA_NP = new TH1D("hRAA_NP",";p_{T} (GeV/c);", nCentBins,NpartBin);
+
 	double RaaPR[nCentBins]; double RaaPR_err[nCentBins]; double binWidth[nCentBins]; double x[nCentBins];
 	double RaaNP[nCentBins]; double RaaNP_err[nCentBins];
 
@@ -134,8 +137,8 @@ void draw_Raa_psi2S_y0_1p6_Cent()
         double err_PPNP_wgt = err_PPNP/weight_pp;
 
         cout << " " << endl;
-        cout << "PbPb Yield : " << yieldPbPb.val << ", Eff Prompt: " << eff_PbPbPR << ", Acc : " << acc_PbPb << endl;
-        cout << "pp Yield : " << yieldPP.val << ", Eff : " << eff_pp << ", Acc : " << acc_pp << endl;
+        cout << "PbPb Yield : " << yieldPbPb.val << ", b frac : " << fracPbPb.val << ", Eff Prompt: " << eff_PbPbPR << ", Eff NonPrompt : " << eff_PbPbNP <<  ", Acc : " << acc_PbPb << endl;
+        cout << "pp Yield : " << yieldPP.val << ", b frac : " << fracPP.val << ", Eff : " << eff_pp << ", Acc : " << acc_pp << endl;
         cout << "pp Prompt yield : " << yieldPP_PR << ", PbPb Prompt yield : " << yieldPbPb_PR << ", pp NonPrompt yield : " << yieldPP_NP << ", PbPb NonPrompt yield : " << yieldPbPb_NP << endl;
         cout << "pp Prompt error : " << err_PPPR_wgt << " , PbPb Prompt error : " << err_PbPbPR_wgt << " , pp NonPrompt error : " << err_PPNP_wgt << " , PbPb NonPrompt error : " << err_PbPbNP_wgt << endl;
 
@@ -173,7 +176,7 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 
 		
 		cout << "i = " << i << ", Cent " << centBin[i] << "	-	" << centBin[i+1] << "	Cent Frac : " << cfrac[i] << endl;
-	//	cout << "Xpp_PR : " << Xpp_PR[i] << " , Xpp_PR_err : " << Xpp_PR_err[i] << ", XPbPb_PR : " << XPbPb_PR[i] << " , XPbPb_PR_err : " << XPbPb_PR_err[i] << " , Xpp_NP : " << Xpp_NP[i] << " , XPbPb_NP : " << XPbPb_NP[i] << endl;
+		cout << "Xpp_PR : " << Xpp_PR[i] << " , Xpp_PR_err : " << Xpp_PR_err[i] << ", XPbPb_PR : " << XPbPb_PR[i] << " , XPbPb_PR_err : " << XPbPb_PR_err[i] << " , Xpp_NP : " << Xpp_NP[i] << " , XPbPb_NP : " << XPbPb_NP[i] << endl;
 		cout <<"yield PP : " << yieldPP.val << ", yield pp Prompt : " << yieldPP_PR << ", Error pp prompt yield : " << err_PPPR << " ,yield pp Nonprompt : " << yieldPP_NP << ", Error pp Nonprompt : " << err_PPNP << endl;
 		cout << "pp Eff : " << eff_pp << ", pp Acc : " << acc_pp << endl;
 		cout << "PbPb Prompt Eff : " << eff_PbPbPR << ", PbPb Acc : " << acc_PbPb << endl;
@@ -210,7 +213,7 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 		//gRaaNP->SetPointError(i,0,Xpp_NP_err); 
 	}
 */
-	 for(int i=nCentBins-1;i>=0;i--)
+	for(int i=nCentBins-1;i>=0;i--)
     {
         RaaPR[nCentBins-1-i] = hRaa_PbPb_PR->GetBinContent(i+1);
         RaaPR_err[nCentBins-1-i] = hRaa_PbPb_PR->GetBinError(i+1);
@@ -222,7 +225,17 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 		cout << " " << endl;
 		cout << "Raa PR : " << RaaPR[nCentBins-1-i] << " , PR error : " << RaaPR_err[nCentBins-1-i] << endl;
 		cout << "Raa NP : " << RaaNP[nCentBins-1-i] << " , NP error : " << RaaNP_err[nCentBins-1-i] << endl;
+
     }
+
+	 cout << " " << endl;
+	for (int i=0; i<nCentBins; i++){
+		cout << "RAA PR : " << RaaPR[i] << ", RAA NP: " << RaaNP[i] << endl;
+		hRAA_PR->SetBinContent(i+1,RaaPR[i]);
+		hRAA_NP->SetBinContent(i+1,RaaNP[i]);
+		hRAA_PR->SetBinError(i+1,RaaPR_err[i]);
+		hRAA_NP->SetBinError(i+1,RaaNP_err[i]);
+	}
 
 
 	//////////////////////////////// Start Plotting ////////////////////////////////
@@ -352,23 +365,18 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 
 	cRAA->SaveAs("RAA_psi2S_y0_1p6_Npart.pdf");
 
-	TFile *f1 = new TFile("test.root","recreate");
-	f1->cd();
-	hyieldPP_PR->Write();
-	hyieldPbPb_PR->Write();
-	hyieldPP_NP->Write();
-	hyieldPbPb_NP->Write();
+	TFile *outFile = new TFile("RAA_psi2S_midRap_Npart.root","recreate");
+	hRAA_PR->Write();
+	hRAA_NP->Write();
 
-	hXpp_PR->Write();
-	hXPbPb_PR->Write();
-	f1->Close();
+	outFile->Close();
 
 }
 
 valErr getYield_pp(int i){
     TString kineLabel;
     kineLabel = getKineLabelpp(6.5,50,0,1.6,0.0);
-    TFile* inf = new TFile(Form("./pp_psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel.Data()));
+    TFile* inf = new TFile(Form("./pp_psi2S_230512/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
     TH1D* fitResults = (TH1D*)inf->Get("fitResults");
 
     valErr ret;
@@ -380,8 +388,8 @@ valErr getYield_PbPb(int i){
     double centBin[7] = {0,20,40,60,80,100,180};
     TString kineLabel[7];
     kineLabel[i] = getKineLabel(6.5,50,0,1.6,0.0,centBin[i],centBin[i+1]);
-	TFile* inf = new TFile(Form("./psi2S/roots/2DFit_230502/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
-    //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	TFile* inf = new TFile(Form("./psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
+    //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("MassResults");
 
     valErr ret;
@@ -393,7 +401,7 @@ valErr getFrac_PbPb(int i) {
     double centBin[7] = {0,20,40,60,80,100,180};
     TString kineLabel[7];
     kineLabel[i] = getKineLabel(6.5,50,0,1.6,0.0,centBin[i],centBin[i+1]);
-    TFile* inf = new TFile(Form("./psi2S/roots/2DFit_230502/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+    TFile* inf = new TFile(Form("./psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
     valErr ret;
@@ -404,7 +412,7 @@ valErr getFrac_PbPb(int i) {
 valErr getFrac_pp(int i) {
     TString kineLabel;
     kineLabel = getKineLabelpp(6.5,50,0,1.6,0.0);
-    TFile* inf = new TFile(Form("./pp_psi2S/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel.Data()));
+    TFile* inf = new TFile(Form("./pp_psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
     valErr ret;
