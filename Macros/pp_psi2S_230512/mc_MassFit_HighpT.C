@@ -1,10 +1,10 @@
 #include <iostream>
-#include "../../../rootFitHeaders.h"
-#include "../../../commonUtility.h"
-#include "../../../JpsiUtility.h"
-#include "../../../cutsAndBin.h"
-#include "../../../CMS_lumi_v2mass.C"
-#include "../../../tdrstyle.C"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -31,11 +31,11 @@ void mc_MassFit_HighpT(
 {
     TString DATE = "No_Weight";
     gStyle->SetEndErrorSize(0);
-    gSystem->mkdir(Form("../roots_MC"));
-    gSystem->mkdir(Form("../roots_MC/Mass"));
-    gSystem->mkdir(Form("../figs"));
-    gSystem->mkdir(Form("../figs/2DFit_%s",DATE.Data()),kTRUE);
-	gSystem->mkdir(Form("../figs/2DFit_%s/mc_Mass",DATE.Data()),kTRUE);
+    gSystem->mkdir(Form("roots_MC"));
+    gSystem->mkdir(Form("roots_MC/Mass"));
+    gSystem->mkdir(Form("figs"));
+    gSystem->mkdir(Form("figs/2DFit_%s",DATE.Data()),kTRUE);
+	gSystem->mkdir(Form("figs/2DFit_%s/mc_Mass",DATE.Data()),kTRUE);
 
 	TString bCont;
 	if(PR==0) bCont="Prompt";
@@ -381,8 +381,8 @@ void mc_MassFit_HighpT(
     TString kineLabel = getKineLabelpp (ptLow, ptHigh,yLow, yHigh, 0.0);
     
     TFile* outFile;
-    outFile = new TFile(Form("../roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-    c_A->SaveAs(Form("../figs/2DFit_%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+    outFile = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+    c_A->SaveAs(Form("figs/2DFit_%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
 
     pdfMASS_Tot->Write();
