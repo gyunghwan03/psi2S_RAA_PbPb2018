@@ -110,7 +110,7 @@ void mc_MassFit_HighpT(
 	Double_t sigma_up, x_up, alpha_up, n_up, f_up;
 	Double_t sigma_lo, x_lo, alpha_lo, n_lo, f_lo;
 
-	sigma_up=1; x_up=1; alpha_up=10; n_up=10; f_up=1;
+	sigma_up=0.12; x_up=1; alpha_up=10; n_up=10; f_up=1;
 	sigma_lo=1e-3; x_lo=1e-3; alpha_lo=1e-3; n_lo=1e-3; f_lo=1e-3;
 
     
@@ -123,32 +123,34 @@ void mc_MassFit_HighpT(
     double sl1_mean = 0.01, sl2_mean = 0.04, sl3_mean = 0.06;
     double N_Jpsi_high = 2e+5; // 2500000
 	double N_Bkg_high = 200000;
-    double fit_limit = 3.86;
+    double fit_limit_low = 3.4; double fit_limit_high = 3.86;
 	double m_lambda_init = 5;
 	double psi_2S_mass = pdgMass.Psi2S;
-
-	if(ptLow==8&&ptHigh==12) { n_1_init = 5.3;}
-	if(ptLow==12&&ptHigh==20) { n_1_init = 4.6;}
-
+    if(ptLow==3.5&&ptHigh==50) {
+        N_Jpsi_high = 300000; // 2500000
+        f_init=0.5; sigma_1_init = 0.05; n_1_init = 2;
+        x_init = 0.5; alpha_1_init = 2.3;
+    }
+    if(ptLow==5&&ptHigh==6.5) {
+        N_Jpsi_high = 45000; // 2500000
+        f_init=0.5; sigma_1_init = 0.05; n_1_init = 2;
+        x_init = 0.5; alpha_1_init = 2.3;
+    }
     if(ptLow==6.5&&ptHigh==9) {
         N_Jpsi_high = 50000; // 2500000
     }
-
     if(ptLow==6.5&&ptHigh==12) {
         N_Jpsi_high = 200000;
         f_init=0.25; sigma_1_init = 0.04; n_1_init = 2;
         x_init = 0.71; alpha_1_init = 2;
         m_lambda_init=2;
     }
-
     if(ptLow==6.5&&ptHigh==50) {
         N_Jpsi_high = 400000; // 2500000
     }
     if(ptLow==12&&ptHigh==15) {
         N_Jpsi_high = 400000; // 2500000
     }
-
-
     if(ptLow==12&&ptHigh==50) {
         N_Jpsi_high = 20000;
         f_init=0.4; sigma_1_init = 0.03; n_1_init = 2;
@@ -161,10 +163,40 @@ void mc_MassFit_HighpT(
         x_init = 0.8; alpha_1_init = 1.57;
         m_lambda_init=2;
     }
+    if(ptLow==20&&ptHigh==25) {
+        N_Jpsi_high = 5000;
+        //f_init=0.6; sigma_1_init = 0.03; n_1_init = 5;
+        //x_init = 0.8; alpha_1_init = 5;
+        sigma_up = 0.0542; sigma_lo = 0.0542;
+        x_up = 0.5048; x_lo = 0.5048;
+        alpha_up = 2.1412; alpha_lo = 2.1412;
+        f_up = 0.2528; f_lo = 0.2528;
+    }
+    if(ptLow==20&&ptHigh==30) {
+        N_Jpsi_high = 3000;
+        f_init=0.866; sigma_1_init = 0.053; n_1_init = 2;
+        x_init = 0.5; alpha_1_init = 2;
+    }
     if(ptLow==20&&ptHigh==50) {
         N_Jpsi_high = 100000;
         f_init=0.866; sigma_1_init = 0.0327; n_1_init = 1;
         x_init = 0.8; alpha_1_init = 1;
+    }
+    if(ptLow==25&&ptHigh==30) {
+        N_Jpsi_high = 1000;
+        //f_init=0.6; sigma_1_init = 0.03; n_1_init = 5;
+        //x_init = 0.8; alpha_1_init = 5;
+        sigma_up = 0.0542; sigma_lo = 0.0542;
+        x_up = 0.5048; x_lo = 0.5048;
+        alpha_up = 2.1412; alpha_lo = 2.1412;
+        f_up = 0.2528; f_lo = 0.2528;
+    }
+    if(ptLow==30&&ptHigh==50) {
+        N_Jpsi_high = 600;
+        sigma_up = 0.0542; sigma_lo = 0.0542;
+        x_up = 0.5048; x_lo = 0.5048;
+        alpha_up = 2.1412; alpha_lo = 2.1412;
+        f_up = 0.2528; f_lo = 0.2528;
     }
     double paramsupper[8] = {sigma_up, x_up, alpha_up, n_up, f_up,  25.0};
     double paramslower[8] = {sigma_lo, x_lo, alpha_lo, n_lo, f_lo,  -5.0};
@@ -204,8 +236,8 @@ void mc_MassFit_HighpT(
     pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2, *sl3));
 
     //Build the model
-    RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0, N_Jpsi_high);
-    RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0, N_Bkg_high);
+    RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals", N_Jpsi_high*0.9, 0, N_Jpsi_high);
+    RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg", N_Bkg_high*0.9, 0, N_Bkg_high);
     //RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
     RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi),RooArgList(*N_Jpsi));
     //pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *bkg_1order),RooArgList(*N_Jpsi,*N_Bkg));
@@ -230,8 +262,10 @@ void mc_MassFit_HighpT(
     RooPlot* myPlot2_A = (RooPlot*)myPlot_A->Clone();
     dsAB->plotOn(myPlot2_A,Name("dataOS"),MarkerSize(.8));
     bool isWeighted = ws->data("dsAB")->isWeighted();
+    cout << "isWeighted? : " << isWeighted << endl;
     cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
-    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), Range(3.4, fit_limit), NumCPU(nCPU));
+    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(true), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), Range(fit_limit_low, fit_limit_high), NumCPU(nCPU));
+    //RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Minimizer("Minuit", "minimize"),Minos(kTRUE), Timer(kTRUE), Extended(kTRUE), SumW2Error(false), Range(fit_limit_low, fit_limit_high), NumCPU(4));
     cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
 	fitMass->Print("V");
     
@@ -256,11 +290,11 @@ void mc_MassFit_HighpT(
     */
     
     double f_factor = (double) fitFraction.getVal();
-    ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_tot"), LineColor(kBlack), Range(3.4, fit_limit));
+    ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_tot"), LineColor(kBlack), Range(fit_limit_low, fit_limit_high));
     // ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Range(3.4, 3.87), Normalization(fitFraction.getVal()));
     // ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Range(3.4, 3.87), Normalization(1-fitFraction.getVal()));
-    ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Normalization(fitFraction.getVal()), Range(3.4, fit_limit));
-    ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(3.4, fit_limit));
+    ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Normalization(fitFraction.getVal()), Range(fit_limit_low, fit_limit_high));
+    ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(fit_limit_low, fit_limit_high));
     //ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("Sig_A"),Components(RooArgSet(*pdfMASS_Jpsi)),LineColor(kOrange+7),LineWidth(2),LineStyle(2));
 
     //make a pretty plot

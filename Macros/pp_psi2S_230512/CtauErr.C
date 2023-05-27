@@ -201,6 +201,7 @@ void CtauErr(
 
   if(ptLow==6.5&&ptHigh==12) ctauErrMax = 0.1512;
   else if(ptLow==3&&ptHigh==6.5) { ctauErrMin = 0.0198; ctauErrMax=0.16; }
+  else if(ptLow==5&&ptHigh==6.5) { ctauErrMax=0.164; }
   else if(ptLow==5.5&&ptHigh==6.5) { ctauErrMax=0.1528; }
   else if(ptLow==6.5&&ptHigh==8) ctauErrMax = 0.151;
   else if(ptLow==6.5&&ptHigh==9) ctauErrMax = 0.1618;
@@ -220,8 +221,10 @@ void CtauErr(
   else if(ptLow==12&&ptHigh==50) ctauErrMax = 0.091;
   else if(ptLow==15&&ptHigh==20) ctauErrMax = 0.072;
   else if(ptLow==15&&ptHigh==50) ctauErrMax = 0.071;
+  else if(ptLow==20&&ptHigh==25) ctauErrMax = 0.0586;
+  else if(ptLow==25&&ptHigh==30) ctauErrMax = 0.0471;
   else if(yLow==1.2&&yHigh==1.6) ctauErrMax = 0.162;
-  
+
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
     double BinWidth = (ctauErrHigh-ctauErrLow)/nBins;

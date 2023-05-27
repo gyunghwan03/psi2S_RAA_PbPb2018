@@ -164,12 +164,11 @@ void MassFit_FixPar_Data(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.05, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.05, -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.05, -1., 1.);
+
 
   Double_t NBkg_limit = 2.0e+08;
   Double_t NJpsi_limit = 1.0e+08;
+  double s1_init = 0.05; double s2_init = 0.05; double s3_init = 0.05; 
 
   if(ptLow==9&&ptHigh==12) NJpsi_limit = 1e+06;
   else if(ptLow==6.5&&ptHigh==9) NJpsi_limit = 5e+05;
@@ -182,6 +181,11 @@ void MassFit_FixPar_Data(
   if(ptLow==3&&ptHigh==6.5) {
     NJpsi_limit = 500000;
     NBkg_limit = 2000000;
+    //sl1,2,3: 0.01
+  }
+  if(ptLow==5&&ptHigh==6.5) {
+    NJpsi_limit = 40000;
+    NBkg_limit = 150000;
     //sl1,2,3: 0.01
   }
   if(ptLow==9&&ptHigh==12) {
@@ -208,11 +212,26 @@ void MassFit_FixPar_Data(
     NJpsi_limit = 80000;
     NBkg_limit = 200000;
   }
+  if(ptLow==20&&ptHigh==25) {
+    NJpsi_limit = 5000;
+    NBkg_limit = 200000;
+  }
   if(ptLow==20&&ptHigh==50) {
     NJpsi_limit = 80000;
     NBkg_limit = 200000;
   }
+  if(ptLow==25&&ptHigh==30) {
+    NJpsi_limit = 2000;
+    NBkg_limit = 200000;
+  }
+  if(ptLow==30&&ptHigh==50) {
+    NJpsi_limit = 2000;
+    NBkg_limit = 200000;
+  }
 
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", s1_init, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", s2_init, -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", s3_init, -1., 1.);
 
   //THIS IS THE BACKGROUND FUNCTION
   //RooGenericPdf *pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background","TMath::Exp(-@0/@1)",RooArgList(*(ws->var("mass")),m_lambda_A));
