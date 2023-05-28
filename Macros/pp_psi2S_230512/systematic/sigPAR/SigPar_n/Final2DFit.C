@@ -201,10 +201,7 @@ void Final2DFit(
   //else if(ptLow==9 && ptHigh==12) ws->factory("b_Jpsi[0.38, 0.36, 0.4]");
   //else if(ptLow==12 && ptHigh==50) ws->factory("b_Jpsi[0.48, 0.41, 0.49]");
   //else if(ptLow==15 && ptHigh==20) ws->factory("b_Jpsi[0.547, 0.5, 0.56]");
-  if (ptLow==12&&ptHigh==50) {
-    ws->factory("b_Jpsi[0.5, 1e-6, 1.]");//NP fraction for Sig}
-  }
-  else ws->factory("b_Jpsi[0.5, 1e-8, 1.]");//NP fraction for Sig
+  ws->factory("b_Jpsi[0.5, 1e-8, 1.]");//NP fraction for Sig
 
   //RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
   //    Conditional( *ws->pdf("pdfCTAUCOND_BkgPR"), RooArgList(*ws->var("ctau3D"))));
