@@ -218,8 +218,8 @@ void CtauErr(
   else if(ptLow==9&&ptHigh==12) ctauErrMax = 0.114;
   else if(ptLow==11&&ptHigh==12) ctauErrMax = 0.0882;
   else if(ptLow==12&&ptHigh==15) ctauErrMax = 0.0996;
-  else if(ptLow==12&&ptHigh==50) ctauErrMax = 0.091;
-  else if(ptLow==15&&ptHigh==20) ctauErrMax = 0.072;
+  else if(ptLow==12&&ptHigh==50) ctauErrMax = 0.092;
+  else if(ptLow==15&&ptHigh==20) ctauErrMax = 0.08;
   else if(ptLow==15&&ptHigh==50) ctauErrMax = 0.071;
   else if(ptLow==20&&ptHigh==25) ctauErrMax = 0.0586;
   else if(ptLow==25&&ptHigh==30) ctauErrMax = 0.0471;
