@@ -126,9 +126,8 @@ void MassFit_FixPar_Data(
   //if (n_lower<0.0)n_lower==0.0;
   if (f_higher>1.0) f_higher=1.0;
   if (f_lower<0.0) f_lower=0.0;
-
-  double paramslower[6] = {alpha_lower, n_lower, 0.0, xA_lower, 0.0,  0.0};
-  double paramsupper[6] = {alpha_higher, n_higher, 0.4, xA_higher, 1.0, 25.0};
+  double paramslower[6] = {0, 0, 0, 0, 0.0,  0.0};
+  double paramsupper[6] = {10, 10, 0.12, 1, 1.0, 25.0};
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
@@ -243,11 +242,9 @@ void MassFit_FixPar_Data(
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
 
-  //RooGaussian x_constraint("x_constraint","x_constraint",*x_A,RooConst(xA_MC_value),RooConst(xA_MC_value_err));
-
-  //RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(f_constraint,sigma1_constraint)));
-  //RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
-  RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
+  RooGaussian x_constraint("x_constraint","x_constraint",*x_A,RooConst(xA_MC_value),RooConst(xA_MC_value_err));
+  RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(x_constraint)));
+  RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(model, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
   ws->import(*pdfMASS_Tot);
 
   TCanvas* c_A =  new TCanvas("canvas_A","My plots",4,4,550,520);

@@ -106,6 +106,39 @@ void CtauBkg_LowPt(
   ws->factory("lambdaDSS_Bkg2[0.3, 1e-6, 1.]");
   ws->factory("fDSS12[0.8, 0., 1.]");
   ws->factory("fDF12[0.8, 0., 1.]");}
+  else if(ptLow==3.5&&ptHigh==5){
+  ws->factory("b_Bkg[0.3, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.87, 0., 1.]");
+  ws->factory("fDLIV[0.52, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.12, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.3, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.3, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.25, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.4.75, 1e-6, 1.]");
+  ws->factory("fDSS12[0.3, 0., 1.]");
+  ws->factory("fDF12[0.3, 0., 1.]");}
+  else if(ptLow==3.5&&ptHigh==50){
+  ws->factory("b_Bkg[0.3, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.87, 0., 1.]");
+  ws->factory("fDLIV[0.52, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.12, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.3, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.3, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.25, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.4.75, 1e-6, 1.]");
+  ws->factory("fDSS12[0.3, 0., 1.]");
+  ws->factory("fDF12[0.3, 0., 1.]");}
+  else if(ptLow==5&&ptHigh==6.5){
+  ws->factory("b_Bkg[0.3, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.87, 0., 1.]");
+  ws->factory("fDLIV[0.52, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.12, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.3, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.3, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.25, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.4.75, 1e-6, 1.]");
+  ws->factory("fDSS12[0.3, 0., 1.]");
+  ws->factory("fDF12[0.3, 0., 1.]");}
   else {
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
@@ -213,7 +246,11 @@ void CtauBkg_LowPt(
   cout << "normDSTot = " << normDSTot << " normBkg : " << normBkg << endl;
 
   bool isWeighted = ws->data("dataw_Bkg")->isWeighted();
-  //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataw_Bkg, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
+  
+  //cout << "isWeighted? : " << isWeighted << endl;
+  //exit(1);
+  //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Minimizer("Minuit", "scan"), Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(false));
+  
   RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 
