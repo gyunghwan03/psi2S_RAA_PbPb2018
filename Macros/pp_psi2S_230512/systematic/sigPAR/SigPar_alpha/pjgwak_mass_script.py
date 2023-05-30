@@ -14,7 +14,7 @@ import subprocess
 #subprocess.call("root -l MassFit_FixPar_Data.C'(12, 15, 0, 1.6)'", shell=True)
 #subprocess.call("root -l MassFit_FixPar_Data.C'(15, 20, 0, 1.6)'", shell=True)
 
-subprocess.call("root -l MassFit_FixPar_Data.C'(20, 25, 0, 1.6)'", shell=True)
+#subprocess.call("root -l MassFit_FixPar_Data.C'(20, 25, 0, 1.6)'", shell=True)
 #subprocess.call("root -l MassFit_FixPar_Data.C'(25, 30, 0, 1.6)'", shell=True)
 #subprocess.call("root -l MassFit_FixPar_Data.C'(30, 50, 0, 1.6)'", shell=True)
 

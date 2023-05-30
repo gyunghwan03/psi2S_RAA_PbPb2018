@@ -206,8 +206,9 @@ void MassFit_FixPar_Data(
   }
   if(ptLow==25&&ptHigh==30) {
     NJpsi_limit = 2000;
-    NBkg_limit = 40000;
-    s1_init = 0.1; s2_init = 0.08; s3_init = 0.05;
+    NBkg_limit = 5000;
+    s1_init = 0.01; s2_init = 0.08; s3_init = 0.05;
+    alpha_1_init = 2;
   }
   if(ptLow==30&&ptHigh==50) {
     NJpsi_limit = 2000;
@@ -245,11 +246,6 @@ void MassFit_FixPar_Data(
   RooCBShape* cb_2_A = new RooCBShape("cball_2_A", "cystal Ball", *(ws->var("mass")), mean, sigma_2_A, alpha_2_A, n_2_A);
   //RooGaussian* gauss = new RooGaussian("gauss","gaussian PDF",*(ws->var("mass")),mean,sigma_2_A);
   pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
-  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal",RooArgList(*cb_1_A,*gauss), RooArgList(*f) );
-
-  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
-  //BACKGROUND
-  //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
 
 
 
@@ -264,9 +260,17 @@ void MassFit_FixPar_Data(
 
   RooGaussian alpha_constraint("alpha_constraint","alpha_constraint",alpha_1_A,RooConst(alpha_MC_value),RooConst(alpha_MC_value_err));
   RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(alpha_constraint)));
-  RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(model, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
+  RooAddPdf* pdfMASS_Tot = nullptr;
+  if ( (ptLow==20&&ptHigh==25) || (ptLow==25&&ptHigh==30) || (ptLow==30&&ptHigh==50) ) {
+    pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
+  }
+  else {
+    pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(model, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
+  }
   ws->import(*pdfMASS_Tot);
 
+
+  // Plotting
   TCanvas* c_A =  new TCanvas("canvas_A","My plots",4,4,550,520);
   c_A->cd();
   TPad *pad_A_1 = new TPad("pad_A_1", "pad_A_1", 0, 0.25, 0.98, 1.0);
