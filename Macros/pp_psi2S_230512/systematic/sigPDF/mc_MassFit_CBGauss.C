@@ -110,7 +110,7 @@ void mc_MassFit_CBGauss(
 	Double_t sigma_up, x_up, alpha_up, n_up, f_up;
 	Double_t sigma_lo, x_lo, alpha_lo, n_lo, f_lo;
 
-	sigma_up=1; x_up=1; alpha_up=10; n_up=10; f_up=1;
+	sigma_up=1; x_up=2; alpha_up=10; n_up=10; f_up=1;
 	sigma_lo=1e-3; x_lo=1e-3; alpha_lo=1e-3; n_lo=1e-3; f_lo=1e-3;
 
     
@@ -133,15 +133,57 @@ void mc_MassFit_CBGauss(
     if(ptLow==6.5&&ptHigh==9) {
         N_Jpsi_high = 50000; // 2500000
     }
-
-    if(ptLow==6.5&&ptHigh==12) {
+     if(ptLow==5&&ptHigh==6.5) {
+               N_Jpsi_high = 50000;
+        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
+        x_init = 0.7; alpha_1_init = 3;
+        x_up = 2;
+        alpha_up=20;
+        // m_lambda_init=2;
+        n_up = 10;
+    }
+       if(ptLow==6.5&&ptHigh==12) {
         N_Jpsi_high = 200000;
-        f_init=0.25; sigma_1_init = 0.04; n_1_init = 2;
+        x_up = 2;
+        f_init=0.3; sigma_1_init = 0.04; n_1_init = 2;
         x_init = 0.71; alpha_1_init = 2;
         m_lambda_init=2;
+        n_up = 1000;
+    }
+    
+     if(ptLow==25&&ptHigh==30) {
+               N_Jpsi_high = 50000;
+        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
+        x_init = 0.7; alpha_1_init = 3;
+        x_up = 3;
+        alpha_up=20;
+        // m_lambda_init=2;
+        n_up = 10;
+    }
+    
+     if(ptLow==30&&ptHigh==50) {
+               N_Jpsi_high = 50000;
+        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
+        x_init = 0.7; alpha_1_init = 3;
+        x_up = 3;
+        alpha_up=20;
+        // m_lambda_init=2;
+        n_up = 10;
     }
 
-    if(ptLow==6.5&&ptHigh==50) {
+
+    //  if(ptLow==25&&ptHigh==30) {
+    //     n_up =20; // 2500000
+    //     n_lo = 1e-5;
+    //     n_1_init = 2;
+    // }
+    //  if(ptLow==30&&ptHigh==50) {
+    //     n_up =20; // 2500000
+    //     n_lo = 1e-5;
+    //     n_1_init = 2;
+    // }
+
+     if(ptLow==6.5&&ptHigh==50) {
         N_Jpsi_high = 400000; // 2500000
     }
     if(ptLow==12&&ptHigh==15) {
