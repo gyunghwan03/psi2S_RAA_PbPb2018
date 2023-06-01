@@ -229,6 +229,13 @@ void MassFit_FixPar_Data(
  if (ptLow==3.5&&ptHigh==5 && cLow==0 && cHigh==180)  {
 	   NBkg_limit = 300000;
 	   NJpsi_limit = 10000; }
+     if (ptLow==6.5&&ptHigh==50)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 100000; }
+          if (ptLow==5&&ptHigh==6.5)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
+
 
   if (ptLow==3.5&&ptHigh==50)  {
 	   NBkg_limit = 500000;
@@ -236,7 +243,7 @@ void MassFit_FixPar_Data(
   else if (ptLow==6.5&&ptHigh==9)  {
 	   NBkg_limit = 5e+5;
 	   NJpsi_limit = 5e+3; }
-  else if (ptLow==6.5&&ptHigh==12)  {
+  else if (ptLow==9&&ptHigh==12)  {
 	   NBkg_limit = 100000;
 	   NJpsi_limit = 10000; }
   else if (ptLow==15&&ptHigh==20)  {
@@ -245,10 +252,10 @@ void MassFit_FixPar_Data(
   else if (ptLow==20&&ptHigh==25)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
-  else if (ptLow==12&&ptHigh==50)  {
+  else if (ptLow==25&&ptHigh==30)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
-  else if (ptLow==15&&ptHigh==50)  {
+  else if (ptLow==30&&ptHigh==50)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
   else if (ptLow==25&&ptHigh==50)  {
