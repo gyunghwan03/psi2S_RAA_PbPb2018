@@ -23,9 +23,10 @@
 using namespace std;
 using namespace RooFit;
 
-void CtauBkg_LowPt(
+void CtauBkg(
     double ptLow=3, double ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
+    int cLow=0, int cHigh=200,
     int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
@@ -52,11 +53,11 @@ void CtauBkg_LowPt(
   RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
 
   TFile* f1; TFile* fMass; TFile* fCErr; TFile* fCRes;
-  TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
+  TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
 
   fMass = new TFile(Form("../../roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   fCErr = new TFile(Form("../../roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  fCRes = new TFile(Form("../../roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fCRes = new TFile(Form("roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
   RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
@@ -73,7 +74,7 @@ void CtauBkg_LowPt(
   double ctauErrMin, ctauErrMax;
   ws->data("dataw_Bkg")->getRange(*ws->var("ctau3DErr"), ctauErrMin, ctauErrMax);
   cout<<"####################################" <<endl;
-  cout<<"pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<endl;
+  cout<<"pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow/2<<"-"<<cHigh/2<<"%"<<endl;
 
   cout <<"******** New Combined Dataset ***********" <<endl;
   ws->var("ctau3D")->setRange(ctauLow, ctauHigh);
@@ -89,67 +90,61 @@ void CtauBkg_LowPt(
   cout <<endl <<"************** Start BKG Ctau Fit *****************" <<endl <<endl;
   //make parameter 3 exp
   ws->factory("zeroMean[0.0]");
-  if(ptLow==3.5&&ptHigh==5){
-  ws->factory("b_Bkg[0.5, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.8, 0., 1.]");
-  ws->factory("fDLIV[0.6, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.6, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.4, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.1, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.2, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.6, 1e-6, 1.]");
-  ws->factory("fDSS12[0.7, 0., 1.]");
-  ws->factory("fDF12[0.5, 0., 1.]");
-  ws->factory("fDSS13[0.6, 0., 1.]");
-  ws->factory("fDF13[0.9, 0., 1.]");}
-  else if(ptLow==3.5&&ptHigh==50){
+  //ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
+  //ws->factory("fDFSS[0.5, 1e-6, 1.]");
+  //ws->factory("fDLIV[0.5, 1e-6, 1.]");
+  //ws->factory("lambdaDDS_Bkg[0.2, 1e-6, 1.]");
+  //ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1.]");
+  //ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");
+  if(ptLow==3&&ptHigh==6.5){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.06, 0., 1.]");
-  ws->factory("fDLIV[0.04, 0., 1]");
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.03, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.02, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.02, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.055, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.03, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.03, 1e-6, 1.]");
-  ws->factory("fDSS12[0.08, 0., 1.]");
-  ws->factory("fDF12[0.08, 0., 1.]");
-  ws->factory("fDSS13[0.08, 0., 1.]");
-  ws->factory("fDF13[0.08, 0., 1.]");}
-  else if(ptLow==5&&ptHigh==6.5){
-  ws->factory("b_Bkg[0.76, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.70, 0., 1.]");
-  ws->factory("fDLIV[0.98, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.01, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.4, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.3, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.2, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.1, 1e-6, 1.]");
-  ws->factory("fDSS12[0.4, 0., 1.]");
-  ws->factory("fDF12[0.4, 0., 1.]");
-  ws->factory("fDSS13[0.1, 0., 1.]");
-  ws->factory("fDF13[0.3, 0., 1.]");}
+  ws->factory("lambdaDF_Bkg[0.0327, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
+  else if(ptLow==6.5&&ptHigh==9){
+  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg[0.3, 0.2, 1]");
+  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  else if(ptLow==6.5&&ptHigh==12){
+  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg[0.3, 0.2, 1]");
+  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  else if(ptLow==9&&ptHigh==12){
+  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg[0.3, 0.2, 1]");
+  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  else if(cLow==0&&cHigh==40){
+  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.5, 0.2, 1.]");
+  ws->factory("lambdaDF_Bkg[0.4, 0.3, 1]");
+  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  else if(cLow==40&&cHigh==80){
+  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.6, 0., 1.]");
+  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.5, 0.23, 1.]");
+  ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
   else {
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
   ws->factory("fDLIV[0.4, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.3, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.2, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.2, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.55, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.3, 1e-6, 1.]");
-  ws->factory("fDSS12[0.8, 0., 1.]");
-  ws->factory("fDF12[0.8, 0., 1.]");
-  ws->factory("fDSS13[0.8, 0., 1.]");
-  ws->factory("fDF13[0.8, 0., 1.]");}
-
+  ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
@@ -182,17 +177,24 @@ void CtauBkg_LowPt(
   //ws->factory(Form("AddModel::%s({%s, %s}, {%s})", "ctauRes32", "ctauRes3", "ctauRes2", "f2_CtauRes"));
   ws->factory(Form("AddModel::%s({%s, %s}, {%s})", "pdfCTAURES", "ctauRes1", "ctauRes2", "f_CtauRes"));
   //make 3 exp
+  /*
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUDSS1", "ctau3D", "lambdaDSS_Bkg1", "pdfCTAURES"));
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUDSS2", "ctau3D", "lambdaDSS_Bkg2", "pdfCTAURES"));
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUDSS3", "ctau3D", "lambdaDSS_Bkg3", "pdfCTAURES"));
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::Flipped)", "pdfCTAUDF1", "ctau3D", "lambdaDF_Bkg1", "pdfCTAURES"));
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::Flipped)", "pdfCTAUDF2", "ctau3D", "lambdaDF_Bkg2", "pdfCTAURES"));
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::Flipped)", "pdfCTAUDF3", "ctau3D", "lambdaDF_Bkg3", "pdfCTAURES"));
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::DoubleSided)", "pdfCTAUDDS", "ctau3D", "lambdaDDS_Bkg", "pdfCTAURES"));
-  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUDSS12", "fDSS12", "pdfCTAUDSS1", "pdfCTAUDSS2"));
-  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUDSS", "fDSS13", "pdfCTAUDSS12", "pdfCTAUDSS3"));
-  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUDF12", "fDF12", "pdfCTAUDF1", "pdfCTAUDF2"));
-  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUDF", "fDF13", "pdfCTAUDF12", "pdfCTAUDF3"));
+  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUDSS", "fDSS12", "pdfCTAUDSS1", "pdfCTAUDSS2"));
+  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUDF", "fDF12", "pdfCTAUDF1", "pdfCTAUDF2"));
+  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAU1", "fDFSS", "pdfCTAUDSS", "pdfCTAUDF"));
+  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUCOND_BkgNoPR", "fDLIV", "pdfCTAU1", "pdfCTAUDDS"));//NP
+  ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_BkgPR","pdfCTAURES"));//PR
+  ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUCOND_Bkg", "b_Bkg", "pdfCTAUCOND_BkgNoPR", "pdfCTAUCOND_BkgPR"));
+  ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfTot_Bkg", "pdfCTAUCOND_Bkg", "N_Bkg"));//N_Bkg is number of bkg from dataw_Bkg
+	*/																					 //
+  //1 exp
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUDSS", "ctau3D", "lambdaDSS_Bkg", "pdfCTAURES"));
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::Flipped)", "pdfCTAUDF", "ctau3D", "lambdaDF_Bkg", "pdfCTAURES"));
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::DoubleSided)", "pdfCTAUDDS", "ctau3D", "lambdaDDS_Bkg", "pdfCTAURES"));
   ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAU1", "fDFSS", "pdfCTAUDSS", "pdfCTAUDF"));
   ws->factory(Form("SUM::%s(%s*%s, %s)", "pdfCTAUCOND_BkgNoPR", "fDLIV", "pdfCTAU1", "pdfCTAUDDS"));//NP
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_BkgPR","pdfCTAURES"));//PR
@@ -211,16 +213,23 @@ void CtauBkg_LowPt(
 
   TH1D* hTot = (TH1D*)ws->data("dataw_Bkg")->createHistogram(("hTot"), *ws->var("ctau3D"),Binning(nCtauBins,ctauLow,ctauHigh));
   double ctauMin=hTot->GetBinLowEdge(hTot->FindFirstBinAbove(1,1));
+  //if (cLow==80&&cHigh==100) ctauMin=-1.0;
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
   //if(ptLow>=15) { ctauMin=-1.5;}
-//  if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
-  if (ptLow==9&&ptHigh==12) ctauMin=-2.5;
-  else if(ptLow==6.5&&ptHigh==12) ctauMin = -2;
-  else if(ptLow==6.5&&ptHigh==9) ctauMax = 3;
-  else if(ptLow==12&&ptHigh==50) ctauMin = -0.7;
-  else if(ptLow==20&&ptHigh==50) ctauMin = -1.5;
-  else if(ptLow==15&&ptHigh==50) ctauMin = -1.;
+  if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
+  else if(ptLow==3&&ptHigh==4.5) {ctauMax=2.65;}
+  else if(ptLow==6.5&&ptHigh==9) { ctauMin = -2.65; ctauMax = 2.5;}
+  else if(ptLow==4&&ptHigh==6.5) ctauMax=2.;
+  else if(ptLow==6.5&&ptHigh==12&&yLow==1.6) ctauMin = -2.;
+  else if(ptLow==12&&ptHigh==15&&yLow==1.6) ctauMin = -2.;
+  else if(ptLow>=15) ctauMin = -1;
+  else if(cLow==0&&cHigh==40) { ctauMin=-2; ctauMax=2.4; }
+  else if(cLow==40&&cHigh==60) ctauMin=-2;
+  else if(cLow==40&&cHigh==80) ctauMax=1.9;
+  else if(cLow==80&&cHigh==100) ctauMin=-0.8;
+  else if(cLow==100&&cHigh==200) ctauMin=-0.55;
+  else if(cLow==100&&cHigh==180) {ctauMin=-1.;}
 
   TCanvas* c_E =  new TCanvas("canvas_E","My plots",1108,4,550,520);
   c_E->cd();
@@ -245,15 +254,9 @@ void CtauBkg_LowPt(
   double normBkg = 1.0;
   if (ws->data("dataw_Bkg")){normBkg = ws->data("dataToFit")->sumEntries()*normDSTot/ws->data("dataw_Bkg")->sumEntries();}
 
-  cout << "normDSTot = " << normDSTot << " normBkg : " << normBkg << endl;
-
   bool isWeighted = ws->data("dataw_Bkg")->isWeighted();
-  
-  //cout << "isWeighted? : " << isWeighted << endl;
-  //exit(1);
-  //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Minimizer("Minuit", "scan"), Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(false));
-  
-  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(isWeighted));
+  //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataw_Bkg, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
+  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 
   myPlot2_E->updateNormVars(RooArgSet(*ws->var("mass"), *ws->var("ctau3D"), *ws->var("ctau3DErr"))) ;
@@ -279,7 +282,7 @@ void CtauBkg_LowPt(
   Ydown = 0.01;
   myPlot2_E->GetYaxis()->SetRangeUser(Ydown,Yup);
   myPlot2_E->GetXaxis()->SetRangeUser(-4, 7);
-  myPlot2_E->GetXaxis()->SetTitle("#font[12]{l}_{J/#psi} (mm)");
+  myPlot2_E->GetXaxis()->SetTitle("#font[12]{l}_{#psi(2S)} (mm)");
   myPlot2_E->SetFillStyle(4000);
   myPlot2_E->GetYaxis()->SetTitleOffset(1.43);
   myPlot2_E->GetXaxis()->SetLabelSize(0);
@@ -307,7 +310,9 @@ void CtauBkg_LowPt(
   drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c",ptLow, ptHigh ),text_x,text_y,text_color,text_size);
   if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x,text_y-y_diff,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
+  drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
 
+  /*
   drawText(Form("N_{Bkg} = %.f #pm %.f", ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y,text_color,text_size);
   drawText(Form("b_{Bkg} = %.4f #pm %.4f", ws->var("b_Bkg")->getVal(), ws->var("b_Bkg")->getError() ),text_x+0.5,text_y-y_diff*1,text_color,text_size);
   drawText(Form("fDFSS = %.4f #pm %.4f", ws->var("fDFSS")->getVal(), ws->var("fDFSS")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
@@ -315,12 +320,18 @@ void CtauBkg_LowPt(
   drawText(Form("#lambdaDDS_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDDS_Bkg")->getVal(), ws->var("lambdaDDS_Bkg")->getError() ),text_x+0.5,text_y-y_diff*4,text_color,text_size);
   drawText(Form("#lambdaDF1_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDF_Bkg1")->getVal(), ws->var("lambdaDF_Bkg1")->getError() ),text_x+0.5,text_y-y_diff*5,text_color,text_size);
   drawText(Form("#lambdaDF2_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDF_Bkg2")->getVal(), ws->var("lambdaDF_Bkg2")->getError() ),text_x+0.5,text_y-y_diff*6,text_color,text_size);
-  drawText(Form("#lambdaDF3_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDF_Bkg3")->getVal(), ws->var("lambdaDF_Bkg3")->getError() ),text_x+0.5,text_y-y_diff*7,text_color,text_size);
-  drawText(Form("#lambdaDSS1_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg1")->getVal(), ws->var("lambdaDSS_Bkg1")->getError() ),text_x+0.5,text_y-y_diff*8,text_color,text_size);
-  drawText(Form("#lambdaDSS2_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg2")->getVal(), ws->var("lambdaDSS_Bkg2")->getError() ),text_x+0.5,text_y-y_diff*9,text_color,text_size);
-  drawText(Form("#lambdaDSS3_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg3")->getVal(), ws->var("lambdaDSS_Bkg3")->getError() ),text_x+0.5,text_y-y_diff*10,text_color,text_size);
+  drawText(Form("#lambdaDSS1_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg1")->getVal(), ws->var("lambdaDSS_Bkg1")->getError() ),text_x+0.5,text_y-y_diff*7,text_color,text_size);
+  drawText(Form("#lambdaDSS2_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg2")->getVal(), ws->var("lambdaDSS_Bkg2")->getError() ),text_x+0.5,text_y-y_diff*8,text_color,text_size);
   //pullDist(ws, pad_E_2, c_E, frameTMP_E, hpull_E, "data_ctauBkg", "ctauBkg_Tot", "ctau3D", nCtauBins, ctauLow, ctauHigh, "#font[12]{l}_{J/#psi} (mm)");
-  
+  */
+  drawText(Form("N_{Bkg} = %.f #pm %.f", ws->var("N_Bkg")->getVal(), ws->var("N_Bkg")->getError() ),text_x+0.5,text_y,text_color,text_size);
+  drawText(Form("b_{Bkg} = %.4f #pm %.4f", ws->var("b_Bkg")->getVal(), ws->var("b_Bkg")->getError() ),text_x+0.5,text_y-y_diff*1,text_color,text_size);
+  drawText(Form("fDFSS = %.4f #pm %.4f", ws->var("fDFSS")->getVal(), ws->var("fDFSS")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
+  drawText(Form("fDLIV = %.4f #pm %.4f", ws->var("fDLIV")->getVal(), ws->var("fDLIV")->getError() ),text_x+0.5,text_y-y_diff*3,text_color,text_size);
+  drawText(Form("#lambdaDDS_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDDS_Bkg")->getVal(), ws->var("lambdaDDS_Bkg")->getError() ),text_x+0.5,text_y-y_diff*4,text_color,text_size);
+  drawText(Form("#lambdaDF_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDF_Bkg")->getVal(), ws->var("lambdaDF_Bkg")->getError() ),text_x+0.5,text_y-y_diff*5,text_color,text_size);
+  drawText(Form("#lambdaDSS_{Bkg} = %.4f #pm %.4f", ws->var("lambdaDSS_Bkg")->getVal(), ws->var("lambdaDSS_Bkg")->getError() ),text_x+0.5,text_y-y_diff*6,text_color,text_size);
+
   TPad *pad_E_2 = new TPad("pad_E_2", "pad_E_2", 0, 0.006, 0.98, 0.227);
   c_E->cd();
   pad_E_2->Draw();
@@ -348,7 +359,7 @@ void CtauBkg_LowPt(
   pullFrame_E->GetYaxis()->SetTickSize(0.04);
   pullFrame_E->GetYaxis()->SetNdivisions(404);
 
-  pullFrame_E->GetXaxis()->SetTitle("#font[12]{l}_{J/#psi} (mm)");
+  pullFrame_E->GetXaxis()->SetTitle("#font[12]{l}_{#psi(2S)} (mm)");
   //pullFrame_E->GetXaxis()->SetRangeUser(-1, 7);
   pullFrame_E->GetXaxis()->SetTitleOffset(1.05) ;
   pullFrame_E->GetXaxis()->SetLabelOffset(0.04) ;
@@ -377,9 +388,9 @@ void CtauBkg_LowPt(
 
   //	ws->Print();
 
+  fitCtauBkg->Print();
   TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   fitCtauBkg->Write();
-  fitCtauBkg->Print("V");
   pdfCTAU_Bkg_Tot->Write();
   //pdfCTAUCOND_Bkg->Write();
   //pdfTot_Bkg->Write();

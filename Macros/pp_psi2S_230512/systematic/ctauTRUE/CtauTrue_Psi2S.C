@@ -111,12 +111,23 @@ void CtauTrue_Psi2S(
       // MC NP ctau true
       double entries_True = ws->data("reducedDS_MC")->numEntries();
       ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True * 2));
-      ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
-      ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
+      if (ptLow==3.5&&ptHigh==5) {
+      ws->factory("lambdaDSS[0.1, 1e-6, 1.0]");
+      ws->factory("lambdaDSS2[0.1, 1e-6, 1.0]");
+      ws->factory("fDSS[0.5, 0., 1.]");
+      }
+      else if (ptLow==5&&ptHigh==6.5) {
+      ws->factory("lambdaDSS[0.4, 1e-6, 1.0]");
+      ws->factory("lambdaDSS2[0.2, 1e-6, 1.0]");
+      ws->factory("fDSS[0.3, 0., 1.]");
+      }
+      else {
+      ws->factory("lambdaDSS[0.4, 1e-6, 1.0]");
+      ws->factory("lambdaDSS2[0.4, 1e-6, 1.0]");
+      ws->factory("fDSS[0.5, 0., 1.]");
+      }
       ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
-      ws->factory("fDSS[0.8, 0., 1.]");
       ws->factory("fDSS1[0.8, 0., 1.]");
-
       ws->factory("sigmaMC[0.001, 0.000000001, 1.0]");
       ws->factory("ctauMC[0.0, 0.0, 0.0]");
 
