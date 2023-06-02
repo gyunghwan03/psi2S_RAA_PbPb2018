@@ -41,10 +41,10 @@ void psiaccStudy_PbPb_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="2
   //###rf = new TFile("OniaTree_JpsiMM_5p02TeV_TuneCUETP8M1_nofilter_pp502Fall15-MCRUN2_71_V1-v1_GENONLY.root","READ");
   //rf = new TFile("../OniaTree_BJpsiMM_5p02TeV_TuneCUETP8M1_nofilter_pp502Fall15-MCRUN2_71_V1-v1_GENONLY.root","READ");
 	//rf = new TFile("/work2/Oniatree/Psi2S/OniatreeMC_Psi2SMM_TuneCUETP8M1_5p02TeV_pythia8_RunIIpp5Spring18DR-94X_mc2017_realistic_forppRef5TeV-v2.root");
-	rf = new TFile("/work2/Oniatree/Psi2S/OniatreeMC_Psi2SMM_TuneCUETP8M1_5p02TeV_pythia8_RunIIpp5Spring18DR-94X_mc2017_realistic_forppRef5TeV-v2.root");
+	rf = new TFile("/work2/Oniatree/Psi2S/OniaTree_psi2SMM_5p02TeV_TuneCUETP8M1_nofilter_pp502Fall15-MCRUN2_71_V1-v1_GENONLY.root");
 	//rf = new TFile("/work2/Oniatree/Psi2S/OniatreeMC_Psi2S_pThat-2_TuneCP5_HydjetDrumMB_5p02TeV_pythia8.root");
   //rf = new TFile("/eos/cms/store/group/phys_heavyions/dileptons/MC2015/pp502TeV/TTrees/OniaTree_Psi2SMM_5p02TeV_TuneCUETP8M1_nofilter_pp502Fall15-MCRUN2_71_V1-v1_GENONLY.root", "READ");
-  TTree *tree = (TTree*) rf -> Get("hionia/myTree");
+  TTree *tree = (TTree*) rf -> Get("myTree");
 
   //TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root","read");
   //TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230420.root","read");
@@ -480,7 +480,7 @@ void psiaccStudy_PbPb_v2_20230416(int wtopt=1, int isPtWgtUp = 0, TString rmk="2
   std::cout << std::endl;
 
 
-  TFile *wf = new TFile(Form("./roots/acceptance_Prompt_psi2s_GenOnly_wgt%d_%s_SysUp%d_20230505.root",wtopt,"PbPb",isPtWgtUp),"RECREATE");
+  TFile *wf = new TFile(Form("./roots/acceptance_Prompt_psi2s_GenOnly_wgt%d_%s_SysUp%d_20230601.root",wtopt,"PbPb",isPtWgtUp),"RECREATE");
   wf->cd();
 
   hAccPt_2021_ally->Write();
