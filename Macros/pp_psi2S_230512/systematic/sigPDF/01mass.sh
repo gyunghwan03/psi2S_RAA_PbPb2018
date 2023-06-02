@@ -5,11 +5,8 @@ root -l -b <<EOF
 .q
 EOF
 
-for pt in  '3,4' '4,6.5' '3,6.5'
-do
-	root -l -b -q 'MassFit_FixPar_Data.C('$pt',1.6,2.4)'
-done
-for pt in '6.5,12' '12,50' '3,50'
+# done
+for pt in  '3.5,5' '3.5,50' '5,6.5' '6.5,12' '12,50'
 do
 	root -l -b -q 'MassFit_FixPar_Data.C('$pt',1.6,2.4)'
 done

@@ -5,11 +5,20 @@ root -l -b <<EOF
 .q
 EOF
 
-for pt in  '3,4' '4,6.5' '3,6.5'
-do
-	root -l -b -q 'mc_MassFit_CBGauss.C('$pt',1.6,2.4)'
-done
-for pt in '6.5,12' '12,50' '3,50'
+# for pt in  '3,4' '4,6.5' '3,6.5'
+# do
+# 	root -l -b -q 'mc_MassFit_CBGauss.C('$pt',1.6,2.4)'
+# done
+# for pt in '6.5,12' '12,50' '3,50'
+# do
+# 	root -l -b -q 'mc_MassFit_CBGauss.C('$pt',1.6,2.4)'
+# done
+
+# for pt in  '6.5,9' '9,12' '12,15' '15,20' '20,50' '6.5,50' #'20,50'
+# do
+# 	root -l -b -q 'mc_MassFit_CBGauss.C('$pt',0,1.6)'
+# done
+for pt in  '3.5,5' '3.5,50' '5,6.5' '6.5,12' '12,50'
 do
 	root -l -b -q 'mc_MassFit_CBGauss.C('$pt',1.6,2.4)'
 done
