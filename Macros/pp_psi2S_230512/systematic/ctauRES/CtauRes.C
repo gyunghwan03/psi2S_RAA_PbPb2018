@@ -93,6 +93,7 @@ void CtauRes(
   ctauResCutDS->SetName("ctauResCutDS");
   ws->import(*ctauResCutDS);
   cout<<"N_Jpsi: "<<ws->var("N_Jpsi")->getVal()<<"+/-"<<ws->var("N_Jpsi")->getError()<<endl;
+  ws->var("N_Jpsi")->setMax(1000000);
   // create the variables for this model
   int nGauss = 3;
   ws->factory("One[1.0]");
