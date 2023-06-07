@@ -1,13 +1,13 @@
 #include <iostream>
 #include <TLorentzVector.h>
-#include "commonUtility.h"
-#include "JpsiUtility.h"
-#include "HiEvtPlaneList.h"
-#include "cutsAndBin.h"
-#include "Style.h"
+#include "../commonUtility.h"
+#include "../JpsiUtility.h"
+#include "../HiEvtPlaneList.h"
+#include "../cutsAndBin.h"
+#include "../Style.h"
 //#include "Style_jaebeom.h"
 //#include "tnp_weight_lowptPbPb.h"
-#include "tnp_weight_lowptPbPb_num_den_new.h"
+#include "../tnp_weight_lowptPbPb_num_den_new.h"
 #include <TAttMarker.h>
 
 using namespace std;
@@ -43,9 +43,9 @@ void get_Eff_psi_pbpb_hwan_NP(
 
   //input files
   //PbPb
- // TString inputMC1 = "/work2/Oniatree/Psi2S/OniatreeMC_Psi2S_pThat-2_TuneCP5_HydjetDrumMB_5p02TeV_pythia8.root";
-  TString inputMC1 = "/work2/Oniatree/miniAOD/OniaTreeMC_miniAOD_psi2S_BtoPsi2S_pThat2_HydjetMB_Glb_5p02TeV_merged.root";	//PbPb_non prompt
-  TChain* mytree = new TChain("hionia/myTree"); 
+  TString inputMC1 = "/work2/Oniatree/Psi2S/OniatreeMC_BtoPsi2S_pThat-2_TuneCP5-EvtGen_HydjetDrumMB_5p02TeV_pythia8.root";
+  //TString inputMC1 = "/work2/Oniatree/miniAOD/OniaTreeMC_miniAOD_psi2S_BtoPsi2S_pThat2_HydjetMB_Glb_5p02TeV_merged.root";	//PbPb_non prompt
+  TChain* mytree = new TChain("myTree"); 
   mytree->Add(inputMC1.Data());
   //TFile *inf = new TFile("../OniatreeMC_Psi2S_pThat-2_TuneCP5_HydjetDrumMB_5p02TeV_pythia8.root","READ");
   //TTree *mytree = (TTree*)inf->Get("myTree");
@@ -112,8 +112,8 @@ void get_Eff_psi_pbpb_hwan_NP(
   const int maxBranchSize = 1000;
   Int_t           Centrality;
   ULong64_t       HLTriggers;
-  Short_t           Gen_QQ_size;
-  Short_t           Gen_mu_size;
+  Int_t           Gen_QQ_size;
+  Int_t           Gen_mu_size;
   TClonesArray    *Gen_QQ_4mom;
   TClonesArray    *Gen_mu_4mom;
   ULong64_t       Gen_QQ_trig[maxBranchSize];   //[Gen_QQ_size]
@@ -134,20 +134,20 @@ void get_Eff_psi_pbpb_hwan_NP(
   mytree->SetBranchAddress("Gen_mu_4mom", &Gen_mu_4mom, &b_Gen_mu_4mom);
 
   //  muon id 
-  Short_t           Gen_QQ_mupl_idx[maxBranchSize];
-  Short_t           Gen_QQ_mumi_idx[maxBranchSize];
+  Int_t           Gen_QQ_mupl_idx[maxBranchSize];
+  Int_t           Gen_QQ_mumi_idx[maxBranchSize];
   TBranch        *b_Gen_QQ_mupl_idx;
   TBranch        *b_Gen_QQ_mumi_idx;
   mytree->SetBranchAddress("Gen_QQ_mupl_idx",Gen_QQ_mupl_idx,&b_Gen_QQ_mupl_idx);
   mytree->SetBranchAddress("Gen_QQ_mumi_idx",Gen_QQ_mumi_idx,&b_Gen_QQ_mumi_idx);
 
-  Short_t           Gen_mu_charge[maxBranchSize];
+  Int_t           Gen_mu_charge[maxBranchSize];
   TBranch        *b_Gen_mu_charge;   //!
   mytree->SetBranchAddress("Gen_mu_charge", Gen_mu_charge, &b_Gen_mu_charge);
 
 
-  Short_t           Reco_QQ_size;
-  Short_t           Reco_mu_size;
+  Int_t           Reco_QQ_size;
+  Int_t           Reco_mu_size;
   TClonesArray    *Reco_QQ_4mom;
   TClonesArray    *Reco_mu_4mom;
   ULong64_t       Reco_QQ_trig[maxBranchSize];   //[Reco_QQ_size]
@@ -173,8 +173,8 @@ void get_Eff_psi_pbpb_hwan_NP(
   mytree->SetBranchAddress("Reco_QQ_VtxProb", Reco_QQ_VtxProb, &b_Reco_QQ_VtxProb);
 
   //  muon id 
-  Short_t           Reco_QQ_mupl_idx[maxBranchSize];
-  Short_t           Reco_QQ_mumi_idx[maxBranchSize];
+  Int_t           Reco_QQ_mupl_idx[maxBranchSize];
+  Int_t           Reco_QQ_mumi_idx[maxBranchSize];
   TBranch        *b_Reco_QQ_mupl_idx;
   TBranch        *b_Reco_QQ_mumi_idx;
   mytree->SetBranchAddress("Reco_QQ_mupl_idx",Reco_QQ_mupl_idx,&b_Reco_QQ_mupl_idx);
@@ -193,7 +193,7 @@ void get_Eff_psi_pbpb_hwan_NP(
   Int_t           Reco_mu_nPixWMea[maxBranchSize];   //[Reco_mu_size]
   TBranch        *b_Reco_mu_nPixWMea;   //!
   mytree->SetBranchAddress("Reco_mu_nPixWMea", Reco_mu_nPixWMea, &b_Reco_mu_nPixWMea);
-  Short_t           Reco_QQ_sign[maxBranchSize];   //[Reco_QQ_size]
+  Int_t           Reco_QQ_sign[maxBranchSize];   //[Reco_QQ_size]
   TBranch        *b_Reco_QQ_sign;   //!
   mytree->SetBranchAddress("Reco_QQ_sign", Reco_QQ_sign, &b_Reco_QQ_sign);
 
@@ -201,7 +201,7 @@ void get_Eff_psi_pbpb_hwan_NP(
   TBranch        *b_Reco_mu_SelectionType;
   mytree->SetBranchAddress("Reco_mu_SelectionType", Reco_mu_SelectionType, &b_Reco_mu_SelectionType);
 
-  Short_t Reco_mu_whichGen[maxBranchSize];
+  Int_t Reco_mu_whichGen[maxBranchSize];
   TBranch *b_Reco_mu_whichGen;
   Float_t Gen_weight;
   TBranch *b_Gen_weight;
@@ -283,7 +283,7 @@ void get_Eff_psi_pbpb_hwan_NP(
 			hcent_gen_1->Fill( Centrality,weight*pt_weight);
 			hInt_gen_1->Fill(1,weight*pt_weight); 
 		}
-		if(Rapidity_g < 1.6){
+		if(Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 50){
 			hcent_gen_2->Fill( Centrality,weight*pt_weight);
 			hInt_gen_2->Fill(1,weight*pt_weight);
 		}
@@ -470,7 +470,7 @@ void get_Eff_psi_pbpb_hwan_NP(
 			  hcent_reco_1->Fill( Centrality,weight*tnp_weight*pt_weight);
 			  hInt_reco_1->Fill(1,weight*tnp_weight*pt_weight); 
 		  }
-		  if(Rapidity < 1.6){
+		  if(Rapidity < 1.6 && JP_Reco->Pt() > 6.5 && JP_Reco->Pt() < 50){
 			  hcent_reco_2->Fill( Centrality,weight*tnp_weight*pt_weight);
 			  hInt_reco_2->Fill(1,weight*tnp_weight*pt_weight);
 		  }
@@ -643,7 +643,7 @@ void get_Eff_psi_pbpb_hwan_NP(
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
   TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20230424.root",cLow,cHigh,isPtWeight,isTnP);
-  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20230528.root",cLow,cHigh,isPtWeight,isTnP);
+  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20230607.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
   hpt_eff_2->Write();

@@ -1,10 +1,10 @@
 #include <iostream>
 #include <TLorentzVector.h>
-#include "commonUtility.h"
-#include "JpsiUtility.h"
-#include "HiEvtPlaneList.h"
-#include "cutsAndBin.h"
-#include "Style.h"
+#include "../commonUtility.h"
+#include "../JpsiUtility.h"
+#include "../HiEvtPlaneList.h"
+#include "../cutsAndBin.h"
+#include "../Style.h"
 //#include "Style_jaebeom.h"
 //#include "tnp_weight_lowptPbPb.h"
 #include "../tnp_weight_pp.h"
@@ -273,7 +273,7 @@ void get_Eff_psi_pp_hwan_v2(
 	    if(JP_Gen->Pt() > 6.5) hy_gen->Fill(Rapidity_g, weight*pt_weight);
 		if(Rapidity_g > 1.6 && Rapidity_g <2.4) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); }
 	    if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<50) { hInt_gen_1->Fill(1,weight*pt_weight); }
-	    if(Rapidity_g < 1.6 ) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
+	    if(Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 50) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
 
 	    //if(! (Centrality > cLow && Centrality < cHigh)) continue;
         //cout<<"pt_Weight in gen : "<<pt_weight<<endl;
@@ -384,7 +384,7 @@ void get_Eff_psi_pp_hwan_v2(
       if(HLTPass==true && HLTFilterPass==true){
 	      if(Rapidity > 1.6 && Rapidity < 2.4) { hpt_reco_1->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight);}
 		  if(Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt()>3.5 && JP_Reco->Pt()<50) { hInt_reco_1->Fill(1, weight*tnp_weight*pt_weight); }
-	      if(Rapidity < 1.6) { hpt_reco_2->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_2->Fill(1, weight*tnp_weight*pt_weight); }
+	      if(Rapidity < 1.6 && JP_Reco->Pt() > 6.5 && JP_Reco->Pt() < 50) { hpt_reco_2->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_2->Fill(1, weight*tnp_weight*pt_weight); }
           
 
       }
@@ -500,7 +500,7 @@ void get_Eff_psi_pp_hwan_v2(
   hy_eff ->SetName(Form("mc_eff_vs_rap_TnP%d_PtW%d",isTnP, isPtWeight));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp%d_20230602.root",isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp%d_20230607.root",isPtWeight,isTnP);
 //  if(state==2) outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20211207.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
