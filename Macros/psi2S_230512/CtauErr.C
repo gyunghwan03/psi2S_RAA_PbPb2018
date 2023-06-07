@@ -60,7 +60,7 @@ void CtauErr(
   TString BkgCut;
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
 
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root"));
   fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f&& cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, massLow, massHigh, cLow, cHigh);
 
@@ -196,10 +196,18 @@ void CtauErr(
   }
 
   if(ptLow==3&&ptHigh==6.5) ctauErrMax=0.1476;
-  else if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.093;
+  else if(ptLow==4&&ptHigh==6.5) ctauErrMax=0.1618;
+  else if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.1404;
+  else if(ptLow==6.5&&ptHigh==12) ctauErrMax=0.09;
+  else if(ptLow==9&&ptHigh==12) ctauErrMax=0.1026;
+  else if(ptLow==12&&ptHigh==15) ctauErrMax=0.0576;
   else if(ptLow==15&&ptHigh==20) ctauErrMax=0.0378;
+  else if(ptLow==15&&ptHigh==50) ctauErrMax=0.0504;
   else if(cLow==40&&cHigh==80) ctauErrMax=0.1476;
-  else if(cLow==0&&cHigh==20) ctauErrMax=0.0914;
+  else if(cLow==0&&cHigh==20) ctauErrMax=0.1092;
+  else if(cLow==40&&cHigh==60) ctauErrMax=0.1044;
+  //else if(cLow==0&&cHigh==20) ctauErrMax=0.0914;
+  else if(cLow==80&&cHigh==180) ctauErrMax=0.1386;
   else if(cLow==100&&cHigh==180) ctauErrMax=0.0628;
   else if(cLow==100&&cHigh==200) ctauErrMax=0.063;
 

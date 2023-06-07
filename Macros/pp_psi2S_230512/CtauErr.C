@@ -59,7 +59,7 @@ void CtauErr(
   TString BkgCut;
   TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
 
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw1_Accw1_PtW1_TnP1_230323.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230515.root"));
   fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
 
@@ -201,10 +201,12 @@ void CtauErr(
 
   if(ptLow==6.5&&ptHigh==12) ctauErrMax = 0.1512;
   else if(ptLow==3&&ptHigh==6.5) { ctauErrMin = 0.0198; ctauErrMax=0.16; }
+  else if(ptLow==5&&ptHigh==6.5) { ctauErrMax=0.164; }
   else if(ptLow==5.5&&ptHigh==6.5) { ctauErrMax=0.1528; }
   else if(ptLow==6.5&&ptHigh==8) ctauErrMax = 0.151;
   else if(ptLow==6.5&&ptHigh==9) ctauErrMax = 0.1618;
   else if(ptLow==6.5&&ptHigh==7) ctauErrMax = 0.1332;
+  else if(ptLow==6.5&&ptHigh==50) ctauErrMax = 0.1624;
   else if(ptLow==6.&&ptHigh==7) ctauErrMax = 0.153;
   else if(ptLow==7.&&ptHigh==8) ctauErrMax = 0.1365;
   else if(ptLow==7&&ptHigh==7.5) {ctauErrMin = 0.01354; ctauErrMax = 0.1318;}
@@ -213,11 +215,15 @@ void CtauErr(
   else if(ptLow==9&&ptHigh==10&&yLow==1.6&&yHigh==2.4) ctauErrMax = 0.1056;
   else if(ptLow==9&&ptHigh==10&&yHigh==1.2) ctauErrMax = 0.1074;
   else if(ptLow==9&&ptHigh==10) ctauErrMax = 0.1147;
+  else if(ptLow==9&&ptHigh==12) ctauErrMax = 0.114;
   else if(ptLow==11&&ptHigh==12) ctauErrMax = 0.0882;
-  else if(ptLow==12&&ptHigh==50) ctauErrMax = 0.088;
-
+  else if(ptLow==12&&ptHigh==15) ctauErrMax = 0.0996;
+  else if(ptLow==12&&ptHigh==50) ctauErrMax = 0.092;
+  else if(ptLow==15&&ptHigh==20) ctauErrMax = 0.08;
+  else if(ptLow==15&&ptHigh==50) ctauErrMax = 0.071;
+  else if(ptLow==20&&ptHigh==25) ctauErrMax = 0.0586;
+  else if(ptLow==25&&ptHigh==30) ctauErrMax = 0.0471;
   else if(yLow==1.2&&yHigh==1.6) ctauErrMax = 0.162;
-
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 

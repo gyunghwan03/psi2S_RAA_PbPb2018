@@ -7,7 +7,7 @@
 #include "Style.h"
 //#include "Style_jaebeom.h"
 //#include "tnp_weight_lowptPbPb.h"
-#include "tnp_weight_lowptPbPb_num_den_new.h"
+#include "../tnp_weight_lowptPbPb_num_den_new.h"
 #include <TAttMarker.h>
 
 using namespace std;
@@ -63,22 +63,22 @@ void get_Eff_psi_pbpb_hwan_v1(
   TF1* fptw2 = (TF1*) fPtW2->Get("dataMC_Ratio1");
 
 
-  double ptBin_for[5] = {0,3,6.5,12,50};
-  double ptBin_mid[7] = {0,6.5,9,12,15,20,50};
-  double centBin_for[4] = {0,40,80,180};
+  double ptBin_for[6] = {0,3.5,5,6.5,12,50};
+  double ptBin_mid[9] = {0,6.5,9,12,15,20,25,30,50};
+  double centBin_for[7] = {0,20,40,60,80,100,180};
   double centBin_mid[7] = {0,20,40,60,80,100,180};
   float yBin[7] = {0,0.4,0.8,1.2,1.6,2.0,2.4};
 
-  TH1D* hpt_reco_1 = new TH1D("hpt_reco_1","hpt_reco_1",4,ptBin_for);
-  TH1D* hpt_reco_2 = new TH1D("hpt_reco_2","hpt_reco_2",6,ptBin_mid);
+  TH1D* hpt_reco_1 = new TH1D("hpt_reco_1","hpt_reco_1",5,ptBin_for);
+  TH1D* hpt_reco_2 = new TH1D("hpt_reco_2","hpt_reco_2",7,ptBin_mid);
 
-  TH1D* hpt_gen_1 = new TH1D("hpt_gen_1","hpt_gen_1",4,ptBin_for);
-  TH1D* hpt_gen_2 = new TH1D("hpt_gen_2","hpt_gen_2",6,ptBin_mid);
+  TH1D* hpt_gen_1 = new TH1D("hpt_gen_1","hpt_gen_1",5,ptBin_for);
+  TH1D* hpt_gen_2 = new TH1D("hpt_gen_2","hpt_gen_2",7,ptBin_mid);
 
-  TH1D* hcent_reco_1 = new TH1D("hcent_reco_1", "hcent_reco_1",3,centBin_for);
+  TH1D* hcent_reco_1 = new TH1D("hcent_reco_1", "hcent_reco_1",6,centBin_for);
   TH1D* hcent_reco_2 = new TH1D("hcent_reco_2", "hcent_reco_2",6,centBin_mid);
 
-  TH1D* hcent_gen_1 = new TH1D("hcent_gen_1", "hcent_gen_1",3,centBin_for);
+  TH1D* hcent_gen_1 = new TH1D("hcent_gen_1", "hcent_gen_1",6,centBin_for);
   TH1D* hcent_gen_2 = new TH1D("hcent_gen_2", "hcent_gen_2",6,centBin_mid);
 
   TH1D* hInt_gen_1 = new TH1D("hInt_gen_1", "",1,0,50);
@@ -277,7 +277,7 @@ void get_Eff_psi_pbpb_hwan_v1(
 			if(Rapidity_g < 1.6 ) hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); }
 		if(Rapidity_g > 1.6 && Rapidity_g <2.4){
 			hcent_gen_1->Fill( Centrality,weight*pt_weight);
-			if(JP_Gen->Pt() > 3 && JP_Gen->Pt() < 50) { hInt_gen_1->Fill(1,weight*pt_weight); }
+			if(JP_Gen->Pt() > 3.5 && JP_Gen->Pt() < 50) { hInt_gen_1->Fill(1,weight*pt_weight); }
 		}
 		if(Rapidity_g < 1.6){
 			hcent_gen_2->Fill( Centrality,weight*pt_weight);
@@ -336,7 +336,7 @@ void get_Eff_psi_pbpb_hwan_v1(
 
       Double_t Rapidity = fabs(JP_Reco->Rapidity());
 
-      if(! (JP_Reco->Pt()>3&&JP_Reco->Pt()<50&&fabs(JP_Reco->Rapidity())<2.4&&IsAcceptanceQQ(mupl_Reco->Pt(),fabs(mupl_Reco->Eta()))&&IsAcceptanceQQ(mumi_Reco->Pt(),fabs(mumi_Reco->Eta()))) ) continue;
+      if(! (JP_Reco->Pt()>3.5&&JP_Reco->Pt()<50&&fabs(JP_Reco->Rapidity())<2.4&&IsAcceptanceQQ(mupl_Reco->Pt(),fabs(mupl_Reco->Eta()))&&IsAcceptanceQQ(mumi_Reco->Pt(),fabs(mumi_Reco->Eta()))) ) continue;
 
       if(!( fabs(mupl_Reco->Eta())<2.4 && fabs(mumi_Reco->Eta())<2.4 && fabs(JP_Reco->Rapidity())<2.4 && JP_Reco->M()>massLow && JP_Reco->M()<massHigh)) continue;
 
@@ -464,7 +464,7 @@ void get_Eff_psi_pbpb_hwan_v1(
 
 		  if(Rapidity > 1.6 && Rapidity <2.4){
 			  hcent_reco_1->Fill( Centrality,weight*tnp_weight*pt_weight);
-			  if (JP_Reco->Pt() > 3 && JP_Reco->Pt() < 50 ) { hInt_reco_1->Fill(1,weight*tnp_weight*pt_weight); }
+			  if (JP_Reco->Pt() > 3.5 && JP_Reco->Pt() < 50 ) { hInt_reco_1->Fill(1,weight*tnp_weight*pt_weight); }
 		  }
 		  if(Rapidity < 1.6){
 			  hcent_reco_2->Fill( Centrality,weight*tnp_weight*pt_weight);
@@ -638,7 +638,7 @@ void get_Eff_psi_pbpb_hwan_v1(
   hInt_eff_2 ->SetName(Form("mc_eff_Integrated_TnP%d_PtW%d_cent_%0.0f_to_%0.0f_absy0_1p6  ",isTnP, isPtWeight, cLow, cHigh));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20230417.root",cLow,cHigh,isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20230602.root",cLow,cHigh,isPtWeight,isTnP);
   if(state==2) outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20230417.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();

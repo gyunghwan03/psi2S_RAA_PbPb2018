@@ -9,7 +9,7 @@ using namespace std;
 valErr getYield(float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0);
 double getFrac(float ptLow, float ptHigh, float yLow, float yHigh);
 double getFracErr(float ptLow, float ptHigh, float yLow, float yHigh);
-void dndpt_y0_1p6_pp(int PR=0, int WRITE=1) {
+void dndpt_y0_1p6_pp(int PR=1, int WRITE=1) {
 
   TString fname;
   if(PR==0) fname = "Prompt";

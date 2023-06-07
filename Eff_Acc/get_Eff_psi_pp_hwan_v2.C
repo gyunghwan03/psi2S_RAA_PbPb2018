@@ -63,17 +63,17 @@ void get_Eff_psi_pp_hwan_v2(
   TF1* fptw2 = (TF1*) fPtW2->Get("dataMC_Ratio1");
 
 
-  double ptBin_for[5] = {0,3,6.5,12,50};
-  double ptBin_mid[7] = {0,6.5,9,12,15,20,50};
-  double centBin_for[4] = {0,40,80,180};
+  double ptBin_for[6] = {0,3.5,5,6.5,12,50};
+  double ptBin_mid[9] = {0,6.5,9,12,15,20,25,30,50};
+  double centBin_for[7] = {0,40,80,180};
   double centBin_mid[7] = {0,10,20,30,40,50,90};
   float yBin[7] = {0,0.4,0.8,1.2,1.6,2.0,2.4};
 
-  TH1D* hpt_reco_1 = new TH1D("hpt_reco_1","hpt_reco_1",4,ptBin_for);
-  TH1D* hpt_reco_2 = new TH1D("hpt_reco_2","hpt_reco_2",6,ptBin_mid);
+  TH1D* hpt_reco_1 = new TH1D("hpt_reco_1","hpt_reco_1",5,ptBin_for);
+  TH1D* hpt_reco_2 = new TH1D("hpt_reco_2","hpt_reco_2",8,ptBin_mid);
 
-  TH1D* hpt_gen_1 = new TH1D("hpt_gen_1","hpt_gen_1",4,ptBin_for);
-  TH1D* hpt_gen_2 = new TH1D("hpt_gen_2","hpt_gen_2",6,ptBin_mid);
+  TH1D* hpt_gen_1 = new TH1D("hpt_gen_1","hpt_gen_1",5,ptBin_for);
+  TH1D* hpt_gen_2 = new TH1D("hpt_gen_2","hpt_gen_2",8,ptBin_mid);
 
   TH1D* hInt_gen_1 = new TH1D("hInt_gen_1", "",1,0,50);
   TH1D* hInt_gen_2 = new TH1D("hInt_gen_2", "",1,0,50);
@@ -272,7 +272,7 @@ void get_Eff_psi_pp_hwan_v2(
 		if(isPtWeight && fabs(JP_Gen->Rapidity()) > 1.6 && fabs(JP_Gen->Rapidity() < 2.4) ) pt_weight = fptw2->Eval(JP_Gen->Pt());
 	    if(JP_Gen->Pt() > 6.5) hy_gen->Fill(Rapidity_g, weight*pt_weight);
 		if(Rapidity_g > 1.6 && Rapidity_g <2.4) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); }
-	    if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3 && JP_Gen->Pt()<50) { hInt_gen_1->Fill(1,weight*pt_weight); }
+	    if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<50) { hInt_gen_1->Fill(1,weight*pt_weight); }
 	    if(Rapidity_g < 1.6 ) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
 
 	    //if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -358,49 +358,20 @@ void get_Eff_psi_pp_hwan_v2(
        //tnp_weight = tnp_weight * tnp_weight_trk_pbpb(mupl_Reco->Eta(), 0) * tnp_weight_trk_pbpb(mumi_Reco->Eta(), 0); //inner tracker
 
        //Trigger part
-       if(!((Reco_mu_trig[Reco_QQ_mupl_idx[irqq]]&((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)) && (Reco_mu_trig[Reco_QQ_mumi_idx[irqq]]&((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)) ) ){
-//         cout << "irqq : " << irqq << " - iev : " << iev << endl;
-//         cout << "TnP ERROR !!!! ::: No matched L2 filter1 " << endl;
-         continue;
-       }
-
-       //if( mupl_isL2 && mumi_isL3){
-       //        tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 2, 0);
-       //        tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 3, 0);
-       //        SelDone = true;
-       //}
-       //else if( mupl_isL3 && mumi_isL2){
-       //        tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 3, 0);
-       //        tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 2, 0);
-       //        SelDone = true;
-       //}
-       //else if( mupl_isL3 && mumi_isL3){
-       //        int t[2] = {-1,1}; // mupl, mumi
-       //        int l = rand() % (2); 
-       //        //pick up what will be L2
-       //        if(t[l]==-1){
-       // 	       tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 2, 0);
-       // 	       tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 3, 0);
-       //        }
-       //        else if(t[l]==1){
-       // 	       tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 3, 0);
-       // 	       tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 2, 0);
-       //        }
-       //        else {cout << "ERROR :: No random selection done !!!!" << endl; continue;}
-       //        SelDone = true;
-       //}    
+//       if(!((Reco_mu_trig[Reco_QQ_mupl_idx[irqq]]&((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)) && (Reco_mu_trig[Reco_QQ_mumi_idx[irqq]]&((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)) ) ){
+////         cout << "irqq : " << irqq << " - iev : " << iev << endl;
+////         cout << "TnP ERROR !!!! ::: No matched L2 filter1 " << endl;
+//         continue;
+//       }
 
 
        tnp_weight = tnp_weight * tnp_trig_weight;
 
 
 
-       //if(SelDone == false){cout << "ERROR :: No muon filter combination selected !!!!" << endl; continue;}
-       //if((tnp_trig_weight_mupl == -1 || tnp_trig_weight_mumi == -1)){cout << "ERROR :: No trigger muon tnp scale factors selected !!!!" << endl; continue;}
        if(HLTPass==true && HLTFilterPass==true){
 	       counttnp++;
 	       tnp_trig_dimu = tnp_trig_weight;
-	       //hpt_tnp_trig->Fill(JP_Reco->Pt(),tnp_trig_dimu);
        }
       }
 
@@ -412,10 +383,9 @@ void get_Eff_psi_pp_hwan_v2(
       //cout<<"pt_Weight in reco : "<<pt_weight<<endl;
       if(HLTPass==true && HLTFilterPass==true){
 	      if(Rapidity > 1.6 && Rapidity < 2.4) { hpt_reco_1->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight);}
-		  if(Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt()>3 && JP_Reco->Pt()<50) { hInt_reco_1->Fill(1, weight*tnp_weight*pt_weight); }
+		  if(Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt()>3.5 && JP_Reco->Pt()<50) { hInt_reco_1->Fill(1, weight*tnp_weight*pt_weight); }
 	      if(Rapidity < 1.6) { hpt_reco_2->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_2->Fill(1, weight*tnp_weight*pt_weight); }
           
-          //if(! (Centrality > cLow && Centrality < cHigh)) continue;
 
       }
     }
@@ -530,7 +500,7 @@ void get_Eff_psi_pp_hwan_v2(
   hy_eff ->SetName(Form("mc_eff_vs_rap_TnP%d_PtW%d",isTnP, isPtWeight));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp%d_20230416.root",isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp%d_20230602.root",isPtWeight,isTnP);
 //  if(state==2) outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20211207.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
