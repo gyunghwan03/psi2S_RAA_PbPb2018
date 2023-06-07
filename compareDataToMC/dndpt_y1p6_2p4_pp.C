@@ -21,10 +21,10 @@ void dndpt_y1p6_2p4_pp(int PR=0, int WRITE=1) {
   TH1::SetDefaultSumw2();
 
   //// modify by hand according to the pt range of the sample
-  const int nPtBins=7;
-  double ptBin[nPtBins+1]={3,4,5,6,7,8,10,12};
-  const int nPtBinsMC=7;
-  double ptBinMC[nPtBinsMC+1]={3,4,5,6,7,8,10,12};
+  const int nPtBins=8;
+  double ptBin[nPtBins+1]={3,4,5,6,7,8,10,12,50};
+  const int nPtBinsMC=8;
+  double ptBinMC[nPtBinsMC+1]={3,4,5,6,7,8,10,12,50};
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double frac[nPtBins];
@@ -211,10 +211,10 @@ void dndpt_y1p6_2p4_pp(int PR=0, int WRITE=1) {
   TF1* fitdata1;
   TF1* fitRatio1;
 
-  fitmc1 = new TF1("fitmc1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,20);
-  fitdata1 = new TF1("fitdata1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,20);
+  fitmc1 = new TF1("fitmc1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,50);
+  fitdata1 = new TF1("fitdata1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,50);
   //fitRatio1 = new TF1("fitRatio1","(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))/([2]-1)*([3]-2)/([2]*[3]*([2]*[3] + ([2]-2)*[2])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([2]*[3])),-[2])",0,30);
-  fitRatio1 = new TF1("fitRatio1","( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )",3,12);
+  fitRatio1 = new TF1("fitRatio1","( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )",3,50);
   //fitRatio1 = new TF1("fitRatio1","TMath::Exp(-x/[0])*[1]+[2]",6.5,50);
   //fitRatio1->SetParameters(0.0005,4.5);
   //fitRatio1->SetParameters(0, 10);
@@ -309,8 +309,8 @@ void dndpt_y1p6_2p4_pp(int PR=0, int WRITE=1) {
   //fitRatio2->Draw("same");
   //fitRatio3->Draw("same");
   hptData1->SetAxisRange(0,4.,"Y");
-  hptData1->Fit(fitRatio1,"IE","",3,12);
-  TFitResultPtr r = hptData1->Fit(fitRatio1,"S","",3,12);
+  hptData1->Fit(fitRatio1,"IE","",3,50);
+  TFitResultPtr r = hptData1->Fit(fitRatio1,"S","",3,50);
   //TFitResultPtr r = hptData1->Fit("expo","S");
   r.Get()->Print("V");
   //leg2->Draw("same");
@@ -439,7 +439,7 @@ void dndpt_y1p6_2p4_pp(int PR=0, int WRITE=1) {
   c_3->SaveAs("./fraction_vs_pt.pdf");
 
   if(WRITE==1&&PR==0){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230321.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230420.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -447,7 +447,7 @@ void dndpt_y1p6_2p4_pp(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   else if(WRITE==1&&PR==1){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_pp_BtoPsi2S_DATA_y1p6_2p4_230321.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_pp_BtoPsi2S_DATA_y1p6_2p4_230420.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -455,8 +455,8 @@ void dndpt_y1p6_2p4_pp(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   if(WRITE==1){
-	  c_A->SaveAs(Form("./dNdpt_plot_%s_y1p6_2p4.pdf",fname.Data()));
-	  c_A->SaveAs(Form("./dNdpt_plot_%s_y1p6_2p4.png",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_%s_pp_y1p6_2p4.pdf",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_%s_pp_y1p6_2p4.png",fname.Data()));
   }
 }
 
