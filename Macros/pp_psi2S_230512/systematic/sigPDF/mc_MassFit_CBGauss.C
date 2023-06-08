@@ -208,6 +208,27 @@ void mc_MassFit_CBGauss(
         f_init=0.866; sigma_1_init = 0.0327; n_1_init = 1;
         x_init = 0.8; alpha_1_init = 1;
     }
+    if(ptLow==20&&ptHigh==25) {
+        N_Jpsi_high = 100000;
+        sigma_up = 0.0513; sigma_lo = 0.0513;
+        x_up = 0.5045; x_lo = 0.5045;
+        alpha_up = 1.5956; alpha_lo = 1.5956;
+        f_up = 0.3431; f_lo = 0.3431;
+    }
+    if(ptLow==25&&ptHigh==30) {
+        N_Jpsi_high = 100000;
+        sigma_up = 0.0513; sigma_lo = 0.0513;
+        x_up = 0.5045; x_lo = 0.5045;
+        alpha_up = 1.5956; alpha_lo = 1.5956;
+        f_up = 0.3431; f_lo = 0.3431;
+    }
+    if(ptLow==30&&ptHigh==50) {
+        N_Jpsi_high = 100000;
+        sigma_up = 0.0513; sigma_lo = 0.0513;
+        x_up = 0.5045; x_lo = 0.5045;
+        alpha_up = 1.5956; alpha_lo = 1.5956;
+        f_up = 0.3431; f_lo = 0.3431;
+    }
     double paramsupper[8] = {sigma_up, x_up, alpha_up, n_up, f_up,  25.0};
     double paramslower[8] = {sigma_lo, x_lo, alpha_lo, n_lo, f_lo,  -5.0};
 
