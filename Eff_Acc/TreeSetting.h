@@ -11,6 +11,22 @@
 
 using namespace std;
 
+enum mode
+{
+  TAG,
+  STATUP,
+  STATDOWN,
+  SYSUP,
+  SYSDOWN
+};
+std::map<int, std::string> mode_str =
+{
+  {TAG, "TagChange"},
+  {STATUP, "statUp"},
+  {STATDOWN, "statDo"},
+  {SYSUP, "sysUp"},
+  {SYSDOWN, "sysDo"}
+};
 
 #if !defined(TreeSetting_h)
 extern const long int maxBranchSize = 100000;
@@ -59,7 +75,6 @@ double		 ptErr_inner2;
 double		 weight;
 double		 tnp_weight;
 double		 pt_weight;
-double		 BDT;
 
 //  muon id 
 /////////////////////////////////////////
@@ -115,7 +130,7 @@ class SetTree_SYSREF
   public:
     SetTree_SYSREF(){};
 
-    virtual ~SetTreeBDT_SYSREF();
+    virtual ~SetTree_SYSREF();
     virtual void TreeSetting(TTree* tree);
 };
 
