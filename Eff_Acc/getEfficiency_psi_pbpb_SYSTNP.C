@@ -84,7 +84,7 @@ void getEfficiency_psi_pbpb_SYSTNP(
     systree[i].TreeSetting(mytree[i]);
   }
   
-  TString histName = Form("%s_pt%.1f_%.1f_y%.1f_%.1f_accYes_mass%.1f_%.1f_cent%d_%d_isTnP%d_isPtWeight%d_%s", flavorTag.c_str(), ptLow,ptHigh,yLow,yHigh,massLow,massHigh,cLow,cHigh,isTnP,isPtWeight, "SYSTNP");
+  TString histName = Form("PbPb_%s_pt%.1f_%.1f_y%.1f_%.1f_accYes_mass%.1f_%.1f_cent%d_%d_isTnP%d_isPtWeight%d_%s", flavorTag.c_str(), ptLow,ptHigh,yLow,yHigh,massLow,massHigh,cLow,cHigh,isTnP,isPtWeight, "SYSTNP");
   TH1D *hreco[15], *hreco_tnp[15], *hreco_xtnp[15];
   counter =0;
   for( int _cv : {1,2,3}){
