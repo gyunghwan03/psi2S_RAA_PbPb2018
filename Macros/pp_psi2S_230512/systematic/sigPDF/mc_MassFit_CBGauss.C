@@ -151,6 +151,16 @@ void mc_MassFit_CBGauss(
         n_up = 1000;
     }
     
+     
+     if(ptLow==20&&ptHigh==25) {
+               N_Jpsi_high = 50000;
+        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
+        x_init = 0.7; alpha_1_init = 3;
+        x_up = 3;
+        alpha_up=20;
+        // m_lambda_init=2;
+        n_up = 10;
+     }
      if(ptLow==25&&ptHigh==30) {
                N_Jpsi_high = 50000;
         f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
@@ -164,11 +174,11 @@ void mc_MassFit_CBGauss(
      if(ptLow==30&&ptHigh==50) {
                N_Jpsi_high = 50000;
         f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
-        x_init = 0.7; alpha_1_init = 3;
+        x_init = 1; alpha_1_init = 3;
         x_up = 3;
         alpha_up=20;
         // m_lambda_init=2;
-        n_up = 10;
+        n_up = 20;
     }
 
 

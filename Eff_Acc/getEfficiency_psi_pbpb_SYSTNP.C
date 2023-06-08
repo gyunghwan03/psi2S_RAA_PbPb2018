@@ -4,24 +4,22 @@
 #include "../commonUtility.h"
 #include "../cutsAndBin.h"
 #include "../Style.h"
-#include "tnp_weight_lowptPbPb.h"
+#include "../tnp_weight_lowptPbPb.h"
 #include "TreeSetting.h"
 
 using namespace std;
 
 void getEfficiency_psi_pbpb_SYSTNP(
+  bool isPR,
   float ptLow = 0.0, float ptHigh = 30.0,
   float yLow = 0.0, float yHigh = 2.4,
-  int cLow = 0, int cHigh = 181, bool isTnP = true, bool isPtWeight = true, double vcut = 0.00
+  int cLow = 0, int cHigh = 181, bool isTnP = true, bool isPtWeight = true
   ) {
 
   gStyle->SetOptStat(0);
 //  int kTrigSel_=0;
 //  if(kTrigSel == kTrigUps) kTrigSel_ = 1;
 //  else if(kTrigSel == kTrigL1DBOS40100) kTrigSel_ = 2; 
-
-  float muPtCut = 3.5;
-  float muEtaCut = 2.4;
 
   float massLow ;
   float massHigh;
@@ -41,8 +39,8 @@ void getEfficiency_psi_pbpb_SYSTNP(
   TString inputMC_base, inputMC_ref, inputMC, idstr, trkstr, trgstr;
 
   string flavorTag = (isPR) ? "PR" : "NP";
-  inputMC_base = Form("../TnPSkim/OutputSkim_isMC1_%s_fitVarNom_tnp_", flavorTag.c_str() ); 
-  inputMC_ref = Form("../TnPSkim/OutputSkim_isMC1_%s_fitVar_noFitNom_tnp_idstatUp_trkNom_trgNom.root", flavorTag.c_str()); 
+  inputMC_base = Form("../TnPSkim/OutputSkim_isMC1_%s_fitVar_noFitNom_tnp_", flavorTag.c_str() ); 
+  inputMC_ref = Form("../TnPSkim/OutputSkim_isMC1_%s_fitVar_noFitNom_tnp_idNom_trkNom_trgNom.root", flavorTag.c_str()); 
   auto get_input_config = [&] (int cvr, int mod)
   {
     TString _input_config, _idstr, _trkstr, _trgstr;
@@ -65,7 +63,7 @@ void getEfficiency_psi_pbpb_SYSTNP(
   }
 
   string rapDef = (yHigh == 2.4) ? "Forward_y_211218" : "y0_1p6_211201";
-  TFile *fPtW = new TFile(Form("Eff_Acc/ratioDataMC_AA_Jpsi_DATA_%s.root", rapDef.c_str()),"read");
+  TFile *fPtW = new TFile(Form("ratioDataMC_AA_Jpsi_DATA_%s.root", rapDef.c_str()),"read");
   TF1* f1 = (TF1*) fPtW->Get("dataMC_Ratio1");
 
   TChain* mytree[15];
@@ -83,10 +81,10 @@ void getEfficiency_psi_pbpb_SYSTNP(
   settree_.TreeSetting(reftree);
   SetTreeSYS systree[15];
   for (int i = 0 ; i < 15; i ++){
-    systree[i].TreeSetting(mytree[i],);
+    systree[i].TreeSetting(mytree[i]);
   }
-
-  TString histName = Form("pt%.1f_%.1f_y%.1f_%.1f_SiMuPt%.1f_mass%.1f_%.1f_cent%d_%d_isTnP%d_isPtWeight%d_%s", ptLow,ptHigh,yLow,yHigh,muPtCut,massLow,massHigh,cLow,cHigh,isTnP,isPtWeight, "SYSTNP");
+  
+  TString histName = Form("PbPb_%s_pt%.1f_%.1f_y%.1f_%.1f_accYes_mass%.1f_%.1f_cent%d_%d_isTnP%d_isPtWeight%d_%s", flavorTag.c_str(), ptLow,ptHigh,yLow,yHigh,massLow,massHigh,cLow,cHigh,isTnP,isPtWeight, "SYSTNP");
   TH1D *hreco[15], *hreco_tnp[15], *hreco_xtnp[15];
   counter =0;
   for( int _cv : {1,2,3}){
@@ -138,15 +136,13 @@ void getEfficiency_psi_pbpb_SYSTNP(
     reftree->GetEntry(iev);
 
     if(!( fabs(y) < yHigh && fabs(y) > yLow && pt < ptHigh && pt >ptLow )) continue;
-    if(!( pt1> muPtCut && pt2> muPtCut && fabs(eta1) < muEtaCut && fabs(eta2) < muEtaCut )) continue;
-    if(!( IsAcceptanceQQ(pt1, eta1) && IsAcceptanceQQ(pt2, eta2 )) continue;
+    if(!( IsAcceptanceQQ(pt1, eta1) && IsAcceptanceQQ(pt2, eta2 )) ) continue;
     if(!( cBin < cHigh && cBin >= cLow)) continue;
     if(!( mass < massHigh && mass > massLow)) continue;
     bool checkID = true; 
     if (checkID) {
       if(!( nTrkWMea1 >5 && nTrkWMea2 >5 && nPixWMea1 > 0 && nPixWMea2 > 0 && fabs(dxy1) < 0.3 && fabs(dxy2) < 0.3 && fabs(dz1) < 20. && fabs(dz2) < 20.) ) continue;
 
-//    histName = Form("_pt%.1f_%.1f_y%.1f_%.1f_SiMuPt%.1f_mass%.1f_%.1f_cent%d_%d_vp_%.4f_isTnP%d_isPtWeight%d_ID",ptLow,ptHigh,yLow,yHigh,muPtCut,massLow,massHigh,cLow,cHigh,vcut,isTnP,isPtWeight);
     }
     double ptW =1;
     if( isPtWeight) ptW = f1->Eval(pt);
@@ -161,7 +157,7 @@ void getEfficiency_psi_pbpb_SYSTNP(
   }
   cout << "count " << count << endl;
 
-  TString outFileName = Form("/TNP/mc_eff_%s.root",histName.Data());
+  TString outFileName = Form("roots/TnP/mc_eff_%s.root",histName.Data());
   TFile* outFile = new TFile(outFileName,"RECREATE");
 //  heff->Write();
   for (int i = 0 ; i < 15; i ++){
