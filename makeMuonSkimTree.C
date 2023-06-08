@@ -188,7 +188,7 @@ void makeMuonSkimTree(bool isMC = true, bool isPR = true,
   mytree->SetBranchAddress("Reco_QQ_ctau3D", Reco_QQ_ctau3D, &b_Reco_QQ_ctau3D);
   mytree->SetBranchAddress("Reco_QQ_ctauErr3D", Reco_QQ_ctauErr3D, &b_Reco_QQ_ctauErr3D);
   
-  Int_t Reco_mu_whichGen[maxBranchSize];
+  Short_t Reco_mu_whichGen[maxBranchSize];
   TBranch *b_Reco_mu_whichGen;
   Float_t Gen_weight;
   TBranch *b_Gen_weight;
