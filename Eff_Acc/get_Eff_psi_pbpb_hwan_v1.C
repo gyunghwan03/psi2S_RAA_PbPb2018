@@ -1,10 +1,10 @@
 #include <iostream>
 #include <TLorentzVector.h>
-#include "commonUtility.h"
-#include "JpsiUtility.h"
-#include "HiEvtPlaneList.h"
-#include "cutsAndBin.h"
-#include "Style.h"
+#include "../commonUtility.h"
+#include "../JpsiUtility.h"
+#include "../HiEvtPlaneList.h"
+#include "../cutsAndBin.h"
+#include "../Style.h"
 //#include "Style_jaebeom.h"
 //#include "tnp_weight_lowptPbPb.h"
 #include "../tnp_weight_lowptPbPb_num_den_new.h"
@@ -276,10 +276,10 @@ void get_Eff_psi_pbpb_hwan_v1(
 			if(Rapidity_g > 1.6 && Rapidity_g <2.4){ hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight);}
 			if(Rapidity_g < 1.6 ) hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); }
 		if(Rapidity_g > 1.6 && Rapidity_g <2.4){
-			hcent_gen_1->Fill( Centrality,weight*pt_weight);
-			if(JP_Gen->Pt() > 3.5 && JP_Gen->Pt() < 50) { hInt_gen_1->Fill(1,weight*pt_weight); }
+			//hcent_gen_1->Fill( Centrality,weight*pt_weight);
+			if(JP_Gen->Pt() > 3.5 && JP_Gen->Pt() < 50) { hInt_gen_1->Fill(1,weight*pt_weight); hcent_gen_1->Fill( Centrality,weight*pt_weight); }
 		}
-		if(Rapidity_g < 1.6){
+		if(Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 50 ){
 			hcent_gen_2->Fill( Centrality,weight*pt_weight);
 			hInt_gen_2->Fill(1,weight*pt_weight);
 		}
@@ -463,10 +463,10 @@ void get_Eff_psi_pbpb_hwan_v1(
           if(Rapidity < 1.6) hpt_reco_2->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); }
 
 		  if(Rapidity > 1.6 && Rapidity <2.4){
-			  hcent_reco_1->Fill( Centrality,weight*tnp_weight*pt_weight);
-			  if (JP_Reco->Pt() > 3.5 && JP_Reco->Pt() < 50 ) { hInt_reco_1->Fill(1,weight*tnp_weight*pt_weight); }
+			  //hcent_reco_1->Fill( Centrality,weight*tnp_weight*pt_weight);
+			  if (JP_Reco->Pt() > 3.5 && JP_Reco->Pt() < 50 ) { hInt_reco_1->Fill(1,weight*tnp_weight*pt_weight); hcent_reco_1->Fill( Centrality,weight*tnp_weight*pt_weight); }
 		  }
-		  if(Rapidity < 1.6){
+		  if(Rapidity < 1.6 && JP_Reco->Pt() > 6.5 && JP_Reco->Pt() < 50 ){
 			  hcent_reco_2->Fill( Centrality,weight*tnp_weight*pt_weight);
 			  hInt_reco_2->Fill(1,weight*tnp_weight*pt_weight);
 		  }
@@ -638,7 +638,7 @@ void get_Eff_psi_pbpb_hwan_v1(
   hInt_eff_2 ->SetName(Form("mc_eff_Integrated_TnP%d_PtW%d_cent_%0.0f_to_%0.0f_absy0_1p6  ",isTnP, isPtWeight, cLow, cHigh));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20230602.root",cLow,cHigh,isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2s_PtW%d_tnp%d_20230607.root",cLow,cHigh,isPtWeight,isTnP);
   if(state==2) outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_new_20230417.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
