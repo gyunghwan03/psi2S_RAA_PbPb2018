@@ -261,7 +261,7 @@ void makeMuonSkimTree(bool isMC = true, bool isPR = true,
   else if(tnp_trgs==99) ftnpTrg = "TagChange";
  
   string flavorTag = (isPR) ? "PR" : "NP";
-  const char* outFileName = Form("TnPSkim/ThisTEST_OutputSkim_isMC%d_%s_fitVar_noFit%s_tnp_id%s_trk%s_trg%s.root",isMC, flavorTag.c_str(),fitVarStr.c_str(),ftnpId.c_str(), ftnpTrk.c_str(), ftnpTrg.c_str());
+  const char* outFileName = Form("TnPSkim/OutputSkim_isMC%d_%s_fitVar_noFit%s_tnp_id%s_trk%s_trg%s.root",isMC, flavorTag.c_str(),fitVarStr.c_str(),ftnpId.c_str(), ftnpTrk.c_str(), ftnpTrg.c_str());
   TFile* outFile = new TFile(outFileName,"RECREATE");
 
   TTree *wtree = new TTree("tree","");

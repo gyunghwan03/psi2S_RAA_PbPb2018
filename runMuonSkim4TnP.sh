@@ -1,11 +1,9 @@
 #!/bin/bash
 
 
-# Mid Rapidity
+# Mid Rapidity Prompt
 	# Nominal
 root -l -b -q 'makeMuonSkimTree.C(true, true, 0.0, 50.0, 0.0, 1.6, 0, 180, true, true, false, kTrigJpsi, 0, 0, 0, 0)'
-
-exit
 
 	# ID Stat Up
 root -l -b -q 'makeMuonSkimTree.C(true, true, 0.0, 50.0, 0.0, 1.6, 0, 180, true, true, false, kTrigJpsi, 0, 1, 0, 0)'
@@ -40,7 +38,7 @@ root -l -b -q 'makeMuonSkimTree.C(true, true, 0.0, 50.0, 0.0, 1.6, 0, 180, true,
 	# Trg Tag Change
 root -l -b -q 'makeMuonSkimTree.C(true, true, 0.0, 50.0, 0.0, 1.6, 0, 180, true, true, false, kTrigJpsi, 0, 0, 0, 99)'
 
-# Forward Rapidity
+# Forward Rapidity Prompt
 	# Nominal
 root -l -b -q 'makeMuonSkimTree.C(true, true, 0.0, 50.0, 1.6, 2.4, 0, 180, true, true, false, kTrigJpsi, 0, 0, 0, 0)'
 
@@ -81,7 +79,7 @@ root -l -b -q 'makeMuonSkimTree.C(true, true, 0.0, 50.0, 1.6, 2.4, 0, 180, true,
 
 
 
-# Mid Rapidity NonPrompt
+# Mid Rapidity Non-prompt
 	# Nominal
 root -l -b -q 'makeMuonSkimTree.C(true, false, 0.0, 50.0, 0.0, 1.6, 0, 180, true, true, false, kTrigJpsi, 0, 0, 0, 0)'
 
@@ -120,7 +118,7 @@ root -l -b -q 'makeMuonSkimTree.C(true, false, 0.0, 50.0, 0.0, 1.6, 0, 180, true
 	# Trg Tag Change
 root -l -b -q 'makeMuonSkimTree.C(true, false, 0.0, 50.0, 0.0, 1.6, 0, 180, true, true, false, kTrigJpsi, 0, 0, 0, 99)'
 
-# Forward Rapidity
+# Forward Rapidity Non-prompt
 	# Nominal
 root -l -b -q 'makeMuonSkimTree.C(true, false, 0.0, 50.0, 1.6, 2.4, 0, 180, true, true, false, kTrigJpsi, 0, 0, 0, 0)'
 
