@@ -30,7 +30,7 @@
 
 double tnp_weight_muid_pbpb(double pt, double eta, int idx=0);
 double tnp_weight_trk_pbpb(double eta, int idx=0);
-double tnp_weight_trg_pbpb(double pt, double eta, int filterId=0,int idx=0);
+double tnp_weight_trg_pbpb(double pt, double eta, int filterId=0,int idx=0, bool getRawDen= false);
 
 ///////////////////////////////////////////////////
 //             M u I D    P b P b                //
@@ -154,7 +154,7 @@ double tnp_weight_muid_pbpb(double pt, double eta, int idx) {
 //              T R G     P b P b                //
 ///////////////////////////////////////////////////
 
-double tnp_weight_trg_pbpb(double pt, double eta, int filterId,int idx) {
+double tnp_weight_trg_pbpb(double pt, double eta, int filterId,int idx, bool getRawDen= false) {
   double x = pt;
   double num=1, den=1, syst=0, statUp=0, statDown=0;
   if (filterId==0) { //L2 Jpsi
@@ -598,7 +598,8 @@ double tnp_weight_trg_pbpb(double pt, double eta, int filterId,int idx) {
   if (idx == -2) syst_factor = -1*syst;
   if (idx == +1) stat_factor = statUp;
   if (idx == +2) stat_factor = -1*statDown;
-  return ((num+syst_factor+stat_factor)/den);
+  double toreturn = (getRawDen) ? den : ((num+syst_factor+stat_factor)/den);
+  return toreturn;
 }
 
 ///////////////////////////////////////////////////
