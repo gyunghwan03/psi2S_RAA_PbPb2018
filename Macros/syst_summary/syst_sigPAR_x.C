@@ -16,7 +16,7 @@ void syst_sigPAR_x()
     string nominal_path_pp = "../pp_psi2S_230512/roots/2DFit_No_Weight/Final/";
     string nominal_path_pb = "../psi2S_230512/roots/2DFit_No_Weight/Final/";
     string syst_path_pp = "../pp_psi2S_230512/systematic/sigPAR/SigPar_x/roots/2DFit_No_Weight/Final/";
-    string syst_path_pb = "../psi2S_230512/systematic/sigPAR/SigPar_x/roots/2DFit_No_Weight/Final/";
+    string syst_path_pb = "../psi2S_230512/systematics/sigPAR/sigPAR_x/roots/2DFit_No_Weight/Final/";
 
     // Define pointers for input files
     TFile *pp_nominal_input = nullptr;
@@ -217,7 +217,7 @@ void syst_sigPAR_x()
         
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_syst, n_NP_Pb_nomi, n_NP_Pb_syst);
-        cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+        //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
         
         // Fill histograms
         mid_cent_PR.SetBinContent(i+1, PR_uncert); // i starts from 0, hist elements starts from 1
@@ -275,7 +275,7 @@ void syst_sigPAR_x()
         
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_syst, n_NP_Pb_nomi, n_NP_Pb_syst);
-        cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+        //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
         
         // Fill histograms
         fwd_cent_PR.SetBinContent(i+1, PR_uncert); // i starts from 0, hist elements starts from 1

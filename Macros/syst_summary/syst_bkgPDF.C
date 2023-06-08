@@ -217,7 +217,7 @@ void syst_bkgPDF()
         
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_syst, n_NP_Pb_nomi, n_NP_Pb_syst);
-        cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+        //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
         
         // Fill histograms
         mid_cent_PR.SetBinContent(i+1, PR_uncert); // i starts from 0, hist elements starts from 1
@@ -275,7 +275,7 @@ void syst_bkgPDF()
         
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_syst, n_NP_Pb_nomi, n_NP_Pb_syst);
-        cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+        //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
         
         // Fill histograms
         fwd_cent_PR.SetBinContent(i+1, PR_uncert); // i starts from 0, hist elements starts from 1
