@@ -57,7 +57,7 @@ void compute_total_syst()
     auto h_sigPDF_mid_pt_PR = (TH1D*) in_sigPDF_pt->Get("mid_PR");
     auto h_sigPAR_mid_pt_PR = (TH1D*) in_sigPAR_pt->Get("mid_PR");
     auto h_bkgPDF_mid_pt_PR = (TH1D*) in_bkgPDF_pt->Get("mid_PR");
-    auto h_bFracF_mid_pt_PR = (TH1D*) in_bFrac_pt->Get("mid_PR");
+    auto h_bFrac_mid_pt_PR = (TH1D*) in_bFrac_pt->Get("mid_PR");
     auto h_acc_mid_pt_PR = (TH1D*) in_acc_pt->Get("mid_PR");
     auto h_eff_mid_pt_PR = (TH1D*) in_eff_pt->Get("mid_PR");
     auto h_HF_mid_pt_PR = (TH1D*) in_HF_pt->Get("mid_PR");
@@ -66,7 +66,7 @@ void compute_total_syst()
     auto h_sigPDF_mid_pt_NP = (TH1D*) in_sigPDF_pt->Get("mid_NP");
     auto h_sigPAR_mid_pt_NP = (TH1D*) in_sigPAR_pt->Get("mid_NP");
     auto h_bkgPDF_mid_pt_NP = (TH1D*) in_bkgPDF_pt->Get("mid_NP");
-    auto h_bFracF_mid_pt_NP = (TH1D*) in_bFrac_pt->Get("mid_NP");
+    auto h_bFrac_mid_pt_NP = (TH1D*) in_bFrac_pt->Get("mid_NP");
     auto h_acc_mid_pt_NP = (TH1D*) in_acc_pt->Get("mid_NP");
     auto h_eff_mid_pt_NP = (TH1D*) in_eff_pt->Get("mid_NP");
     auto h_HF_mid_pt_NP = (TH1D*) in_HF_pt->Get("mid_NP");
@@ -82,8 +82,13 @@ void compute_total_syst()
         double sigPDF_PR = h_sigPDF_mid_pt_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_mid_pt_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_mid_pt_PR->GetBinContent(hist_idx);
+        double bFrac_PR = h_bFrac_mid_pt_PR->GetBinContent(hist_idx);
+        double acc_PR = h_acc_mid_pt_PR->GetBinContent(hist_idx);
+        double eff_PR = h_eff_mid_pt_PR->GetBinContent(hist_idx);
+        double HF_PR = h_HF_mid_pt_PR->GetBinContent(hist_idx);
         
-        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2) );
+        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2)
+                + Power(bFrac_PR,2) + Power(acc_PR,2) + Power(eff_PR,2) + Power(HF_PR,2) );
         h_total_mid_pt_PR->SetBinContent(hist_idx, tot_syst_PR);
 
         // NP
@@ -91,8 +96,13 @@ void compute_total_syst()
         double sigPDF_NP = h_sigPDF_mid_pt_NP->GetBinContent(hist_idx);
         double sigPAR_NP = h_sigPAR_mid_pt_NP->GetBinContent(hist_idx);
         double bkgPDF_NP = h_bkgPDF_mid_pt_NP->GetBinContent(hist_idx);
+        double bFrac_NP = h_bFrac_mid_pt_NP->GetBinContent(hist_idx);
+        double acc_NP = h_acc_mid_pt_NP->GetBinContent(hist_idx);
+        double eff_NP = h_eff_mid_pt_NP->GetBinContent(hist_idx);
+        double HF_NP = h_HF_mid_pt_NP->GetBinContent(hist_idx);
 
-        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2) );
+        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2)
+                        + Power(bFrac_NP,2) + Power(acc_NP,2) + Power(eff_NP,2) + Power(HF_NP,2) );
         h_total_mid_pt_NP->SetBinContent(hist_idx, tot_syst_NP);
         //cout << h_total_mid_pt_NP->GetBinContent(hist_idx) << endl;
     }
@@ -103,7 +113,7 @@ void compute_total_syst()
     auto h_sigPDF_fwd_pt_PR = (TH1D*) in_sigPDF_pt->Get("fwd_PR");
     auto h_sigPAR_fwd_pt_PR = (TH1D*) in_sigPAR_pt->Get("fwd_PR");
     auto h_bkgPDF_fwd_pt_PR = (TH1D*) in_bkgPDF_pt->Get("fwd_PR");
-    auto h_bFracF_fwd_pt_PR = (TH1D*) in_bFrac_pt->Get("fwd_PR");
+    auto h_bFrac_fwd_pt_PR = (TH1D*) in_bFrac_pt->Get("fwd_PR");
     auto h_acc_fwd_pt_PR = (TH1D*) in_acc_pt->Get("fwd_PR");
     auto h_eff_fwd_pt_PR = (TH1D*) in_eff_pt->Get("fwd_PR");
     auto h_HF_fwd_pt_PR = (TH1D*) in_HF_pt->Get("fwd_PR");
@@ -112,7 +122,7 @@ void compute_total_syst()
     auto h_sigPDF_fwd_pt_NP = (TH1D*) in_sigPDF_pt->Get("fwd_NP");
     auto h_sigPAR_fwd_pt_NP = (TH1D*) in_sigPAR_pt->Get("fwd_NP");
     auto h_bkgPDF_fwd_pt_NP = (TH1D*) in_bkgPDF_pt->Get("fwd_NP");
-    auto h_bFracF_fwd_pt_NP = (TH1D*) in_bFrac_pt->Get("fwd_NP");
+    auto h_bFrac_fwd_pt_NP = (TH1D*) in_bFrac_pt->Get("fwd_NP");
     auto h_acc_fwd_pt_NP = (TH1D*) in_acc_pt->Get("fwd_NP");
     auto h_eff_fwd_pt_NP = (TH1D*) in_eff_pt->Get("fwd_NP");
     auto h_HF_fwd_pt_NP = (TH1D*) in_HF_pt->Get("fwd_NP");
@@ -128,8 +138,13 @@ void compute_total_syst()
         double sigPDF_PR = h_sigPDF_fwd_pt_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_fwd_pt_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_fwd_pt_PR->GetBinContent(hist_idx);
+        double bFrac_PR = h_bFrac_fwd_pt_PR->GetBinContent(hist_idx);
+        double acc_PR = h_acc_fwd_pt_PR->GetBinContent(hist_idx);
+        double eff_PR = h_eff_fwd_pt_PR->GetBinContent(hist_idx);
+        double HF_PR = h_HF_fwd_pt_PR->GetBinContent(hist_idx);
         
-        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2) );
+        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2)
+                + Power(bFrac_PR,2) + Power(acc_PR,2) + Power(eff_PR,2) + Power(HF_PR,2) );
         h_total_fwd_pt_PR->SetBinContent(hist_idx, tot_syst_PR);
 
         // NP
@@ -137,10 +152,15 @@ void compute_total_syst()
         double sigPDF_NP = h_sigPDF_fwd_pt_NP->GetBinContent(hist_idx);
         double sigPAR_NP = h_sigPAR_fwd_pt_NP->GetBinContent(hist_idx);
         double bkgPDF_NP = h_bkgPDF_fwd_pt_NP->GetBinContent(hist_idx);
+        double bFrac_NP = h_bFrac_fwd_pt_NP->GetBinContent(hist_idx);
+        double acc_NP = h_acc_fwd_pt_NP->GetBinContent(hist_idx);
+        double eff_NP = h_eff_fwd_pt_NP->GetBinContent(hist_idx);
+        double HF_NP = h_HF_fwd_pt_NP->GetBinContent(hist_idx);
 
-        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2) );
+        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2)
+                        + Power(bFrac_NP,2) + Power(acc_NP,2) + Power(eff_NP,2) + Power(HF_NP,2) );
         h_total_fwd_pt_NP->SetBinContent(hist_idx, tot_syst_NP);
-        //cout << h_total_fwd_pt_NP->GetBinContent(hist_idx) << endl;
+        //cout << h_total_mid_pt_NP->GetBinContent(hist_idx) << endl;
     }
 
 
@@ -150,7 +170,7 @@ void compute_total_syst()
     auto h_sigPDF_mid_cent_PR = (TH1D*) in_sigPDF_cent->Get("mid_PR");
     auto h_sigPAR_mid_cent_PR = (TH1D*) in_sigPAR_cent->Get("mid_PR");
     auto h_bkgPDF_mid_cent_PR = (TH1D*) in_bkgPDF_cent->Get("mid_PR");
-    auto h_bFracF_mid_cent_PR = (TH1D*) in_bFrac_cent->Get("mid_PR");
+    auto h_bFrac_mid_cent_PR = (TH1D*) in_bFrac_cent->Get("mid_PR");
     auto h_acc_mid_cent_PR = (TH1D*) in_acc_cent->Get("mid_PR");
     auto h_eff_mid_cent_PR = (TH1D*) in_eff_cent->Get("mid_PR");
     auto h_HF_mid_cent_PR = (TH1D*) in_HF_cent->Get("mid_PR");
@@ -159,7 +179,7 @@ void compute_total_syst()
     auto h_sigPDF_mid_cent_NP = (TH1D*) in_sigPDF_cent->Get("mid_NP");
     auto h_sigPAR_mid_cent_NP = (TH1D*) in_sigPAR_cent->Get("mid_NP");
     auto h_bkgPDF_mid_cent_NP = (TH1D*) in_bkgPDF_cent->Get("mid_NP");
-    auto h_bFracF_mid_cent_NP = (TH1D*) in_bFrac_cent->Get("mid_NP");
+    auto h_bFrac_mid_cent_NP = (TH1D*) in_bFrac_cent->Get("mid_NP");
     auto h_acc_mid_cent_NP = (TH1D*) in_acc_cent->Get("mid_NP");
     auto h_eff_mid_cent_NP = (TH1D*) in_eff_cent->Get("mid_NP");
     auto h_HF_mid_cent_NP = (TH1D*) in_HF_cent->Get("mid_NP");
@@ -174,8 +194,13 @@ void compute_total_syst()
         double sigPDF_PR = h_sigPDF_mid_cent_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_mid_cent_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_mid_cent_PR->GetBinContent(hist_idx);
+        double bFrac_PR = h_bFrac_mid_cent_PR->GetBinContent(hist_idx);
+        double acc_PR = h_acc_mid_cent_PR->GetBinContent(hist_idx);
+        double eff_PR = h_eff_mid_cent_PR->GetBinContent(hist_idx);
+        double HF_PR = h_HF_mid_cent_PR->GetBinContent(hist_idx);
         
-        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2) );
+        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2)
+                + Power(bFrac_PR,2) + Power(acc_PR,2) + Power(eff_PR,2) + Power(HF_PR,2) );
         h_total_mid_cent_PR->SetBinContent(hist_idx, tot_syst_PR);
 
         // NP
@@ -183,8 +208,13 @@ void compute_total_syst()
         double sigPDF_NP = h_sigPDF_mid_cent_NP->GetBinContent(hist_idx);
         double sigPAR_NP = h_sigPAR_mid_cent_NP->GetBinContent(hist_idx);
         double bkgPDF_NP = h_bkgPDF_mid_cent_NP->GetBinContent(hist_idx);
+        double bFrac_NP = h_bFrac_mid_cent_NP->GetBinContent(hist_idx);
+        double acc_NP = h_acc_mid_cent_NP->GetBinContent(hist_idx);
+        double eff_NP = h_eff_mid_cent_NP->GetBinContent(hist_idx);
+        double HF_NP = h_HF_mid_cent_NP->GetBinContent(hist_idx);
 
-        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2) );
+        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2)
+                        + Power(bFrac_NP,2) + Power(acc_NP,2) + Power(eff_NP,2) + Power(HF_NP,2) );
         h_total_mid_cent_NP->SetBinContent(hist_idx, tot_syst_NP);
         //cout << h_total_mid_cent_NP->GetBinContent(hist_idx) << endl;
     }
@@ -195,7 +225,7 @@ void compute_total_syst()
     auto h_sigPDF_fwd_cent_PR = (TH1D*) in_sigPDF_cent->Get("fwd_PR");
     auto h_sigPAR_fwd_cent_PR = (TH1D*) in_sigPAR_cent->Get("fwd_PR");
     auto h_bkgPDF_fwd_cent_PR = (TH1D*) in_bkgPDF_cent->Get("fwd_PR");
-    auto h_bFracF_fwd_cent_PR = (TH1D*) in_bFrac_cent->Get("fwd_PR");
+    auto h_bFrac_fwd_cent_PR = (TH1D*) in_bFrac_cent->Get("fwd_PR");
     auto h_acc_fwd_cent_PR = (TH1D*) in_acc_cent->Get("fwd_PR");
     auto h_eff_fwd_cent_PR = (TH1D*) in_eff_cent->Get("fwd_PR");
     auto h_HF_fwd_cent_PR = (TH1D*) in_HF_cent->Get("fwd_PR");
@@ -204,7 +234,7 @@ void compute_total_syst()
     auto h_sigPDF_fwd_cent_NP = (TH1D*) in_sigPDF_cent->Get("fwd_NP");
     auto h_sigPAR_fwd_cent_NP = (TH1D*) in_sigPAR_cent->Get("fwd_NP");
     auto h_bkgPDF_fwd_cent_NP = (TH1D*) in_bkgPDF_cent->Get("fwd_NP");
-    auto h_bFracF_fwd_cent_NP = (TH1D*) in_bFrac_cent->Get("fwd_NP");
+    auto h_bFrac_fwd_cent_NP = (TH1D*) in_bFrac_cent->Get("fwd_NP");
     auto h_acc_fwd_cent_NP = (TH1D*) in_acc_cent->Get("fwd_NP");
     auto h_eff_fwd_cent_NP = (TH1D*) in_eff_cent->Get("fwd_NP");
     auto h_HF_fwd_cent_NP = (TH1D*) in_HF_cent->Get("fwd_NP");
@@ -219,8 +249,13 @@ void compute_total_syst()
         double sigPDF_PR = h_sigPDF_fwd_cent_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_fwd_cent_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_fwd_cent_PR->GetBinContent(hist_idx);
+        double bFrac_PR = h_bFrac_fwd_cent_PR->GetBinContent(hist_idx);
+        double acc_PR = h_acc_fwd_cent_PR->GetBinContent(hist_idx);
+        double eff_PR = h_eff_fwd_cent_PR->GetBinContent(hist_idx);
+        double HF_PR = h_HF_fwd_cent_PR->GetBinContent(hist_idx);
         
-        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2) );
+        tot_syst_PR = Sqrt( Power(sigPDF_PR,2) + Power(sigPAR_PR,2) + Power(bkgPDF_PR,2)
+                + Power(bFrac_PR,2) + Power(acc_PR,2) + Power(eff_PR,2) + Power(HF_PR,2) );
         h_total_fwd_cent_PR->SetBinContent(hist_idx, tot_syst_PR);
 
         // NP
@@ -228,10 +263,15 @@ void compute_total_syst()
         double sigPDF_NP = h_sigPDF_fwd_cent_NP->GetBinContent(hist_idx);
         double sigPAR_NP = h_sigPAR_fwd_cent_NP->GetBinContent(hist_idx);
         double bkgPDF_NP = h_bkgPDF_fwd_cent_NP->GetBinContent(hist_idx);
+        double bFrac_NP = h_bFrac_fwd_cent_NP->GetBinContent(hist_idx);
+        double acc_NP = h_acc_fwd_cent_NP->GetBinContent(hist_idx);
+        double eff_NP = h_eff_fwd_cent_NP->GetBinContent(hist_idx);
+        double HF_NP = h_HF_fwd_cent_NP->GetBinContent(hist_idx);
 
-        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2) );
+        tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2)
+                        + Power(bFrac_NP,2) + Power(acc_NP,2) + Power(eff_NP,2) + Power(HF_NP,2) );
         h_total_fwd_cent_NP->SetBinContent(hist_idx, tot_syst_NP);
-        cout << h_total_fwd_cent_NP->GetBinContent(hist_idx) << endl;
+        //cout << h_total_fwd_cent_NP->GetBinContent(hist_idx) << endl;
     }
     out_file.cd();
     out_file.Write();
