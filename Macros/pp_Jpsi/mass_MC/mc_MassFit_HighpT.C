@@ -29,7 +29,7 @@ void mc_MassFit_HighpT(
 		int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
 		)
 {
-    TString DATE = "230429";
+    TString DATE = "No_weight";
     gStyle->SetEndErrorSize(0);
     gSystem->mkdir(Form("roots/%s",DATE.Data()),kTRUE);
     gSystem->mkdir(Form("figs/%s",DATE.Data()),kTRUE);
@@ -60,7 +60,7 @@ void mc_MassFit_HighpT(
 	RooMsgService::instance().setSilentMode(true);
 
     // MC
-    TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Jpsi_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230117.root", "read");
+    TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_Jpsi_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230717.root", "read");
 
 
 	// cout << "Input file: "
@@ -114,9 +114,9 @@ void mc_MassFit_HighpT(
     double x_init = 0.4566;
 	double alpha_1_init = 1.9581;
 	double n_1_init = 1.8425;
-	double f_init = 0.2886;
+	double f_init = 0.5886;
     double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
-    double N_Jpsi_high = 200000; // 2500000
+    double N_Jpsi_high = 250000; // 2500000
 	double N_Bkg_high = 200000;
     double fit_limit = 3.24;
 
@@ -124,6 +124,8 @@ void mc_MassFit_HighpT(
 	else if(ptLow==9&&ptHigh==12) N_Jpsi_high = 1000000;
 
 	if(ptLow==6.5&&ptHigh==7) f_init=0.6;
+	else if(ptLow==6.5&&ptHigh==9) n_1_init=2.;
+	else if(ptLow==5&&ptHigh==6.5) f_init=0.6;
 
 	double m_lambda_init = 5;
 	double psi_2S_mass = pdgMass.Psi2S;
