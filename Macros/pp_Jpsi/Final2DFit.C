@@ -23,6 +23,8 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
+
 void Final2DFit(
     double ptLow=3, double ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
@@ -613,10 +615,43 @@ void Final2DFit(
   outFile->cd();
   fitResult->Write();
   fitResult->Print("V");
+  check_convergence(fitResult);
   outh->Write();
   //outh1->Write();
   //outh2->Write();
   //outh3->Write();
   //outh4->Write();
   outFile->Close();
+}
+
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

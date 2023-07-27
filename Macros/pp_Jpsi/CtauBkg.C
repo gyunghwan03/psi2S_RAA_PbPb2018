@@ -23,14 +23,14 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
+
 void CtauBkg(
     float ptLow=3, float ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
     int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
-
-
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
@@ -89,26 +89,13 @@ void CtauBkg(
   cout <<endl <<"************** Start BKG Ctau Fit *****************" <<endl <<endl;
   //make parameter 3 exp
   ws->factory("zeroMean[0.0]");
-  //ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.5, 1e-6, 1.]");
-  //ws->factory("fDLIV[0.5, 1e-6, 1.]");
-  //ws->factory("lambdaDDS_Bkg[0.2, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");
-  if(ptLow==3&&ptHigh==6.5){
-  ws->factory("b_Bkg[0.1, 1e-6, 1]");//NP fraction for bkg
-  ws->factory("fDFSS[0.1, 1e-6, 1.]");
-  ws->factory("fDLIV[0.1, 1e-6, 1.]");
+  if(ptLow==12&&ptHigh==15){
+  ws->factory("b_Bkg[0.6, 1e-6, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.01, 1e-6, 1.]");
+  ws->factory("fDLIV[0.8, 1e-6, 1.]");
   ws->factory("lambdaDDS_Bkg[0.5, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[ 0.01, 1e-6, .1]");
-  ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");}
-  else if(ptLow==6.5&&ptHigh==9){
-  ws->factory("b_Bkg[0.1, 1e-6, 1]");//NP fraction for bkg
-  ws->factory("fDFSS[0.1, 1e-6, 1.]");
-  ws->factory("fDLIV[0.1, 1e-6, 1.]");
-  ws->factory("lambdaDDS_Bkg[0.8, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.6, 0.1, 1.]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  ws->factory("lambdaDF_Bkg[ 0.01, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.8, 1e-6, 1.]");}
   else {
   ws->factory("b_Bkg[0.1, 1e-6, 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.5, 1e-6, 1.]");
@@ -175,6 +162,7 @@ void CtauBkg(
   //if(ptLow>=15) { ctauMin=-1.5;}
 
   if(ptLow==6.5&&ptHigh==9) { ctauMin=-2.2; ctauMax=3.7; }
+  else if(ptLow==12&&ptHigh==15) { ctauMin=-1.37; ctauMax=3.7; }
 
   TCanvas* c_E =  new TCanvas("canvas_E","My plots",1108,4,550,520);
   c_E->cd();
@@ -328,5 +316,38 @@ void CtauBkg(
   //pdfTot_Bkg->Write();
   datasetCBkg->Write();
   wscbkg->Write();
+  check_convergence(fitCtauBkg);
   outFile->Close();
+}
+
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

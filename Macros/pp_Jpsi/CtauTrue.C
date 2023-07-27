@@ -24,6 +24,8 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
+
 void CtauTrue(
     float ptLow=4.5, float ptHigh=6.5,
     double yLow=1.6, double yHigh=2.4,
@@ -65,7 +67,8 @@ void CtauTrue(
   //f2 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco_6p5_50_201005.root");
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f2 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
-  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_BPsi2SMM_GENONLY_20230717.root");
+  //f1 = new TFile("../../skimmedFiles/OniaRooDataSet_BPsi2SMM_GENONLY_20230717.root"); // 2S
+  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_BtoJpsiMM_GENONLY_20230717.root"); // 1S
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_psi2S_GENONLY_NonPrompt_20220906_root618.root","read");
   
   kineCutMC = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>2.6 && mass<3.5" ,ptLow, ptHigh, yLow, yHigh);
@@ -322,6 +325,7 @@ void CtauTrue(
   RooArgSet* fitargs = new RooArgSet();
   fitargs->add(fitCtauTrue->floatParsFinal());
   ctauTrueModel->Write();
+  check_convergence(fitCtauTrue);
   outFile->Close();
   //TFile *hFile = new TFile(Form("ctauTreuHist_%s.root",kineLabel.Data()),"recreate");
   //hCTrue->Write();
@@ -330,4 +334,36 @@ void CtauTrue(
   printf("RealTime=%f seconds, CpuTime=%f seconds\n",t->RealTime(),t->CpuTime());
   cout << endl << "************ Finished MC Ctau True Fit ***************" << endl << endl;
 
+}
+
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

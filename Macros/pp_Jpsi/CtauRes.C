@@ -23,6 +23,8 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
+
 void CtauRes(
     double ptLow=3, double ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
@@ -98,6 +100,14 @@ void CtauRes(
   ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.96, 1e-3, 5.0]");
   ws->factory("rS32_CtauRes[2.57, 1e-3, 5.0]");}
+  else if(ptLow==3.5&&ptHigh==50){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[2.1, 1e-3, 10.0]");
+  ws->factory("rS32_CtauRes[3.1, 1e-3, 10.0]");}
   else if(ptLow==4.&&ptHigh==6.5){
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
@@ -114,6 +124,14 @@ void CtauRes(
   ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.96, 1e-3, 5.0]");
   ws->factory("rS32_CtauRes[2.57, 1e-3, 5.0]");}
+  else if(ptLow==6.5&&ptHigh==50){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[1.2, 1e-3, 8.0]");
+  ws->factory("rS32_CtauRes[2.1, 1e-3, 5.0]");}
   else if(ptLow==7&&ptHigh==8){
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
@@ -178,6 +196,14 @@ void CtauRes(
   ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.96, 1.5, 10.0]");
   ws->factory("rS32_CtauRes[2.57, 2., 10.0]");}
+  else if(ptLow==20&&ptHigh==50){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.3, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[1.3, 1, 10.0]");
+  ws->factory("rS32_CtauRes[2.1, 2., 10.0]");}
   else{
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
@@ -413,5 +439,38 @@ void CtauRes(
   //	ctauResCutDS->Write();
   //datasetRes->Write();
   //fitCtauRes->Write();
+  check_convergence(fitCtauRes);
   outFile->Close();
+}
+
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

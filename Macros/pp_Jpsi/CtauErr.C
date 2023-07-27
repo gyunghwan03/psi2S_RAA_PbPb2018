@@ -189,6 +189,7 @@ void CtauErr(
   if(ptLow==6.5&&ptHigh==7) ctauErrMax=0.1116;
   else if(ptLow==7&&ptHigh==7.5) ctauErrMax=0.108;
   else if(ptLow==7.5&&ptHigh==8) ctauErrMax=0.1062;
+  else if(ptLow==12&&ptHigh==15) ctauErrMax=0.067;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
