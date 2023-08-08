@@ -32,7 +32,7 @@ void mc_MassFit_HighpT(
 		int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
 		)
 {
-    TString DATE = "No_weight";
+    TString DATE = "2DFit_No_Weight";
     gStyle->SetEndErrorSize(0);
     gSystem->mkdir("roots");
     gSystem->mkdir("roots_MC");
@@ -107,7 +107,7 @@ void mc_MassFit_HighpT(
 
 	//         The order is {sigma_1,  x, alpha_1, n_1,   f, m_lambda}
     double paramsupper[8] = {0.1,  1.0  ,     10,     10,   1.0,     25.0};
-    double paramslower[8] = {0.0,  0.0,   1e-6,   1e-6,   1e-6,      -5.0};
+    double paramslower[8] = {1e-6,  0.0,   1e-6,   1e-6,   1e-6,      -25.0};
     
 	//SIGNAL: initial params
 	double sigma_1_init = 0.03555;
@@ -120,14 +120,29 @@ void mc_MassFit_HighpT(
 	double N_Bkg_high = 200000;
     double fit_limit = 3.24;
     //double fit_limit = 3.3;
-
-    if(ptLow==12&&ptHigh==15) {
-        N_Jpsi_high = 50000;
-        sigma_1_init = 0.4;
+    if(ptLow==6.5&&ptHigh==50) {
+        N_Jpsi_high = 5000000;
+        sigma_1_init = 0.03;
         x_init = 0.2;
-	    alpha_1_init = 1.1;
-	    n_1_init = 1.1;
-	    f_init = 0.3;
+	    alpha_1_init = 1.97;
+	    n_1_init = 1.48;
+	    f_init = 0.1;
+    }
+    else if(ptLow==12&&ptHigh==15) {
+        N_Jpsi_high = 50000;
+        sigma_1_init = 0.03;
+        x_init = 0.2;
+	    alpha_1_init = 1.97;
+	    n_1_init = 1.48;
+	    f_init = 0.38;
+    }
+    else if(ptLow==25&&ptHigh==50) {
+        N_Jpsi_high = 5000;
+        sigma_1_init = 0.03;
+        x_init = 0.2;
+	    alpha_1_init = 1.97;
+	    n_1_init = 1.48;
+	    f_init = 0.1;
     }
 
 	double m_lambda_init = 5;
@@ -192,8 +207,7 @@ void mc_MassFit_HighpT(
     dsAB->plotOn(myPlot2_A,Name("dataOS"),MarkerSize(.8));
     bool isWeighted = ws->data("dsAB")->isWeighted();
     cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
-    // RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
-    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), Range(2.6, fit_limit), NumCPU(nCPU));
+    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(4));
     cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
 	fitMass->Print("V");
     

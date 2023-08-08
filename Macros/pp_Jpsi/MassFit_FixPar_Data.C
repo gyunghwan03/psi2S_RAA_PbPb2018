@@ -120,13 +120,13 @@ void MassFit_FixPar_Data(
   if (f_higher>1.0) f_higher=1.0;
   if (f_lower<0.0) f_lower=0.0;
 
-  double paramslower[6] = {alpha_lower, n_lower, 0.0, xA_lower, 0.0,  0.0};
-  double paramsupper[6] = {alpha_higher, n_higher, 0.4, xA_higher, 1.0, 25.0};
+  double paramslower[6] = {alpha_lower, n_lower, 0.0, xA_lower, 0.0,  -25.0};
+  double paramsupper[6] = {alpha_higher, n_higher, 0.1, xA_higher, 1.0, 25.0};
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
   //SIGNAL
-  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.1, pdgMass.JPsi+0.1) ;
+  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.03, pdgMass.JPsi+0.03) ;
   //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
   RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
@@ -154,6 +154,9 @@ void MassFit_FixPar_Data(
   if(ptLow==6.5&&ptHigh==9) {NJpsi_limit = 2e+06; NBkg_limit = 2e5;}
   else if(ptLow==12&&ptHigh==50) {NJpsi_limit = 1e+06; NBkg_limit = 2e5;}
   else if(ptLow==20&&ptHigh==50) {NJpsi_limit = 1e+06; NBkg_limit = 2e5;}
+  else if(ptLow==20&&ptHigh==25) {
+    NJpsi_limit = 80000; NBkg_limit = 20000;
+    sl1_init = 0.1; sl2_init = -0.08; sl3_init = 0.2;}
 
 
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", sl1_init, -1., 1.);
@@ -184,7 +187,7 @@ void MassFit_FixPar_Data(
   bool isWeighted = ws->data("dsAB")->isWeighted();
   //bool isWeighted = true;
   cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
-  RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
+  RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(4));
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
 //  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_Tot"), LineColor(kBlack));
