@@ -128,13 +128,17 @@ void mc_MassFit_CBGauss(
 	// else if(ptLow==9&&ptHigh==12) N_Jpsi_high = 1000000;
 	// else if(ptLow==6.5&&ptHigh==50) N_Jpsi_high = 5e+7;
     if(ptLow==3.5 && ptHigh==5) { 
-            N_Jpsi_high = 500000;
-            f_init=0.8; sigma_1_init = 0.05; n_1_init = 4;
+            N_Jpsi_high = 60000;
+            paramsupper[0]=0.4;
+            paramsupper[1]=4;
+            paramsupper[2]=20.;
+            paramsupper[3]=20;
+            f_init=0.8; sigma_1_init = 0.06; n_1_init = 2;
             x_init = 0.1; alpha_1_init = 2;
     }
     if(ptLow==3.5 && ptHigh==50 && cHigh == 40) { 
             N_Jpsi_high = 500000;
-            f_init=0.8; sigma_1_init = 0.05; n_1_init = 2;
+            f_init=0.2; sigma_1_init = 0.05; n_1_init = 2;
             x_init = 2; alpha_1_init = 2;
     }
     if(ptLow==3.5 && ptHigh==50 && cHigh == 180) { 

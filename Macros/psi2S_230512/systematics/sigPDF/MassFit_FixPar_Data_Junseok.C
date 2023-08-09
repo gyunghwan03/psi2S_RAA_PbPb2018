@@ -227,8 +227,8 @@ void MassFit_FixPar_Data(
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
  if (ptLow==3.5&&ptHigh==5 && cLow==0 && cHigh==180)  {
-	   NBkg_limit = 300000;
-	   NJpsi_limit = 10000; }
+	   NBkg_limit = 200000;
+	   NJpsi_limit = 1400; }
      if (ptLow==6.5&&ptHigh==50)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 100000; }
