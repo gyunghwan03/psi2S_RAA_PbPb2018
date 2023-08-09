@@ -2,9 +2,6 @@
 #include "../../rootFitHeaders.h"
 #include "../../commonUtility.h"
 #include "../../JpsiUtility.h"
-#include "../../cutsAndBin.h"
-#include "../../CMS_lumi_v2mass.C"
-#include "../../tdrstyle.C"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -15,6 +12,9 @@
 #include "TText.h"
 #include "TArrow.h"
 #include "TFile.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include "RooDataHist.h"
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
@@ -24,7 +24,7 @@ using namespace std;
 using namespace RooFit;
 void CtauErr(
     double ptLow=3, double ptHigh=4.5,
-    double yLow=1.6, double yHigh=2.4,
+    float yLow=1.6, float yHigh=2.4,
     int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
@@ -34,8 +34,6 @@ void CtauErr(
   //TString DATE="20_40";
   //TString DATE="0_180";
   TString DATE;
-  //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
-  //else DATE=Form("%i_%i",cLow/2,cHigh/2);
   DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
@@ -59,7 +57,10 @@ void CtauErr(
   TString BkgCut;
   TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
 
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw1_Accw1_PtW1_TnP1_230323.root"));
+  massLow=2.6; massHigh=3.5;
+
+
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_pp_y0.00_2.40_Effw0_Accw0_PtW1_TnP1_230209.root"));
   fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
 
@@ -67,8 +68,7 @@ void CtauErr(
 
   TString OS="recoQQsign==0 &&";
 
-  TString nan_cut = "&& !TMath::IsNaN(ctau3D) && !TMath::IsNaN(ctau3DRes)";
-  kineCut = OS+accCut+kineCut + nan_cut;
+  kineCut = OS+accCut+kineCut;
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
@@ -83,29 +83,18 @@ void CtauErr(
   RooDataSet *datasetW = new RooDataSet("datasetW","A sample",
 		  *argSet,
 		  Import(*dataset));//,WeightVar(*ws->var("weight")));
-  RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample",
-		  *argSet,
-		  Import(*dataset));
   ws->import(*datasetW);
-  ws->import(*datasetWo);
-
-  datasetW->Print("V");
 
   RooDataSet *dsAB = (RooDataSet*)datasetW->reduce(*argSet, kineCut.Data() );
-  RooDataSet *dsAB1 = (RooDataSet*)datasetWo->reduce(*argSet, kineCut.Data() );
-  cout << "################## dsAB ################## " << endl;
-  dsAB->Print("V");
+  dsAB->Print();
   cout << "Weight : " << ws->var("weight")->getVal() << endl;
   cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<endl;
   cout << "####################################" << endl;
   dsAB->SetName("dsAB");
-  dsAB1->SetName("dsAB1");
   ws->import(*dsAB);
-  ws->import(*dsAB1);
 
   //ws->var("ctau3DErr")->setRange(0,0.25);
     ws->var("ctau3DErr")->setRange(ctauErrLow, ctauHigh);
-	cout << "ctauErrLow : " << ctauErrLow << " ctauErrHigh : " << ctauErrHigh << endl;
   /*
   TCanvas* c_D =  new TCanvas("canvas_D","My plots",4,420,550,520);
   c_D->cd();
@@ -179,8 +168,6 @@ void CtauErr(
   for(int i=0; i<hTot_M->GetNbinsX()/2; i++){
     //if(hSig->GetBinContent(i)<=0&&hSig->GetBinContent(i+1)<=0&&hSig->GetBinContent(i+2)>=1&&hSig->GetBinContent(i+3)>=1){
     if(hTot_M->GetBinContent(i)>1){//pt 7-7.5
-      //if(ptLow==3&&ptHigh==4.5&&cLow==20&&cHigh==120) ctauErrMin = hSig->GetBinLowEdge(i);
-      //else ctauErrMin = hSig->GetBinLowEdge(i+1);
       ctauErrMin = hTot_M->GetBinLowEdge(i+1);
       break;}
   }
@@ -199,24 +186,15 @@ void CtauErr(
     else { ctauErrMax = hTot_M->GetBinLowEdge(i); }
   }
 
-  if(ptLow==6.5&&ptHigh==12) ctauErrMax = 0.1512;
-  else if(ptLow==3&&ptHigh==6.5) { ctauErrMin = 0.0198; ctauErrMax=0.16; }
-  else if(ptLow==5.5&&ptHigh==6.5) { ctauErrMax=0.1528; }
-  else if(ptLow==6.5&&ptHigh==8) ctauErrMax = 0.151;
-  else if(ptLow==6.5&&ptHigh==9) ctauErrMax = 0.1618;
-  else if(ptLow==6.5&&ptHigh==7) ctauErrMax = 0.1332;
-  else if(ptLow==6.&&ptHigh==7) ctauErrMax = 0.153;
-  else if(ptLow==7.&&ptHigh==8) ctauErrMax = 0.1365;
-  else if(ptLow==7&&ptHigh==7.5) {ctauErrMin = 0.01354; ctauErrMax = 0.1318;}
-  else if(ptLow==7.5&&ptHigh==8) ctauErrMax = 0.1205;
-  else if(ptLow==8&&ptHigh==9) ctauErrMax = 0.1098;
-  else if(ptLow==9&&ptHigh==10&&yLow==1.6&&yHigh==2.4) ctauErrMax = 0.1056;
-  else if(ptLow==9&&ptHigh==10&&yHigh==1.2) ctauErrMax = 0.1074;
-  else if(ptLow==9&&ptHigh==10) ctauErrMax = 0.1147;
-  else if(ptLow==11&&ptHigh==12) ctauErrMax = 0.0882;
-  else if(ptLow==12&&ptHigh==50) ctauErrMax = 0.088;
-
-
+  if(ptLow==6.5&&ptHigh==7) ctauErrMax=0.1116;
+  else if(ptLow==3.5&&ptHigh==5) ctauErrMax=0.258;
+  else if(ptLow==7&&ptHigh==7.5) ctauErrMax=0.108;
+  else if(ptLow==7.5&&ptHigh==8) ctauErrMax=0.1062;
+  else if(ptLow==12&&ptHigh==15) ctauErrMax=0.1138;
+  else if(ptLow==15&&ptHigh==20) ctauErrMax=0.11;
+  else if(ptLow==20&&ptHigh==25) ctauErrMax=0.065;
+  else if(ptLow==25&&ptHigh==50) ctauErrMax=0.0598;
+  //else if(ptLow==12&&ptHigh==15) ctauErrMax=0.067;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
@@ -241,9 +219,9 @@ void CtauErr(
   //for(int i=20; i<hTot_w->GetNbinsX(); i++){
   //    cout<<"Bin: "<<i<<", CtauError: "<<hTot_w->GetBinLowEdge(i)+hTot_w->GetBinWidth(i)<<", Events: "<<hTot_w->GetBinContent(i)<<endl;
   //  if(hTot_w->GetBinContent(i)>=1&&hTot_w->GetBinContent(i+1)<1){
-  //  //if(hTot_w->GetBinContent(i+1)<1&&hTot_w->GetBinContent(i+2)<1){
-  //  //if(hTot_w->GetBinContent(i)>=1&&hTot_w->GetBinContent(i+1)<1&&hTot_w->GetBinContent(i+2)<1){
-  //  //if(hTot_w->GetBinContent(i)>=100&&hTot_w->GetBinContent(i+1)<50&&hTot_w->GetBinContent(i+2)<50){
+ //if(hTot_w->GetBinContent(i+1)<1&&hTot_w->GetBinContent(i+2)<1){
+ //if(hTot_w->GetBinContent(i)>=1&&hTot_w->GetBinContent(i+1)<1&&hTot_w->GetBinContent(i+2)<1){
+ //if(hTot_w->GetBinContent(i)>=100&&hTot_w->GetBinContent(i+1)<50&&hTot_w->GetBinContent(i+2)<50){
   //    cout<<"##### i(Max): "<<i<<", CtauError:  "<<hTot_w->GetBinLowEdge(i)+hTot_w->GetBinWidth(i)<<hTot_w->GetBinContent(i)<<", Events: "<<hTot_w->GetBinContent(i)<<endl;
   //    cout<<"##### i: "<<i+1<<", CtauError:  "<<hTot_w->GetBinLowEdge(i+1)+hTot_w->GetBinWidth(i+1)<<hTot_w->GetBinContent(i+1)<<", Events: "<<hTot_w->GetBinContent(i+1)<<endl;
   //    cout<<"##### i: "<<i+2<<", CtauError:  "<<hTot_w->GetBinLowEdge(i+2)+hTot_w->GetBinWidth(i+2)<<hTot_w->GetBinContent(i+2)<<", Events: "<<hTot_w->GetBinContent(i+2)<<endl;
@@ -330,10 +308,6 @@ void CtauErr(
     cout<<"Tot evt: ("<<outTot<<")"<<endl;
     cout<<"Res evt: ("<<outRes<<")"<<endl;
     cout<<"lost evt: ("<<((outTot-outRes)*100)/outTot<<")%, "<<outRes<<"evts"<<endl;
-    ws->var("ctau3D")->Print();
-    ws->var("ctau3DRes")->Print();
-	dataw_Sig->Print("V");
-	ctauResCutDS->Print("V");
 
   TLine   *minline = new TLine(ctauErrMin, 0.0, ctauErrMin, (Ydown*TMath::Power((Yup/Ydown),0.5)));
   minline->SetLineStyle(2);
@@ -369,7 +343,7 @@ void CtauErr(
   else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x,text_y-y_diff,text_color,text_size);
   //drawText(Form("n_{J/#psi} = %.f #pm %.f",sData.GetYieldFromSWeight("N_Jpsi"),ws->var("N_Jpsi")->getError()),text_x,text_y-y_diff*3,text_color,text_size);
   //drawText(Form("n_{Bkg} = %.f #pm %.f",sData.GetYieldFromSWeight("N_Bkg"), ws->var("N_Bkg")->getError()),text_x,text_y-y_diff*4,text_color,text_size);
-  drawText(Form("Loss: (%.4f%s) %.f evts", (outTot-outRes)*100/outTot, "%", outTot-outRes),text_x,text_y-y_diff*4,text_color,text_size);
+  drawText(Form("Loss: (%.4f%s) %.f evts", (outTot-outRes)*100/outTot, "%", outTot-outRes),text_x,text_y-y_diff*3,text_color,text_size);
   TPad *pad_B_2 = new TPad("pad_B_2", "pad_B_2", 0, 0.006, 0.98, 0.227);
   c_B->cd();
   pad_B_2->Draw();

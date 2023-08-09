@@ -23,6 +23,8 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
+
 void Final2DFit(
     double ptLow=3, double ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
@@ -37,6 +39,9 @@ void Final2DFit(
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/Final",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/Final", DATE.Data()),kTRUE);
+
+  massLow=2.6;
+  massHigh=3.5;
 
   TString fname;
   if (PRw==1) fname="PR";
@@ -56,7 +61,7 @@ void Final2DFit(
   TString kineCut; TString OS; 
   TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
   
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_pp_y0.00_2.40_Effw1_Accw1_PtW1_TnP1_230323.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_pp_y0.00_2.40_Effw0_Accw0_PtW1_TnP1_230209.root"));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
   OS="recoQQsign==0 &&";
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
@@ -201,7 +206,7 @@ void Final2DFit(
   //else if(ptLow==9 && ptHigh==12) ws->factory("b_Jpsi[0.38, 0.36, 0.4]");
   //else if(ptLow==12 && ptHigh==50) ws->factory("b_Jpsi[0.48, 0.41, 0.49]");
   //else if(ptLow==15 && ptHigh==20) ws->factory("b_Jpsi[0.547, 0.5, 0.56]");
-  ws->factory("b_Jpsi[0.3, 1e-8, 1.]");//NP fraction for Sig
+  ws->factory("b_Jpsi[0.5, 1e-8, 1.]");//NP fraction for Sig
 
   //RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
   //    Conditional( *ws->pdf("pdfCTAUCOND_BkgPR"), RooArgList(*ws->var("ctau3D"))));
@@ -249,10 +254,10 @@ void Final2DFit(
   double njpsi = ws->var("N_Jpsi")->getVal();
   //ws->factory(Form("N_Jpsi_3[%.3f, %.3f, %.3f]",njpsi, njpsi*0.95, njpsi*1.05));
   //ws->factory(Form("N_Jpsi_3[ %.3f, %.3f]", 1e-6, 5e+7));
-  ws->factory(Form("N_Jpsi_3[%.3f, %.3f, %.3f]",njpsi, 1e-6, 5e+7));
+  ws->factory(Form("N_Jpsi[%.3f, %.3f, %.3f]",njpsi, 1e-6, 5e+7));
   double nbkg = ws->var("N_Bkg")->getVal();
   //ws->factory(Form("N_Bkg_3[%.3f, %.3f, %.3f]",nbkg, nbkg*0.95, nbkg*1.05));
-  ws->factory(Form("N_Bkg_3[%.3f, %.3f, %.3f]",nbkg, 1e-6, 5e+7));
+  ws->factory(Form("N_Bkg[%.3f, %.3f, %.3f]",nbkg, 1e-6, 5e+7));
   //ws->factory(Form("N_Bkg_3[ %.3f, %.3f]", 1e-6, 5e+7));
   cout<<"######"<<ws->var("N_Jpsi")->getError()<<endl;
 
@@ -307,21 +312,23 @@ void Final2DFit(
   c_G->SetLogy();
   pad_G_1->cd();
 
-  RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",ctauErrMin, ctauErrMax))->Clone("dsTot");
-  //RooDataSet* dsToFit = (RooDataSet*)dsTot->Clone("dsTot");
+  //RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",ctauErrMin, ctauErrMax))->Clone("dsTot");
+  RooDataSet* dsToFit = (RooDataSet*)dsTot->Clone("dsTot");
   dsToFit->SetName("dsToFit");
   ws->import(*dsToFit);
   //double normDSTot = ws->data("dsToFit")->sumEntries()/ws->data("dsTot")->sumEntries();
   //cout<<normDSTot<<": "<<ws->data("dsToFit")->sumEntries()<<"/"<<ws->data("dsTot")->sumEntries()<<endl;
   double normDSTot = (ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal())/ws->data("dsToFit")->sumEntries();
+  //double normDSTot = (ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal())/ws->data("dsToFit")->sumEntries();
   //cout<<normDSTot<<": "<<ws->var("N_Jpsi_Mean")->getVal()+ws->var("N_Bkg_Mean")->getVal()<<"/"<<ws->data("dsToFit")->sumEntries()<<endl;
   //double normBkg = ws->data("dsToFit")->sumEntries()*normDSTot/ws->data("dataw_Bkg")->sumEntries();
   //double normJpsi =ws->data("dsToFit")->sumEntries()*normDSTot/ws->data("dataw_Sig")->sumEntries();
 
   cout<<"##############START TOTAL CTAU FIT############"<<endl;
   bool isWeighted = ws->data("dsToFit")->isWeighted();
-  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
+  //RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   //RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
+  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   ws->import(*fitResult, "fitResult_pdfCTAUMASS_Tot");
 
   //DRAW
@@ -601,17 +608,50 @@ void Final2DFit(
 
   outh->SetBinContent(1,temp);
   outh->SetBinError(1,temperr);
-
-  fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();
   TFile *outFile = new TFile(Form("roots/2DFit_%s/Final/2DFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   //ws->Write();
   outFile->cd();
+  fitResult->Write();
+  fitResult->Print("V");
+  check_convergence(fitResult);
   outh->Write();
   //outh1->Write();
   //outh2->Write();
   //outh3->Write();
   //outh4->Write();
   outFile->Close();
+}
+
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

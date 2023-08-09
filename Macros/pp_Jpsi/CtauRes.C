@@ -23,6 +23,8 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
+
 void CtauRes(
     double ptLow=3, double ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
@@ -37,7 +39,7 @@ void CtauRes(
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="230429";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauRes",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauRes",DATE.Data()),kTRUE);
@@ -86,7 +88,7 @@ void CtauRes(
   cout<<"N_Jpsi: "<<ws->var("N_Jpsi")->getVal()<<"+/-"<<ws->var("N_Jpsi")->getError()<<endl;
   // create the variables for this model
   int nGauss = 3;
-  //if (ptLow==15&&ptHigh==20) {nGauss=2;}
+  if (ptLow==25&&ptHigh==50) {nGauss=2;}
   ws->factory("One[1.0]");
   ws->factory("ctauRes_mean[0.0]");
   //else {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.6, 0.01, 1.1]");}
@@ -98,6 +100,14 @@ void CtauRes(
   ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.96, 1e-3, 5.0]");
   ws->factory("rS32_CtauRes[2.57, 1e-3, 5.0]");}
+  else if(ptLow==3.5&&ptHigh==50){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[2.1, 1e-3, 10.0]");
+  ws->factory("rS32_CtauRes[3.1, 1e-3, 10.0]");}
   else if(ptLow==4.&&ptHigh==6.5){
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
@@ -114,6 +124,14 @@ void CtauRes(
   ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.96, 1e-3, 5.0]");
   ws->factory("rS32_CtauRes[2.57, 1e-3, 5.0]");}
+  else if(ptLow==6.5&&ptHigh==50){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[1.2, 1e-3, 8.0]");
+  ws->factory("rS32_CtauRes[2.1, 1e-3, 5.0]");}
   else if(ptLow==7&&ptHigh==8){
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
@@ -170,14 +188,46 @@ void CtauRes(
   ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.6, 1.5, 2.5]");
   ws->factory("rS32_CtauRes[2.57, 2., 10.0]");}
-  else if(ptLow==15&&ptHigh==50){
+  else if(ptLow==12&&ptHigh==15){
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.6, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.96, 1.5, 10.0]");
-  ws->factory("rS32_CtauRes[2.57, 2., 10.0]");}
+  ws->factory("s1_CtauRes[0.2, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[1.6, 1e-6, 10]");
+  ws->factory("rS32_CtauRes[2.57, 1e-6, 10.0]");}
+  else if(ptLow==15&&ptHigh==20){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.4, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[2.6, 1e-6, 10]");
+  ws->factory("rS32_CtauRes[2.57, 1e-6, 10.0]");}
+  else if(ptLow==20&&ptHigh==25){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[1.3, 1e-3, 5.0]");
+  ws->factory("rS32_CtauRes[2.1, 1e-3, 5.0]");}
+  else if(ptLow==20&&ptHigh==50){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.3, 1e-3, 10.0]");
+  ws->factory("rS21_CtauRes[1.3, 1, 10.0]");
+  ws->factory("rS32_CtauRes[2.1, 2., 10.0]");}
+  else if(ptLow==25&&ptHigh==50){
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.2, 1e-5, 1.0]");
+  ws->factory("rS21_CtauRes[0.4, 1e-5, 10]");
+  ws->factory("rS32_CtauRes[0.5, 1e-5, 10]");}
   else{
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
@@ -192,11 +242,15 @@ void CtauRes(
   ws->factory("RooFormulaVar::s3_CtauRes('@0*@1',{rS32_CtauRes,s2_CtauRes})");
   ws->factory("RooFormulaVar::s4_CtauRes('@0*@1',{rS43_CtauRes,s3_CtauRes})");
  
+
   //  ws->factory("f_CtauRes[0.4, 1e-6, 1.]");ws->factory("f2_CtauRes[0.2, 1e-6, 1.]");ws->factory("f3_CtauRes[0.7, 0., 1.]");}
   if(ptLow==6.5&&ptHigh==9) {ws->factory("f_CtauRes[0.28, 1e-6, 1.]");ws->factory("f2_CtauRes[0.3, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
   else if(ptLow==6.5&&ptHigh==12) {ws->factory("f_CtauRes[0.28, 1e-6, 1.]");ws->factory("f2_CtauRes[0.3, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
   else if(ptLow==8&&ptHigh==10) {ws->factory("f_CtauRes[0.28, 1e-6, 1.]");ws->factory("f2_CtauRes[0.1, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  else {ws->factory("f_CtauRes[0.28, 0., 1.]");ws->factory("f2_CtauRes[0.3, 0., 1.]");ws->factory("f3_CtauRes[0.5, 0., 1.]");}
+  //else if(ptLow==25&&ptHigh==50) {ws->factory("f_CtauRes[0.1, 1e-6, 1.]");ws->factory("f2_CtauRes[0.5, 1e-6, 1.]");ws->factory("f3_CtauRes[0.8, 1e-6, 1.]");}
+  else {ws->factory("f_CtauRes[0.6, 0., 1.]");ws->factory("f2_CtauRes[0.26, 0., 1.]");ws->factory("f3_CtauRes[0.8, 0., 1.]");}
+  
+  
   // create the three PDFs
   TString varName="ctau3DRes";
   ws->factory(Form("GaussModel::%s(%s, %s, %s,One,One)", "GaussModel1_ctauRes", varName.Data(),
@@ -264,7 +318,7 @@ void CtauRes(
   gPad->SetLogy();
   RooPlot* myPlot2_C = (RooPlot*)myPlot_C->Clone();
   bool isWeighted = ws->data("dataToFit")->isWeighted();
-  RooFitResult* fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
+  RooFitResult* fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), Hesse(true), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(4), PrintLevel(-1));
   ws->import(*fitCtauRes);
   //setFixedVarsToContantVars(ws);
   //ws->data("dataToFit")->plotOn(myPlot2_C, Name("dataHist_ctauRes"), DataError(RooAbsData::SumW2), XErrorSize(0),
@@ -413,5 +467,38 @@ void CtauRes(
   //	ctauResCutDS->Write();
   //datasetRes->Write();
   //fitCtauRes->Write();
+  check_convergence(fitCtauRes);
   outFile->Close();
+}
+
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

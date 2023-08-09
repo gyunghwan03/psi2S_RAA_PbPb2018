@@ -459,22 +459,22 @@ void makeMuonSkimTree(bool isMC = true, bool isPR = true,
         bool SelDone = false;
 
         if( mupl_isL2 && mumi_isL3){
-          tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 2, tnp_trgs); 
-          tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 3, tnp_trgs); 
+          tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 0, tnp_trgs); 
+          tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 1, tnp_trgs); 
           SelDone = true;
         }   
         else if( mupl_isL3 && mumi_isL2){
-          tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 3, tnp_trgs); 
-          tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 2, tnp_trgs); 
+          tnp_trig_weight_mupl = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 1, tnp_trgs); 
+          tnp_trig_weight_mumi = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 0, tnp_trgs); 
           SelDone = true;
         }   
         else if( mupl_isL3 && mumi_isL3){
-          double T1_ = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 3, tnp_trgs, true);
-          double T2_ = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 3, tnp_trgs, true);
-          double T1 = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 2, tnp_trgs, true);
-          double T2 = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 2, tnp_trgs, true);
+          double T1_ = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 1, tnp_trgs, true);
+          double T2_ = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 1, tnp_trgs, true);
+          double T1 = tnp_weight_trg_pbpb(mupl_Reco->Pt(), mupl_Reco->Eta(), 0, tnp_trgs, true);
+          double T2 = tnp_weight_trg_pbpb(mumi_Reco->Pt(), mumi_Reco->Eta(), 0, tnp_trgs, true);
           double den_ = T1_*T2 + (T1-T1_)*T2_;
-          double num_ = T1_*tnp_weight_trg_pbpb(pt1, eta1, 3, tnp_trgs)*T2*tnp_weight_trg_pbpb(pt2, eta2, 2, tnp_trgs) + (T1*tnp_weight_trg_pbpb(pt1, eta1, 2, tnp_trgs)-T1_*tnp_weight_trg_pbpb(pt1, eta1, 3, tnp_trgs))*T2_*tnp_weight_trg_pbpb(pt2, eta2, 3, tnp_trgs);
+          double num_ = T1_*tnp_weight_trg_pbpb(pt1, eta1, 1, tnp_trgs)*T2*tnp_weight_trg_pbpb(pt2, eta2, 0, tnp_trgs) + (T1*tnp_weight_trg_pbpb(pt1, eta1, 0, tnp_trgs)-T1_*tnp_weight_trg_pbpb(pt1, eta1, 1, tnp_trgs))*T2_*tnp_weight_trg_pbpb(pt2, eta2, 1, tnp_trgs);
 
           tnp_trig_weight_mupl = num_/den_; tnp_trig_weight_mumi = 1;
           if(den_<=0 || num_<=0){cout << "ERROR wrong calculation" << endl; continue;}

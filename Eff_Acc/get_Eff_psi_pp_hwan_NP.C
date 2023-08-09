@@ -1,10 +1,10 @@
 #include <iostream>
 #include <TLorentzVector.h>
-#include "commonUtility.h"
-#include "JpsiUtility.h"
-#include "HiEvtPlaneList.h"
-#include "cutsAndBin.h"
-#include "Style.h"
+#include "../commonUtility.h"
+#include "../JpsiUtility.h"
+#include "../HiEvtPlaneList.h"
+#include "../cutsAndBin.h"
+#include "../Style.h"
 //#include "Style_jaebeom.h"
 //#include "tnp_weight_lowptPbPb.h"
 #include "../tnp_weight_pp.h"
@@ -44,8 +44,8 @@ void get_Eff_psi_pp_hwan_NP(
   //input files
   //PbPb
   //TString inputMC1 = "/work2/Oniatree/JPsi/OniaTree_psi2SMM_5p02TeV_TuneCUETP8M1_nofilter_pp502Fall15-MCRUN2_71_V1-v1_GENONLY.root";
-  TString inputMC1 = "/work2/Oniatree/Psi2S/OniatreeMC_BtoPsi2S_pThat-2_TuneCP5-EvtGen_HydjetDrumMB_5p02TeV_pythia8.root";	//PbPb_non prompt
-  TChain* mytree = new TChain("myTree"); 
+  TString inputMC1 = "/work2/Oniatree/Psi2S/OniatreeMC_BPsi2SMM_TuneCUETP8M1_5p02TeV_pythia8_ptHatMin2_ONIATREE.root";	//pp_non prompt
+  TChain* mytree = new TChain("hionia/myTree"); 
   mytree->Add(inputMC1.Data());
   //TFile *inf = new TFile("../OniatreeMC_Psi2S_pThat-2_TuneCP5_HydjetDrumMB_5p02TeV_pythia8.root","READ");
   //TTree *mytree = (TTree*)inf->Get("myTree");
@@ -56,24 +56,26 @@ void get_Eff_psi_pp_hwan_NP(
 
   //pT reweighting function
   //ratioDataMC_AA_Jpsi_DATA_y0.0-2.4_210915.root
-  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root","read");
-  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230420.root","read");
+  //TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root","read");
+  //TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230420.root","read");
+  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_BtoPsi2S_DATA_y0_1p6_230629.root","read");
+  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_BtoPsi2S_DATA_y1p6_2p4_230629.root","read");
   //if(state==2) TFile *fPtW = new TFile("ratioDataMC_AA_btojpsi_DATA_1s.root","read");
   TF1* fptw1 = (TF1*) fPtW1->Get("dataMC_Ratio1");
   TF1* fptw2 = (TF1*) fPtW2->Get("dataMC_Ratio1");
 
 
-  double ptBin_for[5] = {0,3,6.5,12,50};
-  double ptBin_mid[7] = {0,6.5,9,12,15,20,50};
+  double ptBin_for[6] = {0,3.5,5,6.5,12,50};
+  double ptBin_mid[9] = {0,6.5,9,12,15,20,25,30,50};
   double centBin_for[4] = {0,40,80,180};
   double centBin_mid[7] = {0,10,20,30,40,50,90};
   float yBin[7] = {0,0.4,0.8,1.2,1.6,2.0,2.4};
 
-  TH1D* hpt_reco_1 = new TH1D("hpt_reco_1","hpt_reco_1",4,ptBin_for);
-  TH1D* hpt_reco_2 = new TH1D("hpt_reco_2","hpt_reco_2",6,ptBin_mid);
+  TH1D* hpt_reco_1 = new TH1D("hpt_reco_1","hpt_reco_1",5,ptBin_for);
+  TH1D* hpt_reco_2 = new TH1D("hpt_reco_2","hpt_reco_2",8,ptBin_mid);
 
-  TH1D* hpt_gen_1 = new TH1D("hpt_gen_1","hpt_gen_1",4,ptBin_for);
-  TH1D* hpt_gen_2 = new TH1D("hpt_gen_2","hpt_gen_2",6,ptBin_mid);
+  TH1D* hpt_gen_1 = new TH1D("hpt_gen_1","hpt_gen_1",5,ptBin_for);
+  TH1D* hpt_gen_2 = new TH1D("hpt_gen_2","hpt_gen_2",8,ptBin_mid);
 
   TH1D* hInt_gen_1 = new TH1D("hInt_gen_1", "",1,0,50);
   TH1D* hInt_gen_2 = new TH1D("hInt_gen_2", "",1,0,50);
@@ -108,8 +110,8 @@ void get_Eff_psi_pp_hwan_NP(
 
   const int maxBranchSize = 1000;
   ULong64_t       HLTriggers;
-  Int_t           Gen_QQ_size;
-  Int_t           Gen_mu_size;
+  Short_t           Gen_QQ_size;
+  Short_t           Gen_mu_size;
   TClonesArray    *Gen_QQ_4mom;
   TClonesArray    *Gen_mu_4mom;
   ULong64_t       Gen_QQ_trig[maxBranchSize];   //[Gen_QQ_size]
@@ -129,20 +131,20 @@ void get_Eff_psi_pp_hwan_NP(
   mytree->SetBranchAddress("Gen_mu_4mom", &Gen_mu_4mom, &b_Gen_mu_4mom);
 
   //  muon id 
-  Int_t           Gen_QQ_mupl_idx[maxBranchSize];
-  Int_t           Gen_QQ_mumi_idx[maxBranchSize];
+  Short_t           Gen_QQ_mupl_idx[maxBranchSize];
+  Short_t           Gen_QQ_mumi_idx[maxBranchSize];
   TBranch        *b_Gen_QQ_mupl_idx;
   TBranch        *b_Gen_QQ_mumi_idx;
   mytree->SetBranchAddress("Gen_QQ_mupl_idx",Gen_QQ_mupl_idx,&b_Gen_QQ_mupl_idx);
   mytree->SetBranchAddress("Gen_QQ_mumi_idx",Gen_QQ_mumi_idx,&b_Gen_QQ_mumi_idx);
 
-  Int_t           Gen_mu_charge[maxBranchSize];
+  Short_t           Gen_mu_charge[maxBranchSize];
   TBranch        *b_Gen_mu_charge;   //!
   mytree->SetBranchAddress("Gen_mu_charge", Gen_mu_charge, &b_Gen_mu_charge);
 
 
-  Int_t           Reco_QQ_size;
-  Int_t           Reco_mu_size;
+  Short_t           Reco_QQ_size;
+  Short_t           Reco_mu_size;
   TClonesArray    *Reco_QQ_4mom;
   TClonesArray    *Reco_mu_4mom;
   ULong64_t       Reco_QQ_trig[maxBranchSize];   //[Reco_QQ_size]
@@ -167,8 +169,8 @@ void get_Eff_psi_pp_hwan_NP(
   mytree->SetBranchAddress("Reco_QQ_VtxProb", Reco_QQ_VtxProb, &b_Reco_QQ_VtxProb);
 
   //  muon id 
-  Int_t           Reco_QQ_mupl_idx[maxBranchSize];
-  Int_t           Reco_QQ_mumi_idx[maxBranchSize];
+  Short_t           Reco_QQ_mupl_idx[maxBranchSize];
+  Short_t           Reco_QQ_mumi_idx[maxBranchSize];
   TBranch        *b_Reco_QQ_mupl_idx;
   TBranch        *b_Reco_QQ_mumi_idx;
   mytree->SetBranchAddress("Reco_QQ_mupl_idx",Reco_QQ_mupl_idx,&b_Reco_QQ_mupl_idx);
@@ -187,7 +189,7 @@ void get_Eff_psi_pp_hwan_NP(
   Int_t           Reco_mu_nPixWMea[maxBranchSize];   //[Reco_mu_size]
   TBranch        *b_Reco_mu_nPixWMea;   //!
   mytree->SetBranchAddress("Reco_mu_nPixWMea", Reco_mu_nPixWMea, &b_Reco_mu_nPixWMea);
-  Int_t           Reco_QQ_sign[maxBranchSize];   //[Reco_QQ_size]
+  Short_t           Reco_QQ_sign[maxBranchSize];   //[Reco_QQ_size]
   TBranch        *b_Reco_QQ_sign;   //!
   mytree->SetBranchAddress("Reco_QQ_sign", Reco_QQ_sign, &b_Reco_QQ_sign);
 
@@ -195,7 +197,7 @@ void get_Eff_psi_pp_hwan_NP(
   TBranch        *b_Reco_mu_SelectionType;
   mytree->SetBranchAddress("Reco_mu_SelectionType", Reco_mu_SelectionType, &b_Reco_mu_SelectionType);
 
-  Int_t Reco_mu_whichGen[maxBranchSize];
+  Short_t Reco_mu_whichGen[maxBranchSize];
   TBranch *b_Reco_mu_whichGen;
   Float_t Gen_weight;
   TBranch *b_Gen_weight;
@@ -272,7 +274,7 @@ void get_Eff_psi_pp_hwan_NP(
 		if(isPtWeight && fabs(JP_Gen->Rapidity()) > 1.6 && fabs(JP_Gen->Rapidity() < 2.4) ) pt_weight = fptw2->Eval(JP_Gen->Pt());
 	    if(JP_Gen->Pt() > 6.5) hy_gen->Fill(Rapidity_g, weight*pt_weight);
 		//if(Rapidity_g > 1.6 && Rapidity_g <2.4) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); }
-	    if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3 && JP_Gen->Pt()<50) {  hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_1->Fill(1,weight*pt_weight); }
+	    if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<50) {  hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_1->Fill(1,weight*pt_weight); }
 	    if(Rapidity_g < 1.6 && JP_Gen->Pt()>6.5 && JP_Gen->Pt()<50) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
 
 	    //if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -412,7 +414,7 @@ void get_Eff_psi_pp_hwan_NP(
       //cout<<"pt_Weight in reco : "<<pt_weight<<endl;
       if(HLTPass==true && HLTFilterPass==true){
 	      //if(Rapidity > 1.6 && Rapidity < 2.4) { hpt_reco_1->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight);}
-		  if(Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt()>3 && JP_Reco->Pt()<50) { hpt_reco_1->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_1->Fill(1, weight*tnp_weight*pt_weight); }
+		  if(Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt()>3.5 && JP_Reco->Pt()<50) { hpt_reco_1->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_1->Fill(1, weight*tnp_weight*pt_weight); }
 	      if(Rapidity < 1.6 && JP_Reco->Pt()>6.5 && JP_Reco->Pt()<50) { hpt_reco_2->Fill(JP_Reco->Pt(), weight* tnp_weight* pt_weight); hInt_reco_2->Fill(1, weight*tnp_weight*pt_weight); }
           
           //if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -531,7 +533,7 @@ void get_Eff_psi_pp_hwan_NP(
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
   TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp%d_20230416.root",isPtWeight,isTnP);
-  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_new_20230424.root",isPtWeight,isTnP);
+  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_20230629.root",isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
   hpt_eff_2->Write();

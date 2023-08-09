@@ -101,14 +101,15 @@ void TNPUnc(bool incl_pp, bool incl_pbpb, bool dopt){
 		return tnpUnc;
 	};
 
+	//(bool isPbPb, bool isPR, bool isFwd, bool isPT, float ptLow, float ptHigh, int cbinLow, int cbinHigh)
 	if( dopt ){
 		for( auto idx : ROOT::TSeqI(numbin_for)){
 			hist_for_PR->SetBinContent(idx+1, getUncBin(incl_pbpb, true , true, dopt, (float) ptBin_for[idx], (float) ptBin_for[idx+1] , 0, 181)) ;
 			hist_for_NP->SetBinContent(idx+1, getUncBin(incl_pbpb, false, true, dopt, (float) ptBin_for[idx], (float) ptBin_for[idx+1] , 0, 181)) ;
 		}
 		for( auto idx : ROOT::TSeqI(numbin_mid)){
-			hist_mid_PR->SetBinContent(idx+1, getUncBin(incl_pbpb, true , false, dopt, (float) ptBin_for[idx], (float) ptBin_for[idx+1] , 0, 181)) ;
-			hist_mid_NP->SetBinContent(idx+1, getUncBin(incl_pbpb, false, false, dopt, (float) ptBin_for[idx], (float) ptBin_for[idx+1] , 0, 181)) ;
+			hist_mid_PR->SetBinContent(idx+1, getUncBin(incl_pbpb, true , false, dopt, (float) ptBin_mid[idx], (float) ptBin_mid[idx+1] , 0, 181)) ;
+			hist_mid_NP->SetBinContent(idx+1, getUncBin(incl_pbpb, false, false, dopt, (float) ptBin_mid[idx], (float) ptBin_mid[idx+1] , 0, 181)) ;
 		}
 	}
 	if( dopt ){
@@ -117,8 +118,8 @@ void TNPUnc(bool incl_pp, bool incl_pbpb, bool dopt){
 			hist_for_NP->SetBinContent(idx+1, getUncBin(incl_pbpb, false, true, dopt, (float) ptBin_for[idx], (float) ptBin_for[idx+1] , 0, 181)) ;
 		}
 		for( auto idx : ROOT::TSeqI(numbin_mid)){
-			hist_mid_PR->SetBinContent(idx+1, getUncBin(incl_pbpb, true , false, dopt, (float) ptBin_for[idx], (float) ptBin_for[idx+1] , 0, 181)) ;
-			hist_mid_NP->SetBinContent(idx+1, getUncBin(incl_pbpb, false, false, dopt, (float) ptBin_for[idx], (float) ptBin_for[idx+1] , 0, 181)) ;
+			hist_mid_PR->SetBinContent(idx+1, getUncBin(incl_pbpb, true , false, dopt, (float) ptBin_mid[idx], (float) ptBin_mid[idx+1] , 0, 181)) ;
+			hist_mid_NP->SetBinContent(idx+1, getUncBin(incl_pbpb, false, false, dopt, (float) ptBin_mid[idx], (float) ptBin_mid[idx+1] , 0, 181)) ;
 		}
 	}
 
