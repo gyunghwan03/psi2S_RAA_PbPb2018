@@ -26,7 +26,7 @@ void CtauErr(
     double ptLow=3, double ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
     int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
 
@@ -37,7 +37,7 @@ void CtauErr(
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="221116";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
@@ -85,7 +85,7 @@ void CtauErr(
   argSet->add(*(ws->var("pt1")) ); argSet->add(*(ws->var("pt2")) ); argSet->add(*(ws->var("eta1")) );  argSet->add(*(ws->var("eta2")) ); argSet->add(*(ws->var("recoQQsign")) ); argSet->add(*(ws->var("cBin"))); 
   RooDataSet *datasetW = new RooDataSet("datasetW","A sample",
 		  *argSet,
-		  Import(*dataset),WeightVar(*ws->var("weight")));
+		  Import(*dataset));//WeightVar(*ws->var("weight")));
   RooDataSet *datasetWo = new RooDataSet("datasetWo","A sample",
 		  *argSet,
 		  Import(*dataset));

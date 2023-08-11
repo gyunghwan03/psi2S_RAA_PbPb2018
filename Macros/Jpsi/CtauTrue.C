@@ -36,7 +36,7 @@ void CtauTrue(
   TStopwatch *t = new TStopwatch;
   t->Start();
   
-  TString DATE="221116";
+  TString DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
@@ -126,20 +126,26 @@ void CtauTrue(
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]");}
+  ws->factory("fDSS[0.8, 0., 1.]");
+  ws->factory("fDSS1[0.8, 0., 1.]");}
   else if(ptLow==12&&ptHigh==15){
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]");}
+  ws->factory("fDSS[0.8, 0., 1.]");
+  ws->factory("fDSS1[0.8, 0., 1.]");}
+  else if(ptLow==12&&ptHigh==15){
+  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
+  ws->factory("fDSS[0.5, 0., 1.]");
+  ws->factory("fDSS1[0.5, 0., 1.]");}
   else {
   ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]"); }
+  ws->factory("fDSS[0.5, 0., 1.]");
+  ws->factory("fDSS1[0.5, 0., 1.]"); }
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");
