@@ -27,7 +27,7 @@ void CtauBkg(
     float ptLow=3, float ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
     int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
 
@@ -35,7 +35,7 @@ void CtauBkg(
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="221116";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauBkg",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauBkg",DATE.Data()),kTRUE);
@@ -110,6 +110,13 @@ void CtauBkg(
   ws->factory("lambdaDDS_Bkg[0.8, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg[ 0.05, 1e-6, 1.]");
   ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  else if(ptLow==20&&ptHigh==25){
+  ws->factory("b_Bkg[0.1, 1e-6, 1]");//NP fraction for bkg
+  ws->factory("fDFSS[0.1, 1e-6, 1.]");
+  ws->factory("fDLIV[0.1, 1e-6, 1.]");
+  ws->factory("lambdaDDS_Bkg[0.8, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg[ 0.05, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
   else {
   ws->factory("b_Bkg[0.1, 1e-6, 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.5, 1e-6, 1.]");
@@ -173,8 +180,9 @@ void CtauBkg(
   //if (cLow==80&&cHigh==100) ctauMin=-1.0;
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
-  //if(ptLow>=15) { ctauMin=-1.5;}
-  if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
+  if(ptLow>=15) { ctauMin=-1.5;}
+  else if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
+  else if(ptLow==6.5&&cLow==100&&cHigh==180) ctauMin=-1.25;
 
   TCanvas* c_E =  new TCanvas("canvas_E","My plots",1108,4,550,520);
   c_E->cd();
@@ -330,4 +338,5 @@ void CtauBkg(
   datasetCBkg->Write();
   wscbkg->Write();
   outFile->Close();
+  fitCtauBkg->Print("V");
 }

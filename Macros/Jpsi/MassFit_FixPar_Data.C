@@ -27,14 +27,14 @@ void MassFit_FixPar_Data(
     double ptLow=3, double ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
     int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
   //TString DATE = "10_60";
   //TString DATE = "20_40";
   //TString DATE = "0_180";
   TString DATE;
-  DATE="221116";
+  DATE="No_Weight";
   //if(ptLow==6.5&&ptHigh==50) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
   gStyle->SetEndErrorSize(0);
@@ -85,7 +85,7 @@ void MassFit_FixPar_Data(
   ws->data("dataset")->Print();
   cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow/2<<"-"<<cHigh/2<<"%"<<endl;
   cout << "####################################" << endl;
-  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset),WeightVar(*ws->var("weight")));
+  RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset));//,WeightVar(*ws->var("weight")));
   //RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset));
   RooDataSet *dsAB = (RooDataSet*)datasetW->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), kineCut.Data() );
   cout << "******** New Combined Dataset ***********" << endl;
@@ -98,7 +98,7 @@ void MassFit_FixPar_Data(
   //****************************** MASS FIT *******************************
   //***********************************************************************
 
-  TFile * f_fit = new TFile(Form("roots_MC/Mass/MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d_NColl.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
   RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
   ws_fit->import(*dataset_fit);
@@ -139,7 +139,7 @@ void MassFit_FixPar_Data(
   //double paramsupper[6] = {alpha_higher, 3.1, 0.06,  3.50, 1.0, 25.0};
 
   double paramslower[6] = {alpha_lower, n_lower, 0.0, xA_lower, 0.0,  0.0};
-  double paramsupper[6] = {alpha_higher, n_higher, 0.1, xA_higher, 1.0, 25.0};
+  double paramsupper[6] = {alpha_higher, n_higher, 0.13, xA_higher, 1.0, 25.0};
 
   //double alpha_1_init = 2.1; double n_1_init = 1.65;
   //double sigma_1_init = 0.04; double x_init = 2.15; double f_init = 0.75;
@@ -187,7 +187,7 @@ void MassFit_FixPar_Data(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.28, -10., 10.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.0, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
   RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.0, -1., 1.);
   RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.0, -1., 1.);
   RooRealVar *sl4 = new RooRealVar("sl4","sl4", 0.0, -1., 1.);
@@ -209,13 +209,13 @@ void MassFit_FixPar_Data(
   //*sl1, *sl2, *sl3, *sl4, *sl5, *sl6
   //pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList());
   //pdfMASS_bkg = new RooExponential("pdfMASS_bkg","Background",*(ws->var("mass")),*sl1);
-  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
+  if (ptLow<6.5) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
   else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
   //Build the model
   //RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,700000);
   //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,1400000);
-  Double_t NBkg_limit = 2.0e+09;
-  Double_t NJpsi_limit = 1.0e+08;
+  Double_t NBkg_limit = 2.0e+08;
+  Double_t NJpsi_limit = 1.0e+07;
   if (ptLow==12&&ptHigh==15)  {
 	   NBkg_limit = 1e+5;
 	   NJpsi_limit = 1e+5; }
@@ -225,6 +225,12 @@ void MassFit_FixPar_Data(
   else if (ptLow==20&&ptHigh==50)  {
 	   NBkg_limit = 1e+6;
 	   NJpsi_limit = 1e+5; }
+  else if (ptLow==6.5&&cLow==20&&cHigh==40) {
+	  NBkg_limit = 1e+6;
+	  NJpsi_limit = 1e+6; }
+  else if (ptLow==6.5&&cLow==100&&cHigh==180) {
+	  NBkg_limit = 1e+6;
+	  NJpsi_limit = 1e+5; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
@@ -309,7 +315,7 @@ void MassFit_FixPar_Data(
   //RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Constrain(RooArgSet(*f,sigma_1_A)),Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
   RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
-//  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
+  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_Tot"), LineColor(kBlack));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_1_A)), LineColor(44));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_2_A)), LineColor(8));
@@ -458,7 +464,7 @@ void MassFit_FixPar_Data(
   pdfMASS_Tot->Write();
   pdfMASS_bkg->Write();
   datasetMass->Write();
-  ws->Write();
+  //ws->Write();
   outh->Write();
   fitMass->Write();
   outFile->Close();
