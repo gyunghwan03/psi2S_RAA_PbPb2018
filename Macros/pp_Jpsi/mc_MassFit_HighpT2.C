@@ -25,7 +25,7 @@ using namespace RooFit;
 
 void check_convergence(RooFitResult *fit_result);
 
-void mc_MassFit_HighpT(
+void mc_MassFit_HighpT2(
 		float ptLow=6.5, float ptHigh=9.0,
 		float yLow=0, float yHigh=1.6,
 		int PR=0, //0=PR, 1=NP, 2=Inc.
@@ -68,8 +68,6 @@ void mc_MassFit_HighpT(
 
     // MC
     TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_isMC1_Jpsi_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230717.root", "read");
-    //TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_isMC1_Jpsi_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230810.root", "read"); // mass range (2.2 - 4)
-    
 
 
 	// cout << "Input file: "
@@ -79,13 +77,12 @@ void mc_MassFit_HighpT(
 
 	massLow=2.6;
 	massHigh=3.5;
-    
-    double fit_limit = 3.26;
 
 	TString kineCut;
 	kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
 
-	TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
+	//TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
+    TString accCut = "(abs(eta1) <= 5) &&";//2018 acceptance cut
 
 	TString OS="recoQQsign==0 &&";
 
@@ -100,19 +97,6 @@ void mc_MassFit_HighpT(
 	cout << "####################################" << endl;
 	RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset),WeightVar(*ws->var("weight")));
 	RooDataSet *dsAB = (RooDataSet*)datasetW->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), kineCut.Data() );
-
-    cout << "======= dataset ======\n";
-    dataset->Print("V");
-    cout << endl << endl;
-
-    cout << "======= datasetW ======\n";
-    datasetW->Print("V");
-    cout << endl << endl;
-
-    cout << "======= dsAB ======\n";
-    dsAB->Print("V");
-    cout << endl << endl;
-
 	cout << "******** New Combined Dataset ***********" << endl;
 	dsAB->SetName("dsAB");
 	ws->import(*dsAB);
@@ -132,12 +116,18 @@ void mc_MassFit_HighpT(
 	double alpha_1_init = 1.9581;
 	double n_1_init = 1.8425;
 	double f_init = 0.5886;
-    double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
     double N_Jpsi_high = 250000; // 2500000
-	double N_Bkg_high = 200000;
-
-    //double fit_limit = 3.3;
-    if(ptLow==6.5&&ptHigh==50) {
+    //double fit_limit = 3.5;
+    double fit_limit = 3.24;
+    if(ptLow==6.5&&ptHigh==9) {
+        N_Jpsi_high = 200000;
+        sigma_1_init = 0.051;
+        x_init = 0.52;
+	    alpha_1_init = 2.5;
+	    n_1_init = 1.56;
+	    f_init = 0.18;
+    }
+    else if(ptLow==6.5&&ptHigh==50) {
         N_Jpsi_high = 5000000;
         sigma_1_init = 0.03;
         x_init = 0.2;
@@ -163,12 +153,12 @@ void mc_MassFit_HighpT(
     }
 
 	double m_lambda_init = 5;
-	double mass_jpsi = pdgMass.JPsi;
+	double psi_2S_mass = pdgMass.Psi2S;
     // cout << psi_2S_mass << endl;
     // exit(1);
 
     //SIGNAL
-    RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.1, pdgMass.JPsi+0.1);
+    RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-pdgMass.JPsi*0.01, pdgMass.JPsi+pdgMass.JPsi*0.01);
     RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[1], paramsupper[1]);
     RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[0], paramsupper[0]);
     RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
@@ -186,26 +176,14 @@ void mc_MassFit_HighpT(
     RooCBShape* cb_2_A = new RooCBShape("cball_2_A", "cystal Ball", *(ws->var("mass")), mean, sigma_2_A, alpha_2_A, n_2_A);
     pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
 
-    //BACKGROUND
-    RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-    RooRealVar *sl1 = new RooRealVar("sl1","sl1", sl1_mean, -10., 10.);
-    RooRealVar *sl2 = new RooRealVar("sl2","sl2", sl2_mean, -10., 10.);
-    RooRealVar *sl3 = new RooRealVar("sl3","sl3", sl3_mean, -10., 10.);
-
-    //THIS IS THE BACKGROUND FUNCTION
-    RooChebychev *pdfMASS_bkg;
-    pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2, *sl3));
-
     //Build the model
-    RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0, N_Jpsi_high);
-    RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0, N_Bkg_high);
-    //RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
+    RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",N_Jpsi_high*0.5,0, N_Jpsi_high);
     RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi),RooArgList(*N_Jpsi));
     //pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *bkg_1order),RooArgList(*N_Jpsi,*N_Bkg));
     //pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","PR Jpsi + NP Jpsi + Bkg",RooArgList(*cb_1_A, *cb_2_A, *bkg),RooArgList(*N_JpsiPR,*N_JpsiNP,*N_Bkg));
     ws->import(*pdfMASS_Tot);
 
-    //nMassBin = 46;
+    //nMassBin = 25;
     TCanvas* c_A =  new TCanvas("canvas_A","My plots",4,4,550,520);
     c_A->cd();
     TPad *pad_A_1 = new TPad("pad_A_1", "pad_A_1", 0, 0.16, 0.98, 1.0);
@@ -224,7 +202,7 @@ void mc_MassFit_HighpT(
     dsAB->plotOn(myPlot2_A,Name("dataOS"),MarkerSize(.8));
     bool isWeighted = ws->data("dsAB")->isWeighted();
     cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
-    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,fit_limit), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(4));
+    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(2.8,3.24), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(4));
     cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
 	fitMass->Print("V");
     
@@ -249,11 +227,11 @@ void mc_MassFit_HighpT(
     */
     
     double f_factor = (double) fitFraction.getVal();
-    ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_tot"), LineColor(kBlack), Range(massLow, fit_limit));
+    ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_tot"), LineColor(kBlack), Range(2.6, fit_limit));
     // ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Range(3.4, 3.87), Normalization(fitFraction.getVal()));
     // ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Range(3.4, 3.87), Normalization(1-fitFraction.getVal()));
-    ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Normalization(fitFraction.getVal()), Range(massLow, fit_limit));
-    ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(massLow, fit_limit));
+    ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Normalization(fitFraction.getVal()), Range(2.6, fit_limit));
+    ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(2.6, fit_limit));
     //ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("Sig_A"),Components(RooArgSet(*pdfMASS_Jpsi)),LineColor(kOrange+7),LineWidth(2),LineStyle(2));
 
     //make a pretty plot

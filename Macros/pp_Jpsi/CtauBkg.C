@@ -88,14 +88,28 @@ void CtauBkg(
   //***********************************************************************
   cout <<endl <<"************** Start BKG Ctau Fit *****************" <<endl <<endl;
   //make parameter 3 exp
-  ws->factory("zeroMean[0.0]");
-  if(ptLow==12&&ptHigh==15){
-  ws->factory("b_Bkg[0.6, 1e-6, 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.01, 1e-6, 1.]");
-  ws->factory("fDLIV[0.8, 1e-6, 1.]");
-  ws->factory("lambdaDDS_Bkg[2, 1e-6, 10.]");
-  ws->factory("lambdaDF_Bkg[ 2, 1e-6, 10]");
-  ws->factory("lambdaDSS_Bkg[2, 1e-6, 10.]");}
+ ws->factory("zeroMean[0.0]");
+  if(ptLow==5&&ptHigh==6.5){
+  ws->factory("b_Bkg[0.0.5, 1e-3, 1]");//NP fraction for bkg
+  ws->factory("fDFSS[0.86, 1e-3, 1]");
+  ws->factory("fDLIV[0.9, 1e-3, 1]");
+  ws->factory("lambdaDDS_Bkg[0.8, 1e-3, 1]");
+  ws->factory("lambdaDF_Bkg[0.09, 1e-3, 1]");
+  ws->factory("lambdaDSS_Bkg[0.37, 1e-3, 1]");}
+  else if(ptLow==6.5&&ptHigh==9){
+  ws->factory("b_Bkg[0.74, 1e-6, 1]");//NP fraction for bkg
+  ws->factory("fDFSS[0.89, 1e-6, 1]");
+  ws->factory("fDLIV[0.77, 1e-6, 1]");
+  ws->factory("lambdaDDS_Bkg[0.42, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg[0.133, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.92, 1e-6, 1]");}
+  else if(ptLow==12&&ptHigh==15){
+  ws->factory("b_Bkg[0.84, 1e-6, 1]");//NP fraction for bkg
+  ws->factory("fDFSS[0.94, 1e-6, 1]");
+  ws->factory("fDLIV[0.892, 1e-6, 1]");
+  ws->factory("lambdaDDS_Bkg[0.11, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg[0.028, 1e-6, 1]");
+  ws->factory("lambdaDSS_Bkg[0.41, 1e-6, 1]");}
   else if(ptLow==15&&ptHigh==20){
   ws->factory("b_Bkg[0.3, 1e-6, 0.9]");//NP fraction for bkg
   ws->factory("fDFSS[0.1, 1e-6, 0.9]");
@@ -111,12 +125,14 @@ void CtauBkg(
   ws->factory("lambdaDF_Bkg[0.02, 1e-6, 1.]");
   ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
   else {
-  ws->factory("b_Bkg[0.1, 1e-6, 1.]");//NP fraction for bkg
+  ws->factory("b_Bkg[0.1, 1e-6, 1.]"); // NP fraction for bkg
   ws->factory("fDFSS[0.5, 1e-6, 1.]");
   ws->factory("fDLIV[0.5, 1e-6, 1.]");
   ws->factory("lambdaDDS_Bkg[0.3, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg[0.5, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");}
+  ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");
+  }
+
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
@@ -174,11 +190,12 @@ void CtauBkg(
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
   //if(ptLow>=15) { ctauMin=-1.5;}
-
-  if(ptLow==6.5&&ptHigh==9) { ctauMin=-2.2; ctauMax=3.7; }
+  if(ptLow==5&&ptHigh==6.5) { ctauMin=-1.9, ctauMax=3.8;}
+  if(ptLow==5&&ptHigh==6) { ctauMin=-2, ctauMax=3.5;}
+  if(ptLow==6.5&&ptHigh==9) { ctauMin=-1, ctauMax=2;}
   if(ptLow>=15) { ctauMin=-1.5, ctauMax=3.7; }
   //else if(ptLow==12&&ptHigh==15) { ctauMin=-1.37; ctauMax=3.7; }
-
+  // ctauLow=-1; ctauHigh=2; One line only for test. Can remove w/o issue. pjgwak
   TCanvas* c_E =  new TCanvas("canvas_E","My plots",1108,4,550,520);
   c_E->cd();
   TPad *pad_E_1 = new TPad("pad_E_1", "pad_E_1", 0, 0.16, 0.98, 1.0);
@@ -189,7 +206,20 @@ void CtauBkg(
 
   ws->pdf("pdfCTAU_Bkg_Tot")->setNormRange("ctauWindow");
 
-  RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f",ctauMin, ctauMax))->Clone("dataw_Bkg");
+  RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(
+    Form(
+        "ctau3D>=%.f && ctau3D<=%.f && ((mass>2.7&&mass<2.8)||(mass>3.2&&mass<3.3))"
+        ,ctauMin, ctauMax)
+    )->Clone("dataw_Bkg");
+
+  //RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(
+  //  Form(
+  //      "((mass>2.92&&mass<2.98)||(mass>3.21&&mass<3.28))"
+  //      )
+  //  )->Clone("dataw_Bkg");
+
+  //RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f" ,ctauMin, ctauMax))->Clone("dataw_Bkg");
+  //RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f",ctauMin, ctauMax))->Clone("dataw_Bkg");
 //  RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f",-2.0, 4.0))->Clone("dataw_Bkg");
   ws->import(*dataToFit, Rename("dataToFit"));
 
@@ -208,8 +238,8 @@ void CtauBkg(
 
   myPlot2_E->updateNormVars(RooArgSet(*ws->var("mass"), *ws->var("ctau3D"), *ws->var("ctau3DErr"))) ;
 
-  ws->data("dataToFit")->plotOn(myPlot2_E, Name("data_ctauBkg"), DataError(RooAbsData::SumW2), XErrorSize(0), MarkerColor(kBlue), LineColor(kBlue), MarkerSize(0.7));
-  ws->data("dataw_Bkg")->plotOn(myPlot2_E, Name("data_ctauBkg"), DataError(RooAbsData::SumW2), XErrorSize(0), MarkerColor(kBlack), LineColor(kBlack), MarkerSize(0.7));
+  //ws->data("dataToFit")->plotOn(myPlot2_E, Name("data_ctauBkg"), DataError(RooAbsData::SumW2), XErrorSize(0), MarkerColor(kBlue), LineColor(kBlue), MarkerSize(0.7));
+  //ws->data("dataw_Bkg")->plotOn(myPlot2_E, Name("data_ctauBkg"), DataError(RooAbsData::SumW2), XErrorSize(0), MarkerColor(kBlack), LineColor(kBlack), MarkerSize(0.7));
   ws->pdf("pdfCTAU_Bkg_Tot")->plotOn(myPlot2_E, Name("ctauBkg_Tot"),  Normalization(normBkg, RooAbsReal::NumEvent), NumCPU(nCPU),
       ProjWData(RooArgSet(*ws->var("ctau3DErr")), *ws->data("dataw_Bkg"), kTRUE),
       FillStyle(1001), FillColor(kAzure-9), VLines(), DrawOption("LCF"), Precision(1e-4));
@@ -330,6 +360,7 @@ void CtauBkg(
   //pdfTot_Bkg->Write();
   datasetCBkg->Write();
   wscbkg->Write();
+  dataToFit->Print();
   check_convergence(fitCtauBkg);
   outFile->Close();
 }
