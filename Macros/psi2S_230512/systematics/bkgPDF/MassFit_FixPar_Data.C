@@ -271,7 +271,7 @@ void MassFit_FixPar_Data(
 	  NJpsi_limit = 10000; }
   if (cLow==0&&cHigh==20)  {
 	  NBkg_limit = 500000;
-	  NJpsi_limit = 200000; }
+	  NJpsi_limit = 2000; }
   else if (cLow==20&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 20000; }
@@ -296,9 +296,7 @@ void MassFit_FixPar_Data(
   else if (yLow==0.4&&yHigh==0.9)  {
 	  NBkg_limit = 50000;
 	  NJpsi_limit = 1000; }
-  else if (yLow==1.6&&yHigh==2.)  {
-	  NBkg_limit = 50000;
-	  NJpsi_limit = 5000; }
+    cout<< NJpsi_limit <<endl;
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);

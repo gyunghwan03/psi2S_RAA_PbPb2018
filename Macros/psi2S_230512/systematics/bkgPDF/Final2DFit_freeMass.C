@@ -263,7 +263,7 @@ void Final2DFit_freeMass(
   RooRealVar *lambda3 = new RooRealVar("lambda3","lambda3", 0.5, -2, 2.);
   RooFormulaVar invMassNorm("invMassNorm","(-1.0+2.0*(@0-@1)/(@2-@1))", RooArgList(*(ws->var("mass")),*mMin,*mMax) );
   RooGenericPdf *pdfMASS_bkg;
-  if(ptLow==3) {pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",
+  if(ptLow<6.5) {pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",
           "TMath::Exp(@4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
           RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2));}
   else {pdfMASS_bkg= new RooGenericPdf("pdfMASS_bkg","Background",
@@ -281,7 +281,10 @@ void Final2DFit_freeMass(
   //RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,700000);
   //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,1400000);
   Double_t NBkg_limit = 2.0e+07;
-  Double_t NJpsi_limit = 10.0e+06;
+  Double_t NJpsi_limit = 10.0;
+  if (ptLow==3.5&&ptHigh==5)  {
+	   NBkg_limit = 200000;
+	   NJpsi_limit = 100; }
   if (ptLow==12&&ptHigh==15)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
@@ -322,8 +325,8 @@ void Final2DFit_freeMass(
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
  if (cLow==20&&cHigh==40)  {
-	  NBkg_limit = 200000;
-	  NJpsi_limit = 10000; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 5000; }
   else if (cLow==40&&cHigh==60)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
@@ -342,13 +345,11 @@ void Final2DFit_freeMass(
   else if (yLow==0.4&&yHigh==0.9)  {
 	  NBkg_limit = 50000;
 	  NJpsi_limit = 1000; }
-  else if (yLow==1.6&&yHigh==2.)  {
-	  NBkg_limit = 50000;
-	  NJpsi_limit = 5000; }
+	  // NJpsi_limit = 5000; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
-
+ cout << N_Jpsi->getVal() << endl;
   RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
   ws->import(*pdfMASS_Tot);
 

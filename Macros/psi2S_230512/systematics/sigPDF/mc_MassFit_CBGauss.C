@@ -65,8 +65,8 @@ void mc_MassFit_CBGauss(
 	RooMsgService::instance().setSilentMode(true);
 
     // MC
-    //TFile* f1 = new TFile("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
-	TFile* f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
+    TFile* f1 = new TFile("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
+	// TFile* f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 
 
 	// cout << "Input file: "
@@ -112,7 +112,7 @@ void mc_MassFit_CBGauss(
 	//Cent.10-20
     
 	// 						sigma_1,    x,   alpha,    n_1,     f,  m_lambda
-    double paramsupper[8] = {0.4,       1,      10,     10,   1.0,    25.0};
+    double paramsupper[8] = {0.4,       4,      10,     10,   1.0,    25.0};
     double paramslower[8] = {1e-5,   1e-5,    1e-5,   1e-5,  1e-5,    -5.0};
     
 	//SIGNAL: initial params
@@ -134,11 +134,11 @@ void mc_MassFit_CBGauss(
     if(ptLow==3.5 && ptHigh==5) { 
             N_Jpsi_high = 60000;
             paramsupper[0]=0.4;
-			paramslower[0]=0.01;
-            paramsupper[1]=1;
+			// paramslower[0]=1e-5;
+            paramsupper[1]=10;
             paramsupper[2]=20.;
-            paramsupper[3]=150;
-            f_init=0.8; sigma_1_init = 0.06; n_1_init = 8;
+            paramsupper[3]=20;
+            f_init=0.4; sigma_1_init = 0.02; n_1_init = 2;
             x_init = 0.1; alpha_1_init = 2;
 			fit_lower = 3.484;
     }
@@ -198,7 +198,7 @@ void mc_MassFit_CBGauss(
             f_init=0.4; sigma_1_init = 0.01; n_1_init = 0.5;
                        x_init = 1; alpha_1_init = 0.5;
      }
-                    if(ptLow==30 && ptHigh==50) { 
+                    if(ptLow==25 && ptHigh==50) { 
             N_Jpsi_high = 5000;
             f_init=0.4; sigma_1_init = 0.01; n_1_init = 0.2;
                        x_init = 1; alpha_1_init = 2;

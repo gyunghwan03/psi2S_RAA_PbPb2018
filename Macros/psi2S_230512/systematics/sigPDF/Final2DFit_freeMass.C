@@ -57,8 +57,8 @@ void Final2DFit_freeMass(
   TString kineCut; TString OS; 
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
   
-  f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root", "read");
-  //f1 = new TFile(Form("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root"));
+  // f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root", "read");
+  f1 = new TFile(Form("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root"));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f && cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, massLow, massHigh, cLow, cHigh);
   OS="recoQQsign==0 &&";
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
