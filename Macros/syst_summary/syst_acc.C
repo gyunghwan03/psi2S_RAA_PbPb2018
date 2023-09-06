@@ -35,8 +35,8 @@ void syst_acc()
     string out_name = "./syst_roots/syst_pt_" + syst_type + ".root";
     TFile out_pt(out_name.c_str(), "recreate");
 
-    const int NBINS_mid_pt = 7;
-    double edges_mid_pt[NBINS_mid_pt+1] = {6.5, 9, 12, 15, 20, 25, 30, 50};
+    const int NBINS_mid_pt = 6;
+    double edges_mid_pt[NBINS_mid_pt+1] = {6.5, 9, 12, 15, 20, 25, 50};
     TH1D mid_pt_PR("mid_pt_PR", "mid_PR", NBINS_mid_pt, edges_mid_pt);
     TH1D mid_pt_NP("mid_pt_NP", "mid_NP", NBINS_mid_pt, edges_mid_pt);
 
