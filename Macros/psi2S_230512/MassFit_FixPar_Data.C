@@ -137,8 +137,13 @@ void MassFit_FixPar_Data(
   //double paramslower[6] = {alpha_lower, 1.2, 0.01, 1.00, 0.0,  0.0};
   //double paramsupper[6] = {alpha_higher, 3.1, 0.06,  3.50, 1.0, 25.0};
 
-  double paramslower[6] = {alpha_lower, n_lower, 0.0, xA_lower, 0.0,  0.0};
-  double paramsupper[6] = {alpha_higher, n_higher, 0.5, xA_higher, 1.0, 25.0};
+  double paramslower[6] = {alpha_lower,   n_lower, 0, xA_lower, 0.0,  0.0};
+  double paramsupper[6] = {alpha_higher, n_higher, 0.13, xA_higher, 1.0, 25.0};
+
+  if (ptLow==3.5&&cLow==0&&cHigh==20) { paramslower[2] = sigma_lower; paramsupper[2] = sigma_higher; }
+  //else if (ptLow==3.5&&ptHigh==5) { paramslower[2] = 0.08; paramsupper[2] = 0.16; }
+  else if (ptLow==3.5&&ptHigh==5) { paramslower[2] = sigma_lower; paramsupper[2] = sigma_higher; }
+  else if (ptLow==6.5&&cLow==60&&cHigh==80) { paramslower[2] = 0; paramsupper[2] = 0.06; }
 
   //double alpha_1_init = 2.1; double n_1_init = 1.65;
   //double sigma_1_init = 0.04; double x_init = 2.15; double f_init = 0.75;
@@ -214,7 +219,7 @@ void MassFit_FixPar_Data(
   //*sl1, *sl2, *sl3, *sl4, *sl5, *sl6
   //pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList());
   //pdfMASS_bkg = new RooExponential("pdfMASS_bkg","Background",*(ws->var("mass")),*sl1);
-  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
+  if (ptLow<6.5) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
   else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
   //pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2));
   //if(ptLow==9&&ptHigh==12){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2, *sl3));}
@@ -226,9 +231,17 @@ void MassFit_FixPar_Data(
   //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,1400000);
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
+  Double_t NJpsi_lower = 0.;
   if (ptLow==12&&ptHigh==15)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
+  else if (ptLow==3.5&&ptHigh==5) {
+	  NJpsi_lower = 00;
+	  NBkg_limit = 1.65e+5;
+	  NJpsi_limit = 10000; }
+  else if (ptLow==5&&ptHigh==6.5)  {
+	   NBkg_limit = 8e+4;
+	   NJpsi_limit = 1600; }
   else if (ptLow==6.5&&ptHigh==9)  {
 	   NBkg_limit = 5e+5;
 	   NJpsi_limit = 5e+3; }
@@ -262,18 +275,43 @@ void MassFit_FixPar_Data(
   else if (ptLow==20&&ptHigh==50)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
-  else if (cLow==20&&cHigh==40)  {
+  else if (ptLow==6.5&&cLow==0&&cHigh==20)  {
+	  NBkg_limit = 3e+4;
+	  NJpsi_limit = 1000; }
+  else if (ptLow==6.5&&cLow==20&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
-  else if (cLow==40&&cHigh==60)  {
+  else if (ptLow==6.5&&cLow==40&&cHigh==60)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
-  else if (cLow==60&&cHigh==80)  {
+  else if (ptLow==6.5&&cLow==60&&cHigh==80) {
+	  NJpsi_limit = 700;
+	  NBkg_limit = 1e+4;   }
+  else if (ptLow==6.5&&cLow==100&&cHigh==180) {
+	  NJpsi_limit = 500;
+	  NBkg_limit = 3e+3;   }
+  else if (ptLow==3.5&&cLow==0&&cHigh==20)  {
+	  NJpsi_lower = 800;
+	  NBkg_limit = 1e+6;
+	  NJpsi_limit = 1100; }
+  else if (ptLow==3.5&&cLow==20&&cHigh==40)  {
+	  //NJpsi_lower = 600;
+	  NBkg_limit = 8.2e+4;
+	  NJpsi_limit = 1580; }
+  else if (ptLow==3.5&&cLow==40&&cHigh==60)  {
+	  //NJpsi_lower = 600;
+	  NBkg_limit = 5.6e+4;
+	  NJpsi_limit = 1150; }
+  else if (ptLow==3.5&&cLow==60&&cHigh==80)  {
+	  NJpsi_lower = 400;
 	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==80&&cHigh==100)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
+	  NJpsi_limit = 1000; }
+  else if (ptLow==3.5&&cLow==80&&cHigh==100)  {
+	  NBkg_limit = 1.5e+4;
+	  NJpsi_limit = 530; }
+  else if (ptLow==3.5&&cLow==100&&cHigh==180)  {
+	  NBkg_limit = 7000;
+	  NJpsi_limit = 400; }
   else if (cLow==0&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
@@ -287,7 +325,7 @@ void MassFit_FixPar_Data(
 	  NBkg_limit = 50000;
 	  NJpsi_limit = 5000; }
 
-  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
+  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",NJpsi_lower,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
   /*RooRealVar *N_Jpsi;
 	RooRealVar *N_Bkg;
@@ -370,7 +408,7 @@ void MassFit_FixPar_Data(
   //RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Constrain(RooArgSet(*f,sigma_1_A)),Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
   RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
-//  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
+  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_Tot"), LineColor(kBlack));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_1_A)), LineColor(44));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_2_A)), LineColor(8));
@@ -394,6 +432,10 @@ void MassFit_FixPar_Data(
   double Yup;
   Ydown = YMin/(TMath::Power((YMax/YMin), (0.1/(1.0-0.1-0.4))));
   Yup = YMax*TMath::Power((YMax/YMin), (0.4/(1.0-0.1-0.4)));
+  if(ptLow==3.5) {
+	  Ydown = YMin/(TMath::Power((YMax/YMin), (0.1/(1.0-0.1-0.4))));
+	  Yup = YMax*TMath::Power((YMax/YMin), (0.7/(1.0-0.1-0.4)));
+  }
   myPlot2_A->GetYaxis()->SetRangeUser(Ydown,Yup);
   //myPlot2_A->SetMinimum(2*10);
   myPlot2_A->GetXaxis()->SetLabelSize(0);

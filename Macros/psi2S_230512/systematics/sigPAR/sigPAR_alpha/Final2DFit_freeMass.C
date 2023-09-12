@@ -77,7 +77,7 @@ void Final2DFit_freeMass(
   else fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
-  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  //RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
   //RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
   RooDataSet *dataw_Bkg = (RooDataSet*)fCErr->Get("dataw_Bkg");
   //RooDataSet *dataw_Sig = (RooDataSet*)fCErr->Get("dataw_Sig");
@@ -106,7 +106,7 @@ void Final2DFit_freeMass(
   //ctauErrMin = 0.01;//0.0143889
   //ctauErrMax = 0.05;}//0.124872
   ws->import(*dataset); //total
-  ws->import(*datasetMass);
+  //ws->import(*datasetMass);
   //ws->import(*pdfMASS_Tot);
   //ws->import(*dataw_Sig);
   //ws->import(*GaussModel_Tot);
@@ -254,6 +254,16 @@ void Final2DFit_freeMass(
   //Build the model
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
+  Double_t NJpsi_lower = 0;
+
+  RooWorkspace *ws_temp = new RooWorkspace("TEMP");
+  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  ws_temp->import(*datasetMass);
+  NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.1;
+  NBkg_limit = (ws_temp->var("N_Bkg")->getVal())*1.1;
+
+  if(ptLow==3.5&&ptHigh==5) { NJpsi_lower = 1500; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.01; }
+  /*
   if (ptLow==12&&ptHigh==15)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
@@ -356,7 +366,7 @@ void Final2DFit_freeMass(
   else if (cLow==80&&cHigh==180)  {
 	  NBkg_limit = 100000;
 	  NJpsi_limit = 2000; }
-
+*/
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
 

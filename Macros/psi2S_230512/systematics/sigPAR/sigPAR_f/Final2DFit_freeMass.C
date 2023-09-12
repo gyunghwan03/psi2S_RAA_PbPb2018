@@ -71,13 +71,13 @@ void Final2DFit_freeMass(
   //if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
   //else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
   if(ptLow==3&&ptHigh==50) fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.0-50.0_y1.6-2.4_muPt0.0_centrality0-180.root",DATE.Data()));
-  else if(ptLow==3.5&&ptHigh==50) fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt4.0-50.0_y1.6-2.4_muPt0.0_centrality0-180.root",DATE.Data()));
+  else if(ptLow==3.5&&ptHigh==50) fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.5-50.0_y1.6-2.4_muPt0.0_centrality0-180.root",DATE.Data()));
   else if(ptLow==4&&ptHigh==50) fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt4.0-50.0_y1.6-2.4_muPt0.0_centrality0-180.root",DATE.Data()));
   else if(ptLow==6.5&&ptHigh==50) fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-1.6_muPt0.0_centrality0-180.root",DATE.Data()));
   else fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
-  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  //RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
   //RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
   RooDataSet *dataw_Bkg = (RooDataSet*)fCErr->Get("dataw_Bkg");
   //RooDataSet *dataw_Sig = (RooDataSet*)fCErr->Get("dataw_Sig");
@@ -106,7 +106,7 @@ void Final2DFit_freeMass(
   //ctauErrMin = 0.01;//0.0143889
   //ctauErrMax = 0.05;}//0.124872
   ws->import(*dataset); //total
-  ws->import(*datasetMass);
+  //ws->import(*datasetMass);
   //ws->import(*pdfMASS_Tot);
   //ws->import(*dataw_Sig);
   //ws->import(*GaussModel_Tot);
@@ -163,7 +163,6 @@ void Final2DFit_freeMass(
   cout << "************************************************************************" << endl;
   cout << "*************************** START MASS FIT *****************************" << endl;
   cout << "************************************************************************" << endl;
-
   TFile * f_fit = new TFile(Form("../../../roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
   RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
@@ -199,11 +198,14 @@ void Final2DFit_freeMass(
   double low; double high;
   double slow; double shigh;
 
-  if(ptLow==3.5&&ptHigh==5) {slow=sigma_lower; shigh=sigma_higher; low=0.75; high=0.85;}
-  else {slow=0; shigh=0.13; low=0; high=1;}
+  //if(ptLow==3.5&ptHigh==5) { low=1.45; high=1.47; slow=sigma_lower; shigh=sigma_higher;}
+  //else if(ptLow==3.5&ptHigh==50&&cLow==0&&cHigh==20) { low=.3; high=3.2; slow=sigma_lower; shigh=sigma_higher;}
+  low=0; high=10; slow=sigma_lower; shigh=sigma_higher;
 
-  double paramslower[6] = { 0.,  0.,  slow, 0.,  low,   0.};
-  double paramsupper[6] = {10., 10., shigh, 1., high, 25.0};
+  double paramslower[6] = {low, 0., slow, 0., 0., 0.};
+  double paramsupper[6] = {high, 10 , shigh, 1, 1.0, 25.0};
+
+  if(ptLow==3.5&cLow==0&&cHigh==20) { paramslower[4] = 0.26; paramsupper[4] = 0.28;}
 
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
@@ -212,18 +214,34 @@ void Final2DFit_freeMass(
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
   RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
   RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
+  //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init, paramslower[0], paramsupper[0]);
   RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
   RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
+  //RooRealVar    n_1_A("n_1_A","power order", n_1_init,n_1_init*0.9,n_1_init*1.1);
   RooRealVar    n_1_A("n_1_A","power order", n_1_init);
   RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
+  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, f_init*0.99,f_init*1.01);
+  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
   RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
+
+  //SIGNAL FREE
+  //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
+  //RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init);
+  //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init,alpha_1_init*0.9,alpha_1_init*1.1);
+  //RooRealVar    n_1_A("n_1_A","power order", n_1_init , paramslower[1], paramsupper[1]);
+  //RooRealVar   *f = new RooRealVar("f","cb fraction", f_init, paramslower[4], paramsupper[4]);
   //Set up crystal ball shapes
   RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
   RooAddPdf*  pdfMASS_Jpsi;
   //DOUBLE CRYSTAL BALL
   RooCBShape* cb_2_A = new RooCBShape("cball_2_A", "cystal Ball", *(ws->var("mass")), mean, sigma_2_A, alpha_2_A, n_2_A);
+  //RooGaussian* gauss = new RooGaussian("gauss","gaussian PDF",*(ws->var("mass")),mean,sigma_2_A);
   pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
+  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal",RooArgList(*cb_1_A,*gauss), RooArgList(*f) );
+
+  //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
+  //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.0, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
   RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.0, -1., 1.);
   RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.0, -1., 1.);
@@ -235,65 +253,82 @@ void Final2DFit_freeMass(
   RooChebychev *pdfMASS_bkg;
   if (ptLow<6.5) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
   else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
+  //Build the model
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
-    if (ptLow==12&&ptHigh==15)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
+  Double_t NJpsi_lower = 0;
+
+  RooWorkspace *ws_temp = new RooWorkspace("TEMP");
+  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  ws_temp->import(*datasetMass);
+  NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.1;
+  NBkg_limit = (ws_temp->var("N_Bkg")->getVal())*1.1;
+
+  if(ptLow==3.5&&ptHigh==5) { NJpsi_lower = 1500; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.01; }
+  /*
+  if (ptLow==12&&ptHigh==15)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==3&&ptHigh==6.5)  {
-       NBkg_limit = 5e+5;
-       NJpsi_limit = 4e+3; }
+	   NBkg_limit = 5e+5;
+	   NJpsi_limit = 4e+3; }
   else if (ptLow==3.5&&ptHigh==5)  {
-       NBkg_limit = 2e+5;
-       NJpsi_limit = 1500; }
+	   NBkg_limit = 1.66e+5;
+	   NJpsi_limit = 1300; }
   else if (ptLow==5&&ptHigh==6.5)  {
-       NBkg_limit = 5e+7;
-       NJpsi_limit = 3e+3; }
+	   NBkg_limit = 5e+7;
+	   NJpsi_limit = 3e+3; }
   else if (cLow==0&&cHigh==40)  {
-       NBkg_limit = 5e+6;
-       NJpsi_limit = 3e+4; }
+	   NBkg_limit = 5e+6;
+	   NJpsi_limit = 3e+4; }
   else if (ptLow==3&&ptHigh==4.5)  {
-       NBkg_limit = 5e+7;
-       NJpsi_limit = 5e+3; }
+	   NBkg_limit = 5e+7;
+	   NJpsi_limit = 5e+3; }
   else if (ptLow==6.5&&ptHigh==9)  {
-       NBkg_limit = 5e+5;
-       NJpsi_limit = 5e+3; }
+	   NBkg_limit = 5e+5;
+	   NJpsi_limit = 5e+3; }
+  else if (ptLow==9&&ptHigh==12)  {
+	   NBkg_limit = 100000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==6.5&&ptHigh==12)  {
-       NBkg_limit = 100000;
-       NJpsi_limit = 10000; }
+	   NBkg_limit = 100000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==15&&ptHigh==20)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==20&&ptHigh==25)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==12&&ptHigh==50)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==15&&ptHigh==50)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==25&&ptHigh==50)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==30&&ptHigh==50)  {
-      NBkg_limit = 500;
-      NJpsi_limit = 100; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (ptLow==20&&ptHigh==30)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (ptLow==25&&ptHigh==30)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (ptLow==30&&ptHigh==50)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (ptLow==20&&ptHigh==50)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (yLow==0.4&&yHigh==0.9)  {
-      NBkg_limit = 50000;
-      NJpsi_limit = 1000; }
+	  NBkg_limit = 50000;
+	  NJpsi_limit = 1000; }
   else if (yLow==1.6&&yHigh==2.)  {
-      NBkg_limit = 50000;
-      NJpsi_limit = 5000; }
+	  NBkg_limit = 50000;
+	  NJpsi_limit = 5000; }
   else if (ptLow==3.5&&cLow==0&&cHigh==20)  {
       NBkg_limit = 1.6e+5;
       NJpsi_limit = 650; }
@@ -301,14 +336,14 @@ void Final2DFit_freeMass(
       NBkg_limit = 2e+5;
       NJpsi_limit = 1600; }
   else if (ptLow==3.5&&cLow==40&&cHigh==60)  {
-      NBkg_limit = 6.1e+4;
-      NJpsi_limit = 850; }
+      NBkg_limit = 6.5e+4;
+      NJpsi_limit = 1000; }
   else if (ptLow==3.5&&cLow==60&&cHigh==80)  {
       NBkg_limit = 50000;
       NJpsi_limit = 700; }
-  else if (ptLow==3.5&&cLow==80&&cHigh==100)  { cout << "########################################### HERE ########################################### " << endl;
-      NBkg_limit = 11700;
-      NJpsi_limit = 500; }
+  else if (ptLow==3.5&&cLow==80&&cHigh==100)  {
+      NBkg_limit = 20000;
+      NJpsi_limit = 1100; }
   else if (ptLow==3.5&&cLow==100&&cHigh==180)  {
       NBkg_limit = 10000;
       NJpsi_limit = 450; }
@@ -316,42 +351,58 @@ void Final2DFit_freeMass(
       NBkg_limit = 10000;
       NJpsi_limit = 450; }
   else if (cLow==20&&cHigh==40)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (cLow==40&&cHigh==60)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (cLow==60&&cHigh==80)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
-  else if (ptLow==6.5&&cLow==80&&cHigh==100)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (cLow==80&&cHigh==100)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (cLow==40&&cHigh==80)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 5000; }
-
-  cout << "NJpsi_Limit : " << NJpsi_limit << endl;
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 5000; }
+  else if (cLow==80&&cHigh==180)  {
+	  NBkg_limit = 100000;
+	  NJpsi_limit = 2000; }
+*/
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
-  cout << "N_Jpsi MAX : " << ws->var("N_Jpsi")->getMax() << endl;
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
 
+
+
+  //RooGaussian x_constraint("x_constraint","x_constraint",*x_A,RooConst(xA_MC_value),RooConst(xA_MC_value_err));
+  //RooGaussian alpha_constraint("alpha_constraint","alpha_constraint",alpha_1_A,RooConst(alpha_MC_value),RooConst(alpha_MC_value_err));
+  //RooGaussian n_constraint("n_constraint","n_constraint",n_1_A,RooConst(n_MC_value),RooConst(n_MC_value_err));
   RooGaussian f_constraint("f_constraint","f_constraint",*f,RooConst(f_MC_value),RooConst(f_MC_value_err));
+  //RooGaussian sigma1_constraint("sigma1_constraint","sigma1_constraint",sigma_1_A,RooConst(sigma_MC_value),RooConst(sigma_MC_value_err));
 
   RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(f_constraint)));
+  //RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(f_constraint,sigma1_constraint)));
+  //RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(f_constraint,sigma1_constraint)));
+  //RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(model, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
   RooAddPdf* pdfMASS_Tot;
-  if (ptLow==3.5&&ptHigh==5) {pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg)); }
+  if(ptLow==3.5&&ptHigh==5) { pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg)); }
+  else if(ptLow==3.5&&ptHigh==50&&cLow==0&&cHigh==20) { pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg)); }
   else { pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(model, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg)); }
+  //RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
+  //RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
   ws->import(*pdfMASS_Tot);
 
   bool isWeighted = ws->data("dsTot")->isWeighted();
+  //bool isWeighted = true;
   cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
+  //RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Constrain(RooArgSet(*f,sigma_1_A)),Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
+  //RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Constrain(RooArgSet(*f,sigma_1_A)),Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
   RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsTot,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(nCPU));
-
-  //ws->import(*pdfMASS_Tot);
-  fitMass->Print("V");
-
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
+  ws->import(*pdfMASS_Tot);
+
+  pdfMASS_Tot->Print();
+
   cout << "**********************************************************************" << endl;
   cout << "*************************** END MASS FIT *****************************" << endl;
   cout << "**********************************************************************" << endl;

@@ -23,6 +23,7 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
 void MassFit_FixPar_Data(
     double ptLow=3, double ptHigh=4.5,
     double yLow=1.6, double yHigh=2.4,
@@ -130,10 +131,12 @@ void MassFit_FixPar_Data(
   if (f_lower<0.0) f_lower=0.0;
 
   double paramslower[6] = {0.,0.,0.,0.,0.,0.};
-  double paramsupper[6] = {10, 10, 0.12, 1, 1., 25.0};
+  double paramsupper[6] = {10, 10, 0.15, 1, 1., 25.0};
 
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
+
+  if(ptLow==3.5&&cLow==0&&cHigh==20) { paramslower[1] = 10.; paramsupper[1] = 12.; paramslower[2] = sigma_lower; paramsupper[2] = sigma_higher;}
   //SIGNAL FIX
   RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
@@ -198,19 +201,19 @@ void MassFit_FixPar_Data(
   //if(ptLow==12&&ptHigh==15){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2, *sl3));}
   //if(cLow==10&&cHigh==20){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));}
   //Build the model
-  //RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,700000);
-  //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,1400000);
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
+  Double_t NJpsi_lower = 0.;
   if (ptLow==12&&ptHigh==15)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
   else if (ptLow==3.5&&ptHigh==5) {
-	  NBkg_limit = 8.2e+5;
-      NJpsi_limit = 1.55e+3; }
+	  NJpsi_lower = 1400;
+	  NBkg_limit = 1.7e+5;
+	  NJpsi_limit = 1600; }
   else if (ptLow==5&&ptHigh==6.5)  {
-	   NBkg_limit = 8.2e+4;
-	   NJpsi_limit = 1.55e+3; }
+	   NBkg_limit = 8e+4;
+	   NJpsi_limit = 1700; }
   else if (ptLow==6.5&&ptHigh==9)  {
 	   NBkg_limit = 5e+5;
 	   NJpsi_limit = 5e+3; }
@@ -229,49 +232,66 @@ void MassFit_FixPar_Data(
   else if (ptLow==15&&ptHigh==50)  {
 	   NBkg_limit = 500000;
 	   NJpsi_limit = 10000; }
-  else if (ptLow==20&&ptHigh==30)  {
-	   NBkg_limit = 5000;
-	   NJpsi_limit = 300; }
-  else if (ptLow==25&&ptHigh==30)  {
-	  NBkg_limit = 500;
-	  NJpsi_limit = 100; }
+  else if (ptLow==25&&ptHigh==50)  {
+	   NBkg_limit = 500000;
+	   NJpsi_limit = 10000; }
   else if (ptLow==30&&ptHigh==50)  {
-	  NBkg_limit = 300;
-	  NJpsi_limit = 80; }
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (ptLow==20&&ptHigh==30)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (ptLow==30&&ptHigh==50)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (ptLow==20&&ptHigh==50)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
   else if (ptLow==6.5&&cLow==0&&cHigh==20)  {
+	  NBkg_limit = 3e+4;
+	  NJpsi_limit = 1000; }
+  else if (ptLow==6.5&&cLow==20&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (ptLow==6.5&&cLow==40&&cHigh==60)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
+  else if (ptLow==6.5&&cLow==60&&cHigh==80) {
+	  NJpsi_limit = 700;
+	  NBkg_limit = 1e+4;   }
+  else if (ptLow==6.5&&cLow==80&&cHigh==100) {
+	  NJpsi_limit = 400;
+	  NJpsi_lower = 300;
+	  NBkg_limit = 4e+3;   }
+  else if (ptLow==6.5&&cLow==100&&cHigh==180) {
+	  NJpsi_limit = 500;
+	  NBkg_limit = 3e+3;   }
   else if (ptLow==3.5&&cLow==0&&cHigh==20)  {
-	  NBkg_limit = 1.6e+5;
-	  NJpsi_limit = 650; }
-  else if (ptLow==3.5&&cLow==20&&cHigh==40)  {
+	  NJpsi_lower = 950;
 	  NBkg_limit = 1e+6;
-	  NJpsi_limit = 1e+5; }
+	  NJpsi_limit = 1500; }
+  else if (ptLow==3.5&&cLow==20&&cHigh==40)  {
+	  //NJpsi_lower = 600;
+	  NBkg_limit = 8.3e+4;
+	  NJpsi_limit = 1580; }
   else if (ptLow==3.5&&cLow==40&&cHigh==60)  {
-	  NBkg_limit = 55100;
-	  NJpsi_limit = 800; }
+	  //NJpsi_lower = 600;
+	  NBkg_limit = 5.6e+4;
+	  NJpsi_limit = 1150; }
+  else if (ptLow==3.5&&cLow==60&&cHigh==80)  {
+	  NJpsi_lower = 400;
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 1000; }
   else if (ptLow==3.5&&cLow==80&&cHigh==100)  {
-	  NBkg_limit = 15000;
-	  NJpsi_limit = 8000; }
-  else if (cLow==60&&cHigh==80)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==80&&cHigh==100)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==100&&cHigh==180)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
+	  NBkg_limit = 1.5e+4;
+	  NJpsi_limit = 530; }
+  else if (ptLow==3.5&&cLow==100&&cHigh==180)  {
+	  NBkg_limit = 7000;
+	  NJpsi_limit = 400; }
   else if (cLow==0&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
   else if (cLow==40&&cHigh==80)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==80&&cHigh==180)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
   else if (yLow==0.4&&yHigh==0.9)  {
@@ -281,8 +301,10 @@ void MassFit_FixPar_Data(
 	  NBkg_limit = 50000;
 	  NJpsi_limit = 5000; }
 
-  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
+  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",NJpsi_lower,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
+  //RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,700000);
+  //RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,1400000);
   /*RooRealVar *N_Jpsi;
 	RooRealVar *N_Bkg;
   //RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,700000);
@@ -387,7 +409,7 @@ void MassFit_FixPar_Data(
   double Ydown;
   double Yup;
   Ydown = YMin/(TMath::Power((YMax/YMin), (0.1/(1.0-0.1-0.4))));
-  Yup = YMax*TMath::Power((YMax/YMin), (0.4/(1.0-0.1-0.4)));
+  Yup = YMax*TMath::Power((YMax/YMin), (0.6/(1.0-0.1-0.4)));
   myPlot2_A->GetYaxis()->SetRangeUser(Ydown,Yup);
   //myPlot2_A->SetMinimum(2*10);
   myPlot2_A->GetXaxis()->SetLabelSize(0);
@@ -524,4 +546,37 @@ void MassFit_FixPar_Data(
   outh->Write();
   fitMass->Write();
   outFile->Close();
+  check_convergence(fitMass);
+}
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Caveat: mean was fixed so it's not a matter" << endl;
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

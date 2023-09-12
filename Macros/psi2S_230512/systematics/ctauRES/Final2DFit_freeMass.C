@@ -240,6 +240,22 @@ void Final2DFit_freeMass(
   RooChebychev *pdfMASS_bkg;
   if (ptLow<6.5) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
   else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
+
+  Double_t NBkg_limit = 2.0e+07;
+  Double_t NJpsi_limit = 10.0e+06;
+  Double_t NJpsi_lower = 0;
+
+  RooWorkspace *ws_temp = new RooWorkspace("TEMP");
+  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  ws_temp->import(*datasetMass);
+  NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.1;
+  NBkg_limit = (ws_temp->var("N_Bkg")->getVal())*1.1;
+
+  if(ptLow==3.5&&ptHigh==5) { NJpsi_lower = 1250; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.01; NBkg_limit = 1.65e+5; }
+  if(ptLow==3.5&&cLow==80) { NJpsi_lower = 350; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.02; NBkg_limit = 1.3e+4; }
+  if(ptLow==3.5&&cLow==100) { NJpsi_lower = 250; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.02; NBkg_limit = 6000; }
+
+/*
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
   if (ptLow==12&&ptHigh==15)  {
@@ -289,9 +305,9 @@ void Final2DFit_freeMass(
       NJpsi_limit = 10000; }
   else if (cLow==80&&cHigh==100)  {
       NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+      NJpsi_limit = 10000; }*/
 
-  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
+  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",NJpsi_lower,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
 
   RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
@@ -661,9 +677,9 @@ void Final2DFit_freeMass(
 
 
   c_G->Update();
-  c_G->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "230520", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_G->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Ctau_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   c_H->Update();
-  c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", "230520", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   TH1D* outh = new TH1D("2DfitResults","fit result",20,0,20);
 

@@ -77,7 +77,7 @@ void Final2DFit_freeMass(
   else fCTrue = new TFile(Form("../../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
-  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  //RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
   //RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
   RooDataSet *dataw_Bkg = (RooDataSet*)fCErr->Get("dataw_Bkg");
   //RooDataSet *dataw_Sig = (RooDataSet*)fCErr->Get("dataw_Sig");
@@ -106,7 +106,7 @@ void Final2DFit_freeMass(
   //ctauErrMin = 0.01;//0.0143889
   //ctauErrMax = 0.05;}//0.124872
   ws->import(*dataset); //total
-  ws->import(*datasetMass);
+  //ws->import(*datasetMass);
   //ws->import(*pdfMASS_Tot);
   //ws->import(*dataw_Sig);
   //ws->import(*GaussModel_Tot);
@@ -201,6 +201,7 @@ void Final2DFit_freeMass(
 
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
+  if(ptLow==3.5&&cLow==0&&cHigh==20) { paramslower[1] = 10.; paramsupper[1] = 12.; paramslower[2] = sigma_lower; paramsupper[2] = sigma_higher;}
   //SIGNAL FIX
   RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
@@ -230,85 +231,12 @@ void Final2DFit_freeMass(
   else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
-  if (ptLow==12&&ptHigh==15)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==3.5&&ptHigh==5) {
-	  NBkg_limit = 8.2e+5;
-	  NJpsi_limit = 1.55e+3; }
-  else if (ptLow==5&&ptHigh==6.5)  {
-	  NBkg_limit = 8.2e+4;
-	  NJpsi_limit = 1.55e+3; }
-  else if (ptLow==6.5&&ptHigh==9)  {
-	  NBkg_limit = 5e+5;
-	  NJpsi_limit = 5e+3; }
-  else if (ptLow==6.5&&ptHigh==12)  {
-	  NBkg_limit = 100000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==15&&ptHigh==20)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==20&&ptHigh==25)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==12&&ptHigh==50)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==15&&ptHigh==50)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==20&&ptHigh==30)  {
-	  NBkg_limit = 5000;
-	  NJpsi_limit = 300; }
-  else if (ptLow==25&&ptHigh==30)  {
-	  NBkg_limit = 500;
-	  NJpsi_limit = 100; }
-  else if (ptLow==30&&ptHigh==50)  {
-	  NBkg_limit = 300;
-	  NJpsi_limit = 80; }
-  else if (ptLow==20&&ptHigh==50)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==6.5&&cLow==0&&cHigh==20)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==3.5&&cLow==0&&cHigh==20)  {
-	  NBkg_limit = 1.6e+5;
-	  NJpsi_limit = 650; }
-  else if (ptLow==3.5&&cLow==20&&cHigh==40)  {
-	  NBkg_limit = 1e+6;
-	  NJpsi_limit = 1e+5; }
-  else if (ptLow==3.5&&cLow==40&&cHigh==60)  {
-	  NBkg_limit = 55100;
-	  NJpsi_limit = 800; }
-  else if (ptLow==3.5&&cLow==80&&cHigh==100)  {
-	  NBkg_limit = 15000;
-	  NJpsi_limit = 500; }
-  else if (cLow==60&&cHigh==80)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==80&&cHigh==100)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==100&&cHigh==180)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==0&&cHigh==40)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (cLow==40&&cHigh==80)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (ptLow==6.5&&cLow==80&&cHigh==180)  {
-	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
-  else if (yLow==0.4&&yHigh==0.9)  {
-	  NBkg_limit = 50000;
-	  NJpsi_limit = 1000; }
-  else if (yLow==1.6&&yHigh==2.)  {
-	  NBkg_limit = 50000;
-	  NJpsi_limit = 5000; }
 
+  RooWorkspace *ws_temp = new RooWorkspace("TEMP");
+  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  ws_temp->import(*datasetMass);
+  NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.1;
+  NBkg_limit = (ws_temp->var("N_Bkg")->getVal())*1.1;
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
 

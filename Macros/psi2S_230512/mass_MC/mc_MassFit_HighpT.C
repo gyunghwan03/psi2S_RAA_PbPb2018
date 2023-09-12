@@ -64,7 +64,7 @@ void mc_MassFit_HighpT(
 	RooMsgService::instance().setSilentMode(true);
 
     // MC
-    TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_isMC1_PR_Psi_2S_20210727.root", "read");
+    TFile* f1 = new TFile("../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230822.root", "read");
 
 
 	// cout << "Input file: "
@@ -88,9 +88,9 @@ void mc_MassFit_HighpT(
 	RooWorkspace *ws = new RooWorkspace("workspace");
 	ws->import(*dataset);
 	ws->data("dataset")->Print();
-	cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow<<"-"<<cHigh<<"%"<<endl;
+	cout << "pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<", Cent: "<<cLow/2<<"-"<<cHigh/2<<"%"<<endl;
 	cout << "####################################" << endl;
-	RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset),WeightVar(*ws->var("weight")));
+	RooDataSet *datasetW = new RooDataSet("datasetW","A sample",*dataset->get(),Import(*dataset));//WeightVar(*ws->var("weight")));
 	RooDataSet *dsAB = (RooDataSet*)datasetW->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), kineCut.Data() );
 	cout << "******** New Combined Dataset ***********" << endl;
 	dsAB->SetName("dsAB");
@@ -109,12 +109,11 @@ void mc_MassFit_HighpT(
 	//double paramslower[8] = {0.01,   0.0,     1., 1., 0.0,      0.0};//pt3-4.5 m_lambda==-25.0
 	//Cent.10-20
     
-    double paramsupper[8] = {0.4,    4,     3, 3, 1.0,     25.0};
-    double paramslower[8] = {0.,   0.0,     0, 0, 0.,      -5.0};
+	double sigma_up=0.13; double sigma_lo=0; double x_up=1; double x_lo=1e-6; double alpha_up=5; double alpha_lo=0; double n_up=5; double n_lo=0; double f_up=1; double f_lo=1e-6;
     
 	//SIGNAL: initial params
-	double sigma_1_init = 0.03555;
-    double x_init = 1.9566;
+	double sigma_1_init = 0.05;
+    double x_init = 0.566;
 	double alpha_1_init = 1.9581;
 	double n_1_init = 1.8425;
 	double f_init = 0.6886;
@@ -123,10 +122,16 @@ void mc_MassFit_HighpT(
 	double N_Bkg_high = 200000;
     double fit_limit = 3.85;
 
-	if(ptLow==6.5&&ptHigh==9) N_Jpsi_high = 5000000;
+	if(ptLow==6.5&&ptHigh==9) { N_Jpsi_high = 5000000; n_up=10; }
 	else if(ptLow==9&&ptHigh==12) N_Jpsi_high = 1000000;
-	else if(ptLow==6.5&&ptHigh==50) N_Jpsi_high = 5e+7;
+	else if(ptLow==12&&ptHigh==50) N_Jpsi_high = 1e+7;
+	else if(ptLow==3.5&&ptHigh==5) { N_Jpsi_high = 1e+7; n_up=150; n_lo=1; f_init=0.33; x_init=0.1; sigma_up = 0.3; n_1_init = 3.8; alpha_up = 2; alpha_lo = .1;}
+	else if(ptLow==5&&ptHigh==6.5) { N_Jpsi_high = 1e+8; n_up=5; n_lo=1; f_init=0.33; x_init=0.1; sigma_up = 0.3; n_1_init = 3.8; alpha_up = 2; alpha_lo = 1.5;}
+	else if(ptLow==3.5&&cLow==0&&cHigh==20) {N_Jpsi_high = 1e+8; n_up=11.0256; f_lo=0.1; x_up=0.7; }
+	else if(ptLow==6.5&&cLow==100&&cHigh==180) N_Jpsi_high = 1e+7; 
 
+    double paramsupper[8] = {sigma_up,   x_up,     alpha_up,  n_up,  f_up,     25.0};
+    double paramslower[8] = {sigma_lo,   x_lo,     alpha_lo,  n_lo,  f_lo,     -5.0};
 	double m_lambda_init = 5;
 	double psi_2S_mass = pdgMass.Psi2S;
     // cout << psi_2S_mass << endl;

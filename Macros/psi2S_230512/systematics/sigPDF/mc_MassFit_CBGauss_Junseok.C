@@ -22,6 +22,7 @@
 using namespace std;
 using namespace RooFit;
 
+void check_convergence(RooFitResult *fit_result);
 void mc_MassFit_CBGauss(
 		float ptLow=6.5, float ptHigh=9.0,
 		float yLow=0, float yHigh=1.6,
@@ -423,6 +424,7 @@ void mc_MassFit_CBGauss(
     // ws->Write();
     fitMass->Write();
     outFile->Close();
+	check_convergence(fitMass);
         fitMass->Print("v");
     // Get # of entries for every bins.
     // To compare events number point by point
@@ -430,4 +432,35 @@ void mc_MassFit_CBGauss(
     // ofstream fout(Form("entry_check_mass_fit_of_2D_fit_Psi2S_Inclusive_%s.txt", kineLabel.Data()));
     // for (int i = 1; i <= h->GetNbinsX(); i++)
     // fout << h->GetBinContent(i) << endl;
+}
+void check_convergence(RooFitResult *fit_result)
+{
+    int hesse_code = fit_result->status();
+    double edm = fit_result->edm();
+    double mll = fit_result->minNll();
+    //RooRealVar* par_fitresult = (RooRealVar*)fit_result->floatParsFinal().find("N_Jpsi");
+    RooRealVar* fit_para = (RooRealVar*)fit_result->floatParsFinal().at(0);
+    double val_ = fit_para->getVal();
+    double err_ = fit_para->getError();
+    double min_ = fit_para->getMin();
+    double max_ = fit_para->getMax();
+
+    cout << "\n###### Fit Convergence Check ######\n";
+    cout << "Hesse: " << hesse_code << "\t edm: " << edm << "\t mll: " << mll << endl;
+    int cnt_ = 0;
+    for (int idx = 0; idx < fit_result->floatParsFinal().getSize(); idx++) {
+        RooRealVar *fit_para = (RooRealVar *)fit_result->floatParsFinal().at(idx);
+        double val_ = fit_para->getVal();
+        double err_ = fit_para->getError();
+        double min_ = fit_para->getMin();
+        double max_ = fit_para->getMax();
+        if ((val_ - err_ > min_) && (val_ + err_ < max_)) {
+            // No work is intended
+        }
+        else {
+            cout << "\033[31m" << "[Stuck] " << fit_para->GetName() << " \033[0m // Final Value : " << val_ << " (" << min_ << " ~ " << max_ << ")" << endl << endl;
+            cnt_++;
+        }
+    }
+    if (cnt_ == 0) cout << "[Fit Converged]" << endl;
 }

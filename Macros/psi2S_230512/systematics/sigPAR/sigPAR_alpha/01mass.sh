@@ -13,7 +13,7 @@ do
 	root -l -b -q 'MassFit_FixPar_Data.C('$pt',1.6,2.4,0,180)'
 done
 
-for pt in  '6.5,9' '9,12' '12,15' '15,20' '20,25' '25,30' '30,50'
+for pt in  '6.5,9' '9,12' '12,15' '15,20' '20,25' '25,50'
 do
 	root -l -b -q 'MassFit_FixPar_Data.C('$pt',0,1.6,0,180)'
 done

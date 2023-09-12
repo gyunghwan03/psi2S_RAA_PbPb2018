@@ -70,12 +70,11 @@ void Final2DFit_freeMass(
   //fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root","Corr",kineLabel.Data()));
   //if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
   //else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
-  if(ptLow==3&&ptHigh==50) fCTrue = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.0-50.0_y1.6-2.4_muPt0.0_centrality0-180.root",DATE.Data()));
+  if(ptLow==3.5&&ptHigh==50) fCTrue = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.5-50.0_y1.6-2.4_muPt0.0_centrality0-180.root",DATE.Data()));
   else if(ptLow==6.5&&ptHigh==50) fCTrue = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-1.6_muPt0.0_centrality0-180.root",DATE.Data()));
   else fCTrue = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root","No_Weight",kineLabel.Data()));
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
-  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
   //RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
   RooDataSet *dataw_Bkg = (RooDataSet*)fCErr->Get("dataw_Bkg");
   //RooDataSet *dataw_Sig = (RooDataSet*)fCErr->Get("dataw_Sig");
@@ -85,6 +84,7 @@ void Final2DFit_freeMass(
   RooAddPdf* GaussModel_Tot = (RooAddPdf*)fCRes->Get("GaussModel_Tot");
   RooAddPdf* TrueModel_Tot = (RooAddPdf*)fCTrue->Get("TrueModel_Tot");
   RooAddPdf* pdfCTAU_Bkg_Tot = (RooAddPdf*)fCBkg->Get("pdfCTAU_Bkg_Tot");
+
 
   RooWorkspace *ws = new RooWorkspace("workspace");
   ws->import(*dataw_Bkg);
@@ -104,7 +104,7 @@ void Final2DFit_freeMass(
   //ctauErrMin = 0.01;//0.0143889
   //ctauErrMax = 0.05;}//0.124872
   ws->import(*dataset); //total
-  ws->import(*datasetMass);
+  //ws->import(*datasetMass);
   //ws->import(*pdfMASS_Tot);
   //ws->import(*dataw_Sig);
   //ws->import(*GaussModel_Tot);
@@ -195,6 +195,10 @@ void Final2DFit_freeMass(
   double paramslower[6] = {alpha_lower, n_lower, 1e-6, xA_lower, 0.0,  0.0};
   double paramsupper[6] = {alpha_higher, n_higher, 0.5, xA_higher, 1.0, 25.0};
 
+  //if(ptLow==3.5&&ptHigh==5) { paramslower[2] = 0.08; paramsupper[2]=0.2;}
+  if(ptLow==3.5&&ptHigh==5) { paramslower[2] = sigma_lower; paramsupper[2]=sigma_higher;}
+  else if(ptLow==3.5&&cLow==0&&cHigh==20) { paramsupper[2]=sigma_higher; paramslower[2]=sigma_lower; }
+
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
@@ -236,36 +240,49 @@ void Final2DFit_freeMass(
   RooRealVar *sl6 = new RooRealVar("sl6","sl6", 0.0, -1., 1.);
 
   RooChebychev *pdfMASS_bkg;
-  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
+  if (ptLow<6.5) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
   else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
+
   Double_t NBkg_limit = 2.0e+07;
   Double_t NJpsi_limit = 10.0e+06;
-  if (ptLow==12&&ptHigh==15)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
-  else if (ptLow==6.5&&ptHigh==12)  {
-       NBkg_limit = 100000;
-       NJpsi_limit = 10000; }
-  else if (ptLow==15&&ptHigh==20)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
-  else if (ptLow==12&&ptHigh==50)  {
-       NBkg_limit = 500000;
-       NJpsi_limit = 10000; }
-  else if (ptLow==30&&ptHigh==50)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
-  else if (ptLow==20&&ptHigh==50)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
-  else if (cLow==40&&cHigh==60)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
-  else if (cLow==80&&cHigh==100)  {
-      NBkg_limit = 500000;
-      NJpsi_limit = 10000; }
+  Double_t NJpsi_lower = 0;
 
-  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
+  RooWorkspace *ws_temp = new RooWorkspace("TEMP");
+  RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
+  ws_temp->import(*datasetMass);
+  NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.1;
+  NBkg_limit = (ws_temp->var("N_Bkg")->getVal())*1.1;
+
+  if(ptLow==3.5&&ptHigh==5) { NJpsi_lower = 1250; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.01; NBkg_limit = 1.65e+5; }
+  if(ptLow==3.5&&cLow==80) { NJpsi_lower = 350; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.02; NBkg_limit = 1.3e+4; }
+  if(ptLow==3.5&&cLow==100) { NJpsi_lower = 250; NJpsi_limit = (ws_temp->var("N_Jpsi")->getVal())*1.02; NBkg_limit = 6000; }
+
+  //if (ptLow==12&&ptHigh==15)  {
+  //     NBkg_limit = 500000;
+  //     NJpsi_limit = 10000; }
+  //else if (ptLow==6.5&&ptHigh==12)  {
+  //     NBkg_limit = 100000;
+  //     NJpsi_limit = 10000; }
+  //else if (ptLow==15&&ptHigh==20)  {
+  //     NBkg_limit = 500000;
+  //     NJpsi_limit = 10000; }
+  //else if (ptLow==12&&ptHigh==50)  {
+  //     NBkg_limit = 500000;
+  //     NJpsi_limit = 10000; }
+  //else if (ptLow==30&&ptHigh==50)  {
+  //    NBkg_limit = 500000;
+  //    NJpsi_limit = 10000; }
+  //else if (ptLow==20&&ptHigh==50)  {
+  //    NBkg_limit = 500000;
+  //    NJpsi_limit = 10000; }
+  //else if (cLow==40&&cHigh==60)  {
+  //    NBkg_limit = 500000;
+  //    NJpsi_limit = 10000; }
+  //else if (cLow==80&&cHigh==100)  {
+  //    NBkg_limit = 500000;
+  //    NJpsi_limit = 10000; }
+
+  RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",NJpsi_lower,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
 
   RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
@@ -274,6 +291,7 @@ void Final2DFit_freeMass(
   RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsTot,Save(), Hesse(kTRUE), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(0), NumCPU(nCPU));
   
   ws->import(*pdfMASS_Tot);
+  fitMass->Print("V");
 
   cout << "**********************************************************************" << endl;
   cout << "*************************** END MASS FIT *****************************" << endl;
@@ -654,6 +672,7 @@ void Final2DFit_freeMass(
   hmass->SetBinContent(1,temp2);
   hmass->SetBinError(1,temp2err);
 
+  fitMass->Print("V");
   fitResult->Print("v");
   const TMatrixDSym &cor = fitResult->correlationMatrix();
   cor.Print();

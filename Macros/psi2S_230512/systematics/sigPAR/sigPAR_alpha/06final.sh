@@ -4,19 +4,19 @@ root -l -b <<EOF
 .q
 EOF
 
-#for pt in '3.5,5' '5,6.5' '6.5,12' '12,50' 
-#do
-#	root -l -b -q 'Final2DFit_freeMass.C('$pt',1.6,2.4,0,180)'
-#done
-#for pt in  '6.5,9' '9,12' '12,15' '15,20' '20,25' '25,30' '30,50' 
-#do
-#	root -l -b -q 'Final2DFit_freeMass.C('$pt',0,1.6,0,180)'
-#done
+for pt in '3.5,5' '5,6.5' '6.5,12' '12,50' 
+do
+	root -l -b -q 'Final2DFit_freeMass.C('$pt',1.6,2.4,0,180)'
+done
+for pt in  '6.5,9' '9,12' '12,15' '15,20' '20,25' '25,50' 
+do
+	root -l -b -q 'Final2DFit_freeMass.C('$pt',0,1.6,0,180)'
+done
 
-#for cent in '0,20' '20,40' '40,60' '60,80' '80,100' '100,180'
-#do
-#    root -l -b -q 'Final2DFit_freeMass.C(6.5,50,0,1.6,'$cent')'
-#done
+for cent in '0,20' '20,40' '40,60' '60,80' '80,100' '100,180'
+do
+    root -l -b -q 'Final2DFit_freeMass.C(6.5,50,0,1.6,'$cent')'
+done
 for cent in '0,20' '20,40' '40,60' '60,80' '80,100' '100,180'
 do
     root -l -b -q 'Final2DFit_freeMass.C(3.5,50,1.6,2.4,'$cent')'
