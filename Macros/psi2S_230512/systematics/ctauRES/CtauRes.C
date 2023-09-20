@@ -106,6 +106,7 @@ void CtauRes(
   if(ptLow==6.5&&cLow==60&&cHigh==80) nGauss=2;
   else if(ptLow==15&&ptHigh==20) nGauss=2;
   else if(ptLow==3.5&&ptHigh==5) nGauss=2;
+  //else if(ptLow==9&&ptHigh==12) nGauss=2;
   //else if (cLow==0&&cHigh==20) nGauss=3;
   ws->factory("One[1.0]");
   ws->factory("ctauRes_mean[0.0]");
@@ -186,7 +187,7 @@ void CtauRes(
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
   ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1.3, 2.0]");
+  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
   ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
   else if(ptLow==20&&ptHigh==25){
   ws->factory("ctau1_CtauRes[0.]");  
@@ -221,7 +222,8 @@ void CtauRes(
   //if(ptLow==6.5&&ptHigh==7&&cLow==20&&cHigh==120){
   //  ws->factory("f_CtauRes[0.4, 1e-6, 1.]");ws->factory("f2_CtauRes[0.2, 1e-6, 1.]");ws->factory("f3_CtauRes[0.7, 0., 1.]");}
   if(cLow==00&&cHigh==60) {ws->factory("f_CtauRes[0.5, 0.1, 1.]");ws->factory("f2_CtauRes[0.3, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  //else if(ptLow==6.5&&ptHigh==9) {ws->factory("f_CtauRes[0.171, 0.17, 0.1791]");ws->factory("f2_CtauRes[0.691, 0.69, 0.6955]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
+  else if(ptLow==6.5&&ptHigh==9) {ws->factory("f_CtauRes[0.171, 0.1, 1.]");ws->factory("f2_CtauRes[0.691, 1e-3, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
+  else if(ptLow==9&&ptHigh==12) {ws->factory("f_CtauRes[0.171, 0.1, 1.]");ws->factory("f2_CtauRes[0.691, 1e-3, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
   else {ws->factory("f_CtauRes[0.4, 1e-6, 1.]");ws->factory("f2_CtauRes[0.5, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]"); }
   // create the three PDFs
   TString varName="ctau3DRes";

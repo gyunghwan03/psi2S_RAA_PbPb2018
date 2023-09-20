@@ -309,11 +309,12 @@ void Final2DFit_freeMass(
   //double fdss1 = ws->var("fDSS1")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
-  /*
-  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda,  1e-8, 100.));
-  ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, 100.));
+  
+  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda,  1e-8, 1.));
+  ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, 1.));
   ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
-  */
+  
+  /*
   ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
   ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
   ws->factory(Form("fDSS1_test[%.4f]", fdss));
@@ -321,7 +322,7 @@ void Final2DFit_freeMass(
   ws->var("lambdaDSS_test1")->setConstant();
   ws->var("lambdaDSS_test2")->setConstant();
   ws->var("fDSS1_test")->setConstant();
-  
+  */
 
   //NoPR{
   //1exp
