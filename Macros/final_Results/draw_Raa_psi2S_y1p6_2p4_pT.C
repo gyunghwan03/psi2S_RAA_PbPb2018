@@ -48,6 +48,8 @@ void draw_Raa_psi2S_y1p6_2p4_pT()
 	TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_20230801.root");
 	TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
     TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
+	//TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+	TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
 
     TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
     TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
@@ -55,6 +57,9 @@ void draw_Raa_psi2S_y1p6_2p4_pT()
     TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4");
     TH1D *hAcc_PbPb = (TH1D*) fAcc_PbPb -> Get("hAccPt_2021_Fory");
     TH1D *hAcc_pp = (TH1D*) fAcc_pp -> Get("hAccPt_2021_Fory");
+
+	TH1D *hSys_PR = (TH1D*) fSys -> Get("mid_pt_PR");
+    TH1D *hSys_NP = (TH1D*) fSys -> Get("mid_pt_NP");
 
     Double_t Nmb = 11968044281.;
     Double_t Nmb_err = Nmb*0.01261;
@@ -86,6 +91,7 @@ void draw_Raa_psi2S_y1p6_2p4_pT()
 
     double RaaPR[nPtBins]; double RaaPR_err[nPtBins]; double binWidth[nPtBins]; double x[nPtBins];
     double RaaNP[nPtBins]; double RaaNP_err[nPtBins];
+	double SysPR[nPtBins]; double SysNP[nPtBins];
 
     double Xpp_PR[nPtBins]; double Xpp_NP[nPtBins];
     double Xpp_PR_err[nPtBins]; double Xpp_NP_err[nPtBins];
@@ -209,6 +215,8 @@ void draw_Raa_psi2S_y1p6_2p4_pT()
         cout << "   , RAA NP : " << RaaNP[i] <<  ", RaaNP_err : " << RaaNP_err[i] << endl;
         //gRaaNP->SetPoint(i,(ptBin[i+1]-ptBin[i])/2,);
         //gRaaNP->SetPointError(i,0,Xpp_NP_err);
+		SysPR[i] = RaaPR[i]*(hSys_PR->GetBinContent(i+1));
+        SysNP[i] = RaaNP[i]*(hSys_NP->GetBinContent(i+1));
         hRAA_PR->SetBinContent(i+1,RaaPR[i]);
         hRAA_PR->SetBinError(i+1,RaaPR_err[i]);
         hRAA_NP->SetBinContent(i+1,RaaNP[i]);
@@ -307,6 +315,8 @@ void draw_Raa_psi2S_y1p6_2p4_pT()
 
 	TGraphErrors *gRaaPR = new TGraphErrors(nPtBins,x,RaaPR,binWidth,RaaPR_err);
 	TGraphErrors *gRaaNP = new TGraphErrors(nPtBins,x,RaaNP,binWidth,RaaNP_err);
+    TGraphErrors *gSysPR = new TGraphErrors(nPtBins,x,RaaPR,binWidth,SysPR);
+    TGraphErrors *gSysNP = new TGraphErrors(nPtBins,x,RaaNP,binWidth,SysNP);
 	TCanvas *cRAA = new TCanvas("cRAA", "", 700, 700);
 	cRAA->cd();
 	gRaaPR->GetXaxis()->SetTitle("p_{T} (GeV/c)");
@@ -327,8 +337,15 @@ void draw_Raa_psi2S_y1p6_2p4_pT()
 	gRaaNP->SetMarkerStyle(21);
 	gRaaNP->SetMarkerSize(1.4);
 
+	gSysPR->SetLineColor(kBlue-4);
+    gSysPR->SetFillColorAlpha(kBlue-9,0.40);
+    gSysNP->SetLineColor(kRed-4);
+    gSysNP->SetFillColorAlpha(kRed-9,0.40);
+
 	gRaaPR->Draw("AP");
 	gRaaNP->Draw("P");
+	gSysPR->Draw("5");
+    gSysNP->Draw("5");
 
 	TLegend *leg = new TLegend(0.68,0.72,0.8,0.82);
     SetLegendStyle(leg);

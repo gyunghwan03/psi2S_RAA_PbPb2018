@@ -46,7 +46,9 @@ void draw_Raa_psi2S_y0_1p6_Cent()
     TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root");
     TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230801.root");
 	TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
-    TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
+	TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
+	//TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+	TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
 
     TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_50_absy0_1p6");
     TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_50_absy0_1p6");
@@ -54,6 +56,9 @@ void draw_Raa_psi2S_y0_1p6_Cent()
     TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_Integrated_TnP1_PtW1_absy0_1p6");
     TH1D *hAcc_PbPb = (TH1D*) fAcc_PbPb -> Get("hAccPt_2021_midy_Int");
     TH1D *hAcc_pp = (TH1D*) fAcc_pp -> Get("hAccPt_2021_midy_Int");
+
+	TH1D *hSys_PR = (TH1D*) fSys -> Get("mid_cent_PR");
+    TH1D *hSys_NP = (TH1D*) fSys -> Get("mid_cent_NP");
 
 	Double_t Nmb = 11968044281.;
 	//Double_t Taa = 5.649; // 0-100%
@@ -83,8 +88,9 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 	TH1D *hRAA_PR = new TH1D("hRAA_PR",";p_{T} (GeV/c);", nCentBins,NpartBin);
 	TH1D *hRAA_NP = new TH1D("hRAA_NP",";p_{T} (GeV/c);", nCentBins,NpartBin);
 
-	double RaaPR[nCentBins]; double RaaPR_err[nCentBins]; double binWidth[nCentBins]; double x[nCentBins];
+	double RaaPR[nCentBins]; double RaaPR_err[nCentBins]; double binWidth[nCentBins]={4.3,4.3,4.3,4.3,4.3,4.3}; double x[nCentBins];
 	double RaaNP[nCentBins]; double RaaNP_err[nCentBins];
+	double SysPR[nCentBins]; double SysNP[nCentBins];
 
 	double cfrac[nCentBins];
 	double Taa[nCentBins] = {23.05, 14.39, 8.798, 5.124, 2.777, 0.5803};
@@ -218,6 +224,8 @@ void draw_Raa_psi2S_y0_1p6_Cent()
         RaaPR_err[nCentBins-1-i] = hRaa_PbPb_PR->GetBinError(i+1);
         RaaNP[nCentBins-1-i] = hRaa_PbPb_NP->GetBinContent(i+1);
         RaaNP_err[nCentBins-1-i] = hRaa_PbPb_NP->GetBinError(i+1);
+		SysPR[nCentBins-1-i] = RaaPR[nCentBins-1-i]*(hSys_PR->GetBinContent(i+1));
+        SysNP[nCentBins-1-i] = RaaNP[nCentBins-1-i]*(hSys_NP->GetBinContent(i+1));
 
 		//cout << "i : " << i << ", RAA Value : " << RaaPR[i] << ",   RAA Err : " << RaaPR_err[i] << " x : " << x[i] << ", bin Width : " << binWidth[i] << endl;
         //cout << "   , RAA NP : " << RaaNP[i] <<  ", RaaNP_err : " << RaaNP_err[i] << endl;
@@ -287,7 +295,7 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cXPR,iPeriod,iPos);	
 
-	cXPR->SaveAs("CrossSection_PR_y0_1p6_Cent.pdf");
+	cXPR->SaveAs("./figs/CrossSection_PR_y0_1p6_Cent.pdf");
 
 	TCanvas *cXNP = new TCanvas("cXNP", "", 700,700);
 	cXNP->cd();
@@ -325,10 +333,12 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cXNP,iPeriod,iPos);	
 
-	cXNP->SaveAs("CrossSection_NP_y0_1p6_Cent.pdf");
+	cXNP->SaveAs("figs/CrossSection_NP_y0_1p6_Cent.pdf");
 
 	TGraphErrors *gRaaPR = new TGraphErrors(nCentBins,NpartBin,RaaPR,0,RaaPR_err);
 	TGraphErrors *gRaaNP = new TGraphErrors(nCentBins,NpartBin,RaaNP,0,RaaNP_err);
+	TGraphErrors *gSysPR = new TGraphErrors(nCentBins,NpartBin,RaaPR,binWidth,SysPR);
+    TGraphErrors *gSysNP = new TGraphErrors(nCentBins,NpartBin,RaaNP,binWidth,SysNP);
 	TCanvas *cRAA = new TCanvas("cRAA", "", 700, 700);
 	cRAA->cd();
 	gRaaPR->GetXaxis()->SetTitle("<N_{Part}>");
@@ -343,13 +353,22 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 	gRaaPR->SetMarkerColor(kBlue+2);
 	gRaaPR->SetLineColor(kBlue+2);
 	gRaaPR->SetMarkerStyle(20);
-	gRaaPR->SetMarkerSize(1.4);
+	gRaaPR->SetMarkerSize(1.5);
 	gRaaNP->SetMarkerColor(kRed+3);
 	gRaaNP->SetLineColor(kRed+3);
 	gRaaNP->SetMarkerStyle(21);
-	gRaaNP->SetMarkerSize(1.4);
+	gRaaNP->SetMarkerSize(1.5);
 
-	gRaaPR->Draw("AP");
+	gSysPR->SetMinimum(0);
+	gSysPR->SetMaximum(1.44);
+	gSysPR->SetLineColor(kBlue-4);
+    gSysPR->SetFillColorAlpha(kBlue-9,0.40);
+    gSysNP->SetLineColor(kRed-4);
+    gSysNP->SetFillColorAlpha(kRed-9,0.40);
+
+	gSysPR->Draw("A5");
+	gSysNP->Draw("5");
+	gRaaPR->Draw("P");
 	gRaaNP->Draw("P");
 
 	TLegend *leg = new TLegend(0.68,0.72,0.8,0.82);
@@ -363,9 +382,9 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cRAA,iPeriod,iPos);	
 
-	cRAA->SaveAs("RAA_psi2S_y0_1p6_Npart.pdf");
+	cRAA->SaveAs("./figs/RAA_psi2S_y0_1p6_Npart.pdf");
 
-	TFile *outFile = new TFile("RAA_psi2S_midRap_Npart.root","recreate");
+	TFile *outFile = new TFile("./roots/RAA_psi2S_midRap_Npart.root","recreate");
 	hRAA_PR->Write();
 	hRAA_NP->Write();
 
