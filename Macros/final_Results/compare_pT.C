@@ -11,6 +11,9 @@
 
 void compare_pT()
 {
+  gStyle->SetOptStat(0);
+  setTDRStyle();
+
   TFile *f_mid = new TFile("roots/RAA_psi2S_midRap_pT.root"); 
   TFile *f_fwd = new TFile("roots/RAA_psi2S_forRap_pT.root"); 
   TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
@@ -79,6 +82,18 @@ void compare_pT()
   double x_1st = (6.5+3)/2;
   TArrow *fwdPR_upper = new TArrow(x_1st,0,x_1st,0.395,0.027,"<-|");
 
+  int iPeriod = 101;
+	int iPos = 33;
+
+  double text_x = 0.18;
+	double text_y = 0.8;
+	double y_diff = 0.08;
+  float pos_x = 0.20;
+	float pos_y = 0.85;
+	float pos_y_diff = 0.051;
+	int text_color = 1;
+	float text_size = 25;
+
   TCanvas *c1 = new TCanvas("c1","",900,800);
   c1->cd();
 
@@ -119,6 +134,18 @@ void compare_pT()
   g_midPR_old->Draw("P");
   g_midPR_oldSys->Draw("5");
 
+  TLegend *leg1 = new TLegend(0.62,0.835,0.72,0.735);
+	leg1->SetTextSize(text_size);
+	leg1->SetTextFont(43);
+	leg1->SetBorderSize(0);
+  leg1->AddEntry(g_midPR,"Prompt #psi(2S) New Data");
+  leg1->AddEntry(g_midPR_old,"Prompt #psi(2S) HIN-16-025");
+  leg1->Draw("SAME");
+
+  drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+  CMS_lumi_v2mass(c1, iPeriod, iPos);
+
   c1->SaveAs("./figs/compare_mid_pT.pdf");
 
   TCanvas *c2 = new TCanvas("c2","",900,800);
@@ -155,5 +182,18 @@ void compare_pT()
   g_fwdPR_old->Draw("P");
   g_fwdPR_oldSys->Draw("5");
   fwdPR_upper->Draw("");
+
+  TLegend *leg2 = new TLegend(0.62,0.835,0.72,0.735);
+  leg2->SetTextSize(text_size);
+	leg2->SetTextFont(43);
+	leg2->SetBorderSize(0);
+  leg2->AddEntry(g_fwdPR,"prompt #psi(2S) New Data");
+  leg2->AddEntry(g_fwdPR_old,"propmt #psi(2S) HIN-16-025");
+  leg2->Draw("SAME");
+
+  drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("1.6< |y| < 2.4", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+  CMS_lumi_v2mass(c2, iPeriod, iPos);
+
   c2->SaveAs("./figs/compare_fwd_pT.pdf");
 }
