@@ -82,6 +82,7 @@ void compute_total_syst()
         double tot_syst_PR = 0;
 		double acc_PR = 0; double eff_PR = 0;
 		double acc_NP = 0; double eff_NP = 0;
+		//double bFrac_PR = 0; double bFrac_NP = 0;
         double sigPDF_PR = h_sigPDF_mid_pt_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_mid_pt_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_mid_pt_PR->GetBinContent(hist_idx);
@@ -140,6 +141,7 @@ void compute_total_syst()
         double tot_syst_PR = 0;
 		double acc_PR = 0; double eff_PR = 0;
 		double acc_NP = 0; double eff_NP = 0;
+		//double bFrac_PR = 0; double bFrac_NP = 0;
         double sigPDF_PR = h_sigPDF_fwd_pt_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_fwd_pt_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_fwd_pt_PR->GetBinContent(hist_idx);
@@ -198,6 +200,7 @@ void compute_total_syst()
         double tot_syst_PR = 0;
 		double acc_PR = 0; double eff_PR = 0;
 		double acc_NP = 0; double eff_NP = 0;
+		//double bFrac_PR = 0; double bFrac_NP = 0;
         double sigPDF_PR = h_sigPDF_mid_cent_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_mid_cent_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_mid_cent_PR->GetBinContent(hist_idx);
@@ -255,6 +258,7 @@ void compute_total_syst()
         double tot_syst_PR = 0;
 		double acc_PR = 0; double eff_PR = 0;
 		double acc_NP = 0; double eff_NP = 0;
+		//double bFrac_PR = 0; double bFrac_NP = 0;
         double sigPDF_PR = h_sigPDF_fwd_cent_PR->GetBinContent(hist_idx);
         double sigPAR_PR = h_sigPAR_fwd_cent_PR->GetBinContent(hist_idx);
         double bkgPDF_PR = h_bkgPDF_fwd_cent_PR->GetBinContent(hist_idx);
