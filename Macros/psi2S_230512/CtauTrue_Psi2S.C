@@ -315,8 +315,8 @@ void CtauTrue_Psi2S(
   //if(yLow==0)drawText(Form("|y^{#mu#mu}| < %.1f",yHigh), text_x+0.5,text_y-y_diff,text_color,text_size);
   //else if(yLow!=0)drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh), text_x+0.5,text_y-y_diff,text_color,text_size);
   drawText(Form("#lambdaDSS = %.4f #pm %.4f", ws->var("lambdaDSS")->getVal(), ws->var("lambdaDSS")->getError() ),text_x+0.5,text_y-y_diff,text_color,text_size);
-  drawText(Form("#lambdaDSS2 = %.4f #pm %.4f", ws->var("lambdaDSS2")->getVal(), ws->var("lambdaDSS2")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
-  drawText(Form("#lambdaDSS3 = %.4f #pm %.4f", ws->var("lambdaDSS3")->getVal(), ws->var("lambdaDSS3")->getError() ),text_x+0.5,text_y-y_diff*3,text_color,text_size);
+  //drawText(Form("#lambdaDSS2 = %.4f #pm %.4f", ws->var("lambdaDSS2")->getVal(), ws->var("lambdaDSS2")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
+  //drawText(Form("#lambdaDSS3 = %.4f #pm %.4f", ws->var("lambdaDSS3")->getVal(), ws->var("lambdaDSS3")->getError() ),text_x+0.5,text_y-y_diff*3,text_color,text_size);
 
   TPad *pad_D_2 = new TPad("pad_D_2", "pad_D_2", 0, 0.006, 0.98, 0.227);
   c_D->cd();

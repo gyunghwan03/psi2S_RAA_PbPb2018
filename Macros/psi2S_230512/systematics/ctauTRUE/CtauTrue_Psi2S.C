@@ -124,9 +124,9 @@ void CtauTrue_Psi2S(
   double entries_True = ws->data("reducedDS_MC")->numEntries();
   if(ptLow==6.5&&ptHigh==9){
   ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
-  ws->factory("lambdaDSS[0.42, 1e-6, .9]");
-  ws->factory("lambdaDSS2[0.24, 1e-6, .9]");
-  ws->factory("lambdaDSS3[0.1, 1e-6, .9]");
+  ws->factory("lambdaDSS[0.642, 1e-6, 1.]");
+  ws->factory("lambdaDSS2[0.65, 1e-6, 1.]");
+  ws->factory("lambdaDSS3[0.1, 1e-6, 1.]");
   ws->factory("fDSS[0.3, 1e-6, 1.]");
   ws->factory("fDSS1[0.3, 1e-6.,1.]");}
   else if(ptLow==3.5&&ptHigh==5){

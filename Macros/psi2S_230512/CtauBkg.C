@@ -219,7 +219,7 @@ void CtauBkg(
   //if(ptLow>=15) { ctauMin=-1.5;}
   if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
   else if(ptLow==3&&ptHigh==4.5) {ctauMax=2.65;}
-  else if(ptLow==6.5&&ptHigh==9) ctauMin = -2.65;
+  else if(ptLow==6.5&&ptHigh==9) ctauMin = -1.9;
   else if(ptLow==4&&ptHigh==6.5) ctauMax=2.;
   else if(ptLow==6.5&&ptHigh==12&&yLow==1.6) ctauMin = -2.;
   else if(ptLow==12&&ptHigh==15&&yLow==1.6) ctauMin = -2.;

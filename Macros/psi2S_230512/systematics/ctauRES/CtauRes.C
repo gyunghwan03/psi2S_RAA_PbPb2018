@@ -106,6 +106,7 @@ void CtauRes(
   if(ptLow==6.5&&cLow==60&&cHigh==80) nGauss=2;
   else if(ptLow==15&&ptHigh==20) nGauss=2;
   else if(ptLow==3.5&&ptHigh==5) nGauss=2;
+  else if(ptLow==12&&ptHigh==15) nGauss=2;
   //else if(ptLow==9&&ptHigh==12) nGauss=2;
   //else if (cLow==0&&cHigh==20) nGauss=3;
   ws->factory("One[1.0]");
