@@ -11,8 +11,8 @@ vector<string> pp_mid_pt = {
     "2DFitResult_pt12.0-15.0_y0.0-1.6_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root",
     "2DFitResult_pt15.0-20.0_y0.0-1.6_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root",
     "2DFitResult_pt20.0-25.0_y0.0-1.6_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root",
-    "2DFitResult_pt25.0-30.0_y0.0-1.6_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root",
-    "2DFitResult_pt30.0-50.0_y0.0-1.6_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root"
+    "2DFitResult_pt25.0-50.0_y0.0-1.6_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root",
+    //"2DFitResult_pt30.0-50.0_y0.0-1.6_muPt0.0_PRw_Effw0_Accw0_PtW0_TnP0.root"
 };
 vector<string> pb_mid_pt = {
     "2DFitResult_pt6.5-9.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root",
@@ -20,8 +20,8 @@ vector<string> pb_mid_pt = {
     "2DFitResult_pt12.0-15.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root",
     "2DFitResult_pt15.0-20.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root",
     "2DFitResult_pt20.0-25.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root",
-    "2DFitResult_pt25.0-30.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root",
-    "2DFitResult_pt30.0-50.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root"
+    "2DFitResult_pt25.0-50.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root",
+    //"2DFitResult_pt30.0-50.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.root"
 };
 
 vector<string> pp_mid_cent = {
