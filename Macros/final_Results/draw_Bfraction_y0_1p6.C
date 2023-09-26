@@ -1,10 +1,9 @@
-#include <iostream>
-#include "../rootFitHeaders.h"
-#include "../commonUtility.h"
-#include "../JpsiUtility.h"
-#include "../cutsAndBin.h"
-#include "../CMS_lumi_v2mass.C"
-#include "../tdrstyle.C"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -19,6 +18,7 @@
 #include "RooCategory.h"
 #include "RooSimultaneous.h"
 #include "RooStats/SPlot.h"
+#include <iostream>
 
 using namespace std;
 using namespace RooFit;
@@ -33,11 +33,11 @@ void draw_Bfraction_y0_1p6()
 	int iPeriod = 101;
 	int iPos = 33;
 
-	const int nPtBins=5;
+	const int nPtBins=6;
 	TFile *fPbPb[nPtBins+1];
 	TFile *fpp[nPtBins+1];
 
-	double ptBin[nPtBins+1] = {6.5,9,12,15,20,50};
+	double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,50};
 	double fracPP[nPtBins]; double fracPbPb[nPtBins];
 	double fracErrPP[nPtBins]; double fracErrPbPb[nPtBins];
 	double x[nPtBins]; double binWidth[nPtBins];
@@ -116,15 +116,15 @@ void draw_Bfraction_y0_1p6()
 
 	CMS_lumi_v2mass(c1,iPeriod,iPos);
 
-	c1->SaveAs("Bfraction_y0_0p6_Corr.pdf");
+	c1->SaveAs("figs/Bfraction_y0_1p6.pdf");
 
 
 }
 valErr getFrac_psi2S_PbPb(int i) {
-	double ptBin[6] = {6.5,9,12,15,20,50};
-	TString kineLabel[6];
-	kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],0,1.6,0.0,0,200);
-	TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	double ptBin[7] = {6.5,9,12,15,20,25,50};
+	TString kineLabel[7];
+	kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],0,1.6,0.0,0,180);
+	TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;
@@ -133,10 +133,10 @@ valErr getFrac_psi2S_PbPb(int i) {
 	return ret;
 }
 valErr getFrac_psi2S_pp(int i) {
-	double ptBin[6] = {6.5,9,12,15,20,50};
-	TString kineLabel[6];
+	double ptBin[7] = {6.5,9,12,15,20,25,50};
+	TString kineLabel[7];
 	kineLabel[i] = getKineLabelpp(ptBin[i],ptBin[i+1],0,1.6,0.0);
-	TFile* inf = new TFile(Form("./pp_psi2S_Corr/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;

@@ -24,6 +24,7 @@ void compare_pT()
   TH1D *hSys_PR = (TH1D*) fSys->Get("mid_pt_PR");
   TH1D *hSys_fwd_PR = (TH1D*) fSys->Get("fwd_pt_PR");
 
+
   const int nPtBins=6;
   const int nPtBins_fwd=4;
   double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,50};
@@ -141,6 +142,7 @@ void compare_pT()
   leg1->AddEntry(g_midPR,"Prompt #psi(2S) New Data");
   leg1->AddEntry(g_midPR_old,"Prompt #psi(2S) HIN-16-025");
   leg1->Draw("SAME");
+  jumSun(0,1,50,1);
 
   drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
@@ -190,6 +192,7 @@ void compare_pT()
   leg2->AddEntry(g_fwdPR,"prompt #psi(2S) New Data");
   leg2->AddEntry(g_fwdPR_old,"propmt #psi(2S) HIN-16-025");
   leg2->Draw("SAME");
+  jumSun(0,1,50,1);
 
   drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("1.6< |y| < 2.4", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
