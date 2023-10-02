@@ -1,4 +1,5 @@
-#include <vector>
+#include "TH1.h"
+#include "TFile.h"
 #include "input_list.h" // Input file list
 using namespace std;
 
@@ -13,17 +14,40 @@ void syst_eff()
     string syst_type = "Eff";
 
     // Path label
-    string nominal_path_pp = "../pp_psi2S_230512/roots/2DFit_No_Weight/Final/";
-    string nominal_path_pb = "../psi2S_230512/roots/2DFit_No_Weight/Final/";
-    string syst_path_pp = "../pp_psi2S_230512/systematic/" + syst_type + "/roots/2DFit_No_Weight/Final/";
-    string syst_path_pb = "../psi2S_230512/systematics/" + syst_type + "/roots/2DFit_No_Weight/Final/";
+    TString path = "../../Eff_Acc/roots/";
+    TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root";
+    TString pp_nomi_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230728.root";
+    TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20230729.root";
+    TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_20230729.root";
+
+    TString pp_syst_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW0_tnp1_20231002.root";
+    TString pp_syst_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW0_tnp1_20231002.root";
+    TString pb_syst_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW0_tnp1_20231002.root";
+    TString pb_syst_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW0_tnp1_new_20231002.root";
+
+    TString h_pp_mid = "mc_eff_vs_pt_TnP1_PtW%d_absy0_1p6";
+    TString h_pb_mid = "mc_eff_vs_pt_TnP1_PtW%d_cent_0_to_180_absy0_1p6";
 
     // Define pointers for input files
-    TFile *pp_nominal_input = nullptr;
-    TFile *pb_nominal_input = nullptr;
-    TFile *pp_syst_input = nullptr;
-    TFile *pb_syst_input = nullptr;    
+    TFile *PR_pp_nomi_input =  new TFile(path+pp_nomi_PR.Data());
+    TFile *PR_pb_nomi_input = new TFile(path+pb_nomi_PR.Data());
+    TFile *PR_pp_syst_input = new TFile(path+pp_syst_PR.Data());
+    TFile *PR_pb_syst_input = new TFile(path+pb_syst_PR.Data());
     
+    TFile *NP_pp_nomi_input =  new TFile(path+pp_nomi_NP.Data());
+    TFile *NP_pb_nomi_input = new TFile(path+pb_nomi_NP.Data());
+    TFile *NP_pp_syst_input = new TFile(path+pp_syst_NP.Data());
+    TFile *NP_pb_syst_input = new TFile(path+pb_syst_NP.Data());
+
+    TH1D *h_pb_nomi_PR = (TH1D *)PR_pb_nomi_input->Get(Form(h_pb_mid.Data(),1));
+    TH1D *h_pb_syst_PR = (TH1D *)PR_pb_syst_input->Get(Form(h_pb_mid.Data(),0));
+    TH1D *h_pp_nomi_PR = (TH1D *)PR_pp_nomi_input->Get(Form(h_pp_mid.Data(),1));
+    TH1D *h_pp_syst_PR = (TH1D *)PR_pp_syst_input->Get(Form(h_pp_mid.Data(),0));
+
+    TH1D *h_pb_nomi_NP = (TH1D *)NP_pb_nomi_input->Get(Form(h_pb_mid.Data(),1));
+    TH1D *h_pb_syst_NP = (TH1D *)NP_pb_syst_input->Get(Form(h_pb_mid.Data(),0));
+    TH1D *h_pp_nomi_NP = (TH1D *)NP_pp_nomi_input->Get(Form(h_pp_mid.Data(),1));
+    TH1D *h_pp_syst_NP = (TH1D *)NP_pp_syst_input->Get(Form(h_pp_mid.Data(),0));
 
     // Start loop
         // loop1 - mid_pt
@@ -40,42 +64,23 @@ void syst_eff()
     TH1D mid_pt_PR("mid_pt_PR", "mid_PR", NBINS_mid_pt, edges_mid_pt);
     TH1D mid_pt_NP("mid_pt_NP", "mid_NP", NBINS_mid_pt, edges_mid_pt);
 
-    for (int i = 0; i < pp_mid_pt.size(); i++) {
-         // Open input files
-        string temp_input_path = nominal_path_pp + pp_mid_pt[i].c_str();
-        pp_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = nominal_path_pb + pb_mid_pt[i].c_str();
-        pb_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pp + pp_mid_pt[i];
-        pp_syst_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pb + pb_mid_pt[i];
-        pb_syst_input = TFile::Open(temp_input_path.c_str());
-
-
+    for (int i = 0; i < NBINS_mid_pt; i++) {
         // Get number of PR and NP Jpsi
         // pp nominal
-        double n_PR_pp_nomi;
-        double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
-        //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
+        double n_PR_pp_nomi = h_pp_nomi_PR->GetBinContent(i+2);
+        double n_NP_pp_nomi = h_pp_nomi_NP->GetBinContent(i+2);
         
         // pp syst
-        double n_PR_pp_syst;
-        double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        double n_PR_pp_syst = h_pp_syst_PR->GetBinContent(i+2);
+        double n_NP_pp_syst = h_pp_syst_NP->GetBinContent(i+2);
         
         // Pb nominal
-        double n_PR_Pb_nomi;
-        double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        double n_PR_Pb_nomi = h_pb_nomi_PR->GetBinContent(i+2);
+        double n_NP_Pb_nomi = h_pb_nomi_NP->GetBinContent(i+2);
         
         // Pb syst
-        double n_PR_Pb_syst;
-        double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        double n_PR_Pb_syst= h_pb_syst_PR->GetBinContent(i+2);;
+        double n_NP_Pb_syst= h_pb_syst_NP->GetBinContent(i+2);;
 
 
         // Compute uncertainty
@@ -92,46 +97,41 @@ void syst_eff()
     }
 
     // loop2 - fwd_pt
+    TString h_pp_fwd = "mc_eff_vs_pt_TnP1_PtW%d_absy1p6_2p4";
+    TString h_pb_fwd = "mc_eff_vs_pt_TnP1_PtW%d_cent_0_to_180_absy1p6_2p4;";
+
+    h_pb_nomi_PR = (TH1D *)PR_pb_nomi_input->Get(Form(h_pb_fwd.Data(),1));
+    h_pb_syst_PR = (TH1D *)PR_pb_syst_input->Get(Form(h_pb_fwd.Data(),0));
+    h_pp_nomi_PR = (TH1D *)PR_pp_nomi_input->Get(Form(h_pp_fwd.Data(),1));
+    h_pp_syst_PR = (TH1D *)PR_pp_syst_input->Get(Form(h_pp_fwd.Data(),0));
+
+    h_pb_nomi_NP = (TH1D *)NP_pb_nomi_input->Get(Form(h_pb_fwd.Data(),1));
+    h_pb_syst_NP = (TH1D *)NP_pb_syst_input->Get(Form(h_pb_fwd.Data(),0));
+    h_pp_nomi_NP = (TH1D *)NP_pp_nomi_input->Get(Form(h_pp_fwd.Data(),1));
+    h_pp_syst_NP = (TH1D *)NP_pp_syst_input->Get(Form(h_pp_fwd.Data(),0));
+
     const int NBINS_fwd_pt = 4;
     double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 5, 6.5, 12, 50};
     TH1D fwd_pt_PR("fwd_pt_PR", "fwd_PR", NBINS_fwd_pt, edges_fwd_pt);
     TH1D fwd_pt_NP("fwd_pt_NP", "fwd_NP", NBINS_fwd_pt, edges_fwd_pt);
     for (int i = 0; i < pp_fwd_pt.size(); i++) {
          // Open input files
-        string temp_input_path = nominal_path_pp + pp_fwd_pt[i].c_str();
-        pp_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = nominal_path_pb + pb_fwd_pt[i].c_str();
-        pb_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pp + pp_fwd_pt[i];
-        pp_syst_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pb + pb_fwd_pt[i];
-        pb_syst_input = TFile::Open(temp_input_path.c_str());
-
-
         // Get number of PR and NP Jpsi
         // pp nominal
-        double n_PR_pp_nomi;
-        double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
-        //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
+        double n_PR_pp_nomi = h_pp_nomi_PR->GetBinContent(i+2);
+        double n_NP_pp_nomi = h_pp_nomi_NP->GetBinContent(i+2);
         
         // pp syst
-        double n_PR_pp_syst;
-        double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        double n_PR_pp_syst = h_pp_syst_PR->GetBinContent(i+2);
+        double n_NP_pp_syst = h_pp_syst_NP->GetBinContent(i+2);
         
         // Pb nominal
-        double n_PR_Pb_nomi;
-        double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        double n_PR_Pb_nomi = h_pb_nomi_PR->GetBinContent(i+2);
+        double n_NP_Pb_nomi = h_pb_nomi_NP->GetBinContent(i+2);
         
         // Pb syst
-        double n_PR_Pb_syst;
-        double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        double n_PR_Pb_syst= h_pb_syst_PR->GetBinContent(i+2);;
+        double n_NP_Pb_syst= h_pb_syst_NP->GetBinContent(i+2);;
 
 
         // Compute uncertainty
@@ -141,7 +141,7 @@ void syst_eff()
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_syst, n_NP_Pb_nomi, n_NP_Pb_syst);
         //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
-        
+
         // Fill histograms
         fwd_pt_PR.SetBinContent(i+1, PR_uncert); // i starts from 0, hist elements starts from 1
         fwd_pt_NP.SetBinContent(i+1, NP_uncert);
@@ -167,48 +167,38 @@ void syst_eff()
     out_name = "./syst_roots/syst_cent_" + syst_type + ".root";
     TFile out_cent(out_name.c_str(), "recreate");
 
+    h_pp_mid = "mc_eff_Integrated_TnP1_PtW%d_absy0_1p6";
+    h_pb_mid = "mc_eff_vs_cent_TnP1_PtW%d_pt_6p5_to_50_absy0_1p6";
+    h_pb_nomi_PR = (TH1D *)PR_pb_nomi_input->Get(Form(h_pb_mid.Data(),1));
+    h_pb_syst_PR = (TH1D *)PR_pb_syst_input->Get(Form(h_pb_mid.Data(),0));
+    h_pp_nomi_PR = (TH1D *)PR_pp_nomi_input->Get(Form(h_pp_mid.Data(),1));
+    h_pp_syst_PR = (TH1D *)PR_pp_syst_input->Get(Form(h_pp_mid.Data(),0));
+
+    h_pb_nomi_NP = (TH1D *)NP_pb_nomi_input->Get(Form(h_pb_mid.Data(),1));
+    h_pb_syst_NP = (TH1D *)NP_pb_syst_input->Get(Form(h_pb_mid.Data(),0));
+    h_pp_nomi_NP = (TH1D *)NP_pp_nomi_input->Get(Form(h_pp_mid.Data(),1));
+    h_pp_syst_NP = (TH1D *)NP_pp_syst_input->Get(Form(h_pp_mid.Data(),0));
     const int NBINS_mid_cent = 6;
     double edges_mid_cent[NBINS_mid_cent+1] = {0, 10, 20, 30, 40, 50, 90};
     TH1D mid_cent_PR("mid_cent_PR", "mid_PR", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_NP("mid_cent_NP", "mid_NP", NBINS_mid_cent, edges_mid_cent);
 
-    for (int i = 0; i < pb_mid_cent.size(); i++) {
-        // Open input files
-        // pp_mid_cent has only one elements
-        string temp_input_path = nominal_path_pp + pp_mid_cent[0].c_str(); 
-        pp_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = nominal_path_pb + pb_mid_cent[i].c_str();
-        pb_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pp + pp_mid_cent[0];
-        pp_syst_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pb + pb_mid_cent[i];
-        pb_syst_input = TFile::Open(temp_input_path.c_str());
-
-
-        // Get number of PR and NP Jpsi
+    for (int i = 0; i < NBINS_mid_cent; i++) {
         // pp nominal
-        double n_PR_pp_nomi;
-        double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
-        //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
+        double n_PR_pp_nomi = h_pp_nomi_PR->GetBinContent(1);
+        double n_NP_pp_nomi = h_pp_nomi_NP->GetBinContent(1);
         
         // pp syst
-        double n_PR_pp_syst;
-        double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        double n_PR_pp_syst = h_pp_syst_PR->GetBinContent(1);
+        double n_NP_pp_syst = h_pp_syst_NP->GetBinContent(1);
         
         // Pb nominal
-        double n_PR_Pb_nomi;
-        double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        double n_PR_Pb_nomi = h_pb_nomi_PR->GetBinContent(i+1);
+        double n_NP_Pb_nomi = h_pb_nomi_NP->GetBinContent(i+1);
         
         // Pb syst
-        double n_PR_Pb_syst;
-        double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        double n_PR_Pb_syst = h_pb_syst_PR->GetBinContent(i+1);
+        double n_NP_Pb_syst = h_pb_syst_NP->GetBinContent(i+1);
 
 
         // Compute uncertainty
@@ -225,48 +215,39 @@ void syst_eff()
     }
 
     // Start loop4 - fwd_cent
+    h_pp_fwd = "mc_eff_Integrated_TnP1_PtW%d_absy1p6_2p4";
+    h_pb_fwd = "mc_eff_vs_cent_TnP1_PtW%d_pt_3_to_50_absy1p6_2p4";
+    h_pb_nomi_PR = (TH1D *)PR_pb_nomi_input->Get(Form(h_pb_fwd.Data(),1));
+    h_pb_syst_PR = (TH1D *)PR_pb_syst_input->Get(Form(h_pb_fwd.Data(),0));
+    h_pp_nomi_PR = (TH1D *)PR_pp_nomi_input->Get(Form(h_pp_fwd.Data(),1));
+    h_pp_syst_PR = (TH1D *)PR_pp_syst_input->Get(Form(h_pp_fwd.Data(),0));
+
+    h_pb_nomi_NP = (TH1D *)NP_pb_nomi_input->Get(Form(h_pb_fwd.Data(),1));
+    h_pb_syst_NP = (TH1D *)NP_pb_syst_input->Get(Form(h_pb_fwd.Data(),0));
+    h_pp_nomi_NP = (TH1D *)NP_pp_nomi_input->Get(Form(h_pp_fwd.Data(),1));
+    h_pp_syst_NP = (TH1D *)NP_pp_syst_input->Get(Form(h_pp_fwd.Data(),0));
+
     const int NBINS_fwd_cent = 6;
     double edges_fwd_cent[NBINS_fwd_cent+1] = {0, 10, 20, 30, 40, 50, 90};
     TH1D fwd_cent_PR("fwd_cent_PR", "fwd_PR", NBINS_fwd_cent, edges_fwd_cent);
     TH1D fwd_cent_NP("fwd_cent_NP", "fwd_NP", NBINS_fwd_cent, edges_fwd_cent);
 
-    for (int i = 0; i < pb_fwd_cent.size(); i++) {
-        // Open input files
-        // pp_fwd_cent has only one elements
-        string temp_input_path = nominal_path_pp + pp_fwd_cent[0].c_str(); 
-        pp_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = nominal_path_pb + pb_fwd_cent[i].c_str();
-        pb_nominal_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pp + pp_fwd_cent[0];
-        pp_syst_input = TFile::Open(temp_input_path.c_str());
-
-        temp_input_path = syst_path_pb + pb_fwd_cent[i];
-        pb_syst_input = TFile::Open(temp_input_path.c_str());
-
-
-        // Get number of PR and NP Jpsi
+    for (int i = 0; i < NBINS_fwd_cent; i++) {
         // pp nominal
-        double n_PR_pp_nomi;
-        double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
-        //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
+        double n_PR_pp_nomi = h_pp_nomi_PR->GetBinContent(1);
+        double n_NP_pp_nomi = h_pp_nomi_NP->GetBinContent(1);
         
         // pp syst
-        double n_PR_pp_syst;
-        double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        double n_PR_pp_syst = h_pp_syst_PR->GetBinContent(1);
+        double n_NP_pp_syst = h_pp_syst_NP->GetBinContent(1);
         
         // Pb nominal
-        double n_PR_Pb_nomi;
-        double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        double n_PR_Pb_nomi = h_pb_nomi_PR->GetBinContent(i+1);
+        double n_NP_Pb_nomi = h_pb_nomi_NP->GetBinContent(i+1);
         
         // Pb syst
-        double n_PR_Pb_syst;
-        double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        double n_PR_Pb_syst = h_pb_syst_PR->GetBinContent(i+1);
+        double n_NP_Pb_syst = h_pb_syst_NP->GetBinContent(i+1);
 
 
         // Compute uncertainty
@@ -276,7 +257,7 @@ void syst_eff()
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_syst, n_NP_Pb_nomi, n_NP_Pb_syst);
         //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
-        
+
         // Fill histograms
         fwd_cent_PR.SetBinContent(i+1, PR_uncert); // i starts from 0, hist elements starts from 1
         fwd_cent_NP.SetBinContent(i+1, NP_uncert);
@@ -296,22 +277,6 @@ void syst_eff()
     fwd_cent_PR.SetName("fwd_cent_PR");
     fwd_cent_NP.SetName("fwd_cent_NP");
     out_cent.Close();
-}
-
-
-
-void compute_n_jpsi(TFile *my_file, double &n_PR, double &n_NP)
-{
-    //Read N_jpsi, b_fraction
-    auto fit_result = (RooFitResult*)my_file->Get("fitresult_pdfCTAUMASS_Tot_dsToFit");
-    auto hist_frac = (TH1D*)my_file->Get("2DfitResults"); // b_fraction -> only first bin is used
-    auto RooReal_n_jpsi = (RooRealVar*)fit_result->constPars().find("N_Jpsi");
-    double n_jpsi = RooReal_n_jpsi->getVal();
-    double b_frac = hist_frac->GetBinContent(1);
-
-    // Compute # of PR and NP
-    n_NP = n_jpsi * b_frac;
-    n_PR = n_jpsi - n_NP;
 }
 
 double compute_uncertainty(double pp_nomi, double pp_syst, double pb_nomi, double pb_syst)

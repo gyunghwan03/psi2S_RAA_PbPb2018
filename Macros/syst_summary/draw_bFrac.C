@@ -135,7 +135,7 @@ void draw_bFrac()
 
 	c_mid_cent_PR->cd();
 	for (int i=0; i<nFiles; i++) {
-		h_mid_cent_PR[i]->GetYaxis()->SetRangeUser(0,1);
+		h_mid_cent_PR[i]->GetYaxis()->SetRangeUser(0,0.2);
 		h_mid_cent_PR[i]->GetXaxis()->SetTitle("Centrality (%)");
 		h_mid_cent_PR[i]->SetLineColor(i+2);
 		h_mid_cent_PR[i]->SetLineWidth(2);
@@ -148,7 +148,7 @@ void draw_bFrac()
 
 	c_mid_cent_NP->cd();
 	for (int i=0; i<nFiles; i++) {
-		h_mid_cent_NP[i]->GetYaxis()->SetRangeUser(0,1);
+		h_mid_cent_NP[i]->GetYaxis()->SetRangeUser(0,0.2);
 		h_mid_cent_NP[i]->GetXaxis()->SetTitle("Centrality (%)");
 		h_mid_cent_NP[i]->SetLineColor(i+2);
 		h_mid_cent_NP[i]->SetLineWidth(2);

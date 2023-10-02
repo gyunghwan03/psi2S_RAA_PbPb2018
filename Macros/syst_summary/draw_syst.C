@@ -16,10 +16,10 @@ void draw_syst()
 	gStyle->SetOptStat(0);
     setTDRStyle();
 
-	const int nFiles = 6;
+	const int nFiles = 7;
 
 	//TString SysName[nFiles] = {"Sig. PDF","Sig. Par","Bkg. PDF", "HF", "b Fraction", "Acc", "Eff"};
-	TString SysName[nFiles] = {"Total", "Sig. PDF","Sig. Par","Bkg. PDF", "HF", "b Fraction"};
+	TString SysName[nFiles] = {"Total", "Sig. PDF","Sig. Par","Bkg. PDF", "HF", "b Fraction", "Eff"};
 
 	TFile *in_pt[nFiles];
 	TFile *in_cent[nFiles];
@@ -30,16 +30,16 @@ void draw_syst()
 	in_pt[3] = TFile::Open("syst_roots/syst_pt_bkgPDF.root");
 	in_pt[4] = TFile::Open("syst_roots/syst_pt_HF.root");
 	in_pt[5] = TFile::Open("syst_roots/syst_pt_bFrac.root");
-	//in_pt[5] = TFile::Open("syst_roots/syst_pt_acc.root");
-	//in_pt[6] = TFile::Open("syst_roots/syst_pt_eff.root");
+	in_pt[6] = TFile::Open("syst_roots/syst_pt_eff.root");
+	//in_pt[6] = TFile::Open("syst_roots/syst_pt_acc.root");
 
 	in_cent[1] = TFile::Open("syst_roots/syst_cent_sigPDF.root");
 	in_cent[2] = TFile::Open("syst_roots/syst_cent_sigPAR.root");
 	in_cent[3] = TFile::Open("syst_roots/syst_cent_bkgPDF.root");
 	in_cent[4] = TFile::Open("syst_roots/syst_cent_HF.root");
 	in_cent[5] = TFile::Open("syst_roots/syst_cent_bFrac.root");
-	//in_cent[5] = TFile::Open("syst_roots/syst_cent_acc.root");
-	//in_cent[6] = TFile::Open("syst_roots/syst_cent_eff.root");	
+	in_cent[6] = TFile::Open("syst_roots/syst_cent_eff.root");	
+	//in_cent[6] = TFile::Open("syst_roots/syst_cent_acc.root");
 
 	TH1D *h_mid_pt_PR[nFiles];
 	TH1D *h_mid_pt_NP[nFiles];
@@ -153,7 +153,7 @@ void draw_syst()
 
 	c_mid_cent_PR->cd();
 	for (int i=0; i<nFiles; i++) {
-		h_mid_cent_PR[i]->GetYaxis()->SetRangeUser(0,1);
+		h_mid_cent_PR[i]->GetYaxis()->SetRangeUser(0,0.4);
 		h_mid_cent_PR[i]->GetXaxis()->SetTitle("Centrality (%)");
 		h_mid_cent_PR[i]->SetLineWidth(2);
 		h_mid_cent_PR[i]->SetLineColor(i+1);
@@ -166,7 +166,7 @@ void draw_syst()
 
 	c_mid_cent_NP->cd();
 	for (int i=0; i<nFiles; i++) {
-		h_mid_cent_NP[i]->GetYaxis()->SetRangeUser(0,1);
+		h_mid_cent_NP[i]->GetYaxis()->SetRangeUser(0,0.4);
 		h_mid_cent_NP[i]->GetXaxis()->SetTitle("Centrality (%)");
 		h_mid_cent_NP[i]->SetLineWidth(2);
 		h_mid_cent_NP[i]->SetLineColor(i+1);
