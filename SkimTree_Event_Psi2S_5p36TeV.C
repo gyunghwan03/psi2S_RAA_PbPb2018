@@ -24,7 +24,7 @@ void SkimTree_Event_Psi2S_5p36TeV(int nevt=-1, bool isMC = false, int kTrigSel =
   //TString fname1 = "/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/PromptAOD/DoubleMuonPD/MinBias/HIMinimumBias_Run2018_Upsilon_PromptReco_v1.root";
   TString fnameData1 = "/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/PromptAOD/DoubleMuonPD/PromptAOD_v1_Oniatree_addvn_part*.root";
   TString fnameData2 = "/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/PromptAOD/DoubleMuonPD/PromptAOD_v2_Oniatree_addvn_part*.root";
-  TString fnameDataReReco = "./skimmedFiles/Oniatree_PhysicsHIPhysicsRawPrime0_miniAOD_pseudo_JSON.root";
+  TString fnameDataReReco = "/eos/cms/store/group/phys_heavyions/anstahll/CERN/PbPb2023/OniaTree/2023_10_16/OniaTree_HIPhysicsRawPrime_HIRun2023A_2023_10_16.root";
   TString fnameDataReRecoPeri = "/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/ReReco/AOD/DoubleMuonPsiPeri/ReReco_Oniatree_addvn_part*.root";
   TString fnameMC = "/eos/cms/store/group/phys_heavyions/dileptons/MC2018/PbPb502TeV/TTrees/Upsi1S_TuneCP5_HydjetDrumMB_officialPythia8MC*_v20190801.root";
 
@@ -54,14 +54,14 @@ void SkimTree_Event_Psi2S_5p36TeV(int nevt=-1, bool isMC = false, int kTrigSel =
   Short_t         Reco_mu_charge[maxBranchSize];
   //TClonesArray    *Reco_QQ_4mom;
   //TClonesArray    *Reco_mu_4mom;
-  std::vector<float>        *Reco_QQ_4mom_m;
-  std::vector<float>        *Reco_QQ_4mom_eta;
-  std::vector<float>        *Reco_QQ_4mom_phi;
-  std::vector<float>        *Reco_QQ_4mom_pt;
-  std::vector<float>        *Reco_mu_4mom_m;
-  std::vector<float>        *Reco_mu_4mom_eta;
-  std::vector<float>        *Reco_mu_4mom_phi;
-  std::vector<float>        *Reco_mu_4mom_pt;
+  std::vector<float>        *Reco_QQ_4mom_m = new vector<float>;
+  std::vector<float>        *Reco_QQ_4mom_eta = new vector<float>;
+  std::vector<float>        *Reco_QQ_4mom_phi = new vector<float>;
+  std::vector<float>        *Reco_QQ_4mom_pt = new vector<float>;
+  std::vector<float>        *Reco_mu_4mom_m = new vector<float>;
+  std::vector<float>        *Reco_mu_4mom_eta = new vector<float>;
+  std::vector<float>        *Reco_mu_4mom_phi = new vector<float>;
+  std::vector<float>        *Reco_mu_4mom_pt  = new vector<float>;
   ULong64_t       Reco_QQ_trig[maxBranchSize];   //[Reco_QQ_size]
   ULong64_t       Reco_mu_trig[maxBranchSize];   //[Reco_QQ_size]
   Float_t         Reco_QQ_VtxProb[maxBranchSize];   //[Reco_QQ_size]
@@ -79,7 +79,7 @@ void SkimTree_Event_Psi2S_5p36TeV(int nevt=-1, bool isMC = false, int kTrigSel =
   TBranch        *b_Reco_QQ_4mom_eta;   //!
   TBranch        *b_Reco_QQ_4mom_phi;   //!
   TBranch        *b_Reco_QQ_4mom_pt;   //!
-  TBranch        *b_Reco_mu_4mom_m;   //!
+  TBranch        *b_Reco_mu_4mom_m;   //
   TBranch        *b_Reco_mu_4mom_eta;   //!
   TBranch        *b_Reco_mu_4mom_phi;   //!
   TBranch        *b_Reco_mu_4mom_pt;   //!
@@ -216,9 +216,9 @@ void SkimTree_Event_Psi2S_5p36TeV(int nevt=-1, bool isMC = false, int kTrigSel =
   if(hiHFBinEdge==1) fCentSelHF = "HFUp";
   else if(hiHFBinEdge==-1) fCentSelHF = "HFDown";
   TFile* newfile;
-  newfile = new TFile(Form("OniaFlowSkim_%sTrig_5p36TeV_%sPD_miniAOD_isMC%d_%s_231017.root",fTrigName[trigIndx].Data(),fPD.Data(),isMC,fCentSelHF.Data()),"recreate");
+  newfile = new TFile(Form("OniaFlowSkim_%sTrig_5p36TeV_%sPD_miniAOD_isMC%d_%s_231019.root",fTrigName[trigIndx].Data(),fPD.Data(),isMC,fCentSelHF.Data()),"recreate");
 
-  const static int nMaxDimu = 1000;
+  const static int nMaxDimu = 10000;
   int evt;
   int runN;
   int lumi;
@@ -290,6 +290,7 @@ void SkimTree_Event_Psi2S_5p36TeV(int nevt=-1, bool isMC = false, int kTrigSel =
     if(iev%100000==0) cout << ">>>>> EVENT " << iev << " / " << mytree->GetEntries() <<  " ("<<(int)(100.*iev/mytree->GetEntries()) << "%)" << endl;
 
     mytree->GetEntry(iev);
+	//cout << "HERE" << endl;
   
     nDimu = 0;
     
