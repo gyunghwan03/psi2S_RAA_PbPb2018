@@ -28,7 +28,7 @@ valErr getYield_pp(int i=0);
 valErr getFrac_PbPb(int i=0);
 valErr getFrac_pp(int i=0);
 
-void draw_Raa_psi2S_y0_1p6_Cent()
+void draw_Raa_psi2S_y0_1p6_Cent(bool isSys=true)
 {
 
 	//gROOT->SumW2();
@@ -42,14 +42,24 @@ void draw_Raa_psi2S_y0_1p6_Cent()
     TFile *fpp[nCentBins+1];
 
 	TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20230729.root");
-    TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_20230729.root");
-    TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root");
-    TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230801.root");
+	TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_20230729.root");
+	TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root");
+	TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230801.root");
 	TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
 	TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
-	//TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
-	TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
+	TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+	//TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW0_tnp1_20231019.root");
+	//TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW0_tnp1_new_20231019.root");
+	//TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW0_tnp1_20231019.root");
+	//TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW0_tnp1_20231019.root");
+	//TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt0_PbPb_SysUp0_20231019.root");
+	//TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt0_pp_SysUp0_20231019.root");
+	//TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
 
+    //TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_cent_TnP1_PtW0_pt_6p5_to_50_absy0_1p6");
+    //TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_cent_TnP1_PtW0_pt_6p5_to_50_absy0_1p6");
+    //TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_Integrated_TnP1_PtW0_absy0_1p6");
+    //TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_Integrated_TnP1_PtW0_absy0_1p6");
     TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_50_absy0_1p6");
     TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_50_absy0_1p6");
     TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_Integrated_TnP1_PtW1_absy0_1p6");
@@ -146,6 +156,7 @@ void draw_Raa_psi2S_y0_1p6_Cent()
         double err_PPPR_wgt = err_PPPR/weight_ppPR;
         double err_PPNP_wgt = err_PPNP/weight_ppNP;
 
+		cfrac[i] = (centBin[i+1]-centBin[i])/90.;
 
 		cout << " " << endl;
 		cout << "Cent " << centBin[i] << "	-	" << centBin[i+1] << "	Cent Frac : " << cfrac[i] << endl;
@@ -164,7 +175,6 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 		hyieldPbPb_NP -> SetBinContent(i+1,yieldPbPb.val*(fracPbPb.val));
 		hyieldPbPb_NP -> SetBinError(i+1,err_PbPbNP_wgt);
 
-		cfrac[i] = (centBin[i+1]-centBin[i])/90.;
 
 		Xpp_PR[i] = lumi_pp_scale*yieldPP_PR/(lumi_pp*1e+2*(double)(50.-6.5)*2*(double)(1.6));
 		Xpp_PR_err[i] = lumi_pp_scale*Xpp_PR[i]*sqrt(TMath::Power(err_PPPR_wgt/yieldPP_PR,2) + TMath::Power(lumi_pp_err/(lumi_pp*1e+2),2));
@@ -366,10 +376,12 @@ void draw_Raa_psi2S_y0_1p6_Cent()
     gSysNP->SetLineColor(kRed-4);
     gSysNP->SetFillColorAlpha(kRed-9,0.40);
 
-	gSysPR->Draw("A5");
-	gSysNP->Draw("5");
-	gRaaPR->Draw("P");
+	gRaaPR->Draw("AP");
 	gRaaNP->Draw("P");
+	if(isSys==1){
+		gSysPR->Draw("5");
+		gSysNP->Draw("5");
+	}
 
 	TLegend *leg = new TLegend(0.68,0.72,0.8,0.82);
     SetLegendStyle(leg);
@@ -382,7 +394,7 @@ void draw_Raa_psi2S_y0_1p6_Cent()
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cRAA,iPeriod,iPos);	
 
-	cRAA->SaveAs("./figs/RAA_psi2S_y0_1p6_Npart.pdf");
+	cRAA->SaveAs(Form("./figs/RAA_psi2S_y0_1p6_Npart_Sys%d.pdf",isSys));
 
 	TFile *outFile = new TFile("./roots/RAA_psi2S_midRap_Npart.root","recreate");
 	hRAA_PR->Write();

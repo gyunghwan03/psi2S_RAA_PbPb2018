@@ -1,10 +1,10 @@
 #include <iostream>
-#include "../rootFitHeaders.h"
-#include "../commonUtility.h"
-#include "../JpsiUtility.h"
-#include "../cutsAndBin.h"
-#include "../CMS_lumi_v2mass.C"
-#include "../tdrstyle.C"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
 #include <RooGaussian.h>
 #include <RooFormulaVar.h>
 #include <RooCBShape.h>
@@ -33,11 +33,11 @@ void draw_Bfraction_y1p6_2p4()
 	int iPeriod = 101;
 	int iPos = 33;
 
-	const int nPtBins=3;
+	const int nPtBins=4;
 	TFile *fPbPb[nPtBins+1];
 	TFile *fpp[nPtBins+1];
 
-	double ptBin[nPtBins+1] = {3,6.5,12,50};
+	double ptBin[nPtBins+1] = {3.5,6.5,9,12,50};
 	double fracPP[nPtBins]; double fracPbPb[nPtBins];
 	double fracErrPP[nPtBins]; double fracErrPbPb[nPtBins];
 	double x[nPtBins]; double binWidth[nPtBins];
@@ -46,9 +46,18 @@ void draw_Bfraction_y1p6_2p4()
 
 	TString kineLabel[nPtBins+1];
 
+	double ptBin_BPH[8] = {5.5,6.5,8.,9.,10.,12.,15.,30.};
+	double pt_BPH[7] = {0.21,0.19,0.30,0.30,0.37,0.372,0.45};
+	double pt_Err[7] = {0.06,0.04,0.04,0.03,0.03,0.035,0.04};
+	double x_BPH[7]; double binWidth_BPH[7];
+
 	TH1D *hfracPP = new TH1D("hfracPP",";p_{T} (GeV/c);non-prompt fraction",nPtBins, ptBin);
 	TH1D *hfracPbPb = new TH1D("hfracPbPb",";p_{T} (GeV/c);non-prompt fraction",nPtBins, ptBin);
 
+	for(int i=0; i<7; i++){
+		x_BPH[i] = (ptBin_BPH[i+1]+ptBin_BPH[i])/2;
+		binWidth_BPH[i] = (ptBin_BPH[i+1]-ptBin_BPH[i])/2;
+	}
 
 	for(int i=0;i<nPtBins;i++)
 	{
@@ -79,6 +88,7 @@ void draw_Bfraction_y1p6_2p4()
 
 	TGraphErrors* gfracPP = new TGraphErrors(nPtBins,x,BfracPP,binWidth,fracErrPP); 
 	TGraphErrors* gfracPbPb = new TGraphErrors(nPtBins,x,BfracPbPb, binWidth,fracErrPbPb);
+	TGraphErrors* gfracBPH = new TGraphErrors(7,x_BPH,pt_BPH,binWidth_BPH,pt_Err);
 
 	int text_size=17;
 	double text_x = 0.18;
@@ -92,6 +102,10 @@ void draw_Bfraction_y1p6_2p4()
 	gfracPbPb->SetMarkerColor(kRed+2);
 	gfracPbPb->SetLineColor(kRed+2);
 	gfracPbPb->SetMarkerStyle(21);
+	gfracBPH->SetMarkerColor(15);
+	gfracBPH->SetLineColor(15);
+	gfracBPH->SetMarkerStyle(27);
+	gfracBPH->SetMarkerSize(1.4);
 	
 	gfracPP->GetXaxis()->SetTitle("p_{T} (GeV/c)");
 	gfracPP->GetYaxis()->SetTitle("non-propmt fraction");
@@ -102,28 +116,36 @@ void draw_Bfraction_y1p6_2p4()
 	gfracPP->GetYaxis()->SetRangeUser(0,0.75);
 	gfracPbPb->GetYaxis()->SetRangeUser(0,0.75);
 	gfracPP->GetXaxis()->SetLimits(0,50);
+	gfracBPH->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+	gfracBPH->GetYaxis()->SetTitle("non-propmt fraction");
+	gfracBPH->GetXaxis()->CenterTitle();
+	gfracBPH->GetYaxis()->CenterTitle();
+	gfracBPH->GetXaxis()->SetLimits(0,50);
+	gfracBPH->GetYaxis()->SetRangeUser(0,0.75);
 	gfracPP->Draw("AP");
 	gfracPbPb->Draw("P");
+	gfracBPH->Draw("P");
 
 	TLegend *leg = new TLegend(0.2,0.9,0.3,0.8);
 	leg->SetTextSize(text_size);
 	leg->SetTextFont(43);
 	leg->SetBorderSize(0);
-	leg->AddEntry(gfracPP,"pp 5.02 TeV, 1.6<|y|<2.4","P");
-	leg->AddEntry(gfracPbPb,"PbPb 5.02 TeV, 1.6<|y|<2.4","P");
+	leg->AddEntry(gfracPP,"pp 5.02 TeV, 1.6 < |y| < 2.4","P");
+	leg->AddEntry(gfracPbPb,"PbPb 5.02 TeV, 1.6 < |y| < 2.4","P");
+	leg->AddEntry(gfracBPH,"pp 7 TeV (BPH-10-014), 1.6 < |y| < 2.4","P");
 	leg->Draw("SAME");
 
 	CMS_lumi_v2mass(c1,iPeriod,iPos);
 
-	c1->SaveAs("Bfraction_y1p6_2p4.pdf");
+	c1->SaveAs("./figs/Bfraction_y1p6_2p4_freeFit.pdf");
 
 
 }
 valErr getFrac_psi2S_PbPb(int i) {
-	double ptBin[4] = {3,6.5,12,50};
-	TString kineLabel[4];
-	kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],1.6,2.4,0.0,0,200);
-	TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	double ptBin[5] = {3.5,6.5,9,12,50};
+	TString kineLabel[5];
+	kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],1.6,2.4,0.0,0,180);
+	TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;
@@ -132,10 +154,11 @@ valErr getFrac_psi2S_PbPb(int i) {
 	return ret;
 }
 valErr getFrac_psi2S_pp(int i) {
-	double ptBin[4] = {3,6.5,12,50};
-	TString kineLabel[4];
+	double ptBin[5] = {3.5,6.5,9,12,50};
+	TString kineLabel[5];
 	kineLabel[i] = getKineLabelpp(ptBin[i],ptBin[i+1],1.6,2.4,0.0);
-	TFile* inf = new TFile(Form("./pp_psi2S_Corr/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw1_Accw1_PtW1_TnP1.root", kineLabel[i].Data()));
+	TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
+	//TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/backup_231122/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
 	TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
 	valErr ret;
