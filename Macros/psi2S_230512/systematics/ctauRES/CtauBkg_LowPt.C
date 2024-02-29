@@ -96,7 +96,7 @@ void CtauBkg_LowPt(
   //ws->factory("lambdaDDS_Bkg[0.2, 1e-6, 1.]");
   //ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1.]");
   //ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");
-  if(ptLow==3&&ptHigh==6.5){
+  if(ptLow==3.5&&ptHigh==5){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
   ws->factory("fDLIV[0.3, 0., 0.99]");
