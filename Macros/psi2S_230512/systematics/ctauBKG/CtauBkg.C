@@ -121,7 +121,7 @@ void CtauBkg(
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
-  //ws->var("ctau3_CtauRes")->setConstant(kTRUE);	ws->var("rS32_CtauRes")->setConstant(kTRUE);
+  ws->var("ctau3_CtauRes")->setConstant(kTRUE);	ws->var("rS32_CtauRes")->setConstant(kTRUE);
   //ws->var("f2_CtauRes")->setConstant(kTRUE);	
   ws->var("f_CtauRes")->setConstant(kTRUE);
   cout<<ws->var("N_Bkg")->getVal()<<"+/-"<<ws->var("N_Bkg")->getError()<<endl;
