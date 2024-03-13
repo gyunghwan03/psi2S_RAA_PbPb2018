@@ -127,7 +127,7 @@ void CtauRes(
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.5, 1e-3, 0.6722]");
+  ws->factory("s1_CtauRes[0.5, 1e-3, 1.]");
   ws->factory("rS21_CtauRes[1.18, 1e-3, 5.]");
   ws->factory("rS32_CtauRes[2.57, 1e-3., 5.0]");}
   else if(ptLow==3.5&&cLow==20&&cHigh==40){
@@ -325,7 +325,7 @@ void CtauRes(
   else if(ptLow==3.5&&cLow==0&&cHigh==20) { ctauResMin=-10; ctauResMax=8.2;}
   else if(ptLow==3.5&&cLow==20&&cHigh==40) { ctauResMin=-7; ctauResMax=7;}
   else if(ptLow==3.5&&cLow==40&&cHigh==60) { ctauResMin=-5; ctauResMax=5;}
-  else if(ptLow==3.5&&ptHigh==6.5) {ctauResMin=-10; ctauResMax=8.7;}
+  else if(ptLow==3.5&&ptHigh==6.5) {ctauResMin=-4.6; ctauResMax=5.8;}
 
   ws->var("ctau3DRes")->setRange("ctauResWindow",ctauResMin,ctauResMax);
   cout<<"Fit Range: "<<ctauResMin<<" - " << ctauResMax <<endl;
