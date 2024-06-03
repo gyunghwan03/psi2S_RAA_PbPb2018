@@ -72,7 +72,7 @@ void syst_HFup()
 
     // loop2 - fwd_pt
     const int NBINS_fwd_pt = 4;
-    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 5, 6.5, 12, 50};
+    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 6.5, 9, 12, 50};
     TH1D fwd_pt_PR("fwd_pt_PR", "fwd_PR", NBINS_fwd_pt, edges_fwd_pt);
     TH1D fwd_pt_NP("fwd_pt_NP", "fwd_NP", NBINS_fwd_pt, edges_fwd_pt);
     for (int i = 0; i < pb_fwd_pt.size(); i++) {

@@ -14,30 +14,53 @@ void syst_eff()
     string syst_type = "Eff";
 
     // Path label
-    TString path = "../../Eff_Acc/roots/";
-    TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root";
-    TString pp_nomi_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230728.root";
-    TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20230729.root";
-    TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_20230729.root";
+    /*
+    TString path = "./Efficiency/20230607_EffNom_";
+    TString fname_pp = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW%d_tnp1_20230602.root";
+    TString fname_pb = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW%d_tnp1_20230602.root";
+    TString pp_nomi_PR = "pp/roots/"+fname_pp;
+    TString pp_nomi_NP = "pp/roots/"+fname_pp;
+    TString pp_syst_PR = "pp_Off/roots/"+fname_pp;
+    TString pp_syst_NP = "pp_Off/roots/"+fname_pp;
+    TString pb_nomi_PR = "pbpb_On/roots/"+fname_pb;
+    TString pb_nomi_NP = "pbpb_On_Npr/roots/"+fname_pb;
+    TString pb_syst_PR = "pbpb_Off/roots/"+fname_pb;
+    TString pb_syst_NP = "pbpb_Off_Npr/roots/"+fname_pb;
+*/
 
-    TString pp_syst_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW0_tnp1_20231002.root";
-    TString pp_syst_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW0_tnp1_20231002.root";
-    TString pb_syst_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW0_tnp1_20231002.root";
-    TString pb_syst_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW0_tnp1_new_20231002.root";
+
+    
+    TString path = "../../Eff_Acc/roots/";
+	TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20240509_ppWfunc.root"; //0322
+	TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_20240509_ppWfunc.root"; //0322
+	TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20240509.root";
+	//TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20240314.root";
+	TString pp_nomi_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230801.root";
+    //TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20231019.root";
+    //TString pp_nomi_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230728.root";
+    //TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20231019.root";
+    //TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_new_20231019.root";
+
+    TString pp_syst_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW0_tnp1_20240509.root"; //0319
+    TString pp_syst_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW0_tnp1_20240314.root";
+    TString pb_syst_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW0_tnp1_20240509_ppWfunc.root"; //0314
+    TString pb_syst_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW0_tnp1_20240509_ppWfunc.root"; //0314
+    
 
     TString h_pp_mid = "mc_eff_vs_pt_TnP1_PtW%d_absy0_1p6";
     TString h_pb_mid = "mc_eff_vs_pt_TnP1_PtW%d_cent_0_to_180_absy0_1p6";
+    
 
     // Define pointers for input files
-    TFile *PR_pp_nomi_input =  new TFile(path+pp_nomi_PR.Data());
-    TFile *PR_pb_nomi_input = new TFile(path+pb_nomi_PR.Data());
-    TFile *PR_pp_syst_input = new TFile(path+pp_syst_PR.Data());
-    TFile *PR_pb_syst_input = new TFile(path+pb_syst_PR.Data());
+    TFile *PR_pp_nomi_input = new TFile(Form(path+pp_nomi_PR.Data(),1));
+    TFile *PR_pb_nomi_input = new TFile(Form(path+pb_nomi_PR.Data(),1));
+    TFile *PR_pp_syst_input = new TFile(Form(path+pp_syst_PR.Data(),0));
+    TFile *PR_pb_syst_input = new TFile(Form(path+pb_syst_PR.Data(),0));
     
-    TFile *NP_pp_nomi_input =  new TFile(path+pp_nomi_NP.Data());
-    TFile *NP_pb_nomi_input = new TFile(path+pb_nomi_NP.Data());
-    TFile *NP_pp_syst_input = new TFile(path+pp_syst_NP.Data());
-    TFile *NP_pb_syst_input = new TFile(path+pb_syst_NP.Data());
+    TFile *NP_pp_nomi_input = new TFile(Form(path+pp_nomi_NP.Data(),1));
+    TFile *NP_pb_nomi_input = new TFile(Form(path+pb_nomi_NP.Data(),1));
+    TFile *NP_pp_syst_input = new TFile(Form(path+pp_syst_NP.Data(),0));
+    TFile *NP_pb_syst_input = new TFile(Form(path+pb_syst_NP.Data(),0));
 
     TH1D *h_pb_nomi_PR = (TH1D *)PR_pb_nomi_input->Get(Form(h_pb_mid.Data(),1));
     TH1D *h_pb_syst_PR = (TH1D *)PR_pb_syst_input->Get(Form(h_pb_mid.Data(),0));
@@ -60,7 +83,7 @@ void syst_eff()
     TFile out_pt(out_name.c_str(), "recreate");
 
     const int NBINS_mid_pt = 6;
-    double edges_mid_pt[NBINS_mid_pt+1] = {6.5, 9, 12, 15, 20, 25,  50};
+    double edges_mid_pt[NBINS_mid_pt+1] = {6.5, 9, 12, 15, 20, 25, 50};
     TH1D mid_pt_PR("mid_pt_PR", "mid_PR", NBINS_mid_pt, edges_mid_pt);
     TH1D mid_pt_NP("mid_pt_NP", "mid_NP", NBINS_mid_pt, edges_mid_pt);
 
@@ -111,7 +134,7 @@ void syst_eff()
     h_pp_syst_NP = (TH1D *)NP_pp_syst_input->Get(Form(h_pp_fwd.Data(),0));
 
     const int NBINS_fwd_pt = 4;
-    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 5, 6.5, 12, 50};
+    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 6.5, 9, 12, 50};
     TH1D fwd_pt_PR("fwd_pt_PR", "fwd_PR", NBINS_fwd_pt, edges_fwd_pt);
     TH1D fwd_pt_NP("fwd_pt_NP", "fwd_NP", NBINS_fwd_pt, edges_fwd_pt);
     for (int i = 0; i < pp_fwd_pt.size(); i++) {

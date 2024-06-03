@@ -51,7 +51,7 @@ void merge_HF()
 	}
 
 	const int NBINS_fwd_pt = 4;
-    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 5, 6.5, 12, 50};
+    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 6.5, 9, 12, 50};
     auto h_hf_fwd_pt_PR = new TH1D("fwd_PR", "fwd_PR", NBINS_fwd_pt, edges_fwd_pt);
     auto h_hf_fwd_pt_NP = new TH1D("fwd_NP", "fwd_NP", NBINS_fwd_pt, edges_fwd_pt);
 
