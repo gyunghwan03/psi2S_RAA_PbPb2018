@@ -63,7 +63,7 @@ void mc_MassFit_CBGauss(
 	RooMsgService::instance().setSilentMode(true);
 
     // MC
-	TFile* f1 = new TFile("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
+	TFile* f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 
 	// cout << "Input file: "
 	// << Form("../data/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20210111.root",
@@ -127,10 +127,32 @@ void mc_MassFit_CBGauss(
 	double m_lambda_init = 5;
 	double psi_2S_mass = pdgMass.Psi2S;
 
+;   if(ptLow==3.5&&ptHigh==6.5) {
+        N_Jpsi_high = 100000;
+        sigma_up = 0.8;
+    }
+;   if(ptLow==3.5&&ptHigh==50) {
+        N_Jpsi_high = 200000;
+        sigma_up = 0.8;
+    }
 	if(ptLow==8&&ptHigh==12) { n_1_init = 5.3;}
 	if(ptLow==12&&ptHigh==20) { n_1_init = 4.6;}
 
-    if(ptLow==6.5&&ptHigh==9) {
+    if(ptLow==6.5&&ptHigh==9&&yLow==1.6) {
+        N_Jpsi_high = 50000; // 2500000
+        sigma_up = 0.8;
+        n_1_init=10;
+        n_up = 16;
+        n_lo = 0;
+    }
+    if(ptLow==9&&ptHigh==12&&yLow==1.6) {
+        N_Jpsi_high = 20000; // 2500000
+        sigma_up = 0.8;
+        n_1_init=8;
+        n_up = 20;
+        n_lo = 1e-6;
+    }
+    if(ptLow==6.5&&ptHigh==9&&yLow==0) {
         N_Jpsi_high = 50000; // 2500000
     }
      if(ptLow==5&&ptHigh==6.5) {
@@ -196,13 +218,16 @@ void mc_MassFit_CBGauss(
      if(ptLow==6.5&&ptHigh==50) {
         N_Jpsi_high = 400000; // 2500000
     }
-    if(ptLow==12&&ptHigh==15) {
-        N_Jpsi_high = 400000; // 2500000
+    if(ptLow==9&&ptHigh==12&&yLow==0) {
+        N_Jpsi_high = 35000;
+    }
+    if(ptLow==12&&ptHigh==15&&yLow==0) {
+        N_Jpsi_high = 20000; // 2500000
     }
 
 
     if(ptLow==12&&ptHigh==50) {
-        N_Jpsi_high = 20000;
+        N_Jpsi_high = 10000;
         f_init=0.4; sigma_1_init = 0.03; n_1_init = 2;
         x_init = 0.4; alpha_1_init = 2;
     }
