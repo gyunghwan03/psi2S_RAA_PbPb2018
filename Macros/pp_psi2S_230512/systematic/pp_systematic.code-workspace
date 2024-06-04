@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"MassFit_FixPar_Data.C": "cpp",
+			"mc_MassFit_CBGauss.C": "cpp",
+			"CtauTrue_Psi2S.C": "cpp",
+			"Final2DFit.C": "cpp"
+		}
+	}
+}

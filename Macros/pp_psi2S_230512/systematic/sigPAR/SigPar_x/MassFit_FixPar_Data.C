@@ -132,6 +132,7 @@ void MassFit_FixPar_Data(
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
 
+
   //SIGNAL
   RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
@@ -188,9 +189,16 @@ void MassFit_FixPar_Data(
     NBkg_limit = 2000000;
     //sl1,2,3: 0.01
   }
-  if(ptLow==9&&ptHigh==12) {
+  if(ptLow==9&&ptHigh==12&&yLow==0) {
     NJpsi_limit = 500000;
     NBkg_limit = 2000000;
+    //sl1,2,3: 0.01
+  }
+  if(ptLow==9&&ptHigh==12&&yLow==1.6) {
+    NJpsi_limit = 20000;
+    NBkg_limit = 26000;
+
+    if(ptLow==3.5&&cLow==20&&cHigh==)
     //sl1,2,3: 0.01
   }
   if(ptLow==12&&ptHigh==15) {
@@ -235,7 +243,7 @@ void MassFit_FixPar_Data(
   RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(x_constraint)));
 
   RooAddPdf* pdfMASS_Tot = nullptr;
-  if ( (ptLow==20&&ptHigh==25) || (ptLow==25&&ptHigh==30) || (ptLow==30&&ptHigh==50) ) {
+  if ( (ptLow==20&&ptHigh==25) || (ptLow==25&&ptHigh==30) || (ptLow==30&&ptHigh==50) || (ptLow==25&&ptHigh==50)) {
     pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
   }
   else {

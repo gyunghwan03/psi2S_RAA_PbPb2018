@@ -106,6 +106,14 @@ void CtauRes(
   ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.76, 1., 5.0]");
   ws->factory("rS32_CtauRes[2.57, 2., 5.0]");}
+  if(ptLow==6.5&&ptHigh==9&&yLow==0){
+  ws->factory("ctau1_CtauRes[0.]");
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
+  ws->factory("rS21_CtauRes[1.76, 1., 5.0]");
+  ws->factory("rS32_CtauRes[2.57, 2., 5.0]");}
   else{
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
