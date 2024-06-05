@@ -6,8 +6,7 @@ using namespace std;
 
 void compute_n_jpsi(TFile *my_file, double &n_PR, double &n_NP);
 double compute_uncertainty(double pp_nomi, double pp_syst, double pb_nomi, double pb_syst);
-double compute_uncertainty_pp(double pp_nomi, double pp_syst);
-double compute_uncertainty_pb(double pb_nomi, double pb_syst);
+double compute_uncertainty(double nominal_value, double syst_value);
 
 void syst_acc()
 {
@@ -96,8 +95,8 @@ void syst_acc()
         // Compute uncertainty
         // Proppt
         double uncert = compute_uncertainty(n_pp_nomi, n_pp_syst, n_Pb_nomi, n_Pb_syst);
-        double uncert_pp = compute_uncertainty_pp(n_pp_nomi, n_pp_syst);
-        double uncert_pb = compute_uncertainty_pb(n_Pb_nomi, n_Pb_syst);
+        double uncert_pp = compute_uncertainty(n_pp_nomi, n_pp_syst);
+        double uncert_pb = compute_uncertainty(n_Pb_nomi, n_Pb_syst);
         
         
         // Non-prompt
@@ -143,8 +142,8 @@ void syst_acc()
         // Compute uncertainty
         // Proppt
         double uncert = compute_uncertainty(n_pp_nomi, n_pp_syst, n_Pb_nomi, n_Pb_syst);
-        double uncert_pp = compute_uncertainty_pp(n_pp_nomi, n_pp_syst);
-        double uncert_pb = compute_uncertainty_pb(n_Pb_nomi, n_Pb_syst);
+        double uncert_pp = compute_uncertainty(n_pp_nomi, n_pp_syst);
+        double uncert_pb = compute_uncertainty(n_Pb_nomi, n_Pb_syst);
         
         
         // Non-prompt
@@ -197,6 +196,7 @@ void syst_acc()
     const int NBINS_mid_cent = 6;
     double edges_mid_cent[NBINS_mid_cent+1] = {0, 10, 20, 30, 40, 50, 90};
 	TH1D mid_cent("mid_cent", "mid", NBINS_mid_cent, edges_mid_cent);
+    TH1D mid_cent_pp("mid_cent_pp", "mid_pp", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_pb("mid_cent_pb", "mid_pb", NBINS_mid_cent, edges_mid_cent);
 
 	// pp nominal
@@ -215,7 +215,8 @@ void syst_acc()
 	// Compute uncertainty
 	// Proppt
 	double uncert_mid = compute_uncertainty(n_pp_nomi, n_pp_syst, n_Pb_nomi, n_Pb_syst);
-    double uncert_mid_pb = compute_uncertainty_pb(n_Pb_nomi, n_Pb_syst);
+    double uncert_mid_pp = compute_uncertainty(n_pp_nomi, n_pp_syst);
+    double uncert_mid_pb = compute_uncertainty(n_Pb_nomi, n_Pb_syst);
     
 
 	// Non-prompt
@@ -224,6 +225,7 @@ void syst_acc()
 	// Fill histograms
 	for(int i = 0; i < NBINS_mid_cent; i++){
 		mid_cent.SetBinContent(i+1, uncert_mid); // i starts from 0, hist elements starts from 1
+        mid_cent_pp.SetBinContent(i+1, uncert_mid_pp);
         mid_cent_pb.SetBinContent(i+1, uncert_mid_pb);
 	}
 
@@ -238,6 +240,7 @@ void syst_acc()
     const int NBINS_fwd_cent = 6;
     double edges_fwd_cent[NBINS_fwd_cent+1] = {0, 10, 20, 30, 40 , 50, 90};
     TH1D fwd_cent("fwd_cent", "fwd", NBINS_fwd_cent, edges_fwd_cent);
+    TH1D fwd_cent_pp("fwd_cent_pp", "fwd_pp", NBINS_fwd_cent, edges_fwd_cent);
     TH1D fwd_cent_pb("fwd_cent_pb", "fwd_pb", NBINS_fwd_cent, edges_fwd_cent);
 
 	// pp nominal
@@ -256,7 +259,8 @@ void syst_acc()
 	// Compute uncertainty
 	// Proppt
 	double uncert_fwd = compute_uncertainty(n_pp_nomi, n_pp_syst, n_Pb_nomi, n_Pb_syst);
-    double uncert_fwd_pb = compute_uncertainty_pb(n_Pb_nomi, n_Pb_syst);
+    double uncert_fwd_pp = compute_uncertainty(n_pp_nomi, n_pp_syst);
+    double uncert_fwd_pb = compute_uncertainty(n_Pb_nomi, n_Pb_syst);
     
 
 	// Non-prompt
@@ -265,27 +269,34 @@ void syst_acc()
 	// Fill histograms
 	for(int i = 0; i < NBINS_fwd_cent; i++){
 		fwd_cent.SetBinContent(i+1, uncert_fwd); // i starts from 0, hist elements starts from 1
+        fwd_cent_pp.SetBinContent(i+1, uncert_fwd_pp);
         fwd_cent_pb.SetBinContent(i+1, uncert_fwd_pb);
 	}
 
     // Save results of loop 3 and 4
     out_cent.cd();
     mid_cent.SetName("mid");
+    mid_cent_pp.SetName("mid_pp");
     mid_cent_pb.SetName("mid_pb");
 
     fwd_cent.SetName("fwd");
+    fwd_cent_pp.SetName("fwd_pp");
     fwd_cent_pb.SetName("fwd_pb");
     
     mid_cent.Write();
+    mid_cent_pp.Write();
     mid_cent_pb.Write();
     
     fwd_cent.Write();
+    fwd_cent_pp.Write();
     fwd_cent_pb.Write();
     
     mid_cent.SetName("mid_cent"); // Restore names
+    mid_cent_pp.SetName("mid_cent_pp");
     mid_cent_pb.SetName("mid_cent_pb");
 
     fwd_cent.SetName("fwd_cent");
+    fwd_cent_pp.SetName("fwd_cent_pp");
     fwd_cent_pb.SetName("fwd_cent_pb");
     out_cent.Close();
 }
@@ -296,16 +307,10 @@ double compute_uncertainty(double pp_nomi, double pp_syst, double pb_nomi, doubl
     return TMath::Sqrt(TMath::Power(((pb_nomi-pb_syst)/pb_nomi), 2) + TMath::Power(((pp_nomi-pp_syst)/pp_nomi), 2));
 }
 
-double compute_uncertainty_pp(double pp_nomi, double pp_syst)
+double compute_uncertainty(double nominal_value, double syst_value)
 {
-    return TMath::Sqrt(TMath::Power(((pp_nomi-pp_syst)/pp_nomi), 2));
+    return TMath::Sqrt(TMath::Power(((nominal_value-syst_value)/nominal_value), 2));
 }
-
-double compute_uncertainty_pb(double pb_nomi, double pb_syst)
-{
-    return TMath::Sqrt(TMath::Power(((pb_nomi-pb_syst)/pb_nomi), 2));
-}
-
   
     // Open file
     // Read N_jpsi and b_fraction
