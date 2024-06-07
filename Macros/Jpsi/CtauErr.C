@@ -63,7 +63,8 @@ void CtauErr(
   massLow=2.6; massHigh=3.5;
 
 
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_PRw_Effw1_Accw1_PtW1_TnP1_20210426.root"));
+  //f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_PRw_Effw1_Accw1_PtW1_TnP1_20210426.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_JPsi_cent0_200_Effw0_Accw0_PtW0_TnP0_230721.root"));
   fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f&& cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, massLow, massHigh, cLow, cHigh);
 
@@ -199,9 +200,11 @@ void CtauErr(
   }
 
   //if(ptLow==3&&ptHigh==6.5) ctauErrMax=0.1476;
-  if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.1494;
-  else if(ptLow==12&&ptHigh==15) ctauErrMax=0.0882;
+  //if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.1494;
+  //else if(ptLow==12&&ptHigh==15) ctauErrMax=0.0882;
   //else if(ptLow==15&&ptHigh==20) ctauErrMax=0.0378;
+  //ctauErrMin=0.019;
+  ctauErrMax=0.11;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 

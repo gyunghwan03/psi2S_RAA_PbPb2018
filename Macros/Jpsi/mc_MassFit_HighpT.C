@@ -68,7 +68,8 @@ void mc_MassFit_HighpT(
 	RooMsgService::instance().setSilentMode(true);
 
     // MC
-    TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_isMC1_PR_JPsi_20230721.root", "read");
+    //TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_isMC1_PR_JPsi_20230721.root", "read");
+    TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_JPsi_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_240530.root", "read");
 
 
 	// cout << "Input file: "
@@ -107,63 +108,81 @@ void mc_MassFit_HighpT(
 	//***********************************************************************
 
 	//         The order is {sigma_1,  x, alpha_1, n_1,   f, m_lambda}
-    double paramsupper[8] = {0.4,  1.0  ,     10,     10,   1.0,     25.0};
-    double paramslower[8] = {1e-6,  0.0,   1e-6,   1e-6,   1e-6,      -25.0};
+    double paramsupper[8] = {1.,  2.  ,     3.5,     3.5,   2.,     25.0};
+    double paramslower[8] = {1e-6,  1e-6,   1e-6,   1e-6,   1e-6,      -25.0};
     
 	//SIGNAL: initial params
-	double sigma_1_init = 0.03555;
-    double x_init = 0.4566;
-	double alpha_1_init = 1.9581;
-	double n_1_init = 1.8425;
-	double f_init = 0.5886;
-    double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
-    double N_Jpsi_high = 1e+9; // 2500000
+	double sigma_1_init = 0.5;
+    double x_init = 0.43;
+	double alpha_1_init = 0.5;
+	double n_1_init = 0.8;
+	double f_init = 0.4;
+    double sl1_mean = 0.35, sl2_mean = 0.004, sl3_mean = 0.006;
+    double N_Jpsi_high = 1e+8; // 2500000
 	double N_Bkg_high = 200000;
-    //double fit_limit = 3.24;
-    double fit_limit = 3.32;
-    if(ptLow==6.5&&ptHigh==50) {
-        N_Jpsi_high = 1e+8;
-        sigma_1_init = 0.045;
-        x_init = 0.2;
-	    alpha_1_init = 2.97;
-	    n_1_init = 1.48;
-	    f_init = 0.5;
-    }
-	else if(ptLow==6.5&&ptHigh==12) {
-		N_Jpsi_high = 1e+9;
+    double fit_limit = 3.29;
+    
+	//SIGNAL: initial params
+	////double sigma_1_init = 0.09;
+    ////double x_init = 0.43;
+	////double alpha_1_init = 0.4;
+	////double n_1_init = 0.4;
+	////double f_init = 0.62;
+    ////double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
+    ////double N_Jpsi_high = 1e+9; // 2500000
+	////double N_Bkg_high = 200000;
+    ////double fit_limit = 3.24;
+
+	if(ptLow==3.5&&cLow==60&&cHigh==80) {
+	N_Jpsi_high = 1e+8;
 	}
-	else if(ptLow==12&&ptHigh==50) {
-		alpha_1_init = 1;
-		n_1_init = 3;
-		N_Jpsi_high = 1e+9;
+	else if(ptLow==6.5&&ptHigh==9&&yLow==1.6) {
+	N_Jpsi_high = 1e+8;
 	}
-	else if(ptLow==3.5&&cLow==20&&cHigh==40) {
-		n_1_init=3;
-	}
-    else if(ptLow==12&&ptHigh==15) {
-        N_Jpsi_high = 1e+8;
-        sigma_1_init = 0.03;
-        x_init = 0.2;
-	    alpha_1_init = 1.97;
-	    n_1_init = 1.48;
-	    f_init = 0.38;
-    }
-    else if(ptLow==15&&ptHigh==20) {
-        N_Jpsi_high = 1e+8;
-        sigma_1_init = 0.05;
-        x_init = 0.2;
-	    alpha_1_init = 2.97;
-	    n_1_init = 3.48;
-	    f_init = 0.38;
-    }
-    else if(ptLow==25&&ptHigh==50) {
-        N_Jpsi_high = 1e+7;
-        sigma_1_init = 0.03;
-        x_init = 0.2;
-	    alpha_1_init = 1.97;
-	    n_1_init = 1.48;
-	    f_init = 0.1;
-    }
+
+    //if(ptLow==6.5&&ptHigh==50) {
+    //    N_Jpsi_high = 1e+8;
+    //    sigma_1_init = 0.045;
+    //    x_init = 0.2;
+	//    alpha_1_init = 2.97;
+	//    n_1_init = 1.48;
+	//    f_init = 0.5;
+    //}
+	//else if(ptLow==6.5&&ptHigh==12) {
+	//	N_Jpsi_high = 1e+9;
+	//}
+	//else if(ptLow==12&&ptHigh==50) {
+	//	alpha_1_init = 1;
+	//	n_1_init = 3;
+	//	N_Jpsi_high = 1e+9;
+	//}
+	//else if(ptLow==3.5&&cLow==20&&cHigh==40) {
+	//	n_1_init=3;
+	//}
+    //else if(ptLow==12&&ptHigh==15) {
+    //    N_Jpsi_high = 1e+8;
+    //    sigma_1_init = 0.03;
+    //    x_init = 0.2;
+	//    alpha_1_init = 1.97;
+	//    n_1_init = 1.48;
+	//    f_init = 0.38;
+    //}
+    //else if(ptLow==15&&ptHigh==20) {
+    //    N_Jpsi_high = 1e+8;
+    //    sigma_1_init = 0.05;
+    //    x_init = 0.2;
+	//    alpha_1_init = 2.97;
+	//    n_1_init = 3.48;
+	//    f_init = 0.38;
+    //}
+    //else if(ptLow==25&&ptHigh==50) {
+    //    N_Jpsi_high = 1e+7;
+    //    sigma_1_init = 0.03;
+    //    x_init = 0.2;
+	//    alpha_1_init = 1.97;
+	//    n_1_init = 1.48;
+	//    f_init = 0.1;
+    //}
 
 	double m_lambda_init = 5;
 	double psi_2S_mass = pdgMass.Psi2S;
@@ -171,7 +190,7 @@ void mc_MassFit_HighpT(
     // exit(1);
 
     //SIGNAL
-    RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi, pdgMass.JPsi);
+    RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.1, pdgMass.JPsi+0.1);
     RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[1], paramsupper[1]);
     RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[0], paramsupper[0]);
     RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
@@ -378,7 +397,11 @@ void mc_MassFit_HighpT(
     
     TFile* outFile;
 	outFile = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-    c_A->SaveAs(Form("figs/%s/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+    c_A->SaveAs(Form("figs/%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf",DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+//	outFile = new TFile(Form("jpsi_0to1p6/roots/MC/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+//    c_A->SaveAs(Form("jpsi_0to1p6/figs/MC/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+//	outFile = new TFile(Form("jpsi_1p6to2p4/roots/MC/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+//    c_A->SaveAs(Form("jpsi_1p6to2p4/figs/MC/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
 
     pdfMASS_Tot->Write();

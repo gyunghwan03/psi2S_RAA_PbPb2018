@@ -73,11 +73,9 @@ void Final2DFit(
   fCErr = new TFile(Form("roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   fCRes = new TFile(Form("roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   fCBkg = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  //fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root","Corr",kineLabel.Data()));
   //if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
   //else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
-  if (ptLow==6.5&&ptHigh==50) fCTrue = new TFile(Form("./roots/2DFit_No_Weight/CtauTrue/CtauTrueResult_Inclusive_%s.root",kineLabel.Data()));
-  else fCTrue = new TFile(Form("./roots/2DFit_No_Weight/CtauTrue/CtauTrueResult_Inclusive_%s.root",kineLabel.Data()));
+  fCTrue = new TFile(Form("./roots/2DFit_No_Weight/CtauTrue/CtauTrueResult_Inclusive_%s.root",kineLabel.Data()));
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
@@ -126,7 +124,6 @@ void Final2DFit(
   //RooDataSet *dsTot = (RooDataSet*)dataset->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), kineCut.Data());
   //RooDataSet *dsToFit = (RooDataSet*)dataset->reduce(RooArgSet(*(ws->var("ctau3DRes")),*(ws->var("ctau3D")), *(ws->var("ctau3DErr")), *(ws->var("mass")), *(ws->var("pt")), *(ws->var("y"))), Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f&&%s", ctauErrMin, ctauErrMax, kineCut.Data()) );
   //RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=%.6f&&ctau3DErr<=%.6f",0.009, 0.3))->Clone("dsTot");
-  //RooDataSet* dsToFit = (RooDataSet*)dsTot->reduce(Form("ctau3DErr>=0.0126009&&ctau3DErr<=0.09"))->Clone("dsTot");
   dsTot->SetName("dsTot");
   ws->import(*dsTot);
   ws->var("mass")->setRange(massLow, massHigh);
@@ -177,7 +174,7 @@ void Final2DFit(
   //ws->factory(Form("fDSS1_test[%.4f]", fdss));
   //ws->factory(Form("fDSS2_test[%.4f]", fdss1));
 
-  ws->var("lambdaDSS_test1")->setConstant();
+  //ws->var("lambdaDSS_test1")->setConstant();
   //ws->var("lambdaDSS_test2")->setConstant();
   //ws->var("lambdaDSS_test3")->setConstant();
   //ws->var("fDSS1_test")->setConstant();
@@ -253,12 +250,10 @@ void Final2DFit(
 
   double njpsi = ws->var("N_Jpsi")->getVal();
   //ws->factory(Form("N_Jpsi_3[%.3f, %.3f, %.3f]",njpsi, njpsi*0.95, njpsi*1.05));
-  //ws->factory(Form("N_Jpsi_3[ %.3f, %.3f]", 1e-6, 5e+7));
   ws->factory(Form("N_Jpsi[%.3f, %.3f, %.3f]",njpsi, 1e-6, 5e+7));
   double nbkg = ws->var("N_Bkg")->getVal();
   //ws->factory(Form("N_Bkg_3[%.3f, %.3f, %.3f]",nbkg, nbkg*0.95, nbkg*1.05));
   ws->factory(Form("N_Bkg[%.3f, %.3f, %.3f]",nbkg, 1e-6, 5e+7));
-  //ws->factory(Form("N_Bkg_3[ %.3f, %.3f]", 1e-6, 5e+7));
   cout<<"######"<<ws->var("N_Jpsi")->getError()<<endl;
 
   RooRealVar *N_Jpsi_2= new RooRealVar("N_Jpsi_2","inclusive Jpsi signals",njpsi*0.5,njpsi*0.86);

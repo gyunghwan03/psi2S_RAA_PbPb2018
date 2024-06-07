@@ -66,8 +66,9 @@ void CtauTrue(
   //f2 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco_6p5_50_201005.root");
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f2 = new TFile("../skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
-  f1 = new TFile("/Users/hwan/tools/2019/CMS/JPsi/Jpsi_v2_PbPb2018/skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
+  //f1 = new TFile("/Users/hwan/tools/2019/CMS/JPsi/Jpsi_v2_PbPb2018/skimmedFiles/OniaRooDataSet_NonPrompt_GenInReco.root");
   //f1 = new TFile("../skimmedFiles/OniaRooDataSet_psi2S_GENONLY_NonPrompt_20220906_root618.root","read");
+  f1 = new TFile("../../skimmedFiles/OniaRooDataSet_JPsi_GENONLY_NonPrompt_y0_2p4_230829.root","read");
   
   kineCutMC = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>2.6 && mass<3.5" ,ptLow, ptHigh, yLow, yHigh);
   
@@ -122,24 +123,36 @@ void CtauTrue(
   //MC NP ctau true
   double entries_True = ws->data("reducedDS_MC")->numEntries();
   ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
-  if(ptLow==20&&ptHigh==50){
+  if(ptLow==3.5&&ptHigh==6.5){
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
   ws->factory("fDSS[0.8, 0., 1.]");
   ws->factory("fDSS1[0.8, 0., 1.]");}
-  else if(ptLow==12&&ptHigh==15){
+  else if(ptLow==6.5&&ptHigh==9){
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.4238, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
   ws->factory("fDSS[0.8, 0., 1.]");
   ws->factory("fDSS1[0.8, 0., 1.]");}
-  else if(ptLow==12&&ptHigh==15){
+  else if(ptLow==9&&ptHigh==12){
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
   ws->factory("fDSS[0.5, 0., 1.]");
   ws->factory("fDSS1[0.5, 0., 1.]");}
+  else if(ptLow==3.5&&ptHigh==50){
+  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
+  ws->factory("fDSS[0.1, 0., 1.]");
+  ws->factory("fDSS1[0.5, 0., 1.]");}
+  else if(ptLow==6.5&&ptHigh==50){
+  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.1038, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
+  ws->factory("fDSS[0.1, 0., 1.]");
+  ws->factory("fDSS1[0.8, 0., 1.]");}
   else {
   ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
@@ -160,7 +173,12 @@ void CtauTrue(
   //ws->factory("fDSS2[0.8, 0., 1.]");
   //ws->factory("f[0.8, 0., 1.]");
   //}
-  ws->factory("sigmaMC[0.001, 0.000000001, 1.0]");
+  //ws->factory("lambdaDSS[0.22, 1e-6, 1.]");
+  //ws->factory("lambdaDSS2[0.35, 1e-6, 1.]");
+  //ws->factory("lambdaDSS3[0.31, 1e-6, 1.]");
+  //ws->factory("fDSS[0.42, 0., 1.]");
+  //ws->factory("fDSS1[0.1, 0., 1.]");
+  ws->factory("sigmaMC[0.1, 1e-6, 1.0]");
   ws->factory("ctauMC[0.0, 0.0, 0.0]");
   // create the PDF
   ws->factory(Form("TruthModel::%s(%s)", "pdfCTAUTRUERES", "ctau3Dtrue"));

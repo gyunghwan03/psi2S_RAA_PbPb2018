@@ -80,7 +80,8 @@ void mc_MassFit_HighpT(
 	massLow=2.6;
 	massHigh=3.5;
     
-    double fit_limit = 3.26;
+    //double fit_limit = 3.26;     //1st value
+    double fit_limit = 3.22;     
 
 	TString kineCut;
 	kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
@@ -123,44 +124,54 @@ void mc_MassFit_HighpT(
 	//***********************************************************************
 
 	//         The order is {sigma_1,  x, alpha_1, n_1,   f, m_lambda}
-    double paramsupper[8] = {0.1,  1.0  ,     10,     10,   1.0,     25.0};
-    double paramslower[8] = {1e-6,  0.0,   1e-6,   1e-6,   1e-6,      -25.0};
+    double paramsupper[8] = {0.1,  1.0  ,     10,     10.,   1.0,     25.0};
+    double paramslower[8] = {1e-6,  0.0,   1e-6,   1e-06,   1e-6,      -25.0};
     
 	//SIGNAL: initial params
-	double sigma_1_init = 0.03555;
-    double x_init = 0.4566;
-	double alpha_1_init = 1.9581;
-	double n_1_init = 1.8425;
-	double f_init = 0.5886;
+	//1st value
+	//double sigma_1_init = 0.15;
+    //double x_init = 0.07;
+	//double alpha_1_init = 1.5;
+	//double n_1_init = 1.0;
+	//double f_init = 0.58;
+    //double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
+    //double N_Jpsi_high = 800000; // 2500000
+	//double N_Bkg_high = 800000;
+
+	double sigma_1_init = 0.015;
+    double x_init = 0.07;
+	double alpha_1_init = 1.;
+	double n_1_init = 1.;
+	double f_init = 0.58;
     double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
-    double N_Jpsi_high = 250000; // 2500000
-	double N_Bkg_high = 200000;
+    double N_Jpsi_high = 800000; // 2500000
+	double N_Bkg_high = 800000;
 
     //double fit_limit = 3.3;
-    if(ptLow==6.5&&ptHigh==50) {
-        N_Jpsi_high = 5000000;
-        sigma_1_init = 0.03;
-        x_init = 0.2;
-	    alpha_1_init = 1.97;
-	    n_1_init = 1.48;
-	    f_init = 0.1;
-    }
-    else if(ptLow==12&&ptHigh==15) {
-        N_Jpsi_high = 50000;
-        sigma_1_init = 0.03;
-        x_init = 0.2;
-	    alpha_1_init = 1.97;
-	    n_1_init = 1.48;
-	    f_init = 0.38;
-    }
-    else if(ptLow==25&&ptHigh==50) {
-        N_Jpsi_high = 5000;
-        sigma_1_init = 0.03;
-        x_init = 0.2;
-	    alpha_1_init = 1.97;
-	    n_1_init = 1.48;
-	    f_init = 0.1;
-    }
+    //if(ptLow==6.5&&ptHigh==50) {
+    //    N_Jpsi_high = 5000000;
+    //    sigma_1_init = 0.03;
+    //    x_init = 0.2;
+	//    alpha_1_init = 1.97;
+	//    n_1_init = 1.48;
+	//    f_init = 0.1;
+    //}
+    //else if(ptLow==12&&ptHigh==15) {
+    //    N_Jpsi_high = 50000;
+    //    sigma_1_init = 0.03;
+    //    x_init = 0.2;
+	//    alpha_1_init = 1.97;
+	//    n_1_init = 1.48;
+	//    f_init = 0.38;
+    //}
+    //else if(ptLow==25&&ptHigh==50) {
+    //    N_Jpsi_high = 5000;
+    //    sigma_1_init = 0.03;
+    //    x_init = 0.2;
+	//    alpha_1_init = 1.97;
+	//    n_1_init = 1.48;
+	//    f_init = 0.1;
+    //}
 
 	double m_lambda_init = 5;
 	double mass_jpsi = pdgMass.JPsi;
@@ -375,7 +386,7 @@ void mc_MassFit_HighpT(
     
     TFile* outFile;
 	outFile = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-    c_A->SaveAs(Form("figs/%s/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+    c_A->SaveAs(Form("figs/%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
 
     pdfMASS_Tot->Write();

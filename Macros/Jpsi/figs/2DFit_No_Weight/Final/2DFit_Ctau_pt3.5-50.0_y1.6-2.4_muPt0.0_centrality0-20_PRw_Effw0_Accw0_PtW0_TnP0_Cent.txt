@@ -1,0 +1,4 @@
+Amount: 0.68=0.520807
+CUT LOW: -0.001, CUT HIGH: 0.068
+BJpsi Fraction: 0.0750549
+

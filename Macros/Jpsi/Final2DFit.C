@@ -26,15 +26,17 @@ using namespace RooFit;
 void Final2DFit(
     float ptLow=3, float ptHigh=4.5,
     float yLow=1.6, float yHigh=2.4,
-    int cLow=20, int cHigh=120,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
+	int cLow=20, int cHigh=120,
+	int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
+	//int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
     )
 {
 
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
-  DATE="221116";
+  //DATE="221116";
+  DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/Final",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/Final", DATE.Data()),kTRUE);
@@ -58,7 +60,8 @@ void Final2DFit(
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
   massLow=2.6; massHigh=3.5;
   
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_PRw_Effw1_Accw1_PtW1_TnP1_20210426.root"));
+  //f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_PRw_Effw1_Accw1_PtW1_TnP1_20210426.root"));
+  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_JPsi_cent0_200_Effw0_Accw0_PtW0_TnP0_230721.root"));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f && cBin>%d && cBin<%d",ptLow, ptHigh, yLow, yHigh, massLow, massHigh, cLow, cHigh);
   OS="recoQQsign==0 &&";
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
@@ -172,22 +175,27 @@ void Final2DFit(
   //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*2));
   //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
   //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
-  ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
-  ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
-  ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
-  ws->factory(Form("fDSS1_test[%.4f]", fdss));
-  ws->factory(Form("fDSS2_test[%.4f]", fdss1));
+  ws->factory(Form("lambdaDSS_test1[%.2f]", lambda));
+  ws->factory(Form("lambdaDSS_test2[%.2f]", lambda1));
+  ws->factory(Form("lambdaDSS_test3[%.2f]", lambda2));
+  ws->factory(Form("fDSS1_test[%.2f]", fdss));
+  ws->factory(Form("fDSS2_test[%.2f]", fdss1));
   //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, lambda*0.9, lambda*1.1));
   //ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, lambda1*0.9, lambda1*1.1));
   //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, lambda2*0.9, lambda2*1.1));
   //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, fdss*0.9, fdss*1.1));
   //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, fdss1*0.9, fdss1*1.1));
 
-  ws->var("lambdaDSS_test1")->setConstant();
-  ws->var("lambdaDSS_test2")->setConstant();
-  ws->var("lambdaDSS_test3")->setConstant();
-  ws->var("fDSS1_test")->setConstant();
-  ws->var("fDSS2_test")->setConstant();
+  //ws->var("lambdaDSS_test1")->setConstant();
+  //ws->var("lambdaDSS_test2")->setConstant();
+  //ws->var("lambdaDSS_test3")->setConstant();
+  //ws->var("fDSS1_test")->setConstant();
+  //ws->var("fDSS2_test")->setConstant();
+  //ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
+  //ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
+  //ws->var("ctau3_CtauRes")->setConstant(kTRUE);	ws->var("rS32_CtauRes")->setConstant(kTRUE);
+  //ws->var("f2_CtauRes")->setConstant(kTRUE);	
+  //ws->var("f_CtauRes")->setConstant(kTRUE);
 
 
   //NoPR{
@@ -202,9 +210,14 @@ void Final2DFit(
   //PR
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_JpsiPR", "pdfCTAURES"));
   //3-4.5
-  if(ptLow==6.5&&ptHigh==9) ws->factory("b_Jpsi[0.28, 0.2, .3]");//NP fraction for Sig
-  else if(ptLow==3&&ptHigh==6.5) ws->factory("b_Jpsi[0.143, 0.1, .2]");//NP fraction for Sig
-  else ws->factory("b_Jpsi[0.22, 1e-8, 1.0]");//NP fraction for Sig
+  //if(ptLow==6.5&&ptHigh==9) ws->factory("b_Jpsi[0.28, 0.2, .3]");//NP fraction for Sig
+  //else if(ptLow==3&&ptHigh==6.5) ws->factory("b_Jpsi[0.143, 0.1, .2]");//NP fraction for Sig
+  //else ws->factory("b_Jpsi[0.22, 1e-8, 1.0]");//NP fraction for Sig
+  ws->factory("b_Jpsi[0.52, 1e-8, 1.0]");//NP fraction for Sig
+  //if(ptLow==6.5 && ptHigh==7.5) ws->factory("b_Jpsi[0.27, 0.23, 0.3]");//NP fraction for Sig
+  //if(ptLow==7.5 && ptHigh==8.5) ws->factory("b_Jpsi[0.31, 0.25, 0.35]");//NP fraction for Sig
+  //if(ptLow==8.5 && ptHigh==9.5) ws->factory("b_Jpsi[0.32, 0.31, 0.35]");//NP fraction for Sig
+  //if(ptLow==6.5 && ptHigh==9.) ws->factory("b_Jpsi[0.52, 1e-8, 1.0]");//NP fraction for Sig
 
   //RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
   //    Conditional( *ws->pdf("pdfCTAUCOND_BkgPR"), RooArgList(*ws->var("ctau3D"))));
@@ -314,7 +327,8 @@ void Final2DFit(
 
   cout<<"##############START TOTAL CTAU FIT############"<<endl;
   bool isWeighted = ws->data("dsTot")->isWeighted();
-  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
+  //RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
+  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   ws->import(*fitResult, "fitResult_pdfCTAUMASS_Tot");
 
   //DRAW
@@ -663,5 +677,6 @@ void Final2DFit(
   outh2->Write();
   outh3->Write();
   outh4->Write();
+  themodel->Write();
   outFile->Close();
 }

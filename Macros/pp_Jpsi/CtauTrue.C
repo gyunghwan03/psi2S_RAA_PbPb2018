@@ -125,30 +125,30 @@ void CtauTrue(
   //MC NP ctau true
   double entries_True = ws->data("reducedDS_MC")->numEntries();
   ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
-  if(ptLow==20&&ptHigh==50){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]");}
-  else if(ptLow==12&&ptHigh==15){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]");}
-  else if(ptLow==3&&ptHigh==50){
-  ws->factory("lambdaDSS[0.75, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.34, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.29, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]");}
-  else {
-  ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]"); }
+  //if(ptLow==20&&ptHigh==50){
+  //ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
+  //ws->factory("fDSS[0.8, 0., 2.]");
+  //ws->factory("fDSS1[0.8, 0., 2.]");}
+  //else if(ptLow==12&&ptHigh==15){
+  //ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
+  //ws->factory("fDSS[0.8, 0., 2.]");
+  //ws->factory("fDSS1[0.8, 0., 2.]");}
+  //else if(ptLow==3&&ptHigh==50){
+  //ws->factory("lambdaDSS[0.75, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS2[0.34, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS3[0.29, 1e-6, 1.0]");
+  //ws->factory("fDSS[0.8, 0., 2.]");
+  //ws->factory("fDSS1[0.8, 0., 2.]");}
+  //else {
+  //ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
+  //ws->factory("fDSS[0.8, 0., 2.]");
+  //ws->factory("fDSS1[0.8, 0., 2.]"); }
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");
@@ -163,7 +163,25 @@ void CtauTrue(
   //ws->factory("fDSS2[0.8, 0., 1.]");
   //ws->factory("f[0.8, 0., 1.]");
   //}
-  ws->factory("sigmaMC[0.001, 0.000000001, 1.0]");
+  //1st value
+  //ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  //ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
+  //ws->factory("fDSS[0.8, 0., 2.]");
+  //ws->factory("fDSS1[0.8, 0., 2.]"); 
+  //ws->factory("fDSS2[0.8, 0., 2.]");
+  //ws->factory("f[0.8, 0., 1.]");
+  //ws->factory("sigmaMC[0.001, 1e-9, 1.0]");
+  //ws->factory("ctauMC[0.0, 0.0, 0.0]");
+
+  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
+  ws->factory("fDSS[0.8, 0., 2.]");
+  ws->factory("fDSS1[0.8, 0., 2.]"); 
+  ws->factory("fDSS2[0.8, 0., 2.]");
+  ws->factory("f[0.8, 0., 1.]");
+  ws->factory("sigmaMC[0.001, 1e-9, 1.0]");
   ws->factory("ctauMC[0.0, 0.0, 0.0]");
   // create the PDF
   ws->factory(Form("TruthModel::%s(%s)", "pdfCTAUTRUERES", "ctau3Dtrue"));
