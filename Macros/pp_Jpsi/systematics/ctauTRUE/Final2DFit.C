@@ -157,25 +157,26 @@ void Final2DFit(
         ))->setAttribAll("Constant", kTRUE);
   //ws->var("lambdaDSS1")->setConstant(kTRUE);//make it as a initial value..
   double lambda = ws->var("lambdaDSS")->getVal();
-  //double lambda1 = ws->var("lambdaDSS2")->getVal();
+  double lambda1 = ws->var("lambdaDSS2")->getVal();
   //double lambda2 = ws->var("lambdaDSS3")->getVal();
-  //double fdss = ws->var("fDSS")->getVal();
+  double fdss = ws->var("fDSS")->getVal();
   //double fdss1 = ws->var("fDSS1")->getVal();
   //double lambda2 = ws->var("lambdaDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
-  //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
-  //ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*2));
+  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
+  ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*2));
   //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*2));
-  //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
+  ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
   //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
-  ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
+  
+  //ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
   //ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
   //ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
   //ws->factory(Form("fDSS1_test[%.4f]", fdss));
   //ws->factory(Form("fDSS2_test[%.4f]", fdss1));
 
-  ws->var("lambdaDSS_test1")->setConstant();
+  //ws->var("lambdaDSS_test1")->setConstant();
   //ws->var("lambdaDSS_test2")->setConstant();
   //ws->var("lambdaDSS_test3")->setConstant();
   //ws->var("fDSS1_test")->setConstant();
@@ -186,11 +187,12 @@ void Final2DFit(
   //1exp
   //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS", "pdfCTAURES")); //NP
   //3exp
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
-  //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test2", "ctau3D", "lambdaDSS_test2", "pdfCTAURES")); //NP
+  //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test1", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test2", "ctau3D", "lambdaDSS_test2", "pdfCTAURES")); //NP
   //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test3", "ctau3D", "lambdaDSS_test3", "pdfCTAURES")); //NP
   //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test1", "pdfCTAUTRUE_test2", "fDSS1_test"));
-  //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUCOND_JpsiNoPR", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test3", "fDSS2_test"));//}
+  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUCOND_JpsiNoPR", "pdfCTAUTRUE_test1", "pdfCTAUTRUE_test2", "fDSS1_test"));//}
   //PR
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_JpsiPR", "pdfCTAURES"));
   //3-4.5
@@ -323,7 +325,7 @@ void Final2DFit(
 
   cout<<"##############START TOTAL CTAU FIT############"<<endl;
   bool isWeighted = ws->data("dsToFit")->isWeighted();
-  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(4), SumW2Error(isWeighted), PrintLevel(3), Save());
+  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   //RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   ws->import(*fitResult, "fitResult_pdfCTAUMASS_Tot");
 

@@ -67,7 +67,7 @@ void CtauTrue(
       //f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_Psi2S_miniAOD_noNCollw_GENONLY_NonPrompt_20230517.root", "read");
       f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_BtoJpsiMM_GENONLY_20230717.root"); // 1S
 
-      kineCutMC = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1", ptLow, ptHigh, yLow, yHigh);
+      kineCutMC = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>2.6 && mass<3.5", ptLow, ptHigh, yLow, yHigh);
 
       TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&"; // 2018 acceptance cut
 
@@ -124,8 +124,8 @@ void CtauTrue(
       }
       else {
       ws->factory("lambdaDSS[0.4, 1e-6, 1.0]");
-      ws->factory("lambdaDSS2[0.4, 1e-6, 1.0]");
-      ws->factory("fDSS[0.5, 0., 1.]");
+      ws->factory("lambdaDSS2[0.1, 1e-6, 1.0]");
+      ws->factory("fDSS[0.5, 1e-6, 1.0]");
       }
       ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
       ws->factory("fDSS1[0.8, 0., 1.]");

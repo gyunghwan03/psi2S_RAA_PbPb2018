@@ -326,7 +326,7 @@ void Final2DFit(
 
   cout<<"##############START TOTAL CTAU FIT############"<<endl;
   bool isWeighted = ws->data("dsToFit")->isWeighted();
-  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(4), SumW2Error(isWeighted), PrintLevel(3), Save());
+  RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), ExternalConstraints(*ws->set("ConstrainPdfList")), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   //RooFitResult* fitResult = ws->pdf("pdfCTAUMASS_Tot")->fitTo(*dsToFit, Extended(kTRUE), NumCPU(nCPU), SumW2Error(isWeighted), PrintLevel(3), Save());
   ws->import(*fitResult, "fitResult_pdfCTAUMASS_Tot");
 

@@ -71,7 +71,7 @@ void mc_MassFit_CBGauss(
 	// exit(0);
 
 	TString kineCut;
-	kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.4 && mass<4.0",ptLow, ptHigh, yLow, yHigh);
+	kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>2.6 && mass<3.5",ptLow, ptHigh, yLow, yHigh);
 
 	TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
 
@@ -115,15 +115,15 @@ void mc_MassFit_CBGauss(
 
     
 	//SIGNAL: initial params
-	double sigma_1_init = 0.0555;
-    double x_init = 0.366;
-	double alpha_1_init = 2.9581;
+	double sigma_1_init = 0.0355;
+    double x_init = 0.666;
+	double alpha_1_init = 1.9581;
 	double n_1_init = 1.8425;
 	double f_init = 0.6886;
     double sl1_mean = 0.01, sl2_mean = 0.04, sl3_mean = 0.06;
-    double N_Jpsi_high = 2e+5; // 2500000
+    double N_Jpsi_high = 2e+7; // 2500000
 	double N_Bkg_high = 200000;
-    double fit_limit = 3.86;
+    double fit_limit = 3.31;
 	double m_lambda_init = 5;
 
 ;   if(ptLow==3.5&&ptHigh==6.5) {
@@ -221,10 +221,8 @@ void mc_MassFit_CBGauss(
         N_Jpsi_high = 35000;
     }
     if(ptLow==12&&ptHigh==15&&yLow==0) {
-        N_Jpsi_high = 20000; // 2500000
+        N_Jpsi_high = 2000000; // 2500000
     }
-
-
     if(ptLow==12&&ptHigh==50) {
         N_Jpsi_high = 10000;
         f_init=0.4; sigma_1_init = 0.03; n_1_init = 2;
@@ -305,11 +303,7 @@ void mc_MassFit_CBGauss(
 
     //Build the model
     RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0, N_Jpsi_high);
-    RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0, N_Bkg_high);
-    //RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
     RooAddPdf* pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi),RooArgList(*N_Jpsi));
-    //pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *bkg_1order),RooArgList(*N_Jpsi,*N_Bkg));
-    //pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","PR Jpsi + NP Jpsi + Bkg",RooArgList(*cb_1_A, *cb_2_A, *bkg),RooArgList(*N_JpsiPR,*N_JpsiNP,*N_Bkg));
     ws->import(*pdfMASS_Tot);
 
     //nMassBin = 25;
@@ -335,6 +329,7 @@ void mc_MassFit_CBGauss(
     cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
 	fitMass->Print("V");
     
+    
     // Check and get fitted parameters
     const RooArgList & fitParams = fitMass->floatParsFinal();
     
@@ -356,12 +351,12 @@ void mc_MassFit_CBGauss(
     */
     
     double f_factor = (double) fitFraction.getVal();
-    ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_tot"), LineColor(kBlack), Range(3.4, fit_limit));
-    // ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Range(3.4, 3.87), Normalization(fitFraction.getVal()));
-    // ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Range(3.4, 3.87), Normalization(1-fitFraction.getVal()));
-    ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Normalization(fitFraction.getVal()), Range(3.4, fit_limit));
-    ws->pdf("gauss")->plotOn(myPlot2_A,Name("gauss"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(3.4, fit_limit));
-    //ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(3.4, fit_limit));
+    ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_tot"), LineColor(kBlack), Range(2.6, fit_limit));
+    // ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Range(2.6, 3.87), Normalization(fitFraction.getVal()));
+    // ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Range(2.6, 3.87), Normalization(1-fitFraction.getVal()));
+    ws->pdf("cball_1_A")->plotOn(myPlot2_A,Name("cball_1_A"), LineColor(kBlue+2), Normalization(fitFraction.getVal()), Range(2.6, fit_limit));
+    ws->pdf("gauss")->plotOn(myPlot2_A,Name("gauss"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(2.6, fit_limit));
+    //ws->pdf("cball_2_A")->plotOn(myPlot2_A,Name("cball_2_A"), LineColor(kGreen+2), Normalization(1-fitFraction.getVal()), Range(2.6, fit_limit));
     //ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("Sig_A"),Components(RooArgSet(*pdfMASS_Jpsi)),LineColor(kOrange+7),LineWidth(2),LineStyle(2));
 
     //make a pretty plot
@@ -381,7 +376,6 @@ void mc_MassFit_CBGauss(
     Ydown = YMin/(TMath::Power((YMax/YMin), (0.1/(1.0-0.1-0.4))));
     Yup = YMax*TMath::Power((YMax/YMin), (0.4/(1.0-0.1-0.4)));
     //myPlot2_A->GetYaxis()->SetRangeUser(Ydown,Yup);
-
 
     myPlot2_A->GetXaxis()->SetLabelSize(0);
     myPlot2_A->GetXaxis()->SetTitleSize(0);
@@ -408,6 +402,7 @@ void mc_MassFit_CBGauss(
     drawText(Form("n_{1} = %.4f #pm %.4f",fitN_1.getVal(),fitN_1.getError()),text_x,text_y-y_diff*5,text_color,text_size);
     drawText(Form("#sigma_{1} = %.4f #pm %.4f",fitSigma_1.getVal(),fitSigma_1.getError()),text_x,text_y-y_diff*6,text_color,text_size);
     drawText(Form("#sigma_{2} / #sigma_{1} = %.4f #pm %.4f",fitX.getVal(),fitX.getError()),text_x,text_y-y_diff*7,text_color,text_size);
+
     
 
     TPad *pad_A_2 = new TPad("pad_A_2", "pad_A_2", 0, 0.006, 0.98, 0.227);
@@ -484,6 +479,10 @@ void mc_MassFit_CBGauss(
     TFile* outFile;
     outFile = new TFile(Form("roots_MC/Mass_CBGauss/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
     c_A->SaveAs(Form("figs/2DFit_%s/mc_Mass_CBGauss/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+    
+
+    //cout << "\n\n\nHello World\n\n\n" << endl;
+    //exit(1);
 
     pdfMASS_Tot->Write();
     datasetMass->Write();

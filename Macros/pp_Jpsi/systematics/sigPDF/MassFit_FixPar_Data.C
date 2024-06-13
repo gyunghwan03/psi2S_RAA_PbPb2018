@@ -60,11 +60,10 @@ void MassFit_FixPar_Data(
 	massLow=2.6;
 	massHigh=3.5;
 
-//  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC1_Jpsi_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230717.root"));
+  f1 = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_pp_y0.00_2.40_Effw0_Accw0_PtW1_TnP1_230209.root"));
 
 
-  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1",ptLow, ptHigh, yLow, yHigh);
+  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>2.6 && mass<3.5",ptLow, ptHigh, yLow, yHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
   TString OS="recoQQsign==0 &&";
@@ -133,7 +132,7 @@ void MassFit_FixPar_Data(
 
 
   //SIGNAL
-  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.1, pdgMass.JPsi+0.1);
+  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.01, pdgMass.JPsi+0.01);
   //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
   RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
@@ -177,8 +176,8 @@ void MassFit_FixPar_Data(
   else if(ptLow==8&&ptHigh==9) NJpsi_limit = 4e+06;
   else if(ptLow==9&&ptHigh==10) NJpsi_limit = 3e+06;
   else if(ptLow==10&&ptHigh==12) NJpsi_limit = 4e+06;
-  else if(ptLow==12&&ptHigh==15) NJpsi_limit = 6e+06;
   else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
+  
   if(ptLow==3&&ptHigh==6.5) {
     NJpsi_limit = 500000;
     NBkg_limit = 2000000;
@@ -194,8 +193,8 @@ void MassFit_FixPar_Data(
     //sl1,2,3: 0.01
   }
   if(ptLow==12&&ptHigh==15) {
-    NJpsi_limit = 20000;
-    NBkg_limit = 200000;
+    NJpsi_limit = 2000000;
+    NBkg_limit = 2000000;
     //sl1,2,3: 0.08 Ditto 0.01
   }
   if(ptLow==12&&ptHigh==50) {

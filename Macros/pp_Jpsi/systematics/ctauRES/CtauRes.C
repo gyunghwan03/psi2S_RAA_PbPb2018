@@ -56,7 +56,8 @@ void CtauRes(
 
   //	f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20201216.root",fname.Data(),fEffW,fAccW,isPtW,isTnP));
   fMass = new TFile(Form("../../roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  fMC = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_pt3.00_50.00_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230601.root"));
+  //fMC = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC1_Psi2S_pp_pt3.00_50.00_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230601.root"));
+  fMC = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_isMC1_Jpsi_pp_y0.00_2.40_Effw0_Accw0_PtW0_TnP0_230717.root"));
 
   RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
   //RooDataSet *dataw_Sig = (RooDataSet*)fCErr->Get("dataw_Sig");
@@ -65,7 +66,7 @@ void CtauRes(
   RooWorkspace *ws = new RooWorkspace("RooWorkspace");
   ws->import(*pdfMASS_Tot);
   ws->import(*dataset);
-  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1",ptLow, ptHigh, yLow, yHigh);
+  kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>2.6 && mass<3.5",ptLow, ptHigh, yLow, yHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
 

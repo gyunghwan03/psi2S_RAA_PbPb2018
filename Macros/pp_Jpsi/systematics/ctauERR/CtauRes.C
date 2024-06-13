@@ -196,7 +196,7 @@ void CtauRes(
   bool isWeighted = ws->data("dataToFit")->isWeighted();
   //isWeighted = false;
   //RooFitResult* fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(false), Extended(kTRUE), NumCPU(4), PrintLevel(-1));
-  RooFitResult* fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(4), PrintLevel(-1));
+  RooFitResult* fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
   ws->import(*fitCtauRes);
   //setFixedVarsToContantVars(ws);
   //ws->data("dataToFit")->plotOn(myPlot2_C, Name("dataHist_ctauRes"), DataError(RooAbsData::SumW2), XErrorSize(0),
