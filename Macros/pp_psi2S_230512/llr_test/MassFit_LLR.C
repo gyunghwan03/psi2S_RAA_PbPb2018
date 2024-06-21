@@ -139,8 +139,8 @@ void MassFit_LLR(
 		sig_high = 200000;
 		bkg_high = 10000000;
 	} else if(ptLow==9&&ptHigh==12&&yLow==0) {
-		sig_high = 1000000;
-		bkg_high = 20000000;
+		sig_high = 40000;
+		bkg_high = 1000000;
 	} else if(ptLow==12&&ptHigh==15) {
 		sig_high = 20000;
 		bkg_high = 10000000;
