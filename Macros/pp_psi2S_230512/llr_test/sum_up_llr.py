@@ -27,7 +27,8 @@ import subprocess as sub
 
 def cal_p_value(nll_low_dimension, nll_high_dimension, diff_dimension):
     # Call .C file
-    fit_command = f"root -l -b -q cal_p_value.C\'({nll_low_dimension},{nll_high_dimension},{diff_dimension})\'"
+    diff_AIC = 2*diff_dimension
+    fit_command = f"root -l -b -q cal_p_value.C\'({nll_low_dimension},{nll_high_dimension},{diff_AIC})\'"
     process = sub.Popen(fit_command, stdout=sub.PIPE, stderr=sub.PIPE, shell=True)
     output, error = process.communicate()
     p_value = float(output.decode().strip().split()[-1])
