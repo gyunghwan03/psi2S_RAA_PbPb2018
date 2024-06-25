@@ -118,16 +118,16 @@ void CtauBkg(
   ws->factory("fDSS12[0.4, 0., 1.]");
   ws->factory("fDF12[0.6, 0., 1.]");}
   else if(ptLow==15&&ptHigh==20){
-  ws->factory("b_Bkg[0.85, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.8, 0., 1.]");
-  ws->factory("fDLIV[0.1, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.18, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.18, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.18, 1e-6, 1]");
+  ws->factory("b_Bkg[0.2, 0.01, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.8, 0.01, 1.]");
+  ws->factory("fDLIV[0.7, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.28, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.48, 1e-6, 1]");
+  ws->factory("lambdaDF_Bkg2[0.38, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg1[0.8, 1e-6, 1.]");
   ws->factory("lambdaDSS_Bkg2[0.8, 1e-6, 1.]");
-  ws->factory("fDSS12[0.2, 0., 1.]");
-  ws->factory("fDF12[0.2, 0., 1.]");}
+  ws->factory("fDSS12[0.1, 0., 1.]");
+  ws->factory("fDF12[0.1, 0., 1.]");}
   else if(ptLow==20&&ptHigh==25){
   ws->factory("b_Bkg[0.6855, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.95, 0., 1.]");
@@ -239,7 +239,9 @@ void CtauBkg(
   else if(ptLow==6.5&&ptHigh==12) ctauMin = -2;
   else if(ptLow==6.5&&ptHigh==9) ctauMax = 3;
   else if(ptLow==12&&ptHigh==50) ctauMin = -0.7;
-  else if(ptLow==20&&ptHigh==50) ctauMin = -1.5;
+  else if(ptLow==15&&ptHigh==20) {
+    ctauMin = -1.4; ctauMax = 3.15;
+  } else if(ptLow==20&&ptHigh==50) ctauMin = -1.5;
   else if(ptLow==15&&ptHigh==50) ctauMin = -1.;
 
   TCanvas* c_E =  new TCanvas("canvas_E","My plots",1108,4,550,520);
@@ -273,7 +275,7 @@ void CtauBkg(
   //exit(1);
   //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Minimizer("Minuit", "scan"), Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(false));
   
-  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(isWeighted));
+  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 
   myPlot2_E->updateNormVars(RooArgSet(*ws->var("mass"), *ws->var("ctau3D"), *ws->var("ctau3DErr"))) ;

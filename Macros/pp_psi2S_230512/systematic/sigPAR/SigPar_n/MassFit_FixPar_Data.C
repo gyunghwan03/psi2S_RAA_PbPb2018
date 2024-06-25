@@ -245,9 +245,15 @@ void MassFit_FixPar_Data(
 
   //THIS IS THE BACKGROUND FUNCTION
   RooChebychev *pdfMASS_bkg;
-  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
-  else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2,*sl3));
-
+  if (ptLow==15 && ptHigh==20 && yLow==0) {
+    pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
+  } else if (ptLow==20 && ptHigh==25 && yLow==0) {
+    pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
+  } else if (ptLow==25 && ptHigh==50 && yLow==0) {
+    pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
+  } else {
+    pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2,*sl3));
+  }
   //Build the model
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals", NJpsi_limit*0.9, 0, NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg", NBkg_limit*0.9, 0, NBkg_limit);

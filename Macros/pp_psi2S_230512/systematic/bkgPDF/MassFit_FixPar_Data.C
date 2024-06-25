@@ -258,12 +258,24 @@ void MassFit_FixPar_Data(
   RooRealVar *lambda3 = new RooRealVar("lambda3","lambda3", 0.5, -2, 2.);
   RooFormulaVar invMassNorm("invMassNorm","(-1.0+2.0*(@0-@1)/(@2-@1))", RooArgList(*(ws->var("mass")),*mMin,*mMax) );
   RooGenericPdf *pdfMASS_bkg;
-  if(ptLow==3) {pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",
-          "TMath::Exp(@5*(4*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))-3*(-1.0+2.0*(@0-@1)/(@2-@1))) + @4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
-          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2, *lambda3));}
-  else {pdfMASS_bkg= new RooGenericPdf("pdfMASS_bkg","Background",
+  if (ptLow==15 && ptHigh==20 && yLow==0) {
+    pdfMASS_bkg= new RooGenericPdf("pdfMASS_bkg","Background",
           "TMath::Exp(@4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
-          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2));}
+          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2));
+  } else if (ptLow==20 && ptHigh==25 && yLow==0) {
+        pdfMASS_bkg= new RooGenericPdf("pdfMASS_bkg","Background",
+          "TMath::Exp(@4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
+          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2));
+  } else if (ptLow==25 && ptHigh==30 && yLow==0) {
+        pdfMASS_bkg= new RooGenericPdf("pdfMASS_bkg","Background",
+          "TMath::Exp(@4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
+          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2));
+  } else {
+    pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",
+          "TMath::Exp(@5*(4*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))-3*(-1.0+2.0*(@0-@1)/(@2-@1))) + @4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
+          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2, *lambda3));
+  }
+    
   
   
   //Build the model
