@@ -115,20 +115,26 @@ void CtauTrue_Psi2S(
       ws->factory("lambdaDSS[0.1, 1e-6, 1.0]");
       ws->factory("lambdaDSS2[0.1, 1e-6, 1.0]");
       ws->factory("fDSS[0.5, 0., 1.]");
-      }
-      else if (ptLow==5&&ptHigh==6.5) {
+      } else if (ptLow==5&&ptHigh==6.5) {
       ws->factory("lambdaDSS[0.4, 1e-6, 1.0]");
       ws->factory("lambdaDSS2[0.2, 1e-6, 1.0]");
       ws->factory("fDSS[0.3, 0., 1.]");
-      }
-      else {
+      } else if (ptLow==20&&ptHigh==25) {
+            ws->factory("lambdaDSS[0.3, 0.1, 1]");
+            ws->factory("lambdaDSS2[0.6, 0.1, 1]");
+            ws->factory("fDSS[0.5, 0., 1.]");
+      } else if (ptLow==25&&ptHigh==50) {
+            ws->factory("lambdaDSS[0.9, 0.3, 1]");
+            ws->factory("lambdaDSS2[0.6, 0.3, 1]");
+            ws->factory("fDSS[0.2, 0., 1.]");
+      } else {
       ws->factory("lambdaDSS[0.6, 0, 1.0]");
       ws->factory("lambdaDSS2[0.6, 0 1.0]");
       ws->factory("fDSS[0.2, 0., 1.]");
       }
       ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
       ws->factory("fDSS1[0.8, 0., 1.]");
-      ws->factory("sigmaMC[0.004, 1e-5, 1.0]");
+      ws->factory("sigmaMC[0.003, 1e-6, 1.0]");
       ws->factory("ctauMC[0.0, 0.0, 0.0]");
 
       // create the PDF
@@ -189,7 +195,8 @@ void CtauTrue_Psi2S(
       pad_D_1->cd();
       gPad->SetLogy();
       // RooFitResult* fitCtauTrue = ws->pdf("TrueModel_Tot")->fitTo(*reducedDS_MC, SumW2Error(true), Range(ctau3DTrueMin, ctau3DTrueMax), Extended(kTRUE), NumCPU(nCPU), PrintLevel(3), Save());
-      RooFitResult *fitCtauTrue = ws->pdf("TrueModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), Range("ctauTrueRange"), PrintLevel(-1));
+      RooFitResult *fitCtauTrue = ws->pdf("TrueModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), Range("ctauTrueRange"), PrintLevel(-1), Strategy(1));
+      //RooFitResult *fitCtauTrue = ws->pdf("TrueModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), Range("ctauTrueRange"), PrintLevel(-1));
       fitCtauTrue->Print("v");
       // int nBins = min(int( round((ctau3DTrueMax - ctau3DTrueMin)/0.1) ), 1000);
       int nBins = 70;

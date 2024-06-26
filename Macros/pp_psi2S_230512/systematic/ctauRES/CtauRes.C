@@ -96,6 +96,8 @@ void CtauRes(
   ws->var("N_Jpsi")->setMax(1000000);
   // create the variables for this model
   int nGauss = 3;
+  if (ptLow==25 && ptHigh==50 && yLow==0) {nGauss = 2;}
+
   ws->factory("One[1.0]");
   ws->factory("ctauRes_mean[0.0]");
   if (ptLow==3.5&&ptHigh==5){
@@ -130,6 +132,15 @@ void CtauRes(
     ws->factory("s1_CtauRes[0.7, 1e-3, 1.0]");
     ws->factory("rS21_CtauRes[5.5, 1e-3, 10.0]");
     ws->factory("rS32_CtauRes[2.5, 1e-3, 10.0]");
+  } else if (ptLow==25 && ptHigh==50 && yLow==0) {
+    ws->factory("ctau1_CtauRes[0.]");  
+    ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+    ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+    ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+    ws->factory("s1_CtauRes[0.2, 1e-3, 1.0]");
+    ws->factory("rS21_CtauRes[1.2, 1e-3, 3.0]");
+    ws->factory("rS32_CtauRes[2.5, 1e-3, 10.0]");
+    ws->var("N_Jpsi")->setVal(500);
   } else {
     ws->factory("ctau1_CtauRes[0.]");  
     ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");

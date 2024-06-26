@@ -175,13 +175,13 @@ void CtauBkg(
   ws->factory("lambdaDDS_Bkg[0.1, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg[0.5, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg[0.8, 1e-6, 1.]");}
-  else if(ptLow==30&&ptHigh==50){
-  ws->factory("b_Bkg[0.07, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.02, 0., 1.]");
-  ws->factory("fDLIV[0.01, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.1, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.2, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
+  else if(ptLow==25&&ptHigh==50){
+  ws->factory("b_Bkg[0.23, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.61, 0., 1.]");
+  ws->factory("fDLIV[0.44, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.4, 1e-3, 1.]");
+  ws->factory("lambdaDF_Bkg[0.54, 1e-3, 1]");
+  ws->factory("lambdaDSS_Bkg[0.23, 1e-3, 1.]");}
   else if(yLow==0&&yHigh==0.4){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
@@ -284,8 +284,9 @@ void CtauBkg(
   else if(ptLow==6.5&&ptHigh==12) ctauMin = -2;
   else if(ptLow==6.5&&ptHigh==9) ctauMax = 3;
   else if(ptLow==12&&ptHigh==50) ctauMin = -0.7;
-  else if(ptLow==20&&ptHigh==25) ctauMin = -0.55;
-  else if(ptLow==25&&ptHigh==30) ctauMin = -1.5;
+  else if(ptLow==20&&ptHigh==25) {
+    ctauMin = -0.55; ctauMax = 2.6;
+  } else if(ptLow==25&&ptHigh==30) ctauMin = -1.5;
   else if(ptLow==30&&ptHigh==50) ctauMin = -1.5;
   else if(ptLow==15&&ptHigh==50) ctauMin = -1.;
   else if(yLow==0&&yHigh==0.4) ctauMin = -2.;

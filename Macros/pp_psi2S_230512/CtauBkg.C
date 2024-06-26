@@ -168,20 +168,13 @@ void CtauBkg(
   ws->factory("lambdaDDS_Bkg[0.2, 0.01, 1]");
   ws->factory("lambdaDF_Bkg[0.1, 0.01, 1]");
   ws->factory("lambdaDSS_Bkg[0.4, 0.01, 1]");}
-  else if(ptLow==25&&ptHigh==30){
-  ws->factory("b_Bkg[0.1, 1e-6., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.1, 1e-6., 2]"); // Should be 0 - 1. Give 10 to make some room
-  ws->factory("fDLIV[0.11, 1e-6., 2]"); // Should be 0 -1
-  ws->factory("lambdaDDS_Bkg[0.1, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.2, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 1.]");}
-  else if(ptLow==30&&ptHigh==50){
-  ws->factory("b_Bkg[0.7, 1e-6., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.41, 1e-6., 1]"); // Should be 0 - 1. Give 10 to make some room
-  ws->factory("fDLIV[0.31, 1e-6., 1]"); // Should be 0 -1
-  ws->factory("lambdaDDS_Bkg[0.2, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg[0.6, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");}
+  else if(ptLow==25&&ptHigh==50){
+  ws->factory("b_Bkg[0.5, 0.4, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.51, 0.4., 1]"); // Should be 0 - 1. Give 10 to make some room
+  ws->factory("fDLIV[0.51, 0.4., 1]"); // Should be 0 -1
+  ws->factory("lambdaDDS_Bkg[0.15, 1e-3, 1.]");
+  ws->factory("lambdaDF_Bkg[0.4, 0.01, 1]");
+  ws->factory("lambdaDSS_Bkg[0.18, 1e-3, 1.]");}
   else if(yLow==0&&yHigh==0.4){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");
@@ -204,9 +197,9 @@ void CtauBkg(
   ws->factory("lambdaDF_Bkg[0.01, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg[0.3, 1e-6, 1.]");}
   else if(yLow==2.0&&yHigh==2.4){
-  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.6, 0., 1.]");
-  ws->factory("fDLIV[0.4, 0., 1]");
+  ws->factory("b_Bkg[0.6, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.8, 0., 1.]");
+  ws->factory("fDLIV[0.8, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.5, 1e-6, 1.]");
   ws->factory("lambdaDF_Bkg[0.01, 1e-6, 1]");
   ws->factory("lambdaDSS_Bkg[0.2, 1e-6, 1.]");}
@@ -284,7 +277,7 @@ void CtauBkg(
   else if(ptLow==15&&ptHigh==20) {
     ctauMin = -4;}
   else if(ptLow==20&&ptHigh==25) {ctauMin = -2; ctauMax = 4;}
-  else if(ptLow==20&&ptHigh==50) ctauMin = -1.5;
+  //else if(ptLow==25&&ptHigh==50) {ctauMin = -0.65; ctauMax = 2.5;}
   else if(ptLow==15&&ptHigh==50) ctauMin = -1.;
   else if(yLow==0&&yHigh==0.4) ctauMin = -2.;
   else if(yLow==2&&yHigh==2.4) ctauMin = -2.;
@@ -318,6 +311,7 @@ void CtauBkg(
   //isWeighted = false;
   //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Minimizer("Minuit", "scan"), Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(false));
 
+  //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted), Strategy(2));
   RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 

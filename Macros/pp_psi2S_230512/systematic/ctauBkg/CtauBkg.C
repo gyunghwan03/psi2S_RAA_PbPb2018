@@ -129,16 +129,16 @@ void CtauBkg(
   ws->factory("fDSS12[0.1, 0., 1.]");
   ws->factory("fDF12[0.1, 0., 1.]");}
   else if(ptLow==20&&ptHigh==25){
-  ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.2, 0., 1.]");
-  ws->factory("fDLIV[0.3, 0., 1]");
+  ws->factory("b_Bkg[0.9, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.7, 0., 1.]");
+  ws->factory("fDLIV[0.87, 0., 1]");
   ws->factory("lambdaDDS_Bkg[0.05, 1e-3, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.5, 1e-3, 1]");
-  ws->factory("lambdaDF_Bkg2[0.36, 1e-3, 1]");
+  ws->factory("lambdaDF_Bkg1[0.1, 1e-3, 1]");
+  ws->factory("lambdaDF_Bkg2[0.1, 1e-3, 1]");
   ws->factory("lambdaDSS_Bkg1[0.1, 1e-3, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.41 1e-3, 1.]");
-  ws->factory("fDSS12[0.1, 0., 1.]");
-  ws->factory("fDF12[0.1, 0., 1.]");}
+  ws->factory("lambdaDSS_Bkg2[0.1 1e-3, 1.]");
+  ws->factory("fDSS12[0.4, 0., 1.]");
+  ws->factory("fDF12[0.5, 0., 1.]");}
   else if(ptLow==25&&ptHigh==30){
   ws->factory("b_Bkg[0.85, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.8, 0., 1.]");
@@ -150,7 +150,7 @@ void CtauBkg(
   ws->factory("lambdaDSS_Bkg2[0.8, 1e-6, 1.]");
   ws->factory("fDSS12[0.2, 0., 1.]");
   ws->factory("fDF12[0.2, 0., 1.]");}
-  else if(ptLow==30&&ptHigh==50){
+  else if(ptLow==25&&ptHigh==50){
   ws->factory("b_Bkg[0.95, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.5, 0., 1.]");
   ws->factory("fDLIV[0.3, 0., 1]");
@@ -242,7 +242,7 @@ void CtauBkg(
   else if(ptLow==15&&ptHigh==20) {
     ctauMin = -1.4; ctauMax = 3.15;
   } else if(ptLow==20&&ptHigh==25) {
-    ctauMin = -0.97; ctauMax = 2.5;
+    ctauMin = -1.1; ctauMax = 2.6;
   } else if(ptLow==20&&ptHigh==50) ctauMin = -1.5;
   else if(ptLow==15&&ptHigh==50) ctauMin = -1.;
 
@@ -277,7 +277,7 @@ void CtauBkg(
   //exit(1);
   //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Minimizer("Minuit", "scan"), Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(4), PrintLevel(-1), SumW2Error(false));
   
-  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
+  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(30), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 
   myPlot2_E->updateNormVars(RooArgSet(*ws->var("mass"), *ws->var("ctau3D"), *ws->var("ctau3DErr"))) ;
