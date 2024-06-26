@@ -164,8 +164,8 @@ void CtauBkg(
   else if(ptLow==20&&ptHigh==25){
   ws->factory("b_Bkg[0.3, 1e-6., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.5, 1e-6., 2]"); // Should be 0 - 1. Give 10 to make some room
-  ws->factory("fDLIV[0.8, 1e-6., 2]"); // Should be 0 -1
-  ws->factory("lambdaDDS_Bkg[0.9, 1e-6, 2.]");
+  ws->factory("fDLIV[0.2, 1e-6., 2]"); // Should be 0 -1
+  ws->factory("lambdaDDS_Bkg[0.1, 1e-6, 2.]");
   ws->factory("lambdaDF_Bkg[0.01, 1e-6, 2]");
   ws->factory("lambdaDSS_Bkg[0.4, 1e-6, 2.]");}
   else if(ptLow==25&&ptHigh==30){

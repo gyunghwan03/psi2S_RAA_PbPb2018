@@ -122,13 +122,13 @@ void CtauTrue_Psi2S(
       ws->factory("fDSS[0.3, 0., 1.]");
       }
       else {
-      ws->factory("lambdaDSS[0.4, 1e-6, 1.0]");
-      ws->factory("lambdaDSS2[0.4, 1e-6, 1.0]");
-      ws->factory("fDSS[0.5, 0., 1.]");
+      ws->factory("lambdaDSS[0.6, 0, 1.0]");
+      ws->factory("lambdaDSS2[0.6, 0 1.0]");
+      ws->factory("fDSS[0.2, 0., 1.]");
       }
       ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
       ws->factory("fDSS1[0.8, 0., 1.]");
-      ws->factory("sigmaMC[0.001, 0.000000001, 1.0]");
+      ws->factory("sigmaMC[0.004, 1e-5, 1.0]");
       ws->factory("ctauMC[0.0, 0.0, 0.0]");
 
       // create the PDF

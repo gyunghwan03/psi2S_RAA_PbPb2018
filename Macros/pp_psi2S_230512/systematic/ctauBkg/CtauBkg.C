@@ -129,16 +129,16 @@ void CtauBkg(
   ws->factory("fDSS12[0.1, 0., 1.]");
   ws->factory("fDF12[0.1, 0., 1.]");}
   else if(ptLow==20&&ptHigh==25){
-  ws->factory("b_Bkg[0.6855, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.95, 0., 1.]");
-  ws->factory("fDLIV[0.74, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.05, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.3, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.26, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.4, 1e-6, 1.]");
-  ws->factory("fDSS12[0.4, 0., 1.]");
-  ws->factory("fDF12[0.4, 0., 1.]");}
+  ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.2, 0., 1.]");
+  ws->factory("fDLIV[0.3, 0., 1]");
+  ws->factory("lambdaDDS_Bkg[0.05, 1e-3, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.5, 1e-3, 1]");
+  ws->factory("lambdaDF_Bkg2[0.36, 1e-3, 1]");
+  ws->factory("lambdaDSS_Bkg1[0.1, 1e-3, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.41 1e-3, 1.]");
+  ws->factory("fDSS12[0.1, 0., 1.]");
+  ws->factory("fDF12[0.1, 0., 1.]");}
   else if(ptLow==25&&ptHigh==30){
   ws->factory("b_Bkg[0.85, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.8, 0., 1.]");
@@ -241,6 +241,8 @@ void CtauBkg(
   else if(ptLow==12&&ptHigh==50) ctauMin = -0.7;
   else if(ptLow==15&&ptHigh==20) {
     ctauMin = -1.4; ctauMax = 3.15;
+  } else if(ptLow==20&&ptHigh==25) {
+    ctauMin = -0.97; ctauMax = 2.5;
   } else if(ptLow==20&&ptHigh==50) ctauMin = -1.5;
   else if(ptLow==15&&ptHigh==50) ctauMin = -1.;
 
