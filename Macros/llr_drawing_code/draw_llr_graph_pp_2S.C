@@ -1,17 +1,30 @@
+#include <iostream>
 #include <TGraph.h>
 #include <TCanvas.h>
 #include <TGaxis.h>
+#include "TFile.h"
+#include "TH1.h"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
+#include "../../Style.h"
 
 void draw_llr_graph_pp_2S()
 {
+    gStyle->SetOptStat(0);
+    setTDRStyle();
+
     // Forward
     // 4 + 1 bins
-    auto canvas_forward = new TCanvas("canvas_forward", "", 800, 600);
+    auto canvas_forward = new TCanvas("canvas_forward", "", 700, 700);
     const int n_forward1 = 4;
     const int n_forward2 = 1; // 3.5 ~ 50
     double forward_x1[n_forward1] = {5, 7.75, 10.5, 31};
     double forward_ex1[n_forward1] = {1.5, 1.25, 1.5, 19};
-    double forward_y1[n_forward1] = {2, 3, 3, 3};
+    double forward_y1[n_forward1] = {3, 3, 3, 3};
     double forward_ey1[n_forward1] = {0.1, 0.1, 0.1, 0.1}; // Added for cosmetics.
 
     double forward_x2[n_forward2] = {26.75};
@@ -81,7 +94,7 @@ void draw_llr_graph_pp_2S()
 
     graph_mid2->Draw("P same");
 
-    TLegend *legend = new TLegend(0.6, 0.75, 0.95, 0.9);
+    TLegend *legend = new TLegend(0.7, 0.8, 0.94, 0.92);
     legend->AddEntry(graph_forward1, "1.6<|y|<2.4", "lp"); // 1 = line
     legend->AddEntry(graph_forward2, "3.5<p_{T}<50, 1.6<|y|<2.4", "lp");
     legend->AddEntry(graph_mid1, "|y|<1.6", "lp");

@@ -1,12 +1,25 @@
+#include <iostream>
 #include <TGraph.h>
 #include <TCanvas.h>
 #include <TGaxis.h>
+#include "TFile.h"
+#include "TH1.h"
+#include "../../rootFitHeaders.h"
+#include "../../commonUtility.h"
+#include "../../JpsiUtility.h"
+#include "../../cutsAndBin.h"
+#include "../../CMS_lumi_v2mass.C"
+#include "../../tdrstyle.C"
+#include "../../Style.h"
 
 void draw_llr_graph_PbPb_2S()
 {
+    gStyle->SetOptStat(0);
+    setTDRStyle();
+
     // Forward pT
     // 4 bins
-    auto canvas_pt = new TCanvas("canvas_pt", "", 800, 600);
+    auto canvas_pt = new TCanvas("canvas_pt", "", 700, 700);
     const int n_forward1 = 4;
     double forward_x1[n_forward1] = {5, 7.75, 10.5, 31};
     double forward_ex1[n_forward1] = {1.5, 1.25, 1.5, 19}; // error x points
@@ -50,10 +63,9 @@ void draw_llr_graph_PbPb_2S()
 
     graph_mid1->Draw("P same");
 
-    TLegend *legend = new TLegend(0.6, 0.75, 0.95, 0.9);
-    legend->AddEntry(graph_forward1, "1.6<|y|<2.4, cent. 10-90%", "lp");
-    legend->AddEntry(graph_mid1, "|y|<1.6, cent. 10-90%", "lp");
-    
+    TLegend *legend = new TLegend(0.6, 0.85, 0.94, 0.92);
+    legend->AddEntry(graph_forward1, "1.6 < |y| < 2.4, cent. 10 - 90 %", "lp");
+    legend->AddEntry(graph_mid1, "|y| < 1.6, cent. 10 - 90 %", "lp");
     legend->SetTextSize(0.02); 
     legend->SetFillColor(0);
     legend->SetFillStyle(0);
@@ -66,7 +78,7 @@ void draw_llr_graph_PbPb_2S()
     // ===== Centrality ===== //
     // Forward cent
     // 6 bins
-    auto canvas_cent = new TCanvas("canvas_cent", "", 800, 600);
+    auto canvas_cent = new TCanvas("canvas_cent", "", 700, 700);
     canvas_cent->cd();
     const int n_forward2 = 6; // 3.5 ~ 50
     double forward_x2[n_forward2] = {5, 15, 25, 35, 45, 70};
@@ -103,9 +115,9 @@ void draw_llr_graph_PbPb_2S()
 
     graph_mid2->Draw("P same");
 
-    TLegend *legend_cent = new TLegend(0.6, 0.75, 0.95, 0.9);
-    legend_cent->AddEntry(graph_forward2, "3.5<p_{T}<50, 1.6<|y|<2.4", "lp");
-    legend_cent->AddEntry(graph_mid2, "6.5<p_{T}<50, |y|<1.6", "lp");
+    TLegend *legend_cent = new TLegend(0.62, 0.85, 0.94, 0.92);
+    legend_cent->AddEntry(graph_forward2, "3.5 < p_{T} < 50, 1.6 < |y| < 2.4", "lp");
+    legend_cent->AddEntry(graph_mid2, "6.5 < p_{T} < 50, |y| < 1.6", "lp");
     
     legend_cent->SetTextSize(0.02); 
     legend_cent->SetFillColor(0);
