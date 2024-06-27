@@ -18,6 +18,8 @@ void draw_syst_ver2()
     setTDRStyle();
 
 	int iPeriod = 101;
+	int iPeriod_pb = 2;
+	int iPeriod_pp = 1;
     int iPos = 33;
 
 	const int nFiles = 10;
@@ -179,7 +181,7 @@ void draw_syst_ver2()
 	h_mid_pt_PR_pp[8] = (TH1D*) in_pt[8]->Get("mid_pp"); //Acc
 	h_mid_pt_PR_pb[8] = (TH1D*) in_pt[8]->Get("mid_pb"); //Acc
 	h_mid_pt_NP[8] = (TH1D*) in_pt[8]->Get("mid"); //Acc
-	h_mid_pt_NP_pp[8] = (TH1D*) in_pt[8]->Get("mid_ppp"); //Acc
+	h_mid_pt_NP_pp[8] = (TH1D*) in_pt[8]->Get("mid_pp"); //Acc
 	h_mid_pt_NP_pb[8] = (TH1D*) in_pt[8]->Get("mid_pb"); //Acc
 	h_fwd_pt_PR[8] = (TH1D*) in_pt[8]->Get("fwd"); //Acc
 	h_fwd_pt_PR_pp[8] = (TH1D*) in_pt[8]->Get("fwd_pp"); //Acc
@@ -208,37 +210,46 @@ void draw_syst_ver2()
 	h_fwd_cent_PR[6] = new TH1D("fwd_PR","fwd_PR",NcentBins,centBin);
 	h_fwd_cent_NP[6] = new TH1D("fwd_NP","fwd_NP",NcentBins,centBin);
 
-	h_mid_pt_PR[6] = new TH1D("mid_PR","mid_PR",NcentBins,centBin);
-	h_mid_pt_NP[6] = new TH1D("mid_NP","mid_NP",NcentBins,centBin);
-	h_fwd_pt_PR[6] = new TH1D("fwd_PR","fwd_PR",NcentBins,centBin);
-	h_fwd_pt_NP[6] = new TH1D("fwd_NP","fwd_NP",NcentBins,centBin);
+	const int NptBinsMid = 6;
+	const int NptBinsFwd = 4;
+	double ptBinMid[NptBinsMid+1] = {6.5,9,12,15,20,25,50};
+	double ptBinFwd[NptBinsFwd+1] = {3.5,6.5,9,12,50};
 
-	for(int i=1; i<NcentBins+1; i++) {
+	h_mid_pt_PR[6] = new TH1D("mid_PR","mid_PR",NptBinsMid,ptBinMid);
+	h_mid_pt_NP[6] = new TH1D("mid_NP","mid_NP",NptBinsMid,ptBinMid);
+	h_fwd_pt_PR[6] = new TH1D("fwd_PR","fwd_PR",NptBinsFwd,ptBinFwd);
+	h_fwd_pt_NP[6] = new TH1D("fwd_NP","fwd_NP",NptBinsFwd,ptBinFwd);
+
+	for(int i=1; i<NptBinsMid; i++) {
 		// pt
 		double TnP_pb = h_mid_pt_PR_pb[6]->GetBinContent(i);
-		double TnP_pp = h_mid_pt_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
+		double TnP_pp = h_mid_pt_PR_pp[6]->GetBinContent(i); // pp input has one TnP bin
 		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_mid_pt_PR[6]->SetBinContent(i, TnP_tot);
+		h_mid_pt_PR[6]->SetBinContent(i-1, TnP_tot);
 		
 		TnP_pb = h_mid_pt_NP_pb[6]->GetBinContent(i);
 		TnP_pp = h_mid_pt_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_mid_pt_NP[6]->SetBinContent(i, TnP_tot);
+		h_mid_pt_NP[6]->SetBinContent(i-1, TnP_tot);
+	}
 		
-		TnP_pb = h_fwd_pt_PR_pb[6]->GetBinContent(i);
-		TnP_pp = h_fwd_pt_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
-		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_fwd_pt_PR[6]->SetBinContent(i, TnP_tot);
+	for(int i=1; i<NptBinsFwd; i++) {
+		double TnP_pb = h_fwd_pt_PR_pb[6]->GetBinContent(i);
+		double TnP_pp = h_fwd_pt_PR_pp[6]->GetBinContent(i); // pp input has one TnP bin
+		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
+		h_fwd_pt_PR[6]->SetBinContent(i-1, TnP_tot);
 		
 		TnP_pb = h_fwd_pt_NP_pb[6]->GetBinContent(i);
-		TnP_pp = h_fwd_pt_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
+		TnP_pp = h_fwd_pt_NP_pp[6]->GetBinContent(i); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_fwd_pt_NP[6]->SetBinContent(i, TnP_tot);
+		h_fwd_pt_NP[6]->SetBinContent(i-1, TnP_tot);
+	}
 
+	for(int i=1; i<NcentBins+1; i++) {
 		// cent
-		TnP_pb = h_mid_cent_PR_pb[6]->GetBinContent(i);
-		TnP_pp = h_mid_cent_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
-		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
+		double TnP_pb = h_mid_cent_PR_pb[6]->GetBinContent(i);
+		double TnP_pp = h_mid_cent_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
+		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_mid_cent_PR[6]->SetBinContent(i, TnP_tot);
 		
 		TnP_pb = h_mid_cent_NP_pb[6]->GetBinContent(i);
@@ -378,7 +389,7 @@ void draw_syst_ver2()
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_mid_pt_PR_pp,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_mid_pt_PR_pp,iPeriod_pp,iPos);	
 	c_mid_pt_PR_pp->SaveAs("./figs/mid_pt_PR_pp.pdf");
 
 	c_mid_pt_PR_pb->cd();
@@ -395,7 +406,7 @@ void draw_syst_ver2()
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_mid_pt_PR_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_mid_pt_PR_pb,iPeriod_pb,iPos);	
 	c_mid_pt_PR_pb->SaveAs("./figs/mid_pt_PR_pb.pdf");
 
 	// mid pt NP
@@ -407,8 +418,8 @@ void draw_syst_ver2()
 		h_mid_pt_NP[i]->SetLineColor(i+1);
 		h_mid_pt_NP[i]->Draw("SAME");
 
-		leg_midptPR->AddEntry(h_mid_pt_NP[i],SysName[i]);
-		leg_midptPR->Draw("SAME");
+		leg_midptNP->AddEntry(h_mid_pt_NP[i],SysName[i]);
+		leg_midptNP->Draw("SAME");
 		
 	}
 	drawText("Nonprompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
@@ -434,11 +445,11 @@ void draw_syst_ver2()
 		
 	}
 	c_mid_pt_NP_pp->SaveAs("./figs/mid_pt_NP_pp.pdf");
-	exit(1);
+	//exit(1);
 	drawText("NonPompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_mid_pt_NP_pp,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_mid_pt_NP_pp,iPeriod_pp,iPos);	
 	c_mid_pt_NP_pp->SaveAs("./figs/mid_pt_NP_pp.pdf");
 	
 
@@ -453,14 +464,14 @@ void draw_syst_ver2()
 		leg_midptNP_pb->AddEntry(h_mid_pt_NP_pb[i],SysName[i]);
 		leg_midptNP_pb->Draw("SAME");
 	}
-	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
+	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_mid_pt_NP_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_mid_pt_NP_pb,iPeriod_pb,iPos);	
 	c_mid_pt_NP_pb->SaveAs("./figs/mid_pt_NP_pb.pdf");
 
 
-	exit(1);
+	//exit(1);
 
 
 	// fwd pt PR
@@ -483,19 +494,23 @@ void draw_syst_ver2()
 
 	c_fwd_pt_PR_pp->cd();
 	for (int i=0; i<nFiles-1; i++) {
+		if (i==4) {
+			// 4: HF
+			continue;
+		}
 		h_fwd_pt_PR_pp[i]->GetYaxis()->SetRangeUser(0,fwd_pt_PR_max);
 		h_fwd_pt_PR_pp[i]->GetXaxis()->SetTitle("p_{T} (GeV/c)");
 		h_fwd_pt_PR_pp[i]->SetLineWidth(2);
 		h_fwd_pt_PR_pp[i]->SetLineColor(i+1);
 		h_fwd_pt_PR_pp[i]->Draw("SAME");
 
-		leg_fwdptPR->AddEntry(h_fwd_pt_PR_pp[i],SysName[i]);
-		leg_fwdptPR->Draw("SAME");
+		leg_fwdptPR_pp->AddEntry(h_fwd_pt_PR_pp[i],SysName[i]);
+		leg_fwdptPR_pp->Draw("SAME");
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_fwd_pt_PR_pp,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_fwd_pt_PR_pp,iPeriod_pp,iPos);
 	c_fwd_pt_PR_pp->SaveAs("./figs/fwd_pt_PR_pp.pdf");
 
 	c_fwd_pt_PR_pb->cd();
@@ -506,13 +521,13 @@ void draw_syst_ver2()
 		h_fwd_pt_PR_pb[i]->SetLineColor(i+1);
 		h_fwd_pt_PR_pb[i]->Draw("SAME");
 
-		leg_fwdptPR->AddEntry(h_fwd_pt_PR_pb[i],SysName[i]);
-		leg_fwdptPR->Draw("SAME");
+		leg_fwdptPR_pb->AddEntry(h_fwd_pt_PR_pb[i],SysName[i]);
+		leg_fwdptPR_pb->Draw("SAME");
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_fwd_pt_PR_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_fwd_pt_PR_pb,iPeriod_pb,iPos);	
 	c_fwd_pt_PR_pb->SaveAs("./figs/fwd_pt_PR_pb.pdf");
 
 	// fwd pt NP
@@ -535,19 +550,23 @@ void draw_syst_ver2()
 
 	c_fwd_pt_NP_pp->cd();
 	for (int i=0; i<nFiles-1; i++) {
+		if (i==4) {
+			// 4: HF
+			continue;
+		}
 		h_fwd_pt_NP_pp[i]->GetYaxis()->SetRangeUser(0,fwd_pt_NP_max);
 		h_fwd_pt_NP_pp[i]->GetXaxis()->SetTitle("p_{T} (GeV/c)");
 		h_fwd_pt_NP_pp[i]->SetLineWidth(2);
 		h_fwd_pt_NP_pp[i]->SetLineColor(i+1);
 		h_fwd_pt_NP_pp[i]->Draw("SAME");
 
-		leg_fwdptNP->AddEntry(h_fwd_pt_NP_pp[i],SysName[i]);
-		leg_fwdptNP->Draw("SAME");
+		leg_fwdptNP_pp->AddEntry(h_fwd_pt_NP_pp[i],SysName[i]);
+		leg_fwdptNP_pp->Draw("SAME");
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_fwd_pt_NP_pp,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_fwd_pt_NP_pp,iPeriod_pp,iPos);	
 	c_fwd_pt_NP_pp->SaveAs("./figs/fwd_pt_NP_pp.pdf");
 
 	c_fwd_pt_NP_pb->cd();
@@ -558,13 +577,13 @@ void draw_syst_ver2()
 		h_fwd_pt_NP_pb[i]->SetLineColor(i+1);
 		h_fwd_pt_NP_pb[i]->Draw("SAME");
 
-		leg_fwdptNP->AddEntry(h_fwd_pt_NP_pb[i],SysName[i]);
-		leg_fwdptNP->Draw("SAME");
+		leg_fwdptNP_pb->AddEntry(h_fwd_pt_NP_pb[i],SysName[i]);
+		leg_fwdptNP_pb->Draw("SAME");
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_fwd_pt_NP_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_fwd_pt_NP_pb,iPeriod_pb,iPos);	
 	c_fwd_pt_NP_pb->SaveAs("./figs/fwd_pt_NP_pb.pdf");
 
 	// mid cent PR
@@ -593,14 +612,35 @@ void draw_syst_ver2()
 		h_mid_cent_PR_pb[i]->SetLineColor(i+1);
 		h_mid_cent_PR_pb[i]->Draw("SAME");
 
-		leg_midcentPR->AddEntry(h_mid_cent_PR_pb[i],SysName[i]);
-		leg_midcentPR->Draw("SAME");
+		leg_midcentPR_pb->AddEntry(h_mid_cent_PR_pb[i],SysName[i]);
+		leg_midcentPR_pb->Draw("SAME");
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_mid_cent_PR_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_mid_cent_PR_pb,iPeriod_pb,iPos);
 	c_mid_cent_PR_pb->SaveAs("./figs/mid_cent_PR_pb.pdf");
+	
+	c_mid_cent_PR_pp->cd();
+	for (int i=0; i<nFiles-1; i++) {
+		if (i==4) {
+			// 4: HF
+			continue;
+		}
+		h_mid_cent_PR_pp[i]->GetYaxis()->SetRangeUser(0,mid_cent_PR_max);
+		h_mid_cent_PR_pp[i]->GetXaxis()->SetTitle("Centrality (%)");
+		h_mid_cent_PR_pp[i]->SetLineWidth(2);
+		h_mid_cent_PR_pp[i]->SetLineColor(i+1);
+		h_mid_cent_PR_pp[i]->Draw("SAME");
+
+		leg_midcentPR_pp->AddEntry(h_mid_cent_PR_pp[i],SysName[i]);
+		leg_midcentPR_pp->Draw("SAME");
+	}
+	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
+	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+    CMS_lumi_v2mass(c_mid_cent_PR_pp,iPeriod_pp,iPos);	
+	c_mid_cent_PR_pp->SaveAs("./figs/mid_cent_PR_pp.pdf");
 
 	// mid cent NP
 	c_mid_cent_NP->cd();
@@ -628,14 +668,35 @@ void draw_syst_ver2()
 		h_mid_cent_NP_pb[i]->SetLineColor(i+1);
 		h_mid_cent_NP_pb[i]->Draw("SAME");
 
-		leg_midcentNP->AddEntry(h_mid_cent_NP_pb[i],SysName[i]);
-		leg_midcentNP->Draw("SAME");
+		leg_midcentNP_pb->AddEntry(h_mid_cent_NP_pb[i],SysName[i]);
+		leg_midcentNP_pb->Draw("SAME");
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_mid_cent_NP_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_mid_cent_NP_pb,iPeriod_pb,iPos);	
 	c_mid_cent_NP_pb->SaveAs("./figs/mid_cent_NP_pb.pdf");
+
+	c_mid_cent_NP_pp->cd();
+	for (int i=0; i<nFiles-1; i++) {
+		if (i==4) {
+			// 4: HF
+			continue;
+		}
+		h_mid_cent_NP_pp[i]->GetYaxis()->SetRangeUser(0,mid_cent_NP_max);
+		h_mid_cent_NP_pp[i]->GetXaxis()->SetTitle("Centrality (%)");
+		h_mid_cent_NP_pp[i]->SetLineWidth(2);
+		h_mid_cent_NP_pp[i]->SetLineColor(i+1);
+		h_mid_cent_NP_pp[i]->Draw("SAME");
+
+		leg_midcentNP_pp->AddEntry(h_mid_cent_NP_pp[i],SysName[i]);
+		leg_midcentNP_pp->Draw("SAME");
+	}
+	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
+	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+    CMS_lumi_v2mass(c_mid_cent_NP_pp,iPeriod_pp,iPos);	
+	c_mid_cent_NP_pp->SaveAs("./figs/mid_cent_NP_pp.pdf");
 
 	// fwd cent PR
 	c_fwd_cent_PR->cd();
@@ -663,14 +724,35 @@ void draw_syst_ver2()
 		h_fwd_cent_PR_pb[i]->SetLineColor(i+1);
 		h_fwd_cent_PR_pb[i]->Draw("SAME");
 
-		leg_fwdcentPR->AddEntry(h_fwd_cent_PR_pb[i],SysName[i]);
-		leg_fwdcentPR->Draw("SAME");
+		leg_fwdcentPR_pb->AddEntry(h_fwd_cent_PR_pb[i],SysName[i]);
+		leg_fwdcentPR_pb->Draw("SAME");
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_fwd_cent_PR_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_fwd_cent_PR_pb,iPeriod_pb,iPos);	
 	c_fwd_cent_PR_pb->SaveAs("./figs/fwd_cent_PR_pb.pdf");
+
+	c_fwd_cent_PR_pp->cd();
+	for (int i=0; i<nFiles-1; i++) {
+		if (i==4) {
+			// 4: HF
+			continue;
+		}
+		h_fwd_cent_PR_pp[i]->GetYaxis()->SetRangeUser(0,fwd_cent_PR_max);
+		h_fwd_cent_PR_pp[i]->GetXaxis()->SetTitle("Centrality (%)");
+		h_fwd_cent_PR_pp[i]->SetLineWidth(2);
+		h_fwd_cent_PR_pp[i]->SetLineColor(i+1);
+		h_fwd_cent_PR_pp[i]->Draw("SAME");
+
+		leg_fwdcentPR_pp->AddEntry(h_fwd_cent_PR_pp[i],SysName[i]);
+		leg_fwdcentPR_pp->Draw("SAME");
+	}
+	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
+	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+    CMS_lumi_v2mass(c_fwd_cent_PR_pp,iPeriod_pp,iPos);	
+	c_fwd_cent_PR_pp->SaveAs("./figs/fwd_cent_PR_pp.pdf");
 
 	// fwd cent NP
 	c_fwd_cent_NP->cd();
@@ -698,12 +780,33 @@ void draw_syst_ver2()
 		h_fwd_cent_NP_pb[i]->SetLineColor(i+1);
 		h_fwd_cent_NP_pb[i]->Draw("SAME");
 
-		leg_fwdcentNP->AddEntry(h_fwd_cent_NP_pb[i],SysName[i]);
-		leg_fwdcentNP->Draw("SAME");
+		leg_fwdcentNP_pb->AddEntry(h_fwd_cent_NP_pb[i],SysName[i]);
+		leg_fwdcentNP_pb->Draw("SAME");
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
-    CMS_lumi_v2mass(c_fwd_cent_NP_pb,iPeriod,iPos);	
+    CMS_lumi_v2mass(c_fwd_cent_NP_pb,iPeriod_pb,iPos);	
 	c_fwd_cent_NP_pb->SaveAs("./figs/fwd_cent_NP_pb.pdf");
+
+	c_fwd_cent_NP_pp->cd();
+	for (int i=0; i<nFiles-1; i++) {
+		if (i==4) {
+			// 4: HF
+			continue;
+		}
+		h_fwd_cent_NP_pp[i]->GetYaxis()->SetRangeUser(0,fwd_cent_NP_max);
+		h_fwd_cent_NP_pp[i]->GetXaxis()->SetTitle("Centrality (%)");
+		h_fwd_cent_NP_pp[i]->SetLineWidth(2);
+		h_fwd_cent_NP_pp[i]->SetLineColor(i+1);
+		h_fwd_cent_NP_pp[i]->Draw("SAME");
+
+		leg_fwdcentNP_pp->AddEntry(h_fwd_cent_NP_pp[i],SysName[i]);
+		leg_fwdcentNP_pp->Draw("SAME");
+	}
+	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
+	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+    CMS_lumi_v2mass(c_fwd_cent_NP_pp,iPeriod_pp,iPos);	
+	c_fwd_cent_NP_pp->SaveAs("./figs/fwd_cent_NP_pp.pdf");
 }
