@@ -137,7 +137,7 @@ void draw_Bfraction_y1p6_2p4()
 
 	CMS_lumi_v2mass(c1,iPeriod,iPos);
 
-	c1->SaveAs("./figs/Bfraction_y1p6_2p4_freeFit.pdf");
+	c1->SaveAs("./figs/Bfraction_y1p6_2p4.pdf");
 
 
 }

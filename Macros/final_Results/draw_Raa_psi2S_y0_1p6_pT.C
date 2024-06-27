@@ -45,8 +45,10 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_20230729.root");
   TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root");
   TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230801.root");
-  TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
-  TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
+  TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
+  TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
+  TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_pp_SysUp0_20240514.root");
+  TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20240515.root");
   //TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW0_tnp1_20231019.root");
   //TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW0_tnp1_new_20231019.root");
   //TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW0_tnp1_20231019.root");
@@ -60,21 +62,27 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy0_1p6");
   TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_vs_pt_TnP1_PtW1_absy0_1p6");
   TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_vs_pt_TnP1_PtW1_absy0_1p6");
-  TH1D *hAcc_PbPb = (TH1D*) fAcc_PbPb -> Get("hAccPt_2021_midy");
-  TH1D *hAcc_pp = (TH1D*) fAcc_pp -> Get("hAccPt_2021_midy");
+  TH1D *hAcc_PbPbPR = (TH1D*) fAcc_PbPbPR -> Get("hAccPt_2021_midy");
+  TH1D *hAcc_ppPR = (TH1D*) fAcc_ppPR -> Get("hAccPt_2021_midy");
+  TH1D *hAcc_PbPbNP = (TH1D*) fAcc_PbPbNP -> Get("hAccPt_2021_midy");
+  TH1D *hAcc_ppNP = (TH1D*) fAcc_ppNP -> Get("hAccPt_2021_midy");
 
   TH1D *hSys_PR = (TH1D*) fSys -> Get("mid_pt_PR");
+  TH1D *hSys_PR_pb = (TH1D*) fSys -> Get("mid_pt_PR_pb");
+  TH1D *hSys_PR_pp = (TH1D*) fSys -> Get("mid_pt_PR_pp");
   TH1D *hSys_NP = (TH1D*) fSys -> Get("mid_pt_NP");
+  TH1D *hSys_NP_pb = (TH1D*) fSys -> Get("mid_pt_NP_pb");
+  TH1D *hSys_NP_pp = (TH1D*) fSys -> Get("mid_pt_NP_pp");
 
   Double_t Nmb = 11968044281.;
-  Double_t Nmb_err = Nmb*0.01261;
+  Double_t Nmb_err = 0.01261;
   //Double_t Taa = 5.649; // 0-100%
   Double_t Taa = 6.274; // 0-90%
   Double_t lumi_pp = 3.;
   Double_t lumi_pp_scale = 1e-9;
-  Double_t lumi_pp_err = 1*lumi_pp_scale;
+  Double_t lumi_pp_err = 0.019;
   //Double_t Taa_err = 0.123; //0-100%
-  Double_t Taa_err = 0.137; //0-90%
+  Double_t Taa_err = 0.022; //0-90%
 
   double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,50};
   double fracPP[nPtBins]; double fracPbPb[nPtBins];
@@ -98,6 +106,8 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   double RaaPR[nPtBins]; double RaaPR_err[nPtBins]; double binWidth[nPtBins]; double x[nPtBins];
   double RaaNP[nPtBins]; double RaaNP_err[nPtBins];
   double SysPR[nPtBins]; double SysNP[nPtBins];
+  double SysPR_pb[nPtBins]; double SysNP_pb[nPtBins];
+  double SysPR_pp[nPtBins]; double SysNP_pp[nPtBins];
 
   double Xpp_PR[nPtBins]; double Xpp_NP[nPtBins];
   double Xpp_PR_err[nPtBins]; double Xpp_NP_err[nPtBins];
@@ -111,20 +121,22 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   {
     double weight_ppPR = 1; double weight_ppNP = 1; double weight_PbPbPR = 1; double weight_PbPbNP = 1;
     double eff_ppPR = 1; double eff_ppNP = 1; double eff_PbPbPR = 1; double eff_PbPbNP = 1;
-    double acc_pp = 1; double acc_PbPb = 1;
+    double acc_ppPR = 1; double acc_PbPbPR = 1; double acc_ppNP = 1; double acc_PbPbNP = 1;
 
 
     eff_ppPR=hEff_ppPR->GetBinContent(i+2);
     eff_ppNP=hEff_ppNP->GetBinContent(i+2);
-    acc_pp=hAcc_pp->GetBinContent(i+1);
+    acc_ppPR=hAcc_ppPR->GetBinContent(i+1);
+    acc_ppNP=hAcc_ppNP->GetBinContent(i+1);
     eff_PbPbPR=hEff_PbPbPR->GetBinContent(i+2);
     eff_PbPbNP=hEff_PbPbNP->GetBinContent(i+2);
-    acc_PbPb=hAcc_PbPb->GetBinContent(i+1);
+    acc_PbPbPR=hAcc_PbPbPR->GetBinContent(i+1);
+    acc_PbPbNP=hAcc_PbPbNP->GetBinContent(i+1);
 
-    weight_ppPR=eff_ppPR*acc_pp;
-    weight_ppNP=eff_ppNP*acc_pp;
-    weight_PbPbPR=eff_PbPbPR*acc_PbPb;
-    weight_PbPbNP=eff_PbPbNP*acc_PbPb;
+    weight_ppPR=eff_ppPR*acc_ppPR;
+    weight_ppNP=eff_ppNP*acc_ppNP;
+    weight_PbPbPR=eff_PbPbPR*acc_PbPbPR;
+    weight_PbPbNP=eff_PbPbNP*acc_PbPbNP;
 
     valErr yieldPP; valErr yieldPbPb; valErr fracPP; valErr fracPbPb;
     yieldPP = getYield_pp(i);
@@ -154,8 +166,8 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
 
     cout << " " << endl;
     cout << "pt " << ptBin[i] << " - " << ptBin[i+1] << endl;
-    cout << "PbPb Yield	: " << yieldPbPb.val << ",	b frac	: " << fracPbPb.val << ",	PR Eff	: " << eff_PbPbPR << ",	NP Eff	: " << eff_PbPbNP<< ",	Acc	: " << acc_PbPb << endl;
-    cout << "pp Yield	: " << yieldPP.val << ",	b frac	: " << fracPP.val << ",	PR Eff	: " << eff_ppPR << ",	NP Eff	: " << eff_ppNP << ",	Acc	: " << acc_pp << endl;
+    cout << "PbPb Yield	: " << yieldPbPb.val << ",	Yield Err	: " << err1_PbPb << ",	b frac	: " << fracPbPb.val << ",	frac Err	: " << err2_PbPb << ",	PR Eff	: " << eff_PbPbPR << ",	NP Eff	: " << eff_PbPbNP<< ",	PR Acc	: " << acc_PbPbPR << ", NP Acc  : " << acc_PbPbNP<< endl;
+    cout << "pp Yield	: " << yieldPP.val << ",	Yield Err	: " << err1_PP << ",	b frac	: " << fracPP.val << ",	frac Err	: " << err2_PP << ",	PR Eff	: " << eff_ppPR << ",	NP Eff	: " << eff_ppNP << ",	PR Acc	: " << acc_ppPR << ", NP Acc  : " << acc_ppNP << endl;
     cout << "pp Prompt yield : " << yieldPP_PR << ", PbPb Prompt yield : " << yieldPbPb_PR << ", pp NonPrompt yield : " << yieldPP_NP << ", PbPb NonPrompt yield : " << yieldPbPb_NP << endl;
     cout << "pp Prompt error : " << err_PPPR_wgt << " , PbPb Prompt error : " << err_PbPbPR_wgt << " , pp NonPrompt error : " << err_PPNP_wgt << " , PbPb NonPrompt error : " << err_PbPbNP_wgt << endl;
 
@@ -201,7 +213,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
     step_two[i] = step_one[i];
     RAA[i] = step_two[i]*yieldPbPb_PR;
     //cout << "Taa_Nmb = " << Taa_Nmb << " ,step one = " << step_one[i] << " , step two = " << step_two[i] << ", RAA = " << RAA[i] << endl;
-    cout << "Xpp_PR : " << Xpp_PR[i] << " , Xpp_PR_err : " << Xpp_PR_err[i] << ", XPbPb_PR : " << XPbPb_PR[i] << " , XPbPb_PR_err : " << XPbPb_PR_err[i] << " , Xpp_NP : " << Xpp_NP[i] << " , XPbPb_NP : " << XPbPb_NP[i] << endl;
+    cout << "Xpp_PR : " << Xpp_PR[i] << " , Xpp_PR_err : " << Xpp_PR_err[i] << " : "<< Xpp_PR_err[i]/Xpp_PR[i] << "%" << ", XPbPb_PR : " << XPbPb_PR[i] << " , XPbPb_PR_err : " << XPbPb_PR_err[i] << " , Xpp_NP : " << Xpp_NP[i] << " , XPbPb_NP : " << XPbPb_NP[i] << endl;
   }
 
   hXpp_PR->Sumw2();
@@ -239,6 +251,11 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
     binWidth[i] = (ptBin[i+1]-ptBin[i])/2;
     SysPR[i] = RaaPR[i]*(hSys_PR->GetBinContent(i+1));
     SysNP[i] = RaaNP[i]*(hSys_NP->GetBinContent(i+1));
+    SysPR_pb[i] = XPbPb_PR[i]*(hSys_PR_pb->GetBinContent(i+1));
+    SysNP_pb[i] = XPbPb_NP[i]*(hSys_NP_pb->GetBinContent(i+1));
+    SysPR_pp[i] = Xpp_PR[i]*(hSys_PR_pp->GetBinContent(i+1));
+    SysNP_pp[i] = Xpp_NP[i]*(hSys_NP_pp->GetBinContent(i+1));
+	cout << "SysPR_pb : " << SysPR_pb[i] << ", SysPR_pp : " << SysPR_pp[i] << endl;
     cout << "pt : " << ptBin[i] << " - " << ptBin[i+1] << ", Raa PR : " << RaaPR[i] << ",	Raa PR Err : " << RaaPR_err[i] << " x : " << x[i] << ", bin Width : " << binWidth[i] << endl;
     cout << "	    , RAA NP : " << RaaNP[i] <<  ",	Raa NP err : " << RaaNP_err[i] << endl;
     //gRaaNP->SetPoint(i,(ptBin[i+1]-ptBin[i])/2,); 
@@ -249,17 +266,82 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
     hRAA_NP->SetBinError(i+1,RaaNP_err[i]);
   }
 
+	//////////////////////////////// Tex Table ////////////////////////////////
+	cout << " " << endl;
+	cout << " " << endl;
+	cout << " " << endl;
+	cout.precision(3);
+	cout << "\\multicolumn{2}{c}{$|y| < 1.6, 0-90\\%$} \\\\ " << endl;
+	for(int i=0;i<nPtBins;i++)
+	{
+		cout << ptBin[i] << " -- " << ptBin[i+1] << " & " << RaaPR[i] << " $\\pm$ " << RaaPR_err[i] << " (stat.) $\\pm$ " << SysPR[i] << " (syst.) \\\\" << endl;
+	}
+	cout << " " << endl;
+	cout << "\\multicolumn{2}{c}{$|y| < 1.6, 0-90\\%$} \\\\ " << endl;
+	for(int i=0;i<nPtBins;i++)
+	{
+		cout << ptBin[i] << " -- " << ptBin[i+1] << " & " << RaaNP[i] << " $\\pm$ " << RaaNP_err[i] << " (stat.) $\\pm$ " << SysNP[i] << " (syst.) \\\\" << endl;
+	}
+
+	cout << " " << endl;
+	cout << " " << endl;
+	cout << " " << endl;
+
+	cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Cross Section  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"  << endl;
+	cout << "\\multicolumn{2}{c}{$|y| < 1.6, 0-90\\%$} \\\\ " << endl;
+	for(int i=0;i<nPtBins;i++)
+	{
+		cout << ptBin[i] << " -- " << ptBin[i+1] << " & " << Xpp_PR[i] << " $\\pm$ " << Xpp_PR_err[i] << " (stat.) $\\pm$ " << SysPR_pp[i] << " (syst.) \\\\" << endl;
+	}
+	cout << " " << endl;
+	for(int i=0;i<nPtBins;i++)
+	{
+		cout << ptBin[i] << " -- " << ptBin[i+1] << " & " << Xpp_NP[i] << " $\\pm$ " << Xpp_NP_err[i] << " (stat.) $\\pm$ " << SysNP_pp[i] << " (syst.) \\\\" << endl;
+	}
+	cout << " " << endl;
+	cout << "\\multicolumn{2}{c}{$|y| < 1.6, 0-90\\%$} \\\\ " << endl;
+	for(int i=0;i<nPtBins;i++)
+	{
+		cout << ptBin[i] << " -- " << ptBin[i+1] << " & " << XPbPb_PR[i] << " $\\pm$ " << XPbPb_PR_err[i] << " (stat.) $\\pm$ " << SysPR_pb[i] << " (syst.) \\\\" << endl;
+	}
+	cout << " " << endl;
+	for(int i=0;i<nPtBins;i++)
+	{
+		cout << ptBin[i] << " -- " << ptBin[i+1] << " & " << XPbPb_NP[i] << " $\\pm$ " << XPbPb_NP_err[i] << " (stat.) $\\pm$ " << SysNP_pb[i] << " (syst.) \\\\" << endl;
+	}
+
+
+
+
   //////////////////////////////// Start Plotting ////////////////////////////////
   float pos_x = 0.25;
   float pos_y = 0.85;
   float pos_y_diff = 0.071;
   int text_color = 1;
   float text_size = 25;
-  TGraphErrors *gXpp_PR = new TGraphErrors(nPtBins,x,Xpp_PR,binWidth,Xpp_PR_err);
-  TGraphErrors *gXpp_NP = new TGraphErrors(nPtBins,x,Xpp_NP,binWidth,Xpp_NP_err);
+  TGraphErrors *gXpp_PR;
+  TGraphErrors *gXpp_NP;
+  TGraphErrors *gXPbPb_PR;
+  TGraphErrors *gXPbPb_NP;
+  if(isSys==1){
+	  gXpp_PR = new TGraphErrors(nPtBins,x,Xpp_PR,0,Xpp_PR_err);
+	  gXpp_NP = new TGraphErrors(nPtBins,x,Xpp_NP,0,Xpp_NP_err);
 
-  TGraphErrors *gXPbPb_PR = new TGraphErrors(nPtBins,x,XPbPb_PR,binWidth,XPbPb_PR_err);
-  TGraphErrors *gXPbPb_NP = new TGraphErrors(nPtBins,x,XPbPb_NP,binWidth,XPbPb_NP_err);
+	  gXPbPb_PR = new TGraphErrors(nPtBins,x,XPbPb_PR,0,XPbPb_PR_err);
+	  gXPbPb_NP = new TGraphErrors(nPtBins,x,XPbPb_NP,0,XPbPb_NP_err);
+  }
+  else {
+	  gXpp_PR = new TGraphErrors(nPtBins,x,Xpp_PR,binWidth,Xpp_PR_err);
+	  gXpp_NP = new TGraphErrors(nPtBins,x,Xpp_NP,binWidth,Xpp_NP_err);
+
+	  gXPbPb_PR = new TGraphErrors(nPtBins,x,XPbPb_PR,binWidth,XPbPb_PR_err);
+	  gXPbPb_NP = new TGraphErrors(nPtBins,x,XPbPb_NP,binWidth,XPbPb_NP_err);
+  }
+
+  TGraphErrors *gSysPR_pb = new TGraphErrors(nPtBins,x,XPbPb_PR,binWidth,SysPR_pb);
+  TGraphErrors *gSysNP_pb = new TGraphErrors(nPtBins,x,XPbPb_NP,binWidth,SysNP_pb);
+  TGraphErrors *gSysPR_pp = new TGraphErrors(nPtBins,x,Xpp_PR,binWidth,SysPR_pp);
+  TGraphErrors *gSysNP_pp = new TGraphErrors(nPtBins,x,Xpp_NP,binWidth,SysNP_pp);
 
   TCanvas *cXPR = new TCanvas("cXPR", "", 700,700);
   cXPR->cd();
@@ -273,18 +355,34 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gXpp_PR->GetYaxis()->CenterTitle();
   gXpp_PR->GetXaxis()->SetLimits(0.,50);
   gXpp_PR->SetMinimum(1e-11);
-  gXpp_PR->SetMaximum(1e-3);
+  gXpp_PR->SetMaximum(1e-5);
   gXpp_PR->SetMarkerColor(kBlue+2);
   gXpp_PR->SetLineColor(kBlue+2);
   gXpp_PR->SetMarkerStyle(20);
-  gXpp_PR->SetMarkerSize(1.4);
+  gXpp_PR->SetMarkerSize(1.2);
   gXPbPb_PR->SetMarkerColor(kRed+3);
   gXPbPb_PR->SetLineColor(kRed+3);
   gXPbPb_PR->SetMarkerStyle(21);
-  gXPbPb_PR->SetMarkerSize(1.4);
+  gXPbPb_PR->SetMarkerSize(1.2);
+
+  gSysPR_pb->GetXaxis()->SetLimits(0.,50);
+  gSysPR_pb->SetMinimum(0);
+  gSysPR_pb->SetMaximum(1.44);
+  gSysPR_pb->SetLineColor(kRed-4);
+  gSysPR_pb->SetFillColorAlpha(kRed-9,0.40);
+
+  gSysPR_pp->GetXaxis()->SetLimits(0.,50);
+  gSysPR_pp->SetMinimum(0);
+  gSysPR_pp->SetMaximum(1.44);
+  gSysPR_pp->SetLineColor(kBlue-4);
+  gSysPR_pp->SetFillColorAlpha(kBlue-9,0.40);
 
   gXpp_PR->Draw("AP");
   gXPbPb_PR->Draw("P");
+  if(isSys==1) {
+    gSysPR_pb->Draw("5");
+    gSysPR_pp->Draw("5");
+  }
 
   TLegend *legPR = new TLegend(0.68,0.72,0.8,0.82);
   SetLegendStyle(legPR);
@@ -292,6 +390,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   legPR->AddEntry(gXPbPb_PR,"PbPb, Cent. 0-90%", "p");
   legPR->Draw("SAME");
   jumSun(0,1,50,1);
+
 
   drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
   drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
@@ -311,18 +410,34 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gXpp_NP->GetYaxis()->CenterTitle();
   gXpp_NP->GetXaxis()->SetLimits(0.,50);
   gXpp_NP->SetMinimum(1e-11);
-  gXpp_NP->SetMaximum(1e-3);
+  gXpp_NP->SetMaximum(1e-5);
   gXpp_NP->SetMarkerColor(kBlue+2);
   gXpp_NP->SetLineColor(kBlue+2);
   gXpp_NP->SetMarkerStyle(20);
-  gXpp_NP->SetMarkerSize(1.4);
+  gXpp_NP->SetMarkerSize(1.2);
   gXPbPb_NP->SetMarkerColor(kRed+3);
   gXPbPb_NP->SetLineColor(kRed+3);
   gXPbPb_NP->SetMarkerStyle(21);
-  gXPbPb_NP->SetMarkerSize(1.4);
+  gXPbPb_NP->SetMarkerSize(1.2);
+
+  gSysNP_pb->GetXaxis()->SetLimits(0.,50);
+  gSysNP_pb->SetMinimum(0);
+  gSysNP_pb->SetMaximum(1.44);
+  gSysNP_pb->SetLineColor(kRed-4);
+  gSysNP_pb->SetFillColorAlpha(kRed-9,0.40);
+
+  gSysNP_pp->GetXaxis()->SetLimits(0.,50);
+  gSysNP_pp->SetMinimum(0);
+  gSysNP_pp->SetMaximum(1.44);
+  gSysNP_pp->SetLineColor(kBlue-4);
+  gSysNP_pp->SetFillColorAlpha(kBlue-9,0.40);
 
   gXpp_NP->Draw("AP");
   gXPbPb_NP->Draw("P");
+  if(isSys==1) {
+    gSysNP_pb->Draw("5");
+    gSysNP_pp->Draw("5");
+  }
 
   TLegend *legNP = new TLegend(0.68,0.72,0.8,0.82);
   SetLegendStyle(legNP);
@@ -392,6 +507,22 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   leg->AddEntry(gRaaNP,"Non Prompt #psi(2S)", "p");
   leg->Draw("SAME");
   jumSun(0,1,50,1);
+
+  double glb_Err=0;
+  glb_Err = TMath::Sqrt( TMath::Power(Nmb_err,2) + TMath::Power(Taa_err,2) + TMath:: Power(lumi_pp_err,2) );
+
+  cout << "Global Uncertainty : " << glb_Err << endl;
+
+  TBox* b_ynerr = new TBox();
+  b_ynerr->SetX1(0);
+  b_ynerr->SetX2(2);
+  b_ynerr->SetY1(1 - glb_Err);
+  b_ynerr->SetY2(1 + glb_Err);
+  b_ynerr->SetFillColorAlpha(12, 0.8);
+  b_ynerr->SetLineWidth(1);
+  b_ynerr->SetLineColor(kBlack);
+  b_ynerr->Draw("L");
+
 
   drawText("Cent. 0-90%", pos_x, pos_y, text_color, text_size);
   drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
