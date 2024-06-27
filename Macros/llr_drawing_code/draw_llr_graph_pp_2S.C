@@ -91,19 +91,23 @@ void draw_llr_graph_pp_2S()
     graph_mid2->SetMarkerColor(kBlue);
     graph_mid2->SetLineColor(kBlue);
     //graph_mid2->SetLineStyle(2);
-
     graph_mid2->Draw("P same");
 
-    TLegend *legend = new TLegend(0.7, 0.8, 0.94, 0.92);
-    legend->AddEntry(graph_forward1, "1.6<|y|<2.4", "lp"); // 1 = line
-    legend->AddEntry(graph_forward2, "3.5<p_{T}<50, 1.6<|y|<2.4", "lp");
-    legend->AddEntry(graph_mid1, "|y|<1.6", "lp");
-    legend->AddEntry(graph_mid2, "6.5<p_{T}<50, |y|<1.6", "lp");
-    
-    legend->SetTextSize(0.02); 
-    legend->SetFillColor(0);
-    legend->SetFillStyle(0);
-    legend->SetBorderSize(0);
+
+    TLegend *legend = new TLegend(0.538, 0.8, 0.94, 0.92);
+    SetLegendStyle(legend);
+	//drawText(" #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
+	//drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	//drawText("Cent. 0-90%", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+    //CMS_lumi_v2mass(c_mid_pt_PR,iPeriod,iPos);	
+    legend->AddEntry(graph_forward1, "1.6 < |y| < 2.4", "lp"); // 1 = line
+    legend->AddEntry(graph_forward2, "3.5 < p_{T} < 50, 1.6 < |y| < 2.4", "lp");
+    legend->AddEntry(graph_mid1, "|y| < 1.6", "lp");
+    legend->AddEntry(graph_mid2, "6.5 < p_{T} < 50, |y| < 1.6", "lp");
+    //legend->SetTextSize(0.02); 
+    //legend->SetFillColor(0);
+    //legend->SetFillStyle(0);
+    //legend->SetBorderSize(0);
     legend->Draw();
 
     canvas_forward->SaveAs("llr_result_pp_2S.pdf");
