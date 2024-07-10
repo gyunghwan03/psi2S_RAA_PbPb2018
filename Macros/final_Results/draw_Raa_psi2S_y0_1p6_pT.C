@@ -23,12 +23,12 @@
 using namespace std;
 using namespace RooFit;
 
-valErr getYield_PbPb(int i=0);
-valErr getYield_pp(int i=0);
-valErr getFrac_PbPb(int i=0);
-valErr getFrac_pp(int i=0);
+valErr getYield_PbPb(int i=0, double ptHigh=40);
+valErr getYield_pp(int i=0, double ptHigh=40);
+valErr getFrac_PbPb(int i=0, double ptHigh=40);
+valErr getFrac_pp(int i=0, double ptHigh=40);
 
-void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
+void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true, double ptHigh=40)
 {
 
   //gROOT->SumW2();
@@ -84,7 +84,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   //Double_t Taa_err = 0.123; //0-100%
   Double_t Taa_err = 0.022; //0-90%
 
-  double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,50};
+  double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,ptHigh};
   double fracPP[nPtBins]; double fracPbPb[nPtBins];
   double fracErrPP[nPtBins]; double fracErrPbPb[nPtBins];
 
@@ -208,7 +208,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
 
     //cout << "yield Err NonPrompt : " << err_PbPbNP << "	X-Section Err NP : " << XPbPb_NP_err[i] << endl;
 
-    Taa_Nmb =  Taa*Nmb*2*(2.4-1.6)*(50.-3.);
+    Taa_Nmb =  Taa*Nmb*2*(2.4-1.6)*(ptHigh-3.);
     step_one[i] = 1./(Taa_Nmb*Xpp_PR[i]);
     step_two[i] = step_one[i];
     RAA[i] = step_two[i]*yieldPbPb_PR;
@@ -353,7 +353,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gXpp_PR->GetYaxis()->SetTitleOffset(1.90);
   gXpp_PR->SetTitle("");
   gXpp_PR->GetYaxis()->CenterTitle();
-  gXpp_PR->GetXaxis()->SetLimits(0.,50);
+  gXpp_PR->GetXaxis()->SetLimits(0.,ptHigh);
   gXpp_PR->SetMinimum(1e-11);
   gXpp_PR->SetMaximum(1e-5);
   gXpp_PR->SetMarkerColor(kBlue+2);
@@ -365,13 +365,13 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gXPbPb_PR->SetMarkerStyle(21);
   gXPbPb_PR->SetMarkerSize(1.2);
 
-  gSysPR_pb->GetXaxis()->SetLimits(0.,50);
+  gSysPR_pb->GetXaxis()->SetLimits(0.,ptHigh);
   gSysPR_pb->SetMinimum(0);
   gSysPR_pb->SetMaximum(1.44);
   gSysPR_pb->SetLineColor(kRed-4);
   gSysPR_pb->SetFillColorAlpha(kRed-9,0.40);
 
-  gSysPR_pp->GetXaxis()->SetLimits(0.,50);
+  gSysPR_pp->GetXaxis()->SetLimits(0.,ptHigh);
   gSysPR_pp->SetMinimum(0);
   gSysPR_pp->SetMaximum(1.44);
   gSysPR_pp->SetLineColor(kBlue-4);
@@ -389,14 +389,14 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   legPR->AddEntry(gXpp_PR,"pp", "p");
   legPR->AddEntry(gXPbPb_PR,"PbPb, Cent. 0-90%", "p");
   legPR->Draw("SAME");
-  jumSun(0,1,50,1);
+  jumSun(0,1,ptHigh,1);
 
 
   drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
   drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
   CMS_lumi_v2mass(cXPR,iPeriod,iPos);	
 
-  cXPR->SaveAs("figs/CrossSection_PR_y0_1p6_pT.pdf");
+  cXPR->SaveAs(Form("figs/CrossSection_PR_y0_1p6_pT_%.f.pdf",ptHigh));
 
   TCanvas *cXNP = new TCanvas("cXNP", "", 700,700);
   cXNP->cd();
@@ -408,7 +408,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gXpp_NP->GetYaxis()->SetTitleOffset(1.90);
   gXpp_NP->SetTitle("");
   gXpp_NP->GetYaxis()->CenterTitle();
-  gXpp_NP->GetXaxis()->SetLimits(0.,50);
+  gXpp_NP->GetXaxis()->SetLimits(0.,ptHigh);
   gXpp_NP->SetMinimum(1e-11);
   gXpp_NP->SetMaximum(1e-5);
   gXpp_NP->SetMarkerColor(kBlue+2);
@@ -420,13 +420,13 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gXPbPb_NP->SetMarkerStyle(21);
   gXPbPb_NP->SetMarkerSize(1.2);
 
-  gSysNP_pb->GetXaxis()->SetLimits(0.,50);
+  gSysNP_pb->GetXaxis()->SetLimits(0.,ptHigh);
   gSysNP_pb->SetMinimum(0);
   gSysNP_pb->SetMaximum(1.44);
   gSysNP_pb->SetLineColor(kRed-4);
   gSysNP_pb->SetFillColorAlpha(kRed-9,0.40);
 
-  gSysNP_pp->GetXaxis()->SetLimits(0.,50);
+  gSysNP_pp->GetXaxis()->SetLimits(0.,ptHigh);
   gSysNP_pp->SetMinimum(0);
   gSysNP_pp->SetMaximum(1.44);
   gSysNP_pp->SetLineColor(kBlue-4);
@@ -444,13 +444,13 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   legNP->AddEntry(gXpp_NP,"pp", "p");
   legNP->AddEntry(gXPbPb_NP,"PbPb, Cent. 0-90%", "p");
   legNP->Draw("SAME");
-  jumSun(0,1,50,1);
+  jumSun(0,1,ptHigh,1);
 
   drawText("Non Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
   drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
   CMS_lumi_v2mass(cXNP,iPeriod,iPos);	
 
-  cXNP->SaveAs("figs/CrossSection_NP_y0_1p6_pT.pdf");
+  cXNP->SaveAs(Form("figs/CrossSection_NP_y0_1p6_pT_%.f.pdf",ptHigh));
 
   TGraphErrors *gRaaPR;
   TGraphErrors *gRaaNP;
@@ -471,7 +471,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gRaaPR->GetYaxis()->SetTitle("R_{AA}");
   gRaaPR->SetTitle("");
   gRaaPR->GetYaxis()->CenterTitle();
-  gRaaPR->GetXaxis()->SetLimits(0.,50);
+  gRaaPR->GetXaxis()->SetLimits(0.,ptHigh);
   gRaaPR->SetMinimum(0);
   gRaaPR->SetMaximum(1.44);
 
@@ -484,10 +484,10 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   gRaaNP->SetMarkerStyle(21);
   gRaaNP->SetMarkerSize(1.4);
 
-  gSysPR->GetXaxis()->SetLimits(0.,50);
+  gSysPR->GetXaxis()->SetLimits(0.,ptHigh);
   gSysPR->SetMinimum(0);
   gSysPR->SetMaximum(1.44);
-  gSysNP->GetXaxis()->SetLimits(0.,50);
+  gSysNP->GetXaxis()->SetLimits(0.,ptHigh);
   gSysNP->SetMinimum(0);
   gSysNP->SetMaximum(1.44);
   gSysPR->SetLineColor(kBlue-4);
@@ -506,7 +506,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   leg->AddEntry(gRaaPR,"Prompt #psi(2S)", "p");
   leg->AddEntry(gRaaNP,"Non Prompt #psi(2S)", "p");
   leg->Draw("SAME");
-  jumSun(0,1,50,1);
+  jumSun(0,1,ptHigh,1);
 
   double glb_Err=0;
   glb_Err = TMath::Sqrt( TMath::Power(Nmb_err,2) + TMath::Power(Taa_err,2) + TMath:: Power(lumi_pp_err,2) );
@@ -528,9 +528,9 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
   drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
   CMS_lumi_v2mass(cRAA,iPeriod,iPos);	
 
-  cRAA->SaveAs(Form("figs/RAA_psi2S_y0_1p6_pT_Sys%d.pdf",isSys));
+  cRAA->SaveAs(Form("figs/RAA_psi2S_y0_1p6_pT_%.f_Sys%d.pdf",ptHigh,isSys));
 
-  TFile *outFile = new TFile("./roots/RAA_psi2S_midRap_pT.root","recreate");
+  TFile *outFile = new TFile(Form("./roots/RAA_psi2S_midRap_pT_%.f.root",ptHigh),"recreate");
   hRAA_PR->Write();
   hRAA_NP->Write();
   outFile->Close();
@@ -538,8 +538,8 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true)
 
 }
 
-valErr getYield_pp(int i){
-  double ptBins[7] = {6.5,9,12,15,20,25,50};
+valErr getYield_pp(int i, double ptHigh){
+  double ptBins[7] = {6.5,9,12,15,20,25,ptHigh};
   TString kineLabel[7];
   kineLabel[i] = getKineLabelpp(ptBins[i],ptBins[i+1],0,1.6,0.0);
   TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
@@ -551,8 +551,8 @@ valErr getYield_pp(int i){
   ret.err = fitResults->GetBinError(1);
   return ret;
 }
-valErr getYield_PbPb(int i){
-  double ptBins[7] = {6.5,9,12,15,20,25,50};
+valErr getYield_PbPb(int i, double ptHigh){
+  double ptBins[7] = {6.5,9,12,15,20,25,ptHigh};
   TString kineLabel[7];
   kineLabel[i] = getKineLabel(ptBins[i],ptBins[i+1],0,1.6,0.0,0,180);
   //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
@@ -564,8 +564,8 @@ valErr getYield_PbPb(int i){
   ret.err = fitResults->GetBinError(1);
   return ret;
 }
-valErr getFrac_PbPb(int i) {
-  double ptBin[7] = {6.5,9,12,15,20,25,50};
+valErr getFrac_PbPb(int i, double ptHigh) {
+  double ptBin[7] = {6.5,9,12,15,20,25,ptHigh};
   TString kineLabel[7];
   kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],0,1.6,0.0,0,180);
   TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
@@ -576,8 +576,8 @@ valErr getFrac_PbPb(int i) {
   ret.err = fitResults->GetBinError(1);
   return ret;
 }
-valErr getFrac_pp(int i) {
-  double ptBin[7] = {6.5,9,12,15,20,25,50};
+valErr getFrac_pp(int i, double ptHigh) {
+  double ptBin[7] = {6.5,9,12,15,20,25,ptHigh};
   TString kineLabel[7];
   kineLabel[i] = getKineLabelpp(ptBin[i],ptBin[i+1],0,1.6,0.0);
   TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
