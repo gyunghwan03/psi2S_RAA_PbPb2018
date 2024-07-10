@@ -63,13 +63,14 @@ void draw_llr_graph_PbPb_2S()
 
     graph_mid1->Draw("P same");
 
-    TLegend *legend = new TLegend(0.6, 0.85, 0.94, 0.92);
+    TLegend *legend = new TLegend(0.522, 0.85, 0.94, 0.92);
+    SetLegendStyle(legend);
     legend->AddEntry(graph_forward1, "1.6 < |y| < 2.4, cent. 10 - 90 %", "lp");
     legend->AddEntry(graph_mid1, "|y| < 1.6, cent. 10 - 90 %", "lp");
-    legend->SetTextSize(0.02); 
-    legend->SetFillColor(0);
-    legend->SetFillStyle(0);
-    legend->SetBorderSize(0);
+    //legend->SetTextSize(0.02); 
+    //legend->SetFillColor(0);
+    //legend->SetFillStyle(0);
+    //legend->SetBorderSize(0);
     legend->Draw();
 
     canvas_pt->SaveAs("llr_result_PbPb_2S_pT.pdf");
@@ -115,14 +116,14 @@ void draw_llr_graph_PbPb_2S()
 
     graph_mid2->Draw("P same");
 
-    TLegend *legend_cent = new TLegend(0.62, 0.85, 0.94, 0.92);
+    TLegend *legend_cent = new TLegend(0.534, 0.85, 0.94, 0.92);
+    SetLegendStyle(legend_cent);
     legend_cent->AddEntry(graph_forward2, "3.5 < p_{T} < 50, 1.6 < |y| < 2.4", "lp");
     legend_cent->AddEntry(graph_mid2, "6.5 < p_{T} < 50, |y| < 1.6", "lp");
-    
-    legend_cent->SetTextSize(0.02); 
-    legend_cent->SetFillColor(0);
-    legend_cent->SetFillStyle(0);
-    legend_cent->SetBorderSize(0);
+    //legend_cent->SetTextSize(0.02); 
+    //legend_cent->SetFillColor(0);
+    //legend_cent->SetFillStyle(0);
+    //legend_cent->SetBorderSize(0);
     legend_cent->Draw();
 
     canvas_cent->SaveAs("llr_result_PbPb_2S_cent.pdf");
