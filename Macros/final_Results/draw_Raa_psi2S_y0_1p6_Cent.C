@@ -182,14 +182,14 @@ void draw_Raa_psi2S_y0_1p6_Cent(bool isSys=true)
 		hyieldPbPb_NP -> SetBinError(i+1,err_PbPbNP_wgt);
 
 
-		Xpp_PR[i] = lumi_pp_scale*yieldPP_PR/(lumi_pp*1e+2*(double)(50.-6.5)*2*(double)(1.6));
+		Xpp_PR[i] = lumi_pp_scale*yieldPP_PR/(lumi_pp*1e+2*(double)(30.-6.5)*2*(double)(1.6));
 		Xpp_PR_err[i] = lumi_pp_scale*Xpp_PR[i]*sqrt(TMath::Power(err_PPPR_wgt/yieldPP_PR,2) + TMath::Power(lumi_pp_err/(lumi_pp*1e+2),2));
-		Xpp_NP[i] = lumi_pp_scale*yieldPP_NP/(lumi_pp*1e+2*(double)(50.-6.5)*2*(double)(1.6));
+		Xpp_NP[i] = lumi_pp_scale*yieldPP_NP/(lumi_pp*1e+2*(double)(30.-6.5)*2*(double)(1.6));
 		Xpp_NP_err[i] = lumi_pp_scale*Xpp_NP[i]*sqrt(TMath::Power(err_PPNP_wgt/yieldPP_NP,2) + TMath::Power(lumi_pp_err/(lumi_pp*1e+2),2));
 
-		XPbPb_PR[i] = yieldPbPb_PR/(Nmb*Taa[i]*(double)(50.-6.5)*2*(double)(1.6)*cfrac[i]);
+		XPbPb_PR[i] = yieldPbPb_PR/(Nmb*Taa[i]*(double)(30.-6.5)*2*(double)(1.6)*cfrac[i]);
 		XPbPb_PR_err[i] = XPbPb_PR[i]*sqrt(TMath::Power(Taa_err[i]/Taa[i],2) + TMath::Power(err_PbPbPR_wgt/yieldPbPb_PR,2));// + TMath::Power(Nmb_err/Nmb,2));
-		XPbPb_NP[i] = yieldPbPb_NP/(Nmb*Taa[i]*(double)(50.-6.5)*2*(double)(1.6)*cfrac[i]);
+		XPbPb_NP[i] = yieldPbPb_NP/(Nmb*Taa[i]*(double)(30.-6.5)*2*(double)(1.6)*cfrac[i]);
 		XPbPb_NP_err[i] = XPbPb_NP[i]*sqrt(TMath::Power(Taa_err[i]/Taa[i],2) + TMath::Power(err_PbPbNP_wgt/yieldPbPb_NP,2));// + TMath::Power(Nmb_err/Nmb,2));
 
 		hXpp_PR->SetBinContent(i+1, Xpp_PR[i]);
@@ -334,7 +334,7 @@ void draw_Raa_psi2S_y0_1p6_Cent(bool isSys=true)
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cXPR,iPeriod,iPos);	
 
-	cXPR->SaveAs("./figs/CrossSection_PR_y0_1p6_Cent.pdf");
+	cXPR->SaveAs("./figs/CrossSection_PR_y0_1p6_Cent_pt6p5_30.pdf");
 
 	TCanvas *cXNP = new TCanvas("cXNP", "", 700,700);
 	cXNP->cd();
@@ -372,7 +372,7 @@ void draw_Raa_psi2S_y0_1p6_Cent(bool isSys=true)
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cXNP,iPeriod,iPos);	
 
-	cXNP->SaveAs("figs/CrossSection_NP_y0_1p6_Cent.pdf");
+	cXNP->SaveAs("figs/CrossSection_NP_y0_1p6_Cent_pt6p5_30.pdf");
 
 	TGraphErrors *gRaaPR = new TGraphErrors(nCentBins,NpartBin,RaaPR,0,RaaPR_err);
 	TGraphErrors *gRaaNP = new TGraphErrors(nCentBins,NpartBin,RaaNP,0,RaaNP_err);
@@ -434,13 +434,13 @@ void draw_Raa_psi2S_y0_1p6_Cent(bool isSys=true)
     b_ynerr->SetLineColor(kBlack);
     b_ynerr->Draw("L");
 
-	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y, text_color, text_size);
+	drawText("6.5 < p_{T} < 30 GeV/c", pos_x, pos_y, text_color, text_size);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cRAA,iPeriod,iPos);	
 
-	cRAA->SaveAs(Form("./figs/RAA_psi2S_y0_1p6_Npart_Sys%d.pdf",isSys));
+	cRAA->SaveAs(Form("./figs/RAA_psi2S_y0_1p6_Npart_Sys%d_pt6p5_30.pdf",isSys));
 
-	TFile *outFile = new TFile("./roots/RAA_psi2S_midRap_Npart.root","recreate");
+	TFile *outFile = new TFile("./roots/RAA_psi2S_midRap_Npart_pt6p5_30.root","recreate");
 	hRAA_PR->Write();
 	hRAA_NP->Write();
 
@@ -450,7 +450,7 @@ void draw_Raa_psi2S_y0_1p6_Cent(bool isSys=true)
 
 valErr getYield_pp(int i){
     TString kineLabel;
-    kineLabel = getKineLabelpp(6.5,50,0,1.6,0.0);
+    kineLabel = getKineLabelpp(6.5,30,0,1.6,0.0);
     TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
     TH1D* fitResults = (TH1D*)inf->Get("fitResults");
 
@@ -462,7 +462,7 @@ valErr getYield_pp(int i){
 valErr getYield_PbPb(int i){
     double centBin[7] = {0,20,40,60,80,100,180};
     TString kineLabel[7];
-    kineLabel[i] = getKineLabel(6.5,50,0,1.6,0.0,centBin[i],centBin[i+1]);
+    kineLabel[i] = getKineLabel(6.5,30,0,1.6,0.0,centBin[i],centBin[i+1]);
 	TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("MassResults");
@@ -475,7 +475,7 @@ valErr getYield_PbPb(int i){
 valErr getFrac_PbPb(int i) {
     double centBin[7] = {0,20,40,60,80,100,180};
     TString kineLabel[7];
-    kineLabel[i] = getKineLabel(6.5,50,0,1.6,0.0,centBin[i],centBin[i+1]);
+    kineLabel[i] = getKineLabel(6.5,30,0,1.6,0.0,centBin[i],centBin[i+1]);
     TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
@@ -486,7 +486,7 @@ valErr getFrac_PbPb(int i) {
 }
 valErr getFrac_pp(int i) {
     TString kineLabel;
-    kineLabel = getKineLabelpp(6.5,50,0,1.6,0.0);
+    kineLabel = getKineLabelpp(6.5,30,0,1.6,0.0);
     TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 

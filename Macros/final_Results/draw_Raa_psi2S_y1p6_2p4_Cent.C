@@ -175,14 +175,14 @@ void draw_Raa_psi2S_y1p6_2p4_Cent(bool isSys=true)
 
         cfrac[i] = (centBin[i+1]-centBin[i])/90.;
 
-        Xpp_PR[i] = lumi_pp_scale*yieldPP_PR/(lumi_pp*1e+2*(double)(50.-3.5)*(double)2*(2.4-1.6));
+        Xpp_PR[i] = lumi_pp_scale*yieldPP_PR/(lumi_pp*1e+2*(double)(30.-3.5)*(double)2*(2.4-1.6));
         Xpp_PR_err[i] = lumi_pp_scale*Xpp_PR[i]*sqrt(TMath::Power(err_PPPR_wgt/yieldPP_PR,2) + TMath::Power(lumi_pp_err/(lumi_pp*1e+2),2));
-        Xpp_NP[i] = lumi_pp_scale*yieldPP_NP/(lumi_pp*1e+2*(double)(50.-3.5)*(double)2*(2.4-1.6));
+        Xpp_NP[i] = lumi_pp_scale*yieldPP_NP/(lumi_pp*1e+2*(double)(30.-3.5)*(double)2*(2.4-1.6));
         Xpp_NP_err[i] = lumi_pp_scale*Xpp_NP[i]*sqrt(TMath::Power(err_PPNP_wgt/yieldPP_NP,2) + TMath::Power(lumi_pp_err/(lumi_pp*1e+2),2));
 
-        XPbPb_PR[i] = yieldPbPb_PR/(Nmb*Taa[i]*(double)(50.-3.5)*(double)2*(2.4-1.6)*cfrac[i]);
+        XPbPb_PR[i] = yieldPbPb_PR/(Nmb*Taa[i]*(double)(30.-3.5)*(double)2*(2.4-1.6)*cfrac[i]);
         XPbPb_PR_err[i] = XPbPb_PR[i]*sqrt(TMath::Power(Taa_err[i]/Taa[i],2) + TMath::Power(err_PbPbPR_wgt/yieldPbPb_PR,2));// + TMath::Power(Nmb_err/Nmb,2));
-        XPbPb_NP[i] = yieldPbPb_NP/(Nmb*Taa[i]*(double)(50.-3.5)*(double)2*(2.4-1.6)*cfrac[i]);
+        XPbPb_NP[i] = yieldPbPb_NP/(Nmb*Taa[i]*(double)(30.-3.5)*(double)2*(2.4-1.6)*cfrac[i]);
         XPbPb_NP_err[i] = XPbPb_NP[i]*sqrt(TMath::Power(Taa_err[i]/Taa[i],2) + TMath::Power(err_PbPbNP_wgt/yieldPbPb_NP,2));// + TMath::Power(Nmb_err/Nmb,2));
 
         hXpp_PR->SetBinContent(i+1, Xpp_PR[i]);
@@ -435,9 +435,9 @@ void draw_Raa_psi2S_y1p6_2p4_Cent(bool isSys=true)
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cRAA,iPeriod,iPos);	
 
-	cRAA->SaveAs(Form("figs/RAA_psi2S_y1p6_2p4_Cent_Sys%d.pdf",isSys));
+	cRAA->SaveAs(Form("figs/RAA_psi2S_y1p6_2p4_Cent_Sys%d_pt3p5_30.pdf",isSys));
 
-	TFile *f1 = new TFile("roots/RAA_psi2S_forRap_Npart.root","recreate");
+	TFile *f1 = new TFile("roots/RAA_psi2S_forRap_Npart_pt3p5_30.root","recreate");
 	f1->cd();
 	hRAA_PR->Write();
 	hRAA_NP->Write();
@@ -447,7 +447,7 @@ void draw_Raa_psi2S_y1p6_2p4_Cent(bool isSys=true)
 
 valErr getYield_pp(int i){
     TString kineLabel;
-    kineLabel = getKineLabelpp(3.5,50,1.6,2.4,0.0);
+    kineLabel = getKineLabelpp(3.5,30,1.6,2.4,0.0);
     TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
     TH1D* fitResults = (TH1D*)inf->Get("fitResults");
 
@@ -459,7 +459,7 @@ valErr getYield_pp(int i){
 valErr getYield_PbPb(int i){
     double centBin[7] = {0,20,40,60,80,100,180};
     TString kineLabel[7];
-    kineLabel[i] = getKineLabel(3.5,50,1.6,2.4,0.0,centBin[i],centBin[i+1]);
+    kineLabel[i] = getKineLabel(3.5,30,1.6,2.4,0.0,centBin[i],centBin[i+1]);
     //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
 	//cout << "File Name : " << Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()) << endl;
@@ -473,7 +473,7 @@ valErr getYield_PbPb(int i){
 valErr getFrac_PbPb(int i) {
     double centBin[7] = {0,20,40,60,80,100,180};
     TString kineLabel[7];
-    kineLabel[i] = getKineLabel(3.5,50,1.6,2.4,0.0,centBin[i],centBin[i+1]);
+    kineLabel[i] = getKineLabel(3.5,30,1.6,2.4,0.0,centBin[i],centBin[i+1]);
     TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
@@ -484,7 +484,7 @@ valErr getFrac_PbPb(int i) {
 }
 valErr getFrac_pp(int i) {
     TString kineLabel;
-    kineLabel = getKineLabelpp(3.5,50,1.6,2.4,0.0);
+    kineLabel = getKineLabelpp(3.5,30,1.6,2.4,0.0);
     TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
