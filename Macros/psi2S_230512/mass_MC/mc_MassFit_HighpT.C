@@ -109,13 +109,13 @@ void mc_MassFit_HighpT(
 	//double paramslower[8] = {0.01,   0.0,     1., 1., 0.0,      0.0};//pt3-4.5 m_lambda==-25.0
 	//Cent.10-20
     
-	double sigma_up=0.13; double sigma_lo=0; double x_up=1; double x_lo=1e-6; double alpha_up=5; double alpha_lo=0; double n_up=5; double n_lo=0; double f_up=1; double f_lo=1e-6;
+	double sigma_up=0.15; double sigma_lo=0.001; double x_up=5; double x_lo=1e-6; double alpha_up=5; double alpha_lo=0; double n_up=5; double n_lo=0; double f_up=1; double f_lo=1e-6;
     
 	//SIGNAL: initial params
 	double sigma_1_init = 0.05;
-    double x_init = 0.566;
-	double alpha_1_init = 1.9581;
-	double n_1_init = 1.8425;
+    double x_init = 0.766;
+	double alpha_1_init = 3.581;
+	double n_1_init = 2.425;
 	double f_init = 0.6886;
     double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
     double N_Jpsi_high = 200000; // 2500000
