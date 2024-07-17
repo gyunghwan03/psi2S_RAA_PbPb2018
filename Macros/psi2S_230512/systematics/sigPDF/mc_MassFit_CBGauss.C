@@ -65,7 +65,7 @@ void mc_MassFit_CBGauss(
 	RooMsgService::instance().setSilentMode(true);
 
     // MC
-    TFile* f1 = new TFile("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
+    TFile* f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 	// TFile* f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230517.root", "read");
 
 

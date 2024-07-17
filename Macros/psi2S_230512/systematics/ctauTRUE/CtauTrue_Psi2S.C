@@ -190,6 +190,20 @@ void CtauTrue_Psi2S(
   ws->factory("lambdaDSS3[.21, 1e-6, 1.0]");
   ws->factory("fDSS[0.5, 1e-6, 1.]");
   ws->factory("fDSS1[0.8, 1e-6.,1.]");}
+  else if(cLow==20&&cHigh==60){
+    ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+    ws->factory("lambdaDSS[0.23, 1e-6, 1.0]");
+    ws->factory("lambdaDSS2[0.8, 1e-6, 1.0]");
+    ws->factory("lambdaDSS3[.21, 1e-6, 1.0]");
+    ws->factory("fDSS[0.1, 1e-6, 1.]");
+    ws->factory("fDSS1[0.3, 1e-6.,1.]");}
+  else if(cLow==60&&cHigh==100){
+    ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+    ws->factory("lambdaDSS[0.23, 1e-6, 1.0]");
+    ws->factory("lambdaDSS2[0.8, 1e-6, 1.0]");
+    ws->factory("lambdaDSS3[.21, 1e-6, 1.0]");
+    ws->factory("fDSS[0.1, 1e-6, 1.]");
+    ws->factory("fDSS1[0.3, 1e-6.,1.]");}
   else {
   ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
   ws->factory("lambdaDSS[0.34, 1e-6, 1.0]");

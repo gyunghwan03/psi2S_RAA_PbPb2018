@@ -64,7 +64,7 @@ void MassFit_FixPar_Data(
   //massLow=2.75;
 
 //  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("/home/CMS/DataFiles/psi2Sanalysis/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root"));
+  f1 = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root"));
     // f1 = new TFile("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root", "read");
   //f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_220808.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
 //  f1 = new TFile("../../skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
@@ -292,8 +292,14 @@ void MassFit_FixPar_Data(
   else if (cLow==20&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (cLow==20&&cHigh==60)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (cLow==40&&cHigh==60)  {
 	  NBkg_limit = 500000;
+	  NJpsi_limit = 5000; }
+  else if (cLow==60&&cHigh==100)  {
+	  NBkg_limit = 100000;
 	  NJpsi_limit = 5000; }
   else if (cLow==60&&cHigh==80)  {
 	  NBkg_limit = 500000;

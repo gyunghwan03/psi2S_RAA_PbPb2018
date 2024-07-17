@@ -131,12 +131,12 @@ void MassFit_FixPar_Data(
   if (f_lower<0.0) f_lower=0.0;
 
   double paramslower[6] = {0.,   0., 0.,  0., 0., 0.};
-  double paramsupper[6] = {10., 10., 0.13, 1., 1., 25.0};
+  double paramsupper[6] = {10., 10., 0.2, 2., 1., 25.0};
 
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
   //SIGNAL FIX
-  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.1, pdgMass.Psi2S + 0.1 ) ;
+  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.Psi2S, pdgMass.Psi2S -0.05, pdgMass.Psi2S + 0.05 ) ;
   //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
   RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
   RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
@@ -245,6 +245,9 @@ void MassFit_FixPar_Data(
   else if (ptLow==20&&ptHigh==50)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (ptLow==3.5&&cLow==60&&cHigh==100)  {
+	  NBkg_limit = 50000;
+	  NJpsi_limit = 2000; }
   else if (ptLow==6.5&&cLow==0&&cHigh==20)  {
 	  NBkg_limit = 3e+4;
 	  NJpsi_limit = 1000; }
@@ -289,6 +292,9 @@ void MassFit_FixPar_Data(
   else if (cLow==0&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (cLow==20&&cHigh==60) {
+	  NBkg_limit = 150000;
+	  NJpsi_limit = 4000; }
   else if (cLow==40&&cHigh==80)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }

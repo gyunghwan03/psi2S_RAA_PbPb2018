@@ -291,6 +291,9 @@ void MassFit_FixPar_Data(
   else if (cLow==0&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (cLow==20&&cHigh==60)  {
+	  NBkg_limit = 200000;
+	  NJpsi_limit = 5000; }
   else if (cLow==40&&cHigh==80)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }

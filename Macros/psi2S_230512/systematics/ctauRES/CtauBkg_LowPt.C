@@ -140,6 +140,17 @@ void CtauBkg_LowPt(
   ws->factory("lambdaDSS_Bkg2[0.5, 1e-6, 1.]");
   ws->factory("fDSS12[0.5, 0., 1.]");
   ws->factory("fDF12[0.5, 0., 1.]");}
+  else if(cLow==20&&cHigh==60){
+    ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
+    ws->factory("fDFSS[0.6, 0., 1.]");
+    ws->factory("fDLIV[0.4, 0., 1]");
+    ws->factory("lambdaDDS_Bkg[0.04, 1e-6, 1.]");
+    ws->factory("lambdaDF_Bkg1[0.327, 1e-6, 1]");
+    ws->factory("lambdaDF_Bkg2[0.0327, 1e-6, 1]");
+    ws->factory("lambdaDSS_Bkg1[0.5, 1e-6, 1.]");
+    ws->factory("lambdaDSS_Bkg2[0.3, 1e-6, 1.]");
+    ws->factory("fDSS12[0.5, 0., 1.]");
+    ws->factory("fDF12[0.5, 0., 1.]");}
   else if(cLow==60&&cHigh==80){
   ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
   ws->factory("fDFSS[0.6, 0., 1.]");

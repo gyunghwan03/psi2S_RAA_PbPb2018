@@ -135,7 +135,7 @@ void MassFit_FixPar_Data(
 
   //if(ptLow==3.5&ptHigh==5) { low=1.45; high=1.47; slow=sigma_lower; shigh=sigma_higher;}
   //else if(ptLow==3.5&ptHigh==50&&cLow==0&&cHigh==20) { low=.3; high=3.2; slow=sigma_lower; shigh=sigma_higher;}
-  low=0; high=10; slow=sigma_lower; shigh=sigma_higher;
+  low=0; high=10; slow=sigma_lower; shigh=sigma_higher+0.05;
 
   double paramslower[6] = {low, 0., slow, 0., 0., 0.};
   double paramsupper[6] = {high, 10 , shigh, 1, 1.0, 25.0};
@@ -275,9 +275,15 @@ void MassFit_FixPar_Data(
   else if (cLow==0&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (cLow==20&&cHigh==60)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 10000; }
   else if (cLow==40&&cHigh==80)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (cLow==60&&cHigh==100)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 5000; }
   else if (yLow==0.4&&yHigh==0.9)  {
 	  NBkg_limit = 50000;
 	  NJpsi_limit = 1000; }

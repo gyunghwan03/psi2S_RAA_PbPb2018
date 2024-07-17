@@ -131,16 +131,26 @@ void CtauRes(
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
   ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.76, 1., 2.5]");
-  ws->factory("rS32_CtauRes[2.57, 2.5, 5.0]");}
-  if(ptLow==12&&ptHigh==50){
+  ws->factory("rS32_CtauRes[2.57, 2.5, 5.0]");
+  } else if(ptLow==12&&ptHigh==50){
   ws->factory("ctau1_CtauRes[0.]");
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
   ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
   ws->factory("rS21_CtauRes[1.76, 1e-3, 2.5]");
-  ws->factory("rS32_CtauRes[2.57, 2., 5.0]");}
-  if(ptLow==3.5&&cLow==60&&cHigh==80){
+  ws->factory("rS32_CtauRes[2.57, 2., 5.0]");
+  } else if(ptLow==3.5&&cLow==20&&cHigh==60) {
+    ws->var("N_Jpsi")->setRange(0, 100000);
+    ws->var("N_Jpsi")->setVal(50000);
+    ws->factory("ctau1_CtauRes[0.]");
+    ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+    ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+    ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+    ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
+    ws->factory("rS21_CtauRes[1.2, 1, 3]");
+    ws->factory("rS32_CtauRes[2.5, 1, 3]");
+  } else if(ptLow==3.5&&cLow==60&&cHigh==80) {
   ws->factory("ctau1_CtauRes[0.]");
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
