@@ -193,8 +193,8 @@ void syst_acc()
     h_pp_nomi = (TH1D *)pp_nomi_input->Get(h_pp_mid.Data());
     h_pp_syst = (TH1D *)pp_syst_input->Get(h_pp_mid.Data());
 
-    const int NBINS_mid_cent = 6;
-    double edges_mid_cent[NBINS_mid_cent+1] = {0, 10, 20, 30, 40, 50, 90};
+    const int NBINS_mid_cent = 8;
+    double edges_mid_cent[NBINS_mid_cent+1] = {0,5,10,15,20,30,40,50,90};
 	TH1D mid_cent("mid_cent", "mid", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_pp("mid_cent_pp", "mid_pp", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_pb("mid_cent_pb", "mid_pb", NBINS_mid_cent, edges_mid_cent);

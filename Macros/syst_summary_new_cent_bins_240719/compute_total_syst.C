@@ -408,8 +408,8 @@ void compute_total_syst()
     auto h_TNP_mid_cent_NP_pb = (TH1D*) in_TNP_cent->Get("mid_NP");
     
 
-    const int NBINS_mid_cent = 6;
-    double edges_mid_cent[NBINS_mid_cent+1] = {0, 10, 20, 30, 40, 50, 90};
+    const int NBINS_mid_cent = 8;
+    double edges_mid_cent[NBINS_mid_cent+1] = {0,5,10,15,20,30,40,50,90};
     auto h_total_mid_cent_PR = new TH1D("mid_cent_PR", "mid_PR", NBINS_mid_cent, edges_mid_cent);
     auto h_total_mid_cent_PR_pp = new TH1D("mid_cent_PR_pp", "mid_PR_pp", NBINS_mid_cent, edges_mid_cent);
     auto h_total_mid_cent_PR_pb = new TH1D("mid_cent_PR_pb", "mid_PR_pb", NBINS_mid_cent, edges_mid_cent);

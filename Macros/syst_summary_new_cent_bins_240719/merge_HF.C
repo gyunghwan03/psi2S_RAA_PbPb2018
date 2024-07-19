@@ -4,11 +4,11 @@ using TMath::Power; using TMath::Sqrt;
 
 void merge_HF()
 {
-	auto HF_up_pt = TFile::Open("syst_roots/syst_pt_HF_Up.root");
-	auto HF_down_pt = TFile::Open("syst_roots/syst_pt_HF_Down.root");
+	auto HF_up_pt = TFile::Open("syst_roots/syst_pt_HF_up.root");
+	auto HF_down_pt = TFile::Open("syst_roots/syst_pt_HF_down.root");
 
-	auto HF_up_cent = TFile::Open("syst_roots/syst_cent_HF_Up.root");
-	auto HF_down_cent = TFile::Open("syst_roots/syst_cent_HF_Down.root");
+	auto HF_up_cent = TFile::Open("syst_roots/syst_cent_HF_up.root");
+	auto HF_down_cent = TFile::Open("syst_roots/syst_cent_HF_down.root");
 
 	auto h_up_mid_pt_PR = (TH1D*) HF_up_pt->Get("mid_PR");
 	//auto h_up_mid_pt_PR_pp = (TH1D*) HF_up_pt->Get("mid_PR_pp");
@@ -179,8 +179,8 @@ void merge_HF()
 	//h_hf_fwd_pt_NP_pp->Write();
 	h_hf_fwd_pt_NP_pb->Write();
 
-	const int NBINS_mid_cent = 6;
-    double edges_mid_cent[NBINS_mid_cent+1] = {0, 10, 20, 30, 40, 50, 90};
+	const int NBINS_mid_cent = 8;
+    double edges_mid_cent[NBINS_mid_cent+1] = {0,5,10,15,20,30,40,50,90};
     auto h_hf_mid_cent_PR = new TH1D("mid_PR", "mid_PR", NBINS_mid_cent, edges_mid_cent);
 	auto h_hf_mid_cent_PR_pb = new TH1D("mid_PR_pb", "mid_PR_pb", NBINS_mid_cent, edges_mid_cent);
     auto h_hf_mid_cent_NP = new TH1D("mid_NP", "mid_NP", NBINS_mid_cent, edges_mid_cent);

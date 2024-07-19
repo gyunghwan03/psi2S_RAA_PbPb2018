@@ -203,8 +203,8 @@ void draw_syst_ver2()
 	h_fwd_cent_NP_pb[8] = (TH1D*) in_cent[8]->Get("fwd_pb");
 
 	
-	const int NcentBins = 6;
-	double centBin[NcentBins+1] = {0,10,20,30,40,50,90};
+	const int NcentBins = 8;
+	double centBin[NcentBins+1] = {0,5,10,15,20,30,40,50,90};
 	h_mid_cent_PR[6] = new TH1D("mid_PR","mid_PR",NcentBins,centBin);
 	h_mid_cent_NP[6] = new TH1D("mid_NP","mid_NP",NcentBins,centBin);
 	h_fwd_cent_PR[6] = new TH1D("fwd_PR","fwd_PR",NcentBins,centBin);

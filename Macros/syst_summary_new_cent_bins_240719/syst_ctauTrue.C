@@ -167,8 +167,8 @@ void syst_ctauTrue()
     out_name = "./syst_roots/syst_cent_" + syst_type + ".root";
     TFile out_cent(out_name.c_str(), "recreate");
 
-    const int NBINS_mid_cent = 6;
-    double edges_mid_cent[NBINS_mid_cent+1] = {0, 10, 20, 30, 40, 50, 90};
+    const int NBINS_mid_cent = 8;
+    double edges_mid_cent[NBINS_mid_cent+1] = {0,5,10,15,20,30,40,50,90};
     TH1D mid_cent_PR("mid_cent_PR", "mid_PR", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_NP("mid_cent_NP", "mid_NP", NBINS_mid_cent, edges_mid_cent);
 

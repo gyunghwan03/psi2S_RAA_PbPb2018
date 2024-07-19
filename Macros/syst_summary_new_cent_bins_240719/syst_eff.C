@@ -257,8 +257,8 @@ void syst_eff()
     h_pb_syst_NP = (TH1D *)NP_pb_syst_input->Get(Form(h_pb_mid.Data(),0));
     h_pp_nomi_NP = (TH1D *)NP_pp_nomi_input->Get(Form(h_pp_mid.Data(),1));
     h_pp_syst_NP = (TH1D *)NP_pp_syst_input->Get(Form(h_pp_mid.Data(),0));
-    const int NBINS_mid_cent = 6;
-    double edges_mid_cent[NBINS_mid_cent+1] = {0, 10, 20, 30, 40, 50, 90};
+    const int NBINS_mid_cent = 8;
+    double edges_mid_cent[NBINS_mid_cent+1] = {0,5,10,15,20,30,40,50,90};
     TH1D mid_cent_PR("mid_cent_PR", "mid_PR", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_PR_pp("mid_cent_PR_pp", "mid_PR_pp", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_PR_pb("mid_cent_PR_pb", "mid_PR_pb", NBINS_mid_cent, edges_mid_cent);
