@@ -203,12 +203,15 @@ void draw_syst_ver2()
 	h_fwd_cent_NP_pb[8] = (TH1D*) in_cent[8]->Get("fwd_pb");
 
 	
-	const int NcentBins = 8;
-	double centBin[NcentBins+1] = {0,5,10,15,20,30,40,50,90};
-	h_mid_cent_PR[6] = new TH1D("mid_PR","mid_PR",NcentBins,centBin);
-	h_mid_cent_NP[6] = new TH1D("mid_NP","mid_NP",NcentBins,centBin);
-	h_fwd_cent_PR[6] = new TH1D("fwd_PR","fwd_PR",NcentBins,centBin);
-	h_fwd_cent_NP[6] = new TH1D("fwd_NP","fwd_NP",NcentBins,centBin);
+	const int NcentBinsMid = 8;
+	const int NcentBinsFwd = 4;
+	double centBinMid[NcentBinsMid+1] = {0,5,10,15,20,30,40,50,90};
+	double centBinFwd[NcentBinsFwd+1] = {0, 10, 30, 50, 90};
+	h_mid_cent_PR[6] = new TH1D("mid_PR","mid_PR",NcentBinsMid,centBinMid);
+	h_mid_cent_NP[6] = new TH1D("mid_NP","mid_NP",NcentBinsMid,centBinMid);
+	
+	h_fwd_cent_PR[6] = new TH1D("fwd_PR","fwd_PR",NcentBinsFwd,centBinFwd);
+	h_fwd_cent_NP[6] = new TH1D("fwd_NP","fwd_NP",NcentBinsFwd,centBinFwd);
 
 	const int NptBinsMid = 6;
 	const int NptBinsFwd = 4;
@@ -245,7 +248,7 @@ void draw_syst_ver2()
 		h_fwd_pt_NP[6]->SetBinContent(i-1, TnP_tot);
 	}
 
-	for(int i=1; i<NcentBins+1; i++) {
+	for(int i=1; i<NcentBinsMid+1; i++) {
 		// cent
 		double TnP_pb = h_mid_cent_PR_pb[6]->GetBinContent(i);
 		double TnP_pp = h_mid_cent_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
@@ -256,18 +259,17 @@ void draw_syst_ver2()
 		TnP_pp = h_mid_cent_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_mid_cent_NP[6]->SetBinContent(i, TnP_tot);
-		
-		TnP_pb = h_fwd_cent_PR_pb[6]->GetBinContent(i);
-		TnP_pp = h_fwd_cent_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
-		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
+	}
+	for(int i=1; i<NcentBinsFwd+1; i++) {
+		double TnP_pb = h_fwd_cent_PR_pb[6]->GetBinContent(i);
+		double TnP_pp = h_fwd_cent_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
+		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_fwd_cent_PR[6]->SetBinContent(i, TnP_tot);
 		
 		TnP_pb = h_fwd_cent_NP_pb[6]->GetBinContent(i);
 		TnP_pp = h_fwd_cent_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_fwd_cent_NP[6]->SetBinContent(i, TnP_tot);
-
-
 	}
 	
 
