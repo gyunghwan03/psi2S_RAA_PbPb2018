@@ -152,28 +152,28 @@ void draw_syst_ver2()
 	}
 
 	// Fill 6th and 8th components
-	h_mid_pt_PR[6] = (TH1D*) in_pt[6]->Get("mid_PR");
+	//h_mid_pt_PR[6] = (TH1D*) in_pt[6]->Get("mid_PR");
 	h_mid_pt_PR_pp[6] = (TH1D*) in_pt[9]->Get("mid_PR");
 	h_mid_pt_PR_pb[6] = (TH1D*) in_pt[6]->Get("mid_PR");
-	h_mid_pt_NP[6] = (TH1D*) in_pt[6]->Get("mid_NP");
+	//h_mid_pt_NP[6] = (TH1D*) in_pt[6]->Get("mid_NP");
 	h_mid_pt_NP_pp[6] = (TH1D*) in_pt[9]->Get("mid_NP");
 	h_mid_pt_NP_pb[6] = (TH1D*) in_pt[6]->Get("mid_NP");
-	h_fwd_pt_PR[6] = (TH1D*) in_pt[6]->Get("fwd_PR");
+	//h_fwd_pt_PR[6] = (TH1D*) in_pt[6]->Get("fwd_PR");
 	h_fwd_pt_PR_pp[6] = (TH1D*) in_pt[9]->Get("fwd_PR");
 	h_fwd_pt_PR_pb[6] = (TH1D*) in_pt[6]->Get("fwd_NP");
-	h_fwd_pt_NP[6] = (TH1D*) in_pt[6]->Get("fwd_NP");
+	//h_fwd_pt_NP[6] = (TH1D*) in_pt[6]->Get("fwd_NP");
 	h_fwd_pt_NP_pp[6] = (TH1D*) in_pt[9]->Get("fwd_NP");
 	h_fwd_pt_NP_pb[6] = (TH1D*) in_pt[6]->Get("fwd_NP");
-	h_mid_cent_PR[6] = (TH1D*) in_cent[6]->Get("mid_PR");
+	//h_mid_cent_PR[6] = (TH1D*) in_cent[6]->Get("mid_PR");
 	h_mid_cent_PR_pp[6] = (TH1D*) in_cent[9]->Get("mid_PR");
 	h_mid_cent_PR_pb[6] = (TH1D*) in_cent[6]->Get("mid_PR");
-	h_mid_cent_NP[6] = (TH1D*) in_cent[6]->Get("mid_NP");
+	//h_mid_cent_NP[6] = (TH1D*) in_cent[6]->Get("mid_NP");
 	h_mid_cent_NP_pp[6] = (TH1D*) in_cent[9]->Get("mid_NP");
 	h_mid_cent_NP_pb[6] = (TH1D*) in_cent[6]->Get("mid_NP");
-	h_fwd_cent_PR[6] = (TH1D*) in_cent[6]->Get("fwd_PR");
+	//h_fwd_cent_PR[6] = (TH1D*) in_cent[6]->Get("fwd_PR");
 	h_fwd_cent_PR_pp[6] = (TH1D*) in_cent[9]->Get("fwd_PR");
 	h_fwd_cent_PR_pb[6] = (TH1D*) in_cent[6]->Get("fwd_PR");
-	h_fwd_cent_NP[6] = (TH1D*) in_cent[6]->Get("fwd_NP");
+	//h_fwd_cent_NP[6] = (TH1D*) in_cent[6]->Get("fwd_NP");
 	h_fwd_cent_NP_pp[6] = (TH1D*) in_cent[9]->Get("fwd_NP");
 	h_fwd_cent_NP_pb[6] = (TH1D*) in_cent[6]->Get("fwd_NP");
 
@@ -215,37 +215,37 @@ void draw_syst_ver2()
 
 	const int NptBinsMid = 6;
 	const int NptBinsFwd = 4;
-	double ptBinMid[NptBinsMid+1] = {6.5,9,12,15,20,25,50};
-	double ptBinFwd[NptBinsFwd+1] = {3.5,6.5,9,12,50};
+	double ptBinMid[NptBinsMid+1] = {6.5,9,12,15,20,25,40};
+	double ptBinFwd[NptBinsFwd+1] = {3.5,6.5,9,12,40};
 
 	h_mid_pt_PR[6] = new TH1D("mid_PR","mid_PR",NptBinsMid,ptBinMid);
 	h_mid_pt_NP[6] = new TH1D("mid_NP","mid_NP",NptBinsMid,ptBinMid);
 	h_fwd_pt_PR[6] = new TH1D("fwd_PR","fwd_PR",NptBinsFwd,ptBinFwd);
 	h_fwd_pt_NP[6] = new TH1D("fwd_NP","fwd_NP",NptBinsFwd,ptBinFwd);
 
-	for(int i=1; i<NptBinsMid; i++) {
+	for(int i=1; i<NptBinsMid+1; i++) {
 		// pt
-		double TnP_pb = h_mid_pt_PR_pb[6]->GetBinContent(i);
-		double TnP_pp = h_mid_pt_PR_pp[6]->GetBinContent(i); // pp input has one TnP bin
+		double TnP_pb = h_mid_pt_PR_pb[6]->GetBinContent(i+1);
+		double TnP_pp = h_mid_pt_PR_pp[6]->GetBinContent(i+1); // pp input has one TnP bin
 		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_mid_pt_PR[6]->SetBinContent(i-1, TnP_tot);
+		h_mid_pt_PR[6]->SetBinContent(i, TnP_tot);
 		
 		TnP_pb = h_mid_pt_NP_pb[6]->GetBinContent(i);
 		TnP_pp = h_mid_pt_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_mid_pt_NP[6]->SetBinContent(i-1, TnP_tot);
+		h_mid_pt_NP[6]->SetBinContent(i, TnP_tot);
 	}
 		
-	for(int i=1; i<NptBinsFwd; i++) {
-		double TnP_pb = h_fwd_pt_PR_pb[6]->GetBinContent(i);
-		double TnP_pp = h_fwd_pt_PR_pp[6]->GetBinContent(i); // pp input has one TnP bin
+	for(int i=1; i<NptBinsFwd+1; i++) {
+		double TnP_pb = h_fwd_pt_PR_pb[6]->GetBinContent(i+1);
+		double TnP_pp = h_fwd_pt_PR_pp[6]->GetBinContent(i+1); // pp input has one TnP bin
 		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_fwd_pt_PR[6]->SetBinContent(i-1, TnP_tot);
+		h_fwd_pt_PR[6]->SetBinContent(i, TnP_tot);
 		
 		TnP_pb = h_fwd_pt_NP_pb[6]->GetBinContent(i);
 		TnP_pp = h_fwd_pt_NP_pp[6]->GetBinContent(i); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		h_fwd_pt_NP[6]->SetBinContent(i-1, TnP_tot);
+		h_fwd_pt_NP[6]->SetBinContent(i, TnP_tot);
 	}
 
 	for(int i=1; i<NcentBinsMid+1; i++) {
@@ -264,7 +264,9 @@ void draw_syst_ver2()
 		double TnP_pb = h_fwd_cent_PR_pb[6]->GetBinContent(i);
 		double TnP_pp = h_fwd_cent_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
+		cout << "pb TnP : " << TnP_pb << ", pp TnP : " << TnP_pp << ", Total : " << TnP_tot << endl;
 		h_fwd_cent_PR[6]->SetBinContent(i, TnP_tot);
+		cout << "lower : " << h_fwd_cent_PR[6]->GetXaxis()->GetBinLowEdge(i) << ", upper : " <<  h_fwd_cent_PR[6]->GetXaxis()->GetBinUpEdge(i) << endl;
 		
 		TnP_pb = h_fwd_cent_NP_pb[6]->GetBinContent(i);
 		TnP_pp = h_fwd_cent_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
@@ -602,7 +604,7 @@ void draw_syst_ver2()
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_mid_cent_PR,iPeriod,iPos);	
 	c_mid_cent_PR->SaveAs("./figs/mid_cent_PR.pdf");
 
@@ -619,7 +621,7 @@ void draw_syst_ver2()
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_mid_cent_PR_pb,iPeriod_pb,iPos);
 	c_mid_cent_PR_pb->SaveAs("./figs/mid_cent_PR_pb.pdf");
 	
@@ -640,7 +642,7 @@ void draw_syst_ver2()
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_mid_cent_PR_pp,iPeriod_pp,iPos);	
 	c_mid_cent_PR_pp->SaveAs("./figs/mid_cent_PR_pp.pdf");
 
@@ -658,7 +660,7 @@ void draw_syst_ver2()
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_mid_cent_NP,iPeriod,iPos);	
 	c_mid_cent_NP->SaveAs("./figs/mid_cent_NP.pdf");
 
@@ -675,7 +677,7 @@ void draw_syst_ver2()
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_mid_cent_NP_pb,iPeriod_pb,iPos);	
 	c_mid_cent_NP_pb->SaveAs("./figs/mid_cent_NP_pb.pdf");
 
@@ -696,7 +698,7 @@ void draw_syst_ver2()
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_mid_cent_NP_pp,iPeriod_pp,iPos);	
 	c_mid_cent_NP_pp->SaveAs("./figs/mid_cent_NP_pp.pdf");
 
@@ -714,7 +716,7 @@ void draw_syst_ver2()
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("3.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_fwd_cent_PR,iPeriod,iPos);	
 	c_fwd_cent_PR->SaveAs("./figs/fwd_cent_PR.pdf");
 
@@ -731,7 +733,7 @@ void draw_syst_ver2()
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("3.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_fwd_cent_PR_pb,iPeriod_pb,iPos);	
 	c_fwd_cent_PR_pb->SaveAs("./figs/fwd_cent_PR_pb.pdf");
 
@@ -752,7 +754,7 @@ void draw_syst_ver2()
 	}
 	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("3.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_fwd_cent_PR_pp,iPeriod_pp,iPos);	
 	c_fwd_cent_PR_pp->SaveAs("./figs/fwd_cent_PR_pp.pdf");
 
@@ -770,7 +772,7 @@ void draw_syst_ver2()
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("3.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_fwd_cent_NP,iPeriod,iPos);	
 	c_fwd_cent_NP->SaveAs("./figs/fwd_cent_NP.pdf");
 
@@ -787,7 +789,7 @@ void draw_syst_ver2()
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("3.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_fwd_cent_NP_pb,iPeriod_pb,iPos);	
 	c_fwd_cent_NP_pb->SaveAs("./figs/fwd_cent_NP_pb.pdf");
 
@@ -808,7 +810,7 @@ void draw_syst_ver2()
 	}
 	drawText("NonPrompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
-	drawText("3.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
+	drawText("3.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     CMS_lumi_v2mass(c_fwd_cent_NP_pp,iPeriod_pp,iPos);	
 	c_fwd_cent_NP_pp->SaveAs("./figs/fwd_cent_NP_pp.pdf");
 }
