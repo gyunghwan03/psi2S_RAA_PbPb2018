@@ -33,7 +33,7 @@ void syst_HFup()
     TFile out_pt(out_name.c_str(), "recreate");
 
     const int NBINS_mid_pt = 6;
-    double edges_mid_pt[NBINS_mid_pt+1] = {6.5, 9, 12, 15, 20, 25, 40};
+    double edges_mid_pt[NBINS_mid_pt+1] = {6.5, 9, 12, 15, 20, 25, 50};
     TH1D mid_pt_PR("mid_pt_PR", "mid_PR", NBINS_mid_pt, edges_mid_pt);
     TH1D mid_pt_PR_pb("mid_pt_PR_pb", "mid_PR_pb", NBINS_mid_pt, edges_mid_pt);
     TH1D mid_pt_NP("mid_pt_NP", "mid_NP", NBINS_mid_pt, edges_mid_pt);
@@ -79,7 +79,7 @@ void syst_HFup()
 
     // loop2 - fwd_pt
     const int NBINS_fwd_pt = 4;
-    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 6.5, 9, 12, 40};
+    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 6.5, 9, 12, 50};
     TH1D fwd_pt_PR("fwd_pt_PR", "fwd_PR", NBINS_fwd_pt, edges_fwd_pt);
     TH1D fwd_pt_PR_pb("fwd_pt_PR_pb", "fwd_PR_pb", NBINS_fwd_pt, edges_fwd_pt);
     TH1D fwd_pt_NP("fwd_pt_NP", "fwd_NP", NBINS_fwd_pt, edges_fwd_pt);

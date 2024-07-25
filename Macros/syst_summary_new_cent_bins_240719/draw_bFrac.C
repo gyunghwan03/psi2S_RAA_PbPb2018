@@ -15,7 +15,6 @@ void draw_bFrac()
 {
 	gStyle->SetOptStat(0);
     setTDRStyle();
-	gSystem->mkdir("figs/bfrac");
 
 	const int nFiles = 4;
 
