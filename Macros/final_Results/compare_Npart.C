@@ -23,9 +23,9 @@ void compare_Npart(bool isSys=true)
 	gStyle->SetOptStat(0);
 	setTDRStyle();
 
-	TFile *f_mid = new TFile("roots/RAA_psi2S_midRap_Npart_pt6p5_30.root"); 
-	TFile *f_fwd = new TFile("roots/RAA_psi2S_forRap_Npart.root"); 
-	TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+	TFile *f_mid = new TFile("roots/RAA_psi2S_midRap_Npart_pt6p5_40_8Bins.root"); 
+	TFile *f_fwd = new TFile("roots/RAA_psi2S_forRap_Npart_pt3p5_40_4Bins.root"); 
+	TFile *fSys = new TFile("../syst_summary_new_cent_bins_240719/syst_roots/total_syst.root");
 	TFile *fOld = new TFile("roots/RAA_PR_psi2S_HIN_16_025_Npart.root");
 	TFile *fJpsi_mid_old = new TFile("roots/RAA_PR_JPsi_HIN_16_025_mid_Npart.root");
 	TFile *fJpsi_fwd_old = new TFile("roots/RAA_PR_JPsi_HIN_16_025_fwd_Npart.root");
@@ -50,10 +50,11 @@ void compare_Npart(bool isSys=true)
 	TH1F *h_PR_Jpsi_fwd_oldSys = (TH1F*) fJpsi_fwd_old->Get("Table 19/Hist1D_y1_e2plus");
 
 
-	const int nCentBins=6;
-	const int nCentBins_fwd=3;
+	const int nCentBins=8;
+	const int nCentBins_fwd=4;
 	double centBin[nCentBins+1];
-	double NpartBin[nCentBins+1] = {27.12,87.19,131.0,188.2,262.3,356,9};
+	double NpartBin[nCentBins+1] = {27.12,87.19,131.0,188.2,262.3,283.6,331.5,382.3};
+	double NpartBin_fwd[nCentBins_fwd+1] = {27.12,109.1,225.2,356.9};
 	double NpartBin_mid_old[nCentBins] = {21.9,86.9,131.4,189.2,264.2,358.8};
 	double NpartBin_fwd_old[3] = {32.7,160.3,311.5};
 	double NpartBin_alice[4] = {18,70.74,159.4,309.7};
@@ -69,35 +70,35 @@ void compare_Npart(bool isSys=true)
 	double SysPR[nCentBins]; 
 	double SysPR_fwd[nCentBins];
 
-	double midPR_old[nCentBins];
-	double midPR_old_Err[nCentBins];
-	double midPR_old_Sys[nCentBins];
+	double midPR_old[6];
+	double midPR_old_Err[6];
+	double midPR_old_Sys[6];
 
-	double midPR_Jpsi_old[nCentBins];
-	double midPR_Jpsi_old_Err[nCentBins];
-	double midPR_Jpsi_old_Sys[nCentBins];
+	double midPR_Jpsi_old[6];
+	double midPR_Jpsi_old_Err[6];
+	double midPR_Jpsi_old_Sys[6];
 
-	double fwdPR_Jpsi_old[nCentBins];
-	double fwdPR_Jpsi_old_Err[nCentBins];
-	double fwdPR_Jpsi_old_Sys[nCentBins];
+	double fwdPR_Jpsi_old[3];
+	double fwdPR_Jpsi_old_Err[3];
+	double fwdPR_Jpsi_old_Sys[3];
 
-	double binWidth[nCentBins]={4.3,4.3,4.3,4.3,4.3,4.3};
+	double binWidth[nCentBins]={4.3,4.3,4.3,4.3,4.3,4.3,4.3,4.3};
 
 	for (int i=0; i<nCentBins; i++){
 		midPR_new[i] = h_midPR->GetBinContent(i+1);
 		midPR_new_Err[i] = h_midPR->GetBinError(i+1);
 		SysPR[i] = midPR_new[i]*(hSys_PR->GetBinContent(i+1));
-		//    cout << "New Val : " << midPR_new[i]  << endl;
+		    cout << "New Val : " << midPR_new[i]  << endl;
 	}
-	for (int i=0; i<nCentBins; i++){
-		midPR_old[i] = h_PR_psi2S->GetBinContent(nCentBins-i-1);
-		midPR_old_Err[i] = h_PR_psi2SErr->GetBinContent(nCentBins-i-1);
-		midPR_old_Sys[i] = h_PR_psi2SSys->GetBinContent(nCentBins-i-1);
-		midPR_Jpsi_old[i] 	  = h_PR_Jpsi_mid_old->GetBinContent(nCentBins-i);
-		midPR_Jpsi_old_Err[i] = h_PR_Jpsi_mid_oldErr->GetBinContent(nCentBins-i);
-		midPR_Jpsi_old_Sys[i] = h_PR_Jpsi_mid_oldSys->GetBinContent(nCentBins-i);
-		//cout << "i : " << i << ", nCentBins-i-1 : " << nCentBins-i << " Old Val : " << midPR_old[i] << endl;
-		cout << "i : " << i << ", nCentBins-i : " << nCentBins-i << " Old Val : " << midPR_Jpsi_old[i] << endl;
+	for (int i=0; i<6; i++){
+		midPR_old[i] = h_PR_psi2S->GetBinContent(6-i-1);
+		midPR_old_Err[i] = h_PR_psi2SErr->GetBinContent(6-i-1);
+		midPR_old_Sys[i] = h_PR_psi2SSys->GetBinContent(6-i-1);
+		midPR_Jpsi_old[i] 	  = h_PR_Jpsi_mid_old->GetBinContent(6-i);
+		midPR_Jpsi_old_Err[i] = h_PR_Jpsi_mid_oldErr->GetBinContent(6-i);
+		midPR_Jpsi_old_Sys[i] = h_PR_Jpsi_mid_oldSys->GetBinContent(6-i);
+		//cout << "i : " << i << ", 6-i-1 : " << 6-i << " Old Val : " << midPR_old[i] << endl;
+		cout << "i : " << i << ", 6-i : " << 6-i << " Old Val : " << midPR_Jpsi_old[i] << endl;
 	}
 	for (int i=0; i<3; i++){
 		fwdPR_Jpsi_old[i]     = h_PR_Jpsi_fwd_old->GetBinContent(3-i);
@@ -106,7 +107,7 @@ void compare_Npart(bool isSys=true)
 		//cout << "i : " << i << ", nCentBins-i-1 : " << nCentBins-i << " Old Val : " << midPR_old[i] << endl;
 		cout << "i : " << i <<  " Old Val : " << fwdPR_Jpsi_old[i] << ", stat. Error : " << fwdPR_Jpsi_old_Err[i] << ", syst. Error : " << fwdPR_Jpsi_old_Sys[i] << endl;
 	}
-	for (int i=0; i<nCentBins; i++){
+	for (int i=0; i<nCentBins_fwd; i++){
 		fwdPR_new[i] = h_fwdPR->GetBinContent(i+1);
 		fwdPR_new_Err[i] = h_fwdPR->GetBinError(i+1);
 		SysPR_fwd[i] = fwdPR_new[i]*(hSys_fwd_PR->GetBinContent(i+1));
@@ -126,29 +127,29 @@ void compare_Npart(bool isSys=true)
 	if (isSys == 1)
 	{
 		g_midPR = new TGraphErrors(nCentBins, NpartBin, midPR_new, 0, midPR_new_Err);
-		g_midPR_old = new TGraphErrors(nCentBins - 1, NpartBin_mid_old, midPR_old, 0, midPR_old_Err);
-		g_Jpsi_midPR_old = new TGraphErrors(nCentBins, NpartBin_mid_old, midPR_Jpsi_old, 0, midPR_Jpsi_old_Err);
+		g_midPR_old = new TGraphErrors(5, NpartBin_mid_old, midPR_old, 0, midPR_old_Err);
+		g_Jpsi_midPR_old = new TGraphErrors(6, NpartBin_mid_old, midPR_Jpsi_old, 0, midPR_Jpsi_old_Err);
 		g_Jpsi_fwdPR_old = new TGraphErrors(3, NpartBin_fwd_old, fwdPR_Jpsi_old, 0, fwdPR_Jpsi_old_Err);
-		g_fwdPR = new TGraphErrors(nCentBins, NpartBin, fwdPR_new, 0, fwdPR_new_Err);
+		g_fwdPR = new TGraphErrors(nCentBins_fwd, NpartBin_fwd, fwdPR_new, 0, fwdPR_new_Err);
 		g_fwdPR_old = new TGraphErrors();
 		g_alice = new TGraphErrors(4,NpartBin_alice,alice_var,0,alice_err);
 	}
 	else
 	{
 		g_midPR = new TGraphErrors(nCentBins, NpartBin, midPR_new, 0, midPR_new_Err);
-		g_midPR_old = new TGraphErrors(nCentBins - 1, NpartBin_mid_old, midPR_old, 0, midPR_old_Err);
-		g_Jpsi_midPR_old = new TGraphErrors(nCentBins, NpartBin_mid_old, midPR_Jpsi_old, 0, midPR_Jpsi_old_Err);
+		g_midPR_old = new TGraphErrors(5, NpartBin_mid_old, midPR_old, 0, midPR_old_Err);
+		g_Jpsi_midPR_old = new TGraphErrors(6, NpartBin_mid_old, midPR_Jpsi_old, 0, midPR_Jpsi_old_Err);
 		g_Jpsi_fwdPR_old = new TGraphErrors(3, NpartBin_fwd_old, fwdPR_Jpsi_old, 0, fwdPR_Jpsi_old_Err);
-		g_fwdPR = new TGraphErrors(nCentBins, NpartBin, fwdPR_new, 0, fwdPR_new_Err);
+		g_fwdPR = new TGraphErrors(nCentBins_fwd, NpartBin_fwd, fwdPR_new, 0, fwdPR_new_Err);
 		g_fwdPR_old = new TGraphErrors();
 		g_alice = new TGraphErrors(4,NpartBin_alice,alice_var,0,alice_err);
 	}
 	TGraphErrors *g_midPRSys = new TGraphErrors(nCentBins,NpartBin,midPR_new,binWidth,SysPR);
-	TGraphErrors *g_midPR_oldSys = new TGraphErrors(nCentBins-1,NpartBin_mid_old,midPR_old,binWidth,midPR_old_Sys);
-	TGraphErrors *g_Jpsi_midPR_oldSys = new TGraphErrors(nCentBins,NpartBin_mid_old,midPR_Jpsi_old,binWidth,midPR_Jpsi_old_Sys);
+	TGraphErrors *g_midPR_oldSys = new TGraphErrors(5,NpartBin_mid_old,midPR_old,binWidth,midPR_old_Sys);
+	TGraphErrors *g_Jpsi_midPR_oldSys = new TGraphErrors(6,NpartBin_mid_old,midPR_Jpsi_old,binWidth,midPR_Jpsi_old_Sys);
 	TGraphErrors *g_Jpsi_fwdPR_oldSys = new TGraphErrors(3,NpartBin_fwd_old,fwdPR_Jpsi_old,binWidth,fwdPR_Jpsi_old_Sys);
 	TArrow *midPR_upper = new TArrow(358.8,0,358.8,0.138,0.027,"<-|");
-	TGraphErrors *g_fwdPRSys = new TGraphErrors(nCentBins,NpartBin,fwdPR_new,binWidth,SysPR_fwd);
+	TGraphErrors *g_fwdPRSys = new TGraphErrors(nCentBins_fwd,NpartBin_fwd,fwdPR_new,binWidth,SysPR_fwd);
 	TGraphErrors *g_fwdPR_oldSys = new TGraphErrors();
 
 	TGraphErrors *g_aliceSys = new TGraphErrors(4,NpartBin_alice,alice_var,binWidth,alice_sys);

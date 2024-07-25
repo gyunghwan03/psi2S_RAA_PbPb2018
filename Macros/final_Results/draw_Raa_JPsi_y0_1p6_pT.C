@@ -24,14 +24,14 @@ using namespace std;
 using namespace RooFit;
 using namespace TMath;
 
-valErr getYield_PbPb(int i=0, double ptHigh=40);
-valErr getYield_pp(int i=0, double ptHigh=40);
-valErr getFrac_PbPb(int i=0, double ptHigh=40);
-valErr getFrac_pp(int i=0, double ptHigh=40);
+valErr getYield_PbPb(int i=0);
+valErr getYield_pp(int i=0);
+valErr getFrac_PbPb(int i=0);
+valErr getFrac_pp(int i=0);
 double getAccWeight(TH1D* h = 0, double pt = 0);
 double getEffWeight(TH1D* h = 0, double pt = 0);
 
-void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
+void draw_Raa_JPsi_y0_1p6_pT(bool isSys = true)
 {
 	//gROOT->SumW2();
     gStyle->SetOptStat(0);
@@ -39,35 +39,31 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
     int iPeriod = 101;
     int iPos = 33;
 
-    const int nPtBins=4;
+    const int nPtBins=6;
     TFile *fPbPb[nPtBins+1];
     TFile *fpp[nPtBins+1];
 
-    //TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20230602.root");
-    //TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nonprompt_pbpb_psi2s_PtW1_tnp1_20230602.root");
-    //TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230718.root");
-    //TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_20230801.root");
-    //TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
-    //TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
-    TFile *fSys = new TFile("../syst_summary_new_cent_bins_240719/syst_roots/total_syst.root");
+    TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
     //TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
-    TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20231226.root");
-    TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_20231226.root");
-    TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20231226.root");
-    TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_20231226.root");
-    TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20231226.root");
-    TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20231226.root");
-    TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_pp_SysUp0_20240514.root");
-    TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20240515.root");
+	TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_200_rap_prompt_pbpb_Jpsi_PtW1_tnp1_20240724.root");
+    TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_200_rap_nprompt_pbpb_Jpsi_PtW1_tnp1_20240724.root"); //Must Change
+    TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW1_tnp1_20240724.root");
+    TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW1_tnp1_20240724.root");
+    TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_2.root");
+    //TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_PbPb_SysUp0_20240610.root");
+    TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_2.root");
+    TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_NP.root"); //Must Change
+    //TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_PbPb_SysUp0_20240610.root"); // Must Change
+    TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_NP.root"); // Must Change
 
-    TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
-    TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
-    TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4");
-    TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4");
-    TH1D *hAcc_PbPbPR = (TH1D*) fAcc_PbPbPR -> Get("hAccPt_2021_Fory");
-    TH1D *hAcc_PbPbNP = (TH1D*) fAcc_PbPbNP -> Get("hAccPt_2021_Fory");
-    TH1D *hAcc_ppPR = (TH1D*) fAcc_ppPR -> Get("hAccPt_2021_Fory");
-    TH1D *hAcc_ppNP = (TH1D*) fAcc_ppNP -> Get("hAccPt_2021_Fory");
+    TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_200_absy0_1p6");
+    TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_200_absy0_1p6");
+    TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_vs_pt_TnP1_PtW1_absy0_1p6");
+    TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_vs_pt_TnP1_PtW1_absy0_1p6");
+    TH1D *hAcc_PbPbPR = (TH1D*) fAcc_PbPbPR -> Get("hAccPt_2021_midy");
+    TH1D *hAcc_PbPbNP = (TH1D*) fAcc_PbPbNP -> Get("hAccPt_2021_midy");
+    TH1D *hAcc_ppPR = (TH1D*) fAcc_ppPR -> Get("hAccPt_2021_midy");
+    TH1D *hAcc_ppNP = (TH1D*) fAcc_ppNP -> Get("hAccPt_2021_midy");
 
 	TH1D *hSys_PR = (TH1D*) fSys -> Get("mid_pt_PR");
     TH1D *hSys_PR_pb = (TH1D *)fSys->Get("mid_pt_PR_pb");
@@ -86,7 +82,7 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
     Double_t Taa_err = 0.137;
 
 
-    double ptBin[nPtBins+1] = {3.5,6.5,9,12,ptHigh};
+    double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,50};
     double fracPP[nPtBins]; double fracPbPb[nPtBins];
     double fracErrPP[nPtBins]; double fracErrPbPb[nPtBins];
 
@@ -119,6 +115,7 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 
     for(int i=0;i<nPtBins;i++)
     {
+		cout << " i " << i << endl;
         double weight_ppPR = 1; double weight_ppNP = 1; double weight_PbPbPR = 1; double weight_PbPbNP = 1;
         double eff_ppPR = 1; double eff_ppNP = 1; double eff_PbPbPR = 1; double eff_PbPbNP = 1;
         double acc_ppPR = 1; double acc_PbPbPR = 1; double acc_ppNP = 1; double acc_PbPbNP = 1;
@@ -126,12 +123,12 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 
         eff_ppPR=hEff_ppPR->GetBinContent(i+2);
         eff_ppNP=hEff_ppNP->GetBinContent(i+2);
-        acc_ppPR=hAcc_ppPR->GetBinContent(i+1);
-        acc_ppNP=hAcc_ppNP->GetBinContent(i+1);
-        eff_PbPbPR=hEff_PbPbPR->GetBinContent(i+2);
+        acc_ppPR=hAcc_ppPR->GetBinContent(i+2);
+        acc_ppNP=hAcc_ppNP->GetBinContent(i+2);
+        eff_PbPbPR=hEff_PbPbPR->GetBinContent(i+1);
         eff_PbPbNP=hEff_PbPbNP->GetBinContent(i+2);
-        acc_PbPbPR=hAcc_PbPbPR->GetBinContent(i+1);
-        acc_PbPbNP=hAcc_PbPbNP->GetBinContent(i+1);
+        acc_PbPbPR=hAcc_PbPbPR->GetBinContent(i+2);
+        acc_PbPbNP=hAcc_PbPbNP->GetBinContent(i+2);
 
         weight_ppPR=eff_ppPR*acc_ppPR;
         weight_ppNP=eff_ppNP*acc_ppNP;
@@ -184,15 +181,15 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
         cout << "PbPb PR Yield  : " << yieldPbPb.val*(1-fracPbPb.val) << ", PbPb NP Yield   : " << yieldPbPb.val*fracPbPb.val << endl;
         cout << "pp PR Yield    : " << yieldPP.val*(1-fracPP.val) << ", pp NP Yield : " << yieldPP.val*fracPP.val << endl;
 
-        Xpp_PR[i] = lumi_pp_scale*yieldPP_PR/(lumi_pp*1e+2*(ptBin[i+1]-ptBin[i])*(double)2*(2.4-1.6));
+        Xpp_PR[i] = lumi_pp_scale*yieldPP_PR/(lumi_pp*1e+2*(ptBin[i+1]-ptBin[i])*(double)2*(1.6));
         Xpp_PR_err[i] = Xpp_PR[i]*sqrt(TMath::Power(err_PPPR_wgt/yieldPP_PR,2) + TMath::Power(lumi_pp_err/(lumi_pp*1e+2),2));
-        Xpp_NP[i] = lumi_pp_scale*yieldPP_NP/(lumi_pp*1e+2*(ptBin[i+1]-ptBin[i])*(double)2*(2.4-1.6));
+        Xpp_NP[i] = lumi_pp_scale*yieldPP_NP/(lumi_pp*1e+2*(ptBin[i+1]-ptBin[i])*(double)2*(1.6));
         Xpp_NP_err[i] = lumi_pp_scale*Xpp_NP[i]*sqrt(TMath::Power(err_PPNP_wgt/yieldPP_NP,2) + TMath::Power(lumi_pp_err/(lumi_pp*1e+2),2));
 
-        XPbPb_PR[i] = yieldPbPb_PR/(Nmb*Taa*(ptBin[i+1]-ptBin[i])*(double)2*(2.4-1.6));
+        XPbPb_PR[i] = yieldPbPb_PR/(Nmb*Taa*(ptBin[i+1]-ptBin[i])*(double)2*(1.6));
         //XPbPb_PR_err[i] = XPbPb_PR[i]*sqrt(TMath::Power(Taa_err/Taa,2) + TMath::Power(err_PbPbPR_wgt/yieldPbPb_PR,2) + TMath::Power(Nmb_err,2));
         XPbPb_PR_err[i] = XPbPb_PR[i]*sqrt(TMath::Power(Taa_err/Taa,2) + TMath::Power(err_PbPbPR_wgt/yieldPbPb_PR,2));// + TMath::Power(Nmb_err,2));
-        XPbPb_NP[i] = yieldPbPb_NP/(Nmb*Taa*(ptBin[i+1]-ptBin[i])*(double)2*(2.4-1.6));
+        XPbPb_NP[i] = yieldPbPb_NP/(Nmb*Taa*(ptBin[i+1]-ptBin[i])*(double)2*(1.6));
         XPbPb_NP_err[i] = XPbPb_NP[i]*sqrt(TMath::Power(Taa_err/Taa,2) + TMath::Power(err_PbPbNP_wgt/yieldPbPb_NP,2));// + TMath::Power(Nmb_err,2));
 
         hXpp_PR->SetBinContent(i+1, Xpp_PR[i]);
@@ -337,7 +334,7 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 	gXpp_PR->GetYaxis()->SetTitleOffset(1.90);
 	gXpp_PR->SetTitle("");
 	gXpp_PR->GetYaxis()->CenterTitle();
-	gXpp_PR->GetXaxis()->SetLimits(0.,ptHigh);
+	gXpp_PR->GetXaxis()->SetLimits(0.,50);
 	gXpp_PR->SetMinimum(1e-11);
 	gXpp_PR->SetMaximum(1e-5);
 	gXpp_PR->SetMarkerColor(kBlue+2);
@@ -349,13 +346,13 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
     gXPbPb_PR->SetMarkerStyle(21);
     gXPbPb_PR->SetMarkerSize(1.2);
 
-    gSysPR_pb->GetXaxis()->SetLimits(0., ptHigh);
+    gSysPR_pb->GetXaxis()->SetLimits(0., 50);
     gSysPR_pb->SetMinimum(0);
     gSysPR_pb->SetMaximum(1.44);
     gSysPR_pb->SetLineColor(kRed - 4);
     gSysPR_pb->SetFillColorAlpha(kRed - 9, 0.40);
 
-    gSysPR_pp->GetXaxis()->SetLimits(0., ptHigh);
+    gSysPR_pp->GetXaxis()->SetLimits(0., 50);
     gSysPR_pp->SetMinimum(0);
     gSysPR_pp->SetMaximum(1.44);
     gSysPR_pp->SetLineColor(kBlue - 4);
@@ -375,13 +372,13 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 	legPR->AddEntry(gXpp_PR,"pp", "p");
 	legPR->AddEntry(gXPbPb_PR,"PbPb, Cent. 0-90%", "p");
 	legPR->Draw("SAME");
-	jumSun(0,1,ptHigh,1);
+	jumSun(0,1,50,1);
 
-	drawText("Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
-	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("Prompt J/#psi", pos_x, pos_y, text_color, text_size*1.3);
+	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cXPR,iPeriod,iPos);	
 
-	cXPR->SaveAs(Form("./figs/CrossSection_PR_y1p6_2p4_pT_%.f.pdf",ptHigh));
+	cXPR->SaveAs("./figs/CrossSection_JPsi_PR_y0_1p6_pT.pdf");
 
 	TCanvas *cXNP = new TCanvas("cXNP", "", 700,700);
 	cXNP->cd();
@@ -393,7 +390,7 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 	gXpp_NP->GetYaxis()->SetTitleOffset(1.90);
 	gXpp_NP->SetTitle("");
 	gXpp_NP->GetYaxis()->CenterTitle();
-	gXpp_NP->GetXaxis()->SetLimits(0.,ptHigh);
+	gXpp_NP->GetXaxis()->SetLimits(0.,50);
 	gXpp_NP->SetMinimum(1e-11);
 	gXpp_NP->SetMaximum(1e-5);
 	gXpp_NP->SetMarkerColor(kBlue+2);
@@ -405,13 +402,13 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 	gXPbPb_NP->SetMarkerStyle(21);
 	gXPbPb_NP->SetMarkerSize(1.2);
 
-    gSysNP_pb->GetXaxis()->SetLimits(0., ptHigh);
+    gSysNP_pb->GetXaxis()->SetLimits(0., 50);
     gSysNP_pb->SetMinimum(0);
     gSysNP_pb->SetMaximum(1.44);
     gSysNP_pb->SetLineColor(kRed - 4);
     gSysNP_pb->SetFillColorAlpha(kRed - 9, 0.40);
 
-    gSysNP_pp->GetXaxis()->SetLimits(0., ptHigh);
+    gSysNP_pp->GetXaxis()->SetLimits(0., 50);
     gSysNP_pp->SetMinimum(0);
     gSysNP_pp->SetMaximum(1.44);
     gSysNP_pp->SetLineColor(kBlue - 4);
@@ -430,13 +427,13 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 	legNP->AddEntry(gXpp_NP,"pp", "p");
 	legNP->AddEntry(gXPbPb_NP,"PbPb, Cent. 0-90%", "p");
 	legNP->Draw("SAME");
-	jumSun(0,1,ptHigh,1);
+	jumSun(0,1,50,1);
 
-	drawText("Non Prompt #psi(2S)", pos_x, pos_y, text_color, text_size*1.3);
-	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("Non Prompt J/#psi", pos_x, pos_y, text_color, text_size*1.3);
+	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cXNP,iPeriod,iPos);	
 
-	cXNP->SaveAs(Form("./figs/CrossSection_NP_y1p6_2p4_pT_%.f.pdf",ptHigh));
+	cXNP->SaveAs("./figs/CrossSection_JPsi_NP_y0_1p6pT.pdf");
 
     TGraphErrors *gRaaPR;
     TGraphErrors *gRaaNP;
@@ -458,7 +455,7 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 	gRaaPR->GetYaxis()->SetTitle("R_{AA}");
 	gRaaPR->SetTitle("");
 	gRaaPR->GetYaxis()->CenterTitle();
-	gRaaPR->GetXaxis()->SetLimits(0.,ptHigh);
+	gRaaPR->GetXaxis()->SetLimits(0.,50);
 	gRaaPR->SetMinimum(0);
 	gRaaPR->SetMaximum(1.44);
 
@@ -485,10 +482,10 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 
 	TLegend *leg = new TLegend(0.68,0.72,0.8,0.82);
     SetLegendStyle(leg);
-	leg->AddEntry(gRaaPR,"Prompt #psi(2S)", "p");
-	leg->AddEntry(gRaaNP,"Non Prompt #psi(2S)", "p");
+	leg->AddEntry(gRaaPR,"Prompt J/#psi", "p");
+	leg->AddEntry(gRaaNP,"Non Prompt J/#psi", "p");
 	leg->Draw("SAME");
-	jumSun(0,1,ptHigh,1);
+	jumSun(0,1,50,1);
 
 	double glb_Err=0;
 	glb_Err = TMath::Sqrt( TMath::Power(Nmb_err,2) + TMath::Power(0.022,2) + TMath:: Power(0.02,2) );
@@ -509,9 +506,9 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
     CMS_lumi_v2mass(cRAA,iPeriod,iPos);	
 
-	cRAA->SaveAs(Form("./figs/RAA_psi2S_y1p6_2p4_pT_%.f_Sys%d.pdf",ptHigh,isSys));
+	cRAA->SaveAs(Form("./figs/RAA_JPsi_y0_1p6_pT_Sys%d.pdf",isSys));
 
-	TFile *f1 = new TFile(Form("./roots/RAA_psi2S_forRap_pT_%.f.root",ptHigh),"recreate");
+	TFile *f1 = new TFile("./roots/RAA_JPsi_midRap_pT.root","recreate");
 	f1->cd();
 	hRAA_PR->Write();
 	hRAA_NP->Write();
@@ -519,12 +516,11 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
 
 }
 
-valErr getYield_pp(int i, double ptHigh){
-    double ptBins[5] = {3.5,6.5,9,12,ptHigh};
-    TString kineLabel[5];
-    kineLabel[i] = getKineLabelpp(ptBins[i],ptBins[i+1],1.6,2.4,0.0);
-    TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
-    //TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/backup_231122/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
+valErr getYield_pp(int i){
+    double ptBins[7] = {6.5,9,12,15,20,25,50};
+    TString kineLabel[7];
+    kineLabel[i] = getKineLabelpp(ptBins[i],ptBins[i+1],0,1.6,0.0);
+    TFile* inf = new TFile(Form("../pp_JPsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("fitResults");
 
     valErr ret;
@@ -532,24 +528,24 @@ valErr getYield_pp(int i, double ptHigh){
     ret.err = fitResults->GetBinError(1);
     return ret;
 }
-valErr getYield_PbPb(int i, double ptHigh){
-    double ptBins[5] = {3.5,6.5,9,12,ptHigh};
-    TString kineLabel[5];
-    kineLabel[i] = getKineLabel(ptBins[i],ptBins[i+1],1.6,2.4,0.0,0,180);
+valErr getYield_PbPb(int i){
+    double ptBins[7] = {6.5,9,12,15,20,25,50};
+    TString kineLabel[7];
+    kineLabel[i] = getKineLabel(ptBins[i],ptBins[i+1],0,1.6,0.0,0,180);
+	TFile* inf = new TFile(Form("../JPsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
-    TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
-    TH1D* fitResults = (TH1D*)inf->Get("MassResults");
+    TH1D* fitResults = (TH1D*)inf->Get("fitResults");
 
     valErr ret;
     ret.val = fitResults->GetBinContent(1);
     ret.err = fitResults->GetBinError(1);
     return ret;
 }
-valErr getFrac_PbPb(int i, double ptHigh) {
-    double ptBin[5] = {3.5,6.5,9,12,ptHigh};
-    TString kineLabel[5];
-    kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],1.6,2.4,0.0,0,180);
-    TFile* inf = new TFile(Form("../psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
+valErr getFrac_PbPb(int i) {
+    double ptBin[7] = {6.5,9,12,15,20,25,50};
+    TString kineLabel[7];
+    kineLabel[i] = getKineLabel(ptBin[i],ptBin[i+1],0,1.6,0.0,0,180);
+    TFile* inf = new TFile(Form("../JPsi/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
     valErr ret;
@@ -557,12 +553,11 @@ valErr getFrac_PbPb(int i, double ptHigh) {
     ret.err = fitResults->GetBinError(1);
     return ret;
 }
-valErr getFrac_pp(int i, double ptHigh) {
-    double ptBin[5] = {3.5,6.5,9,12,ptHigh};
-    TString kineLabel[5];
-    kineLabel[i] = getKineLabelpp(ptBin[i],ptBin[i+1],1.6,2.4,0.0);
-    TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
-    //TFile* inf = new TFile(Form("../pp_psi2S_230512/roots/backup_231122/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
+valErr getFrac_pp(int i) {
+    double ptBin[7] = {6.5,9,12,15,20,25,50};
+    TString kineLabel[7];
+    kineLabel[i] = getKineLabelpp(ptBin[i],ptBin[i+1],0,1.6,0.0);
+    TFile* inf = new TFile(Form("../pp_JPsi/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
 
     valErr ret;

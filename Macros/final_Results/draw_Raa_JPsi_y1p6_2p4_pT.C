@@ -45,17 +45,19 @@ void draw_Raa_JPsi_y1p6_2p4_pT(bool isSys = true)
 
     TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
     //TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
-    TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW1_tnp1_20240610.root");
-    TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW1_tnp1_20240610.root"); //Must Change
-    TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_JPsi_PtW1_tnp1_20240610.root");
-    TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_JPsi_PtW1_tnp1_20240610.root"); //Must Change
-    TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_pp_SysUp0_20240613.root");
-    TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_PbPb_SysUp0_20240610.root");
-    TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_pp_SysUp0_20240613.root"); //Must Change
-    TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_PbPb_SysUp0_20240610.root"); // Must Change
+	TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_200_rap_prompt_pbpb_Jpsi_PtW1_tnp1_20240724.root");
+    TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_200_rap_nprompt_pbpb_Jpsi_PtW1_tnp1_20240724.root"); //Must Change
+    TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW1_tnp1_20240724.root");
+    TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW1_tnp1_20240724.root");
+    TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_2.root");
+    //TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_PbPb_SysUp0_20240610.root");
+    TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_2.root");
+    TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_NP.root"); //Must Change
+    //TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_Prompt_JPsi_GenOnly_wgt1_PbPb_SysUp0_20240610.root"); // Must Change
+    TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240724_NP.root"); // Must Change
 
-    TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
-    TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
+    TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_200_absy1p6_2p4");
+    TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_200_absy1p6_2p4");
     TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4");
     TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4");
     TH1D *hAcc_PbPbPR = (TH1D*) fAcc_PbPbPR -> Get("hAccPt_2021_Fory");
@@ -113,6 +115,7 @@ void draw_Raa_JPsi_y1p6_2p4_pT(bool isSys = true)
 
     for(int i=0;i<nPtBins;i++)
     {
+		cout << " i " << i << endl;
         double weight_ppPR = 1; double weight_ppNP = 1; double weight_PbPbPR = 1; double weight_PbPbNP = 1;
         double eff_ppPR = 1; double eff_ppNP = 1; double eff_PbPbPR = 1; double eff_PbPbNP = 1;
         double acc_ppPR = 1; double acc_PbPbPR = 1; double acc_ppNP = 1; double acc_PbPbNP = 1;
@@ -120,12 +123,12 @@ void draw_Raa_JPsi_y1p6_2p4_pT(bool isSys = true)
 
         eff_ppPR=hEff_ppPR->GetBinContent(i+2);
         eff_ppNP=hEff_ppNP->GetBinContent(i+2);
-        acc_ppPR=hAcc_ppPR->GetBinContent(i+1);
-        acc_ppNP=hAcc_ppNP->GetBinContent(i+1);
-        eff_PbPbPR=hEff_PbPbPR->GetBinContent(i+2);
+        acc_ppPR=hAcc_ppPR->GetBinContent(i+2);
+        acc_ppNP=hAcc_ppNP->GetBinContent(i+2);
+        eff_PbPbPR=hEff_PbPbPR->GetBinContent(i+1);
         eff_PbPbNP=hEff_PbPbNP->GetBinContent(i+2);
-        acc_PbPbPR=hAcc_PbPbPR->GetBinContent(i+1);
-        acc_PbPbNP=hAcc_PbPbNP->GetBinContent(i+1);
+        acc_PbPbPR=hAcc_PbPbPR->GetBinContent(i+2);
+        acc_PbPbNP=hAcc_PbPbNP->GetBinContent(i+2);
 
         weight_ppPR=eff_ppPR*acc_ppPR;
         weight_ppNP=eff_ppNP*acc_ppNP;
@@ -529,8 +532,9 @@ valErr getYield_PbPb(int i){
     double ptBins[5] = {3.5,6.5,9,12,50};
     TString kineLabel[5];
     kineLabel[i] = getKineLabel(ptBins[i],ptBins[i+1],1.6,2.4,0.0,0,180);
-    TFile* inf = new TFile(Form("../JPsi/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
-    TH1D* fitResults = (TH1D*)inf->Get("MassResults");
+	TFile* inf = new TFile(Form("../JPsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
+    //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
+    TH1D* fitResults = (TH1D*)inf->Get("fitResults");
 
     valErr ret;
     ret.val = fitResults->GetBinContent(1);
