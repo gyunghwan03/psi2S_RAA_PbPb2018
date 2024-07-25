@@ -55,7 +55,7 @@ void draw_Raa_psi2S_y0_1p6_pT(bool isSys = true, double ptHigh=40)
   //TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW0_tnp1_20231019.root");
   //TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt0_pp_SysUp0_20231019.root");
   //TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt0_PbPb_SysUp0_20231019.root");
-  TFile *fSys = new TFile("../syst_summary_new_cent_bins_240719/syst_roots/total_syst.root");
+  TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
   //TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
 
   TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy0_1p6");

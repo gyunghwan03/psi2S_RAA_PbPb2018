@@ -49,7 +49,7 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
     //TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_20230801.root");
     //TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
     //TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
-    TFile *fSys = new TFile("../syst_summary_new_cent_bins_240719/syst_roots/total_syst.root");
+    TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
     //TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
     TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20231226.root");
     TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_20231226.root");

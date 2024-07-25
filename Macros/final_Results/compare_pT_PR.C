@@ -25,7 +25,7 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
 
   TFile *f_mid = new TFile(Form("roots/RAA_psi2S_midRap_pT_%.f.root",ptHigh)); 
   TFile *f_fwd = new TFile(Form("roots/RAA_psi2S_forRap_pT_%.f.root",ptHigh)); 
-  TFile *fSys = new TFile("../syst_summary_new_cent_bins_240719/syst_roots/total_syst.root");
+  TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
   TFile *f_midJpsi_Old = new TFile("roots/RAA_PR_Jpsi_HIN_16_025_mid_pT.root");
   TFile *f_fwdJpsi_Old = new TFile("roots/RAA_PR_Jpsi_HIN_16_025_fwd_pT.root");
 
