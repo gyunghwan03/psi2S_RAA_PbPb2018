@@ -16,7 +16,7 @@ void compare_pT()
 
   TFile *f_mid = new TFile("roots/RAA_psi2S_midRap_pT.root"); 
   TFile *f_fwd = new TFile("roots/RAA_psi2S_forRap_pT.root"); 
-  TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+  TFile *fSys = new TFile("../syst_summary_new_cent_bins_240719/syst_roots/total_syst.root");
 
   TH1D *h_midPR = (TH1D*) f_mid->Get("hRAA_PR");
   TH1D *h_fwdPR = (TH1D*) f_fwd->Get("hRAA_PR");
@@ -27,8 +27,8 @@ void compare_pT()
 
   const int nPtBins=6;
   const int nPtBins_fwd=4;
-  double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,50};
-  double ptBin_fwd[nPtBins_fwd+1] = {3.5,5,6.5,12,50};
+  double ptBin[nPtBins+1] = {6.5,9,12,15,20,25,40};
+  double ptBin_fwd[nPtBins_fwd+1] = {3.5,5,6.5,12,40};
   double ptBin_old[nPtBins] = {6.5,9,12,15,20,30};
   double ptBin_fwd_old[nPtBins_fwd-1] = {6.5,12,50};
   double x[nPtBins]; double binWidth[nPtBins]; 
@@ -144,7 +144,7 @@ void compare_pT()
   leg1->Draw("SAME");
   jumSun(0,1,50,1);
 
-  drawText("6.5 < p_{T} < 50 GeV/c", pos_x, pos_y-pos_y_diff, text_color, text_size);
+  drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y-pos_y_diff, text_color, text_size);
 	drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff*2, text_color, text_size);
   CMS_lumi_v2mass(c1, iPeriod, iPos);
 
