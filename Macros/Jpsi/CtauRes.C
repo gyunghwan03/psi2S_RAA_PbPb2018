@@ -87,6 +87,10 @@ void CtauRes(
   cout<<"N_Jpsi: "<<ws->var("N_Jpsi")->getVal()<<"+/-"<<ws->var("N_Jpsi")->getError()<<endl;
   // create the variables for this model
   int nGauss = 3;
+  if(ptLow==25) nGauss = 2;
+  if(cLow==30 && cHigh==40) nGauss = 2;
+  if(cLow==80) nGauss = 2;
+  if(cLow==100) nGauss = 2;
   //if (ptLow==15&&ptHigh==20) {nGauss=2;}
   //else if (ptLow==20&&ptHigh==25) nGauss=2;
   //else if (ptLow==25&&ptHigh==50) {nGauss=2;}
@@ -142,12 +146,33 @@ void CtauRes(
   //ws->factory("f_CtauRes[0.1, 1e-6, 1.]");
   //ws->factory("f2_CtauRes[0.1, 1e-6, 1.]");
 
-
+  if(ptLow==3.5){
   ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
-  ws->factory("rS21_CtauRes[0.8, 1e-4, 3.0]");
-  ws->factory("rS32_CtauRes[2.2, 1e-6, 5.0]");
-  ws->factory("f_CtauRes[0.31, 1e-4, 1.]");
-  ws->factory("f2_CtauRes[0.31, 1e-6, 1.]");
+  ws->factory("rS21_CtauRes[1.32, 1e-4, 3.0]");
+  ws->factory("rS32_CtauRes[2.37, 1e-4, 5.0]");
+  ws->factory("f_CtauRes[0.344, 1e-5, 1.]");
+  ws->factory("f2_CtauRes[0.322, 1e-5, 1.]");}
+
+  if(ptLow==6.5){
+  ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
+  ws->factory("rS21_CtauRes[1.32, 1e-4, 3.0]");
+  ws->factory("rS32_CtauRes[2.37, 1e-4, 5.0]");
+  ws->factory("f_CtauRes[0.384, 1e-5, 1.]");
+  ws->factory("f2_CtauRes[0.372, 1e-5, 1.]");}
+
+  if(ptLow==6.5 && cLow==30 && cHigh==40){
+  ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
+  ws->factory("rS21_CtauRes[1.32, 1e-4, 5.0]");
+  ws->factory("rS32_CtauRes[2.37, 1e-4, 5.0]");
+  ws->factory("f_CtauRes[0.384, 1e-5, 1.]");
+  ws->factory("f2_CtauRes[0.372, 1e-5, 1.]");}
+
+  else{
+  ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
+  ws->factory("rS21_CtauRes[1.15, 1e-4, 3.0]");
+  ws->factory("rS32_CtauRes[2.5, 1e-4, 5.0]");
+  ws->factory("f_CtauRes[0.333, 1e-4, 1.]");
+  ws->factory("f2_CtauRes[0.341, 1e-4, 1.]");}
 
 
   ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");

@@ -36,8 +36,10 @@ void mc_MassFit_HighpT(
     TString DATE = "2DFit_No_Weight";
     gStyle->SetEndErrorSize(0);
     gSystem->mkdir("roots");
-    gSystem->mkdir("roots_MC");
-    gSystem->mkdir("roots_MC/Mass");
+    gSystem->mkdir(Form("roots/%s",DATE.Data()),kTRUE);
+    gSystem->mkdir(Form("roots/%s/mc_Mass",DATE.Data()),kTRUE);
+    //gSystem->mkdir("roots_MC");
+    //gSystem->mkdir("roots_MC/Mass");
     gSystem->mkdir("figs");
     gSystem->mkdir(Form("figs/%s",DATE.Data()),kTRUE);
     gSystem->mkdir(Form("figs/%s/mc_Mass",DATE.Data()),kTRUE);
@@ -69,7 +71,7 @@ void mc_MassFit_HighpT(
 
     // MC
     //TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_isMC1_PR_JPsi_20230721.root", "read");
-    TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_JPsi_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_240530.root", "read");
+    TFile* f1 = new TFile("../../skimmedFiles/OniaRooDataSet_isMC1_PR_JPsi_miniAOD_20230829.root", "read");
 
 
 	// cout << "Input file: "
@@ -108,7 +110,7 @@ void mc_MassFit_HighpT(
 	//***********************************************************************
 
 	//         The order is {sigma_1,  x, alpha_1, n_1,   f, m_lambda}
-    double paramsupper[8] = {1.,  2.  ,     3.5,     3.5,   2.,     25.0};
+    double paramsupper[8] = {1.2  ,  1.  ,     3.5,     3.5,   1.,     25.0};
     double paramslower[8] = {1e-6,  1e-6,   1e-6,   1e-6,   1e-6,      -25.0};
     
 	//SIGNAL: initial params
@@ -118,9 +120,9 @@ void mc_MassFit_HighpT(
 	double n_1_init = 0.8;
 	double f_init = 0.4;
     double sl1_mean = 0.35, sl2_mean = 0.004, sl3_mean = 0.006;
-    double N_Jpsi_high = 1e+8; // 2500000
+    double N_Jpsi_high = 1e+9; // 2500000
 	double N_Bkg_high = 200000;
-    double fit_limit = 3.29;
+    double fit_limit = 3.21;
     
 	//SIGNAL: initial params
 	////double sigma_1_init = 0.09;
@@ -132,13 +134,6 @@ void mc_MassFit_HighpT(
     ////double N_Jpsi_high = 1e+9; // 2500000
 	////double N_Bkg_high = 200000;
     ////double fit_limit = 3.24;
-
-	if(ptLow==3.5&&cLow==60&&cHigh==80) {
-	N_Jpsi_high = 1e+8;
-	}
-	else if(ptLow==6.5&&ptHigh==9&&yLow==1.6) {
-	N_Jpsi_high = 1e+8;
-	}
 
     //if(ptLow==6.5&&ptHigh==50) {
     //    N_Jpsi_high = 1e+8;
@@ -396,8 +391,8 @@ void mc_MassFit_HighpT(
     TString kineLabel = getKineLabel (ptLow, ptHigh,yLow, yHigh, 0.0, cLow, cHigh );
     
     TFile* outFile;
-	outFile = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-    c_A->SaveAs(Form("figs/%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf",DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+	outFile = new TFile(Form("roots/%s/mc_Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+    c_A->SaveAs(Form("figs/%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 //	outFile = new TFile(Form("jpsi_0to1p6/roots/MC/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
 //    c_A->SaveAs(Form("jpsi_0to1p6/figs/MC/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 //	outFile = new TFile(Form("jpsi_1p6to2p4/roots/MC/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");

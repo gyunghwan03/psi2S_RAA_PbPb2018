@@ -204,7 +204,22 @@ void CtauErr(
   //else if(ptLow==12&&ptHigh==15) ctauErrMax=0.0882;
   //else if(ptLow==15&&ptHigh==20) ctauErrMax=0.0378;
   //ctauErrMin=0.019;
-  ctauErrMax=0.11;
+  ctauErrMax=0.1257;
+  if(ptLow==6.5&&ptHigh==40&&cLow==110) ctauErrMax=0.09647;
+  if(ptLow==6.5&&ptHigh==40&&cLow==10) ctauErrMax=0.07296;
+  if(ptLow==6.5&&ptHigh==40&&cLow==20) ctauErrMax=0.09377;
+  if(ptLow==6.5&&ptHigh==40&&cLow==30) ctauErrMax=0.1019;
+  if(ptLow==6.5&&ptHigh==40&&cLow==40) ctauErrMax=0.08285;
+  if(ptLow==6.5&&ptHigh==40&&cLow==50) ctauErrMax=0.1001;
+  if(ptLow==6.5&&ptHigh==40&&cLow==60) ctauErrMax=0.0793;
+  if(ptLow==6.5&&ptHigh==40&&cLow==70) ctauErrMax=0.08944;
+  if(ptLow==6.5&&ptHigh==40&&cLow==80) ctauErrMax=0.07354;
+  if(ptLow==6.5&&ptHigh==40&&cLow==90) ctauErrMax=0.0736;
+  if(ptLow==6.5&&ptHigh==40&&cLow==100) ctauErrMax=0.0726;
+  if(ptLow==6.5&&ptHigh==40&&cLow==120) ctauErrMax=0.05421;
+  if(ptLow==6.5&&ptHigh==40&&cLow==140) ctauErrMax=0.04448;
+  if(ptLow==12&&ptHigh==40) ctauErrMax=0.0664;
+  if(ptLow==25&&ptHigh==40) ctauErrMax=0.0336;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
@@ -405,6 +420,7 @@ void CtauErr(
   c_B->SaveAs(Form("figs/2DFit_%s/CtauErr/ctauErr_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  c_B->Write();
   dataw_Bkg->Write();
   dataw_Sig->Write();
   pdfCTAUERR_Tot->Write();

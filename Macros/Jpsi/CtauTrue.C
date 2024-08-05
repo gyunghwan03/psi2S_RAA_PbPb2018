@@ -129,18 +129,18 @@ void CtauTrue(
   ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
   ws->factory("fDSS[0.8, 0., 1.]");
   ws->factory("fDSS1[0.8, 0., 1.]");}
-  else if(ptLow==6.5&&ptHigh==9){
+  else if(ptLow==6.5&&ptHigh==40){
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.4238, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 1.]");
-  ws->factory("fDSS1[0.8, 0., 1.]");}
-  else if(ptLow==9&&ptHigh==12){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.4854, 1e-6, 1.0]");
   ws->factory("fDSS[0.5, 0., 1.]");
   ws->factory("fDSS1[0.5, 0., 1.]");}
+  else if(ptLow==3.5&&ptHigh==40){
+  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.5018, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
+  ws->factory("fDSS[0.8, 0., 1.]");
+  ws->factory("fDSS1[0.8, 0., 1.]");}
   else if(ptLow==3.5&&ptHigh==50){
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
@@ -149,16 +149,16 @@ void CtauTrue(
   ws->factory("fDSS1[0.5, 0., 1.]");}
   else if(ptLow==6.5&&ptHigh==50){
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.1038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
-  ws->factory("fDSS[0.1, 0., 1.]");
+  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.4854, 1e-6, 1.0]");
+  ws->factory("fDSS[0.8, 0., 1.]");
   ws->factory("fDSS1[0.8, 0., 1.]");}
   else {
-  ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
-  ws->factory("fDSS[0.5, 0., 1.]");
-  ws->factory("fDSS1[0.5, 0., 1.]"); }
+  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.5968, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.4854, 1e-6, 1.0]");
+  ws->factory("fDSS[0.3, 0., 1.]");
+  ws->factory("fDSS1[0.4, 0., 1.]"); }
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");
@@ -337,7 +337,9 @@ void CtauTrue(
   c_D->SaveAs(Form("figs/2DFit_%s/CtauTrue/ctauTrue_%s_%s.pdf",DATE.Data(),bCont.Data(),kineLabel.Data()));
 
   //TH1 *h1 = (TH1*)TrueModel_Tot->createHistogram("ctau3Dtrue",50,50);
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_%s_%s.root",DATE.Data(),bCont.Data(),kineLabel.Data()),"RECREATE");
+  //TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/cent/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()),"RECREATE");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality0-180.root",DATE.Data()),"RECREATE");
+  //TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/cent/CtauTrueResult_Inclusive_pt6.5-40.0_y0.0-1.6_muPt0.0_centrality0-180.root",DATE.Data()),"RECREATE");
   RooArgSet* fitargs = new RooArgSet();
   fitargs->add(fitCtauTrue->floatParsFinal());
   ctauTrueModel->Write();

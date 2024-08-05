@@ -99,7 +99,7 @@ void MassFit_FixPar_Data(
   //****************************** MASS FIT *******************************
   //***********************************************************************
 
-  TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  TFile * f_fit = new TFile(Form("roots/2DFit_%s/mc_Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   //TFile * f_fit = new TFile(Form("jpsi_0to1p6/roots/MC/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   //TFile * f_fit = new TFile(Form("jpsi_1p6to2p4/roots/MC/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
@@ -231,16 +231,16 @@ void MassFit_FixPar_Data(
   else if (ptLow==20&&ptHigh==25)  {
 	   NBkg_limit = 1e+5;
 	   NJpsi_limit = 1e+5; }
-  else if (ptLow==25&&ptHigh==50)  {
+  else if (ptLow==25&&ptHigh==40)  {
 	   NBkg_limit = 1e+6;
 	   NJpsi_limit = 1e+5; }
-  else if (ptLow==6.5&&cLow==20&&cHigh==40) {
+  else if (ptLow==6.5&&cLow==30&&cHigh==40) {
 	  NBkg_limit = 1e+6;
 	  NJpsi_limit = 1e+6; }
   else if (ptLow==6.5&&cLow==40&&cHigh==60) {
 	  NBkg_limit = 1e+6;
 	  NJpsi_limit = 1e+6; }
-  else if (ptLow==6.5&&cLow==60&&cHigh==80) {
+  else if (ptLow==6.5&&ptHigh==50&&cHigh==200) {
 	  NBkg_limit = 1e+6;
 	  NJpsi_limit = 1e+6; }
   else if (ptLow==3.5&&ptHigh==6.5&&cHigh==180) {
@@ -249,6 +249,9 @@ void MassFit_FixPar_Data(
   else if (ptLow==6.5&&cLow==100&&cHigh==180) {
 	  NBkg_limit = 1e+6;
 	  NJpsi_limit = 1e+5; }
+  else if (ptLow==6.5&&cLow==80&&cHigh==100) {
+	  NBkg_limit = 1e+6;
+	  NJpsi_limit = 1e+6; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
@@ -477,8 +480,8 @@ void MassFit_FixPar_Data(
   c_A->Update();
 
   TFile* outFile;
-  outFile = new TFile(Form("roots/mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-  c_A->SaveAs(Form("figs/mass/Mass_Fixed_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  outFile = new TFile(Form("roots/2DFit_%s/Mass//Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  c_A->SaveAs(Form("figs/2DFit_%s/Mass/Mass_Fixed_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 //  outFile = new TFile(Form("jpsi_0to1p6/roots/mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
 //  c_A->SaveAs(Form("jpsi_0to1p6/figs/mass/Mass_Fixed_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 //  outFile = new TFile(Form("jpsi_1p6to2p4/roots/mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
