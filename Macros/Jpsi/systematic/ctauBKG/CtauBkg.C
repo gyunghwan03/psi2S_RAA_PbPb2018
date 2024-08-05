@@ -335,7 +335,7 @@ void CtauBkg(
   Ydown = 0.01;
   myPlot2_E->GetYaxis()->SetRangeUser(Ydown,Yup);
   myPlot2_E->GetXaxis()->SetRangeUser(-4, 7);
-  myPlot2_E->GetXaxis()->SetTitle("#font[12]{l}_{#psi(2S)} (mm)");
+  myPlot2_E->GetXaxis()->SetTitle("#font[12]{l}_{J/#psi} (mm)");
   myPlot2_E->SetFillStyle(4000);
   myPlot2_E->GetYaxis()->SetTitleOffset(1.43);
   myPlot2_E->GetXaxis()->SetLabelSize(0);
@@ -404,7 +404,7 @@ void CtauBkg(
   pullFrame_E->GetYaxis()->SetTickSize(0.04);
   pullFrame_E->GetYaxis()->SetNdivisions(404);
 
-  pullFrame_E->GetXaxis()->SetTitle("#font[12]{l}_{#psi(2S)} (mm)");
+  pullFrame_E->GetXaxis()->SetTitle("#font[12]{l}_{J/#psi} (mm)");
   //pullFrame_E->GetXaxis()->SetRangeUser(-1, 7);
   pullFrame_E->GetXaxis()->SetTitleOffset(1.05) ;
   pullFrame_E->GetXaxis()->SetLabelOffset(0.04) ;
