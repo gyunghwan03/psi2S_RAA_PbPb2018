@@ -371,7 +371,7 @@ void CtauRes(
     maxline->SetLineWidth(3);
     myPlot2_C->addObject(maxline);}
   myPlot2_C->GetXaxis()->CenterTitle();
-  myPlot2_C->GetXaxis()->SetTitle("#frac{#font[12]{l}_{#psi(2S)^{reco}}#font[12]{l}_{#psi(2S)^{true}}}{#sigma_{#font[12]{l}_{#psi(2S)}}}");
+  myPlot2_C->GetXaxis()->SetTitle("#frac{#font[12]{l}_{J/#psi^{reco}}#font[12]{l}_{J/#psi^{true}}}{#sigma_{#font[12]{l}_{J/#psi}}}");
   myPlot2_C->SetFillStyle(4000);
   myPlot2_C->GetYaxis()->SetTitleOffset(1.43);
   myPlot2_C->GetXaxis()->SetLabelSize(0);
@@ -402,7 +402,7 @@ void CtauRes(
   drawText(Form("Loss: (%.4f%s) %.f evts", (outTot-outRes)*100/outTot, "%", outTot-outRes),text_x,text_y-y_diff*3,text_color,text_size);
   //cout<<"lost evt: ("<<(outRes*100)/outTot<<")%, "<<outRes<<"evts"<<endl;
 
-  drawText(Form("N_{#psi(2S)} = %.f #pm %.f", ws->var("N_Jpsi")->getVal(), ws->var("N_Jpsi")->getError() ),text_x+0.5,text_y,text_color,text_size);
+  drawText(Form("N_{J/#psi} = %.f #pm %.f", ws->var("N_Jpsi")->getVal(), ws->var("N_Jpsi")->getError() ),text_x+0.5,text_y,text_color,text_size);
   drawText(Form("s1_{Res} = %.4f #pm %.4f", ws->var("s1_CtauRes")->getVal(), ws->var("s1_CtauRes")->getError() ),text_x+0.5,text_y-y_diff*1,text_color,text_size);
   drawText(Form("(s2/s1)_{Res} = %.4f #pm %.4f", ws->var("rS21_CtauRes")->getVal(), ws->var("rS21_CtauRes")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
   if(nGauss==3){
@@ -436,7 +436,7 @@ void CtauRes(
   pullFrame_C->GetYaxis()->SetRangeUser(-3.8,3.8);
   pullFrame_C->GetYaxis()->CenterTitle();
 
-  pullFrame_C->GetXaxis()->SetTitle("#frac{(#font[12]{l}_{#psi(2S)}^{ reco}-#font[12]{l}_{#psi(2S)}^{ true})}{#sigma_{#font[12]{l}_{#psi(2S)}}}");
+  pullFrame_C->GetXaxis()->SetTitle("#frac{(#font[12]{l}_{J/#psi}^{ reco}-#font[12]{l}_{J/#psi}^{ true})}{#sigma_{#font[12]{l}_{J/#psi}}}");
   pullFrame_C->GetXaxis()->SetTitleOffset(1.5) ;
   pullFrame_C->GetXaxis()->SetLabelOffset(0.03) ;
   pullFrame_C->GetXaxis()->SetLabelSize(0.11) ;
