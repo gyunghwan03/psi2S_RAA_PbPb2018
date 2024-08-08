@@ -162,71 +162,13 @@ void MassFit_FixPar_Data(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.05, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.05, -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.05, -1., 1.);
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0., -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0., -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0., -1., 1.);
 
   Double_t NBkg_limit = 2.0e+08;
   Double_t NJpsi_limit = 1.0e+08;
 
-  if(ptLow==9&&ptHigh==12) NJpsi_limit = 1e+06;
-  else if(ptLow==6.5&&ptHigh==9&&yLow==0) NJpsi_limit = 5e+05;
-  else if(ptLow==6.5&&ptHigh==9&&yLow==1.6) NJpsi_limit = 5e+04;
-  else if(ptLow==6.5&&ptHigh==12) NJpsi_limit = 5e+04;
-  else if(ptLow==8&&ptHigh==9) NJpsi_limit = 4e+06;
-  else if(ptLow==9&&ptHigh==10) NJpsi_limit = 3e+06;
-  else if(ptLow==10&&ptHigh==12) NJpsi_limit = 4e+06;
-  else if(yLow==2.0&&yHigh==2.4) NJpsi_limit = 6e+06;
-  
-  if(ptLow==3&&ptHigh==6.5) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }if(ptLow==3&&ptHigh==6.5) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==9&&ptHigh==12) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==12&&ptHigh==15) {
-    NJpsi_limit = 2000000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.08 Ditto 0.01
-  }
-  if(ptLow==12&&ptHigh==50) {
-    NJpsi_limit = 10000;
-    NBkg_limit = 50000;
-    //sl1,2,3: 0.08 Ditto 0.01
-  }
-  if(ptLow==15&&ptHigh==20) {
-    NJpsi_limit = 100000;
-    NBkg_limit = 1000000;
-    //sl1,2,3,: 0.05 ditto
-  }
-  if(ptLow==15&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-  if(ptLow==20&&ptHigh==25) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-    if(ptLow==25&&ptHigh==30) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-    if(ptLow==25&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-    if(ptLow==30&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
 
 
   //THIS IS THE BACKGROUND FUNCTION
@@ -245,7 +187,7 @@ void MassFit_FixPar_Data(
   //*sl1, *sl2, *sl3, *sl4, *sl5, *sl6
   //pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList());
   //pdfMASS_bkg = new RooExponential("pdfMASS_bkg","Background",*(ws->var("mass")),*sl1);
-  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
+  if (ptLow<6.5) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
   else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2,*sl3));
   //pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2));
   //if(ptLow==9&&ptHigh==12){pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2, *sl3));}
@@ -285,7 +227,7 @@ void MassFit_FixPar_Data(
 
 
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
-//  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
+  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_Tot"), LineColor(kBlack));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_1_A)), LineColor(44));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *gauss)), LineColor(8));

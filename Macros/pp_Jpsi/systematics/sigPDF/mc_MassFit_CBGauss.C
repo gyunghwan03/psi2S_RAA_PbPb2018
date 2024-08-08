@@ -110,7 +110,7 @@ void mc_MassFit_CBGauss(
 	Double_t sigma_up, x_up, alpha_up, n_up, f_up;
 	Double_t sigma_lo, x_lo, alpha_lo, n_lo, f_lo;
 
-	sigma_up=1; x_up=2; alpha_up=10; n_up=10; f_up=1;
+	sigma_up=1; x_up=1; alpha_up=10; n_up=10; f_up=1;
 	sigma_lo=1e-3; x_lo=1e-3; alpha_lo=1e-3; n_lo=1e-3; f_lo=1e-3;
 
     
@@ -123,144 +123,8 @@ void mc_MassFit_CBGauss(
     double sl1_mean = 0.01, sl2_mean = 0.04, sl3_mean = 0.06;
     double N_Jpsi_high = 2e+7; // 2500000
 	double N_Bkg_high = 200000;
-    double fit_limit = 3.31;
+    double fit_limit = 3.26;
 	double m_lambda_init = 5;
-
-;   if(ptLow==3.5&&ptHigh==6.5) {
-        N_Jpsi_high = 100000;
-        sigma_up = 0.8;
-    }
-;   if(ptLow==3.5&&ptHigh==50) {
-        N_Jpsi_high = 200000;
-        sigma_up = 0.8;
-    }
-	if(ptLow==8&&ptHigh==12) { n_1_init = 5.3;}
-	if(ptLow==12&&ptHigh==20) { n_1_init = 4.6;}
-
-    if(ptLow==6.5&&ptHigh==9&&yLow==1.6) {
-        N_Jpsi_high = 50000; // 2500000
-        sigma_up = 0.8;
-        n_1_init=10;
-        n_up = 16;
-        n_lo = 0;
-    }
-    if(ptLow==9&&ptHigh==12&&yLow==1.6) {
-        N_Jpsi_high = 20000; // 2500000
-        sigma_up = 0.8;
-        n_1_init=8;
-        n_up = 20;
-        n_lo = 1e-6;
-    }
-    if(ptLow==6.5&&ptHigh==9&&yLow==0) {
-        N_Jpsi_high = 50000; // 2500000
-    }
-     if(ptLow==5&&ptHigh==6.5) {
-               N_Jpsi_high = 50000;
-        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
-        x_init = 0.7; alpha_1_init = 3;
-        x_up = 2;
-        alpha_up=20;
-        // m_lambda_init=2;
-        n_up = 10;
-    }
-       if(ptLow==6.5&&ptHigh==12) {
-        N_Jpsi_high = 200000;
-        x_up = 2;
-        f_init=0.3; sigma_1_init = 0.04; n_1_init = 2;
-        x_init = 0.71; alpha_1_init = 2;
-        m_lambda_init=2;
-        n_up = 1000;
-    }
-    
-     
-     if(ptLow==20&&ptHigh==25) {
-               N_Jpsi_high = 50000;
-        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
-        x_init = 0.7; alpha_1_init = 3;
-        x_up = 3;
-        alpha_up=20;
-        // m_lambda_init=2;
-        n_up = 10;
-     }
-     if(ptLow==25&&ptHigh==30) {
-               N_Jpsi_high = 50000;
-        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
-        x_init = 0.7; alpha_1_init = 3;
-        x_up = 3;
-        alpha_up=20;
-        // m_lambda_init=2;
-        n_up = 10;
-    }
-    
-     if(ptLow==30&&ptHigh==50) {
-               N_Jpsi_high = 50000;
-        f_init=0.8; sigma_1_init = 0.04; n_1_init = 1;
-        x_init = 1; alpha_1_init = 3;
-        x_up = 3;
-        alpha_up=20;
-        // m_lambda_init=2;
-        n_up = 20;
-    }
-
-
-    //  if(ptLow==25&&ptHigh==30) {
-    //     n_up =20; // 2500000
-    //     n_lo = 1e-5;
-    //     n_1_init = 2;
-    // }
-    //  if(ptLow==30&&ptHigh==50) {
-    //     n_up =20; // 2500000
-    //     n_lo = 1e-5;
-    //     n_1_init = 2;
-    // }
-
-     if(ptLow==6.5&&ptHigh==50) {
-        N_Jpsi_high = 400000; // 2500000
-    }
-    if(ptLow==9&&ptHigh==12&&yLow==0) {
-        N_Jpsi_high = 35000;
-    }
-    if(ptLow==12&&ptHigh==15&&yLow==0) {
-        N_Jpsi_high = 2000000; // 2500000
-    }
-    if(ptLow==12&&ptHigh==50) {
-        N_Jpsi_high = 10000;
-        f_init=0.4; sigma_1_init = 0.03; n_1_init = 2;
-        x_init = 0.4; alpha_1_init = 2;
-    }
-    if(ptLow==15&&ptHigh==20) {
-        N_Jpsi_high = 500000;
-        sigma_up=0.07;
-        f_init=0.2766; sigma_1_init = 0.0527; n_1_init = 4.116;
-        x_init = 0.8; alpha_1_init = 1.57;
-        m_lambda_init=2;
-    }
-    if(ptLow==20&&ptHigh==50) {
-        N_Jpsi_high = 100000;
-        f_init=0.866; sigma_1_init = 0.0327; n_1_init = 1;
-        x_init = 0.8; alpha_1_init = 1;
-    }
-    if(ptLow==20&&ptHigh==25) {
-        N_Jpsi_high = 100000;
-        sigma_up = 0.0513; sigma_lo = 0.0513;
-        x_up = 0.5045; x_lo = 0.5045;
-        alpha_up = 1.5956; alpha_lo = 1.5956;
-        f_up = 0.3431; f_lo = 0.3431;
-    }
-    if(ptLow==25&&ptHigh==30) {
-        N_Jpsi_high = 100000;
-        sigma_up = 0.0513; sigma_lo = 0.0513;
-        x_up = 0.5045; x_lo = 0.5045;
-        alpha_up = 1.5956; alpha_lo = 1.5956;
-        f_up = 0.3431; f_lo = 0.3431;
-    }
-    if(ptLow==30&&ptHigh==50) {
-        N_Jpsi_high = 100000;
-        sigma_up = 0.0513; sigma_lo = 0.0513;
-        x_up = 0.5045; x_lo = 0.5045;
-        alpha_up = 1.5956; alpha_lo = 1.5956;
-        f_up = 0.3431; f_lo = 0.3431;
-    }
     double paramsupper[8] = {sigma_up, x_up, alpha_up, n_up, f_up,  25.0};
     double paramslower[8] = {sigma_lo, x_lo, alpha_lo, n_lo, f_lo,  -5.0};
 
@@ -325,7 +189,7 @@ void mc_MassFit_CBGauss(
     dsAB->plotOn(myPlot2_A,Name("dataOS"),MarkerSize(.8));
     bool isWeighted = ws->data("dsAB")->isWeighted();
     cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
-    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), Range(3.4, fit_limit), NumCPU(nCPU));
+    RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), Range(2.6, fit_limit), NumCPU(nCPU));
     cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
 	fitMass->Print("V");
     
