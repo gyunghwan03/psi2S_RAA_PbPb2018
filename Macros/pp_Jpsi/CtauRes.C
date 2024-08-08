@@ -54,8 +54,8 @@ void CtauRes(
   TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
 
   //	f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20201216.root",fname.Data(),fEffW,fAccW,isPtW,isTnP));
-  fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  fCErr = new TFile(Form("roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fMass = new TFile(Form("roots/2DFit_%s/Mass/mass_06/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fCErr = new TFile(Form("roots/2DFit_%s/CtauErr/err_06/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
   RooDataSet *dataw_Sig = (RooDataSet*)fCErr->Get("dataw_Sig");
@@ -80,8 +80,7 @@ void CtauRes(
   ws->import(*ctauResCutDS);
   cout<<"N_Jpsi: "<<ws->var("N_Jpsi")->getVal()<<"+/-"<<ws->var("N_Jpsi")->getError()<<endl;
   // create the variables for this model
-  //int nGauss = 3;
-  int nGauss = 2;
+  int nGauss = 3;
   //if (ptLow==25&&ptHigh==50) {nGauss=2;}
   //int nGauss = 4;
 
@@ -104,21 +103,30 @@ void CtauRes(
   //ws->factory("f_CtauRes[0.4, 1e-6, 5.]");
   //ws->factory("f2_CtauRes[0.2, 1e-6, 5.]");
   //ws->factory("f3_CtauRes[0.7, 1e-6, 5.]");
- 
+  if(ptLow==12&&ptHigh==15&&yLow==1.6){
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.7, 1e-6, 10.0]");
-  ws->factory("rS21_CtauRes[1.5, 1e-6, 10.0]");
-  ws->factory("rS32_CtauRes[1.45, 1e-6, 10.0]");
+  ws->factory("s1_CtauRes[0.4, 1e-6, 1.0]");
+  ws->factory("rS21_CtauRes[1.3, 0.5, 5.0]");
+  ws->factory("rS32_CtauRes[2.6, 1.5, 5.0]");}
+ 
+  else{
+  ws->factory("ctau1_CtauRes[0.]");  
+  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
+  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
+  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
+  ws->factory("s1_CtauRes[0.7, 1e-6, 1.2]");
+  ws->factory("rS21_CtauRes[1., 1e-6, 4.0]");
+  ws->factory("rS32_CtauRes[2.45, 1e-6, 10.0]");}
 
   ws->factory("rS43_CtauRes[1.5, 1e-6, 10.0]");
   ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");
   ws->factory("RooFormulaVar::s3_CtauRes('@0*@1',{rS32_CtauRes,s2_CtauRes})");
   ws->factory("RooFormulaVar::s4_CtauRes('@0*@1',{rS43_CtauRes,s3_CtauRes})");
-  ws->factory("f_CtauRes[0.5, 0., 1.]");
-  ws->factory("f2_CtauRes[0.3, 0., 1.]");
+  ws->factory("f_CtauRes[0.35, 1e-4, 1.]");
+  ws->factory("f2_CtauRes[0.33, 1e-6, 1.]");
   ws->factory("f3_CtauRes[0.7, 1e-6, 1.]");
  
   
@@ -340,9 +348,9 @@ void CtauRes(
   ctauResModel->Print("V");
 
   c_C->Update();
-  c_C->SaveAs(Form("figs/2DFit_%s/CtauRes/CtauRes_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_C->SaveAs(Form("figs/2DFit_%s/CtauRes/res_06/CtauRes_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauRes/res_06/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   ctauResModel->Write();
   //GaussModel_Tot->Write();
   //	ctauResCutDS->Write();

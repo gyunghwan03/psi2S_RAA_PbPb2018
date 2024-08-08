@@ -174,13 +174,13 @@ void CtauTrue(
   //ws->factory("sigmaMC[0.001, 1e-9, 1.0]");
   //ws->factory("ctauMC[0.0, 0.0, 0.0]");
 
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 2.]");
-  ws->factory("fDSS1[0.8, 0., 2.]"); 
-  ws->factory("fDSS2[0.8, 0., 2.]");
-  ws->factory("f[0.8, 0., 1.]");
+  ws->factory("lambdaDSS[0.1, 1e-6, 1.0]");
+  ws->factory("lambdaDSS2[0.1, 1e-6, 1.0]");
+  ws->factory("lambdaDSS3[0.1, 1e-6, 1.0]");
+  ws->factory("fDSS[0.1,  1e-6, 1.]");
+  ws->factory("fDSS1[0.1, 1e-6, 1.]"); 
+  ws->factory("fDSS2[0.1, 1e-6, 1.]");
+  ws->factory("f[0.1, 0., 1.]");
   ws->factory("sigmaMC[0.001, 1e-9, 1.0]");
   ws->factory("ctauMC[0.0, 0.0, 0.0]");
   // create the PDF
@@ -210,8 +210,8 @@ void CtauTrue(
   cout << endl << "************ 3 ***************" << endl << endl;
   ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS1", "pdfCTAUTRUEDSS2", "fDSS"));
   cout << endl << "************ 4 ***************" << endl << endl;
-  //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE2", "pdfCTAUTRUEDSS2", "pdfCTAUTRUEDSS3", "fDSS2"));
   ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS3", "fDSS1"));
+  //ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUE1", "N_Jpsi_MC"));
   ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUEDSS1", "N_Jpsi_MC"));
   cout << endl << "************ 5 ***************" << endl << endl;
 
@@ -336,10 +336,10 @@ void CtauTrue(
   pad_D_2->Update();
 
   c_D->Update();
-  c_D->SaveAs(Form("figs/2DFit_%s/CtauTrue/ctauTrue_%s_%s.pdf",DATE.Data(),bCont.Data(),kineLabel.Data()));
+  c_D->SaveAs(Form("figs/2DFit_%s/CtauTrue/true_06/ctauTrue_%s_%s.pdf",DATE.Data(),bCont.Data(),kineLabel.Data()));
 
   //TH1 *h1 = (TH1*)TrueModel_Tot->createHistogram("ctau3Dtrue",50,50);
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_%s_%s.root",DATE.Data(),bCont.Data(),kineLabel.Data()),"RECREATE");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/true_06/CtauTrueResult_%s_%s.root",DATE.Data(),bCont.Data(),kineLabel.Data()),"RECREATE");
   RooArgSet* fitargs = new RooArgSet();
   fitargs->add(fitCtauTrue->floatParsFinal());
   ctauTrueModel->Write();

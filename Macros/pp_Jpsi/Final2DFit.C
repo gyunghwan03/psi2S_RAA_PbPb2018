@@ -160,15 +160,14 @@ void Final2DFit(
   //double lambda2 = ws->var("lambdaDSS3")->getVal();
   //double fdss = ws->var("fDSS")->getVal();
   //double fdss1 = ws->var("fDSS1")->getVal();
-  //double lambda2 = ws->var("lambdaDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
-  //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
+  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
   //ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*2));
   //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*2));
   //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
   //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
-  ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
+  //ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
   //ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
   //ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
   //ws->factory(Form("fDSS1_test[%.4f]", fdss));
@@ -183,9 +182,9 @@ void Final2DFit(
 
   //NoPR{
   //1exp
-  //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS", "pdfCTAURES")); //NP
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS", "pdfCTAURES")); //NP
   //3exp
-  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUCOND_JpsiNoPR", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
+  //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test1", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
   //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test2", "ctau3D", "lambdaDSS_test2", "pdfCTAURES")); //NP
   //ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test3", "ctau3D", "lambdaDSS_test3", "pdfCTAURES")); //NP
   //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test1", "pdfCTAUTRUE_test2", "fDSS1_test"));
@@ -596,6 +595,7 @@ void Final2DFit(
   c_H->Update();
   c_H->SaveAs(Form("figs/2DFit_%s/Final/2DFit_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
+  //TH1D* outh = new TH1D("2DfitResults","fit result",20,0,20);
   TH1D* outh = new TH1D("2DfitResults","fit result",20,0,20);
 
   float temp = ws->var("b_Jpsi")->getVal();

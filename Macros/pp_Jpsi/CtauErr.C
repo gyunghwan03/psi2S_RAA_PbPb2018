@@ -23,8 +23,8 @@
 using namespace std;
 using namespace RooFit;
 void CtauErr(
-    double ptLow=3, double ptHigh=4.5,
-    float yLow=1.6, float yHigh=2.4,
+    double ptLow=6.5, double ptHigh=50,
+    double yLow=0, double yHigh=1.6,
     int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
     )
 {
@@ -37,7 +37,9 @@ void CtauErr(
   DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
+  gSystem->mkdir(Form("roots/2DFit_%s/CtauErr/err_06",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/CtauErr",DATE.Data()),kTRUE);
+  gSystem->mkdir(Form("figs/2DFit_%s/CtauErr/err_06",DATE.Data()),kTRUE);
 
   TString fname;
   if (PRw==1) fname="PR";
@@ -61,14 +63,16 @@ void CtauErr(
 
 
   f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_JPsi_pp_y0.00_2.40_Effw0_Accw0_PtW1_TnP1_230209.root"));
-  fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fMass = new TFile(Form("roots/2DFit_%s/Mass/mass_06/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
 
   TString OS="recoQQsign==0 &&";
 
-  kineCut = OS+accCut+kineCut;
+  TString nan_cut = "&& !TMath::IsNaN(ctau3D) && !TMath::IsNaN(ctau3DRes) && !TMath::IsNaN(ctau3DErr)";
+
+  kineCut = OS+accCut+kineCut+nan_cut;
 
   RooDataSet *dataset = (RooDataSet*)f1->Get("dataset");
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
@@ -186,18 +190,19 @@ void CtauErr(
     else { ctauErrMax = hTot_M->GetBinLowEdge(i); }
   }
 
+  //if(ptLow==12&&ptHigh==15&&yLow==1.6) ctauErrMax = 0.1312;
   //ctauErrMax=0.21; 1st value
-  ctauErrMax=0.0708;
-  //if(ptLow==3.5&&ptHigh==5) ctauErrMax=0.1491;
-  //else if(ptLow==6.5&&ptHigh==7) ctauErrMax=0.1116;
-  //else if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.1549;
-  //else if(ptLow==7&&ptHigh==7.5) ctauErrMax=0.108;
-  //else if(ptLow==7.5&&ptHigh==8) ctauErrMax=0.1062;
-  //else if(ptLow==12&&ptHigh==15) ctauErrMax=0.1138;
+  //ctauErrMax=0.0708;
+  if(ptLow==3.5&&ptHigh==6.5) ctauErrMax=0.2291;
+  else if(ptLow==6.5&&ptHigh==9) ctauErrMax=0.155;
+  else if(ptLow==9&&ptHigh==12) ctauErrMax=0.1408;
+  else if(ptLow==12&&ptHigh==15) ctauErrMax=0.1077;
+  else if(ptLow==20&&ptHigh==25) ctauErrMax=0.0684;
+  else if(ptLow==25&&ptHigh==50) ctauErrMax=0.0504;
   //else if(ptLow==15&&ptHigh==20) ctauErrMax=0.11;
   //else if(ptLow==20&&ptHigh==25) ctauErrMax=0.065;
   //else if(ptLow==25&&ptHigh==50) ctauErrMax=0.0598;
-  //else if(ptLow==12&&ptHigh==15) ctauErrMax=0.067;
+  else if(ptLow==6.5&&ptHigh==50) ctauErrMax=0.17;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
@@ -394,9 +399,9 @@ void CtauErr(
   cout << endl << "************** Finished SPLOT *****************" << endl << endl;
 
   c_B->Update();
-  c_B->SaveAs(Form("figs/2DFit_%s/CtauErr/ctauErr_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_B->SaveAs(Form("figs/2DFit_%s/CtauErr/err_06/ctauErr_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauErr/err_06/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   dataw_Bkg->Write();
   dataw_Sig->Write();
   pdfCTAUERR_Tot->Write();
