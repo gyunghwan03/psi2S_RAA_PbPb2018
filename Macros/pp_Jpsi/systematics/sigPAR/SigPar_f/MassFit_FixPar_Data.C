@@ -163,68 +163,9 @@ void MassFit_FixPar_Data(
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
 
-  Double_t NJpsi_limit = 100000;
-  Double_t NBkg_limit = 500000;
-  double s1_init = 0.11; double s2_init = 0.24; double s3_init = 0.14; 
-
-  if(ptLow==3&&ptHigh==6.5) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.05
-  }
-  if(ptLow==3&&ptHigh==50) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.05
-  }
-  if(ptLow==3.5&&ptHigh==50) {
-    NJpsi_limit = 200000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.05
-  }
-  if(ptLow==6.5&&ptHigh==50) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.05
-  }
-  if(ptLow==9&&ptHigh==12) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.05
-  }
-  if(ptLow==12&&ptHigh==15) {
-    NJpsi_limit = 2000000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.08 Ditto 0.05
-  }
-  if(ptLow==12&&ptHigh==50) {
-    NJpsi_limit = 9000;
-    NBkg_limit = 100000;
-    //sl1,2,3: 0.08 Ditto 0.05
-  }
-  if(ptLow==15&&ptHigh==20) {
-    NJpsi_limit = 100000;
-    NBkg_limit = 1000000;
-    //sl1,2,3,: 0.05 ditto
-  }
-  if(ptLow==15&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-  if(ptLow==20&&ptHigh==25) {
-    NJpsi_limit = 5000;
-    NBkg_limit = 10000;
-  }
-  if(ptLow==20&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-  if(ptLow==30&&ptHigh==50) {
-    NJpsi_limit = 2000;
-    NBkg_limit = 20000;
-    s1_init = 0.1; s2_init = 0.8; s3_init = 0.2;
-    f_init = 0.05;
-  }
+  Double_t NJpsi_limit = 2e+7;
+  Double_t NBkg_limit = 5e+8;
+  double s1_init = 0.; double s2_init = 0.; double s3_init = 0.; 
 
   //BACKGROUND
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", s1_init, -1, 1);

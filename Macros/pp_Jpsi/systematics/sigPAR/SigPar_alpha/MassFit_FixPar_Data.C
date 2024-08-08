@@ -132,88 +132,9 @@ void MassFit_FixPar_Data(
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
-  Double_t NJpsi_limit = 100000;
-  Double_t NBkg_limit = 500000;
-  double s1_init = 0.01; double s2_init = 0.01; double s3_init = 0.01; 
-  if(ptLow==3&&ptHigh==6.5) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==3.5&&ptHigh==5) {
-    NJpsi_limit = 40000;
-    NBkg_limit = 250000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==3.5&&ptHigh==50) {
-    NJpsi_limit = 150000;
-    NBkg_limit = 500000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==5&&ptHigh==6.5) {
-    NJpsi_limit = 40000;
-    NBkg_limit = 150000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==6.5&&ptHigh==9) {
-    NJpsi_limit = 60000;
-    NBkg_limit = 400000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==6.5&&ptHigh==12) {
-    NJpsi_limit = 60000;
-    NBkg_limit = 150000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==6.5&&ptHigh==50) {
-    NJpsi_limit = 120000;
-    NBkg_limit = 200000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==9&&ptHigh==12) {
-    NJpsi_limit = 40000;
-    NBkg_limit = 100000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==12&&ptHigh==15) {
-    NJpsi_limit = 2000000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.08 Ditto 0.01
-  }
-  if(ptLow==12&&ptHigh==50) {
-    NJpsi_limit = 10000;
-    NBkg_limit = 50000;
-    //sl1,2,3: 0.08 Ditto 0.01
-  }
-  if(ptLow==15&&ptHigh==20) {
-    NJpsi_limit = 10000;
-    NBkg_limit = 15000;
-    //sl1,2,3,: 0.05 ditto
-  }
-  if(ptLow==15&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-  if(ptLow==20&&ptHigh==25) {
-    NJpsi_limit = 5000;
-    NBkg_limit = 5000;
-    sigma_1_init = 0.06; alpha_1_init = 2.;
-    s1_init = 0.01; s2_init = 0.08; s3_init = 0.05;
-  }
-  if(ptLow==20&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-  if(ptLow==25&&ptHigh==30) {
-    NJpsi_limit = 2000;
-    NBkg_limit = 5000;
-    s1_init = 0.01; s2_init = 0.08; s3_init = 0.05;
-    alpha_1_init = 2;
-  }
-  if(ptLow==30&&ptHigh==50) {
-    NJpsi_limit = 2000;
-    NBkg_limit = 200000;
-  }
+  Double_t NJpsi_limit = 2e+7;
+  Double_t NBkg_limit = 5e+7;
+  double s1_init = 0.; double s2_init = 0.; double s3_init = 0.; 
 
   //BACKGROUND
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", s1_init, -1, 1);

@@ -161,69 +161,14 @@ void MassFit_FixPar_Data(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.01, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.01, -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.01, -1., 1.);
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0., -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0., -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0., -1., 1.);
 
-  Double_t NJpsi_limit = 100000;
-  Double_t NBkg_limit = 500000;
-  if(ptLow==3&&ptHigh==6.5) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==3&&ptHigh==50) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==3.5&&ptHigh==50) {
-    NJpsi_limit = 200000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==6.5&&ptHigh==50) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==9&&ptHigh==12&&yLow==0) {
-    NJpsi_limit = 500000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.01
-  }
-  if(ptLow==9&&ptHigh==12&&yLow==1.6) {
-    NJpsi_limit = 20000;
-    NBkg_limit = 26000;
-  }
-  if(ptLow==12&&ptHigh==15) {
-    NJpsi_limit = 2000000;
-    NBkg_limit = 2000000;
-    //sl1,2,3: 0.08 Ditto 0.01
-  }
-  if(ptLow==12&&ptHigh==50) {
-    NJpsi_limit = 10000;
-    NBkg_limit = 50000;
-    //sl1,2,3: 0.08 Ditto 0.01
-  }
-  if(ptLow==15&&ptHigh==20) {
-    NJpsi_limit = 100000;
-    NBkg_limit = 1000000;
-    //sl1,2,3,: 0.05 ditto
-  }
-  if(ptLow==15&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
-  if(ptLow==20&&ptHigh==25) {
-    NJpsi_limit = 5000;
-    NBkg_limit = 10000;
-  }
-  if(ptLow==20&&ptHigh==50) {
-    NJpsi_limit = 80000;
-    NBkg_limit = 200000;
-  }
+  Double_t NJpsi_limit = 2e+7;
+  Double_t NBkg_limit = 3e+7;
 
+  if(ptLow==15&&ptHigh==20) NJpsi_limit = 3e+5;
 
   //THIS IS THE BACKGROUND FUNCTION
   RooChebychev *pdfMASS_bkg;
