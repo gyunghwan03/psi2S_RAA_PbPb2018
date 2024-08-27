@@ -182,16 +182,15 @@ void MassFit_FixPar_Data(
   RooRealVar *lambda3 = new RooRealVar("lambda3","lambda3", 0.5, -2, 2.);
   RooFormulaVar invMassNorm("invMassNorm","(-1.0+2.0*(@0-@1)/(@2-@1))", RooArgList(*(ws->var("mass")),*mMin,*mMax) );
   RooGenericPdf *pdfMASS_bkg;
-  pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",
-          "TMath::Exp(@5*(4*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))-3*(-1.0+2.0*(@0-@1)/(@2-@1))) + @4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
-          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2, *lambda3));
+  //pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",
+  //        "TMath::Exp(@5*(4*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))-3*(-1.0+2.0*(@0-@1)/(@2-@1))) + @4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
+  //        RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2, *lambda3));
   //if(ptLow==3) {pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",
   //        "TMath::Exp(@5*(4*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1))-3*(-1.0+2.0*(@0-@1)/(@2-@1))) + @4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
   //        RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2, *lambda3));}
-  //else {pdfMASS_bkg= new RooGenericPdf("pdfMASS_bkg","Background",
-  //        "TMath::Exp(@4*(2.0*(-1.0+2.0*(@0-@1)/(@2-@1))*(-1.0+2.0*(@0-@1)/(@2-@1)) - 1.0) + @3*(-1.0+2.0*(@0-@1)/(@2-@1)) + 1.0)",
-  //        RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1, *lambda2));}
-  
+  pdfMASS_bkg= new RooGenericPdf("pdfMASS_bkg","Background",
+          "@3*(-1.0+2.0*(@0-@1)/(@2-@1))+1.0",
+          RooArgList(*(ws->var("mass")), *mMin, *mMax, *lambda1)); 
   
   //Build the model
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
