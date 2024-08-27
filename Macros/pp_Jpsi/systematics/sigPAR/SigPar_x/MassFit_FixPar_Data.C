@@ -161,19 +161,17 @@ void MassFit_FixPar_Data(
   //pdfMASS_Jpsi = new RooAddPdf("pdfMASS_Jpsi","Signal ",RooArgList(*cb_1_A,*cb_2_A), RooArgList(*f) );
   //BACKGROUND
   //RooRealVar m_lambda_A("#lambda_A","m_lambda",  m_lambda_init, paramslower[5], paramsupper[5]);
-  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0., -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0., -1., 1.);
-  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0., -1., 1.);
+  RooRealVar *sl1 = new RooRealVar("sl1","sl1", 0.01, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
+  RooRealVar *sl2 = new RooRealVar("sl2","sl2", 0.01, -1., 1.);
+  RooRealVar *sl3 = new RooRealVar("sl3","sl3", 0.01, -1., 1.);
 
-  Double_t NJpsi_limit = 2e+7;
-  Double_t NBkg_limit = 3e+7;
+  Double_t NJpsi_limit = 1e+8;
+  Double_t NBkg_limit = 1e+8;
 
-  if(ptLow==15&&ptHigh==20) NJpsi_limit = 3e+5;
 
   //THIS IS THE BACKGROUND FUNCTION
   RooChebychev *pdfMASS_bkg;
-  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
-  else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2,*sl3));
+  pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
 
   //Build the model
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",NJpsi_limit*0.9,0,NJpsi_limit);
@@ -182,13 +180,8 @@ void MassFit_FixPar_Data(
   RooGaussian x_constraint("x_constraint","x_constraint",*x_A,RooConst(xA_MC_value),RooConst(xA_MC_value_err));
   RooProdPdf model("model","model with constraint",RooArgSet(*pdfMASS_Jpsi,RooArgSet(x_constraint)));
 
-  RooAddPdf* pdfMASS_Tot = nullptr;
-  if ( (ptLow==20&&ptHigh==25) || (ptLow==25&&ptHigh==30) || (ptLow==30&&ptHigh==50) || (ptLow==25&&ptHigh==50)) {
-    pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
-  }
-  else {
-    pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(model, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
-  }
+  RooAddPdf* pdfMASS_Tot;
+  pdfMASS_Tot = new RooAddPdf("pdfMASS_Tot","Jpsi + Bkg",RooArgList(*pdfMASS_Jpsi, *pdfMASS_bkg),RooArgList(*N_Jpsi,*N_Bkg));
   ws->import(*pdfMASS_Tot);
 
 
@@ -213,7 +206,7 @@ void MassFit_FixPar_Data(
 
 
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
-//  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
+  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_Tot"), LineColor(kBlack));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_1_A)), LineColor(44));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_2_A)), LineColor(8));

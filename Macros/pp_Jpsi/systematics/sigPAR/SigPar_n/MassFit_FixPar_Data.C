@@ -137,10 +137,9 @@ void MassFit_FixPar_Data(
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
-  Double_t NJpsi_limit = 2e+7;
-  Double_t NBkg_limit = 5e+7;
+  Double_t NJpsi_limit = 1e+8;
+  Double_t NBkg_limit = 1e+8;
   double s1_init = 0.; double s2_init = 0.; double s3_init = 0.; 
-  
 
   //BACKGROUND
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", s1_init, -1, 1);
@@ -168,8 +167,7 @@ void MassFit_FixPar_Data(
 
   //THIS IS THE BACKGROUND FUNCTION
   RooChebychev *pdfMASS_bkg;
-  if (ptLow==3) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
-  else pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2,*sl3));
+  pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
 
   //Build the model
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals", NJpsi_limit*0.9, 0, NJpsi_limit);
@@ -201,7 +199,7 @@ void MassFit_FixPar_Data(
   RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Minimizer("Minuit", "minimize"), Range(massLow,massHigh), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(4));
 
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
-//  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
+  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_Tot"), LineColor(kBlack));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_1_A)), LineColor(44));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_2_A)), LineColor(8));
