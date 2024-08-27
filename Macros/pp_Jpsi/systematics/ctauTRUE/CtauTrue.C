@@ -152,10 +152,6 @@ void CtauTrue(
                        "lambdaDSS2",
                        "pdfCTAUTRUERES"));
 
-      ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUEDSS3",
-                       "ctau3Dtrue",
-                       "lambdaDSS3",
-                       "pdfCTAUTRUERES"));
 
       cout << endl
            << "************ 3 ***************" << endl
@@ -164,9 +160,6 @@ void CtauTrue(
       cout << endl
            << "************ 4 ***************" << endl
            << endl;
-      ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE2", "pdfCTAUTRUEDSS2", "pdfCTAUTRUEDSS3", "fDSS2"));
-      ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS3", "fDSS3"));
-      //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS3", "fDSS1"));
       ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot", "pdfCTAUTRUE1", "N_Jpsi_MC"));
       cout << endl
            << "************ 5 ***************" << endl
