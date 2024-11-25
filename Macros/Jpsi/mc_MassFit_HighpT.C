@@ -122,7 +122,7 @@ void mc_MassFit_HighpT(
     double sl1_mean = 0.35, sl2_mean = 0.004, sl3_mean = 0.006;
     double N_Jpsi_high = 1e+9; // 2500000
 	double N_Bkg_high = 200000;
-    double fit_limit = 3.21;
+    double fit_limit = 3.26;
     
 	//SIGNAL: initial params
 	////double sigma_1_init = 0.09;

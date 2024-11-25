@@ -340,6 +340,32 @@ void CtauBkg_2exp(
   ws->factory("fDSS12[0.3, 1e-4, 1.]");
   ws->factory("fDF12[0.114, 1e-4, 1.]");}
 
+  else if(ptLow==3. && cLow==60 && cHigh==100){
+  ws->factory("zeroMean[0.0]");
+  ws->factory("b_Bkg[0.4, 1e-3, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.3, 1e-3, 1.]");
+  ws->factory("fDLIV[0.3, 1e-3, 1.0]");    //7.5-8.5: ~1.07, 
+  ws->factory("lambdaDDS_Bkg[0.31, 1e-4, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.45, 1e-4, 1.]");
+  ws->factory("lambdaDF_Bkg2[0.31, 1e-4, 1.]");
+  ws->factory("lambdaDSS_Bkg1[0.4, 1e-4, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.03, 1e-4, 1.]");
+  ws->factory("fDSS12[0.3, 1e-4, 1.]");
+  ws->factory("fDF12[0.114, 1e-4, 1.]");}
+
+  else if(ptLow==3. && cLow==100 && cHigh==180){
+  ws->factory("zeroMean[0.0]");
+  ws->factory("b_Bkg[0.4, 1e-3, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.3, 1e-3, 1.]");
+  ws->factory("fDLIV[0.3, 1e-3, 1.0]");    //7.5-8.5: ~1.07, 
+  ws->factory("lambdaDDS_Bkg[0.031, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.3, 1e-6, 1.]");
+  ws->factory("lambdaDF_Bkg2[0.1, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg1[0.04, 1e-6, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.12, 1e-6, 1.]");
+  ws->factory("fDSS12[0.3, 1e-4, 1.]");
+  ws->factory("fDF12[0.114, 1e-4, 1.]");}
+
   else if(ptLow==3.5 && cLow==100 && cHigh==180){
   ws->factory("zeroMean[0.0]");
   ws->factory("b_Bkg[0.4, 1e-3, 1.]");//NP fraction for bkg
@@ -641,6 +667,9 @@ void CtauBkg_2exp(
 
   //parameters fixed by Resolution model
   int nGauss = 3;
+  if(cLow==60&&cHigh==100) nGauss=2;
+  if(cLow==80&&cHigh==100) nGauss=2;
+  if(cLow==100&&cHigh==180) nGauss=2;
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
   ws->var("f_CtauRes")->setConstant(kTRUE);

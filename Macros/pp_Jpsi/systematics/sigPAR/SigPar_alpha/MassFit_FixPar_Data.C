@@ -135,6 +135,9 @@ void MassFit_FixPar_Data(
   Double_t NJpsi_limit = 1e+8;
   Double_t NBkg_limit = 1e+8;
   double s1_init = 0.01; double s2_init = 0.01; double s3_init = 0.01; 
+  
+  if(ptLow==6.5&&ptHigh==9&&yLow==1.6) NJpsi_limit = 1e+7;
+  else if(ptLow==6.5&&ptHigh==9&&yLow==0) { NJpsi_limit = 1e+7; paramsupper[2] = 0.18; }
 
   //BACKGROUND
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", s1_init, -1, 1);

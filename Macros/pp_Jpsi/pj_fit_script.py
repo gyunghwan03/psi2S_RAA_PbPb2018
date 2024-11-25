@@ -17,13 +17,40 @@ args = parser.parse_args()
 #12 - 15
 #15 - 20
 #6.5 - 50
+#6.5-7.5, 7.5-8.5, 8.5-9.5, 9.5-11, 11-13, 13-15 , 15-17.5, 17.5-20, 20-25, 25-30, 30-50
+
+y = [0.0, 2.4]
+c = [0, 200]
+pt = [6.5 , 7.5]
+
 
 #1st value
 #pt = [6.5, 50]
 #y = [0, 2.4]
 
-pt = [20. , 25.]
-y = [0, 2.4]
+#pt = [7.5 , 8.5]
+#pt = [8.5 , 9.5]
+#pt = [9.5 , 11.]
+
+#####################
+#y = [1.6, 2.4]
+#pt = [3.5 , 6.5]
+#pt = [6.5 , 9.]
+#pt = [9. , 12.]
+#pt = [12. , 50.]
+
+#pt = [3.5 , 40.]
+######################
+y = [0, 1.6]
+#pt = [6.5 , 9.]
+#pt = [9. , 12.]
+#pt = [12. , 15.]
+#pt = [15. , 20.]
+#pt = [20. , 25.]
+#pt = [25. , 50.]
+
+pt = [6.5 , 40.]
+######################
 
 steps = {}
 steps['mc'] = f"mc_MassFit_HighpT.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
@@ -32,11 +59,12 @@ steps['err'] = f"CtauErr.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
 steps['res'] = f"CtauRes.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
 steps['true'] = f"CtauTrue.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
 #steps['bkg'] = f"CtauBkg.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
-steps['bkg'] = f"CtauBkg_2exp.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
+steps['bkg'] = f"CtauBkg_LowPt.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
+#steps['bkg'] = f"CtauBkg.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
 #if pt[0] < 6.5: # Use LowPt.C code for low pT region
-#    steps['bkg'] = f"CtauBkg_LowPt.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
+#    steps['bkg'] = f"CtauBkg_LowPt.C\'({pt[0]},{pt[1]},{y[0]},{y[1]},{c[0]},{c[1]})\'"
 #else:
-#    steps['bkg'] = f"CtauBkg.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
+#    steps['bkg'] = f"CtauBkg.C\'({pt[0]},{pt[1]},{y[0]},{y[1]},{c[0]},{c[1]})\'"
 steps['fin'] = f"Final2DFit.C\'({pt[0]},{pt[1]},{y[0]},{y[1]})\'"
 
 

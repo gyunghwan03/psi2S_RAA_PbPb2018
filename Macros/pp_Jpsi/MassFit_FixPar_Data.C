@@ -35,7 +35,9 @@ void MassFit_FixPar_Data(
   DATE="No_Weight";
   gStyle->SetEndErrorSize(0);
   gSystem->mkdir(Form("roots/2DFit_%s/Mass",DATE.Data()),kTRUE);
+  gSystem->mkdir(Form("roots/2DFit_%s/Mass/mass_06",DATE.Data()),kTRUE);
   gSystem->mkdir(Form("figs/2DFit_%s/Mass",DATE.Data()),kTRUE);
+  gSystem->mkdir(Form("figs/2DFit_%s/Mass/mass_06",DATE.Data()),kTRUE);
 
   TString fname;
   if (PRw==1) fname="PR";
@@ -88,7 +90,7 @@ void MassFit_FixPar_Data(
   //****************************** MASS FIT *******************************
   //***********************************************************************
 
-  TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_06/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
   RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
   ws_fit->import(*dataset_fit);
@@ -121,7 +123,7 @@ void MassFit_FixPar_Data(
   if (f_lower<0.0) f_lower=0.0;
 
   double paramslower[6] = {alpha_lower, n_lower, 0.0, xA_lower, 0.0,  -25.0};
-  double paramsupper[6] = {alpha_higher, n_higher, 0.1, xA_higher, 1.0, 25.0};
+  double paramsupper[6] = {alpha_higher, n_higher, 0.13, xA_higher, 1.0, 25.0};
   //first fit MC 
   //double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   //double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
@@ -134,20 +136,23 @@ void MassFit_FixPar_Data(
   double sigma_1_init = sigma_MC_value; 
   double x_init = xA_MC_value; 
 
+  if(ptLow==6.5&&ptHigh==30) { paramslower[2] = 0.03; cout << "HERE" << endl; }
+
 
   //SIGNAL
-  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.1, pdgMass.JPsi+0.1) ;
+  RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi-0.3, pdgMass.JPsi+0.3) ;
   //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
-  RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, 1e-6, 1.);
-  RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, 1e-6, 0.1);
+  RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init);
+  //RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, sigma_1_init - 0.01, sigma_1_init + 0.01);
+  RooRealVar    sigma_1_A("sigma_1_A","width/sigma of the signal gaussian mass PDF",sigma_1_init, paramslower[2], paramsupper[2]);
   RooFormulaVar sigma_2_A("sigma_2_A","@0*@1",RooArgList(sigma_1_A, *x_A) );
   //RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
-  RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init, 1e-6, 2.3);
+  RooRealVar    alpha_1_A("alpha_1_A","tail shift", alpha_1_init);
   RooFormulaVar alpha_2_A("alpha_2_A","1.0*@0",RooArgList(alpha_1_A) );
   //RooRealVar    n_1_A("n_1_A","power order", n_1_init);
-  RooRealVar    n_1_A("n_1_A","power order", n_1_init, 1e-6, 1e+6);
+  RooRealVar    n_1_A("n_1_A","power order", n_1_init );
   RooFormulaVar n_2_A("n_2_A","1.0*@0",RooArgList(n_1_A) );
-  RooRealVar   *f = new RooRealVar("f","cb fraction", f_init,1e-6, 1.);
+  RooRealVar   *f = new RooRealVar("f","cb fraction", f_init);
   //Set up crystal ball shapes
   RooCBShape* cb_1_A = new RooCBShape("cball_1_A", "cystal Ball", *(ws->var("mass")), mean, sigma_1_A, alpha_1_A, n_1_A);
   RooAddPdf*  pdfMASS_Jpsi;
@@ -165,9 +170,13 @@ void MassFit_FixPar_Data(
   
   Double_t NJpsi_limit = 2.0e+7;
   Double_t NBkg_limit = 2.0e+7;
-  double sl1_init = 0.1;
-  double sl2_init = 0.05;
-  double sl3_init = 0.8;
+  double sl1_init = 0.;
+  double sl2_init = 0.;
+  double sl3_init = 0.;
+
+  if(ptLow==12&&ptHigh==15&&yLow==1.6) NJpsi_limit = 1.0e+6;
+  else if(ptLow==7&&ptHigh==8&&yLow==1.6) {NBkg_limit = 1.0e+6; }
+  else if(ptLow==6.5&&ptHigh==30) { NJpsi_limit = 1.0e+8; NBkg_limit = 1.0e+8; }
   
 
   //if(ptLow==6.5&&ptHigh==9) {
@@ -186,7 +195,7 @@ void MassFit_FixPar_Data(
   RooRealVar *sl3 = new RooRealVar("sl3","sl3", sl3_init, -1., 1.);
   RooChebychev *pdfMASS_bkg;
   //if (ptLow<6.5) pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1, *sl2));
-  pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1,*sl2,*sl3));
+  pdfMASS_bkg = new RooChebychev("pdfMASS_bkg","Background",*(ws->var("mass")),RooArgList(*sl1));
 
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
@@ -211,7 +220,7 @@ void MassFit_FixPar_Data(
   cout << endl << "********* Starting Mass Dist. Fit **************" << endl << endl;
   RooFitResult* fitMass = ws->pdf("pdfMASS_Tot")->fitTo(*dsAB,Save(), Hesse(kTRUE), Timer(kTRUE), Extended(kTRUE), SumW2Error(isWeighted), NumCPU(4));
   cout << endl << "********* Finished Mass Dist. Fit **************" << endl << endl;
-//  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
+  ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,VisualizeError(*fitMass,1),FillColor(kOrange));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A,Name("pdfMASS_Tot"), LineColor(kBlack));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_1_A)), LineColor(44));
   ws->pdf("pdfMASS_Tot")->plotOn(myPlot2_A, Components(RooArgSet(*pdfMASS_bkg, *cb_2_A)), LineColor(8));
@@ -258,7 +267,7 @@ void MassFit_FixPar_Data(
   drawText(Form("N_{J/#psi} = %.f #pm %.f,  N_{Bkg} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(),ws->var("N_Jpsi")->getError(),ws->var("N_Bkg")->getVal(),ws->var("N_Bkg")->getError())
             ,text_x,text_y-y_diff*1,text_color,text_size);
   drawText(Form("m_{J/#psi} = %.4f #pm %.4f",ws->var("m_{J/#Psi}")->getVal(),ws->var("m_{J/#Psi}")->getError()),text_x,text_y-y_diff*2,text_color,text_size);
-  drawText(Form("#alpha_{#J/psi} = %.4f (fixed)",ws->var("alpha_1_A")->getVal()),text_x,text_y-y_diff*3,text_color,text_size);
+  drawText(Form("#alpha_{J/#psi} = %.4f (fixed)",ws->var("alpha_1_A")->getVal()),text_x,text_y-y_diff*3,text_color,text_size);
   drawText(Form("f_{J/#psi} = %.4f (fixed)",ws->var("f")->getVal()),text_x,text_y-y_diff*4,text_color,text_size);
   drawText(Form("n_{J/#psi} = %.4f (fixed)",ws->var("n_1_A")->getVal()),text_x,text_y-y_diff*5,text_color,text_size);
   drawText(Form("#sigma1_{J/#psi} = %.2f #pm %.2f MeV/c^{2}, (#sigma2/#sigma1)_{J/#psi} = %.3f (fixed)",(ws->var("sigma_1_A")->getVal())*1000,(ws->var("sigma_1_A")->getError())*1000,ws->var("x_A")->getVal()),text_x,text_y-y_diff*6,text_color,text_size);
@@ -335,8 +344,8 @@ void MassFit_FixPar_Data(
   c_A->Update();
 
   TFile* outFile;
-  outFile = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-  c_A->SaveAs(Form("figs/2DFit_%s/Mass/Mass_Fixed_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  outFile = new TFile(Form("roots/2DFit_%s/Mass/mass_06/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  c_A->SaveAs(Form("figs/2DFit_%s/Mass/mass_06/Mass_Fixed_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   pdfMASS_Tot->Write();
   pdfMASS_bkg->Write();
   datasetMass->Write();

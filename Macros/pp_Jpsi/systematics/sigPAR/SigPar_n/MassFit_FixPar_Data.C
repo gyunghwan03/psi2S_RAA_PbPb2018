@@ -137,6 +137,8 @@ void MassFit_FixPar_Data(
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
+  if(ptLow==6.5&&ptHigh==9&&yLow==0) paramsupper[2]=0.18;
+
   Double_t NJpsi_limit = 1e+8;
   Double_t NBkg_limit = 1e+8;
   double s1_init = 0.; double s2_init = 0.; double s3_init = 0.; 

@@ -177,9 +177,9 @@ void MassFit_FixPar_Data(
   //
   RooRealVar *mMin = new RooRealVar("mMin","mMin", massLow); // 15<pt<50 v2==-1.2 : 0.01
   RooRealVar *mMax = new RooRealVar("mMax","mMax", massHigh); // 15<pt<50 v2==-1.2 : 0.01
-  RooRealVar *lambda1 = new RooRealVar("lambda1","lambda1", 0.5, -2, 2.);
-  RooRealVar *lambda2 = new RooRealVar("lambda2","lambda2", 0.5, -2, 2.);
-  RooRealVar *lambda3 = new RooRealVar("lambda3","lambda3", 0.5, -2, 2.);
+  RooRealVar *lambda1 = new RooRealVar("lambda1","lambda1", 0., -2, 2.);
+  RooRealVar *lambda2 = new RooRealVar("lambda2","lambda2", 0., -2, 2.);
+  RooRealVar *lambda3 = new RooRealVar("lambda3","lambda3", 0., -2, 2.);
   RooFormulaVar invMassNorm("invMassNorm","(-1.0+2.0*(@0-@1)/(@2-@1))", RooArgList(*(ws->var("mass")),*mMin,*mMax) );
   RooGenericPdf *pdfMASS_bkg;
   //pdfMASS_bkg = new RooGenericPdf("pdfMASS_bkg","Background",

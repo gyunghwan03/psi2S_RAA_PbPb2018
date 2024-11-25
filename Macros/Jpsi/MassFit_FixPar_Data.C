@@ -252,6 +252,9 @@ void MassFit_FixPar_Data(
   else if (ptLow==6.5&&cLow==80&&cHigh==100) {
 	  NBkg_limit = 1e+6;
 	  NJpsi_limit = 1e+6; }
+  else if (ptLow==3) {
+	  NJpsi_limit = 1e+7; 
+	  NBkg_limit = 1e+7; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",0,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);

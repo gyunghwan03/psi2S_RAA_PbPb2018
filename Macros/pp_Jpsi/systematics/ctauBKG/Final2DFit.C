@@ -164,18 +164,18 @@ void Final2DFit(
   //double lambda2 = ws->var("lambdaDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
-  //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
+  ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda, 1e-8, lambda*2));
   //ws->factory(Form("lambdaDSS_test2[%.4f, %.4f, %.4f]", lambda1, 1e-8, lambda1*2));
   //ws->factory(Form("lambdaDSS_test3[%.4f, %.4f, %.4f]", lambda2, 1e-8, lambda2*2));
   //ws->factory(Form("fDSS1_test[%.4f, %.4f, %.4f]", fdss, 1e-8, 1.));
   //ws->factory(Form("fDSS2_test[%.4f, %.4f, %.4f]", fdss1, 1e-8, 1.));
-  ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
+  //ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
   //ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
   //ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
   //ws->factory(Form("fDSS1_test[%.4f]", fdss));
   //ws->factory(Form("fDSS2_test[%.4f]", fdss1));
 
-  ws->var("lambdaDSS_test1")->setConstant();
+  //ws->var("lambdaDSS_test1")->setConstant();
   //ws->var("lambdaDSS_test2")->setConstant();
   //ws->var("lambdaDSS_test3")->setConstant();
   //ws->var("fDSS1_test")->setConstant();

@@ -37,9 +37,11 @@ void mc_MassFit_HighpT(
     gSystem->mkdir("roots");
     gSystem->mkdir("roots_MC");
     gSystem->mkdir("roots_MC/Mass");
+    gSystem->mkdir("roots_MC/Mass/mc_06");
     gSystem->mkdir("figs");
     gSystem->mkdir(Form("figs/%s",DATE.Data()),kTRUE);
     gSystem->mkdir(Form("figs/%s/mc_Mass",DATE.Data()),kTRUE);
+    gSystem->mkdir(Form("figs/%s/mc_Mass/mc_06",DATE.Data()),kTRUE);
 
 	TString bCont;
 	if(PR==0) bCont="Prompt";
@@ -81,7 +83,7 @@ void mc_MassFit_HighpT(
 	massHigh=3.5;
     
     //double fit_limit = 3.26;     //1st value
-    double fit_limit = 3.22;     
+    double fit_limit = 3.26;     
 
 	TString kineCut;
 	kineCut = Form("pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>%.2f && mass<%.2f",ptLow, ptHigh, yLow, yHigh, massLow, massHigh);
@@ -124,8 +126,8 @@ void mc_MassFit_HighpT(
 	//***********************************************************************
 
 	//         The order is {sigma_1,  x, alpha_1, n_1,   f, m_lambda}
-    double paramsupper[8] = {0.1,  1.0  ,     10,     10.,   1.0,     25.0};
-    double paramslower[8] = {1e-6,  0.0,   1e-6,   1e-06,   1e-6,      -25.0};
+    double paramsupper[8] = {1.5,  1.5  ,     3.,     3.,   1.0,     25.0};
+    double paramslower[8] = {1e-6,  1e-6,   1e-6,   1e-06,   1e-6,      -25.0};
     
 	//SIGNAL: initial params
 	//1st value
@@ -138,12 +140,12 @@ void mc_MassFit_HighpT(
     //double N_Jpsi_high = 800000; // 2500000
 	//double N_Bkg_high = 800000;
 
-	double sigma_1_init = 0.015;
-    double x_init = 0.07;
-	double alpha_1_init = 1.;
-	double n_1_init = 1.;
-	double f_init = 0.58;
-    double sl1_mean = 0.05, sl2_mean = 0.04, sl3_mean = 0.06;
+	double sigma_1_init = 0.5;
+    double x_init = 0.43;
+	double alpha_1_init = 0.5;
+	double n_1_init = 0.8;
+	double f_init = 0.4;
+    double sl1_mean = 0.35, sl2_mean = 0.004, sl3_mean = 0.06;
     double N_Jpsi_high = 800000; // 2500000
 	double N_Bkg_high = 800000;
 
@@ -385,8 +387,8 @@ void mc_MassFit_HighpT(
     TString kineLabel = getKineLabelpp (ptLow, ptHigh,yLow, yHigh, 0.0);
     
     TFile* outFile;
-	outFile = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-    c_A->SaveAs(Form("figs/%s/mc_Mass/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+	outFile = new TFile(Form("roots_MC/Mass/mc_06/mc_MassFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+    c_A->SaveAs(Form("figs/%s/mc_Mass/mc_06/mc_Mass_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
 
     pdfMASS_Tot->Write();

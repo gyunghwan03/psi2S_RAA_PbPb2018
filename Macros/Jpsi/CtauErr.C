@@ -204,8 +204,9 @@ void CtauErr(
   //else if(ptLow==12&&ptHigh==15) ctauErrMax=0.0882;
   //else if(ptLow==15&&ptHigh==20) ctauErrMax=0.0378;
   //ctauErrMin=0.019;
-  ctauErrMax=0.1257;
+  //ctauErrMax=0.1257;
   if(ptLow==6.5&&ptHigh==40&&cLow==110) ctauErrMax=0.09647;
+  if(ptLow==6.5&&ptHigh==40&&cLow==0&&cHigh==180) ctauErrMax=0.135;
   if(ptLow==6.5&&ptHigh==40&&cLow==10) ctauErrMax=0.07296;
   if(ptLow==6.5&&ptHigh==40&&cLow==20) ctauErrMax=0.09377;
   if(ptLow==6.5&&ptHigh==40&&cLow==30) ctauErrMax=0.1019;
@@ -220,6 +221,7 @@ void CtauErr(
   if(ptLow==6.5&&ptHigh==40&&cLow==140) ctauErrMax=0.04448;
   if(ptLow==12&&ptHigh==40) ctauErrMax=0.0664;
   if(ptLow==25&&ptHigh==40) ctauErrMax=0.0336;
+  if(ptLow==3&&cLow==100&&cHigh==180) ctauErrMax=0.1201;//0.1238;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 
