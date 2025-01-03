@@ -8,7 +8,7 @@ double compute_uncertainty(double pp_nomi, double pp_alpha, double pp_n, double 
 double compute_uncertainty(double nomi, double alpha, double n_value, double f_value, double x_value);
 
 
-void syst_bFrac()
+void syst_bFrac_v2()
 {
     gSystem->mkdir("syst_roots");
     string syst_type = "bFrac";
@@ -184,6 +184,7 @@ void syst_bFrac()
         double NP_uncertTrue_pb = compute_uncertainty(n_PR_Pb_nomi, n_PR_Pb_nomi, n_PR_Pb_nomi, n_PR_Pb_nomi, n_PR_Pb_x);
         
         //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+		//cout << "pp nomi : " << n_PR_pp_nomi << "\tPb nomi : " << n_PR_Pb_nomi  << "\tpp Err Syst : " << n_PR_pp_alpha << "\tPb Err Syst: " << n_PR_Pb_alpha << "\tPR Err pp : " << PR_uncertErr_pp << "\tPR Err Pb :" << PR_uncertErr_pb << endl; 
         
         // Fill histograms
         mid_pt_PR.SetBinContent(i+1, PR_uncert); // The i starts from 0, hist elements start from 1
@@ -192,6 +193,24 @@ void syst_bFrac()
         mid_pt_NP.SetBinContent(i+1, NP_uncert);
         mid_pt_NP_pp.SetBinContent(i+1, NP_uncert_pp);
         mid_pt_NP_pb.SetBinContent(i+1, NP_uncert_pb);
+
+		mid_pt_PR_Err_pp.SetBinContent(i+1, PR_uncertErr_pp);
+		mid_pt_PR_Res_pp.SetBinContent(i+1, PR_uncertRes_pp);
+		mid_pt_PR_Bkg_pp.SetBinContent(i+1, PR_uncertBkg_pp);
+		mid_pt_PR_True_pp.SetBinContent(i+1, PR_uncertTrue_pp);
+		mid_pt_PR_Err_pb.SetBinContent(i+1, PR_uncertErr_pb);
+		mid_pt_PR_Res_pb.SetBinContent(i+1, PR_uncertRes_pb);
+		mid_pt_PR_Bkg_pb.SetBinContent(i+1, PR_uncertBkg_pb);
+		mid_pt_PR_True_pb.SetBinContent(i+1, PR_uncertTrue_pb);
+		mid_pt_NP_Err_pp.SetBinContent(i+1, NP_uncertErr_pp);
+		mid_pt_NP_Res_pp.SetBinContent(i+1, NP_uncertRes_pp);
+		mid_pt_NP_Bkg_pp.SetBinContent(i+1, NP_uncertBkg_pp);
+		mid_pt_NP_True_pp.SetBinContent(i+1, NP_uncertTrue_pp);
+		mid_pt_NP_Err_pb.SetBinContent(i+1, NP_uncertErr_pb);
+		mid_pt_NP_Res_pb.SetBinContent(i+1, NP_uncertRes_pb);
+		mid_pt_NP_Bkg_pb.SetBinContent(i+1, NP_uncertBkg_pb);
+		mid_pt_NP_True_pb.SetBinContent(i+1, NP_uncertTrue_pb);
+
     }
 
     // loop2 - fwd_pt
@@ -318,6 +337,7 @@ void syst_bFrac()
         double NP_uncertTrue_pp = compute_uncertainty(n_PR_pp_nomi, n_PR_pp_nomi, n_PR_pp_nomi, n_PR_pp_nomi, n_PR_pp_x);
         double NP_uncertTrue_pb = compute_uncertainty(n_PR_Pb_nomi, n_PR_Pb_nomi, n_PR_Pb_nomi, n_PR_Pb_nomi, n_PR_Pb_x);
         //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+		cout << "pp nomi : " << n_PR_pp_nomi << "\tPb nomi : " << n_PR_Pb_nomi  << "\tpp Err Syst : " << n_PR_pp_alpha << "\tPb Err Syst: " << n_PR_Pb_alpha << "\tPR Err pp : " << PR_uncertErr_pp << "\tPR Err Pb :" << PR_uncertErr_pb << endl; 
         
         // Fill histograms
         fwd_pt_PR.SetBinContent(i+1, PR_uncert); // The i starts from 0, hist elements start from 1
