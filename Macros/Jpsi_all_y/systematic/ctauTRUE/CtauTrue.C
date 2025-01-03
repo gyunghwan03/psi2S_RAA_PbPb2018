@@ -127,38 +127,18 @@ void CtauTrue(
   ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 1.]");
-  ws->factory("fDSS1[0.8, 0., 1.]");}
-  else if(ptLow==6.5&&ptHigh==9){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.4238, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 0., 1.]");
-  ws->factory("fDSS1[0.8, 0., 1.]");}
-  else if(ptLow==9&&ptHigh==12){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
-  ws->factory("fDSS[0.5, 0., 1.]");
-  ws->factory("fDSS1[0.5, 0., 1.]");}
-  else if(ptLow==3.5&&ptHigh==50){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
-  ws->factory("fDSS[0.1, 0., 1.]");
-  ws->factory("fDSS1[0.5, 0., 1.]");}
-  else if(ptLow==6.5&&ptHigh==50){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.1038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.4354, 1e-6, 1.0]");
-  ws->factory("fDSS[0.1, 0., 1.]");
-  ws->factory("fDSS1[0.8, 0., 1.]");}
+  ws->factory("lambdaDSS4[.341, 1e-6, 1.0]");
+  ws->factory("fDSS[0.8, 1e-6, 1.]");
+  ws->factory("fDSS1[0.8, 1e-6, 1.]");
+  ws->factory("fDSS2[0.8, 1e-6, 1.]");}
   else {
   ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
   ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
   ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
+  ws->factory("lambdaDSS4[.341, 1e-6, 1.0]");
   ws->factory("fDSS[0.5, 0., 1.]");
-  ws->factory("fDSS1[0.5, 0., 1.]"); }
+  ws->factory("fDSS1[0.5, 0., 1.]"); 
+  ws->factory("fDSS2[0.5, 0., 1.]"); }
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");
@@ -203,12 +183,17 @@ void CtauTrue(
         "ctau3Dtrue",
         "lambdaDSS3",
         "pdfCTAUTRUERES"));
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUEDSS4",
+        "ctau3Dtrue",
+        "lambdaDSS4",
+        "pdfCTAUTRUERES"));
 
   cout << endl << "************ 3 ***************" << endl << endl;
   ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS1", "pdfCTAUTRUEDSS2", "fDSS"));
   cout << endl << "************ 4 ***************" << endl << endl;
   //ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE2", "pdfCTAUTRUEDSS2", "pdfCTAUTRUEDSS3", "fDSS2"));
-  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS3", "fDSS1"));
+  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE2", "pdfCTAUTRUE1", "pdfCTAUTRUEDSS3", "fDSS1"));
+  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE", "pdfCTAUTRUE2", "pdfCTAUTRUEDSS4", "fDSS2"));
   ws->factory(Form("RooExtendPdf::%s(%s,%s)", "pdfCTAUTRUETot","pdfCTAUTRUE", "N_Jpsi_MC"));
   cout << endl << "************ 5 ***************" << endl << endl;
 
@@ -286,6 +271,7 @@ void CtauTrue(
   drawText(Form("#lambdaDSS = %.4f #pm %.4f", ws->var("lambdaDSS")->getVal(), ws->var("lambdaDSS")->getError() ),text_x+0.5,text_y-y_diff,text_color,text_size);
   drawText(Form("#lambdaDSS2 = %.4f #pm %.4f", ws->var("lambdaDSS2")->getVal(), ws->var("lambdaDSS2")->getError() ),text_x+0.5,text_y-y_diff*2,text_color,text_size);
   drawText(Form("#lambdaDSS3 = %.4f #pm %.4f", ws->var("lambdaDSS3")->getVal(), ws->var("lambdaDSS3")->getError() ),text_x+0.5,text_y-y_diff*3,text_color,text_size);
+  drawText(Form("#lambdaDSS4 = %.4f #pm %.4f", ws->var("lambdaDSS4")->getVal(), ws->var("lambdaDSS4")->getError() ),text_x+0.5,text_y-y_diff*4,text_color,text_size);
 
   TPad *pad_D_2 = new TPad("pad_D_2", "pad_D_2", 0, 0.006, 0.98, 0.227);
   c_D->cd();
