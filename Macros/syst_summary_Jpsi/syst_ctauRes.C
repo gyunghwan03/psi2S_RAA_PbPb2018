@@ -172,6 +172,7 @@ void syst_ctauRes()
     TH1D mid_cent_PR("mid_cent_PR", "mid_PR", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_NP("mid_cent_NP", "mid_NP", NBINS_mid_cent, edges_mid_cent);
 
+	cout << "Mid Cent" << endl;
     for (int i = 0; i < pb_mid_cent.size(); i++) {
         // Open input files
         // pp_mid_cent has only one elements
@@ -199,16 +200,19 @@ void syst_ctauRes()
         double n_PR_pp_syst;
         double n_NP_pp_syst;
         compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        //cout << "n_PR_pp_syst: " << n_PR_pp_syst << "\tn_NP_pp_syst: " << n_NP_pp_syst << endl;
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
         compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        cout << "n_PR_Pb_nomi: " << n_PR_Pb_nomi << "\tn_NP_Pb_nomi: " << n_NP_Pb_nomi << endl;
         
         // Pb syst
         double n_PR_Pb_syst;
         double n_NP_Pb_syst;
         compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        cout << "n_PR_Pb_syst: " << n_PR_Pb_syst << "\tn_NP_Pb_syst: " << n_NP_Pb_syst << endl;
 
 
         // Compute uncertainty
@@ -218,6 +222,7 @@ void syst_ctauRes()
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_syst, n_NP_Pb_nomi, n_NP_Pb_syst);
         //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+		cout << " " << endl;
         
         // Fill histograms
         mid_cent_PR.SetBinContent(i+1, PR_uncert); // i starts from 0, hist elements starts from 1
@@ -229,6 +234,7 @@ void syst_ctauRes()
     double edges_fwd_cent[NBINS_fwd_cent+1] = {0, 10, 30, 50, 90};
     TH1D fwd_cent_PR("fwd_cent_PR", "fwd_PR", NBINS_fwd_cent, edges_fwd_cent);
     TH1D fwd_cent_NP("fwd_cent_NP", "fwd_NP", NBINS_fwd_cent, edges_fwd_cent);
+	cout << "Fwd Cent." << endl;
 
     for (int i = 0; i < pb_fwd_cent.size(); i++) {
         // Open input files
@@ -308,6 +314,7 @@ void compute_n_jpsi(TFile *my_file, double &n_PR, double &n_NP)
     auto RooReal_n_jpsi = (RooRealVar*)fit_result->constPars().find("N_Jpsi");
     double n_jpsi = RooReal_n_jpsi->getVal();
     double b_frac = hist_frac->GetBinContent(1);
+	//cout << "File Name : " << my_file->GetName() << "\tJpsi Yield : " << n_jpsi << "\tb fraction : " << b_frac << endl;
 
     // Compute # of PR and NP
     n_NP = n_jpsi * b_frac;

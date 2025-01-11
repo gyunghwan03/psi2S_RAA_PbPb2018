@@ -174,8 +174,10 @@ void Final2DFit(
   double lambda = ws->var("lambdaDSS")->getVal();
   double lambda1 = ws->var("lambdaDSS2")->getVal();
   double lambda2 = ws->var("lambdaDSS3")->getVal();
+  double lambda3 = ws->var("lambdaDSS4")->getVal();
   double fdss = ws->var("fDSS")->getVal();
   double fdss1 = ws->var("fDSS1")->getVal();
+  double fdss2 = ws->var("fDSS2")->getVal();
   //ws->var("b_Bkg")->setConstant(kTRUE);//
   //make jpsi pdf
   //ws->factory(Form("lambdaDSS_test1[%.4f, %.4f, %.4f]", lambda,  1e-8, 100.));
@@ -186,14 +188,18 @@ void Final2DFit(
   ws->factory(Form("lambdaDSS_test1[%.4f]", lambda));
   ws->factory(Form("lambdaDSS_test2[%.4f]", lambda1));
   ws->factory(Form("lambdaDSS_test3[%.4f]", lambda2));
+  ws->factory(Form("lambdaDSS_test4[%.4f]", lambda3));
   ws->factory(Form("fDSS1_test[%.4f]", fdss));
   ws->factory(Form("fDSS2_test[%.4f]", fdss1));
+  ws->factory(Form("fDSS3_test[%.5f]", fdss2));
 
   ws->var("lambdaDSS_test1")->setConstant();
   ws->var("lambdaDSS_test2")->setConstant();
   ws->var("lambdaDSS_test3")->setConstant();
+  ws->var("lambdaDSS_test4")->setConstant();
   ws->var("fDSS1_test")->setConstant();
   ws->var("fDSS2_test")->setConstant();
+  ws->var("fDSS3_test")->setConstant();
 
 
   //NoPR{
@@ -203,8 +209,10 @@ void Final2DFit(
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test1", "ctau3D", "lambdaDSS_test1", "pdfCTAURES")); //NP
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test2", "ctau3D", "lambdaDSS_test2", "pdfCTAURES")); //NP
   ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test3", "ctau3D", "lambdaDSS_test3", "pdfCTAURES")); //NP
+  ws->factory(Form("Decay::%s(%s, %s, %s, RooDecay::SingleSided)", "pdfCTAUTRUE_test4", "ctau3D", "lambdaDSS_test4", "pdfCTAURES")); //NP
   ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test1", "pdfCTAUTRUE_test2", "fDSS1_test"));
-  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUCOND_JpsiNoPR", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test3", "fDSS2_test"));//}
+  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUTRUE_test13", "pdfCTAUTRUE_test12", "pdfCTAUTRUE_test3", "fDSS2_test"));
+  ws->factory(Form("AddModel::%s({%s , %s}, %s)", "pdfCTAUCOND_JpsiNoPR", "pdfCTAUTRUE_test13", "pdfCTAUTRUE_test4", "fDSS3_test"));//}
   //PR
   ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_JpsiPR", "pdfCTAURES"));
   //3-4.5
