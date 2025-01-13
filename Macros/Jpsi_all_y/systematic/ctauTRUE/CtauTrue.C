@@ -25,24 +25,25 @@ using namespace std;
 using namespace RooFit;
 
 void CtauTrue(
-    float ptLow=4.5, float ptHigh=6.5,
-    float yLow=1.6, float yHigh=2.4,
-    int cLow=20, int cHigh=120,
-    float muPtCut=0.0,
-    int PR=2, //0=PR, 1=NP, 2=Inc.
-    float ctauCut=0.08
-    )
+    double ptLow = 6.5, double ptHigh = 7.5,
+    double yLow = 0, double yHigh = 2.4,
+    int cLow = 0, int cHigh = 180,
+    float muPtCut = 0.0,
+    int PR = 2, // 0=PR, 1=NP, 2=Inc.
+    float ctauCut = 0.08)
 {
-  TStopwatch *t = new TStopwatch;
-  t->Start();
-  
-  TString DATE="No_Weight";
-  gStyle->SetEndErrorSize(0);
-  gSystem->mkdir(Form("roots/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
-  gSystem->mkdir(Form("figs/2DFit_%s/CtauTrue",DATE.Data()), kTRUE);
+      nCPU = 6;
 
-  TString bCont;
-  if(PR==0) bCont="Prompt";
+      TStopwatch *t = new TStopwatch;
+      t->Start();
+
+      TString DATE = "No_Weight";
+      gStyle->SetEndErrorSize(0);
+      gSystem->mkdir(Form("roots/2DFit_%s/CtauTrue", DATE.Data()), kTRUE);
+      gSystem->mkdir(Form("figs/2DFit_%s/CtauTrue", DATE.Data()), kTRUE);
+
+      TString bCont;
+      if (PR == 0) bCont="Prompt";
   else if(PR==1) bCont="NonPrompt";
   else if(PR==2) bCont="Inclusive";
 
@@ -112,8 +113,8 @@ void CtauTrue(
 
   //ws->var("ctau3Dtrue")->setRange("ctauTrueRange", ctauTrueMin, ctauTrueMax);
   //ws->var("ctau3Dtrue")->setRange(ctau3DTrueMin, ctau3DTrueMax);
-  ws->var("ctau3Dtrue")->setRange(1e-6, ctau3DTrueMax);
-  ws->var("ctau3Dtrue")->setRange("ctauTrueRange", 1e-6, ctau3DTrueMax);
+  ws->var("ctau3Dtrue")->setRange(1e-4, ctau3DTrueMax);
+  ws->var("ctau3Dtrue")->setRange("ctauTrueRange", 1e-4, ctau3DTrueMax);
   ws->var("ctau3Dtrue")->Print();
 
   //***********************************************************************
@@ -122,23 +123,23 @@ void CtauTrue(
   cout << endl << "************ Start MC Ctau True Fit ***************" << endl << endl;
   //MC NP ctau true
   double entries_True = ws->data("reducedDS_MC")->numEntries();
-  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0., entries_True*2));
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True * 50, entries_True*20, entries_True * 100));
   if(ptLow==3.5&&ptHigh==6.5){
-  ws->factory("lambdaDSS[0.3315, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[0.3601, 1e-6, 1.0]");
-  ws->factory("lambdaDSS4[.341, 1e-6, 1.0]");
-  ws->factory("fDSS[0.8, 1e-6, 1.]");
-  ws->factory("fDSS1[0.8, 1e-6, 1.]");
-  ws->factory("fDSS2[0.8, 1e-6, 1.]");}
+  ws->factory("lambdaDSS[0.3315, 1e-4, 1.0]");
+  ws->factory("lambdaDSS2[0.5038, 1e-4, 1.0]");
+  ws->factory("lambdaDSS3[0.3601, 1e-4, 1.0]");
+  ws->factory("lambdaDSS4[.341, 1e-4, 1.0]");
+  ws->factory("fDSS[0.8, 1e-4, 1.]");
+  ws->factory("fDSS1[0.8, 1e-4, 1.]");
+  ws->factory("fDSS2[0.8, 1e-4, 1.]");}
   else {
-  ws->factory("lambdaDSS[0.54, 1e-6, 1.0]");
-  ws->factory("lambdaDSS2[0.462, 1e-6, 1.0]");
-  ws->factory("lambdaDSS3[.341, 1e-6, 1.0]");
-  ws->factory("lambdaDSS4[.341, 1e-6, 1.0]");
-  ws->factory("fDSS[0.5, 0., 1.]");
-  ws->factory("fDSS1[0.5, 0., 1.]"); 
-  ws->factory("fDSS2[0.5, 0., 1.]"); }
+  ws->factory("lambdaDSS[0.2, 0.1, 1]");
+  ws->factory("lambdaDSS2[0.3, 0, 1]");
+  ws->factory("lambdaDSS3[0.1, 0, 1]");
+  ws->factory("lambdaDSS4[0.2, 0, 1]");
+  ws->factory("fDSS[0.3, 0., 1]");
+  ws->factory("fDSS1[0.3, 0., 1]"); 
+  ws->factory("fDSS2[0.6, 0., 1]"); }
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");
@@ -153,12 +154,12 @@ void CtauTrue(
   //ws->factory("fDSS2[0.8, 0., 1.]");
   //ws->factory("f[0.8, 0., 1.]");
   //}
-  //ws->factory("lambdaDSS[0.22, 1e-6, 1.]");
-  //ws->factory("lambdaDSS2[0.35, 1e-6, 1.]");
-  //ws->factory("lambdaDSS3[0.31, 1e-6, 1.]");
+  //ws->factory("lambdaDSS[0.22, 1e-4, 1.]");
+  //ws->factory("lambdaDSS2[0.35, 1e-4, 1.]");
+  //ws->factory("lambdaDSS3[0.31, 1e-4, 1.]");
   //ws->factory("fDSS[0.42, 0., 1.]");
   //ws->factory("fDSS1[0.1, 0., 1.]");
-  ws->factory("sigmaMC[0.1, 1e-6, 1.0]");
+  ws->factory("sigmaMC[0.5, 0, 1.0]");
   ws->factory("ctauMC[0.0, 0.0, 0.0]");
   // create the PDF
   ws->factory(Form("TruthModel::%s(%s)", "pdfCTAUTRUERES", "ctau3Dtrue"));

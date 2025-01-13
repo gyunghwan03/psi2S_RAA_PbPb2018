@@ -24,16 +24,16 @@ using namespace std;
 using namespace RooFit;
 
 void CtauRes(
-    double ptLow=3, double ptHigh=4.5,
-    double yLow=1.6, double yHigh=2.4,
-    int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
-    )
+    double ptLow = 27.5, double ptHigh = 30,
+    double yLow = 0, double yHigh = 2.4,
+    int cLow = 0, int cHigh = 180,
+    int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
-  //TString DATE="210507";
-  //TString DATE="0_180";
-  //TString DATE="10_60";
-  //TString DATE="20_40";
+  nCPU = 6;
+  // TString DATE="210507";
+  // TString DATE="0_180";
+  // TString DATE="10_60";
+  // TString DATE="20_40";
 
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
@@ -63,7 +63,7 @@ void CtauRes(
   ctauResLow=-10; ctauResHigh=10;
 
   //	f1 = new TFile(Form("../skimmedFiles/OniaRooDataSet_isMC0_JPsi_%sw_Effw%d_Accw%d_PtW%d_TnP%d_20201216.root",fname.Data(),fEffW,fAccW,isPtW,isTnP));
-  fMass = new TFile(Form("../../roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  fMass = new TFile(Form("../../roots/2DFit_No_Weight/mc_Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fEffW, fAccW, isPtW, isTnP));
   //fMC = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_Psi2S_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_230601.root"));
   fMC = new TFile(Form("../../../../skimmedFiles/OniaRooDataSet_miniAOD_isMC1_JPsi_Prompt_cent0_200_Effw0_Accw0_PtW0_TnP0_240530.root"));
 
@@ -115,118 +115,14 @@ void CtauRes(
   //else if(ptLow==6.5&&cLow==100) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[0.9, 1e-3, 1.]");}
   //else if(ptLow==15&&cLow==20&&cHigh==120) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[0.7, 1e-3, 1.]");}
   //else {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.6, 0.01, 1.1]");}
-  if(ptLow==3.5&&ptHigh==6.5){
-  ws->factory("ctau1_CtauRes[0.]");
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.5, 1e-3, 1.]");
-  ws->factory("rS21_CtauRes[1.18, 1e-3, 5.]");
-  ws->factory("rS32_CtauRes[2.57, 1e-3., 5.0]");}
-  else if(ptLow==3.5&&cLow==20&&cHigh==40){
-  ws->factory("ctau1_CtauRes[0.]");
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 3.0]");
-  ws->factory("rS32_CtauRes[3.1, 1., 5.0]");}
-  else if(ptLow==3.5&&cLow==100&&cHigh==180){
-  ws->factory("ctau1_CtauRes[0.]");
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1.3, 5.0]");
-  ws->factory("rS32_CtauRes[3.1, 2., 5.0]");}
-  else if(ptLow==6.5&&ptHigh==9){
-  ws->factory("ctau1_CtauRes[0.]");
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[2.7, 1e-3, 3.0]");
-  ws->factory("rS32_CtauRes[3.57, 1e-3, 5.0]");}
-  else if(ptLow==6.5&&cLow==20&&cHigh==40){
-  ws->factory("ctau1_CtauRes[0.]");
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.7, 1e-3, 3.0]");
-  ws->factory("rS32_CtauRes[3.57, 2., 5.0]");}
-  else if(ptLow==6.5&&cLow==40&&cHigh==60){
-  ws->factory("ctau1_CtauRes[0.]");
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
-  else if(ptLow==6.5&&cLow==60&&cHigh==80){
+
   ws->factory("ctau1_CtauRes[0.]");  
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
-  else if(ptLow==6.5&&cLow==80&&cHigh==100){
-  ws->factory("ctau1_CtauRes[0.]");  
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
-  else if(ptLow==6.5&&cLow==100&&cHigh==180){
-  ws->factory("ctau1_CtauRes[0.]");  
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1., 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
-  else if(ptLow==9&&ptHigh==12){
-  ws->factory("ctau1_CtauRes[0.]");  
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
-  else if(ptLow==12&&ptHigh==15){
-  ws->factory("ctau1_CtauRes[0.]");  
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1.5, 5.0]");}
-  else if(ptLow==20&&ptHigh==25){
-  ws->factory("ctau1_CtauRes[0.]");  
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1., 2.0]");
-  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
-  else if(ptLow>=15){
-  ws->factory("ctau1_CtauRes[0.]");  
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");}
-  else{
-  ws->factory("ctau1_CtauRes[0.]");  
-  ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  ws->factory("s1_CtauRes[0.8, 1e-3, 1.0]");
-  ws->factory("rS21_CtauRes[1.6, 1e-3, 5.0]");
-  ws->factory("rS32_CtauRes[3.0, 1e-3, 5.0]");}
+  ws->factory("s1_CtauRes[0.5, 0, 1]");
+  ws->factory("rS21_CtauRes[1.6, 1, 5.0]");
+  ws->factory("rS32_CtauRes[3.0, 1., 5.0]");
 
   ws->factory("rS43_CtauRes[1.5, 1.0, 10.0]");
   ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");
@@ -235,13 +131,7 @@ void CtauRes(
  
   //if(ptLow==6.5&&ptHigh==7&&cLow==20&&cHigh==120){
   //  ws->factory("f_CtauRes[0.4, 1e-6, 1.]");ws->factory("f2_CtauRes[0.2, 1e-6, 1.]");ws->factory("f3_CtauRes[0.7, 0., 1.]");}
-  if(cLow==00&&cHigh==60) {ws->factory("f_CtauRes[0.5, 0.1, 1.]");ws->factory("f2_CtauRes[0.3, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  else if(ptLow==3.5&&ptHigh==5) {ws->factory("f_CtauRes[0.731, 1e-3, 1.]");ws->factory("f2_CtauRes[0.691, 1e-3, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  else if(ptLow==6.5&&ptHigh==9) {ws->factory("f_CtauRes[0.171, 0.1, 1.]");ws->factory("f2_CtauRes[0.691, 1e-3, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  else if(ptLow==9&&ptHigh==12) {ws->factory("f_CtauRes[0.171, 0.1, 1.]");ws->factory("f2_CtauRes[0.691, 1e-3, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  else if(ptLow==3.5&&cLow==0&&cHigh==20) {ws->factory("f_CtauRes[0.95, 1e-3, 1.]");ws->factory("f2_CtauRes[0.691, 1e-3, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  else if(ptLow==3.5&&cLow==40&&cHigh==60) {ws->factory("f_CtauRes[0.1, 1e-6, 1.]");ws->factory("f2_CtauRes[0.691, 1e-3, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]");}
-  else {ws->factory("f_CtauRes[0.4, 1e-6, 1.]");ws->factory("f2_CtauRes[0.5, 1e-6, 1.]");ws->factory("f3_CtauRes[0.5, 1e-6, 1.]"); }
+ws->factory("f_CtauRes[0.4, 0, 1.]");ws->factory("f2_CtauRes[0.5, 0, 1.]");ws->factory("f3_CtauRes[0.5, 0, 1.]"); 
   // create the three PDFs
   TString varName="ctau3DRes";
   ws->factory(Form("GaussModel::%s(%s, %s, %s,One,One)", "GaussModel1_ctauRes", varName.Data(),

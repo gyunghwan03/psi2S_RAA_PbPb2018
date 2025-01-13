@@ -23,13 +23,12 @@
 using namespace std;
 using namespace RooFit;
 void CtauErr(
-    double ptLow=3, double ptHigh=4.5,
-    float yLow=1.6, float yHigh=2.4,
-    int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
-    )
+    double ptLow = 6.5, double ptHigh = 7.5,
+    float yLow = 0, float yHigh = 2.4,
+    int cLow = 0, int cHigh = 180,
+    int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
-
+  nCPU = 6;
   //TString DATE="210507";
   //TString DATE="10_60";
   //TString DATE="20_40";
@@ -198,6 +197,8 @@ void CtauErr(
   }
 
   if(ptLow==3&&ptHigh==6.5) ctauErrMax=0.1476;
+  
+  ctauErrMax = 0.048;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 

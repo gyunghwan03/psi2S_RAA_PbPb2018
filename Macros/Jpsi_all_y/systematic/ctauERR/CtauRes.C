@@ -24,12 +24,12 @@ using namespace std;
 using namespace RooFit;
 
 void CtauRes(
-    float ptLow=3, float ptHigh=4.5,
-    float yLow=1.6, float yHigh=2.4,
-    int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
-    )
+    double ptLow = 6.5, double ptHigh = 7.5,
+    float yLow = 0, float yHigh = 2.4,
+    int cLow = 0, int cHigh = 180,
+    int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
+  nCPU = 6;
   //TString DATE="210507";
   //TString DATE="0_180";
   //TString DATE="10_60";
@@ -91,88 +91,20 @@ void CtauRes(
   if(cLow==30 && cHigh==40) nGauss = 2;
   if(cLow==80) nGauss = 2;
   if(cLow==100) nGauss = 2;
-  //if (ptLow==15&&ptHigh==20) {nGauss=2;}
-  //else if (ptLow==20&&ptHigh==25) nGauss=2;
-  //else if (ptLow==25&&ptHigh==50) {nGauss=2;}
-  //else if (ptLow==6.5&&cLow==100&&cHigh==180) nGauss=2;
+
   ws->factory("One[1.0]");
   ws->factory("ctauRes_mean[0.0]");
-  //if(ptLow==6.5&&cLow==40) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.5, 0.01, 1.3]");}
-  //else if(ptLow==7.5&&cLow==40) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.1, 0.01, 0.5]");}
-  //else if(ptLow==12&&cLow==40) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.8, 0.01, 1.]");}
-  //else if(ptLow==6.5&&cLow==0) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.2, 1e-6, 1.]");}
-  //else if(ptLow==6.5&&cLow==100) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[0.9, 1e-3, 1.]");}
-  //else if(ptLow==15&&cLow==20&&cHigh==120) {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[0.7, 1e-3, 1.]");}
-  //else {ws->factory("ctau1_CtauRes[0.]");  ws->factory("s1_CtauRes[.6, 0.01, 1.1]");}
-  //ws->factory("ctau1_CtauRes[0.]");  
-  //ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  //ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  //ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  //if(ptLow==6.5&&ptHigh==9){									 
-  //ws->factory("s1_CtauRes[0.9, 1e-3, 1.0]");
-  //ws->factory("rS21_CtauRes[1.9, 1.0, 5.0]");
-  //ws->factory("rS32_CtauRes[2.5, 1.0, 5.0]");}
-  //else if(ptLow==25&&ptHigh==50){
-  //ws->factory("s1_CtauRes[0.9, 1e-3, 1.0]");
-  //ws->factory("rS21_CtauRes[2.8, 1e-3, 5.0]");
-  //ws->factory("rS32_CtauRes[2.5, 1.0, 5.0]");}
-  //else{
-  //ws->factory("s1_CtauRes[0.7, 1e-3, 1.0]");
-  //ws->factory("rS21_CtauRes[1.5, 1.0, 5.0]");
-  //ws->factory("rS32_CtauRes[2.5, 1.0, 5.0]");}
-
-  //ws->factory("ctau1_CtauRes[0.]");
-  //ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
-  //ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
-  //ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
-  //ws->factory("s1_CtauRes[0.7, 1e-6, 1.0]");
-  //ws->factory("rS21_CtauRes[1.1, 1e-6, 3.0]");
-  //ws->factory("rS32_CtauRes[2.3, 1e-6, 5.0]");
-
-  //ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");
-  //ws->factory("RooFormulaVar::s3_CtauRes('@0*@1',{rS32_CtauRes,s2_CtauRes})");
-  //ws->factory("f_CtauRes[0.1, 1e-4, 1.]");
-  //ws->factory("f2_CtauRes[0.1, 1e-4, 1.]");
 
   ws->factory("ctau1_CtauRes[0.]");
   ws->factory("ctau2_CtauRes[0.]");  //ws->factory("s2_CtauRes[2., 1e-6, 10.]");
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
 
-  //if(ptLow==6.5&&ptHigh==9){									 
-  //ws->factory("s1_CtauRes[0.7, 1e-6, 1.0]");
-  //ws->factory("rS21_CtauRes[1.1, 1e-6, 3.0]");
-  //ws->factory("rS32_CtauRes[2.3, 1e-6, 5.0]");
-  //ws->factory("f_CtauRes[0.1, 1e-6, 1.]");
-  //ws->factory("f2_CtauRes[0.1, 1e-6, 1.]");
-
-  if(ptLow==3.5){
-  ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
-  ws->factory("rS21_CtauRes[1.32, 1e-4, 3.0]");
-  ws->factory("rS32_CtauRes[2.37, 1e-4, 5.0]");
-  ws->factory("f_CtauRes[0.344, 1e-5, 1.]");
-  ws->factory("f2_CtauRes[0.322, 1e-5, 1.]");}
-
-  if(ptLow==6.5){
-  ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
-  ws->factory("rS21_CtauRes[1.32, 1e-4, 3.0]");
-  ws->factory("rS32_CtauRes[2.37, 1e-4, 5.0]");
-  ws->factory("f_CtauRes[0.384, 1e-5, 1.]");
-  ws->factory("f2_CtauRes[0.372, 1e-5, 1.]");}
-
-  if(ptLow==6.5 && cLow==30 && cHigh==40){
-  ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
-  ws->factory("rS21_CtauRes[1.32, 1e-4, 5.0]");
-  ws->factory("rS32_CtauRes[2.37, 1e-4, 5.0]");
-  ws->factory("f_CtauRes[0.384, 1e-5, 1.]");
-  ws->factory("f2_CtauRes[0.372, 1e-5, 1.]");}
-
-  else{
-  ws->factory("s1_CtauRes[0.5, 1e-4, 1.0]");
-  ws->factory("rS21_CtauRes[1.15, 1e-4, 3.0]");
-  ws->factory("rS32_CtauRes[2.5, 1e-4, 5.0]");
-  ws->factory("f_CtauRes[0.333, 1e-4, 1.]");
-  ws->factory("f2_CtauRes[0.341, 1e-4, 1.]");}
+  ws->factory("s1_CtauRes[0.6 1e-4, 0.99999]");
+  ws->factory("rS21_CtauRes[1.5, 1, 4.0]");
+  ws->factory("rS32_CtauRes[2, 1, 4.0]");
+  ws->factory("f_CtauRes[0.85, 1e-4, 1.]");
+  ws->factory("f2_CtauRes[0.7, 1e-4, 1.]");
 
 
   ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");
@@ -244,8 +176,8 @@ void CtauRes(
     }
     //if(hTot->GetBinContent(i)>1)ctauResMax = hTot->GetBinCenter(i)+hTot->GetBinWidth(i);
   }
-
-//  if (v2==-0.3&&ptLow==6.5&&ptHigh==7.5) ctauResMin=-6.4;
+  ctauResMin = -4.2;
+  //  if (v2==-0.3&&ptLow==6.5&&ptHigh==7.5) ctauResMin=-6.4;
 
   ws->var("ctau3DRes")->setRange("ctauResWindow",ctauResMin,0);
   cout<<"Fit Range: "<<ctauResMin<<" - 0"<<endl;
@@ -256,7 +188,8 @@ void CtauRes(
   gPad->SetLogy();
   RooPlot* myPlot2_C = (RooPlot*)myPlot_C->Clone();
   bool isWeighted = ws->data("dataToFit")->isWeighted();
-  RooFitResult* fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
+  RooFitResult *fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
+  //RooFitResult *fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Minimizer("Minuit2"), Save(), AsymptoticError(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
   ws->import(*fitCtauRes);
   //setFixedVarsToContantVars(ws);
   //ws->data("dataToFit")->plotOn(myPlot2_C, Name("dataHist_ctauRes"), DataError(RooAbsData::SumW2), XErrorSize(0),

@@ -24,14 +24,13 @@ using namespace std;
 using namespace RooFit;
 
 void CtauBkg(
-    double ptLow=3, double ptHigh=4.5,
-    double yLow=1.6, double yHigh=2.4,
-    int cLow=0, int cHigh=200,
-    int PRw=1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false
-    )
+    double ptLow = 6.5, double ptHigh = 7.5,
+    double yLow = 0, double yHigh = 2.4,
+    int cLow = 0, int cHigh = 180,
+    int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
 
-  nCPU = 28;
+  nCPU = 6;
 
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
@@ -91,102 +90,20 @@ void CtauBkg(
   cout <<endl <<"************** Start BKG Ctau Fit *****************" <<endl <<endl;
   //make parameter 3 exp
   ws->factory("zeroMean[0.0]");
-  //ws->factory("b_Bkg[0.1, 0., 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.5, 1e-6, 1.]");
-  //ws->factory("fDLIV[0.5, 1e-6, 1.]");
-  //ws->factory("lambdaDDS_Bkg[0.2, 1e-6, 1.]");
-  //ws->factory("lambdaDF_Bkg[0.3, 1e-6, 1.]");
-  //ws->factory("lambdaDSS_Bkg[0.5, 1e-6, 1.]");
-  if(ptLow==3.5&&ptHigh==6.5){
-  ws->factory("b_Bkg[0.5, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.8, 0., 1.]");
-  ws->factory("fDLIV[0.6, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.1, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.01, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.3, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.1, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.2, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.6, 1e-6, 1.]");
-  ws->factory("fDSS12[0.7, 0., 1.]");
-  ws->factory("fDF12[0.5, 0., 1.]");
-  ws->factory("fDSS13[0.6, 0., 1.]");
-  ws->factory("fDF13[0.9, 0., 1.]");}
-  else if(ptLow==3.5&&ptHigh==50&&cLow==0){
-  ws->factory("b_Bkg[0.5, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.8, 0., 1.]");
-  ws->factory("fDLIV[0.6, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.01, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.01, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.01, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.2, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.6, 1e-6, 1.]");
-  ws->factory("fDSS12[0.7, 0., 1.]");
-  ws->factory("fDF12[0.5, 0., 1.]");
-  ws->factory("fDSS13[0.6, 0., 1.]");
-  ws->factory("fDF13[0.9, 0., 1.]");}
-  else if(ptLow==3.5&&ptHigh==50&&cLow==20){
-  ws->factory("b_Bkg[0.5, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.8, 0., 1.]");
-  ws->factory("fDLIV[0.6, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.01, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.01, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.01, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.2, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.6, 1e-6, 1.]");
-  ws->factory("fDSS12[0.7, 0., 1.]");
-  ws->factory("fDF12[0.5, 0., 1.]");
-  ws->factory("fDSS13[0.6, 0., 1.]");
-  ws->factory("fDF13[0.9, 0., 1.]");}
-  else if(ptLow==3.5&&ptHigh==50&&cLow==40){
-  ws->factory("b_Bkg[0.5, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.7, 0., 1.]");
+  ws->factory("b_Bkg[0.86, 0., 1]");//NP fraction for bkg
+  ws->factory("fDFSS[0.32, 0., 1]");
   ws->factory("fDLIV[0.34, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.01, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.3, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.01, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.2, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.6, 1e-6, 1.]");
-  ws->factory("fDSS12[0.7, 0., 1.]");
-  ws->factory("fDF12[0.5, 0., 1.]");
-  ws->factory("fDSS13[0.6, 0., 1.]");
-  ws->factory("fDF13[0.9, 0., 1.]");}
-  else if(ptLow==3.5&&ptHigh==50&&cLow==60){
-  ws->factory("b_Bkg[0.5, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.3, 0., 1.]");
-  ws->factory("fDLIV[0.4, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.4, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.4, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.02, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.1, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.02, 1e-6, 1.]");
-  ws->factory("fDSS12[0.7, 0., 1.]");
-  ws->factory("fDF12[0.5, 0., 1.]");
-  ws->factory("fDSS13[0.6, 0., 1.]");
-  ws->factory("fDF13[0.5, 0., 1.]");}
-  else {
-  ws->factory("b_Bkg[0.2, 0., 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.6, 0., 1.]");
-  ws->factory("fDLIV[0.4, 0., 1]");
-  ws->factory("lambdaDDS_Bkg[0.4, 1e-6, 1.]");
-  ws->factory("lambdaDF_Bkg1[0.3, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg2[0.2, 1e-6, 1]");
-  ws->factory("lambdaDF_Bkg3[0.2, 1e-6, 1]");
-  ws->factory("lambdaDSS_Bkg1[0.5, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg2[0.3, 1e-6, 1.]");
-  ws->factory("lambdaDSS_Bkg3[0.3, 1e-6, 1.]");
-  ws->factory("fDSS12[0.8, 0., 1.]");
-  ws->factory("fDF12[0.8, 0., 1.]");
-  ws->factory("fDSS13[0.8, 0., 1.]");
-  ws->factory("fDF13[0.8, 0., 1.]");}
+  ws->factory("lambdaDDS_Bkg[0.3, 0., 1]");
+  ws->factory("lambdaDF_Bkg1[0.4, 0., 1]");
+  ws->factory("lambdaDF_Bkg2[0.05, 0., 1]");
+  ws->factory("lambdaDF_Bkg3[0.1, 0., 1]");
+  ws->factory("lambdaDSS_Bkg1[0.3, 0., 1]");
+  ws->factory("lambdaDSS_Bkg2[0.4, 0., 1]");
+  ws->factory("lambdaDSS_Bkg3[0.4, 0., 1]");
+  ws->factory("fDSS12[0.3, 0., 1]");
+  ws->factory("fDF12[0.4, 0., 1]");
+  ws->factory("fDSS13[0.4, 0., 1]");
+  ws->factory("fDF13[0.3, 0., 1]");
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
@@ -252,58 +169,34 @@ void CtauBkg(
   //if (cLow==80&&cHigh==100) ctauMin=-1.0;
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
-  if(ptLow>=15) { ctauMin=-1.5;}
-  else if(ptLow==3.5&&cLow==0&&cHigh==20) { ctauMin = -2.5; }
-  else if(ptLow==3.5&&cLow==60&&cHigh==80) { ctauMin = -2.; }
-  else if(ptLow==3.5&&ptHigh==6.5) ctauMin = -2.2;
-  //if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=4.;}
-  //else if(ptLow==5&&ptHigh==6.5) {ctauMin=-3.;}
-  //else if(ptLow==3.5&&ptHigh==5) {ctauMax=1.9;} //1.9
-  //else if(ptLow==3.5&&ptHigh==6.5) {ctauMax=3.7;} //1.9
-  //else if(ptLow==6.5&&ptHigh==9&&yLow==0) { ctauMin = -2.; ctauMax=3.;}
-  //else if(ptLow==6.5&&ptHigh==9&&yLow==1.6) { ctauMin = -1.8; ctauMax=3.;}
-  //else if(ptLow==4&&ptHigh==6.5) ctauMax=4.;
-  //else if(ptLow==6.5&&ptHigh==12&&yLow==1.6) ctauMin = -2.;
-  //else if(ptLow==12&&ptHigh==15&&yLow==1.6) ctauMin = -2.;
-  //else if(ptLow==12&&ptHigh==50&&yLow==1.6) ctauMax = 2.;
-  //else if(ptLow==9&&ptHigh==12&&yLow==0) { ctauMin = -2; ctauMax = 2.5; }
-  //else if(ptLow==15&&ptHigh==20) { ctauMin = -1.; ctauMax = 2.5; }
-  //else if(ptLow>=15) ctauMin = -1;
-  //else if(ptLow==6.5&&cLow==0&&cHigh==20) { ctauMin=-2; ctauMax=4; }
-  //else if(ptLow==6.5&&cLow==20&&cHigh==40) { ctauMax=3; }
-  //else if(ptLow==6.5&&cLow==60&&cHigh==80) { ctauMin=-1; ctauMax=2; }
-  //else if(ptLow==6.5&&cLow==80&&cHigh==100) { ctauMin=-1.; ctauMax=2.5; }
-  //else if(ptLow==6.5&&cLow==100&&cHigh==180) {ctauMin=-1.; ctauMax=2.5;}
-  //else if(ptLow==3.5&&cLow==0&&cHigh==20) { ctauMax=3.5; }
-  //else if(ptLow==3.5&&cLow==0&&cHigh==40) { ctauMin=-2; ctauMax=2.4; }
-  //else if(ptLow==3.5&&cLow==40&&cHigh==60) { ctauMin=-2.5; ctauMax=3.; }
-  //else if(ptLow==3.5&&cLow==60&&cHigh==80) { ctauMin=-2.; ctauMax = 2; }
-  //else if(cLow==40&&cHigh==60) ctauMin=-2;
-  //else if(cLow==40&&cHigh==80) ctauMax=1.9;
-  //else if(cLow==100&&cHigh==200) ctauMin=-0.55;
+    //ctauMin = -1.3;
+    //ctauMax = 2.;
+    
+    cout << "ctau Min : " << ctauMin << ", ctauMax : " << ctauMax << endl;
 
-  cout << "ctau Min : " << ctauMin << ", ctauMax : " << ctauMax << endl;
+    TCanvas *c_E = new TCanvas("canvas_E", "My plots", 1108, 4, 550, 520);
+    c_E->cd();
+    TPad *pad_E_1 = new TPad("pad_E_1", "pad_E_1", 0, 0.16, 0.98, 1.0);
+    pad_E_1->SetTicks(1, 1);
+    pad_E_1->Draw();
+    pad_E_1->cd();
+    RooPlot *myPlot_E = ws->var("ctau3D")->frame(Bins(nCtauBins), Range(ctauLow, ctauHigh)); // bins
+    myPlot_E->SetTitle("");
 
-  TCanvas* c_E =  new TCanvas("canvas_E","My plots",1108,4,550,520);
-  c_E->cd();
-  TPad *pad_E_1 = new TPad("pad_E_1", "pad_E_1", 0, 0.16, 0.98, 1.0);
-  pad_E_1->SetTicks(1,1);
-  pad_E_1->Draw(); pad_E_1->cd();
-  RooPlot* myPlot_E = ws->var("ctau3D")->frame(Bins(nCtauBins), Range(ctauLow, ctauHigh)); // bins
-  myPlot_E->SetTitle("");
+    ws->pdf("pdfCTAU_Bkg_Tot")->setNormRange("ctauWindow");
 
-  ws->pdf("pdfCTAU_Bkg_Tot")->setNormRange("ctauWindow");
+    RooDataSet *dataToFit = (RooDataSet *)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f", ctauMin, ctauMax))->Clone("dataw_Bkg");
+    //  RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f",-2.0, 4.0))->Clone("dataw_Bkg");
+    ws->import(*dataToFit, Rename("dataToFit"));
 
-  RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f",ctauMin, ctauMax))->Clone("dataw_Bkg");
-//  RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(Form("ctau3D>=%.f&&ctau3D<=%.f",-2.0, 4.0))->Clone("dataw_Bkg");
-  ws->import(*dataToFit, Rename("dataToFit"));
+    pad_E_1->cd();
+    gPad->SetLogy();
+    RooPlot *myPlot2_E = (RooPlot *)myPlot_E->Clone();
 
-  pad_E_1->cd();
-  gPad->SetLogy();
-  RooPlot* myPlot2_E = (RooPlot*)myPlot_E->Clone();
-
-  double normDSTot = 1.0;
-  if (ws->data("dataToFit")){normDSTot = ws->data("dataToFit")->sumEntries()/ws->data("dataToFit")->sumEntries();}
+    double normDSTot = 1.0;
+    if (ws->data("dataToFit"))
+    {
+      normDSTot = ws->data("dataToFit")->sumEntries() / ws->data("dataToFit")->sumEntries();}
   double normBkg = 1.0;
   if (ws->data("dataw_Bkg")){normBkg = ws->data("dataToFit")->sumEntries()*normDSTot/ws->data("dataw_Bkg")->sumEntries();}
 
