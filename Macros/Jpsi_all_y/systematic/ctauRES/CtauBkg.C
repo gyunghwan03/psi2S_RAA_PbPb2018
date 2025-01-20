@@ -30,7 +30,7 @@ void CtauBkg(
     int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
 
-  nCPU = 6;
+  nCPU = 10;
 
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
@@ -90,20 +90,20 @@ void CtauBkg(
   cout <<endl <<"************** Start BKG Ctau Fit *****************" <<endl <<endl;
   //make parameter 3 exp
   ws->factory("zeroMean[0.0]");
-  ws->factory("b_Bkg[0.7, 0.4, 0.9999999]");//NP fraction for bkg
-  ws->factory("fDFSS[0.5, 1e-8, 0.9999999]");
-  ws->factory("fDLIV[0.7, 1e-8, 0.9999999]");
-  ws->factory("lambdaDDS_Bkg[0.1, 0, 0.9999999]");
-  ws->factory("lambdaDF_Bkg1[0.1, 0, 0.9999999]");
-  ws->factory("lambdaDF_Bkg2[0.1, 0, 0.9999999]");
-  ws->factory("lambdaDF_Bkg3[0.1, 0, 0.9999999]");
-  ws->factory("lambdaDSS_Bkg1[0.1, 0, 0.9999999]");
-  ws->factory("lambdaDSS_Bkg2[0.1, 0, 0.9999999]");
-  ws->factory("lambdaDSS_Bkg3[0.1, 0, 0.9999999]");
-  ws->factory("fDSS12[0.6, 0., 0.9999999]");
-  ws->factory("fDF12[0.5, 0., 0.9999999]");
-  ws->factory("fDSS13[0.5, 0., 0.9999999]");
-  ws->factory("fDF13[0.6, 0., 0.9999999]");
+  ws->factory("b_Bkg[0.95, 0.3, 1]");//NP fraction for bkg
+  ws->factory("fDFSS[0.5, 0.2, 1]");
+  ws->factory("fDLIV[0.5, 0.3, 1]");
+  ws->factory("lambdaDDS_Bkg[0.14, 0.01, 0.6]");
+  ws->factory("lambdaDF_Bkg1[0.15, 0, 0.4]");
+  ws->factory("lambdaDF_Bkg2[0.1, 0, 0.3]");
+  ws->factory("lambdaDF_Bkg3[0.1, 0, 0.5]");
+  ws->factory("lambdaDSS_Bkg1[0.3, 0, 0.6]");
+  ws->factory("lambdaDSS_Bkg2[0.3, 0, 1]");
+  ws->factory("lambdaDSS_Bkg3[0.3, 0.01, 0.5]");
+  ws->factory("fDSS12[0.6, 0., 1]");
+  ws->factory("fDF12[0.5, 0., 1]");
+  ws->factory("fDSS13[0.5, 0., 1]");
+  ws->factory("fDF13[0.6, 0., 1]");
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
@@ -169,8 +169,8 @@ void CtauBkg(
   //if (cLow==80&&cHigh==100) ctauMin=-1.0;
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
-  //ctauMin = -0.6;
-  //ctauMax = 1.2;
+  ctauMin = -0.85;
+  ctauMax = 2;
 
 
   cout << "ctau Min : " << ctauMin << ", ctauMax : " << ctauMax << endl;
@@ -199,8 +199,8 @@ void CtauBkg(
   if (ws->data("dataw_Bkg")){normBkg = ws->data("dataToFit")->sumEntries()*normDSTot/ws->data("dataw_Bkg")->sumEntries();}
 
   bool isWeighted = ws->data("dataw_Bkg")->isWeighted();
-  //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataw_Bkg, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
-  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
+  // RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataw_Bkg, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
+  RooFitResult *fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Minimizer("Minuit2", "Genetic"), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 
   myPlot2_E->updateNormVars(RooArgSet(*ws->var("mass"), *ws->var("ctau3D"), *ws->var("ctau3DErr"))) ;
