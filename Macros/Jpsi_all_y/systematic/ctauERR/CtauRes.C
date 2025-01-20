@@ -29,7 +29,7 @@ void CtauRes(
     int cLow = 0, int cHigh = 180,
     int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
-  nCPU = 6;
+  nCPU = 10;
   //TString DATE="210507";
   //TString DATE="0_180";
   //TString DATE="10_60";
@@ -100,11 +100,11 @@ void CtauRes(
   ws->factory("ctau3_CtauRes[0.]");  //ws->factory("s3_CtauRes[3,  1e-6, 10.]");
   ws->factory("ctau4_CtauRes[0.]");  //ws->factory("s4_CtauRes[5.37, 0., 10.]");
 
-  ws->factory("s1_CtauRes[0.6 1e-4, 0.99999]");
-  ws->factory("rS21_CtauRes[1.5, 1, 4.0]");
-  ws->factory("rS32_CtauRes[2, 1, 4.0]");
-  ws->factory("f_CtauRes[0.85, 1e-4, 1.]");
-  ws->factory("f2_CtauRes[0.7, 1e-4, 1.]");
+  ws->factory("s1_CtauRes[0.7, 0.01, 0.99999]");
+  ws->factory("rS21_CtauRes[2.3, 1, 5.0]");
+  ws->factory("rS32_CtauRes[2.5, 1, 5.0]");
+  ws->factory("f_CtauRes[0.8, 0.01, 1.]");
+  ws->factory("f2_CtauRes[0.1, 0.01, 1.]");
 
 
   ws->factory("RooFormulaVar::s2_CtauRes('@0*@1',{rS21_CtauRes,s1_CtauRes})");
@@ -176,7 +176,7 @@ void CtauRes(
     }
     //if(hTot->GetBinContent(i)>1)ctauResMax = hTot->GetBinCenter(i)+hTot->GetBinWidth(i);
   }
-  ctauResMin = -4.2;
+  ctauResMin = -5.0;
   //  if (v2==-0.3&&ptLow==6.5&&ptHigh==7.5) ctauResMin=-6.4;
 
   ws->var("ctau3DRes")->setRange("ctauResWindow",ctauResMin,0);
@@ -188,7 +188,7 @@ void CtauRes(
   gPad->SetLogy();
   RooPlot* myPlot2_C = (RooPlot*)myPlot_C->Clone();
   bool isWeighted = ws->data("dataToFit")->isWeighted();
-  RooFitResult *fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
+  RooFitResult *fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Save(), Minimizer("Minuit2","Genetic"),SumW2Error(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
   //RooFitResult *fitCtauRes = ws->pdf("GaussModel_Tot")->fitTo(*dataToFit, Minimizer("Minuit2"), Save(), AsymptoticError(isWeighted), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
   ws->import(*fitCtauRes);
   //setFixedVarsToContantVars(ws);
