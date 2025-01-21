@@ -104,15 +104,15 @@ void draw_syst_ver2()
 	h_fwd_cent_NP_pp[0] = (TH1D*) in_Tot->Get("fwd_cent_NP_pp");
 	h_fwd_cent_NP_pb[0] = (TH1D*) in_Tot->Get("fwd_cent_NP_pb");
 
-	double mid_pt_PR_max = h_mid_pt_PR[0]->GetBinContent(h_mid_pt_PR[0]->GetMaximumBin()) + 0.1;
-	double mid_pt_NP_max = h_mid_pt_NP[0]->GetBinContent(h_mid_pt_NP[0]->GetMaximumBin()) + 0.1;
-	double fwd_pt_PR_max = h_fwd_pt_PR[0]->GetBinContent(h_fwd_pt_PR[0]->GetMaximumBin()) + 0.1;
-	double fwd_pt_NP_max = h_fwd_pt_NP[0]->GetBinContent(h_fwd_pt_NP[0]->GetMaximumBin()) + 0.1;
-	double mid_cent_PR_max = h_mid_cent_PR[0]->GetBinContent(h_mid_cent_PR[0]->GetMaximumBin()) + 0.1;
-	double mid_cent_PR_pp_max = h_mid_cent_PR_pp[0]->GetBinContent(h_mid_cent_PR_pp[0]->GetMaximumBin()) + 0.1;
-	double mid_cent_NP_max = h_mid_cent_NP[0]->GetBinContent(h_mid_cent_NP[0]->GetMaximumBin()) + 0.1;
-	double fwd_cent_PR_max = h_fwd_cent_PR[0]->GetBinContent(h_fwd_cent_PR[0]->GetMaximumBin()) + 0.1;
-	double fwd_cent_NP_max = h_fwd_cent_NP[0]->GetBinContent(h_fwd_cent_NP[0]->GetMaximumBin()) + 0.1;
+	double mid_pt_PR_max = h_mid_pt_PR[0]->GetBinContent(h_mid_pt_PR[0]->GetMaximumBin()) + 0.05;
+	double mid_pt_NP_max = h_mid_pt_NP[0]->GetBinContent(h_mid_pt_NP[0]->GetMaximumBin()) + 0.05;
+	double fwd_pt_PR_max = h_fwd_pt_PR[0]->GetBinContent(h_fwd_pt_PR[0]->GetMaximumBin()) + 0.05;
+	double fwd_pt_NP_max = h_fwd_pt_NP[0]->GetBinContent(h_fwd_pt_NP[0]->GetMaximumBin()) + 0.05;
+	double mid_cent_PR_max = h_mid_cent_PR[0]->GetBinContent(h_mid_cent_PR[0]->GetMaximumBin()) + 0.05;
+	double mid_cent_PR_pp_max = h_mid_cent_PR_pp[0]->GetBinContent(h_mid_cent_PR_pp[0]->GetMaximumBin()) + 0.05;
+	double mid_cent_NP_max = h_mid_cent_NP[0]->GetBinContent(h_mid_cent_NP[0]->GetMaximumBin()) + 0.05;
+	double fwd_cent_PR_max = h_fwd_cent_PR[0]->GetBinContent(h_fwd_cent_PR[0]->GetMaximumBin()) + 0.05;
+	double fwd_cent_NP_max = h_fwd_cent_NP[0]->GetBinContent(h_fwd_cent_NP[0]->GetMaximumBin()) + 0.05;
 
 	
 
@@ -230,7 +230,7 @@ void draw_syst_ver2()
 		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_mid_pt_PR[6]->SetBinContent(i, TnP_tot);
 		
-		TnP_pb = h_mid_pt_NP_pb[6]->GetBinContent(i);
+		TnP_pb = h_mid_pt_NP_pb[6]->GetBinContent(i+1);
 		TnP_pp = h_mid_pt_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_mid_pt_NP[6]->SetBinContent(i, TnP_tot);
@@ -242,8 +242,8 @@ void draw_syst_ver2()
 		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_fwd_pt_PR[6]->SetBinContent(i, TnP_tot);
 		
-		TnP_pb = h_fwd_pt_NP_pb[6]->GetBinContent(i);
-		TnP_pp = h_fwd_pt_NP_pp[6]->GetBinContent(i); // pp input has one TnP bin
+		TnP_pb = h_fwd_pt_NP_pb[6]->GetBinContent(i+1);
+		TnP_pp = h_fwd_pt_NP_pp[6]->GetBinContent(i+1); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
 		h_fwd_pt_NP[6]->SetBinContent(i, TnP_tot);
 	}

@@ -32,15 +32,17 @@ void syst_eff()
 
     
     TString path = "../../Eff_Acc/roots/";
-	TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW1_tnp1_20241121_ppWfunc.root";
-	TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtW1_tnp1_20241121_ppWfunc.root";
+	//TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW1_tnp1_20241121_ppWfunc.root";
+	//TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtW1_tnp1_20241121_ppWfunc.root";
+	TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW1_tnp1_20250114_ppWfunc.root";
+	TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtW1_tnp1_20250114_ppWfunc.root";
 	TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW1_tnp1_20241011.root";
 	TString pp_nomi_NP = "mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW1_tnp1_20241011.root";
 
     TString pp_syst_PR = "mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW0_tnp1_20241119.root";
     TString pp_syst_NP = "mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW0_tnp1_20241119.root";
-    TString pb_syst_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW0_tnp1_20241121_ppWfunc.root";
-    TString pb_syst_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtW0_tnp1_20241121_ppWfunc.root";
+    TString pb_syst_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW0_tnp1_20250114_ppWfunc.root";
+    TString pb_syst_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtW0_tnp1_20250114_ppWfunc.root";
     
 
     TString h_pp_mid = "mc_eff_vs_pt_TnP1_PtW%d_absy0_1p6";

@@ -32,17 +32,18 @@ void syst_acc()
     
     TString path = "../../Eff_Acc/roots/";
 	//TString pb_nomi = "acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root";
-	TString PR_nomi = "acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20241127_fwdNew.root";
+	//TString PR_nomi = "acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20241127_fwdNew.root";
+	TString PR_nomi = "acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20250114.root";
 	//TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root";
 	//TString pp_nomi = "acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20240314.root";
-	TString NP_nomi = "acceptance_NonPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20241127.root";
+	TString NP_nomi = "acceptance_NonPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20250114.root";
     //TString pp_nomi_PR = "mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20231019.root";
     //TString pp_nomi_NP = "mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230728.root";
     //TString pb_nomi_PR = "mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20231019.root";
     //TString pb_nomi_NP = "mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_new_20231019.root";
 
-    TString PR_syst = "acceptance_Prompt_Jpsi_GenOnly_wgt0_pp_SysUp0_20241127_fwdNew.root";
-    TString NP_syst = "acceptance_NonPrompt_Jpsi_GenOnly_wgt0_pp_SysUp0_20241127.root";
+    TString PR_syst = "acceptance_Prompt_Jpsi_GenOnly_wgt0_pp_SysUp0_20250114.root";
+    TString NP_syst = "acceptance_NonPrompt_Jpsi_GenOnly_wgt0_pp_SysUp0_20250114.root";
     
 
     TString h_PR_mid = "hAccPt_2021_midy";
@@ -73,7 +74,6 @@ void syst_acc()
 
     const int NBINS_mid_pt = 6;
     double edges_mid_pt[NBINS_mid_pt+1] = {6.5, 9, 12, 15, 20, 25, 40};
-    TH1D mid_pt("mid_pt", "mid", NBINS_mid_pt, edges_mid_pt);
     TH1D mid_pt_PR("mid_pt_PR", "mid_PR", NBINS_mid_pt, edges_mid_pt);
     TH1D mid_pt_NP("mid_pt_NP", "mid_NP", NBINS_mid_pt, edges_mid_pt);
 
@@ -94,7 +94,6 @@ void syst_acc()
 
         // Compute uncertainty
         // ProPRt
-        double uncert = compute_uncertainty(n_PR_nomi, n_PR_syst, n_NP_nomi, n_NP_syst);
         double uncert_PR = compute_uncertainty(n_PR_nomi, n_PR_syst);
         double uncert_NP = compute_uncertainty(n_NP_nomi, n_NP_syst);
         
@@ -103,7 +102,6 @@ void syst_acc()
         //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
         
         // Fill histograms
-        mid_pt.SetBinContent(i+1, uncert); // i starts from 0, hist elements starts from 1
         mid_pt_PR.SetBinContent(i+1, uncert_PR);
         mid_pt_NP.SetBinContent(i+1, uncert_NP);
     }
@@ -119,7 +117,7 @@ void syst_acc()
 
 
     const int NBINS_fwd_pt = 4;
-    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 6.5, 9, 12, 50};
+    double edges_fwd_pt[NBINS_fwd_pt+1] = {3.5, 6.5, 9, 12, 40};
     TH1D fwd_pt("fwd_pt", "fwd", NBINS_fwd_pt, edges_fwd_pt);
     TH1D fwd_pt_PR("fwd_pt_PR", "fwd_PR", NBINS_fwd_pt, edges_fwd_pt);
     TH1D fwd_pt_NP("fwd_pt_NP", "fwd_NP", NBINS_fwd_pt, edges_fwd_pt);
@@ -133,30 +131,29 @@ void syst_acc()
         double n_PR_syst = h_PR_syst->GetBinContent(i+1);
         
         // Pb nominal
-        double n_Pb_nomi = h_NP_nomi->GetBinContent(i+1);
+        double n_NP_nomi = h_NP_nomi->GetBinContent(i+1);
 
         // Pb syst
-        double n_Pb_syst = h_NP_syst->GetBinContent(i+1);
+        double n_NP_syst = h_NP_syst->GetBinContent(i+1);
 
 
         // Compute uncertainty
         // ProPRt
-        double uncert = compute_uncertainty(n_PR_nomi, n_PR_syst, n_Pb_nomi, n_Pb_syst);
         double uncert_PR = compute_uncertainty(n_PR_nomi, n_PR_syst);
-        double uncert_NP = compute_uncertainty(n_Pb_nomi, n_Pb_syst);
+        double uncert_NP = compute_uncertainty(n_NP_nomi, n_NP_syst);
         
         
         // Non-prompt
-        //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+		cout << "pt" << edges_fwd_pt[i] << " - " << edges_fwd_pt[i+1] << endl;
+		cout << "nomi : " << n_PR_nomi << "\tsyst : " << n_PR_syst << endl;
+        cout << "PR_uncert: " << uncert_PR<< "\tNP_uncert: " << uncert_NP << endl;
         
         // Fill histograms
-        fwd_pt.SetBinContent(i+1, uncert); // i starts from 0, hist elements starts from 1
         fwd_pt_PR.SetBinContent(i+1, uncert_PR);
         fwd_pt_NP.SetBinContent(i+1, uncert_NP);
     }
     // Save results of loop 1 and 2
     out_pt.cd();
-    mid_pt.SetName("mid");
     mid_pt_PR.SetName("mid_PR");
     mid_pt_NP.SetName("mid_NP");
 
@@ -164,7 +161,6 @@ void syst_acc()
     fwd_pt_PR.SetName("fwd_PR");
     fwd_pt_NP.SetName("fwd_NP");
     
-    mid_pt.Write();
     mid_pt_PR.Write();
     mid_pt_NP.Write();
     
@@ -172,7 +168,6 @@ void syst_acc()
     fwd_pt_PR.Write();
     fwd_pt_NP.Write();
     
-    mid_pt.SetName("mid_pt"); // Restore names
     mid_pt_PR.SetName("mid_pt_PR");
     mid_pt_NP.SetName("mid_pt_NP");
 

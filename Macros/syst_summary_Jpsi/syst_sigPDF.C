@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void compute_n_jpsi(TFile *my_file, double &n_PR, double &n_NP);
+void compute_n_jpsi(TFile *f_nomi, TFile *my_file, double &n_PR, double &n_NP);
 double compute_uncertainty(double pp_nomi, double pp_syst, double pb_nomi, double pb_syst);
 double compute_uncertainty(double pp_nomi, double pp_syst);
 double compute_uncertainty(double pb_nomi, double pb_syst);
@@ -64,23 +64,23 @@ void syst_sigPDF()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
         double n_PR_pp_syst;
         double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_syst;
         double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
 
 
         // Compute uncertainty
@@ -132,23 +132,23 @@ void syst_sigPDF()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
         double n_PR_pp_syst;
         double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_syst;
         double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
 
 
         // Compute uncertainty
@@ -253,23 +253,23 @@ void syst_sigPDF()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
         double n_PR_pp_syst;
         double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_syst;
         double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
 
 
         // Compute uncertainty
@@ -323,23 +323,23 @@ void syst_sigPDF()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
         double n_PR_pp_syst;
         double n_NP_pp_syst;
-        compute_n_jpsi(pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input, n_PR_pp_syst, n_NP_pp_syst);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_syst;
         double n_NP_Pb_syst;
-        compute_n_jpsi(pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
 
 
         // Compute uncertainty
@@ -412,12 +412,12 @@ void syst_sigPDF()
 
 
 
-void compute_n_jpsi(TFile *my_file, double &n_PR, double &n_NP)
+void compute_n_jpsi(TFile*f_nomi, TFile *my_file, double &n_PR, double &n_NP)
 {
     //Read N_jpsi, b_fraction
     auto fit_result = (RooFitResult*)my_file->Get("fitresult_pdfCTAUMASS_Tot_dsToFit");
 	//cout << "input : " << my_file->GetName() << endl;
-    auto hist_frac = (TH1D*)my_file->Get("2DfitResults"); // b_fraction -> only first bin is used
+    auto hist_frac = (TH1D*)f_nomi->Get("2DfitResults"); // b_fraction -> only first bin is used
     auto RooReal_n_jpsi = (RooRealVar*)fit_result->constPars().find("N_Jpsi");
     double n_jpsi = RooReal_n_jpsi->getVal();
     double b_frac = hist_frac->GetBinContent(1);

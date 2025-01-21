@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void compute_n_jpsi(TFile *my_file, double &n_PR, double &n_NP);
+void compute_n_jpsi(TFile *f_nomi, TFile *my_file, double &n_PR, double &n_NP);
 double compute_uncertainty(double pp_nomi, double pp_alpha, double pp_n, double pp_f, double pp_x, double pb_nomi, double pb_alpha, double pb_n, double pb_f, double pb_x);
 double compute_uncertainty(double nomi, double alpha, double n_value, double f_value, double x_value);
 
@@ -89,7 +89,7 @@ void syst_sigPAR()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
@@ -101,15 +101,15 @@ void syst_sigPAR()
         double n_NP_pp_f;
         double n_PR_pp_x;
         double n_NP_pp_x;
-        compute_n_jpsi(pp_syst_input_alpha, n_PR_pp_alpha, n_NP_pp_alpha);
-        compute_n_jpsi(pp_syst_input_n, n_PR_pp_n, n_NP_pp_n);
-        compute_n_jpsi(pp_syst_input_f, n_PR_pp_f, n_NP_pp_f);
-        compute_n_jpsi(pp_syst_input_x, n_PR_pp_x, n_NP_pp_x);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_alpha ,n_PR_pp_alpha, n_NP_pp_alpha);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_n ,n_PR_pp_n, n_NP_pp_n);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_f ,n_PR_pp_f, n_NP_pp_f);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_x ,n_PR_pp_x, n_NP_pp_x);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_alpha;
@@ -120,10 +120,10 @@ void syst_sigPAR()
         double n_NP_Pb_f;
         double n_PR_Pb_x;
         double n_NP_Pb_x;
-        compute_n_jpsi(pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
-        compute_n_jpsi(pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
-        compute_n_jpsi(pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
-        compute_n_jpsi(pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);
 
 
         // Compute uncertainty
@@ -191,7 +191,7 @@ void syst_sigPAR()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
@@ -203,15 +203,15 @@ void syst_sigPAR()
         double n_NP_pp_f;
         double n_PR_pp_x;
         double n_NP_pp_x;
-        compute_n_jpsi(pp_syst_input_alpha, n_PR_pp_alpha, n_NP_pp_alpha);
-        compute_n_jpsi(pp_syst_input_n, n_PR_pp_n, n_NP_pp_n);
-        compute_n_jpsi(pp_syst_input_f, n_PR_pp_f, n_NP_pp_f);
-        compute_n_jpsi(pp_syst_input_x, n_PR_pp_x, n_NP_pp_x);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_alpha, n_PR_pp_alpha, n_NP_pp_alpha);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_n, n_PR_pp_n, n_NP_pp_n);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_f, n_PR_pp_f, n_NP_pp_f);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_x, n_PR_pp_x, n_NP_pp_x);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_alpha;
@@ -222,10 +222,10 @@ void syst_sigPAR()
         double n_NP_Pb_f;
         double n_PR_Pb_x;
         double n_NP_Pb_x;
-        compute_n_jpsi(pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
-        compute_n_jpsi(pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
-        compute_n_jpsi(pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
-        compute_n_jpsi(pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);        
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);        
 
         // Compute uncertainty
         // Proppt
@@ -238,6 +238,8 @@ void syst_sigPAR()
         double NP_uncert_pp = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_alpha, n_NP_pp_n, n_NP_pp_f, n_NP_pp_x);
         double NP_uncert_pb = compute_uncertainty(n_NP_Pb_nomi, n_NP_Pb_alpha, n_NP_Pb_n, n_NP_Pb_f, n_NP_Pb_x);
         //cout << "PR_uncert: " << PR_uncert << "\tNP_uncert: " << NP_uncert << endl;
+		cout << "file Name : " << pb_nominal_input->GetName() << endl;
+		cout << "nomi :" << n_PR_Pb_nomi << "\talpha : " << n_PR_Pb_alpha << "\tn : " << n_PR_Pb_n << "\tf : " << n_PR_Pb_f << "\tx : " << n_PR_Pb_x << endl;
         
         // Fill histograms
         fwd_pt_PR.SetBinContent(i+1, PR_uncert); // The i starts from 0, hist elements start from 1
@@ -299,7 +301,7 @@ void syst_sigPAR()
     out_name = "./syst_roots/syst_cent_" + syst_type + ".root";
     TFile out_cent(out_name.c_str(), "recreate");
 
-    const int NBINS_mid_cent = 8;
+    const int NBINS_mid_cent = 6;
     double edges_mid_cent[NBINS_mid_cent+1] = {0,10,20,30,40,50,90};
     TH1D mid_cent_PR("mid_cent_PR", "mid_PR", NBINS_mid_cent, edges_mid_cent);
     TH1D mid_cent_PR_pp("mid_cent_PR_pp", "mid_PR_pp", NBINS_mid_cent, edges_mid_cent);
@@ -339,7 +341,7 @@ void syst_sigPAR()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
@@ -351,15 +353,15 @@ void syst_sigPAR()
         double n_NP_pp_f;
         double n_PR_pp_x;
         double n_NP_pp_x;
-        compute_n_jpsi(pp_syst_input_alpha, n_PR_pp_alpha, n_NP_pp_alpha);
-        compute_n_jpsi(pp_syst_input_n, n_PR_pp_n, n_NP_pp_n);
-        compute_n_jpsi(pp_syst_input_f, n_PR_pp_f, n_NP_pp_f);
-        compute_n_jpsi(pp_syst_input_x, n_PR_pp_x, n_NP_pp_x);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_alpha, n_PR_pp_alpha, n_NP_pp_alpha);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_n, n_PR_pp_n, n_NP_pp_n);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_f, n_PR_pp_f, n_NP_pp_f);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_x, n_PR_pp_x, n_NP_pp_x);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_alpha;
@@ -370,10 +372,10 @@ void syst_sigPAR()
         double n_NP_Pb_f;
         double n_PR_Pb_x;
         double n_NP_Pb_x;
-        compute_n_jpsi(pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
-        compute_n_jpsi(pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
-        compute_n_jpsi(pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
-        compute_n_jpsi(pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);
 
 
         // Compute uncertainty
@@ -440,7 +442,7 @@ void syst_sigPAR()
         // pp nominal
         double n_PR_pp_nomi;
         double n_NP_pp_nomi;
-        compute_n_jpsi(pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
+        compute_n_jpsi(pp_nominal_input, pp_nominal_input, n_PR_pp_nomi, n_NP_pp_nomi);
         //cout << "n_PR_pp_nomi: " << n_PR_pp_nomi << "\tn_NP_pp_nomi: " << n_NP_pp_nomi << endl;
         
         // pp syst
@@ -452,15 +454,15 @@ void syst_sigPAR()
         double n_NP_pp_f;
         double n_PR_pp_x;
         double n_NP_pp_x;
-        compute_n_jpsi(pp_syst_input_alpha, n_PR_pp_alpha, n_NP_pp_alpha);
-        compute_n_jpsi(pp_syst_input_n, n_PR_pp_n, n_NP_pp_n);
-        compute_n_jpsi(pp_syst_input_f, n_PR_pp_f, n_NP_pp_f);
-        compute_n_jpsi(pp_syst_input_x, n_PR_pp_x, n_NP_pp_x);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_alpha, n_PR_pp_alpha, n_NP_pp_alpha);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_n, n_PR_pp_n, n_NP_pp_n);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_f, n_PR_pp_f, n_NP_pp_f);
+        compute_n_jpsi(pp_nominal_input, pp_syst_input_x, n_PR_pp_x, n_NP_pp_x);
         
         // Pb nominal
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
-        compute_n_jpsi(pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+        compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
         
         // Pb syst
         double n_PR_Pb_alpha;
@@ -471,10 +473,10 @@ void syst_sigPAR()
         double n_NP_Pb_f;
         double n_PR_Pb_x;
         double n_NP_Pb_x;
-        compute_n_jpsi(pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
-        compute_n_jpsi(pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
-        compute_n_jpsi(pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
-        compute_n_jpsi(pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_alpha, n_PR_Pb_alpha, n_NP_Pb_alpha);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_n, n_PR_Pb_n, n_NP_Pb_n);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_f, n_PR_Pb_f, n_NP_Pb_f);
+        compute_n_jpsi(pb_nominal_input, pb_syst_input_x, n_PR_Pb_x, n_NP_Pb_x);
 
 
         // Compute uncertainty
@@ -482,6 +484,8 @@ void syst_sigPAR()
         double PR_uncert = compute_uncertainty(n_PR_pp_nomi, n_PR_pp_alpha, n_PR_pp_n, n_PR_pp_f, n_PR_pp_x, n_PR_Pb_nomi, n_PR_Pb_alpha, n_PR_Pb_n, n_PR_Pb_f, n_PR_Pb_x);
         double PR_uncert_pp = compute_uncertainty(n_PR_pp_nomi, n_PR_pp_alpha, n_PR_pp_n, n_PR_pp_f, n_PR_pp_x);
         double PR_uncert_pb = compute_uncertainty(n_PR_Pb_nomi, n_PR_Pb_alpha, n_PR_Pb_n, n_PR_Pb_f, n_PR_Pb_x);
+		//cout << "file Name : " << pb_nominal_input->GetName() << endl;
+		//cout << "nomi :" << n_PR_Pb_nomi << "\talpha : " << n_PR_Pb_alpha << "\tn : " << n_PR_Pb_n << "\tf : " << n_PR_Pb_f << "\tx : " << n_PR_Pb_x << endl;
         
         // Non-prompt
         double NP_uncert = compute_uncertainty(n_NP_pp_nomi, n_NP_pp_alpha, n_NP_pp_n, n_NP_pp_f, n_NP_pp_x, n_NP_Pb_nomi, n_NP_Pb_alpha, n_NP_Pb_n, n_NP_Pb_f, n_NP_Pb_x);
@@ -549,11 +553,11 @@ void syst_sigPAR()
 
 
 
-void compute_n_jpsi(TFile *my_file, double &n_PR, double &n_NP)
+void compute_n_jpsi(TFile* f_nomi, TFile *my_file, double &n_PR, double &n_NP)
 {
     //Read N_jpsi, b_fraction
     auto fit_result = (RooFitResult*)my_file->Get("fitresult_pdfCTAUMASS_Tot_dsToFit");
-    auto hist_frac = (TH1D*)my_file->Get("2DfitResults"); // b_fraction -> only first bin is used
+    auto hist_frac = (TH1D*)f_nomi->Get("2DfitResults"); // b_fraction -> only first bin is used
     auto RooReal_n_jpsi = (RooRealVar*)fit_result->constPars().find("N_Jpsi");
     double n_jpsi = RooReal_n_jpsi->getVal();
     double b_frac = hist_frac->GetBinContent(1);

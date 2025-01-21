@@ -261,6 +261,7 @@ void compute_total_syst()
     auto h_total_fwd_pt_NP_pb = new TH1D("fwd_pt_NP_pb", "fwd_NP_pb", NBINS_fwd_pt, edges_fwd_pt);
 
     
+	cout << "Fwd pT" << endl;
     for (int hist_idx = 1; hist_idx < NBINS_fwd_pt+1; hist_idx++) {
         double tot_syst_PR_pp = 0;
 		//double acc_PR_pp = 0; double eff_PR_pp = 0;
@@ -334,6 +335,7 @@ void compute_total_syst()
         tot_syst_NP_pb = Sqrt( Power(sigPDF_NP_pb,2) + Power(sigPAR_NP_pb,2) + Power(bkgPDF_NP_pb,2)
                 + Power(bFrac_NP_pb,2) + Power(acc_NP_pb,2) + Power(eff_NP_pb,2) + Power(HF_NP,2) + Power(TNP_NP_pb,2));
         h_total_fwd_pt_NP_pb->SetBinContent(hist_idx, tot_syst_NP_pb);
+		//cout << "TnP Pb : " << TNP_NP_pb << "\tfwd pT Pb Tot : " << tot_syst_NP_pb << endl;
         //cout << h_total_fwd_pt_NP->GetBinContent(hist_idx) << endl;
 		//
         double tot_syst_NP = 0;
@@ -349,6 +351,8 @@ void compute_total_syst()
         tot_syst_NP = Sqrt( Power(sigPDF_NP,2) + Power(sigPAR_NP,2) + Power(bkgPDF_NP,2)
                 + Power(bFrac_NP,2) + Power(acc_NP,2) + Power(eff_NP,2) + Power(HF_NP,2) + Power(TNP_NP,2));
         h_total_fwd_pt_NP->SetBinContent(hist_idx, tot_syst_NP);
+		cout << "pT " << edges_fwd_pt[hist_idx-1] << " - " << edges_fwd_pt[hist_idx] << endl;
+		cout << "TnP Pb : " << TNP_NP_pb << "\tfwd pT Pb Tot : " << tot_syst_NP_pb << "\tTotal : " << tot_syst_NP << endl;
     }
 
 
@@ -434,7 +438,7 @@ void compute_total_syst()
         double acc_PR_pb = h_acc_mid_cent_PR->GetBinContent(hist_idx);
         double eff_PR_pb = h_eff_mid_cent_PR_pb->GetBinContent(hist_idx);
         double HF_PR = h_HF_mid_cent_PR->GetBinContent(hist_idx);
-        double TNP_PR_pb = h_TNP_mid_cent_PR_pb->GetBinContent(hist_idx+1);
+        double TNP_PR_pb = h_TNP_mid_cent_PR_pb->GetBinContent(hist_idx);
         
         tot_syst_PR_pb = Sqrt( Power(sigPDF_PR_pb,2) + Power(sigPAR_PR_pb,2) + Power(bkgPDF_PR_pb,2)
                 + Power(bFrac_PR_pb,2) + Power(acc_PR_pb,2) + Power(eff_PR_pb,2) + Power(HF_PR,2) + Power(TNP_PR_pb,2));
@@ -553,6 +557,7 @@ void compute_total_syst()
     auto h_total_fwd_cent_NP_pp = new TH1D("fwd_cent_NP_pp", "fwd_NP_pp", NBINS_fwd_cent, edges_fwd_cent);
     auto h_total_fwd_cent_NP_pb = new TH1D("fwd_cent_NP_pb", "fwd_NP_pb", NBINS_fwd_cent, edges_fwd_cent);
     
+	cout << "FWD CENT PR" << endl;
     for (int hist_idx = 1; hist_idx < NBINS_fwd_cent+1; hist_idx++) {
         double tot_syst_PR_pp = 0;
 		//double acc_PR_pp = 0; double eff_PR_pp = 0;
@@ -577,11 +582,15 @@ void compute_total_syst()
         double acc_PR_pb = h_acc_fwd_cent_PR->GetBinContent(hist_idx);
         double eff_PR_pb = h_eff_fwd_cent_PR_pb->GetBinContent(hist_idx);
         double HF_PR = h_HF_fwd_cent_PR->GetBinContent(hist_idx);
-        double TNP_PR_pb = h_TNP_fwd_cent_PR_pb->GetBinContent(hist_idx+1);
+        double TNP_PR_pb = h_TNP_fwd_cent_PR_pb->GetBinContent(hist_idx);
+
         
         tot_syst_PR_pb = Sqrt( Power(sigPDF_PR_pb,2) + Power(sigPAR_PR_pb,2) + Power(bkgPDF_PR_pb,2)
                 + Power(bFrac_PR_pb,2) + Power(acc_PR_pb,2) + Power(eff_PR_pb,2) + Power(HF_PR,2) + Power(TNP_PR_pb,2));
         h_total_fwd_cent_PR_pb->SetBinContent(hist_idx, tot_syst_PR_pb);
+
+		printf("Cent %.f - %.f\n" ,edges_fwd_cent[hist_idx], edges_fwd_cent[hist_idx+1]);
+		cout << "sigPDF pb : " << sigPDF_PR_pb << "\tsigPR pb : " << sigPAR_PR_pb << "\tTNP_PR_pb : " << TNP_PR_pb << "\ttotal : " << tot_syst_PR_pb << endl; 
 
         double tot_syst_PR = 0;
 		//double acc_PR = 0; double eff_PR = 0;
