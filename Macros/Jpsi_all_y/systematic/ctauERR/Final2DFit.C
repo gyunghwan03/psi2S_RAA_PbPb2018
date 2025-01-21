@@ -220,7 +220,7 @@ void Final2DFit(
     // PR
     ws->factory(Form("SUM::%s(%s)", "pdfCTAUCOND_JpsiPR", "pdfCTAURES"));
     // 3-4.5
-        ws->factory("b_Jpsi[0.6, 0, 1.0]"); // NP fraction for Sig
+        ws->factory("b_Jpsi[0.4, 0.2, 0.5]"); // NP fraction for Sig
     // if(ptLow==6.5&&ptHigh==7.5&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.25, 1e-8, 1.0]");//NP fraction for Sig
 
     // RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),

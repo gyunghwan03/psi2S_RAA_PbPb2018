@@ -228,7 +228,7 @@ void Final2DFit(
     // else if(ptLow==6.5&&ptHigh==9) ws->factory("b_Jpsi[0.333, 0.30, 0.35]");
     // else if(ptLow==6.5&&cLow==0&&cHigh==20) ws->factory("b_Jpsi[0.80, 0.37, 1.0]");
     else
-        ws->factory("b_Jpsi[0.22, 0, 1.0]"); // NP fraction for Sig
+        ws->factory("b_Jpsi[0.52, 0.3, 1.0]"); // NP fraction for Sig
     // if(ptLow==6.5&&ptHigh==7.5&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.25, 1e-8, 1.0]");//NP fraction for Sig
 
     // RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
