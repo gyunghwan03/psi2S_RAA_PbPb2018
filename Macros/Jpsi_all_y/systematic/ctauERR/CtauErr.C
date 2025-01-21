@@ -28,7 +28,7 @@ void CtauErr(
     int cLow = 0, int cHigh = 180,
     int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
-  nCPU = 6;
+  nCPU = 10;
   //TString DATE="210507";
   //TString DATE="10_60";
   //TString DATE="20_40";
@@ -198,7 +198,7 @@ void CtauErr(
 
   if(ptLow==3&&ptHigh==6.5) ctauErrMax=0.1476;
   
-  ctauErrMax = 0.048;
+  ctauErrMax = 0.075;
 
   cout << "ctauErrMax : " << ctauErrMax << " ctauErrMin : " << ctauErrMin << endl;
 

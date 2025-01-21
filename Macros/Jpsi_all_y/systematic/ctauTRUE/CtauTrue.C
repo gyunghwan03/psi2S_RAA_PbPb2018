@@ -32,7 +32,7 @@ void CtauTrue(
     int PR = 2, // 0=PR, 1=NP, 2=Inc.
     float ctauCut = 0.08)
 {
-      nCPU = 6;
+      nCPU = 10;
 
       TStopwatch *t = new TStopwatch;
       t->Start();
@@ -123,23 +123,14 @@ void CtauTrue(
   cout << endl << "************ Start MC Ctau True Fit ***************" << endl << endl;
   //MC NP ctau true
   double entries_True = ws->data("reducedDS_MC")->numEntries();
-  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True * 50, entries_True*20, entries_True * 100));
-  if(ptLow==3.5&&ptHigh==6.5){
-  ws->factory("lambdaDSS[0.3315, 1e-4, 1.0]");
-  ws->factory("lambdaDSS2[0.5038, 1e-4, 1.0]");
-  ws->factory("lambdaDSS3[0.3601, 1e-4, 1.0]");
-  ws->factory("lambdaDSS4[.341, 1e-4, 1.0]");
-  ws->factory("fDSS[0.8, 1e-4, 1.]");
-  ws->factory("fDSS1[0.8, 1e-4, 1.]");
-  ws->factory("fDSS2[0.8, 1e-4, 1.]");}
-  else {
-  ws->factory("lambdaDSS[0.2, 0.1, 1]");
-  ws->factory("lambdaDSS2[0.3, 0, 1]");
-  ws->factory("lambdaDSS3[0.1, 0, 1]");
-  ws->factory("lambdaDSS4[0.2, 0, 1]");
-  ws->factory("fDSS[0.3, 0., 1]");
-  ws->factory("fDSS1[0.3, 0., 1]"); 
-  ws->factory("fDSS2[0.6, 0., 1]"); }
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0.0, entries_True * 20));
+  ws->factory("lambdaDSS[0.6, 0, 0.999999]");
+  ws->factory("lambdaDSS2[0.3, 0, 0.999999]");
+  ws->factory("lambdaDSS3[0.5, 0, 0.999999]");
+  ws->factory("lambdaDSS4[0.7, 0, 0.999999]");
+  ws->factory("fDSS[0.5, 0., 0.999999]");
+  ws->factory("fDSS1[0.3, 0., 0.999999]"); 
+  ws->factory("fDSS2[0.6, 0., 0.999999]");
   /*
   ws->factory("lambdaDSS[0.5769, 0.5768, 0.577]");
   ws->factory("lambdaDSS2[0.3680, 0.3675, 0.3681]");

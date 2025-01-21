@@ -29,7 +29,7 @@ void Final2DFit(
     int cLow = 0, int cHigh = 180,
     int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
-    nCPU = 6;
+    nCPU = 10;
 
     TString DATE;
     // if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
@@ -81,10 +81,10 @@ void Final2DFit(
     // fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root","Corr",kineLabel.Data()));
     // if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
     // else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
-    if (ptLow == 3.5 && ptHigh == 40)
+    if (ptLow == 3.5 && ptHigh == 50)
         fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality0-180.root", DATE.Data()));
-    else if (ptLow == 6.5 && ptHigh == 40)
-        fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-40.0_y0.0-1.6_muPt0.0_centrality0-180.root", DATE.Data()));
+    else if (ptLow == 6.5 && ptHigh == 50)
+        fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root", DATE.Data()));
     else
         fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root", "No_Weight", kineLabel.Data()));
 

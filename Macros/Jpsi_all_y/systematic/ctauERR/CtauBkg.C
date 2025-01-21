@@ -30,7 +30,7 @@ void CtauBkg(
     int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
 
-  nCPU = 6;
+  nCPU = 10;
 
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
@@ -90,20 +90,20 @@ void CtauBkg(
   cout <<endl <<"************** Start BKG Ctau Fit *****************" <<endl <<endl;
   //make parameter 3 exp
   ws->factory("zeroMean[0.0]");
-  ws->factory("b_Bkg[0.86, 0.5, 0.99999]");//NP fraction for bkg
-  ws->factory("fDFSS[0.36, 0, 0.99999]");
-  ws->factory("fDLIV[0.7, 0, 0.99999]");
-  ws->factory("lambdaDDS_Bkg[0.8, 0, 0.99999]");
-  ws->factory("lambdaDF_Bkg1[0.6, 0, 0.99999]");
-  ws->factory("lambdaDF_Bkg2[0.37, 0, 0.99999]");
-  ws->factory("lambdaDF_Bkg3[0.67, 0, 0.99999]");
-  ws->factory("lambdaDSS_Bkg1[0.76, 0, 0.99999]");
-  ws->factory("lambdaDSS_Bkg2[0.6, 0, 0.99999]");
-  ws->factory("lambdaDSS_Bkg3[0.7, 0, 0.99999]");
-  ws->factory("fDSS12[0.6, 0, 0.99999]");
-  ws->factory("fDF12[0.3, 0, 0.99999]");
-  ws->factory("fDSS13[0.47, 0, 0.99999]");
-  ws->factory("fDF13[0.8, 0, 0.99999]");
+  ws->factory("b_Bkg[0.95, 0.9, 0.99999]");//NP fraction for bkg
+  ws->factory("fDFSS[0.8, 0.05, 0.99999]");
+  ws->factory("fDLIV[0.7, 0.05, 0.99999]");
+  ws->factory("lambdaDDS_Bkg[0.8, 0.01, 0.99999]");
+  ws->factory("lambdaDF_Bkg1[0.6, 0.01, 0.99999]");
+  ws->factory("lambdaDF_Bkg2[0.37, 0.01, 0.99999]");
+  ws->factory("lambdaDF_Bkg3[0.67, 0.01, 0.99999]");
+  ws->factory("lambdaDSS_Bkg1[0.76, 0.01, 0.99999]");
+  ws->factory("lambdaDSS_Bkg2[0.6, 0.05, 0.99999]");
+  ws->factory("lambdaDSS_Bkg3[0.7, 0.05, 0.99999]");
+  ws->factory("fDSS12[0.6, 0.05, 0.99999]");
+  ws->factory("fDF12[0.3, 0.05, 0.99999]");
+  ws->factory("fDSS13[0.47, 0.05, 0.99999]");
+  ws->factory("fDF13[0.4, 0.05, 0.99999]");
   //parameters fixed by Resolution model
   ws->var("ctau1_CtauRes")->setConstant(kTRUE); ws->var("s1_CtauRes")->setConstant(kTRUE);
   ws->var("ctau2_CtauRes")->setConstant(kTRUE);	ws->var("rS21_CtauRes")->setConstant(kTRUE);
@@ -169,8 +169,8 @@ void CtauBkg(
   //if (cLow==80&&cHigh==100) ctauMin=-1.0;
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
-  ctauMin = -0.5;
-  ctauMax = 1.4;
+ctauMin = -0.8;
+ctauMax = 1.6;
 
   cout << "ctau Min : " << ctauMin << ", ctauMax : " << ctauMax << endl;
 

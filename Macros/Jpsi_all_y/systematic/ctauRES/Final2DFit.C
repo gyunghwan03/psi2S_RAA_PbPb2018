@@ -24,12 +24,12 @@ using namespace std;
 using namespace RooFit;
 
 void Final2DFit(
-    double ptLow = 27.5, double ptHigh = 30,
+    double ptLow = 100, double ptHigh = 200,
     double yLow = 0, double yHigh = 2.4,
     int cLow = 0, int cHigh = 180,
     int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
-    nCPU = 6;
+    nCPU = 10;
 
     TString DATE;
     // if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
@@ -80,10 +80,10 @@ void Final2DFit(
     // fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root","Corr",kineLabel.Data()));
     // if(DATE=="0_180") fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root","0_180"));
     // else if(cLow==0&&cHigh==20) fCTrue = new TFile(Form("../2021_09_14/roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root",DATE.Data(),kineLabel.Data()));
-    if (ptLow == 3.5 && ptHigh == 40)
-        fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality0-180.root", DATE.Data()));
-    else if (ptLow == 6.5 && ptHigh == 40)
-        fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-40.0_y0.0-1.6_muPt0.0_centrality0-180.root", DATE.Data()));
+    if (ptLow == 3.5 && ptHigh == 50)
+        fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt3.5-50.0_y1.6-2.4_muPt0.0_centrality0-180.root", DATE.Data()));
+    else if (ptLow == 6.5 && ptHigh == 50)
+        fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_pt6.5-50.0_y0.0-2.4_muPt0.0_centrality0-180.root", DATE.Data()));
     else
         fCTrue = new TFile(Form("../../roots/2DFit_%s/CtauTrue/CtauTrueResult_Inclusive_%s.root", "No_Weight", kineLabel.Data()));
 
@@ -228,7 +228,7 @@ void Final2DFit(
     // else if(ptLow==6.5&&ptHigh==9) ws->factory("b_Jpsi[0.333, 0.30, 0.35]");
     // else if(ptLow==6.5&&cLow==0&&cHigh==20) ws->factory("b_Jpsi[0.80, 0.37, 1.0]");
     else
-        ws->factory("b_Jpsi[0.22, 1e-8, 1.0]"); // NP fraction for Sig
+        ws->factory("b_Jpsi[0.22, 0, 1.0]"); // NP fraction for Sig
     // if(ptLow==6.5&&ptHigh==7.5&&cLow==20&&cHigh==120) ws->factory("b_Jpsi[0.25, 1e-8, 1.0]");//NP fraction for Sig
 
     // RooProdPdf pdfbkgPR("pdfCTAU_BkgPR", "", *ws->pdf("pdfCTAUERR_Bkg"),
