@@ -32,7 +32,7 @@ void CtauTrue(
     int PR = 2, // 0=PR, 1=NP, 2=Inc.
     float ctauCut = 0.08)
 {
-      nCPU = 10;
+      nCPU = 11;
 
       TStopwatch *t = new TStopwatch;
       t->Start();
@@ -123,7 +123,7 @@ void CtauTrue(
   cout << endl << "************ Start MC Ctau True Fit ***************" << endl << endl;
   //MC NP ctau true
   double entries_True = ws->data("reducedDS_MC")->numEntries();
-  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0.0, entries_True * 20));
+  ws->factory(Form("N_Jpsi_MC[%.12f,%.12f,%.12f]", entries_True, 0.0, entries_True * 10));
   ws->factory("lambdaDSS[0.6, 0, 0.999999]");
   ws->factory("lambdaDSS2[0.3, 0, 0.999999]");
   ws->factory("lambdaDSS3[0.5, 0, 0.999999]");
