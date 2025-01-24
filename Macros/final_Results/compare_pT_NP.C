@@ -25,7 +25,7 @@ void compare_pT_NP(bool isSys=true)
 
   TFile *f_mid = new TFile("roots/RAA_psi2S_midRap_pT.root"); 
   TFile *f_fwd = new TFile("roots/RAA_psi2S_forRap_pT.root"); 
-  TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+  TFile *fSys = new TFile("../syst_summary_psi2S/syst_roots/total_syst.root");
   TFile *f_old = new TFile("./roots/Raa_NP_Jpsi_HIN_16_025.root");
 
   TH1D *h_midNP = (TH1D*) f_mid->Get("hRAA_NP");
@@ -175,8 +175,8 @@ void compare_pT_NP(bool isSys=true)
 	leg1->SetTextSize(text_size);
 	leg1->SetTextFont(43);
 	leg1->SetBorderSize(0);
-  leg1->AddEntry(g_midNP,"#bf{NonPrompt #psi(2S)} New Data, |y| < 1.6, Cent. 0-90%");
-  leg1->AddEntry(g_midNP_old,"#bf{NonPrompt J/#psi} HIN-16-025, |y| < 2.4, Cent. 0-100%");
+  leg1->AddEntry(g_midNP,"#bf{NonPrompt #psi(2S)} New Data, |y| < 1.6, Cent. 0-90%", "pe");
+  leg1->AddEntry(g_midNP_old,"#bf{NonPrompt J/#psi} HIN-16-025, |y| < 2.4, Cent. 0-100%", "pe");
   leg1->Draw("SAME");
   jumSun(0,1,50,1);
 

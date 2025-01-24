@@ -29,6 +29,7 @@ void DoubleRatio_Charmonia_pT()
 
 	TFile *f_mid_2S = new TFile(Form("roots/RAA_psi2S_midRap_pT_%.f.root",40.));
 	TFile *f_fwd_2S = new TFile(Form("roots/RAA_psi2S_forRap_pT_%.f.root",40.));
+	TFile *f_ALICE = new TFile("roots/DoubleRatio_ALICE_pT.root");
 
 	TFile *f_mid_Jpsi = new TFile("./roots/RAA_JPsi_midRap_pT.root");
 	TFile *f_fwd_Jpsi = new TFile("./roots/RAA_JPsi_forRap_pT.root");
@@ -73,7 +74,7 @@ void DoubleRatio_Charmonia_pT()
 		x_mid[i] = (ptBin_mid[i+1]+ptBin_mid[i])/2;
 		binWidth_mid[i] = (ptBin_mid[i+1]-ptBin_mid[i])/2;
 		DR_midPR[i] = midPR_2S[i]/midPR_Jpsi[i];
-		DR_midPR_Err[i] = TMath::Sqrt(TMath::Power(midPR_2S_Err[i],2)+TMath::Power(midPR_Jpsi_Err[i],2));
+		DR_midPR_Err[i] = DR_midPR[i]*(TMath::Sqrt(TMath::Power(midPR_2S_Err[i]/midPR_2S[i],2)+TMath::Power(midPR_Jpsi_Err[i]/midPR_Jpsi[i],2)));
 
 		//SysPR[i] = midPR_2S[i]*(hSys_PR->GetBinContent(i+1));
 	}
@@ -86,12 +87,13 @@ void DoubleRatio_Charmonia_pT()
 		x_fwd[i] = (ptBin_fwd[i+1]+ptBin_fwd[i])/2;
 		binWidth_fwd[i] = (ptBin_fwd[i+1]-ptBin_fwd[i])/2;
 		DR_fwdPR[i] = fwdPR_2S[i]/fwdPR_Jpsi[i];
-		DR_fwdPR_Err[i] = TMath::Sqrt(TMath::Power(fwdPR_2S_Err[i],2)+TMath::Power(fwdPR_Jpsi_Err[i],2));
+		DR_fwdPR_Err[i] = DR_fwdPR[i]*(TMath::Sqrt(TMath::Power(fwdPR_2S_Err[i]/fwdPR_2S[i],2)+TMath::Power(fwdPR_Jpsi_Err[i]/fwdPR_Jpsi[i],2)));
 		//SysPR_fwd[i] = fwdPR_2S[i]*(hSys_fwd_PR
 	}
 
 	TGraphErrors *g_midPR;
 	TGraphErrors *g_fwdPR;
+	TGraphErrors *g_alice = (TGraphErrors*)f_ALICE->Get("Table 6/Graph1D_y1");
 
 	g_midPR = new TGraphErrors(nPtBins_mid, x_mid, DR_midPR, binWidth_mid, DR_midPR_Err);
 	g_fwdPR = new TGraphErrors(nPtBins_fwd, x_fwd, DR_fwdPR, binWidth_fwd, DR_fwdPR_Err);
@@ -113,7 +115,7 @@ void DoubleRatio_Charmonia_pT()
 
 	g_midPR->GetXaxis()->SetTitle("p_{T} (GeV/c)");
 	g_midPR->GetXaxis()->CenterTitle();
-	g_midPR->GetYaxis()->SetTitle("Double Ratio");
+	g_midPR->GetYaxis()->SetTitle("(#psi(2S)/J/#psi)_{PbPb} / (#psi(2S)/J/#psi)_{pp}");
 	g_midPR->GetYaxis()->CenterTitle();
 	g_midPR->SetTitle();
 	g_midPR->GetXaxis()->SetLimits(0.,40);
@@ -122,12 +124,13 @@ void DoubleRatio_Charmonia_pT()
 
 	g_midPR->SetMarkerColor(kBlue+2);
 	g_midPR->SetLineColor(kBlue+2);
+	g_midPR->SetLineWidth(2);
 	g_midPR->SetMarkerStyle(20);
-	g_midPR->SetMarkerSize(1.4);
+	g_midPR->SetMarkerSize(1.6);
 
 	g_fwdPR->GetXaxis()->SetTitle("p_{T} (GeV/c)");
 	g_fwdPR->GetXaxis()->CenterTitle();
-	g_fwdPR->GetYaxis()->SetTitle("Double Ratio");
+	g_fwdPR->GetYaxis()->SetTitle("(#psi(2S)/J/#psi)_{PbPb} / (#psi(2S)/J/#psi)_{pp}");
 	g_fwdPR->GetYaxis()->CenterTitle();
 	g_fwdPR->SetTitle();
 	g_fwdPR->GetXaxis()->SetLimits(0.,40);
@@ -136,21 +139,40 @@ void DoubleRatio_Charmonia_pT()
 
 	g_fwdPR->SetMarkerColor(kRed+2);
 	g_fwdPR->SetLineColor(kRed+2);
-	g_fwdPR->SetMarkerStyle(20);
-	g_fwdPR->SetMarkerSize(1.4);
+	g_fwdPR->SetLineWidth(2);
+	g_fwdPR->SetMarkerStyle(21);
+	g_fwdPR->SetMarkerSize(1.6);
+
+	g_alice->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+	g_alice->GetXaxis()->CenterTitle();
+	g_alice->GetYaxis()->SetTitle("(#psi(2S)/J/#psi)_{PbPb} / (#psi(2S)/J/#psi)_{pp}");
+	g_alice->GetYaxis()->CenterTitle();
+	g_alice->SetTitle();
+	g_alice->GetXaxis()->SetLimits(0.,40);
+	g_alice->SetMinimum(0.);
+	g_alice->SetMaximum(1.44);
+
+	g_alice->SetMarkerColor(45);
+    g_alice->SetLineColor(45);
+    g_alice->SetMarkerStyle(33);
+    g_alice->SetMarkerSize(2.0);
 
 	g_midPR->Draw("AP");
 	g_fwdPR->Draw("P");
+	g_alice->Draw("P");
 
-	TLegend *leg1 = new TLegend(0.42,0.84,0.69,0.71);
+	TLegend *leg1 = new TLegend(0.17,0.87,0.44,0.77);
     leg1->SetTextSize(text_size);
     leg1->SetTextFont(43);
     leg1->SetBorderSize(0);
 	leg1->AddEntry(g_midPR,"#bf{Prompt}, |y| < 1.6,  Cent. 0-90%");
 	leg1->AddEntry(g_fwdPR,"#bf{Prompt}, 1.6 < |y| < 2.4, Cent. 0-90%");
+	leg1->AddEntry(g_alice,"#bf{Inclusive} (ALICE), 2.5 < y < 4, Cent. 0-90%");
 	leg1->Draw("SAME");
 	jumSun(0,1,40,1);
 	CMS_lumi_v2mass(c1, iPeriod, iPos);
 	c1->SaveAs("figs/DoubleRatio_Prompt_pT.pdf");
     c1->SaveAs("figs/DoubleRatio_Prompt_pT.png");
+
+	TCanvas *c2 = new TCanvas("c2","",900,900);
 }

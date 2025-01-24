@@ -16,7 +16,9 @@ void compare_pT()
 
   TFile *f_mid = new TFile("roots/RAA_psi2S_midRap_pT.root"); 
   TFile *f_fwd = new TFile("roots/RAA_psi2S_forRap_pT.root"); 
-  TFile *fSys = new TFile("../syst_summary_new_cent_bins_240719/syst_roots/total_syst.root");
+  TFile *f_mid1S = new TFile("roots/RAA_JPsi_midRap_pT.root"); 
+  TFile *f_fwd1S = new TFile("roots/RAA_JPsi_forRap_pT.root"); 
+  TFile *fSys = new TFile("../syst_summary_psi2S/syst_roots/total_syst.root");
 
   TH1D *h_midPR = (TH1D*) f_mid->Get("hRAA_PR");
   TH1D *h_fwdPR = (TH1D*) f_fwd->Get("hRAA_PR");

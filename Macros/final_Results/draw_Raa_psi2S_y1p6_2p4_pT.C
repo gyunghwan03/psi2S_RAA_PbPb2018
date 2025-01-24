@@ -49,16 +49,25 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
     //TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_20230801.root");
     //TFile *fAcc_pp = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
     //TFile *fAcc_PbPb = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20230728.root");
-    TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+    //TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
     //TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst_NobFrac.root");
-    TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20231226.root");
-    TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_20231226.root");
-    TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20231226.root");
-    TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_20231226.root");
-    TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20231226.root");
-    TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20231226.root");
+    //TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20231226.root");
+    //TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_20231226.root");
+    //TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20231226.root");
+    //TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_20231226.root");
+    //TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20231226.root");
+    //TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20231226.root");
+    //TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_pp_SysUp0_20240514.root");
+    //TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20240515.root");
+	TFile *fEff_PbPbPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20240807_ppWfunc.root");
+    TFile *fEff_PbPbNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_20240807_ppWfunc.root");
+    TFile *fEff_ppPR = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2s_PtW1_tnp1_20230728.root");
+    TFile *fEff_ppNP = new TFile("../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2s_PtW1_tnp1_20230801.root");
+    TFile *fAcc_ppPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
+    TFile *fAcc_PbPbPR = new TFile("../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
     TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_pp_SysUp0_20240514.root");
-    TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_PbPb_SysUp0_20240515.root");
+    TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_pp_SysUp0_20240514.root");
+    TFile *fSys = new TFile("../syst_summary_psi2S/syst_roots/total_syst.root");
 
     TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
     TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
@@ -370,10 +379,10 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
     }
 
 
-	TLegend *legPR = new TLegend(0.68,0.75,0.8,0.85);
+	TLegend *legPR = new TLegend(0.66,0.75,0.8,0.85);
     SetLegendStyle(legPR);
-	legPR->AddEntry(gXpp_PR,"pp", "p");
-	legPR->AddEntry(gXPbPb_PR,"PbPb, Cent. 0-90%", "p");
+	legPR->AddEntry(gXpp_PR,"pp", "pe");
+	legPR->AddEntry(gXPbPb_PR,"PbPb, Cent. 0-90%", "pe");
 	legPR->Draw("SAME");
 	jumSun(0,1,ptHigh,1);
 
@@ -425,10 +434,10 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
         gSysNP_pp->Draw("5");
     }
 
-    TLegend *legNP = new TLegend(0.68,0.72,0.8,0.82);
+    TLegend *legNP = new TLegend(0.66,0.72,0.8,0.82);
     SetLegendStyle(legNP);
-	legNP->AddEntry(gXpp_NP,"pp", "p");
-	legNP->AddEntry(gXPbPb_NP,"PbPb, Cent. 0-90%", "p");
+	legNP->AddEntry(gXpp_NP,"pp", "pe");
+	legNP->AddEntry(gXPbPb_NP,"PbPb, Cent. 0-90%", "pe");
 	legNP->Draw("SAME");
 	jumSun(0,1,ptHigh,1);
 
@@ -483,10 +492,10 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true, double ptHigh = 40)
         gSysNP->Draw("5");
     }
 
-	TLegend *leg = new TLegend(0.68,0.72,0.8,0.82);
+	TLegend *leg = new TLegend(0.66,0.72,0.8,0.82);
     SetLegendStyle(leg);
-	leg->AddEntry(gRaaPR,"Prompt #psi(2S)", "p");
-	leg->AddEntry(gRaaNP,"Non Prompt #psi(2S)", "p");
+	leg->AddEntry(gRaaPR,"Prompt #psi(2S)", "pe");
+	leg->AddEntry(gRaaNP,"Non Prompt #psi(2S)", "pe");
 	leg->Draw("SAME");
 	jumSun(0,1,ptHigh,1);
 

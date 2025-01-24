@@ -25,15 +25,22 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
 
   TFile *f_mid = new TFile(Form("roots/RAA_psi2S_midRap_pT_%.f.root",ptHigh)); 
   TFile *f_fwd = new TFile(Form("roots/RAA_psi2S_forRap_pT_%.f.root",ptHigh)); 
-  TFile *fSys = new TFile("../syst_summary/syst_roots/total_syst.root");
+  TFile *f_mid1S = new TFile("roots/RAA_JPsi_midRap_pT.root"); 
+  TFile *f_fwd1S = new TFile("roots/RAA_JPsi_forRap_pT.root"); 
+  TFile *fSys1S = new TFile("../syst_summary_Jpsi/syst_roots/total_syst.root");
+  TFile *fSys2S = new TFile("../syst_summary_psi2S/syst_roots/total_syst.root");
   TFile *f_midJpsi_Old = new TFile("roots/RAA_PR_Jpsi_HIN_16_025_mid_pT.root");
   TFile *f_fwdJpsi_Old = new TFile("roots/RAA_PR_Jpsi_HIN_16_025_fwd_pT.root");
 
   TH1D *h_midPR = (TH1D*) f_mid->Get("hRAA_PR");
   TH1D *h_fwdPR = (TH1D*) f_fwd->Get("hRAA_PR");
+  TH1D *h_midPR1S = (TH1D*) f_mid1S->Get("hRAA_PR");
+  TH1D *h_fwdPR1S = (TH1D*) f_fwd1S->Get("hRAA_PR");
+  TH1D *hSys1S_mid_PR = (TH1D*) fSys1S->Get("mid_pt_PR");
+  TH1D *hSys1S_fwd_PR = (TH1D*) fSys1S->Get("fwd_pt_PR");
 
-  TH1D *hSys_PR = (TH1D*) fSys->Get("mid_pt_PR");
-  TH1D *hSys_fwd_PR = (TH1D*) fSys->Get("fwd_pt_PR");
+  TH1D *hSys2S_mid_PR = (TH1D*) fSys2S->Get("mid_pt_PR");
+  TH1D *hSys2S_fwd_PR = (TH1D*) fSys2S->Get("fwd_pt_PR");
 
   TH1F *h_midPRold_Jpsi =    (TH1F*) f_midJpsi_Old->Get("Table 18/Hist1D_y1");
   TH1F *h_midPRold_JpsiErr = (TH1F*) f_midJpsi_Old->Get("Table 18/Hist1D_y1_e1");
@@ -66,8 +73,15 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   double fwdPR_new_Err[nPtBins_fwd]; 
   double fwdPR_new_Sys[nPtBins_fwd]; 
 
-  double SysPR[nPtBins]; 
-  double SysPR_fwd[nPtBins_fwd];
+  double midPR1S_new[nPtBins]; 
+  double midPR1S_new_Err[nPtBins]; 
+  double fwdPR1S_new[nPtBins_fwd]; 
+  double fwdPR1S_new_Err[nPtBins_fwd]; 
+
+  double SysPR1S_mid[nPtBins]; 
+  double SysPR1S_fwd[nPtBins_fwd];
+  double SysPR2S_mid[nPtBins]; 
+  double SysPR2S_fwd[nPtBins_fwd];
 
   double PRJpsi_midOld[nPtBins-1];
   double PRJpsi_midOld_Err[nPtBins-1];
@@ -91,9 +105,12 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   for (int i=0; i<nPtBins; i++){
     midPR_new[i] = h_midPR->GetBinContent(i+1);
     midPR_new_Err[i] = h_midPR->GetBinError(i+1);
+    midPR1S_new[i] = h_midPR1S->GetBinContent(i+1);
+    midPR1S_new_Err[i] = h_midPR1S->GetBinError(i+1);
     x[i] = (ptBin[i+1]+ptBin[i])/2;
     binWidth[i] = (ptBin[i+1]-ptBin[i])/2;
-    SysPR[i] = midPR_new[i]*(hSys_PR->GetBinContent(i+1));
+    SysPR1S_mid[i] = midPR1S_new[i]*(hSys1S_mid_PR->GetBinContent(i+1));
+    SysPR2S_mid[i] = midPR_new[i]*(hSys2S_mid_PR->GetBinContent(i+1));
   }
   for (int i=0; i<nPtBins-1; i++){
     PRJpsi_midOld[i] = h_midPRold_Jpsi->GetBinContent(i+1);
@@ -110,48 +127,59 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   for (int i=0; i<nPtBins_fwd; i++){
     fwdPR_new[i] = h_fwdPR->GetBinContent(i+1);
     fwdPR_new_Err[i] = h_fwdPR->GetBinError(i+1);
+    fwdPR1S_new[i] = h_fwdPR1S->GetBinContent(i+1);
+    fwdPR1S_new_Err[i] = h_fwdPR1S->GetBinError(i+1);
     x_fwd[i] = (ptBin_fwd[i+1]+ptBin_fwd[i])/2;
     binWidth_fwd[i] = (ptBin_fwd[i+1]-ptBin_fwd[i])/2;
-    SysPR_fwd[i] = fwdPR_new[i]*(hSys_fwd_PR->GetBinContent(i+1));
+    SysPR1S_fwd[i] = fwdPR1S_new[i]*(hSys1S_fwd_PR->GetBinContent(i+1));
+    SysPR2S_fwd[i] = fwdPR_new[i]*(hSys2S_fwd_PR->GetBinContent(i+1));
   }
 
   TGraphErrors *g_midPR;
+  TGraphErrors *g_midPR1S;
   TGraphErrors *g_midPR_old;
   TGraphErrors *g_midPRold_Jpsi;
   TGraphErrors *g_fwdPRold_Jpsi;
 
   if(isSys==1){
     g_midPR = new TGraphErrors(nPtBins, x, midPR_new, 0, midPR_new_Err);
+    g_midPR1S = new TGraphErrors(nPtBins, x, midPR1S_new, 0, midPR1S_new_Err);
     g_midPR_old = new TGraphErrors(nPtBins - 1, x_old, midPR_old, 0, midPR_old_Err);
     g_midPRold_Jpsi = new TGraphErrors(nPtBins - 1, x_old, PRJpsi_midOld, 0, PRJpsi_midOld_Err);
     g_fwdPRold_Jpsi = new TGraphErrors(3, x_fwd_Jpsi, PRJpsi_fwdOld, 0, PRJpsi_fwdOld_Err);
   }
   else {
     g_midPR = new TGraphErrors(nPtBins, x, midPR_new, binWidth, midPR_new_Err);
+    g_midPR1S = new TGraphErrors(nPtBins, x, midPR1S_new, binWidth, midPR1S_new_Err);
     g_midPR_old = new TGraphErrors(nPtBins - 1, x_old, midPR_old, binWidth_old, midPR_old_Err);
     g_midPRold_Jpsi = new TGraphErrors(nPtBins - 1, x_old, PRJpsi_midOld, binWidth_old, PRJpsi_midOld_Err);
     g_fwdPRold_Jpsi = new TGraphErrors(3, x_fwd_Jpsi, PRJpsi_fwdOld, binWidth_fwd_Jpsi, PRJpsi_fwdOld_Err);
   }
-  TGraphErrors *g_midPRSys = new TGraphErrors(nPtBins,x,midPR_new,binWidth,SysPR);
+  TGraphErrors *g_midPRSys1S = new TGraphErrors(nPtBins,x,midPR1S_new,binWidth,SysPR1S_mid);
+  TGraphErrors *g_midPRSys = new TGraphErrors(nPtBins,x,midPR_new,binWidth,SysPR2S_mid);
   TGraphErrors *g_midPR_oldSys = new TGraphErrors(nPtBins-1,x_old,midPR_old,binWidth_old,midPR_old_Sys);
   TGraphErrors *g_midPRold_JpsiSys = new TGraphErrors(nPtBins-1,x_old,PRJpsi_midOld,binWidth_old,PRJpsi_midOld_Sys);
   TGraphErrors *g_fwdPRold_JpsiSys = new TGraphErrors(3,x_fwd_Jpsi,PRJpsi_fwdOld,binWidth_fwd_Jpsi,PRJpsi_fwdOld_Sys);
 
   TGraphErrors *g_fwdPR;
+  TGraphErrors *g_fwdPR1S;
   TGraphErrors *g_fwdPR_old;
   TGraphErrors *g_alice;
 
   if(isSys==1){
     g_fwdPR = new TGraphErrors(nPtBins_fwd, x_fwd, fwdPR_new, 0, fwdPR_new_Err);
+    g_fwdPR1S = new TGraphErrors(nPtBins_fwd, x_fwd, fwdPR1S_new, 0, fwdPR1S_new_Err);
     g_fwdPR_old = new TGraphErrors(2, x_fwd_old, fwdPR_old, 0, fwdPR_old_Err);
     g_alice = new TGraphErrors(4, x_alice, alice_var, 0, alice_err);
   }
   else{
     g_fwdPR = new TGraphErrors(nPtBins_fwd, x_fwd, fwdPR_new, binWidth_fwd, fwdPR_new_Err);
+    g_fwdPR1S = new TGraphErrors(nPtBins_fwd, x_fwd, fwdPR1S_new, binWidth_fwd, fwdPR1S_new_Err);
     g_fwdPR_old = new TGraphErrors(2, x_fwd_old, fwdPR_old, binWidth_fwd_old, fwdPR_old_Err);
     g_alice = new TGraphErrors(4, x_alice, alice_var, binWidth_alice, alice_err);
   }
-  TGraphErrors *g_fwdPRSys = new TGraphErrors(nPtBins_fwd,x_fwd,fwdPR_new,binWidth_fwd,SysPR_fwd);
+  TGraphErrors *g_fwdPRSys1S = new TGraphErrors(nPtBins_fwd,x_fwd,fwdPR1S_new,binWidth_fwd,SysPR1S_fwd);
+  TGraphErrors *g_fwdPRSys = new TGraphErrors(nPtBins_fwd,x_fwd,fwdPR_new,binWidth_fwd,SysPR2S_fwd);
   TGraphErrors *g_fwdPR_oldSys = new TGraphErrors(2,x_fwd_old,fwdPR_old,binWidth_fwd_old,fwdPR_old_Sys);
   TGraphErrors *g_aliceSys = new TGraphErrors(4,x_alice,alice_var,binWidth_alice,alice_sys);
 
@@ -160,16 +188,16 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   TArrow *fwdPR_upper = new TArrow(x_1st,0,x_1st,0.395,0.027,"<-|");
 
   int iPeriod = 101;
-	int iPos = 33;
+  int iPos = 33;
 
   double text_x = 0.18;
-	double text_y = 0.8;
-	double y_diff = 0.08;
+  double text_y = 0.8;
+  double y_diff = 0.08;
   float pos_x = 0.21;
-	float pos_y = 0.87;
-	float pos_y_diff = 0.051;
-	int text_color = 1;
-	float text_size = 25;
+  float pos_y = 0.87;
+  float pos_y_diff = 0.051;
+  int text_color = 1;
+  float text_size = 25;
 
   TCanvas *c1 = new TCanvas("c1","",900,800);
   c1->cd();
@@ -189,6 +217,23 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   g_midPR->SetMarkerSize(1.4);
   g_midPRSys->SetLineColor(kBlue-4);
   g_midPRSys->SetFillColorAlpha(kBlue-9,0.40);
+
+  g_midPR1S->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+  g_midPR1S->GetXaxis()->CenterTitle();
+  g_midPR1S->GetYaxis()->SetTitle("R_{AA}");
+  g_midPR1S->GetYaxis()->CenterTitle();
+  g_midPR1S->SetTitle();
+  g_midPR1S->GetXaxis()->SetLimits(0.,ptHigh);
+  g_midPR1S->SetMinimum(0.);
+  g_midPR1S->SetMaximum(1.44);
+  g_midPR1S->SetMarkerStyle(33);
+  g_midPR1S->SetMarkerSize(1.9);
+  g_midPR1S->SetMarkerColor(kViolet+2);
+  g_midPR1S->SetLineColor(kViolet+2);
+  g_midPRSys1S->SetLineColor(kViolet-4);
+  g_midPRSys1S->SetFillColorAlpha(kViolet-9,0.40);
+
+
   g_midPR_old->GetXaxis()->SetTitle("p_{T} (GeV/c)");
   g_midPR_old->GetXaxis()->CenterTitle();
   g_midPR_old->GetYaxis()->SetTitle("R_{AA}");
@@ -213,31 +258,34 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   g_midPRold_Jpsi->GetXaxis()->SetLimits(0.,ptHigh);
   g_midPRold_Jpsi->SetMinimum(0.);
   g_midPRold_Jpsi->SetMaximum(1.44);
-  g_midPRold_Jpsi->SetMarkerStyle(33);
-  g_midPRold_Jpsi->SetMarkerSize(1.8);
-  g_midPRold_Jpsi->SetMarkerColor(38);
-  g_midPRold_Jpsi->SetLineColor(38);
+  g_midPRold_Jpsi->SetMarkerStyle(27);
+  g_midPRold_Jpsi->SetMarkerSize(1.4);
+  g_midPRold_Jpsi->SetMarkerColor(40);
+  g_midPRold_Jpsi->SetLineColor(40);
 
-  g_midPRold_JpsiSys->SetLineColor(38);
-  g_midPRold_JpsiSys->SetFillColorAlpha(38,0.4);
+  g_midPRold_JpsiSys->SetLineColor(40);
+  g_midPRold_JpsiSys->SetFillColorAlpha(40,0.4);
 
 
   g_midPR->Draw("AP");
+  g_midPR1S->Draw("P");
   g_midPR_old->Draw("P");
   g_midPRold_Jpsi->Draw("P");
   if(isSys==1){
+	g_midPRSys1S->Draw("5");
     g_midPRSys->Draw("5");
     g_midPR_oldSys->Draw("5");
     g_midPRold_JpsiSys->Draw("5");
   }
 
-  TLegend *leg1 = new TLegend(0.42,0.69,0.69,0.56);
-	leg1->SetTextSize(text_size);
-	leg1->SetTextFont(43);
-	leg1->SetBorderSize(0);
-  leg1->AddEntry(g_midPR,"#bf{Prompt #psi(2S)} New Data, Cent. 0-90%");
-  leg1->AddEntry(g_midPR_old,"#bf{Prompt #psi(2S)} HIN-16-025, Cent. 0-100%");
-  leg1->AddEntry(g_midPRold_Jpsi,"#bf{Prompt J/#psi} HIN-16-025, Cent. 0-100%");
+  TLegend *leg1 = new TLegend(0.38,0.69,0.65,0.54);
+  leg1->SetTextSize(text_size);
+  leg1->SetTextFont(43);
+  leg1->SetBorderSize(0);
+  leg1->AddEntry(g_midPR,"#bf{Prompt #psi(2S)} New Data, Cent. 0-90%", "pe");
+  leg1->AddEntry(g_midPR1S,"#bf{Prompt J/#psi} New Data, Cent. 0-90%", "pe");
+  leg1->AddEntry(g_midPR_old,"#bf{Prompt #psi(2S)} HIN-16-025, Cent. 0-100%", "pe");
+  leg1->AddEntry(g_midPRold_Jpsi,"#bf{Prompt J/#psi} HIN-16-025, Cent. 0-100%", "pe");
   leg1->Draw("SAME");
   jumSun(0,1,ptHigh,1);
 
@@ -264,6 +312,22 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   g_fwdPR->SetMarkerSize(1.4);
   g_fwdPRSys->SetLineColor(kBlue-4);
   g_fwdPRSys->SetFillColorAlpha(kBlue-9,0.40);
+
+  g_fwdPR1S->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+  g_fwdPR1S->GetXaxis()->CenterTitle();
+  g_fwdPR1S->GetYaxis()->SetTitle("R_{AA}");
+  g_fwdPR1S->GetYaxis()->CenterTitle();
+  g_fwdPR1S->SetTitle();
+  g_fwdPR1S->GetXaxis()->SetLimits(0.,ptHigh);
+  g_fwdPR1S->SetMinimum(0.);
+  g_fwdPR1S->SetMaximum(1.44);
+  g_fwdPR1S->SetMarkerStyle(33);
+  g_fwdPR1S->SetMarkerSize(2.0);
+  g_fwdPR1S->SetMarkerColor(kViolet+2);
+  g_fwdPR1S->SetLineColor(kViolet+2);
+  g_fwdPRSys1S->SetLineColor(kViolet-4);
+  g_fwdPRSys1S->SetFillColorAlpha(kViolet-9,0.40);
+
 
   g_fwdPR_old->SetMarkerStyle(25);
   g_fwdPR_old->SetMarkerSize(1.4);
@@ -297,21 +361,23 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   g_fwdPRold_Jpsi->GetXaxis()->SetLimits(0.,ptHigh);
   g_fwdPRold_Jpsi->SetMinimum(0.);
   g_fwdPRold_Jpsi->SetMaximum(1.44);
-  g_fwdPRold_Jpsi->SetMarkerStyle(33);
-  g_fwdPRold_Jpsi->SetMarkerSize(1.8);
-  g_fwdPRold_Jpsi->SetMarkerColor(38);
-  g_fwdPRold_Jpsi->SetLineColor(38);
+  g_fwdPRold_Jpsi->SetMarkerStyle(27);
+  g_fwdPRold_Jpsi->SetMarkerSize(1.4);
+  g_fwdPRold_Jpsi->SetMarkerColor(40);
+  g_fwdPRold_Jpsi->SetLineColor(40);
 
-  g_fwdPRold_JpsiSys->SetLineColor(38);
-  g_fwdPRold_JpsiSys->SetFillColorAlpha(38,0.4);
+  g_fwdPRold_JpsiSys->SetLineColor(40);
+  g_fwdPRold_JpsiSys->SetFillColorAlpha(40,0.4);
 
   fwdPR_upper->SetLineColor(15);
   fwdPR_upper->SetLineWidth(2);
 
   g_fwdPR->Draw("AP");
+  g_fwdPR1S->Draw("P");
   g_fwdPR_old->Draw("P");
   g_fwdPRold_Jpsi->Draw("P");
   if(isSys==1){
+    g_fwdPRSys1S->Draw("5");
     g_fwdPRSys->Draw("5");
     g_fwdPR_oldSys->Draw("5");
     g_aliceSys->Draw("5");
@@ -320,20 +386,74 @@ void compare_pT_PR(bool isSys=false, double ptHigh=40)
   fwdPR_upper->Draw("");
   g_alice->Draw("P");
 
-  TLegend *leg2 = new TLegend(0.22,0.69,0.49,0.56);
+  TLegend *leg2 = new TLegend(0.29,0.69,0.63,0.5);
   leg2->SetTextSize(text_size);
-	leg2->SetTextFont(43);
-	leg2->SetBorderSize(0);
-  leg2->AddEntry(g_fwdPR,"#bf{Prompt #psi(2S)} New Data, Cent. 0-90%");
-  leg2->AddEntry(g_fwdPR_old,"#bf{Propmt #psi(2S)} HIN-16-025, Cent. 0-100%");
-  leg2->AddEntry(g_fwdPRold_Jpsi,"#bf{Prompt J/#psi} HIN-16-025, Cent. 0-100%");
-  leg2->AddEntry(g_alice,"#bf{Inclusive #psi(2S)} ALICE, 2.5 < y < 4, Cent.0-90%");
+  leg2->SetTextFont(43);
+  leg2->SetBorderSize(0);
+  leg2->AddEntry(g_fwdPR,"#bf{Prompt #psi(2S)} New Data, Cent. 0-90%", "pe");
+  leg2->AddEntry(g_fwdPR1S,"#bf{Prompt J/#psi} New Data, Cent. 0-90%", "pe");
+  leg2->AddEntry(g_fwdPR_old,"#bf{Propmt #psi(2S)} HIN-16-025, Cent. 0-100%", "pe");
+  leg2->AddEntry(g_fwdPRold_Jpsi,"#bf{Prompt J/#psi} HIN-16-025, Cent. 0-100%", "pe");
+  leg2->AddEntry(g_alice,"#bf{Inclusive #psi(2S)} ALICE, 2.5 < y < 4, Cent.0-90%", "pe");
   leg2->Draw("SAME");
   jumSun(0,1,ptHigh,1);
 
   drawText(Form("3.5 < p_{T} < %.f GeV/c",ptHigh), pos_x, pos_y, text_color, text_size);
-	drawText("1.6< |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
+	drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
   CMS_lumi_v2mass(c2, iPeriod, iPos);
 
   c2->SaveAs(Form("./figs/compare_PR_fwd_pT_%.f_Sys%d.pdf",ptHigh,isSys));
+
+  TCanvas *c3 = new TCanvas("c3","",900,800);
+  c3->cd();
+  g_midPR->Draw("AP");
+  g_midPR_old->Draw("P");
+  if(isSys==1){
+    g_midPRSys->Draw("5");
+    g_midPR_oldSys->Draw("5");
+  }
+
+  TLegend *leg3 = new TLegend(0.38,0.69,0.65,0.56);
+  leg3->SetTextSize(text_size);
+  leg3->SetTextFont(43);
+  leg3->SetBorderSize(0);
+  leg3->AddEntry(g_midPR,"#bf{Prompt #psi(2S)} New Data, Cent. 0-90%", "pe");
+  leg3->AddEntry(g_midPR_old,"#bf{Prompt #psi(2S)} HIN-16-025, Cent. 0-100%", "pe");
+  leg3->Draw("SAME");
+  jumSun(0,1,ptHigh,1);
+
+  drawText(Form("6.5 < p_{T} < %.f GeV/c",ptHigh), pos_x, pos_y, text_color, text_size);
+  drawText("|y| < 1.6", pos_x, pos_y-pos_y_diff, text_color, text_size);
+  CMS_lumi_v2mass(c3, iPeriod, iPos);
+
+  c3->SaveAs(Form("./figs/compare_PR_mid_pT_%.f_Sys%d_psi2S.pdf",ptHigh,isSys));
+
+  TCanvas *c4 = new TCanvas("c4","",900,800);
+  c4->cd();
+  g_fwdPR->Draw("AP");
+  g_fwdPR_old->Draw("P");
+  g_alice->Draw("P");
+  if(isSys==1){
+    g_fwdPRSys->Draw("5");
+    g_fwdPR_oldSys->Draw("5"); 
+    g_aliceSys->Draw("5");
+  }
+  fwdPR_upper->Draw("");
+
+  TLegend *leg4 = new TLegend(0.29,0.69,0.63,0.56);
+  leg4->SetTextSize(text_size);
+  leg4->SetTextFont(43);
+  leg4->SetBorderSize(0);
+  leg4->AddEntry(g_fwdPR,"#bf{Prompt #psi(2S)} New Data, Cent. 0-90%", "pe");
+  leg4->AddEntry(g_fwdPR_old,"#bf{Prompt #psi(2S)} HIN-16-025, Cent. 0-100%", "pe");
+  leg4->AddEntry(g_alice,"#bf{Inclusive #psi(2S)} ALICE, 2.5 < y < 4, Cent. 0-90%", "pe");
+  leg4->Draw("SAME");
+  jumSun(0,1,ptHigh,1);
+
+  drawText(Form("3.5 < p_{T} < %.f GeV/c",ptHigh), pos_x, pos_y, text_color, text_size);
+  drawText("1.6 < |y| < 2.4", pos_x, pos_y-pos_y_diff, text_color, text_size);
+  CMS_lumi_v2mass(c4, iPeriod, iPos);
+
+  c4->SaveAs(Form("./figs/compare_PR_fwd_pT_%.f_Sys%d_psi2S.pdf",ptHigh,isSys));
+
 }
