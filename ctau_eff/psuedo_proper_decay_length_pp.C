@@ -20,13 +20,14 @@ using namespace std;
 
 void GetHistSqrt(TH1D* h1 =0, TH1D* h2=0);
 
-void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
-    float ptLow =  3, float ptHigh = 30, 
+void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30, 
     float yLow = 1.6, float yHigh = 2.4,
     float SiMuPtCut = 0, float massLow = 3.3, float massHigh =4.1, int PRMC=0, bool dimusign=true, bool fAccW = false, bool fEffW = false)
 {
+  // Jpsi mass range: 2.6 - 3.5
+  // 2S mass range: 3.3 - 4.1
 
-  TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, SiMuPtCut, cLow, cHigh) ;
+  TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, SiMuPtCut) ;
   kineLabel = kineLabel + Form("_m%.1f-%.1f",massLow,massHigh);
 
   //Basic Setting
@@ -40,9 +41,9 @@ void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
   TTree *treePRMC;
   TTree *treeNPMC;
 
-  fData = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_DBAllPD_isMC0_HFNom_201127.root");
-  fPRMC = new TFile("../skimmedFiles/OniaFlowSkim_Psi2S_JpsiTrig_Prompt_isMC1_HFNom_210603.root");
-  fNPMC = new TFile("../skimmedFiles/OniaFlowSkim_Psi2S_JpsiTrig_NonPrompt_isMC1_HFNom_noNCollw_230127.root");
+  fData  = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_DoubleMuonPD_pp_isMC0_221226.root");
+  fPRMC  = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_DoubleMuonPD_pp_psi2S_isMC1_230126.root");
+  fNPMC  = new TFile("../skimmedFiles/OniaFlowSkim_Psi2S_JpsiTrig_NonPrompt_isMC1_HFNom_noNCollw_230127.root");
 
   TCut mCut;
   TCut ptCut;
@@ -57,7 +58,7 @@ void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
   mCut = Form("mass>=%.1f&&mass<=%.1f",massLow, massHigh);
   ptCut = Form("pt>%1.f&&pt<%.1f", ptLow, ptHigh);
   yCut  = Form("abs(y)>%.1f&&abs(y)<%.1f", yLow, yHigh);
-  cCut  = Form("cBin>=%d&&cBin<=%d",cLow,cHigh);
+  //cCut  = Form("cBin>=%d&&cBin<=%d",cLow,cHigh);
   sglMuCut = Form("abs(eta1)>%.1f&&abs(eta1)<%.1f&&abs(eta2)>%.1f&&abs(eta2)<%.1f", yLow, yHigh, yLow, yHigh);
   accCut= ("( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || \
       ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || \
@@ -65,7 +66,7 @@ void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
 
   cout<<kineLabel<<endl;
   TCut totalCut ="";
-  totalCut = quality&&dimuSign&&mCut&&ptCut&&yCut&&cCut&&sglMuCut&&accCut;
+  totalCut = quality&&dimuSign&&mCut&&ptCut&&yCut&&sglMuCut&&accCut;
   //totalCut = quality&&dimuSign&&mCut&&ptCut&&yCut&&cCut&&sglMuCut;
   cout<<totalCut<<endl;
   //if(forPR==0)consider="PR_eff";
@@ -144,9 +145,9 @@ void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
   h_massCut->SetLineColor(kRed);
   c_mass->Update();
   if(PRMC==0){
-  c_mass->SaveAs(Form("figs_2S_Pb/decayL/PRMC/mass_%s.pdf", kineLabel.Data()));}
+  c_mass->SaveAs(Form("figs_2S_pp/decayL/PRMC/mass_%s.pdf", kineLabel.Data()));}
   else if(PRMC==1){
-  c_mass->SaveAs(Form("figs_2S_Pb/decayL/NPMC/mass_%s.pdf", kineLabel.Data()));}
+  c_mass->SaveAs(Form("figs_2S_pp/decayL/NPMC/mass_%s.pdf", kineLabel.Data()));}
 
   float pos_x = 0.23;
   float pos_x_mass = 0.55;
@@ -182,30 +183,29 @@ void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
   else if(yLow!=0) drawText(Form("%.1f < |y^{#mu#mu}| < %.1f",yLow, yHigh ), pos_x_mass,pos_y-pos_y_diff,text_color,text_size);
   //drawText(Form("p_{T}^{#mu} > %.1f GeV/c", SiMuPtCut ), pos_x_mass,pos_y-pos_y_diff*1,text_color,text_size);
   drawText("|#eta^{#mu}| < 2.4", pos_x_mass,pos_y-pos_y_diff*1.5,text_color,text_size);
-  drawText(Form("Centrality %d-%d%s",cLow/2,cHigh/2,perc.Data()),pos_x_mass,pos_y-pos_y_diff*2,text_color,text_size);
   if(PRMC==0){
     drawText(Form("L_{J/psi} cut: %.4f", lcutv->GetX1()),pos_x_mass,pos_y-pos_y_diff*3,text_color,text_size);
     drawText(Form("PR J/psi eff: %.3f", lcuth->GetY1()),pos_x_mass,pos_y-pos_y_diff*3.5,text_color,text_size);
     drawText(Form("NP J/psi res: %.3f", lresi->GetY1()),pos_x_mass,pos_y-pos_y_diff*4, kRed+2,text_size);
     c_decayL->Update();
-    c_decayL->SaveAs(Form("figs_2S_Pb/decayL/PRMC/decay_%s.pdf",kineLabel.Data()));
-    TFile *wf = new TFile(Form("roots_2S_Pb/decayL/PRMC/decay_hist_%s.root", kineLabel.Data()),"recreate");
+    c_decayL->SaveAs(Form("figs_2S_pp/decayL/PRMC/decay_%s.pdf",kineLabel.Data()));
+    TFile *wf = new TFile(Form("roots_2S_pp/decayL/PRMC/decay_hist_%s.root", kineLabel.Data()),"recreate");
     wf->cd();}
     else if(PRMC==1){
       drawText(Form("L_{J/psi} cut: %.4f", lcutv->GetX1()),pos_x_mass,pos_y-pos_y_diff*3,text_color,text_size);
       drawText(Form("NP J/psi eff: %.3f", 1-lcuth->GetY1()),pos_x_mass,pos_y-pos_y_diff*3.5,kRed+2,text_size);
       drawText(Form("PR J/psi res: %.3f", 1-lresi->GetY1()),pos_x_mass,pos_y-pos_y_diff*4,text_color,text_size);
       c_decayL->Update();
-      c_decayL->SaveAs(Form("figs_2S_Pb/decayL/NPMC/decay_%s.pdf",kineLabel.Data()));
-      TFile *wf = new TFile(Form("roots_2S_Pb/decayL/NPMC/decay_hist_%s.root", kineLabel.Data()),"recreate");
+      c_decayL->SaveAs(Form("figs_2S_pp/decayL/NPMC/decay_%s.pdf",kineLabel.Data()));
+      TFile *wf = new TFile(Form("roots_2S_pp/decayL/NPMC/decay_hist_%s.root", kineLabel.Data()),"recreate");
       wf->cd();}
 
       h_deffPRMC->Write();
       h_deffNPMC->Write();
       h_mass->Write();
       h_massCut->Write();
-}
 
+      }
 void GetHistSqrt(TH1D* h1, TH1D* h2){
   if(h1->GetNbinsX() != h2->GetNbinsX()){ cout << "Inconsistent # of bins b/w histograms !! " << endl;}
   double content;
