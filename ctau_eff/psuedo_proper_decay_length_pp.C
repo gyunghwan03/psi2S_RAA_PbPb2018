@@ -207,6 +207,7 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
 
       // save the l_jpsi_cut
       auto h_Lcut = new TH1D("h_Lcut", "l_jpsi_cut", 1, 0, 1);
+      h_Lcut->SetBinContent(1, lcutv->GetX1());
       h_Lcut->Write();
       }
 void GetHistSqrt(TH1D* h1, TH1D* h2){
