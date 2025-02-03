@@ -43,7 +43,7 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
 
   fData  = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_DoubleMuonPD_pp_isMC0_221226.root");
   fPRMC  = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_DoubleMuonPD_pp_psi2S_isMC1_230126.root");
-  fNPMC  = new TFile("../skimmedFiles/OniaFlowSkim_Psi2S_JpsiTrig_NonPrompt_isMC1_HFNom_noNCollw_230127.root");
+  fNPMC = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_NonPrompt_pp_Psi2S_isMC1_230629.root");
 
   TCut mCut;
   TCut ptCut;
@@ -205,6 +205,9 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
       h_mass->Write();
       h_massCut->Write();
 
+      // save the l_jpsi_cut
+      auto h_Lcut = new TH1D("h_Lcut", "l_jpsi_cut", 1, 0, 1);
+      h_Lcut->Write();
       }
 void GetHistSqrt(TH1D* h1, TH1D* h2){
   if(h1->GetNbinsX() != h2->GetNbinsX()){ cout << "Inconsistent # of bins b/w histograms !! " << endl;}

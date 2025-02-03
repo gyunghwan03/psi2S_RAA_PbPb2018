@@ -134,9 +134,11 @@ void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
   cout<<"How many Jpsi w/o Cut??"<<h_mass->GetEntries()<<endl;
   cout<<"How many Jpsi w/ Cut??"<<h_massCut->GetEntries()<<endl;
 
-  //gSystem->mkdir("Outputs/decayL",1);
+  
 
-  TCanvas* c_mass = new TCanvas("c_mass","",600,600);
+  // gSystem->mkdir("Outputs/decayL",1);
+
+  TCanvas *c_mass = new TCanvas("c_mass", "", 600, 600);
   h_mass->Draw();
   h_mass->SetMinimum(0);
   h_mass->SetLineColor(kBlack);
@@ -204,6 +206,11 @@ void psuedo_proper_decay_length(int cLow = 120, int cHigh = 180,
       h_deffNPMC->Write();
       h_mass->Write();
       h_massCut->Write();
+
+
+      // save the l_jpsi_cut
+      auto h_Lcut = new TH1D("h_Lcut", "l_jpsi_cut", 1, 0, 1);
+      h_Lcut->Write();
 }
 
 void GetHistSqrt(TH1D* h1, TH1D* h2){

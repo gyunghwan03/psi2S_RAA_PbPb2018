@@ -24,23 +24,17 @@ using namespace std;
 using namespace RooFit;
 
 void MassFit_FixPar_Data(
-    double ptLow=3, double ptHigh=4.5,
-    float yLow=1.6, float yHigh=2.4,
-    int cLow=0, int cHigh=200,
-    double l_cut = 1.,
-    int PRw=1, bool fEffW = true, bool fAccW = true, bool isPtW = true, bool isTnP = true
-    )
+    double ptLow = 3, double ptHigh = 4.5,
+    float yLow = 1.6, float yHigh = 2.4,
+    int cLow = 0, int cHigh = 200,
+    int mc_type = 1,
+    int PRw = 1, bool fEffW = false, bool fAccW = false, bool isPtW = false, bool isTnP = false)
 {
-  //TString DATE = "10_60";
-  //TString DATE = "20_40";
-  //TString DATE = "0_180";
+  double l_cut = 1;
+
   TString DATE;
-  DATE="No_Weight";
-  //if(ptLow==6.5&&ptHigh==50) DATE=Form("%i_%i",0,180);
-  //else DATE=Form("%i_%i",cLow/2,cHigh/2);
   gStyle->SetEndErrorSize(0);
-  gSystem->mkdir(Form("roots/2DFit_%s/Mass",DATE.Data()),kTRUE);
-  gSystem->mkdir(Form("figs/2DFit_%s/Mass",DATE.Data()),kTRUE);
+
 
   TString fname;
   if (PRw==1) fname="PR";
@@ -55,26 +49,39 @@ void MassFit_FixPar_Data(
   RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
 
   TString kineLabel = getKineLabel (ptLow, ptHigh,yLow, yHigh, 0.0, cLow, cHigh);
+  
 
-  TFile* f1; TFile* f2; TFile* f3;
   TString kineCut;
   
   massLow=3.3;
   massHigh=4.1;
   //massLow=2.75;
 
-//  f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_221013_root618.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-  f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_isMC0_Psi2S_cent0_200_Effw1_Accw1_PtW1_TnP1_221117.root"));
-  //f1 = new TFile(Form("../../skimmedFiles/v2Cut_Nom/OniaRooDataSet_isMC0_Psi2S_%s_m3.3-4.1_OS_Effw%d_Accw%d_PtW%d_TnP%d_220808.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
-//  f1 = new TFile("../../skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
-//  f1 = new TFile("/Users/hwan/tools/2019/CMS/JPsi/Jpsi_v2_PbPb2018/skimmedFiles/vnCut/OniaRooDataSet_isMC0_JPsi_pt3.0-4.5_y1.6-2.4_muPt0.0_centrality20-120_m2.6-3.5_OS_Effw0_Accw0_PtW1_TnP1_211110.root");
+  auto f1 = new TFile(Form("../../skimmedFiles/OniaRooDataSet_miniAOD_isMC0_Psi2S_cent0_200_Effw0_Accw0_PtW0_TnP0_230514.root"));
 
-  kineCut = Form("ctau3D<%.5f && pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1 && cBin>=%d && cBin<%d",l_cut, ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
+  auto f2 = new TFile();
+
+  if (mc_type == 1){
+    f2 = new TFile(Form("../../ctau_eff/roots_2S_Pb/decayL/PRMC/decay_hist_%s_m3.3-4.1.root", kineLabel.Data()));
+    DATE = "PRMC";
+  } else {
+    f2 = new TFile(Form("../../ctau_eff/roots_2S_Pb/decayL/NPMC/decay_hist_%s_m3.3-4.1.root", kineLabel.Data()));
+    DATE = "NPMC";
+  }
+
+  gSystem->mkdir(Form("roots_2S_Pb/%s/", DATE.Data()), kTRUE);
+  gSystem->mkdir(Form("figs_2S_Pb/%s/", DATE.Data()), kTRUE);
+
+
+  TH1D *h_Lcut = (TH1D *)f2->Get("h_Lcut");
+  l_cut = h_Lcut->GetBinContent(1);
+
+  kineCut = Form("ctau3D>%.5f && pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1 && cBin>=%d && cBin<%d",l_cut, ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
 
   TString OS="recoQQsign==0 &&";
-
+  
   //TString SglMuPt="pt1>0.5&&pt2>0.5"
 
   kineCut = OS+accCut+kineCut;
@@ -98,7 +105,7 @@ void MassFit_FixPar_Data(
   //****************************** MASS FIT *******************************
   //***********************************************************************
 
-  TFile * f_fit = new TFile(Form("roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root",kineLabel.Data(),fEffW,fAccW,isPtW,isTnP));
+  TFile *f_fit = new TFile(Form("../psi2S_230512/roots_MC/Mass/mc_MassFitResult_%s_PRw_Effw%d_Accw%d_PtW%d_TnP%d.root", kineLabel.Data(), fEffW, fAccW, isPtW, isTnP));
   RooDataSet *dataset_fit = (RooDataSet*)f_fit->Get("datasetMass");
   RooWorkspace *ws_fit = new RooWorkspace("workspace_fit");
   ws_fit->import(*dataset_fit);
@@ -497,8 +504,8 @@ void MassFit_FixPar_Data(
   c_A->Update();
 
   TFile* outFile;
-  outFile = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
-  c_A->SaveAs(Form("figs/2DFit_%s/Mass/Mass_Fixed_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  outFile = new TFile(Form("roots_2S_Pb/%s/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  c_A->SaveAs(Form("figs_2S_Pb/%s/Mass_Fixed_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   pdfMASS_Tot->Write();
   pdfMASS_bkg->Write();
   datasetMass->Write();
