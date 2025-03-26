@@ -76,7 +76,8 @@ void MassFit_FixPar_Data(
   TH1D *h_Lcut = (TH1D *)f2->Get("h_Lcut");
   l_cut = h_Lcut->GetBinContent(1);
 
-  kineCut = Form("ctau3D>%.5f && pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1 && cBin>=%d && cBin<%d",l_cut, ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
+  if(mc_type == 2) kineCut = Form("ctau3D>%.5f && pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1 && cBin>=%d && cBin<%d",l_cut, ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
+  else if(mc_type == 1) kineCut = Form("ctau3D<%.5f && pt>%.2f && pt<%.2f && abs(y)>%.2f && abs(y)<%.2f && mass>3.3 && mass<4.1 && cBin>=%d && cBin<%d",l_cut, ptLow, ptHigh, yLow, yHigh, cLow, cHigh);
 
   TString accCut = "( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) || ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) || ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ) &&";//2018 acceptance cut
 
@@ -246,12 +247,15 @@ void MassFit_FixPar_Data(
   else if (ptLow==30&&ptHigh==50)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
+  else if (ptLow==20&&ptHigh==25)  {
+	  NBkg_limit = 500000;
+	  NJpsi_limit = 1000; }
   else if (ptLow==20&&ptHigh==50)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
-  else if (cLow==40&&cHigh==60)  {
+  else if (ptLow==6.5&&cLow==40&&cHigh==60)  {
 	  NBkg_limit = 500000;
-	  NJpsi_limit = 10000; }
+	  NJpsi_limit = 1000; }
   else if (cLow==80&&cHigh==100)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
@@ -264,9 +268,9 @@ void MassFit_FixPar_Data(
   if (cLow==0&&cHigh==40)  {
 	  NBkg_limit = 500000;
 	  NJpsi_limit = 10000; }
-  if (ptLow==6.5 && ptHigh==50 && cLow==100&&cHigh==180)  {
+  if (ptLow==6.5 && ptHigh==40 && cLow==100&&cHigh==180)  {
 	  NBkg_limit = 50000;
-	  NJpsi_limit = 200; }
+	  NJpsi_limit = 500; }
   if (ptLow==9 && ptHigh==12 && cLow==0&&cHigh==180)  {
 	  NBkg_limit = 50000;
 	  NJpsi_limit = 1000; }
