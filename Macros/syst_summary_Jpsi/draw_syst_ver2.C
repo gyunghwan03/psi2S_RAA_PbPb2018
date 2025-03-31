@@ -264,13 +264,15 @@ void draw_syst_ver2()
 		double TnP_pb = h_fwd_cent_PR_pb[6]->GetBinContent(i);
 		double TnP_pp = h_fwd_cent_PR_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		double TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
-		cout << "pb TnP : " << TnP_pb << ", pp TnP : " << TnP_pp << ", Total : " << TnP_tot << endl;
+		//cout << "Cent " << h_fwd_cent_PR[6]->GetXaxis()->GetBinLowEdge(i) << " - " <<  h_fwd_cent_PR[6]->GetXaxis()->GetBinUpEdge(i) << endl;
+		//cout << "pb TnP : " << TnP_pb << ", pp TnP : " << TnP_pp << ", Total : " << TnP_tot << endl;
 		h_fwd_cent_PR[6]->SetBinContent(i, TnP_tot);
-		cout << "lower : " << h_fwd_cent_PR[6]->GetXaxis()->GetBinLowEdge(i) << ", upper : " <<  h_fwd_cent_PR[6]->GetXaxis()->GetBinUpEdge(i) << endl;
 		
 		TnP_pb = h_fwd_cent_NP_pb[6]->GetBinContent(i);
 		TnP_pp = h_fwd_cent_NP_pp[6]->GetBinContent(1); // pp input has one TnP bin
 		TnP_tot = TMath::Sqrt(TMath::Power(TnP_pb,2) + TMath::Power(TnP_pp,2) ); 
+		cout << "Cent " << h_fwd_cent_NP[6]->GetXaxis()->GetBinLowEdge(i) << " - " <<  h_fwd_cent_NP[6]->GetXaxis()->GetBinUpEdge(i) << endl;
+		cout << "pb TnP : " << TnP_pb << ", pp TnP : " << TnP_pp << ", Total : " << TnP_tot << endl;
 		h_fwd_cent_NP[6]->SetBinContent(i, TnP_tot);
 	}
 	

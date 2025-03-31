@@ -23,6 +23,9 @@ void syst_bkgPDF()
     TFile *pb_nominal_input = nullptr;
     TFile *pp_syst_input = nullptr;
     TFile *pb_syst_input = nullptr;    
+
+    TFile *pb_nominal_int_input = nullptr;
+    TFile *pb_syst_int_input = nullptr;
     
 
     // Start loop
@@ -246,6 +249,12 @@ void syst_bkgPDF()
         temp_input_path = syst_path_pb + pb_mid_cent[i];
         pb_syst_input = TFile::Open(temp_input_path.c_str());
 
+        temp_input_path = syst_path_pb_int + pb_mid_cent[0];
+        pb_nominal_int_input = TFile::Open(temp_input_path.c_str());
+
+        temp_input_path = syst_path_pb_int + pb_mid_cent[0];
+        pb_syst_int_input = TFile::Open(temp_input_path.c_str());
+
 
         // Get number of PR and NP Jpsi
         // pp nominal
@@ -263,11 +272,19 @@ void syst_bkgPDF()
         double n_PR_Pb_nomi;
         double n_NP_Pb_nomi;
         compute_n_jpsi(pb_nominal_input, pb_nominal_input, n_PR_Pb_nomi, n_NP_Pb_nomi);
+
+        double n_PR_Pb_nomi_int;
+        double n_NP_Pb_nomi_int;
+        compute_n_jpsi(pb_nominal_int_input, pb_nominal_int_input, n_PR_Pb_nomi_int, n_NP_Pb_nomi_int);
         
         // Pb syst
         double n_PR_Pb_syst;
         double n_NP_Pb_syst;
         compute_n_jpsi(pb_nominal_input, pb_syst_input, n_PR_Pb_syst, n_NP_Pb_syst);
+
+        double n_PR_Pb_syst_int;
+        double n_NP_Pb_syst_int;
+        compute_n_jpsi(pb_nominal_int_input, pb_syst_int_input, n_PR_Pb_syst_int, n_NP_Pb_syst_int);
 
 
         // Compute uncertainty
