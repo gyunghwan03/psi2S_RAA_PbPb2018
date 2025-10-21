@@ -1,0 +1,41 @@
+
+Processing psuedo_proper_decay_length_pp_1S.C(25, 40, 0, 1.6, 0, 2.6, 3.5, 1)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+pt25.0-40.0_y0.0-1.6_muPt0.0_m2.6-3.5
+((((((fabs(vz)<15)&&(recoQQsign==0))&&(mass>=2.6&&mass<=3.5))&&(pt>25.0&&pt<40.0))&&(abs(y)>0.0&&abs(y)<1.6))&&(abs(eta1)>0.0&&abs(eta1)<1.6&&abs(eta2)>0.0&&abs(eta2)<1.6))&&(( ((abs(eta1) <= 1.2) && (pt1 >=3.5)) || ((abs(eta2) <= 1.2) && (pt2 >=3.5)) ||       ((abs(eta1) > 1.2) && (abs(eta1) <= 2.1) && (pt1 >= 5.47-1.89*(abs(eta1)))) || ((abs(eta2) > 1.2)  && (abs(eta2) <= 2.1) && (pt2 >= 5.47-1.89*(abs(eta2)))) ||       ((abs(eta1) > 2.1) && (abs(eta1) <= 2.4) && (pt1 >= 1.5)) || ((abs(eta2) > 2.1)  && (abs(eta2) <= 2.4) && (pt2 >= 1.5)) ))
+Data Tree: 47994571, by total cut: 38652, 0.0805341%
+PRMC Tree: 40927160, by total cut: 3211, 0.094441%
+NPMC Tree: 38781851, by total cut: 8932, 0.0996652%
+DEBUG: totalPRMC=3211, lowCut=352.889, highCut=638.989
+DEBUG bin=1001, center=0.0005, integralPR=1758
+DEBUG bin=1002, center=0.0015, integralPR=1880
+DEBUG bin=1003, center=0.0025, integralPR=1983
+DEBUG bin=1004, center=0.0035, integralPR=2091
+DEBUG bin=1005, center=0.0045, integralPR=2189
+DEBUG bin=1006, center=0.0055, integralPR=2288
+DEBUG bin=1007, center=0.0065, integralPR=2377
+DEBUG bin=1008, center=0.0075, integralPR=2462
+DEBUG bin=1009, center=0.0085, integralPR=2546
+DEBUG bin=1010, center=0.0095, integralPR=2622
+DEBUG bin=1011, center=0.0105, integralPR=2683
+DEBUG bin=1012, center=0.0115, integralPR=2743
+DEBUG bin=1013, center=0.0125, integralPR=2805
+DEBUG bin=1014, center=0.0135, integralPR=2846
+DEBUG bin=1015, center=0.0145, integralPR=2883
+DEBUG bin=1016, center=0.0155, integralPR=2925
+DEBUG bin=1017, center=0.0165, integralPR=2964
+DEBUG bin=1018, center=0.0175, integralPR=3000
+DEBUG bin=1019, center=0.0185, integralPR=3027
+DEBUG bin=1020, center=0.0195, integralPR=3057
+DEBUG bin=1021, center=0.0205, integralPR=3072
+DEBUG bin=1022, center=0.0215, integralPR=3087
+DEBUG bin=1023, center=0.0225, integralPR=3099
+DEBUG bin=1024, center=0.0235, integralPR=3118
+Selected bin=1024, center=0.0235, integralPR=3118
+LJpsi cut: 0.0235
+How many Jpsi w/o Cut??38652
+How many Jpsi w/ Cut??23865

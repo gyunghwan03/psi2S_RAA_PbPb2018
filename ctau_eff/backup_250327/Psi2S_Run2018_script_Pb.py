@@ -1,0 +1,65 @@
+import subprocess
+
+# PRMC
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9, 12, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12, 15, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 15, 20, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 20, 25, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 25, 40, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 20, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(20, 40, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(40, 60, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(60, 80, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(80, 100, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(100, 180, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'", shell=True)
+
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 3.5, 6.5, 1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9,   1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9,   12,  1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12,  40,  1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0,   20,  3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(20,  60,  3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(60,  100, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(100, 180, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'", shell=True)
+
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9, 0, 1.6)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9, 12, 0, 1.6)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12, 15, 0, 1.6)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 15, 20, 0, 1.6)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 20, 50, 0, 1.6)'", shell=True)
+
+# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 20, 6.5, 50, 0, 1.6)'", shell=True)
+# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(20, 40, 6.5, 50, 0, 1.6)'", shell=True)
+# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(40, 60, 6.5, 50, 0, 1.6)'", shell=True)
+# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(60, 80, 6.5, 50, 0, 1.6)'", shell=True)
+# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(80, 100, 6.5, 50, 0, 1.6)'", shell=True)
+# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(100, 180, 6.5, 50, 0, 1.6)'", shell=True)
+
+
+# NPMC
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9, 12, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12, 15, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 15, 20, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 20, 25, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 25, 40, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 20, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(20, 40, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(40, 60, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(60, 80, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(80, 100, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+#subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(100, 180, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 3.5, 6.5, 1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9,   1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9,   12,  1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12,  40,  1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)
+
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0,   20,  3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(20,  60,  3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(60,  100, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)
+subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(100, 180, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'", shell=True)

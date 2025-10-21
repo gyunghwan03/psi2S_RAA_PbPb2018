@@ -34,6 +34,16 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
   gStyle->SetOptStat(0);
   //  setTDRStyle();
 
+  gSystem->mkdir("./roots_2S_pp/");
+  gSystem->mkdir("./roots_2S_pp/decayL");
+  gSystem->mkdir("./roots_2S_pp/decayL/PRMC");
+  gSystem->mkdir("./roots_2S_pp/decayL/NPMC");
+
+  gSystem->mkdir("./figs_2S_pp/");
+  gSystem->mkdir("./figs_2S_pp/decayL");
+  gSystem->mkdir("./figs_2S_pp/decayL/PRMC");
+  gSystem->mkdir("./figs_2S_pp/decayL/NPMC");
+
   TFile *fData;
   TFile *fPRMC;
   TFile *fNPMC;
@@ -42,8 +52,9 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
   TTree *treeNPMC;
 
   fData  = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_DoubleMuonPD_pp_isMC0_221226.root");
+  //fPRMC  = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_Prompt_pp_Psi2S_isMC1_230717.root");
   fPRMC  = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_DoubleMuonPD_pp_psi2S_isMC1_230126.root");
-  fNPMC = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_NonPrompt_pp_Psi2S_isMC1_230629.root");
+  fNPMC = new TFile("../skimmedFiles/OniaFlowSkim_JpsiTrig_pp_Btopsi2S_isMC1_250514.root");
 
   TCut mCut;
   TCut ptCut;
@@ -56,7 +67,7 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
   quality = ("fabs(vz)<15");
   dimuSign = ("recoQQsign==0");
   mCut = Form("mass>=%.1f&&mass<=%.1f",massLow, massHigh);
-  ptCut = Form("pt>%1.f&&pt<%.1f", ptLow, ptHigh);
+  ptCut = Form("pt>%.1f&&pt<%.1f", ptLow, ptHigh);
   yCut  = Form("abs(y)>%.1f&&abs(y)<%.1f", yLow, yHigh);
   //cCut  = Form("cBin>=%d&&cBin<=%d",cLow,cHigh);
   sglMuCut = Form("abs(eta1)>%.1f&&abs(eta1)<%.1f&&abs(eta2)>%.1f&&abs(eta2)<%.1f", yLow, yHigh, yLow, yHigh);
@@ -209,6 +220,18 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
       auto h_Lcut = new TH1D("h_Lcut", "l_jpsi_cut", 1, 0, 1);
       h_Lcut->SetBinContent(1, lcutv->GetX1());
       h_Lcut->Write();
+
+	  auto h_eff = new TH1D("h_eff", "eff", 1, 0, 1);
+	  if(PRMC==0) h_eff->SetBinContent(1, lcuth->GetY1());
+	  else if(PRMC==1) h_eff->SetBinContent(1, 1-lcuth->GetY1());
+
+	  h_eff->Write();
+
+    auto h_res = new TH1D("h_res", "res", 1, 0, 1);
+    if(PRMC==0) h_res->SetBinContent(1, lresi->GetY1());
+    else if(PRMC==1) h_res->SetBinContent(1, 1-lresi->GetY1()); 
+    h_res->Write();
+
       }
 void GetHistSqrt(TH1D* h1, TH1D* h2){
   if(h1->GetNbinsX() != h2->GetNbinsX()){ cout << "Inconsistent # of bins b/w histograms !! " << endl;}

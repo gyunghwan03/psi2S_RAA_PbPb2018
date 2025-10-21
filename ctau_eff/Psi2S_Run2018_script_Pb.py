@@ -1,29 +1,102 @@
 import subprocess
+from concurrent.futures import ThreadPoolExecutor
 
-# PRMC
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 3, 6.5, 1.6, 2.4)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 4, 6.5, 1.6, 2.4)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 12, 1.6, 2.4)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12, 50, 1.6, 2.4)'", shell=True)
+# 실행할 명령어 리스트
+## 1S ##
+commands_1S = [
+    # PRMC
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 6.5, 9, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 9,  12, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 12, 15, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 15, 20, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 20, 25, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 25, 40, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0,    20, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(20,   40, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(40,   60, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(60,   80, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(80,  100, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(100, 180, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 3.5, 6.5, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 6.5,   9, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180,   9,  12, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180,  12,  40, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0,    20, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(20,   60, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(60,  100, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(100, 180, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 0)'",
+    # NPMC
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 6.5, 9, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 9,  12, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 12, 15, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 15, 20, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 20, 25, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 25, 40, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0,    20, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(20,   40, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(40,   60, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(60,   80, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(80,  100, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(100, 180, 6.5, 40, 0, 1.6, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 3.5, 6.5, 1.6, 2.4, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180, 6.5,   9, 1.6, 2.4, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180,   9,  12, 1.6, 2.4, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0, 180,  12,  40, 1.6, 2.4, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(0,    20, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(20,   60, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(60,  100, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 1)'",
+    "root -l -b -q psuedo_proper_decay_length_1S.C'(100, 180, 3.5, 40, 1.6, 2.4, 0, 2.6, 3.5, 1)'"
+]
 
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 40, 3, 50, 1.6, 2.4)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(20, 80, 3, 50, 1.6, 2.4)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(80, 180, 3, 50, 1.6, 2.4)'", shell=True)
+## 2S ##
+commands_2S = [
+    # PRMC
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9,  12, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12, 15, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 15, 20, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 20, 25, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 25, 40, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0,    20, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(20,   40, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(40,   60, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(60,   80, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(80,  100, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(100, 180, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 3.5, 6.5, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5,   9, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180,   9,  12, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180,  12,  40, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0,    20, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(20,   60, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(60,  100, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(100, 180, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 0)'",
+    # NPMC
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9,  12, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12, 15, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 15, 20, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 20, 25, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 25, 40, 0, 1.6, 0, 3.3, 4.1, 1)'"
+    "root -l -b -q psuedo_proper_decay_length.C'(0,    20, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(20,   40, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(40,   60, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(60,   80, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(80,  100, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(100, 180, 6.5, 40, 0, 1.6, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 3.5, 6.5, 1.6, 2.4, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5,   9, 1.6, 2.4, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180,   9,  12, 1.6, 2.4, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(0, 180,  12,  40, 1.6, 2.4, 0, 3.3, 4.1, 1)'"
+    "root -l -b -q psuedo_proper_decay_length.C'(0,    20, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(20,   60, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(60,  100, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'",
+    "root -l -b -q psuedo_proper_decay_length.C'(100, 180, 3.5, 40, 1.6, 2.4, 0, 3.3, 4.1, 1)'",
+]
+# 병렬 실행 함수
+def run_command(command):
+    subprocess.call(command, shell=True)
 
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9, 12, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 12, 15, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 15, 20, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 20, 50, 0, 1.6)'", shell=True)
-
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 20, 6.5, 50, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(20, 40, 6.5, 50, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(40, 60, 6.5, 50, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(60, 80, 6.5, 50, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(80, 100, 6.5, 50, 0, 1.6)'", shell=True)
-# subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(100, 180, 6.5, 50, 0, 1.6)'", shell=True)
-
-
-# NPMC
-subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 6.5, 9, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
-subprocess.call("root -l -b -q psuedo_proper_decay_length.C'(0, 180, 9, 12, 0, 1.6, 0, 3.3, 4.1, 1)'", shell=True)
+# ThreadPoolExecutor를 사용하여 병렬 실행
+with ThreadPoolExecutor(max_workers=12) as executor:  # 최대 4개의 작업을 동시에 실행
+    executor.map(run_command, commands_1S + commands_2S)
