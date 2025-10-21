@@ -1,0 +1,201 @@
+===== ERROR SUMMARY (2025-10-21 14:24:36) =====
+9014:Returning maximum FCN so far (435390) to force MIGRAD to back out of this region. Error log follows
+9031:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9032:Returning maximum FCN so far (435390) to force MIGRAD to back out of this region. Error log follows
+9050:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9051:Returning maximum FCN so far (435390) to force MIGRAD to back out of this region. Error log follows
+9068:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9069:Returning maximum FCN so far (435390) to force MIGRAD to back out of this region. Error log follows
+9086:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9087:Returning maximum FCN so far (435390) to force MIGRAD to back out of this region. Error log follows
+9106:                     EDM=12.1719    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9108:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9120:                     EDM=7.8793e-06    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   2.8 per cent
+9122:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9132: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9169:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9179: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9210:    Floating Parameter    FinalValue +/-  Error   
+9279:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9281:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9293:                     EDM=6.4812e-05    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   2.3 per cent
+9295:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9305: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9337:                     EDM=0.000941422    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9339:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9349: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9378:    Floating Parameter    FinalValue +/-  Error   
+9446:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9447:Returning maximum FCN so far (-747784) to force MIGRAD to back out of this region. Error log follows
+9452:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9453:Returning maximum FCN so far (-747784) to force MIGRAD to back out of this region. Error log follows
+9459:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9461:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9472: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+9475:                     EDM=6.87527e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9477:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9487: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9519:                     EDM=6.59434e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9521:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9531: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9560:    Floating Parameter    FinalValue +/-  Error   
+9629:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9631:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9642: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+9645:                     EDM=0.000154121    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9647:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9657: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9689:                     EDM=0.000159016    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9691:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9701: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+9730:    Floating Parameter    FinalValue +/-  Error   
+9798:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9799:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9805:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9807:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9817:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9818:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9835:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9836:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9853:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9854:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9871:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9872:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9889:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9890:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9907:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9908:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9925:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9926:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9943:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9944:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9961:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9962:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9979:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9980:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+9998: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+10006:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+10016:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10017:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+10034:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10035:Returning maximum FCN so far (-65286.7) to force MIGRAD to back out of this region. Error log follows
+10053: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+10056:                     EDM=1.57636e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+10058:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+10068: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+10100:                     EDM=1.59022e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+10102:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+10112: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+10141:    Floating Parameter    FinalValue +/-  Error   
+10210:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+10212:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+10222:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10223:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10240:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10241:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10258:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10259:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10276:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10277:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10294:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10295:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10312:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10313:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10330:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10331:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10348:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10349:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10366:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10367:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10384:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10385:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10402:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10403:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10420:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10421:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10438:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10439:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10456:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10457:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10474:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10475:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10492:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10493:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10510:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10511:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10528:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10529:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10546:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10547:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10564:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10565:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10582:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10583:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10600:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10601:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10618:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10619:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10636:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10637:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10654:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10655:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10672:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10673:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10690:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10691:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10708:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10709:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10726:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10727:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10744:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10745:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10762:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10763:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10780:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10781:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10798:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10799:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10817: ============== Negative diagonal element 8 in Error Matrix
+10819: ============== 1 added to diagonal of error matrix
+10820:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10821:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10840:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10841:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10858:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10859:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10876:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10877:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10894:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10895:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10913:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10914:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10931:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10932:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10956:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+10966:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10967:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+10984:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10985:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+11007:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+11017: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+11049:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+11050:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+11067:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+11068:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+11085:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+11086:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+11103:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+11104:Returning maximum FCN so far (431515) to force MIGRAD to back out of this region. Error log follows
+11128:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+11138: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+11169:    Floating Parameter    FinalValue +/-  Error   
+11238:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+11240:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+11251: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+11254:                     EDM=0.000110125    STRATEGY= 1      ERROR MATRIX ACCURATE 
+11256:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+11266: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+11298:                     EDM=0.000114266    STRATEGY= 1      ERROR MATRIX ACCURATE 
+11300:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+11310: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  8    ERR DEF=0.5
+11339:    Floating Parameter    FinalValue +/-  Error   

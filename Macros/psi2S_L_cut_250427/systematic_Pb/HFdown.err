@@ -1,0 +1,201 @@
+===== ERROR SUMMARY (2025-10-17 14:21:22) =====
+3885:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+3893: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+3921:                     EDM=3.31804e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+3923:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+3931: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+3963:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+4026:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+4028:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4038: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+4041:                     EDM=0.0126771    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4043:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4053:                     EDM=0.0174608    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.2 per cent
+4055:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4062: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4090:                     EDM=0.00229328    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4092:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+4099: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4129:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+4187:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+4189:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4197: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+4200:                     EDM=5.36131e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4202:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4209: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4235:                     EDM=5.61524e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4237:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+4244: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4274:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+4292:Error in <TFile::TFile>: file ../../../../ctau_eff/roots_2S_Pb/decayL/NPMC/decay_hist_pt12.0-40.0_y1.6-2.4_muPt0.0_centrality0-180_m3.3-4.1.root does not exist
+4293:Error in <HandleInterpreterException>: Trying to dereference null pointer or trying to call routine taking non-null arguments.
+4346:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+4348:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4357:                     EDM=5.33605e-05    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.7 per cent
+4359:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4366: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4392:                     EDM=0.000100907    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4394:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+4401: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4431:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+4489:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+4491:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4500:                     EDM=1.03391e-06    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   0.7 per cent
+4502:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4509: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4535:                     EDM=2.29234e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4537:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+4545: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4575:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+4633:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+4635:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4643: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+4646:                     EDM=5.78263e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4648:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4655: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4681:                     EDM=5.76765e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4683:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+4690: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4720:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+4778:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+4780:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4788: ============== Negative diagonal element 2 in Error Matrix
+4790: ============== 1.07106 added to diagonal of error matrix
+4794:                     EDM=841.02    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4796:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4804: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+4807:                     EDM=1.06119e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4809:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4816: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4842:                     EDM=1.06038e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4844:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+4851: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4881:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+4939:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+4941:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4949: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+4952:                     EDM=6.7525e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4954:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+4961: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+4987:                     EDM=6.75811e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+4989:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+4996: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5026:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+5084:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+5086:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5094: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+5097:                     EDM=2.92818e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5099:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5106: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5132:                     EDM=2.78913e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5134:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+5141: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5171:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+5229:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+5231:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5239: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+5242:                     EDM=1.35684e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5244:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5251: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5277:                     EDM=1.34229e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5279:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+5286: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5316:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+5374:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+5376:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5384: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+5387:                     EDM=1.16335e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5389:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5396: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5422:                     EDM=1.16061e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5424:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+5431: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5461:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+5519:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+5521:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5529: ============== Negative diagonal element 2 in Error Matrix
+5531: ============== Negative diagonal element 3 in Error Matrix
+5533: ============== Negative diagonal element 4 in Error Matrix
+5535: ============== 1.18394 added to diagonal of error matrix
+5537: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+5540:                     EDM=1.55207e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5542:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5549: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5575:                     EDM=1.55183e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5577:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+5584: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5614:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+5672:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+5674:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5682: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+5685:                     EDM=4.03192e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5687:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5694: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5720:                     EDM=4.05991e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5722:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+5729: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5759:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+5817:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+5819:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5827: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+5830:                     EDM=2.04304e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5832:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5839: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5865:                     EDM=2.04286e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5867:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+5875: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+5905:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+5963:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+5965:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5973: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+5976:                     EDM=7.48552e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+5978:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+5985: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+6011:                     EDM=7.48434e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6013:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+6020: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+6050:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+6109:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+6111:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6119:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+6120:Returning maximum FCN so far (525951) to force MIGRAD to back out of this region. Error log follows
+6138: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+6141:                     EDM=0.000106853    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6143:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6151: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6179:                     EDM=0.000113147    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6181:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+6189: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6221:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+6281:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+6283:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6292: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+6295:                     EDM=1.54355e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6297:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6305: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6333:                     EDM=1.55058e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6335:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+6344: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6376:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+6436:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+6438:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6449: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+6452:                     EDM=0.0117364    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6454:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6464: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+6470:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6478: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6508:                     EDM=0.00254622    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6510:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+6518: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6550:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+6610:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+6612:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6621: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+6624:                     EDM=0.000141443    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6626:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+6634: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6662:                     EDM=0.000142702    STRATEGY= 1      ERROR MATRIX ACCURATE 
+6664:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+6672: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+6704:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
