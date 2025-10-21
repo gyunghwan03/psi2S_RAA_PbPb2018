@@ -1,0 +1,201 @@
+===== ERROR SUMMARY (2025-10-01 11:41:08) =====
+7974:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+7984:                     EDM=0.151011    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.7 per cent
+7986:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+7993: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8021:                     EDM=0.0165844    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8023:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+8030: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8060:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+8121:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8122:Returning maximum FCN so far (1.66791e+07) to force MIGRAD to back out of this region. Error log follows
+8139:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8140:Returning maximum FCN so far (1.66791e+07) to force MIGRAD to back out of this region. Error log follows
+8158:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+8160:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8167:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8168:Returning maximum FCN so far (2.77524e+07) to force MIGRAD to back out of this region. Error log follows
+8188: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+8191:                     EDM=3.35896e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8193:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8200: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8226:                     EDM=3.39577e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8228:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+8235: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8265:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+8326:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8327:Returning maximum FCN so far (1.66971e+07) to force MIGRAD to back out of this region. Error log follows
+8344:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8345:Returning maximum FCN so far (1.66971e+07) to force MIGRAD to back out of this region. Error log follows
+8363:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+8365:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8372:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8373:Returning maximum FCN so far (2.31122e+07) to force MIGRAD to back out of this region. Error log follows
+8392:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8393:Returning maximum FCN so far (2.31122e+07) to force MIGRAD to back out of this region. Error log follows
+8410:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8411:Returning maximum FCN so far (2.31122e+07) to force MIGRAD to back out of this region. Error log follows
+8429: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+8432:                     EDM=0.000536326    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8434:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8441: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8467:                     EDM=0.000536642    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8469:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+8476: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8506:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+8567:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8568:Returning maximum FCN so far (1.6755e+07) to force MIGRAD to back out of this region. Error log follows
+8585:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8586:Returning maximum FCN so far (1.6755e+07) to force MIGRAD to back out of this region. Error log follows
+8604:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+8606:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8614: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+8617:                     EDM=7.41621e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8619:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8626: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8652:                     EDM=7.54928e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8654:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+8661: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8691:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+8752:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8753:Returning maximum FCN so far (1.68199e+07) to force MIGRAD to back out of this region. Error log follows
+8770:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8771:Returning maximum FCN so far (1.68199e+07) to force MIGRAD to back out of this region. Error log follows
+8789:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+8791:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8799: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+8802:                     EDM=8.24701e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8804:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8811: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8837:                     EDM=8.08105e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8839:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+8846: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+8876:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+8937:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8938:Returning maximum FCN so far (1.68917e+07) to force MIGRAD to back out of this region. Error log follows
+8955:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+8956:Returning maximum FCN so far (1.68917e+07) to force MIGRAD to back out of this region. Error log follows
+8974:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+8976:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8986:                     EDM=7.35903    STRATEGY= 1      ERROR MATRIX ACCURATE 
+8988:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+8998:                     EDM=4.73605    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.6 per cent
+9000:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9007: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+9035:                     EDM=0.296091    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9037:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9044: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+9074:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+9135:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9136:Returning maximum FCN so far (1.2407e+07) to force MIGRAD to back out of this region. Error log follows
+9153:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9154:Returning maximum FCN so far (1.2407e+07) to force MIGRAD to back out of this region. Error log follows
+9172:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9174:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9181:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9182:Returning maximum FCN so far (1.28274e+07) to force MIGRAD to back out of this region. Error log follows
+9202: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+9205:                     EDM=0.00504247    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9207:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9217:                     EDM=0.00670034    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   0.7 per cent
+9219:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9226: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+9254:                     EDM=0.000821755    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9256:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9263: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+9293:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+9355:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9356:Returning maximum FCN so far (1.63567e+07) to force MIGRAD to back out of this region. Error log follows
+9373:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9374:Returning maximum FCN so far (1.63567e+07) to force MIGRAD to back out of this region. Error log follows
+9392:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9394:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9402:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9403:Returning maximum FCN so far (2.518e+07) to force MIGRAD to back out of this region. Error log follows
+9420:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9421:Returning maximum FCN so far (2.518e+07) to force MIGRAD to back out of this region. Error log follows
+9439: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+9442:                     EDM=1.93882e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9444:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9452: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+9480:                     EDM=2.01889e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9482:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9490: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+9522:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+9585:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9586:Returning maximum FCN so far (1.60644e+07) to force MIGRAD to back out of this region. Error log follows
+9603:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9604:Returning maximum FCN so far (1.60644e+07) to force MIGRAD to back out of this region. Error log follows
+9622:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9624:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9632:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9633:Returning maximum FCN so far (1.60644e+07) to force MIGRAD to back out of this region. Error log follows
+9651: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+9654:                     EDM=0.000100361    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9656:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9664: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+9692:                     EDM=0.000100283    STRATEGY= 1      ERROR MATRIX ACCURATE 
+9694:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+9702: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+9734:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+9797:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9798:Returning maximum FCN so far (1.65946e+07) to force MIGRAD to back out of this region. Error log follows
+9815:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9816:Returning maximum FCN so far (1.65946e+07) to force MIGRAD to back out of this region. Error log follows
+9834:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+9836:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+9844:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9845:Returning maximum FCN so far (2.80849e+07) to force MIGRAD to back out of this region. Error log follows
+9862:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9863:Returning maximum FCN so far (2.80849e+07) to force MIGRAD to back out of this region. Error log follows
+9880:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9881:Returning maximum FCN so far (2.80849e+07) to force MIGRAD to back out of this region. Error log follows
+9898:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9899:Returning maximum FCN so far (2.80849e+07) to force MIGRAD to back out of this region. Error log follows
+9916:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9917:Returning maximum FCN so far (2.80849e+07) to force MIGRAD to back out of this region. Error log follows
+9934:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9935:Returning maximum FCN so far (2.86931e+07) to force MIGRAD to back out of this region. Error log follows
+9952:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9953:Returning maximum FCN so far (2.86931e+07) to force MIGRAD to back out of this region. Error log follows
+9970:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9971:Returning maximum FCN so far (2.86931e+07) to force MIGRAD to back out of this region. Error log follows
+9988:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+9989:Returning maximum FCN so far (2.86931e+07) to force MIGRAD to back out of this region. Error log follows
+10006:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10007:Returning maximum FCN so far (2.86931e+07) to force MIGRAD to back out of this region. Error log follows
+10024:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10025:Returning maximum FCN so far (2.86931e+07) to force MIGRAD to back out of this region. Error log follows
+10043: MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+10046:                     EDM=2.8745e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+10048:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+10056: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+10084:                     EDM=2.88032e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+10086:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+10094: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+10126:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+10189:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10190:Returning maximum FCN so far (1.68931e+07) to force MIGRAD to back out of this region. Error log follows
+10207:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10208:Returning maximum FCN so far (1.68931e+07) to force MIGRAD to back out of this region. Error log follows
+10226:                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+10228:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+10236:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10237:Returning maximum FCN so far (1.68931e+07) to force MIGRAD to back out of this region. Error log follows
+10256:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10257:Returning maximum FCN so far (1.68931e+07) to force MIGRAD to back out of this region. Error log follows
+10274:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10275:Returning maximum FCN so far (1.68931e+07) to force MIGRAD to back out of this region. Error log follows
+10292:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10293:Returning maximum FCN so far (1.68931e+07) to force MIGRAD to back out of this region. Error log follows
+10310:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10311:Returning maximum FCN so far (2.8744e+07) to force MIGRAD to back out of this region. Error log follows
+10328:[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+10329:Returning maximum FCN so far (2.8744e+07) to force MIGRAD to back out of this region. Error log follows
+10349:                     EDM=0.000420456    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   1.1 per cent
+10351:  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+10359: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+10387:                     EDM=0.00580823    STRATEGY= 1      ERROR MATRIX ACCURATE 
+10389:  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+10397: EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  6    ERR DEF=0.5
+10429:    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
