@@ -38,5 +38,5 @@ def run_command(command):
     subprocess.call(command, shell=True)
 
 # ThreadPoolExecutor를 사용하여 병렬 실행
-with ThreadPoolExecutor(max_workers=12) as executor:  # 최대 4개의 작업을 동시에 실행
+with ThreadPoolExecutor(max_workers=2) as executor:  # 최대 4개의 작업을 동시에 실행
     executor.map(run_command, commands)

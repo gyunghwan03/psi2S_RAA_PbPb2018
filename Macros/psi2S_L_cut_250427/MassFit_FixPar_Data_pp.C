@@ -410,6 +410,10 @@ void MassFit_FixPar_Data_pp(
   drawText(Form("n_{#psi(2S)} = %.4f (fixed)", ws->var("n_1_A")->getVal()), text_x, text_y - y_diff * 5, text_color, text_size);
   drawText(Form("#sigma1_{#psi(2S)} = %.2f #pm %.2f MeV/c^{2}, (#sigma2/#sigma1)_{#psi(2S)} = %.3f (fixed)", (ws->var("sigma_1_A")->getVal()) * 1000, (ws->var("sigma_1_A")->getError()) * 1000, ws->var("x_A")->getVal()), text_x, text_y - y_diff * 6, text_color, text_size);
   // drawText(Form("(#sigma2/#sigma1)_{#psi(2S)} = %.3f (fixed)",ws->var("x_A")->getVal()),text_x,text_y-y_diff*7,text_color,text_size);
+  if (mc_type == 1)
+    drawText(Form("l_{#psi(2S)} < %.4f", l_cut), text_x, text_y - y_diff * 7, text_color, text_size);
+  else if (mc_type == 2)
+    drawText(Form("l_{#psi(2S)} > %.4f", l_cut), text_x, text_y - y_diff * 7, text_color, text_size);
 
   TPad *pad_A_2 = new TPad("pad_A_2", "pad_A_2", 0, 0.001, 0.98, 0.32);
   c_A->cd();
@@ -488,7 +492,7 @@ void MassFit_FixPar_Data_pp(
   pdfMASS_Tot->Write();
   pdfMASS_bkg->Write();
   datasetMass->Write();
-  ws->Write();
+  //ws->Write();
   outh->Write();
   fitMass->Write();
   outFile->Close();
