@@ -129,6 +129,38 @@ void compare_Npart(bool isSys=true)
 
 	double binWidth[8]={4.3,4.3,4.3,4.3,4.3,4.3,4.3,4.3};
 
+	TGraphErrors *g_midPR;    
+	TGraphErrors *g_midPR1S;    
+	TGraphErrors *g_midPR_old;
+	TGraphErrors *g_Jpsi_midPR;    
+	TGraphErrors *g_Jpsi_midPR_old;
+	TGraphErrors *g_Jpsi_fwdPR;    
+	TGraphErrors *g_Jpsi_fwdPR_old;
+	TGraphErrors *g_fwdPR;     
+	TGraphErrors *g_fwdPR1S;     
+	TGraphErrors *g_fwdNP1S;
+	TGraphErrors *g_midNP1S;
+	TGraphErrors *g_fwdPR_old;
+	TGraphErrors *g_alice;
+	TGraphErrors *g_ATLAS_PR = (TGraphErrors*) fATLAS_PR->Get("Table 14/Graph1D_y1");
+    TGraphAsymmErrors *g_ATLAS_PR_Sys = (TGraphAsymmErrors*) fATLAS_PR->Get("Table 14/Graph1D_y1");
+    TGraphErrors *g_ATLAS_NP = (TGraphErrors*) fATLAS_NP->Get("Table 15/Graph1D_y1");
+    TGraphAsymmErrors *g_ATLAS_NP_Sys = (TGraphAsymmErrors*) fATLAS_NP->Get("Table 15/Graph1D_y1");
+	TGraphAsymmErrors *g_Jpsi_NP_mid_old = (TGraphAsymmErrors*) fJpsi_NP_mid_old->Get("Table 30/Graph1D_y1");
+	TGraphAsymmErrors *g_Jpsi_NP_fwd_old = (TGraphAsymmErrors*) fJpsi_NP_fwd_old->Get("Table 32/Graph1D_y1");
+	TGraphAsymmErrors *g_Jpsi_NP_mid_oldSys = (TGraphAsymmErrors*) fJpsi_NP_mid_old->Get("Table 30/Graph1D_y1");
+	TGraphAsymmErrors *g_Jpsi_NP_fwd_oldSys = (TGraphAsymmErrors*) fJpsi_NP_fwd_old->Get("Table 32/Graph1D_y1");
+
+    TH1F *h_ATLAS_PR_Syspl = (TH1F *)fATLAS_PR->Get("Table 14/Hist1D_y1_e2plus");
+    TH1F *h_ATLAS_PR_Sysmi = (TH1F *)fATLAS_PR->Get("Table 14/Hist1D_y1_e2minus");
+    TH1F *h_ATLAS_NP_Syspl = (TH1F *)fATLAS_NP->Get("Table 15/Hist1D_y1_e2plus");
+    TH1F *h_ATLAS_NP_Sysmi = (TH1F *)fATLAS_NP->Get("Table 15/Hist1D_y1_e2minus");
+
+	TH1F *h_Jpsi_NP_mid_oldSyspl = (TH1F *)fJpsi_NP_mid_old->Get("Table 30/Hist1D_y2_e2plus");
+	TH1F *h_Jpsi_NP_mid_oldSysmi = (TH1F *)fJpsi_NP_mid_old->Get("Table 30/Hist1D_y2_e2minus");
+	TH1F *h_Jpsi_NP_fwd_oldSyspl = (TH1F *)fJpsi_NP_fwd_old->Get("Table 32/Hist1D_y2_e2plus");
+	TH1F *h_Jpsi_NP_fwd_oldSysmi = (TH1F *)fJpsi_NP_fwd_old->Get("Table 32/Hist1D_y2_e2minus");
+
 	for (int i=0; i<nCentBins; i++){
 		midPR2S_new[i] = h_midPR->GetBinContent(i+1);
 		midPR2S_new_Err[i] = h_midPR->GetBinError(i+1);
@@ -180,37 +212,6 @@ void compare_Npart(bool isSys=true)
 		//	cout << "New Val : " << fwdPR_new[i]  << endl;
 	}
 
-	TGraphErrors *g_midPR;    
-	TGraphErrors *g_midPR1S;    
-	TGraphErrors *g_midPR_old;
-	TGraphErrors *g_Jpsi_midPR;    
-	TGraphErrors *g_Jpsi_midPR_old;
-	TGraphErrors *g_Jpsi_fwdPR;    
-	TGraphErrors *g_Jpsi_fwdPR_old;
-	TGraphErrors *g_fwdPR;     
-	TGraphErrors *g_fwdPR1S;     
-	TGraphErrors *g_fwdNP1S;
-	TGraphErrors *g_midNP1S;
-	TGraphErrors *g_fwdPR_old;
-	TGraphErrors *g_alice;
-	TGraphErrors *g_ATLAS_PR = (TGraphErrors*) fATLAS_PR->Get("Table 14/Graph1D_y1");
-    TGraphAsymmErrors *g_ATLAS_PR_Sys = (TGraphAsymmErrors*) fATLAS_PR->Get("Table 14/Graph1D_y1");
-    TGraphErrors *g_ATLAS_NP = (TGraphErrors*) fATLAS_NP->Get("Table 15/Graph1D_y1");
-    TGraphAsymmErrors *g_ATLAS_NP_Sys = (TGraphAsymmErrors*) fATLAS_NP->Get("Table 15/Graph1D_y1");
-	TGraphAsymmErrors *g_Jpsi_NP_mid_old = (TGraphAsymmErrors*) fJpsi_NP_mid_old->Get("Table 30/Graph1D_y1");
-	TGraphAsymmErrors *g_Jpsi_NP_fwd_old = (TGraphAsymmErrors*) fJpsi_NP_fwd_old->Get("Table 32/Graph1D_y1");
-	TGraphAsymmErrors *g_Jpsi_NP_mid_oldSys = (TGraphAsymmErrors*) fJpsi_NP_mid_old->Get("Table 30/Graph1D_y1");
-	TGraphAsymmErrors *g_Jpsi_NP_fwd_oldSys = (TGraphAsymmErrors*) fJpsi_NP_fwd_old->Get("Table 32/Graph1D_y1");
-
-    TH1F *h_ATLAS_PR_Syspl = (TH1F *)fATLAS_PR->Get("Table 14/Hist1D_y1_e2plus");
-    TH1F *h_ATLAS_PR_Sysmi = (TH1F *)fATLAS_PR->Get("Table 14/Hist1D_y1_e2minus");
-    TH1F *h_ATLAS_NP_Syspl = (TH1F *)fATLAS_NP->Get("Table 15/Hist1D_y1_e2plus");
-    TH1F *h_ATLAS_NP_Sysmi = (TH1F *)fATLAS_NP->Get("Table 15/Hist1D_y1_e2minus");
-
-	TH1F *h_Jpsi_NP_mid_oldSyspl = (TH1F *)fJpsi_NP_mid_old->Get("Table 30/Hist1D_y2_e2plus");
-	TH1F *h_Jpsi_NP_mid_oldSysmi = (TH1F *)fJpsi_NP_mid_old->Get("Table 30/Hist1D_y2_e2minus");
-	TH1F *h_Jpsi_NP_fwd_oldSyspl = (TH1F *)fJpsi_NP_fwd_old->Get("Table 32/Hist1D_y2_e2plus");
-	TH1F *h_Jpsi_NP_fwd_oldSysmi = (TH1F *)fJpsi_NP_fwd_old->Get("Table 32/Hist1D_y2_e2minus");
 
     for(int i=0; i<g_ATLAS_PR->GetN(); i++) {
         double xError = 4.3;
@@ -260,13 +261,31 @@ void compare_Npart(bool isSys=true)
 		g_Jpsi_NP_fwd_oldSys->SetPointError(i,xError,xError,NP_Sysmi,NP_Sysmi);
 	}
 
+	// Change x points of g_Jpsi_NP_mid_old to use NpartBin_mid_old values
+	for (int i=0; i<g_Jpsi_NP_mid_old->GetN(); i++) {
+		double x_old, y_old;
+		g_Jpsi_NP_mid_old->GetPoint(i, x_old, y_old);
+		g_Jpsi_NP_mid_old->SetPoint(i, NpartBin_mid_old[g_Jpsi_NP_mid_old->GetN()-1-i], y_old);
+		// Set x error to 4.3
+		double eylow = g_Jpsi_NP_mid_old->GetEYlow()[i];
+		double eyhigh = g_Jpsi_NP_mid_old->GetEYhigh()[i];
+		g_Jpsi_NP_mid_old->SetPointError(i, 0, 0, eylow, eyhigh);
+	}
+
+	// Change x points of g_Jpsi_NP_mid_oldSys to use NpartBin_mid_old values
+	for (int i=0; i<g_Jpsi_NP_mid_oldSys->GetN(); i++) {
+		double x_old, y_old;
+		g_Jpsi_NP_mid_oldSys->GetPoint(i, x_old, y_old);
+		g_Jpsi_NP_mid_oldSys->SetPoint(i, NpartBin_mid_old[g_Jpsi_NP_mid_oldSys->GetN()-1-i], y_old);
+	}
+
 	g_midPR = new TGraphErrors(nCentBins, NpartBin, midPR2S_new, 0, midPR2S_new_Err);
 	g_midPR1S = new TGraphErrors(nCentBins, NpartBin, midPR1S_new, 0, midPR1S_new_Err);
 	g_midPR_old = new TGraphErrors(5, NpartBin_mid_old, midPR_old, 0, midPR_old_Err);
 	g_Jpsi_midPR_old = new TGraphErrors(6, NpartBin_mid_old, midPR_Jpsi_old, 0, midPR_Jpsi_old_Err);
 	g_Jpsi_fwdPR_old = new TGraphErrors(3, NpartBin_fwd_old, fwdPR_Jpsi_old, 0, fwdPR_Jpsi_old_Err);
-	g_Jpsi_midNP_old = new TGraphErrors(6, NpartBin_mid_old, midNP_Jpsi_old, 0, midNP_Jpsi_old_Err);
-	g_Jpsi_fwdNP_old = new TGraphErrors(3, NpartBin_fwd_old, fwdNP_Jpsi_old, 0, fwdNP_Jpsi_old_Err);
+	//g_Jpsi_midNP_old = new TGraphErrors(6, NpartBin_mid_old, midNP_Jpsi_old, 0, midNP_Jpsi_old_Err);
+	//g_Jpsi_fwdNP_old = new TGraphErrors(3, NpartBin_fwd_old, fwdNP_Jpsi_old, 0, fwdNP_Jpsi_old_Err);
 	g_fwdPR = new TGraphErrors(nCentBins_fwd, NpartBin_fwd, fwdPR_new, 0, fwdPR_new_Err);
 	g_fwdPR1S = new TGraphErrors(nCentBins_fwd, NpartBin_fwd, fwdPR1S_new, 0, fwdPR1S_new_Err);
 	g_fwdPR_old = new TGraphErrors();
@@ -655,7 +674,9 @@ void compare_Npart(bool isSys=true)
 
 
 	g_Jpsi_NP_mid_old->Draw("AP");
+	g_Jpsi_NP_mid_oldSys->Draw("5");
 	g_ATLAS_NP->Draw("P");
+	g_ATLAS_NP_Sys->Draw("5");
 	g_midNP1S->Draw("P");
 	g_midNPSys1S->Draw("5");
 
