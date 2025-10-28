@@ -107,9 +107,9 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
   cout<<"PRMC Tree: "<<treePRMC->GetEntries()<<", by total cut: "<<h_decayPRMC->GetEntries()<<", "<<h_decayData->GetEntries()/treePRMC->GetEntries()*100<<"%"<<endl;
   cout<<"NPMC Tree: "<<treeNPMC->GetEntries()<<", by total cut: "<<h_decayNPMC->GetEntries()<<", "<<h_decayData->GetEntries()/treeNPMC->GetEntries()*100<<"%"<<endl;
 
-  TLine *lcutv;
-  TLine *lcuth;
-  TLine *lresi;
+  TLine *lcutv = nullptr;
+  TLine *lcuth = nullptr;
+  TLine *lresi = nullptr;
 
   int totalPRMC = h_decayPRMC->GetEntries();
   int totalNPMC = h_decayNPMC->GetEntries();
@@ -135,6 +135,13 @@ void psuedo_proper_decay_length_pp(float ptLow =  3, float ptHigh = 30,
       lcuth = new TLine(xmin, h_decayNPMC->Integral(0,bins)/h_decayNPMC->GetEntries(), h_decayNPMC->GetBinCenter(bins), h_decayNPMC->Integral(0,bins)/h_decayNPMC->GetEntries());
       lresi = new TLine(xmin, h_decayPRMC->Integral(0,bins)/h_decayPRMC->GetEntries(), h_decayPRMC->GetBinCenter(bins), h_decayPRMC->Integral(0,bins)/h_decayPRMC->GetEntries());
     }
+  }
+
+  // Check if lcutv was initialized
+  if (!lcutv) {
+    cout << "Warning: No bin found satisfying the efficiency criteria!" << endl;
+    cout << "Total PRMC entries: " << totalPRMC << ", Total NPMC entries: " << totalNPMC << endl;
+    return;
   }
 
   TCut ctauCut;
