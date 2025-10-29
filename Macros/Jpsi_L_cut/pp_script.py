@@ -32,7 +32,7 @@ commands_nominal = [
 "root -l -b -q MassFit_FixPar_Data_pp.C'(12,   40, 1.6, 2.4, 2)'", 
 "root -l -b -q MassFit_FixPar_Data_pp.C'(3.5,  40, 1.6, 2.4, 2)'", 
 ]
-commands_pTreweight_pp = [
+commands_pTreweight = [
     "root -l -b -q MassFit_FixPar_Data_pp.C'(6.5, 7.5, 0, 1.6, 1)'", 
     "root -l -b -q MassFit_FixPar_Data_pp.C'(7.5, 8.5, 0, 1.6, 1)'", 
     "root -l -b -q MassFit_FixPar_Data_pp.C'(8.5, 9.5, 0, 1.6, 1)'", 
@@ -79,9 +79,9 @@ commands_pTreweight_pp = [
 ]
 
 # 병렬 실행 함수
-def run_command(command_ptReweight_pp):
-    subprocess.call(command_ptReweight_pp, shell=True)
+def run_command(command_ptReweight):
+    subprocess.call(command_ptReweight, shell=True)
 
 # ThreadPoolExecutor를 사용하여 병렬 실행
 with ThreadPoolExecutor(max_workers=4) as executor:  # 최대 4개의 작업을 동시에 실행
-    executor.map(run_command, commands_pTreweight_pp)
+    executor.map(run_command, commands_pTreweight)
