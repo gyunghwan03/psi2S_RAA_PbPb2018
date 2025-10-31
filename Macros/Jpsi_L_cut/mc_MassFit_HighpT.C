@@ -127,7 +127,7 @@ void mc_MassFit_HighpT(
 	//SIGNAL: initial params
     double alpha_1_init = 1.9801; double n_1_init = 1.7473;
     double sigma_1_init = 0.0427; double f_init = 0.7726;
-    double x_init = 1.664; 
+    double x_init = 1.31; 
     double N_Jpsi_high = 1e+8;
     double fit_limit = 3.32;
 	//SIGNAL: initial params
@@ -194,6 +194,12 @@ void mc_MassFit_HighpT(
         //sigma_1_init = 0.05;
         //alpha_1_init = 2.5;
     //}
+    //
+    if(ptLow==17.5&&ptHigh==20&&yLow==0) { x_init = 1.12; x_low = 1e-6; fit_limit = 3.28; }
+    else if(ptLow==20.&&ptHigh==22.5&&yLow==0) { x_init = 1.66; x_low = 1.; fit_limit = 3.32; }
+    else if(ptLow==22.5&&ptHigh==25&&yLow==0) { x_init = 1.12; x_low = 1e-6; fit_limit = 3.28; }
+    else if(ptLow==25&&ptHigh==27.5&&yLow==0) { x_init = 1.66; x_low = 1.; fit_limit = 3.32; }
+    else if(ptLow==30&&ptHigh==40&&yLow==0) { x_init = 1.66; x_low = 1.; fit_limit = 3.32; }
 
     double paramsupper[8] = {sigma_high, x_high, alpha_high, n_high, f_high,  25.0};
     double paramslower[8] = {sigma_low,  x_low,  alpha_low,   n_low,  f_low, -25.0};

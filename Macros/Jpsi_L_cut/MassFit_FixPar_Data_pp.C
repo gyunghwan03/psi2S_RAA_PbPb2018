@@ -143,7 +143,6 @@ void MassFit_FixPar_Data_pp(
   double alpha_1_init = alpha_MC_value; double n_1_init = n_MC_value;
   double sigma_1_init = sigma_MC_value; double x_init = xA_MC_value; double f_init = f_MC_value;
 
-
   //SIGNAL
   RooRealVar    mean("m_{J/#Psi}","mean of the signal gaussian mass PDF",pdgMass.JPsi, pdgMass.JPsi -0.1, pdgMass.JPsi + 0.1 ) ;
   //RooRealVar   *x_A = new RooRealVar("x_A","sigma ratio ", x_init, paramslower[3], paramsupper[3]);
@@ -188,6 +187,19 @@ void MassFit_FixPar_Data_pp(
   else if(ptLow==9&&ptHigh==12&&yLow==1.6&&PRw==1) { NJpsi_limit = 1e+7; NBkg_limit = 1e+7; s1_init = 0.1; }
   else if(ptLow==12&&ptHigh==15&&PRw==1) { NJpsi_limit = 1e+7; NBkg_limit = 1e+7; s1_init = 0.; }
   else if(ptLow==25&&ptHigh==40&&PRw==1) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+
+  else if(ptLow==3.5&&ptHigh==4.5&&PRw==1) { NJpsi_limit = 1e+6; NBkg_limit = 1e+6; s1_init = -0.1; s2_init = 0.1;}
+  else if(ptLow==8.5&&ptHigh==9.5&&PRw==1) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+  else if(ptLow==17.5&&ptHigh==20&&PRw==1) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+  else if(ptLow==20&&ptHigh==40&&PRw==2) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+  else if(ptLow==22.5&&ptHigh==25&&PRw==1) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+  else if(ptLow==25&&ptHigh==27.5&&PRw==1) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+  else if(ptLow==27.5&&ptHigh==30) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+  else if(ptLow==30&&ptHigh==40) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+
+  else if(ptLow==20&&ptHigh==40) { NJpsi_limit = 1e+7; NBkg_limit = 1e+6; }
+
+  
 
   RooRealVar *sl1 = new RooRealVar("sl1","sl1", s1_init, -1., 1.); // 15<pt<50 v2==-1.2 : 0.01
   RooRealVar *sl2 = new RooRealVar("sl2","sl2", s2_init, -1., 1.);
