@@ -1,0 +1,385 @@
+#include "TText.h"
+#include "TArrow.h"
+#include "TFile.h"
+#include "../commonUtility.h"
+#include "../cutsAndBin.h"
+
+using namespace std;
+
+valErr getYield(float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, int cLow=0, int cHigh=0);
+double getFrac(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh);
+double getFracErr(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh);
+void dndpt_y0_1p6_Jpsi(int PR=0, int WRITE=1) {
+
+  TString fname;
+  if(PR==0) fname = "Prompt";
+  else if(PR==1) fname = "NonPrompt";
+  gStyle->SetOptStat(0);
+  //gStyle->SetOptFit(1);
+  gStyle->SetPadTickY(1);
+
+  TH1::SetDefaultSumw2();
+
+  //// modify by hand according to the pt range of the sample
+  const int nPtBins=7;
+  double ptBin[nPtBins+1]={6.5,9.0,12.0,15.0,20.0,25.0,30.0,50.0};
+  const int nPtBinsMC=7;
+  double ptBinMC[nPtBinsMC+1]={6.5,9.0,12.0,15.0,20.0,25.0,30.0,50.0};
+  const int nYBins=6;
+  double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
+  double frac[nPtBins];
+  double fracErr[nPtBins];
+      for(int ipt=0;ipt<nPtBins;ipt++) {
+          frac[ipt]=getFrac(ptBin[ipt],ptBin[ipt+1],0,1.6,0,180);
+          fracErr[ipt]=getFracErr(ptBin[ipt],ptBin[ipt+1],0,1.6,0,180);
+          cout << ptBin[ipt] << " - " << ptBin[ipt+1] << " frac : " << frac[ipt] << " +/- " << fracErr[ipt]<< endl;
+      }
+
+  // Get MC :
+  float massLow = 3.3; float massHigh = 4.1;
+  double ptMin = ptBinMC[0]; double ptMax = ptBinMC[nPtBinsMC];
+  double yMin = yBin[0];     double yMax = yBin[nYBins];
+
+  TH1D* hptData=new TH1D("hptData",";p_{T}(GeV/c);",nPtBins,ptBin);
+  TH1D* hptData1=new TH1D("hptData1",";p_{T}(GeV/c);",nPtBins,ptBin);
+  TH1D* hfracData=new TH1D("hfracData",";p_{T}(GeV/c);b_fraction",nPtBins,ptBin);
+  //TH1D* hptData2=new TH1D("hptData2",";p_{T}(GeV/c);",nPtBins,ptBin);
+  //TH1D* hptData3=new TH1D("hptData3",";p_{T}(GeV/c);",nPtBins,ptBin);
+  //TH1D* hptData4=new TH1D("hptData4",";p_{T}(GeV/c);",nPtBins,ptBin);
+  //TH1D* hptData5=new TH1D("hptData5",";p_{T}(GeV/c);",nPtBins,ptBin);
+  //TH1D* hptData6=new TH1D("hptData6",";p_{T}(GeV/c);",nPtBins,ptBin);
+  //TH1D* hptData7=new TH1D("hptData7",";|y|;",nYBins,yBin);
+
+  TH1D *DataFit1 = new TH1D("DataFit1","; p_{T} (GeV/c) ; ", nPtBins, ptBin);
+
+  TH1D *WeightFactor = new TH1D("WeightFactor","; p_{T} (GeV/c) ; ", nPtBinsMC, ptBinMC);
+
+  TH1D *hptMC  = new TH1D("hptMC","; p_{T} (GeV/c) ; ", nPtBins, ptBin);
+  TH1D *hptMC1 = new TH1D("hptMC1","; p_{T} (GeV/c) ; ", nPtBins, ptBin);
+  TH1D *hptMC2 = new TH1D("hptMC2","; p_{T} (GeV/c) ; ", 100, 0, 50 );
+  TH1D *hptMC3 = new TH1D("hptMC3","; p_{T} (GeV/c) ; ", nPtBins, ptBin);
+  TH1D *hptMC4 = new TH1D("hptMC4","; p_{T} (GeV/c) ; ", nPtBins, ptBin);
+  TH1D *hptMC5 = new TH1D("hptMC5","; p_{T} (GeV/c) ; ", nPtBins, ptBin);
+  TH1D *hptMC6 = new TH1D("hptMC6","; p_{T} (GeV/c) ; ",nPtBins,ptBin);
+  cout << "HERE" << endl;
+//  TH1D *hptMC7 = new TH1D("hptMC7","; |y| ; ", nYBins, yBin);
+  cout << "HERE1" << endl;
+  TH1D *MCfit  = new TH1D("MCfit","; p_{T} (GeV/c) ; ", nPtBinsMC, ptBinMC);
+
+  TChain *tree = new TChain("mmepevt");
+  TString f1;
+  //if(PR==0)  f1 ="/work2/Oniatree/JPsi/skimmed_file/OniaFlowSkim_Jpsi_MC_Prompt_210107.root";
+  if(PR==0)  f1 ="/Users/hwan/tools/2019/CMS/JPsi/RAA_psi2S/psi2S_RAA_PbPb2018/skimmedFiles/OniaFlowSkim_JpsiTrig_Prompt_miniAOD_Psi2S_isMC1_HFNom_230517.root";
+  else if(PR==1) f1 ="./skimmedFiles/OniaFlowSkim_Psi2S_JpsiTrig_NonPrompt_isMC1_HFNom_noNCollw_230127.root";
+//  if(PR==0)  f1 ="../../skimmedFiles/OniaFlowSkim_Jpsi_MC_Prompt_210107.root";
+//  else if(PR==1) f1 ="../../skimmedFiles/OniaFlowSkim_Jpsi_MC_NonPrompt_210107.root";
+  tree->Add(f1.Data());
+
+  //SetBranchAddress
+  const int nMaxDimu = 1000;
+  float mass[nMaxDimu];
+  float P[nMaxDimu];
+  float Px[nMaxDimu];
+  float Py[nMaxDimu];
+  float Pz[nMaxDimu];
+  float pt[nMaxDimu];
+  float y[nMaxDimu];
+  float pt1[nMaxDimu];
+  float pt2[nMaxDimu];
+  float eta[nMaxDimu];
+  float eta1[nMaxDimu];
+  float eta2[nMaxDimu];
+  float ctau3D[nMaxDimu];
+  Int_t event;
+  Int_t nDimu;
+  float vz;
+  int recoQQsign[nMaxDimu];
+
+  TBranch *b_event;
+  TBranch *b_nDimu;
+  TBranch *b_vz;
+  TBranch *b_mass;
+  TBranch *b_recoQQsign;
+  TBranch *b_P;
+  TBranch *b_Px;
+  TBranch *b_Py;
+  TBranch *b_Pz;
+  TBranch *b_pt;
+  TBranch *b_y;
+  TBranch *b_eta;
+  TBranch *b_eta1;
+  TBranch *b_eta2;
+  TBranch *b_ctau3D;
+  TBranch *b_pt1;
+  TBranch *b_pt2;
+
+  tree -> SetBranchAddress("event", &event, &b_event);
+  tree -> SetBranchAddress("nDimu", &nDimu, &b_nDimu);
+  tree -> SetBranchAddress("vz", &vz, &b_vz);
+  tree -> SetBranchAddress("recoQQsign", recoQQsign, &b_recoQQsign);
+  tree -> SetBranchAddress("mass", mass, &b_mass);
+  tree -> SetBranchAddress("y", y, &b_y);
+  tree -> SetBranchAddress("pt", pt, &b_pt);
+  tree -> SetBranchAddress("pt1", pt1, &b_pt1);
+  tree -> SetBranchAddress("pt2", pt2, &b_pt2);
+  tree -> SetBranchAddress("eta", eta, &b_eta);
+  tree -> SetBranchAddress("eta1", eta1, &b_eta1);
+  tree -> SetBranchAddress("eta2", eta2, &b_eta2);
+  tree -> SetBranchAddress("ctau3D", ctau3D, &b_ctau3D);
+
+  Int_t nEvt = tree->GetEntries();
+  cout << "nEvt : " << nEvt << endl;
+  for(int i=0; i<nEvt; i++){
+    tree->GetEntry(i);
+
+    for(int j=0; j<nDimu; j++){
+      if (  !( (mass[j] > massLow)
+            && (mass[j] < massHigh)
+            && ( pt[j] > ptMin)
+            && ( pt[j] < ptMax)
+            && ( fabs(y[j]) < 1.6) )
+         )
+        continue;
+      hptMC->Fill      ( pt[j] );
+      hptMC1->Fill     ( pt[j] );
+      hptMC2->Fill     ( pt[j] );
+    }
+    //hptMC3->Fill     ( pt[i] );
+    //hptMC6->Fill     ( pt[i] );
+  }
+
+  //------------------------------------------ Get Data :
+  //FROM FINAL RESULTS
+  for(int ipt=1;ipt<=nPtBins;ipt++)
+  {
+    valErr yieldAA;
+    yieldAA = getYield(ptBin[ipt-1],ptBin[ipt],0,1.6,0,180);
+    //yieldAA = getYield(8.0,12.0,0,2.4,20,120);
+    if(PR==0){
+    hptData->SetBinContent(ipt,yieldAA.val*(1-frac[ipt-1]));
+    hptData->SetBinError(ipt,yieldAA.err);
+    hptData1->SetBinContent(ipt,yieldAA.val*(1-frac[ipt-1]));
+    hptData1->SetBinError(ipt,yieldAA.err);
+    hfracData->SetBinContent(ipt,frac[ipt-1]);
+    hfracData->SetBinError(ipt,fracErr[ipt-1]);
+    }
+    if(PR==1){
+    hptData->SetBinContent(ipt,yieldAA.val*frac[ipt]);
+    hptData->SetBinError(ipt,yieldAA.err);
+    hptData1->SetBinContent(ipt,yieldAA.val*frac[ipt]);
+    hptData1->SetBinError(ipt,yieldAA.err);
+    }
+    //hptData2->SetBinContent(ipt,(yieldAA.val)+(yieldAA.err));
+    //hptData3->SetBinContent(ipt,(yieldAA.val)-(yieldAA.err));
+    //hptData4->SetBinContent(ipt,yieldAA.val);
+    //hptData4->SetBinError(ipt,yieldAA.err);
+    //hptData5->SetBinContent(ipt,yieldAA.val);
+    //hptData5->SetBinError(ipt,yieldAA.err);
+    //hptData6->SetBinContent(ipt,yieldAA.val);
+    //hptData6->SetBinError(ipt,yieldAA.err);
+    cout << Form("yield, pt  ") << ptBin[ipt-1] << " - " << ptBin[ipt] << " : " << yieldAA.val <<" +/- "<< yieldAA.err 
+      << ", error : " << 100*yieldAA.err/yieldAA.val <<"%"<< ", Frac: "<<frac[ipt-1]<<endl;
+  }
+  ///////////////////////////////////Normalization///////////////////////////////////
+  hptMC->Scale(1./hptMC->Integral());
+  hptMC1->Scale(1./hptMC1->Integral());
+  hptMC2->Scale(1./hptMC2->Integral());
+  //hptMC3->Scale(1./hptMC3->Integral());
+  //hptMC4->Scale(1./hptMC4->Integral());
+  //hptMC5->Scale(1./hptMC5->Integral());
+  //hptMC6->Scale(1./hptMC6->Integral());
+  //hptMC7->Scale(1./hptMC7->Integral());
+
+  hptData->Scale(1./hptData->Integral());
+  hptData1->Scale(1./hptData1->Integral());
+  //hptData2->Scale(1./hptData2->Integral());
+  //hptData3->Scale(1./hptData3->Integral());
+  //hptData4->Scale(1./hptData4->Integral());
+  //hptData5->Scale(1./hptData5->Integral());
+  //hptData6->Scale(1./hptData6->Integral());
+
+  TH1ScaleByWidth(hptMC);
+  TH1ScaleByWidth(hptData);
+
+  handsomeTH1(hptMC,1);     
+  handsomeTH1(hptData,1);   
+  handsomeTH1(hptData1,1);   
+
+  ///////////////////////////////////////////////////Fit Function///////////////////////////
+  TF1* fitmc1;
+  TF1* fitdata1;
+  TF1* fitRatio1;
+
+  fitmc1 = new TF1("fitmc1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,50);
+  fitdata1 = new TF1("fitdata1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,50);
+  //fitRatio1 = new TF1("fitRatio1","(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))/([2]-1)*([3]-2)/([2]*[3]*([2]*[3] + ([2]-2)*[2])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([2]*[3])),-[2])",0,30);
+  fitRatio1 = new TF1("fitRatio1","( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )",6.5,50);
+  //fitRatio1 = new TF1("fitRatio1","TMath::Exp(-x/[0])*[1]+[2]",6.5,50);
+  //fitRatio1->SetParameters(0.0005,4.5);
+  //fitRatio1->SetParameters(0, 10);
+  //fitRatio1->SetParameters(1, 10);
+
+  TLegend *leg1 = new TLegend(0.65,0.75,0.85,0.85);
+  leg1->AddEntry(hptData,"Data","p");
+  leg1->AddEntry(hptMC,"MC","l");
+  leg1->SetLineColor(kWhite);
+
+  //TLegend *leg2 = new TLegend(0.5,0.65,0.87,0.85);
+  //leg2->AddEntry(fitRatio1,Form("reweighting factor using fit(%s %dS)",fcollId.Data(), state),"l");
+  //leg2->SetLineColor(kWhite);
+
+  TCanvas* c_A =  new TCanvas("canvas_A","My plots",4,4,550,520);
+  c_A->cd();
+  TPad *pad_A_1 = new TPad("pad_A_1", "pad_A_1", 0, 0.16, 0.98, 1.0);
+  pad_A_1->SetTicks(1,1);
+  pad_A_1->Draw(); pad_A_1->cd();
+  //pad_A_1->Range(-2.857971,-0.0643152,55.88522,0.5337711);
+  pad_A_1->SetFillColor(0);
+  pad_A_1->SetBorderMode(0);
+  pad_A_1->SetBorderSize(2);
+  pad_A_1->SetTicks(1,1);
+  pad_A_1->SetTopMargin(0.05646528);
+  pad_A_1->SetFrameBorderMode(0);
+  pad_A_1->SetFrameBorderMode(0);
+  hptData->Draw();
+  hptMC->Draw("same hist");
+  leg1->Draw("same");
+  hptData->SetAxisRange(0.,hptData->GetMaximum()+0.05,"Y");
+  hptData->GetXaxis()->SetLabelSize(0);
+  hptData->GetYaxis()->SetTitleSize(0.04);
+  hptData->GetYaxis()->SetTitleOffset(1.00);
+  hptData->GetYaxis()->SetTitle("dN/dp_{T}");
+  //TPad *pad_A_2 = new TPad("pad_A_2", "pad_A_2",0,0.09,0.98,0.23);
+  TPad *pad_A_2 = new TPad("pad_A_2", "pad_A_2", 0, 0.006, 0.98, 0.227);
+  c_A->cd();
+  pad_A_2->Draw();
+  pad_A_2->cd();
+  //pad_A_2->Range(-2.857971,-3.915054,55.88522,5.062366);
+  pad_A_2->SetFillColor(0);
+  pad_A_2->SetBorderMode(0);
+  pad_A_2->SetBorderSize(2);
+  pad_A_2->SetTicks(1,1);
+  //pad_A_2->SetTopMargin(0.00694694);
+  pad_A_2->SetBottomMargin(0.4361001);
+  //pad_A_2->SetFrameBorderMode(0);
+  //pad_A_2->SetFrameBorderMode(0);
+  hptData1->Divide(hptMC1);
+  //hptData2->Divide(hptMC2);
+  //hptData3->Divide(hptMC3);
+  //hptData1->Fit(fitRatio1,"IE","",0,30);
+  //TFitResultPtr r = hptData1->Fit(fitRatio1,"S");
+  //r.Get()->Print("V");
+  //fitRatio2->FixParameter(0,fitRatio1->GetParameter(0)+fitRatio1->GetParError(0));
+  //fitRatio2->FixParameter(1,fitRatio1->GetParameter(1)+fitRatio1->GetParError(1));
+  //fitRatio2->FixParameter(2,fitRatio1->GetParameter(2)+fitRatio1->GetParError(2));
+  //fitRatio2->FixParameter(3,fitRatio1->GetParameter(3)+fitRatio1->GetParError(3));
+  //fitRatio3->FixParameter(0,fitRatio1->GetParameter(0)-fitRatio1->GetParError(0));
+  //fitRatio3->FixParameter(1,fitRatio1->GetParameter(1)-fitRatio1->GetParError(1));
+  //fitRatio3->FixParameter(2,fitRatio1->GetParameter(2)-fitRatio1->GetParError(2));
+  //fitRatio3->FixParameter(3,fitRatio1->GetParameter(3)-fitRatio1->GetParError(3));
+  //cout<<"Fit Parameter 1"<<endl;
+  //cout<<fitRatio1->GetParameter(0)<<", "<<fitRatio1->GetParameter(1)<<", "<<fitRatio1->GetParameter(2)<<", "<<fitRatio1->GetParameter(3)<<endl;
+  //cout<<"Fit Parameter 2"<<endl;
+  //cout<<fitRatio2->GetParameter(0)<<", "<<fitRatio2->GetParameter(1)<<", "<<fitRatio2->GetParameter(2)<<", "<<fitRatio2->GetParameter(3)<<endl;
+  //cout<<"Fit Parameter 3"<<endl;
+  //cout<<fitRatio3->GetParameter(0)<<", "<<fitRatio3->GetParameter(1)<<", "<<fitRatio3->GetParameter(2)<<", "<<fitRatio3->GetParameter(3)<<endl;
+  hptData1->Draw();
+  hptData1->GetXaxis()->SetTitleOffset(1.2) ;
+  hptData1->GetXaxis()->SetTitleSize(0.15) ;
+  hptData1->GetXaxis()->CenterTitle();
+  hptData1->GetXaxis()->SetLabelOffset(0.04) ;
+  hptData1->GetXaxis()->SetLabelSize(0.15) ;
+  hptData1->GetXaxis()->SetTickSize(0.03);
+  hptData1->GetYaxis()->SetTickSize(0.04);
+  hptData1->GetYaxis()->SetNdivisions(404);
+  hptData1->GetYaxis()->SetTitle("Data/MC");
+  hptData1->GetYaxis()->SetTitleOffset(0.25) ;
+  hptData1->GetYaxis()->SetTitleSize(0.15) ;
+  hptData1->GetYaxis()->CenterTitle();
+  hptData1->GetYaxis()->SetLabelSize(0.15) ;
+  hptData1->GetYaxis()->SetTickSize(0.04);
+  hptData1->GetYaxis()->SetNdivisions(404);
+  //hptData2->SetLineColor(kGreen+2);
+  //hptData3->SetLineColor(kRed+2);
+  //fitRatio1->SetLineColor(kGreen+2);
+  //fitRatio2->SetLineColor(kRed+2);
+  //fitRatio3->SetLineColor(kBlue+2);
+  //fitRatio1->Draw("same");
+  //fitRatio2->Draw("same");
+  //fitRatio3->Draw("same");
+  hptData1->SetAxisRange(-1,4.,"Y");
+  hptData1->Fit(fitRatio1,"IE","",6.5,50);
+  TFitResultPtr r = hptData1->Fit(fitRatio1,"S","",6.5,50);
+  //TFitResultPtr r = hptData1->Fit("expo","S");
+  r.Get()->Print("V");
+  //leg2->Draw("same");
+  jumSun(6.5,1,ptMax,1);
+
+  TCanvas* c2 =  new TCanvas("c2","",604, 0, 800, 600);
+  hptMC2->Draw("same hist");
+
+  //TCanvas* c_3 =  new TCanvas("c_3","b_fraction",4,4,550,520);
+  //c_3->cd();
+  //hfracData->Draw();
+  //hfracData->GetYaxis()->SetRangeUser(0,1);
+  //hfracData->SetMarkerStyle(21);
+  //hfracData->SetLineColor(kRed+2);
+  //hfracData->SetMarkerColor(kRed+2);
+  //c_3->SaveAs("./fraction_vs_pt.pdf");
+
+  if(WRITE==1&&PR==0){
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Psi2S_DATA_y0_1p6_230521.root","RECREATE");
+	  fJpsipb->cd();
+	  hptData1->SetName("WeightFactor");
+	  hptData1->Write();
+	  fitRatio1->SetName("dataMC_Ratio1");
+	  fitRatio1->Write();
+  }
+  else if(WRITE==1&&PR==1){
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_BtoPsi2S_DATA_y0_1p6_230521.root","RECREATE");
+	  fJpsipb->cd();
+	  hptData1->SetName("WeightFactor");
+	  hptData1->Write();
+	  fitRatio1->SetName("dataMC_Ratio1");
+	  fitRatio1->Write();
+  }
+  if(WRITE==1){
+	  c_A->SaveAs(Form("./dNdpt_PbPb_plot_%s_y0_1p6_230521.pdf",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_PbPb_plot_%s_y0_1p6_230521.png",fname.Data()));
+  }
+}
+
+//Get Yield
+valErr getYield(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
+  TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
+  TFile* inf = new TFile(Form("../Macros/psi2S_230512/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Mass/MassFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  //RooWorkspace* ws = (RooWorkspace*)inf->Get("workspace");
+  TH1D* fitResults = (TH1D*)inf->Get("fitResults");
+  valErr ret;
+  ret.val = fitResults->GetBinContent(1);
+  ret.err = fitResults->GetBinError(1);
+  cout << Form("../Macros/psi2S_230512/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()) << endl;
+  //cout << Form("../Macros/2021_04_22/roots/2DFit_210604/Mass/MassFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()) << endl;
+  //cout << kineLabel << ": " << " & " << ret.val << " $\pm$ " << ret.err << " & " <<ws->var("nBkg")->getVal() << " $\pm$ "<< ws->var("nBkg")->getError() << "\\\\" << endl;
+  return ret;
+}
+double getFrac(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
+	TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
+  TFile* inf = new TFile(Form("../Macros/psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
+  double frac;
+  frac = fitResults->GetBinContent(1);
+  return frac;
+}
+double getFracErr(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
+	TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
+  TFile* inf = new TFile(Form("../Macros/psi2S_230512/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
+  double frac;
+  frac = fitResults->GetBinError(1);
+  return frac;
+}
+
