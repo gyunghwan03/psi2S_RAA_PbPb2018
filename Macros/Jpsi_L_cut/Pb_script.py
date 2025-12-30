@@ -70,8 +70,9 @@ commands_pTreweight = [
     "root -l -b -q MassFit_FixPar_Data.C'(27.5, 30, 0, 1.6, 0, 180, 1)'", 
     "root -l -b -q MassFit_FixPar_Data.C'(30,   40, 0, 1.6, 0, 180, 1)'", 
 
-    "root -l -b -q MassFit_FixPar_Data.C'(3.5, 4.5, 1.6, 2.4, 0, 180, 1)'",
-    "root -l -b -q MassFit_FixPar_Data.C'(4.5, 6.5, 1.6, 2.4, 0, 180, 1)'",
+    "root -l -b -q MassFit_FixPar_Data.C'(3,     4, 1.6, 2.4, 0, 180, 1)'",
+    "root -l -b -q MassFit_FixPar_Data.C'(4,     5, 1.6, 2.4, 0, 180, 1)'",
+    "root -l -b -q MassFit_FixPar_Data.C'(5,   6.5, 1.6, 2.4, 0, 180, 1)'",
     "root -l -b -q MassFit_FixPar_Data.C'(6.5, 8.5, 1.6, 2.4, 0, 180, 1)'",
     "root -l -b -q MassFit_FixPar_Data.C'(8.5,  12, 1.6, 2.4, 0, 180, 1)'",
     "root -l -b -q MassFit_FixPar_Data.C'(12,   15, 1.6, 2.4, 0, 180, 1)'",
@@ -92,8 +93,9 @@ commands_pTreweight = [
     "root -l -b -q MassFit_FixPar_Data.C'(27.5, 30, 0, 1.6, 0, 180, 2)'", 
     "root -l -b -q MassFit_FixPar_Data.C'(30,   40, 0, 1.6, 0, 180, 2)'", 
 
-    "root -l -b -q MassFit_FixPar_Data.C'(3.5, 4.5, 1.6, 2.4, 0, 180, 2)'",
-    "root -l -b -q MassFit_FixPar_Data.C'(4.5, 6.5, 1.6, 2.4, 0, 180, 2)'",
+    "root -l -b -q MassFit_FixPar_Data.C'(3,     4, 1.6, 2.4, 0, 180, 2)'",
+    "root -l -b -q MassFit_FixPar_Data.C'(4,     5, 1.6, 2.4, 0, 180, 2)'",
+    "root -l -b -q MassFit_FixPar_Data.C'(5,   6.5, 1.6, 2.4, 0, 180, 2)'",
     "root -l -b -q MassFit_FixPar_Data.C'(6.5, 8.5, 1.6, 2.4, 0, 180, 2)'",
     "root -l -b -q MassFit_FixPar_Data.C'(8.5,  12, 1.6, 2.4, 0, 180, 2)'",
     "root -l -b -q MassFit_FixPar_Data.C'(12,   15, 1.6, 2.4, 0, 180, 2)'",
@@ -109,4 +111,4 @@ def run_command(command_pTreweight):
 
 # ThreadPoolExecutor를 사용하여 병렬 실행
 with ThreadPoolExecutor(max_workers=4) as executor:  # 최대 4개의 작업을 동시에 실행
-    executor.map(run_command, commands_pTreweight)
+    executor.map(run_command, commands_pTreweight + commands_nominal)

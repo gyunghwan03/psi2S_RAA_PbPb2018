@@ -32,6 +32,7 @@ void MassFit_FixPar_Data(
     )
 {
 
+  nCPU = 32;
   double l_cut = -10.;
   //TString DATE = "10_60";
   //TString DATE = "20_40";
@@ -258,6 +259,9 @@ void MassFit_FixPar_Data(
   else if (ptLow==20&&ptHigh==22.5&&PRw==1) { NJpsi_limit = 5e+3; NBkg_limit = 1e+4; }
   else if (ptLow==25&&ptHigh==27.5&&PRw==1) { NJpsi_limit = 5e+3; NBkg_limit = 1e+4; }
   else if (ptLow==27.5&&ptHigh==30&&PRw==1) { NJpsi_limit = 5e+3; NBkg_limit = 1e+4; }
+  else if (ptLow==6.5&&ptHigh==40&&cLow==0&&cHigh==180) {NJpsi_limit = 1e+6; }
+
+  else if(ptLow==9&&ptHigh==40&&cLow==120) {NJpsi_limit = 2e+5; }
 
   RooRealVar *N_Jpsi= new RooRealVar("N_Jpsi","inclusive Jpsi signals",NJpsi_lower,NJpsi_limit);
   RooRealVar *N_Bkg = new RooRealVar("N_Bkg","fraction of component 1 in bkg",0,NBkg_limit);
@@ -399,7 +403,7 @@ void MassFit_FixPar_Data(
 
   if(yLow==0)drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c, |y^{#mu#mu}| < %.1f, Cent. %d - %d%s ",ptLow, ptHigh, yHigh, cLow/2, cHigh/2, "%"),text_x,text_y,text_color,text_size);
   else if(yLow!=0)drawText(Form("%.1f < p_{T}^{#mu#mu} < %.1f GeV/c; %.1f < |y^{#mu#mu}| < %.1f; Cent. %d - %d%s", ptLow, ptHigh, yLow, yHigh, cLow/2, cHigh/2, "%"), text_x,text_y,text_color,text_size);
-  drawText(Form("N_{#psi(2S)} = %.f #pm %.f,  N_{Bkg} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(),ws->var("N_Jpsi")->getError(),ws->var("N_Bkg")->getVal(),ws->var("N_Bkg")->getError())
+  drawText(Form("N_{J/#psi} = %.f #pm %.f,  N_{Bkg} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(),ws->var("N_Jpsi")->getError(),ws->var("N_Bkg")->getVal(),ws->var("N_Bkg")->getError())
             ,text_x,text_y-y_diff*1,text_color,text_size);
    // drawText(Form("#alpha = %.4f (fixed)  f = %.4f (fixed)  n_{1} = %.4f (fixed)", ws->var("alpha_1_A")->getVal(), fitFraction.getVal(), fitN_1.getVal()),text_x,text_y-y_diff*2,text_color,text_size);
    // drawText(Form("#sigma_{1} = %.4f #pm %.4f   #sigma_{2} / #sigma_{1} = %.4f (fixed)",fitSigma_1.getVal(),fitSigma_1.getError(),fitX.getVal()),text_x,text_y-y_diff*3,text_color,text_size);
@@ -413,14 +417,14 @@ void MassFit_FixPar_Data(
   //drawText(Form("Cent. %d - %d%s", cLow/2, cHigh/2, "%"),text_x,text_y-y_diff*2,text_color,text_size);
   //drawText(Form("N_{J/#psi} = %.f #pm %.f",ws->var("N_Jpsi")->getVal(),ws->var("N_Jpsi")->getError()),text_x,text_y-y_diff*2,text_color,text_size);
   //drawText(Form("N_{Bkg} = %.f #pm %.f",ws->var("N_Bkg")->getVal(),ws->var("N_Bkg")->getError()),text_x,text_y-y_diff*3,text_color,text_size);
-  drawText(Form("m_{#psi(2S)} = %.4f #pm %.4f",ws->var("m_{J/#Psi}")->getVal(),ws->var("m_{J/#Psi}")->getError()),text_x,text_y-y_diff*2,text_color,text_size);
-  drawText(Form("#alpha_{#psi(2S)} = %.4f (fixed)",ws->var("alpha_1_A")->getVal()),text_x,text_y-y_diff*3,text_color,text_size);
-  drawText(Form("f_{#psi(2S)} = %.4f (fixed)",ws->var("f")->getVal()),text_x,text_y-y_diff*4,text_color,text_size);
-  drawText(Form("n_{#psi(2S)} = %.4f (fixed)",ws->var("n_1_A")->getVal()),text_x,text_y-y_diff*5,text_color,text_size);
-  drawText(Form("#sigma1_{#psi(2S)} = %.2f #pm %.2f MeV/c^{2}, (#sigma2/#sigma1)_{#psi(2S)} = %.3f (fixed)",(ws->var("sigma_1_A")->getVal())*1000,(ws->var("sigma_1_A")->getError())*1000,ws->var("x_A")->getVal()),text_x,text_y-y_diff*6,text_color,text_size);
-  if(PRw==1) drawText(Form("l_{#psi(2S)} < %.4f", l_cut),text_x,text_y-y_diff*7,text_color,text_size);
-  else if(PRw==2) drawText(Form("l_{#psi(2S)} > %.4f", l_cut),text_x,text_y-y_diff*7,text_color,text_size);
-  //drawText(Form("(#sigma2/#sigma1)_{#psi(2S)} = %.3f (fixed)",ws->var("x_A")->getVal()),text_x,text_y-y_diff*7,text_color,text_size);
+  drawText(Form("m_{J/#psi} = %.4f #pm %.4f",ws->var("m_{J/#Psi}")->getVal(),ws->var("m_{J/#Psi}")->getError()),text_x,text_y-y_diff*2,text_color,text_size);
+  drawText(Form("#alpha_{J/#psi} = %.4f (fixed)",ws->var("alpha_1_A")->getVal()),text_x,text_y-y_diff*3,text_color,text_size);
+  drawText(Form("f_{J/#psi} = %.4f (fixed)",ws->var("f")->getVal()),text_x,text_y-y_diff*4,text_color,text_size);
+  drawText(Form("n_{J/#psi} = %.4f (fixed)",ws->var("n_1_A")->getVal()),text_x,text_y-y_diff*5,text_color,text_size);
+  drawText(Form("#sigma1_{J/#psi} = %.2f #pm %.2f MeV/c^{2}, (#sigma2/#sigma1)_{J/#psi} = %.3f (fixed)",(ws->var("sigma_1_A")->getVal())*1000,(ws->var("sigma_1_A")->getError())*1000,ws->var("x_A")->getVal()),text_x,text_y-y_diff*6,text_color,text_size);
+  if(PRw==1) drawText(Form("l_{J/#psi} < %.4f", l_cut),text_x,text_y-y_diff*7,text_color,text_size);
+  else if(PRw==2) drawText(Form("l_{J/#psi} > %.4f", l_cut),text_x,text_y-y_diff*7,text_color,text_size);
+  //drawText(Form("(#sigma2/#sigma1)_{J/#psi} = %.3f (fixed)",ws->var("x_A")->getVal()),text_x,text_y-y_diff*7,text_color,text_size);
 
 
   TPad *pad_A_2 = new TPad("pad_A_2", "pad_A_2", 0, 0.001, 0.98, 0.32);
