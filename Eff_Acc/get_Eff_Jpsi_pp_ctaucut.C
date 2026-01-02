@@ -50,8 +50,8 @@ void get_Eff_Jpsi_pp_ctaucut(
   //TString inputMC1 = "/work2/Oniatree/JPsi/OniaTree_JpsiMM_5p02TeV_TuneCUETP8M1_nofilter_pp502Fall15-MCRUN2_71_V1-v1_GENONLY.root";
   //TString inputMC1 = "/work2/Oniatree/JPsi/OniatreeMC_BJPsiMM_TuneCUETP8M1_5p02TeV_pythia8_230214.root";	//pp_non prompt
   TString inputMC1;
-  if(state==1) inputMC1 = "/disk1/Oniatree/Jpsi/OniaTreeMC_Jpsi_Pythia8_nonUL_5p02TeV_merged.root"; // pp prompt
-  else if (state==2) inputMC1 = "/disk1/Oniatree/Jpsi/BtoJpsiJpsi_miniAOD94X_20Jun_v1.root";
+  if(state==1) inputMC1 = "/data/Oniatree/Jpsi/OniaTreeMC_Jpsi_Pythia8_nonUL_5p02TeV_merged.root"; // pp prompt
+  else if (state==2) inputMC1 = "/data/Oniatree/Jpsi/BtoJpsiJpsi_miniAOD94X_20Jun_v1.root";
   TChain* mytree;
   mytree = new TChain("hionia/myTree"); 
   //TChain* mytree = new TChain("hionia/myTree"); 
@@ -70,8 +70,20 @@ void get_Eff_Jpsi_pp_ctaucut(
   // TFile *fPtW1 = new TFile("../../compareDataToMC/ratioDataMC_pp_BtoPsi2S_DATA_y0_1p6_230629.root", "read");
   // TFile *fPtW2 = new TFile("../../compareDataToMC/ratioDataMC_pp_BtoPsi2S_DATA_y1p6_2p4_230629.root", "read");
   //jpsi
-  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_JPsi_DATA_y1p6_2p4_241016.root", "read");
-  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_JPsi_DATA_y0_1p6_241008.root", "read");
+  TFile *fPtW1;
+  TFile *fPtW2;
+  if(state==1){
+    fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Jpsi_DATA_ctauCut_y0_1p6_251103.root", "read");
+    fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Jpsi_DATA_ctauCut_y1p6_2p4_251103.root", "read");
+  }
+  else if(state==2){
+    fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_BtoJpsi_DATA_ctauCut_y0_1p6_251103.root", "read");
+    fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_BtoJpsi_DATA_ctauCut_y1p6_2p4_251103.root", "read");
+  }
+  //TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Jpsi_DATA_ctauCut_y1p6_2p4_251103.root", "read");
+  //TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_BtoJpsi_DATA_ctauCut_y1p6_2p4_251103.root", "read");
+  //TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_JPsi_DATA_y1p6_2p4_241016.root", "read");
+  //TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_JPsi_DATA_y0_1p6_241008.root", "read");
   //TFile *fPtW1 = new TFile("./ratioDataMC_AA_Jpsi_DATA_Forward_y_211218.root","read");
   //TFile *fPtW2 = new TFile("./ratioDataMC_AA_Jpsi_DATA_y0_1p6_211201.root","read");
   //TFile *fPtW1 = new TFile("./ratioDataMC_pp_BtoJPsi_DATA_y0_2p4_240402_new.root", "read");
@@ -696,8 +708,8 @@ void get_Eff_Jpsi_pp_ctaucut(
   //TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%d_tnp%d_20230416.root", isPtWeight, isTnP);
   //if (state == 2)
   TString  outFileName;
-  if(state==1) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%s_tnp%d_20250207.root", ptSys.Data(), isTnP);
-  else if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW%s_tnp%d_20250207.root", ptSys.Data(), isTnP);
+  if(state==1) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_251202.root", ptSys.Data(), isTnP);
+  else if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_251202.root", ptSys.Data(), isTnP);
   TFile *outFile = new TFile(outFileName, "RECREATE");
   hpt_eff_0->Write();
   hpt_eff_1->Write();
