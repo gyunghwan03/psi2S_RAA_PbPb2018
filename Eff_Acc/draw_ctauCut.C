@@ -13,6 +13,13 @@ using namespace std;
 void draw_ctauCut()
 {
     gStyle->SetOptStat(0);
+
+    float pos_x = 0.70;
+	float pos_y = 0.85;
+	float pos_y_diff = 0.051;
+	int text_color = 1;
+	float text_size = 12;    
+
     TFile *f_pt_PR = new TFile("./roots_ctau3D/ctau3D_cut_ptBin_PRMC_cent0-180.root");
     TFile *f_pt_NP = new TFile("./roots_ctau3D/ctau3D_cut_ptBin_NPMC_cent0-180.root");
     
@@ -22,15 +29,15 @@ void draw_ctauCut()
     TH1D *h_pt_NP_mid = (TH1D*)f_pt_NP->Get("h_ctau_ptBin_mid");    
 
     // Forward rapidity 피팅 함수: a + b/pT
-    TF1* f1_fwd = new TF1("f1_fwd","[0]+[1]/x", 3.5, 40);
-    f1_fwd->SetParameters(0.01, 0.1);  // 초기값 설정
+    TF1* f1_fwd = new TF1("f1_fwd","[0]+[1]/x", 3., 40);
+    f1_fwd->SetParameters(0.01, 0.3);  // 초기값 설정
     f1_fwd->SetParNames("a", "b");
     f1_fwd->SetLineColor(kRed);
     f1_fwd->SetLineWidth(2);
 
     // Mid rapidity 피팅 함수: a + b/pT
     TF1* f1_mid = new TF1("f1_mid","[0]+[1]/x", 6.5, 40);
-    f1_mid->SetParameters(0.01, 0.1);  // 초기값 설정
+    f1_mid->SetParameters(0.01, 0.2);  // 초기값 설정
     f1_mid->SetParNames("a", "b");
     f1_mid->SetLineColor(kRed);
     f1_mid->SetLineWidth(2);
@@ -56,9 +63,9 @@ void draw_ctauCut()
     cout << "b = " << f1_fwd->GetParameter(1) << " +/- " << f1_fwd->GetParError(1) << endl;
     cout << "Chi2/NDF = " << f1_fwd->GetChisquare() << "/" << f1_fwd->GetNDF() << endl;
 
-    drawText(Form("#chi^{2}/NDF = %.2f/%d", f1_fwd->GetChisquare(), f1_fwd->GetNDF()), 0.15, 0.85, 0.03);
-    drawText(Form("a = %.4f #pm %.4f", f1_fwd->GetParameter(0), f1_fwd->GetParError(0)), 0.15, 0.80, 0.03);
-    drawText(Form("b = %.4f #pm %.4f", f1_fwd->GetParameter(1), f1_fwd->GetParError(1)), 0.15, 0.75, 0.03);
+    drawText(Form("#chi^{2}/NDF = %.2f/%d", f1_fwd->GetChisquare(), f1_fwd->GetNDF()), pos_x, pos_y, text_color, text_size);
+    drawText(Form("a = %.4f #pm %.4f", f1_fwd->GetParameter(0), f1_fwd->GetParError(0)), pos_x, pos_y-pos_y_diff, text_color, text_size);
+    drawText(Form("b = %.4f #pm %.4f", f1_fwd->GetParameter(1), f1_fwd->GetParError(1)), pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     
     c_PR_fwd->SaveAs("./figs/ctauCut_ptBin_PR_fwd.pdf");
 
@@ -77,6 +84,9 @@ void draw_ctauCut()
     h_pt_PR_mid->Draw("P");
     f1_mid->Draw("same");
     
+    drawText(Form("#chi^{2}/NDF = %.2f/%d", f1_mid->GetChisquare(), f1_mid->GetNDF()), pos_x, pos_y, text_color, text_size);
+    drawText(Form("a = %.4f #pm %.4f", f1_mid->GetParameter(0), f1_mid->GetParError(0)), pos_x, pos_y-pos_y_diff, text_color, text_size);
+    drawText(Form("b = %.4f #pm %.4f", f1_mid->GetParameter(1), f1_mid->GetParError(1)), pos_x, pos_y-pos_y_diff*2, text_color, text_size);
     // 피팅 결과 출력
     cout << "=== Mid rapidity fit result ===" << endl;
     cout << "a = " << f1_mid->GetParameter(0) << " +/- " << f1_mid->GetParError(0) << endl;

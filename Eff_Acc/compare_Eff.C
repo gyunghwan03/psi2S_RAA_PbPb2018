@@ -13,6 +13,12 @@ void compare_Eff()
     gStyle->SetOptStat(0);
     gStyle->SetPadTickY(1);
 
+    float pos_x = 0.15;
+	float pos_y = 0.83;
+	float pos_y_diff = 0.051;
+	int text_color = 1;
+	float text_size = 15;
+
     TFile *f1 = new TFile("./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_251125.root"); // w\o ctau cut
     TFile *f2 = new TFile("./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260107_test.root"); // w/ ctau cut
 
@@ -35,7 +41,7 @@ void compare_Eff()
     h_eff2->SetLineColor(kRed+2);
     h_eff2->SetMarkerColor(kRed+2);
     h_eff2->SetMarkerStyle(21);
-    h_eff1->SetTitle("J/#psi Efficiency Comparison with/without ctau cut");
+    h_eff1->SetTitle("");
     h_eff1->GetXaxis()->SetTitle("p_{T} (GeV/c)");
     h_eff1->GetYaxis()->SetTitle("Efficiency");
     h_eff1->GetYaxis()->SetRangeUser(0, 1.2);
@@ -44,12 +50,16 @@ void compare_Eff()
     h_eff1->Draw("PE");
     h_eff2->Draw("PE same"); 
 
-    auto legend = new TLegend(0.55, 0.6, 0.84, 0.84);
+    auto legend = new TLegend(0.55, 0.68, 0.88, 0.84);
     legend->AddEntry(h_eff1, "Without ctau cut", "lep");
     legend->AddEntry(h_eff2, "With ctau cut", "lep");
     legend->SetBorderSize(0);
     legend->SetFillColor(0);
     legend->Draw("E");
+    
+    drawText("1.6 < |y| < 2.4", pos_x, pos_y, text_color, text_size);
+    drawText("3.5 < p_{T} < 40 GeV/c", pos_x, pos_y - pos_y_diff, text_color, text_size);
+    drawText("Cent. 0-90%", pos_x, pos_y - pos_y_diff*2, text_color, text_size);
     
     TPad *pad_A_2 = new TPad("pad_A_2","",0,0.06,0.98,0.227);
     c_pT_fwd->cd();
@@ -98,7 +108,7 @@ void compare_Eff()
     h_eff4->SetLineColor(kRed+2);
     h_eff4->SetMarkerColor(kRed+2);
     h_eff4->SetMarkerStyle(21);
-    h_eff3->SetTitle("J/#psi Efficiency Comparison with/without ctau cut");
+    h_eff3->SetTitle("");
     h_eff3->GetXaxis()->SetTitle("p_{T} (GeV/c)");
     h_eff3->GetYaxis()->SetTitle("Efficiency");
     h_eff3->GetYaxis()->SetRangeUser(0, 1.2);
@@ -107,7 +117,11 @@ void compare_Eff()
     h_eff3->Draw("PE");
     h_eff4->Draw("PE same"); 
 
-    auto legend_B = new TLegend(0.55, 0.6, 0.84, 0.84);
+    drawText("|y| < 1.6", pos_x, pos_y, text_color, text_size);
+    drawText("6.5 < p_{T} < 40 GeV/c", pos_x, pos_y - pos_y_diff, text_color, text_size);
+    drawText("Cent. 0-90%", pos_x, pos_y - pos_y_diff*2, text_color, text_size);
+
+    auto legend_B = new TLegend(0.55, 0.68, 0.88, 0.84);
     legend_B->AddEntry(h_eff3, "Without ctau cut", "lep");
     legend_B->AddEntry(h_eff4, "With ctau cut", "lep");
     legend_B->SetBorderSize(0);
