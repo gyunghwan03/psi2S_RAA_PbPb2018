@@ -1,0 +1,73 @@
+# CMD: root -l -b -q mc_MassFit_HighpT.C'(17.5, 20, 0, 1.6, 0, 180, 1)'
+# LABEL: mc_MassFit_HighpT.C | pT[17.5,20], y[0,1.6], cent[0,180], isPR=PR
+# START: 2025-10-29T15:09:23.848196
+# END: 2025-10-29T15:09:33.814767
+
+
+Processing mc_MassFit_HighpT.C(17.5, 20, 0, 1.6, 0, 180, 1)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+RooDataSet::dataset[mass,pt,y,pt1,pt2,eta1,eta2,weight,cBin,recoQQsign,NumDimu,ctau3D,ctau3DErr,ctau3DRes] = 3982228 entries
+pt: 17.5-20, y: 0-1.6, Cent: 0-90%
+####################################
+******** New Combined Dataset ***********
+RooRealVar::mass = 3.07557  L(2.6 - 3.5) // [GeV/c^{2}]
+
+********* Starting Mass Dist. Fit **************
+
+Real time 0:00:01, CP time 0.070
+Real time 0:00:01, CP time 0.070
+Real time 0:00:00, CP time 0.020
+Real time 0:00:01, CP time 0.090, 2 slices
+Real time 0:00:00, CP time 0.010
+Real time 0:00:02, CP time 0.100, 3 slices
+
+********* Finished Mass Dist. Fit **************
+
+
+  RooFitResult: minimized FCN value: -4.31672e+08, estimated distance to minimum: 3038.52
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=0 HESSE=0 HESSE=0 
+
+    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+  --------------------  ------------  --------------------------  --------
+                N_Jpsi    5.0000e+07    1.1128e+06 +/-  8.72e+04  <none>
+             alpha_1_A    1.9801e+00    1.9475e+00 +/-  1.34e+00  <none>
+                     f    7.7260e-01    9.9295e-01 +/-  5.06e+01  <none>
+            m_{J/#Psi}    3.0960e+00    3.0972e+00 +/-  3.28e-03  <none>
+                 n_1_A    1.7473e+00    1.4065e+00 +/-  2.54e+00  <none>
+             sigma_1_A    4.2700e-02    2.8871e-02 +/-  9.74e-03  <none>
+                   x_A    1.3100e+00    1.0000e+00 +/-  2.66e+00  <none>
+
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/mc_Mass/mc_Mass_pt17.5-20.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+
+  RooFitResult: minimized FCN value: -4.31672e+08, estimated distance to minimum: 3038.52
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=0 HESSE=0 HESSE=0 
+
+    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+  --------------------  ------------  --------------------------  --------
+                N_Jpsi    5.0000e+07    1.1128e+06 +/-  8.72e+04  <none>
+             alpha_1_A    1.9801e+00    1.9475e+00 +/-  1.34e+00  <none>
+                     f    7.7260e-01    9.9295e-01 +/-  5.06e+01  <none>
+            m_{J/#Psi}    3.0960e+00    3.0972e+00 +/-  3.28e-03  <none>
+                 n_1_A    1.7473e+00    1.4065e+00 +/-  2.54e+00  <none>
+             sigma_1_A    4.2700e-02    2.8871e-02 +/-  9.74e-03  <none>
+                   x_A    1.3100e+00    1.0000e+00 +/-  2.66e+00  <none>
+
+ *** NLL : -4.31672e+08
+
+###### Fit Convergence Check ######
+Caveat: mean was fixed so it's not a matter
+Hesse: 0	 edm: 3038.52	 mll: -4.31672e+08
+[31m[Stuck] alpha_1_A [0m // Final Value : 1.9475 (1.1 ~ 4)
+
+[31m[Stuck] f [0m // Final Value : 0.992951 (1e-06 ~ 1)
+
+[31m[Stuck] n_1_A [0m // Final Value : 1.4065 (0.2 ~ 15)
+
+[31m[Stuck] x_A [0m // Final Value : 1 (1 ~ 3.5)
+

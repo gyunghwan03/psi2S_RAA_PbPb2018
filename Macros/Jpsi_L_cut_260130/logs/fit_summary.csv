@@ -1,0 +1,13 @@
+label,returncode,stuck,log_path
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[10,20], isPR=PR",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_10_20_isPR_PR.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[0,10], isPR=PR",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_0_10_isPR_PR.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[20,40], isPR=PR",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_20_40_isPR_PR.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[40,80], isPR=PR",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_40_80_isPR_PR.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[0,10], isPR=NP",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_0_10_isPR_NP.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[80,120], isPR=PR",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_80_120_isPR_PR.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[10,20], isPR=NP",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_10_20_isPR_NP.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[120,160], isPR=PR",0,1,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_120_160_isPR_PR.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[20,40], isPR=NP",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_20_40_isPR_NP.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[120,160], isPR=NP",0,1,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_120_160_isPR_NP.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[80,120], isPR=NP",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_80_120_isPR_NP.log
+"mc_MassFit_HighpT.C | pT[9,40], y[0,2], cent[40,80], isPR=NP",0,0,logs/mc_MassFit_HighpT.C_pT_9_40_y_0_2_cent_40_80_isPR_NP.log

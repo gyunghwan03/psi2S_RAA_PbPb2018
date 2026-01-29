@@ -260,6 +260,7 @@ void MassFit_FixPar_Data(
   else if (ptLow==25&&ptHigh==27.5&&PRw==1) { NJpsi_limit = 5e+3; NBkg_limit = 1e+4; }
   else if (ptLow==27.5&&ptHigh==30&&PRw==1) { NJpsi_limit = 5e+3; NBkg_limit = 1e+4; }
   else if (ptLow==6.5&&ptHigh==40&&cLow==0&&cHigh==180) {NJpsi_limit = 1e+6; }
+  else if (ptLow==12&&ptHigh==15&&PRw==2) {NJpsi_limit = 5e+4;}
 
   else if(ptLow==9&&ptHigh==40&&cLow==120) {NJpsi_limit = 2e+5; }
 
