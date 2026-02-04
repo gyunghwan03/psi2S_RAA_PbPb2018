@@ -458,11 +458,13 @@ void decay_length_OniaTree(
       if (Reco_mu_whichGen_pr[Reco_QQ_mumi_idx_pr[irqq]] == -1) continue;
       if (Reco_QQ_whichGen_pr[irqq] == -1) continue;
       if (Reco_QQ_sign_pr[irqq] != 0) continue;
+      
+      //if (Reco_QQ_VtxProb_pr[irqq] < 0.005) continue;
+      
       if (fabs(JP_pr->Rapidity()) > yHigh || fabs(JP_pr->Rapidity()) < yLow) continue;
       if (JP_pr->Pt() < ptLow || JP_pr->Pt() > ptHigh) continue;
       if (JP_pr->M() < massLow || JP_pr->M() > massHigh) continue;
       if (!(IsAcceptanceQQ(mupl_pr->Pt(), mupl_pr->Eta()) && IsAcceptanceQQ(mumi_pr->Pt(), mumi_pr->Eta()))) continue;
-      if (Centrality_pr < cLow || Centrality_pr > cHigh) continue;
       
       // Soft muon cuts
       bool passMuonTypePl_pr = (Reco_mu_SelectionType_pr[Reco_QQ_mupl_idx_pr[irqq]] & ((int)pow(2,1))) && 
@@ -505,7 +507,60 @@ void decay_length_OniaTree(
       }
       
       if (HLTPass_pr && HLTFilterPass_pr) {
-        h_decayPRMC->Fill(Reco_QQ_ctau3D_pr[irqq]);
+        // Calculate weight (Ncoll * Gen_weight * TnP * pT weight)
+        double weight_pr = findNcoll(Centrality_pr) * Gen_weight_pr;
+        
+        // pT weight
+        double pt_weight_pr = 1.0;
+        if (fabs(JP_pr->Rapidity()) < 1.6 && JP_pr->Pt() >= 6.5)
+          pt_weight_pr = fptw1sys->Eval(JP_pr->Pt());
+        if (fabs(JP_pr->Rapidity()) >= 1.6 && fabs(JP_pr->Rapidity()) < 2.4)
+          pt_weight_pr = fptw2sys->Eval(JP_pr->Pt());
+        
+        // TnP weight
+        double tnp_weight_pr = 1.0;
+        if (isTnP) {
+          double pt1_pr = mupl_pr->Pt();
+          double pt2_pr = mumi_pr->Pt();
+          double eta1_pr = mupl_pr->Eta();
+          double eta2_pr = mumi_pr->Eta();
+          tnp_weight_pr = tnp_weight_muid_pbpb(pt1_pr, eta1_pr, 0) * tnp_weight_muid_pbpb(pt2_pr, eta2_pr, 0);
+          tnp_weight_pr *= tnp_weight_trk_pbpb(eta1_pr, 0) * tnp_weight_trk_pbpb(eta2_pr, 0);
+          
+          // Trigger TnP weight
+          bool mupl_L2Filter_pr_tnp = ((Reco_mu_trig_pr[Reco_QQ_mupl_idx_pr[irqq]] & ((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)));
+          bool mupl_L3Filter_pr_tnp = ((Reco_mu_trig_pr[Reco_QQ_mupl_idx_pr[irqq]] & ((ULong64_t)pow(2, kL3filter))) == ((ULong64_t)pow(2, kL3filter)));
+          bool mumi_L2Filter_pr_tnp = ((Reco_mu_trig_pr[Reco_QQ_mumi_idx_pr[irqq]] & ((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)));
+          bool mumi_L3Filter_pr_tnp = ((Reco_mu_trig_pr[Reco_QQ_mumi_idx_pr[irqq]] & ((ULong64_t)pow(2, kL3filter))) == ((ULong64_t)pow(2, kL3filter)));
+          bool mupl_isL2_pr_tnp = (mupl_L2Filter_pr_tnp && !mupl_L3Filter_pr_tnp);
+          bool mupl_isL3_pr_tnp = (mupl_L2Filter_pr_tnp && mupl_L3Filter_pr_tnp);
+          bool mumi_isL2_pr_tnp = (mumi_L2Filter_pr_tnp && !mumi_L3Filter_pr_tnp);
+          bool mumi_isL3_pr_tnp = (mumi_L2Filter_pr_tnp && mumi_L3Filter_pr_tnp);
+          
+          double tnp_trig_weight_mupl_pr = 1.0;
+          double tnp_trig_weight_mumi_pr = 1.0;
+          if (mupl_isL2_pr_tnp && mumi_isL3_pr_tnp) {
+            tnp_trig_weight_mupl_pr = tnp_weight_trg_pbpb(mupl_pr->Pt(), mupl_pr->Eta(), 2, 0);
+            tnp_trig_weight_mumi_pr = tnp_weight_trg_pbpb(mumi_pr->Pt(), mumi_pr->Eta(), 3, 0);
+          } else if (mupl_isL3_pr_tnp && mumi_isL2_pr_tnp) {
+            tnp_trig_weight_mupl_pr = tnp_weight_trg_pbpb(mupl_pr->Pt(), mupl_pr->Eta(), 3, 0);
+            tnp_trig_weight_mumi_pr = tnp_weight_trg_pbpb(mumi_pr->Pt(), mumi_pr->Eta(), 2, 0);
+          } else if (mupl_isL3_pr_tnp && mumi_isL3_pr_tnp) {
+            int t[2] = {-1, 1};
+            int l = rand() % 2;
+            if (t[l] == -1) {
+              tnp_trig_weight_mupl_pr = tnp_weight_trg_pbpb(mupl_pr->Pt(), mupl_pr->Eta(), 2, 0);
+              tnp_trig_weight_mumi_pr = tnp_weight_trg_pbpb(mumi_pr->Pt(), mumi_pr->Eta(), 3, 0);
+            } else {
+              tnp_trig_weight_mupl_pr = tnp_weight_trg_pbpb(mupl_pr->Pt(), mupl_pr->Eta(), 3, 0);
+              tnp_trig_weight_mumi_pr = tnp_weight_trg_pbpb(mumi_pr->Pt(), mumi_pr->Eta(), 2, 0);
+            }
+          }
+          tnp_weight_pr *= tnp_trig_weight_mupl_pr * tnp_trig_weight_mumi_pr;
+        }
+        
+        double total_weight_pr = weight_pr * pt_weight_pr * tnp_weight_pr;
+        h_decayPRMC->Fill(Reco_QQ_ctau3D_pr[irqq], total_weight_pr);
       }
     }
   }
@@ -529,11 +584,13 @@ void decay_length_OniaTree(
       if (Reco_mu_whichGen_np[Reco_QQ_mumi_idx_np[irqq]] == -1) continue;
       if (Reco_QQ_whichGen_np[irqq] == -1) continue;
       if (Reco_QQ_sign_np[irqq] != 0) continue;
+      
+      //if (Reco_QQ_VtxProb_np[irqq] < 0.005) continue;
+      
       if (fabs(JP_np->Rapidity()) > yHigh || fabs(JP_np->Rapidity()) < yLow) continue;
       if (JP_np->Pt() < ptLow || JP_np->Pt() > ptHigh) continue;
       if (JP_np->M() < massLow || JP_np->M() > massHigh) continue;
       if (!(IsAcceptanceQQ(mupl_np->Pt(), mupl_np->Eta()) && IsAcceptanceQQ(mumi_np->Pt(), mumi_np->Eta()))) continue;
-      if (Centrality_np < cLow || Centrality_np > cHigh) continue;
       
       // Soft muon cuts
       bool passMuonTypePl_np = (Reco_mu_SelectionType_np[Reco_QQ_mupl_idx_np[irqq]] & ((int)pow(2,1))) && 
@@ -576,44 +633,100 @@ void decay_length_OniaTree(
       }
       
       if (HLTPass_np && HLTFilterPass_np) {
-        h_decayNPMC->Fill(Reco_QQ_ctau3D_np[irqq]);
+        // Calculate weight (Ncoll * Gen_weight * TnP * pT weight)
+        double weight_np = findNcoll(Centrality_np) * Gen_weight_np;
+        
+        // pT weight
+        double pt_weight_np = 1.0;
+        if (fabs(JP_np->Rapidity()) < 1.6 && JP_np->Pt() >= 6.5)
+          pt_weight_np = fptw1sys->Eval(JP_np->Pt());
+        if (fabs(JP_np->Rapidity()) >= 1.6 && fabs(JP_np->Rapidity()) < 2.4)
+          pt_weight_np = fptw2sys->Eval(JP_np->Pt());
+        
+        // TnP weight
+        double tnp_weight_np = 1.0;
+        if (isTnP) {
+          double pt1_np = mupl_np->Pt();
+          double pt2_np = mumi_np->Pt();
+          double eta1_np = mupl_np->Eta();
+          double eta2_np = mumi_np->Eta();
+          tnp_weight_np = tnp_weight_muid_pbpb(pt1_np, eta1_np, 0) * tnp_weight_muid_pbpb(pt2_np, eta2_np, 0);
+          tnp_weight_np *= tnp_weight_trk_pbpb(eta1_np, 0) * tnp_weight_trk_pbpb(eta2_np, 0);
+          
+          // Trigger TnP weight
+          bool mupl_L2Filter_np_tnp = ((Reco_mu_trig_np[Reco_QQ_mupl_idx_np[irqq]] & ((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)));
+          bool mupl_L3Filter_np_tnp = ((Reco_mu_trig_np[Reco_QQ_mupl_idx_np[irqq]] & ((ULong64_t)pow(2, kL3filter))) == ((ULong64_t)pow(2, kL3filter)));
+          bool mumi_L2Filter_np_tnp = ((Reco_mu_trig_np[Reco_QQ_mumi_idx_np[irqq]] & ((ULong64_t)pow(2, kL2filter))) == ((ULong64_t)pow(2, kL2filter)));
+          bool mumi_L3Filter_np_tnp = ((Reco_mu_trig_np[Reco_QQ_mumi_idx_np[irqq]] & ((ULong64_t)pow(2, kL3filter))) == ((ULong64_t)pow(2, kL3filter)));
+          bool mupl_isL2_np_tnp = (mupl_L2Filter_np_tnp && !mupl_L3Filter_np_tnp);
+          bool mupl_isL3_np_tnp = (mupl_L2Filter_np_tnp && mupl_L3Filter_np_tnp);
+          bool mumi_isL2_np_tnp = (mumi_L2Filter_np_tnp && !mumi_L3Filter_np_tnp);
+          bool mumi_isL3_np_tnp = (mumi_L2Filter_np_tnp && mumi_L3Filter_np_tnp);
+          
+          double tnp_trig_weight_mupl_np = 1.0;
+          double tnp_trig_weight_mumi_np = 1.0;
+          if (mupl_isL2_np_tnp && mumi_isL3_np_tnp) {
+            tnp_trig_weight_mupl_np = tnp_weight_trg_pbpb(mupl_np->Pt(), mupl_np->Eta(), 2, 0);
+            tnp_trig_weight_mumi_np = tnp_weight_trg_pbpb(mumi_np->Pt(), mumi_np->Eta(), 3, 0);
+          } else if (mupl_isL3_np_tnp && mumi_isL2_np_tnp) {
+            tnp_trig_weight_mupl_np = tnp_weight_trg_pbpb(mupl_np->Pt(), mupl_np->Eta(), 3, 0);
+            tnp_trig_weight_mumi_np = tnp_weight_trg_pbpb(mumi_np->Pt(), mumi_np->Eta(), 2, 0);
+          } else if (mupl_isL3_np_tnp && mumi_isL3_np_tnp) {
+            int t[2] = {-1, 1};
+            int l = rand() % 2;
+            if (t[l] == -1) {
+              tnp_trig_weight_mupl_np = tnp_weight_trg_pbpb(mupl_np->Pt(), mupl_np->Eta(), 2, 0);
+              tnp_trig_weight_mumi_np = tnp_weight_trg_pbpb(mumi_np->Pt(), mumi_np->Eta(), 3, 0);
+            } else {
+              tnp_trig_weight_mupl_np = tnp_weight_trg_pbpb(mupl_np->Pt(), mupl_np->Eta(), 3, 0);
+              tnp_trig_weight_mumi_np = tnp_weight_trg_pbpb(mumi_np->Pt(), mumi_np->Eta(), 2, 0);
+            }
+          }
+          tnp_weight_np *= tnp_trig_weight_mupl_np * tnp_trig_weight_mumi_np;
+        }
+        
+        double total_weight_np = weight_np * pt_weight_np * tnp_weight_np;
+        h_decayNPMC->Fill(Reco_QQ_ctau3D_np[irqq], total_weight_np);
       }
     }
   }
   
   cout << "PRMC entries in ctau histogram: " << h_decayPRMC->GetEntries() << endl;
   cout << "NPMC entries in ctau histogram: " << h_decayNPMC->GetEntries() << endl;
+  cout << "PRMC weighted integral: " << h_decayPRMC->Integral() << endl;
+  cout << "NPMC weighted integral: " << h_decayNPMC->Integral() << endl;
   
   // Calculate lcutv (ctau3D cut) like psuedo_proper_decay_length_1S.C
-  int totalPRMC = h_decayPRMC->GetEntries();
-  int totalNPMC = h_decayNPMC->GetEntries();
+  // Use Integral() for weighted histograms instead of GetEntries()
+  double totalPRMC = h_decayPRMC->Integral();
+  double totalNPMC = h_decayNPMC->Integral();
   
   for (int bins = 0; bins < h_decayPRMC->GetNbinsX(); bins++) {
     if (state == 1) { // Prompt selection: find cut where PR efficiency ~90%
-      h_deffPRMC->SetBinContent(bins, h_decayPRMC->Integral(0, bins) / h_decayPRMC->GetEntries());
-      h_deffNPMC->SetBinContent(bins, 1 - (h_decayNPMC->Integral(0, bins) / h_decayNPMC->GetEntries()));
+      h_deffPRMC->SetBinContent(bins, h_decayPRMC->Integral(0, bins) / totalPRMC);
+      h_deffNPMC->SetBinContent(bins, 1 - (h_decayNPMC->Integral(0, bins) / totalNPMC));
       
       if (h_decayPRMC->Integral(0, bins) < (0.899 * totalPRMC) || h_decayPRMC->Integral(0, bins) > (totalPRMC * 0.9099)) continue;
       cout << bins << "th bin, ctau3D: " << h_decayPRMC->GetBinCenter(bins) 
-           << ", PR eff: " << h_decayPRMC->Integral(0, bins) / h_decayPRMC->GetEntries() * 100 << "%" << endl;
+           << ", PR eff: " << h_decayPRMC->Integral(0, bins) / totalPRMC * 100 << "%" << endl;
       lcutv = new TLine(h_decayPRMC->GetBinCenter(bins), 0, h_decayPRMC->GetBinCenter(bins), 1);
-      lcuth = new TLine(xmin, h_decayPRMC->Integral(0, bins) / h_decayPRMC->GetEntries(), 
-                        h_decayPRMC->GetBinCenter(bins), h_decayPRMC->Integral(0, bins) / h_decayPRMC->GetEntries());
-      lresi = new TLine(xmin, h_decayNPMC->Integral(0, bins) / h_decayNPMC->GetEntries(), 
-                        h_decayNPMC->GetBinCenter(bins), h_decayNPMC->Integral(0, bins) / h_decayNPMC->GetEntries());
+      lcuth = new TLine(xmin, h_decayPRMC->Integral(0, bins) / totalPRMC, 
+                        h_decayPRMC->GetBinCenter(bins), h_decayPRMC->Integral(0, bins) / totalPRMC);
+      lresi = new TLine(xmin, h_decayNPMC->Integral(0, bins) / totalNPMC, 
+                        h_decayNPMC->GetBinCenter(bins), h_decayNPMC->Integral(0, bins) / totalNPMC);
     }
     else if (state == 2) { // Non-prompt selection: find cut where PR rejection ~97-98%
-      h_deffNPMC->SetBinContent(bins, h_decayNPMC->Integral(0, bins) / h_decayNPMC->GetEntries());
-      h_deffPRMC->SetBinContent(bins, 1 - (h_decayPRMC->Integral(0, bins) / h_decayPRMC->GetEntries()));
+      h_deffNPMC->SetBinContent(bins, h_decayNPMC->Integral(0, bins) / totalNPMC);
+      h_deffPRMC->SetBinContent(bins, 1 - (h_decayPRMC->Integral(0, bins) / totalPRMC));
       
       if (h_decayPRMC->Integral(0, bins) < (0.97 * totalPRMC) || h_decayPRMC->Integral(0, bins) > (totalPRMC * 0.98)) continue;
       cout << bins << "th bin, ctau3D: " << h_decayPRMC->GetBinCenter(bins) 
-           << ", NP eff: " << (1 - h_decayNPMC->Integral(0, bins) / h_decayNPMC->GetEntries()) * 100 << "%" << endl;
+           << ", NP eff: " << (1 - h_decayNPMC->Integral(0, bins) / totalNPMC) * 100 << "%" << endl;
       lcutv = new TLine(h_decayPRMC->GetBinCenter(bins), 0, h_decayPRMC->GetBinCenter(bins), 1);
-      lcuth = new TLine(xmin, h_decayNPMC->Integral(0, bins) / h_decayNPMC->GetEntries(), 
-                        h_decayNPMC->GetBinCenter(bins), h_decayNPMC->Integral(0, bins) / h_decayNPMC->GetEntries());
-      lresi = new TLine(xmin, h_decayPRMC->Integral(0, bins) / h_decayPRMC->GetEntries(), 
-                        h_decayPRMC->GetBinCenter(bins), h_decayPRMC->Integral(0, bins) / h_decayPRMC->GetEntries());
+      lcuth = new TLine(xmin, h_decayNPMC->Integral(0, bins) / totalNPMC, 
+                        h_decayNPMC->GetBinCenter(bins), h_decayNPMC->Integral(0, bins) / totalNPMC);
+      lresi = new TLine(xmin, h_decayPRMC->Integral(0, bins) / totalPRMC, 
+                        h_decayPRMC->GetBinCenter(bins), h_decayPRMC->Integral(0, bins) / totalPRMC);
     }
   }
   
@@ -854,9 +967,11 @@ void decay_length_OniaTree(
       if (Reco_mu_whichGen_pr[Reco_QQ_mumi_idx_pr[irqq]] == -1) continue;
       if (Reco_QQ_whichGen_pr[irqq] == -1) continue;
       if (Reco_QQ_sign_pr[irqq] != 0) continue;
+      
+      //if (Reco_QQ_VtxProb_pr[irqq] < 0.005) continue;
+      
       if (JP_pr->M() < massLow || JP_pr->M() > massHigh) continue;
       if (!(IsAcceptanceQQ(mupl_pr->Pt(), mupl_pr->Eta()) && IsAcceptanceQQ(mumi_pr->Pt(), mumi_pr->Eta()))) continue;
-      if (Centrality_pr < cLow || Centrality_pr > cHigh) continue;
       
       bool passMuonTypePl_pr = (Reco_mu_SelectionType_pr[Reco_QQ_mupl_idx_pr[irqq]] & ((int)pow(2,1))) && 
                                (Reco_mu_SelectionType_pr[Reco_QQ_mupl_idx_pr[irqq]] & ((int)pow(2,3)));
@@ -935,9 +1050,11 @@ void decay_length_OniaTree(
       if (Reco_mu_whichGen_np[Reco_QQ_mumi_idx_np[irqq]] == -1) continue;
       if (Reco_QQ_whichGen_np[irqq] == -1) continue;
       if (Reco_QQ_sign_np[irqq] != 0) continue;
+      
+      //if (Reco_QQ_VtxProb_np[irqq] < 0.005) continue;
+      
       if (JP_np->M() < massLow || JP_np->M() > massHigh) continue;
       if (!(IsAcceptanceQQ(mupl_np->Pt(), mupl_np->Eta()) && IsAcceptanceQQ(mumi_np->Pt(), mumi_np->Eta()))) continue;
-      if (Centrality_np < cLow || Centrality_np > cHigh) continue;
       
       bool passMuonTypePl_np = (Reco_mu_SelectionType_np[Reco_QQ_mupl_idx_np[irqq]] & ((int)pow(2,1))) && 
                                (Reco_mu_SelectionType_np[Reco_QQ_mupl_idx_np[irqq]] & ((int)pow(2,3)));

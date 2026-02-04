@@ -33,8 +33,8 @@ void get_Eff_psi_pbpb_ctauCut_NP(
   //jpsi
   //float massLow = 0.0;
   //float massHigh = 10.0;
-  float massLow = 3.4;
-  float massHigh = 4.1;
+  float massLow = 3.5;
+  float massHigh = 4.0;
 
   double min = 0;
   double max = ptHigh;

@@ -14,6 +14,8 @@ using namespace std;
 // v3 : change systematics up and down
 // v4 : change TnP part to makeMuonSkimTree_Jpsi.C
 
+//260123 : VtxProb < 0.01
+
 void get_Eff_JPsi_pbpb_ctauCut(
     int state = 2,
     bool isTnP = true, int isPtWeight = 0, // 0 : nominal , 1 : up, -1 : down
@@ -45,8 +47,8 @@ void get_Eff_JPsi_pbpb_ctauCut(
   else if (isPtWeight == -1)
     ptSys = "down";
   // jpsi
-  float massLow = 0.0;
-  float massHigh = 10.0;
+  float massLow = 2.9;
+  float massHigh = 3.3;
   // float massLow = 2.6;
   // float massHigh = 3.5;
 
@@ -463,12 +465,11 @@ void get_Eff_JPsi_pbpb_ctauCut(
 
       if(isMC){
         if(Reco_mu_whichGen[Reco_QQ_mupl_idx[irqq]] == -1) continue;
-        if(Reco_mu_whichGen[Reco_QQ_mupl_idx[irqq]] == -1) continue;
         if(Reco_QQ_whichGen[irqq] == -1) continue;
       }
       if(Reco_QQ_sign[irqq]!=0) continue;  
 
-//      if ( Reco_QQ_VtxProb[irqq]  < 0.005 ) continue;
+      if ( Reco_QQ_VtxProb[irqq]  < 0.01 ) continue;
       
       if(abs(JP_Reco->Rapidity())>yHigh || abs(JP_Reco->Rapidity())<yLow) continue;
       if(JP_Reco->Pt()<ptLow || JP_Reco->Pt()>ptHigh) continue;
@@ -516,12 +517,6 @@ void get_Eff_JPsi_pbpb_ctauCut(
       if ( !(muplSoft && mumiSoft) ) 
         continue;   
 
-      if(isPtWeight){
-        pt_weight = f1->Eval(JP_Reco->Pt());
-        //if(abs(JP_Reco->Rapidity())>=1.6 && JP_Reco->Pt()<6.5) pt_weight = f2->Eval(JP_Reco->Pt());
-        //else if(abs(JP_Reco->Rapidity())<2.4 && JP_Reco->Pt()>=6.5) pt_weight = f1->Eval(JP_Reco->Pt());
-        weight = weight * pt_weight;
-      }
 
 	  if(isTnP){
 		  tnp_weight = 1;
@@ -829,9 +824,9 @@ void get_Eff_JPsi_pbpb_ctauCut(
   hInt_eff_2->SetName(Form("mc_eff_Integrated_TnP%d_PtW%d_cent_%0.0f_to_%0.0f_absy0_1p6  ", isTnP, 1, cLow, cHigh));
 
   // TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_251125.root", cLow, cHigh, ptSys.Data(), isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_260123.root", cLow, cHigh, ptSys.Data(), isTnP);
   if (state == 2)
-    outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_251125.root", cLow, cHigh, ptSys.Data(), isTnP);
+    outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_JPsi_PtW%s_tnp%d_260123.root", cLow, cHigh, ptSys.Data(), isTnP);
   TFile *outFile = new TFile(outFileName, "RECREATE");
   hpt_eff_0->Write();
   hpt_eff_1->Write();

@@ -14,7 +14,7 @@
 using namespace std;
 // v2 : change efficiency to include ctau cut
 // v3 : trying to reduce time
-
+// v4 : ctau Cut from decay_length_OniaTree_v2_PbPb_1S.C
 
 void get_Eff_JPsi_pbpb_ctauCut_v4(
     int state = 2,
@@ -51,10 +51,10 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
   else if (isPtWeight == -1)
     ptSys = "down";
   // jpsi
-  float massLow = 0.0;
-  float massHigh = 10.0;
-  // float massLow = 2.6;
-  // float massHigh = 3.5;
+  //float massLow = 0.0;
+  //float massHigh = 10.0;
+  float massLow = 2.9;
+  float massHigh = 3.3;
 
   double min = 0;
   double max = ptHigh;
@@ -96,11 +96,11 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
   // TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root", "read");
   // TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230621.root", "read");
   // pp Jpsi weight Fucntion
-  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_1p6_251103.root", "read");
+  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_1p6_251118.root", "read");
   TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y1p6_2p4_251118.root", "read");
 
   if( state == 2 ) {
-  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_1p6_251103.root", "read");
+  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_1p6_251118.root", "read");
   TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y1p6_2p4_251118.root", "read");
   }
   // if (state == 2) {
@@ -144,21 +144,21 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
 
   // Precompute ctau cut values for forward pt bins to avoid opening files inside event loop
   // --- Precompute and cache all needed l_cut values ---
-  double l_cut_for_pt[4];
-  double l_cut_mid_pt[6];
+  double l_cut_for_pt[5];
+  double l_cut_mid_pt[7];
   double l_cut_for_cent[4];
   double l_cut_mid_cent[6];
   double l_cut_for_int = -1e6;
   double l_cut_mid_int = -1e6;
 
-  for(int i=0; i<4; ++i){
+  for(int i=0; i<5; ++i){
     double ptLow_tmp = ptBin_for[i+1];
     double ptHigh_tmp = ptBin_for[i+2];
-    TString fpath_tmp = Form("roots_ctau3D/ctau3D_cut_ptBin_%sMC_cent0-180.root", fname.Data());
+    TString fpath_tmp = Form("roots_1S_PbPb/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root", fname.Data());
     TFile *f_ctau_tmp = TFile::Open(fpath_tmp, "READ");
     if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){ 
-      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_ptBin_for");
-      if(h_Lcut_tmp) l_cut_for_pt[i] = h_Lcut_tmp->GetBinContent(i+2);
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("hpt_ctau_1");
+      if(h_Lcut_tmp) l_cut_for_pt[i] = h_Lcut_tmp->GetBinContent(i+1);
       else l_cut_for_pt[i] = -1e6;
       f_ctau_tmp->Close();
       delete f_ctau_tmp;
@@ -167,17 +167,22 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
     }
   }
   cout << "L_cut forward pt bins: ";
-  for(int i=0; i<4; ++i) cout << l_cut_for_pt[i] << " ";
+  for(int i=0; i<5; ++i) cout << l_cut_for_pt[i] << " ";
   cout << endl;
+  cout << "Mapping: l_cut_for_pt[0]=" << l_cut_for_pt[0] << " (pt 0-3.5)" << endl;
+  cout << "         l_cut_for_pt[1]=" << l_cut_for_pt[1] << " (pt 3.5-6.5)" << endl;
+  cout << "         l_cut_for_pt[2]=" << l_cut_for_pt[2] << " (pt 6.5-9)" << endl;
+  cout << "         l_cut_for_pt[3]=" << l_cut_for_pt[3] << " (pt 9-12)" << endl;
+  cout << "         l_cut_for_pt[4]=" << l_cut_for_pt[4] << " (pt 12-40)" << endl;
 
-  for(int i=0; i<6; ++i){
+  for(int i=0; i<7; ++i){
     double ptLow_tmp = ptBin_mid[i+1];
     double ptHigh_tmp = ptBin_mid[i+2];
-    TString fpath_tmp = Form("roots_ctau3D/ctau3D_cut_ptBin_%sMC_cent0-180.root", fname.Data());
+    TString fpath_tmp = Form("roots_1S_PbPb/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root", fname.Data());
     TFile *f_ctau_tmp = TFile::Open(fpath_tmp, "READ");
     if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
-      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_ptBin_mid");
-      if(h_Lcut_tmp) l_cut_mid_pt[i] = h_Lcut_tmp->GetBinContent(i+2);
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("hpt_ctau_2");
+      if(h_Lcut_tmp) l_cut_mid_pt[i] = h_Lcut_tmp->GetBinContent(i+1);
       else l_cut_mid_pt[i] = -1e6;
       f_ctau_tmp->Close();
       delete f_ctau_tmp;
@@ -186,16 +191,16 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
     }
   }
   cout << "L_cut mid pt bins: ";
-  for(int i=0; i<6; ++i) cout << l_cut_mid_pt[i] << " ";
+  for(int i=0; i<7; ++i) cout << l_cut_mid_pt[i] << " ";
   cout << endl;
 
   // centrality-dependent l_cuts
   for(int i=0; i<4; ++i){
     double cLow_tmp = centBin_for[i];
     double cHigh_tmp = centBin_for[i+1];
-    TFile *f_ctau_tmp = TFile::Open(Form("roots_ctau3D/ctau3D_cut_centBin_for_%sMC_pt3.5-40.0.root", fname.Data()), "READ");
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_PbPb/ctau3D_cut_centBin_%sMC_y0.0-2.4.root", fname.Data()), "READ");
     if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
-      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_centBin_for");
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("hcent_ctau_1");
       if(h_Lcut_tmp) l_cut_for_cent[i] = h_Lcut_tmp->GetBinContent(i+1);
       else l_cut_for_cent[i] = -1e6;
       f_ctau_tmp->Close();
@@ -211,9 +216,9 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
   for(int i=0; i<6; ++i){
     double cLow_tmp = centBin_mid[i];
     double cHigh_tmp = centBin_mid[i+1];
-    TFile *f_ctau_tmp = TFile::Open(Form("roots_ctau3D/ctau3D_cut_centBin_mid_%sMC_pt6.5-40.0.root", fname.Data()), "READ");
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_PbPb/ctau3D_cut_centBin_%sMC_y0.0-2.4.root", fname.Data()), "READ");
     if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
-      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_centBin_mid");
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("hcent_ctau_2");
       if(h_Lcut_tmp) l_cut_mid_cent[i] = h_Lcut_tmp->GetBinContent(i+1);
       else l_cut_mid_cent[i] = -1e6;
       f_ctau_tmp->Close();
@@ -228,9 +233,9 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
 
   // integrated l_cut files used later
   {
-    TFile *f_ctau_tmp = TFile::Open(Form("../ctau_eff/roots_1S_Pb/decayL/%sMC/decay_hist_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality0-180_m2.6-3.5.root", fname.Data()), "READ");
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_PbPb/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root", fname.Data()), "READ");
     if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
-      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_Lcut");
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_int_for");
       if(h_Lcut_tmp) l_cut_for_int = h_Lcut_tmp->GetBinContent(1);
       f_ctau_tmp->Close();
       delete f_ctau_tmp;
@@ -238,9 +243,9 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
   }
   cout << "L_cut forward integrated: " << l_cut_for_int << endl;
   {
-    TFile *f_ctau_tmp = TFile::Open(Form("../ctau_eff/roots_1S_Pb/decayL/%sMC/decay_hist_pt6.5-40.0_y0.0-1.6_muPt0.0_centrality0-180_m2.6-3.5.root", fname.Data()), "READ");
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_PbPb/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root", fname.Data()), "READ");
     if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
-      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_Lcut");
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_int_mid");
       if(h_Lcut_tmp) l_cut_mid_int = h_Lcut_tmp->GetBinContent(1);
       f_ctau_tmp->Close();
       delete f_ctau_tmp;
@@ -493,11 +498,13 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
   int counttnp = 0;
   int nevt = mytree->GetEntries();
   // const int nevt = mytree->GetEntries();
+  //nevt = 1000;
+  //nevt = 5000000;
   cout << "Total Events : " << nevt << endl;
   //for (int iev = 0; iev < nevt; ++iev)
    for(int iev=0; iev<nevt; ++iev)
   {
-    if (iev % 100000 == 0)
+    if (iev % 1000000 == 0)
       cout << ">>>>> EVENT " << iev << " / " << mytree->GetEntries() << " (" << (int)(100. * iev / mytree->GetEntries()) << "%)" << endl;
 
     mytree->GetEntry(iev);
@@ -536,8 +543,8 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
       {
         if (JP_Gen->Pt() > 3. && JP_Gen->Pt() < 6.5 && Rapidity_g > 1.6 && Rapidity_g < 2.4) { hpt_gen_0->Fill(JP_Gen->Pt(), weight * pt_weight); }
         if (JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 50 && Rapidity_g < 2.4) { hpt_gen_0->Fill(JP_Gen->Pt(), weight * pt_weight);}
-        if (Rapidity_g > 1.6 && Rapidity_g < 2.4) { hpt_gen_1->Fill(JP_Gen->Pt(), weight * pt_weight);}
-        if (Rapidity_g < 1.6) { hpt_gen_2->Fill(JP_Gen->Pt(), weight * pt_weight); }
+        if (Rapidity_g > 1.6 && Rapidity_g < 2.4 && JP_Gen->Pt() > 3.5 && JP_Gen->Pt() < 40) { hpt_gen_1->Fill(JP_Gen->Pt(), weight * pt_weight);}
+        if (Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 40) { hpt_gen_2->Fill(JP_Gen->Pt(), weight * pt_weight); }
       }
       if (Rapidity_g > 1.6 && Rapidity_g < 2.4)
       {
@@ -583,7 +590,7 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
       }
       if(Reco_QQ_sign[irqq]!=0) continue;  
 
-//      if ( Reco_QQ_VtxProb[irqq]  < 0.005 ) continue;
+      if ( Reco_QQ_VtxProb[irqq]  < 0.01 ) continue;
       
       if(abs(JP_Reco->Rapidity())>yHigh || abs(JP_Reco->Rapidity())<yLow) continue;
       if(JP_Reco->Pt()<ptLow || JP_Reco->Pt()>ptHigh) continue;
@@ -714,16 +721,24 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
           if (Rapidity > 1.6 && Rapidity < 2.4)
           {
             double pt = JP_Reco->Pt();
-            for(int i=0; i < 4 ; i++) {
-              double ptLow = ptBin_for[i+1];
-              double ptHigh = ptBin_for[i+2];
+            // Start from i=1 to skip the first bin [0-3.5 GeV]
+            for(int i=1; i < 5 ; i++) {
+              double ptLow = ptBin_for[i];
+              double ptHigh = ptBin_for[i+1];
               if(pt > ptLow && pt < ptHigh) {
                 double l_cut = l_cut_for_pt[i];
                 if(state==1) { 
-                  if(Reco_QQ_ctau3D[irqq] < l_cut) hpt_reco_1->Fill(pt, weight * tnp_weight * pt_weight); 
-                  //cout << "pT : " << pt << ",\tl_cut : " << l_cut << ",\tctau3D : " << Reco_QQ_ctau3D[irqq] << endl;
+                  if(Reco_QQ_ctau3D[irqq] < l_cut) {
+                    hpt_reco_1->Fill(pt, weight * tnp_weight * pt_weight);
+                    //if(count < 10) cout << "Forward: pT=" << pt << " (bin " << ptLow << "-" << ptHigh << "), l_cut[" << i << "]=" << l_cut << ", ctau3D=" << Reco_QQ_ctau3D[irqq] << " -> FILLED" << endl;
+                  }
                 }
-                else if(state==2) { if(Reco_QQ_ctau3D[irqq] > l_cut) hpt_reco_1->Fill(pt, weight * tnp_weight * pt_weight); }
+                else if(state==2) { 
+                  if(Reco_QQ_ctau3D[irqq] > l_cut) {
+                    hpt_reco_1->Fill(pt, weight * tnp_weight * pt_weight);
+                    //if(count < 10) cout << "Forward: pT=" << pt << " (bin " << ptLow << "-" << ptHigh << "), l_cut[" << i << "]=" << l_cut << ", ctau3D=" << Reco_QQ_ctau3D[irqq] << " -> FILLED" << endl;
+                  }
+                }
                 //break;
               }
             }
@@ -731,17 +746,20 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
           if (Rapidity < 1.6)
           {
             double pt = JP_Reco->Pt();
-            for(int i=0; i < 6 ; i++) {
-              double ptLow = ptBin_mid[i+1];
-              double ptHigh = ptBin_mid[i+2];
+            // Start from i=1 to skip the first bin [0-6.5 GeV]
+            for(int i=1; i < 7 ; i++) {
+              double ptLow = ptBin_mid[i];
+              double ptHigh = ptBin_mid[i+1];
               if(pt > ptLow && pt < ptHigh) {
                 double l_cut = l_cut_mid_pt[i];
                 if(state==1) { 
-                  if(Reco_QQ_ctau3D[irqq] < l_cut) hpt_reco_2->Fill(pt, weight * tnp_weight * pt_weight); 
-                else if(state==2) { if(Reco_QQ_ctau3D[irqq] > l_cut) hpt_reco_2->Fill(pt, weight * tnp_weight * pt_weight); }
-                break; 
-                  cout << "pT : " << pt << ",\tl_cut : " << l_cut << ",\tctau3D : " << Reco_QQ_ctau3D[irqq] << endl;}
-                //cout << "pT :\t" << pt << ", l_cut :\t" << l_cut << ", ctau3D :\t" << Reco_QQ_ctau3D[irqq] << endl;
+                  if(Reco_QQ_ctau3D[irqq] < l_cut) hpt_reco_2->Fill(pt, weight * tnp_weight * pt_weight);
+                  //cout << "pT : " << pt << ",\tl_cut : " << l_cut << ",\tctau3D : " << Reco_QQ_ctau3D[irqq] << endl;
+                }
+                else if(state==2) { 
+                  if(Reco_QQ_ctau3D[irqq] > l_cut) hpt_reco_2->Fill(pt, weight * tnp_weight * pt_weight); 
+                }
+                //break;
               }
             }
           }
@@ -757,7 +775,7 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
               double cHigh = centBin_for[i+1];
               if(Centrality > cLow && Centrality < cHigh) {
                 double l_cut = l_cut_for_cent[i];
-                if(state==1) { if(Reco_QQ_ctau3D[irqq] < l_cut) { hcent_reco_1->Fill(Centrality, weight * tnp_weight * pt_weight); } }
+                if(state==1) { if(Reco_QQ_ctau3D[irqq] <= l_cut) { hcent_reco_1->Fill(Centrality, weight * tnp_weight * pt_weight); } }
                 else if(state==2) { if(Reco_QQ_ctau3D[irqq] > l_cut) { hcent_reco_1->Fill(Centrality, weight * tnp_weight * pt_weight); } }
                 //cout << "Cent :\t" << Centrality << ", pT :\t" << JP_Reco->Pt() << ", l_cut :\t" << l_cut << ", ctau3D :\t" << Reco_QQ_ctau3D[irqq] << endl;
               }
@@ -788,8 +806,8 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
             if(state==1) { if(Reco_QQ_ctau3D[irqq] < l_cut) hInt_reco_2->Fill(1, weight * tnp_weight * pt_weight); }
             else if(state==2) { if(Reco_QQ_ctau3D[irqq] > l_cut) hInt_reco_2->Fill(1, weight * tnp_weight * pt_weight); }
           }
-          }
         }
+      }
         if (Rapidity < 2.4 && JP_Reco->Pt() > 6.5 && JP_Reco->Pt() < 50)
         {
           hcent_reco_0->Fill(Centrality, weight * tnp_weight * pt_weight);
@@ -999,9 +1017,9 @@ void get_Eff_JPsi_pbpb_ctauCut_v4(
 
   // TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
   //TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260105.root", cLow, cHigh, ptSys.Data(), isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260107_test.root", cLow, cHigh, ptSys.Data(), isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260203.root", cLow, cHigh, ptSys.Data(), isTnP);
   if (state == 2)
-    outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260107_test.root", cLow, cHigh, ptSys.Data(), isTnP);
+    outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260203.root", cLow, cHigh, ptSys.Data(), isTnP);
   TFile *outFile = new TFile(outFileName, "RECREATE");
   hpt_eff_0->Write();
   hpt_eff_1->Write();
