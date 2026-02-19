@@ -80,6 +80,7 @@ void compare_Npart(bool isSys=true)
 	double NpartBin_fwd[nCentBins_fwd+1] = {27.12,109.1,225.2,356.9};
 	double NpartBin_mid_old[nCentBins] = {21.9,86.9,131.4,189.2,264.2,358.8};
 	double NpartBin_fwd_old[6] = {21.9,86.9,131.4,189.2,264.2,358.8};
+	double NpartBin_mid_old_Jpsi[3] = {32.7, 160.3, 311.5};
 	double NpartBin_alice[4] = {18,70.74,159.4,309.7};
 	double alice_var[4] = {0.441,0.346,0.299,0.342};
 	double alice_err[4] = {0.115,0.084,0.07,0.063};
@@ -215,6 +216,8 @@ void compare_Npart(bool isSys=true)
 		fwdPR_Jpsi_old[i]     = h_PR_Jpsi_fwd_old->GetBinContent(3-i);
 		fwdPR_Jpsi_old_Err[i] = h_PR_Jpsi_fwd_oldErr->GetBinContent(3-i);
 		fwdPR_Jpsi_old_Sys[i] = h_PR_Jpsi_fwd_oldSys->GetBinContent(3-i);
+
+		
 		//cout << "i : " << i << ", nCentBins-i-1 : " << nCentBins-i << " Old Val : " << midPR_old[i] << endl;
 		cout << "i : " << i <<  " Old Val : " << fwdPR_Jpsi_old[i] << ", stat. Error : " << fwdPR_Jpsi_old_Err[i] << ", syst. Error : " << fwdPR_Jpsi_old_Sys[i] << endl;
 	}
@@ -336,7 +339,7 @@ void compare_Npart(bool isSys=true)
 	g_midPR1S = new TGraphErrors(nCentBins, NpartBin, midPR1S_new, 0, midPR1S_new_Err);
 	g_midPR_old = new TGraphErrors(5, NpartBin_mid_old, midPR_old, 0, midPR_old_Err);
 	g_Jpsi_midPR_old = new TGraphErrors(6, NpartBin_mid_old, midPR_Jpsi_old, 0, midPR_Jpsi_old_Err);
-	g_Jpsi_fwdPR_old = new TGraphErrors(3, NpartBin_fwd_old, fwdPR_Jpsi_old, 0, fwdPR_Jpsi_old_Err);
+	g_Jpsi_fwdPR_old = new TGraphErrors(3, NpartBin_mid_old_Jpsi, fwdPR_Jpsi_old, 0, fwdPR_Jpsi_old_Err);
 	//g_Jpsi_midNP_old = new TGraphErrors(6, NpartBin_mid_old, midNP_Jpsi_old, 0, midNP_Jpsi_old_Err);
 	//g_Jpsi_fwdNP_old = new TGraphErrors(3, NpartBin_fwd_old, fwdNP_Jpsi_old, 0, fwdNP_Jpsi_old_Err);
 	g_fwdPR = new TGraphErrors(nCentBins_fwd, NpartBin_fwd, fwdPR_new, 0, fwdPR_new_Err);
@@ -349,7 +352,7 @@ void compare_Npart(bool isSys=true)
 	TGraphErrors *g_midPRSys = new TGraphErrors(nCentBins,NpartBin,midPR2S_new,binWidth,SysPR2S_mid);
 	TGraphErrors *g_midPR_oldSys = new TGraphErrors(5,NpartBin_mid_old,midPR_old,binWidth,midPR_old_Sys);
 	TGraphErrors *g_Jpsi_midPR_oldSys = new TGraphErrors(6,NpartBin_mid_old,midPR_Jpsi_old,binWidth,midPR_Jpsi_old_Sys);
-	TGraphErrors *g_Jpsi_fwdPR_oldSys = new TGraphErrors(3,NpartBin_fwd_old,fwdPR_Jpsi_old,binWidth,fwdPR_Jpsi_old_Sys);
+	TGraphErrors *g_Jpsi_fwdPR_oldSys = new TGraphErrors(3,NpartBin_mid_old_Jpsi,fwdPR_Jpsi_old,binWidth,fwdPR_Jpsi_old_Sys);
 	TArrow *midPR_upper = new TArrow(358.8,0,358.8,0.138,0.027,"<-|");
 	TGraphErrors *g_fwdPRSys1S = new TGraphErrors(nCentBins_fwd,NpartBin_fwd,fwdPR1S_new,binWidth,SysPR1S_fwd);
 	TGraphErrors *g_fwdPRSys = new TGraphErrors(nCentBins_fwd,NpartBin_fwd,fwdPR_new,binWidth,SysPR2S_fwd);

@@ -46,13 +46,11 @@ void draw_Raa_JPsi_y1p6_2p4_pT_241014(bool isSys = false)
 	TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260126.root");
     TFile *fEff_ppPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
     TFile *fEff_ppNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
-    TFile *fAcc_ppPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20241010.root");
-    TFile *fAcc_PbPbPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20241010.root");
-    TFile *fAcc_ppNP   = new TFile("../../../Eff_Acc/roots/acceptance_NonPrompt_JPsi_GenOnly_wgt1_pp_SysUp0_20241014.root"); //Must Change
-    TFile *fAcc_PbPbNP = new TFile("../../../Eff_Acc/roots/acceptance_NonPrompt_JPsi_GenOnly_wgt1_pp_SysUp0_20241014.root"); // Must Change
-    //TFile *fAcc_ppNP = new TFile("../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805_NP.root"); //Must Change
-    //TFile *fAcc_PbPbNP = new TFile("../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805_NP.root"); // Must Change
-	//
+     TFile *fAcc_ppPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
+    TFile *fAcc_PbPbPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
+    TFile *fAcc_ppNP = new TFile("../../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805_NP.root"); //Must Change
+    TFile *fAcc_PbPbNP = new TFile("../../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805_NP.root"); // Must Change
+
     TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
     TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4");
     TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4");
@@ -511,7 +509,7 @@ valErr getYield_pp(int i, int isPR){
     TString kineLabel[5];
     TString PR = (isPR==0) ? "PRMC" : "NPMC";
     kineLabel[i] = getKineLabelpp(ptBins[i], ptBins[i + 1], 1.6, 2.4, 0.0);
-    TFile *inf = new TFile(Form("../../Jpsi_L_cut/roots_1S_pp/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel[i].Data()));
+    TFile *inf = new TFile(Form("../../Jpsi_L_cut_260130/roots_1S_pp/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel[i].Data()));
     valErr ret;
     ret.val = 0;
     ret.err = 0;
@@ -537,8 +535,8 @@ valErr getYield_PbPb(int i, int isPR){
     TString kineLabel[5];
     TString PR = (isPR==0) ? "PRMC" : "NPMC";
     kineLabel[i] = getKineLabel(ptBins[i],ptBins[i+1],1.6,2.4,0.0,0,180);
-    TFile *inf = new TFile(Form("../../Jpsi_L_cut/roots_1S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel[i].Data()));
-    cout << "file Name : " << inf->GetName() << endl;
+    TFile *inf = new TFile(Form("../../Jpsi_L_cut_260130/roots_1S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel[i].Data()));
+    //cout << "file Name : " << inf->GetName() << endl;
     // TFile* inf = new TFile(Form("./Jpsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D *fitResults = (TH1D *)inf->Get("fitResults");
 

@@ -44,9 +44,9 @@ void draw_Raa_JPsi_y1p6_2p4_Cent_4Bins(bool isSys=true)
     TFile *fpp[nCentBins+1];
 
 	TFile *fSys = new TFile("../../syst_summary/syst_roots/total_syst.root");
-	TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260126.root");
-	TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260126.root");
-    TFile *fEff_ppPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
+	TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root");
+	TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260203.root");
+    TFile *fEff_ppPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root");
     TFile *fEff_ppNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
     TFile *fAcc_ppPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
     TFile *fAcc_PbPbPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
@@ -538,8 +538,13 @@ void draw_Raa_JPsi_y1p6_2p4_Cent_4Bins(bool isSys=true)
 	double RaaPR_int_err = RaaPR_int * sqrt(TMath::Power(XPbPb_PR_int_err/XPbPb_PR_int,2) + TMath::Power(Xpp_PR_int_err/Xpp_PR_int,2));
 	double RaaNP_int_err = RaaNP_int * sqrt(TMath::Power(XPbPb_NP_int_err/XPbPb_NP_int,2) + TMath::Power(Xpp_NP_int_err/Xpp_NP_int,2));
 	
+	cout.precision(6);
 	cout << " " << endl;
-	cout << "Integrated RAA (3.5 < pT < 40 GeV/c, 0-180%):" << endl;
+	cout << "Yield pp PR :\t"   << yieldPP_PR_corr*weight_ppPR_int   << " +/- " << err_PPPR_int*weight_ppPR_int   << "\tEff :\t" << eff_ppPR   << "\tAcc :\t" << acc_ppPR    << "\tweight :\t" << weight_ppPR_int << endl;
+	cout << "Yield PbPb PR :\t" << yieldPbPb_PR_corr*weight_PbPbPR_int << " +/- " << err_PbPbPR_int*weight_PbPbPR_int << "\tEff :\t" << eff_PbPbPR << "\tAcc :\t" << acc_PbPbPR  << "\tweight :\t" << weight_PbPbPR_int << endl;
+	cout << "Yield pp NP :\t"   << yieldPP_NP_corr*weight_ppNP_int   << " +/- " << err_PPNP_int*weight_ppNP_int   << "\tEff :\t" << eff_ppNP   << "\tAcc :\t" << acc_ppNP    << "\tweight :\t" << weight_ppNP_int << endl;
+	cout << "Yield PbPb NP :\t" << yieldPbPb_NP_corr*weight_PbPbNP_int << " +/- " << err_PbPbNP_int*weight_PbPbNP_int << "\tEff :\t" << eff_PbPbNP << "\tAcc :\t" << acc_PbPbNP  << "\tweight :\t" << weight_PbPbNP_int << endl;
+	cout << "Integrated RAA (3.5 < pT < 40 GeV/c, 0-90%):" << endl;
 	cout << "Prompt: " << RaaPR_int << " +/- " << RaaPR_int_err << endl;
 	cout << "NonPrompt: " << RaaNP_int << " +/- " << RaaNP_int_err << endl;
 	cout << " " << endl;

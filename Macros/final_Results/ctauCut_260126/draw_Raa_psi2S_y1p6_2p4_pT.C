@@ -44,8 +44,8 @@ void draw_Raa_psi2S_y1p6_2p4_pT(bool isSys = true)
     TFile *fpp[nPtBins+1];
 
 
-    TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2s_PtW1_tnp1_ctauCut_260127.root");
-    TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2s_PtW1_tnp1_ctauCut_260127.root");
+    TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root");
+    TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root");
     TFile *fEff_ppPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root");
     TFile *fEff_ppNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root");
     TFile *fAcc_ppPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
@@ -531,8 +531,8 @@ valErr getYield_pp(int i, int isPR){
     valErr ret; 
     ret.val = fitResults->GetBinContent(1);
     ret.err = fitResults->GetBinError(1);
-	cout << "Yield pp : " << ret.val << " +/- " << ret.err << endl;
-    cout << "pp file Name : " << inf->GetName() << endl;
+	//cout << "Yield pp : " << ret.val << " +/- " << ret.err << endl;
+    //cout << "pp file Name : " << inf->GetName() << endl;
     return ret;
 }
 valErr getYield_PbPb(int i, int isPR){
@@ -543,14 +543,14 @@ valErr getYield_PbPb(int i, int isPR){
 	if(isPR==0) PR = "PRMC";
 	else if(isPR==1) PR = "NPMC";
 	TFile* inf = new TFile(Form("../../psi2S_L_cut_250427/roots_2S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel[i].Data()));
-	cout << "PbPb file Name : " << inf->GetName() << endl;
+	//cout << "PbPb file Name : " << inf->GetName() << endl;
     //TFile* inf = new TFile(Form("./psi2S/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel[i].Data()));
     TH1D* fitResults = (TH1D*)inf->Get("fitResults");
 
     valErr ret;
     ret.val = fitResults->GetBinContent(1);
     ret.err = fitResults->GetBinError(1);
-    cout << "Yield PbPb : " << ret.val << " +/- " << ret.err << endl;
+    //cout << "Yield PbPb : " << ret.val << " +/- " << ret.err << endl;
     return ret;
 }
 
