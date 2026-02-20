@@ -45,10 +45,14 @@ void draw_Raa_JPsi_y0_1p6_Cent(bool isSys=false)
     TFile *fpp[nCentBins+1];
 
 	TFile *fSys = new TFile("../../syst_summary_Jpsi/syst_roots/total_syst.root");
-	TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260126.root");
-	TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260126.root");
-    TFile *fEff_ppPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
-    TFile *fEff_ppNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
+	//TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260126.root");
+	//TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260126.root");
+	//TFile *fEff_ppPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
+	//TFile *fEff_ppNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
+	TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root");
+	TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260203.root");
+    TFile *fEff_ppPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root");
+    TFile *fEff_ppNP = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root");
     TFile *fAcc_ppPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
     TFile *fAcc_PbPbPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
     TFile *fAcc_ppNP = new TFile("../../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805_NP.root"); //Must Change

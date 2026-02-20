@@ -47,7 +47,7 @@ void draw_Raa_JPsi_y1p6_2p4_Cent_4Bins(bool isSys=true)
 	TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root");
 	TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260203.root");
     TFile *fEff_ppPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root");
-    TFile *fEff_ppNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260126.root");
+    TFile *fEff_ppNP = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root");
     TFile *fAcc_ppPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
     TFile *fAcc_PbPbPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805.root");
     TFile *fAcc_ppNP = new TFile("../../../Eff_Acc/roots/acceptance_NPrompt_Jpsi_GenOnly_wgt1_pp_SysUp0_20240805_NP.root"); //Must Change
@@ -155,6 +155,7 @@ void draw_Raa_JPsi_y1p6_2p4_Cent_4Bins(bool isSys=true)
 			if(isPR == 0)
 			{
 				yieldPP_PR = yieldPP.val/(weight_ppPR);
+				//yieldPP_PR = 2.0e+06/(weight_ppPR);
 				yieldPbPb_PR = yieldPbPb.val/(weight_PbPbPR);
 				err_PPPR = yieldPP.err;
 				err_PbPbPR = yieldPbPb.err;
