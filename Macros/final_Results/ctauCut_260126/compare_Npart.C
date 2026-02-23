@@ -193,6 +193,8 @@ void compare_Npart(bool isSys=true)
 		midNP2S_new_Err[i] = h_midNP2S->GetBinError(i+1);
 		SysNP2S_mid[i] = midNP2S_new[i]*(hSys2S_mid_NP->GetBinContent(i+1));
 		//    cout << "New Val : " << midPR2S_new[i]  << endl;
+		cout << "psi2S RAA" << endl;
+		cout << "i : " << i << "\tPR RAA : " << midPR2S_new[i] << endl;
 	}
 	for (int i=0; i<6; i++){
 		midPR_old[i] = h_PR_psi2S->GetBinContent(6-i-1);

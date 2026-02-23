@@ -41,10 +41,10 @@ void draw_Raa_psi2S_y1p6_2p4_Cent_4Bins(bool isSys=true)
 
     const int nCentBins=4;
 
-	TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root");
-    TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root");
-    TFile *fEff_ppPR = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root");
-    TFile *fEff_ppNP = new TFile("../../../Eff_Acc/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root");
+	TFile *fEff_PbPbPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260223.root");
+	TFile *fEff_PbPbNP = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260223.root");
+    TFile *fEff_ppPR = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260223.root");
+    TFile *fEff_ppNP = new TFile("../../../Eff_Acc_260203/roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260223.root");
     TFile *fAcc_ppPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
     TFile *fAcc_PbPbPR = new TFile("../../../Eff_Acc/roots/acceptance_Prompt_psi2s_GenOnly_wgt1_pp_SysUp0_20230728.root");
     TFile *fAcc_ppNP = new TFile("../../../Eff_Acc/roots/acceptance_NonPrompt_psi2s_GenOnly_wgt1_pp_SysUp0_20240514.root");
@@ -123,7 +123,8 @@ void draw_Raa_psi2S_y1p6_2p4_Cent_4Bins(bool isSys=true)
         double acc_ppPR = 1; double acc_PbPbPR = 1; double acc_ppNP = 1; double acc_PbPbNP = 1;
 
         eff_ppPR=hEff_ppPR->GetBinContent(1);
-        eff_ppNP=hEff_ppNP->GetBinContent(1);
+		eff_ppNP=hEff_ppNP->GetBinContent(1);
+		//eff_ppNP=0.45;
         acc_ppPR=hAcc_ppPR->GetBinContent(1);
         acc_ppNP=hAcc_ppNP->GetBinContent(1);
         eff_PbPbPR=hEff_PbPbPR->GetBinContent(i+1);
