@@ -444,9 +444,9 @@ void run_compare_psi2s_pbpb_nonprompt_cent_mid() {
 // Example 5) pp #psi(2S), forward rapidity, efficiency vs pT
 void run_compare_psi2s_pp_fwd() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260223.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
-       "Prompt #psi(2S) pp (260126)", kBlue + 1, 20},
+       "Prompt #psi(2S) pp (260223)", kBlue + 1, 20},
       {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
        "Prompt #psi(2S) pp (260310)", kRed + 1, 21},
@@ -467,9 +467,9 @@ void run_compare_psi2s_pp_fwd() {
 // Example 6) pp #psi(2S), mid rapidity, efficiency vs pT
 void run_compare_psi2s_pp_mid() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260223.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
-       "Prompt #psi(2S) pp (260126)", kBlue + 1, 20},
+       "Prompt #psi(2S) pp (260223)", kBlue + 1, 20},
       {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
        "Prompt #psi(2S) pp (260310)", kRed + 1, 21},
@@ -763,9 +763,9 @@ void run_compare_psi2s_pp_fwd_with_integrated_rightpad() {
                                           "1.6 < |y| < 2.4",
                                           0.0,
                                           "plot_eff_compare_psi2s_pp_prompt_fwd_with_integrated_rightpad",
-                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260223.root",
                                           "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
-                                          "Prompt #psi(2S) pp (260126)",
+                                          "Prompt #psi(2S) pp (260223)",
                                           "Prompt #psi(2S) pp (260310)",
                                           kBlue + 1,
                                           kRed + 1,
@@ -780,9 +780,9 @@ void run_compare_psi2s_pp_mid_with_integrated_rightpad() {
                                           "|y| < 1.6",
                                           0.0,
                                           "plot_eff_compare_psi2s_pp_prompt_mid_with_integrated_rightpad",
-                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260223.root",
                                           "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
-                                          "Prompt #psi(2S) pp (260126)",
+                                          "Prompt #psi(2S) pp (260223)",
                                           "Prompt #psi(2S) pp (260310)",
                                           kBlue + 1,
                                           kRed + 1,
