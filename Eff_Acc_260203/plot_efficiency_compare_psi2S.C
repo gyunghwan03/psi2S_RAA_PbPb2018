@@ -28,7 +28,7 @@ struct EffInput {
 
 namespace {
 
-const TString kPlotOutputDir = "plot_outputs_eff_compare_jpsi";
+const TString kPlotOutputDir = "plot_outputs_eff_compare_psi2S";
 
 void EnsureOutputDir() {
   if (gSystem) gSystem->mkdir(kPlotOutputDir, true);
@@ -257,19 +257,19 @@ void draw_efficiency_compare(const std::vector<EffInput>& inputs,
   }
 }
 
-// Example 1) PbPb J/#psi, forward rapidity, compare before/after ctau cut
-void run_compare_jpsi_pbpb_fwd() {
+// Example 1) PbPb #psi(2S), forward rapidity, compare before/after ctau cut
+void run_compare_psi2s_pbpb_fwd() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4",
-      "Prompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+      "Prompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4",
-      "Prompt J/#psi PbPb (260310)", kRed + 1, 21},
+      "Prompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_prompt_fwd",
+                          "plot_eff_compare_psi2s_pbpb_prompt_fwd",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -280,19 +280,19 @@ void run_compare_jpsi_pbpb_fwd() {
                           "1.6 < |y| < 2.4");
 }
 
-// Example 2) PbPb J/#psi, mid rapidity, compare before/after ctau cut
-void run_compare_jpsi_pbpb_mid() {
+// Example 2) PbPb #psi(2S), mid rapidity, compare before/after ctau cut
+void run_compare_psi2s_pbpb_mid() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy0_1p6",
-      "Prompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+      "Prompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy0_1p6",
-      "Prompt J/#psi PbPb (260310)", kRed + 1, 21},
+      "Prompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_prompt_mid",
+                          "plot_eff_compare_psi2s_pbpb_prompt_mid",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -303,19 +303,19 @@ void run_compare_jpsi_pbpb_mid() {
                           "|y| < 1.6");
 }
 
-// Example 3) PbPb J/#psi, forward rapidity, efficiency vs centrality
-void run_compare_jpsi_pbpb_cent_fwd() {
+// Example 3) PbPb #psi(2S), forward rapidity, efficiency vs centrality
+void run_compare_psi2s_pbpb_cent_fwd() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_3_to_40_absy1p6_2p4",
-      "Prompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+      "Prompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_3_to_40_absy1p6_2p4",
-      "Prompt J/#psi PbPb (260310)", kRed + 1, 21},
+      "Prompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_prompt_cent_fwd",
+                          "plot_eff_compare_psi2s_pbpb_prompt_cent_fwd",
                           "Centrality (%)",
                           "Efficiency",
                           0.0,
@@ -326,19 +326,19 @@ void run_compare_jpsi_pbpb_cent_fwd() {
                           "1.6 < |y| < 2.4");
 }
 
-// Example 4) PbPb J/#psi, mid rapidity, efficiency vs centrality
-void run_compare_jpsi_pbpb_cent_mid() {
+// Example 4) PbPb #psi(2S), mid rapidity, efficiency vs centrality
+void run_compare_psi2s_pbpb_cent_mid() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_40_absy0_1p6",
-      "Prompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+      "Prompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_40_absy0_1p6",
-      "Prompt J/#psi PbPb (260310)", kRed + 1, 21},
+      "Prompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_prompt_cent_mid",
+                          "plot_eff_compare_psi2s_pbpb_prompt_cent_mid",
                           "Centrality (%)",
                           "Efficiency",
                           0.0,
@@ -349,19 +349,19 @@ void run_compare_jpsi_pbpb_cent_mid() {
                           "|y| < 1.6");
 }
 
-// Example 4-1) PbPb nonprompt J/#psi, forward rapidity, efficiency vs pT
-void run_compare_jpsi_pbpb_nonprompt_fwd() {
+// Example 4-1) PbPb nonprompt #psi(2S), forward rapidity, efficiency vs pT
+void run_compare_psi2s_pbpb_nonprompt_fwd() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4",
-        "Nonprompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+        "Nonprompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy1p6_2p4",
-        "Nonprompt J/#psi PbPb (260310)", kRed + 1, 21},
+        "Nonprompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_nonprompt_fwd",
+                          "plot_eff_compare_psi2s_pbpb_nonprompt_fwd",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -372,19 +372,19 @@ void run_compare_jpsi_pbpb_nonprompt_fwd() {
                           "1.6 < |y| < 2.4");
 }
 
-// Example 4-2) PbPb nonprompt J/#psi, mid rapidity, efficiency vs pT
-void run_compare_jpsi_pbpb_nonprompt_mid() {
+// Example 4-2) PbPb nonprompt #psi(2S), mid rapidity, efficiency vs pT
+void run_compare_psi2s_pbpb_nonprompt_mid() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy0_1p6",
-        "Nonprompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+        "Nonprompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_cent_0_to_180_absy0_1p6",
-        "Nonprompt J/#psi PbPb (260310)", kRed + 1, 21},
+        "Nonprompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_nonprompt_mid",
+                          "plot_eff_compare_psi2s_pbpb_nonprompt_mid",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -395,19 +395,19 @@ void run_compare_jpsi_pbpb_nonprompt_mid() {
                           "|y| < 1.6");
 }
 
-// Example 4-3) PbPb nonprompt J/#psi, forward rapidity, efficiency vs centrality
-void run_compare_jpsi_pbpb_nonprompt_cent_fwd() {
+// Example 4-3) PbPb nonprompt #psi(2S), forward rapidity, efficiency vs centrality
+void run_compare_psi2s_pbpb_nonprompt_cent_fwd() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_3_to_40_absy1p6_2p4",
-        "Nonprompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+        "Nonprompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_3_to_40_absy1p6_2p4",
-        "Nonprompt J/#psi PbPb (260310)", kRed + 1, 21},
+        "Nonprompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_nonprompt_cent_fwd",
+                          "plot_eff_compare_psi2s_pbpb_nonprompt_cent_fwd",
                           "Centrality (%)",
                           "Efficiency",
                           0.0,
@@ -418,19 +418,19 @@ void run_compare_jpsi_pbpb_nonprompt_cent_fwd() {
                           "1.6 < |y| < 2.4");
 }
 
-// Example 4-4) PbPb nonprompt J/#psi, mid rapidity, efficiency vs centrality
-void run_compare_jpsi_pbpb_nonprompt_cent_mid() {
+// Example 4-4) PbPb nonprompt #psi(2S), mid rapidity, efficiency vs centrality
+void run_compare_psi2s_pbpb_nonprompt_cent_mid() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260127.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_40_absy0_1p6",
-        "Nonprompt J/#psi PbPb (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root",
+        "Nonprompt #psi(2S) PbPb (260127)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_40_absy0_1p6",
-        "Nonprompt J/#psi PbPb (260310)", kRed + 1, 21},
+        "Nonprompt #psi(2S) PbPb (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pbpb_nonprompt_cent_mid",
+                          "plot_eff_compare_psi2s_pbpb_nonprompt_cent_mid",
                           "Centrality (%)",
                           "Efficiency",
                           0.0,
@@ -441,19 +441,19 @@ void run_compare_jpsi_pbpb_nonprompt_cent_mid() {
                           "|y| < 1.6");
 }
 
-// Example 5) pp J/#psi, forward rapidity, efficiency vs pT
-void run_compare_jpsi_pp_fwd() {
+// Example 5) pp #psi(2S), forward rapidity, efficiency vs pT
+void run_compare_psi2s_pp_fwd() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
-       "Prompt J/#psi pp (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
+       "Prompt #psi(2S) pp (260126)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
-       "Prompt J/#psi pp (260310)", kRed + 1, 21},
+       "Prompt #psi(2S) pp (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pp_prompt_fwd",
+                          "plot_eff_compare_psi2s_pp_prompt_fwd",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -464,19 +464,19 @@ void run_compare_jpsi_pp_fwd() {
                           "1.6 < |y| < 2.4");
 }
 
-// Example 6) pp J/#psi, mid rapidity, efficiency vs pT
-void run_compare_jpsi_pp_mid() {
+// Example 6) pp #psi(2S), mid rapidity, efficiency vs pT
+void run_compare_psi2s_pp_mid() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
-       "Prompt J/#psi pp (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
+       "Prompt #psi(2S) pp (260126)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
-       "Prompt J/#psi pp (260310)", kRed + 1, 21},
+       "Prompt #psi(2S) pp (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pp_prompt_mid",
+                          "plot_eff_compare_psi2s_pp_prompt_mid",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -487,19 +487,19 @@ void run_compare_jpsi_pp_mid() {
                           "|y| < 1.6");
 }
 
-// Example 6-1) pp nonprompt J/#psi, forward rapidity, efficiency vs pT
-void run_compare_jpsi_pp_nonprompt_fwd() {
+// Example 6-1) pp nonprompt #psi(2S), forward rapidity, efficiency vs pT
+void run_compare_psi2s_pp_nonprompt_fwd() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
-        "Nonprompt J/#psi pp (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
+        "Nonprompt #psi(2S) pp (260126)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
-        "Nonprompt J/#psi pp (260310)", kRed + 1, 21},
+        "Nonprompt #psi(2S) pp (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pp_nonprompt_fwd",
+                          "plot_eff_compare_psi2s_pp_nonprompt_fwd",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -510,19 +510,19 @@ void run_compare_jpsi_pp_nonprompt_fwd() {
                           "1.6 < |y| < 2.4");
 }
 
-// Example 6-2) pp nonprompt J/#psi, mid rapidity, efficiency vs pT
-void run_compare_jpsi_pp_nonprompt_mid() {
+// Example 6-2) pp nonprompt #psi(2S), mid rapidity, efficiency vs pT
+void run_compare_psi2s_pp_nonprompt_mid() {
   std::vector<EffInput> inputs = {
-      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
+      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
-        "Nonprompt J/#psi pp (260219)", kBlue + 1, 20},
-      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
+        "Nonprompt #psi(2S) pp (260126)", kBlue + 1, 20},
+      {"./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
        "mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
-        "Nonprompt J/#psi pp (260310)", kRed + 1, 21},
+        "Nonprompt #psi(2S) pp (260310)", kRed + 1, 21},
   };
 
   draw_efficiency_compare(inputs,
-                          "plot_eff_compare_jpsi_pp_nonprompt_mid",
+                          "plot_eff_compare_psi2s_pp_nonprompt_mid",
                           "p_{T} (GeV/c)",
                           "Efficiency",
                           0.0,
@@ -695,8 +695,8 @@ void draw_pp_with_single_integrated_rightpad(const TString& ptHistName,
   hFrame->GetYaxis()->SetRangeUser(0.0, 1.2);
   hFrame->GetXaxis()->SetLabelSize(0.0);
   hFrame->GetXaxis()->SetTitleSize(0.0);
-  hFrame->GetYaxis()->SetLabelSize(0.045);
-  hFrame->GetYaxis()->SetTitleSize(0.05);
+  hFrame->GetYaxis()->SetLabelSize(0.060);
+  hFrame->GetYaxis()->SetTitleSize(0.060);
   hFrame->Draw("AXIS");
 
   hIntA->SetLineColor(c1);
@@ -721,10 +721,10 @@ void draw_pp_with_single_integrated_rightpad(const TString& ptHistName,
   hRatioR->GetYaxis()->CenterTitle();
   hRatioR->GetYaxis()->SetNdivisions(505);
   hRatioR->GetYaxis()->SetRangeUser(0.9, 1.5);
-  hRatioR->GetXaxis()->SetLabelSize(0.10);
-  hRatioR->GetXaxis()->SetTitleSize(0.11);
-  hRatioR->GetYaxis()->SetLabelSize(0.10);
-  hRatioR->GetYaxis()->SetTitleSize(0.10);
+  hRatioR->GetXaxis()->SetLabelSize(0.12);
+  hRatioR->GetXaxis()->SetTitleSize(0.12);
+  hRatioR->GetYaxis()->SetLabelSize(0.12);
+  hRatioR->GetYaxis()->SetTitleSize(0.12);
   hRatioR->GetYaxis()->SetTitleOffset(0.42);
   hRatioR->SetLineColor(kBlack);
   hRatioR->SetLineWidth(2);
@@ -754,34 +754,34 @@ void draw_pp_with_single_integrated_rightpad(const TString& ptHistName,
   delete fB;
 }
 
-// Example 7) pp J/#psi forward pT + right pad with integrated forward bin only
-void run_compare_jpsi_pp_fwd_with_integrated_rightpad() {
+// Example 7) pp #psi(2S) forward pT + right pad with integrated forward bin only
+void run_compare_psi2s_pp_fwd_with_integrated_rightpad() {
   draw_pp_with_single_integrated_rightpad("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
                                           "mc_eff_Integrated_TnP1_PtW1_absy1p6_2p4",
                                           "1.6 < |y| < 2.4",
                                           0.0,
-                                          "plot_eff_compare_jpsi_pp_prompt_fwd_with_integrated_rightpad",
-                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
-                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
-                                          "Prompt J/#psi pp (260219)",
-                                          "Prompt J/#psi pp (260310)",
+                                          "plot_eff_compare_psi2s_pp_prompt_fwd_with_integrated_rightpad",
+                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
+                                          "Prompt #psi(2S) pp (260126)",
+                                          "Prompt #psi(2S) pp (260310)",
                                           kBlue + 1,
                                           kRed + 1,
                                           20,
                                           21);
 }
 
-// Example 8) pp J/#psi mid pT + right pad with integrated mid bin only
-void run_compare_jpsi_pp_mid_with_integrated_rightpad() {
+// Example 8) pp #psi(2S) mid pT + right pad with integrated mid bin only
+void run_compare_psi2s_pp_mid_with_integrated_rightpad() {
   draw_pp_with_single_integrated_rightpad("mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
                                           "mc_eff_Integrated_TnP1_PtW1_absy0_1p6",
                                           "|y| < 1.6",
                                           0.0,
-                                          "plot_eff_compare_jpsi_pp_prompt_mid_with_integrated_rightpad",
-                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
-                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
-                                          "Prompt J/#psi pp (260219)",
-                                          "Prompt J/#psi pp (260310)",
+                                          "plot_eff_compare_psi2s_pp_prompt_mid_with_integrated_rightpad",
+                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+                                          "./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
+                                          "Prompt #psi(2S) pp (260126)",
+                                          "Prompt #psi(2S) pp (260310)",
                                           kBlue + 1,
                                           kRed + 1,
                                           20,
@@ -789,16 +789,16 @@ void run_compare_jpsi_pp_mid_with_integrated_rightpad() {
 }
 
 // Example 9) pp nonprompt forward pT + right pad with integrated forward bin only
-void run_compare_jpsi_pp_nonprompt_fwd_with_integrated_rightpad() {
+void run_compare_psi2s_pp_nonprompt_fwd_with_integrated_rightpad() {
   draw_pp_with_single_integrated_rightpad("mc_eff_vs_pt_TnP1_PtW1_absy1p6_2p4",
                                           "mc_eff_Integrated_TnP1_PtW1_absy1p6_2p4",
                                           "1.6 < |y| < 2.4",
                                           0.0,
-                                          "plot_eff_compare_jpsi_pp_nonprompt_fwd_with_integrated_rightpad",
-                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
-                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
-                                          "Nonprompt J/#psi pp (260219)",
-                                          "Nonprompt J/#psi pp (260310)",
+                                          "plot_eff_compare_psi2s_pp_nonprompt_fwd_with_integrated_rightpad",
+                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
+                                          "Nonprompt #psi(2S) pp (260126)",
+                                          "Nonprompt #psi(2S) pp (260310)",
                                           kBlue + 1,
                                           kRed + 1,
                                           20,
@@ -806,16 +806,16 @@ void run_compare_jpsi_pp_nonprompt_fwd_with_integrated_rightpad() {
 }
 
 // Example 10) pp nonprompt mid pT + right pad with integrated mid bin only
-void run_compare_jpsi_pp_nonprompt_mid_with_integrated_rightpad() {
+void run_compare_psi2s_pp_nonprompt_mid_with_integrated_rightpad() {
   draw_pp_with_single_integrated_rightpad("mc_eff_vs_pt_TnP1_PtW1_absy0_1p6",
                                           "mc_eff_Integrated_TnP1_PtW1_absy0_1p6",
                                           "|y| < 1.6",
                                           0.0,
-                                          "plot_eff_compare_jpsi_pp_nonprompt_mid_with_integrated_rightpad",
-                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260219.root",
-                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_ctauCut_260310.root",
-                                          "Nonprompt J/#psi pp (260219)",
-                                          "Nonprompt J/#psi pp (260310)",
+                                          "plot_eff_compare_psi2s_pp_nonprompt_mid_with_integrated_rightpad",
+                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260126.root",
+                                          "./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW1_tnp1_ctauCut_260310.root",
+                                          "Nonprompt #psi(2S) pp (260126)",
+                                          "Nonprompt #psi(2S) pp (260310)",
                                           kBlue + 1,
                                           kRed + 1,
                                           20,
@@ -823,26 +823,26 @@ void run_compare_jpsi_pp_nonprompt_mid_with_integrated_rightpad() {
 }
 
 // Quick entry point
-void run_compare_all_default() {
-  run_compare_jpsi_pbpb_fwd();
-  run_compare_jpsi_pbpb_mid();
-  run_compare_jpsi_pbpb_cent_fwd();
-  run_compare_jpsi_pbpb_cent_mid();
-  run_compare_jpsi_pbpb_nonprompt_fwd();
-  run_compare_jpsi_pbpb_nonprompt_mid();
-  run_compare_jpsi_pbpb_nonprompt_cent_fwd();
-  run_compare_jpsi_pbpb_nonprompt_cent_mid();
-  run_compare_jpsi_pp_fwd();
-  run_compare_jpsi_pp_mid();
-  run_compare_jpsi_pp_nonprompt_fwd();
-  run_compare_jpsi_pp_nonprompt_mid();
-  run_compare_jpsi_pp_fwd_with_integrated_rightpad();
-  run_compare_jpsi_pp_mid_with_integrated_rightpad();
-  run_compare_jpsi_pp_nonprompt_fwd_with_integrated_rightpad();
-  run_compare_jpsi_pp_nonprompt_mid_with_integrated_rightpad();
+void run_compare_all_psi2S() {
+  run_compare_psi2s_pbpb_fwd();
+  run_compare_psi2s_pbpb_mid();
+  run_compare_psi2s_pbpb_cent_fwd();
+  run_compare_psi2s_pbpb_cent_mid();
+  run_compare_psi2s_pbpb_nonprompt_fwd();
+  run_compare_psi2s_pbpb_nonprompt_mid();
+  run_compare_psi2s_pbpb_nonprompt_cent_fwd();
+  run_compare_psi2s_pbpb_nonprompt_cent_mid();
+  run_compare_psi2s_pp_fwd();
+  run_compare_psi2s_pp_mid();
+  run_compare_psi2s_pp_nonprompt_fwd();
+  run_compare_psi2s_pp_nonprompt_mid();
+  run_compare_psi2s_pp_fwd_with_integrated_rightpad();
+  run_compare_psi2s_pp_mid_with_integrated_rightpad();
+  run_compare_psi2s_pp_nonprompt_fwd_with_integrated_rightpad();
+  run_compare_psi2s_pp_nonprompt_mid_with_integrated_rightpad();
 }
 
 // Entry point for `rq plot_efficiency_compare.C`
-void plot_efficiency_compare() {
-  run_compare_all_default();
+void plot_efficiency_compare_psi2S() {
+  run_compare_all_psi2S();
 }
