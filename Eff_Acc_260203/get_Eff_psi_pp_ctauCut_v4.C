@@ -306,15 +306,15 @@ void get_Eff_psi_pp_ctauCut_v4(
         pt_weight = 1;
         if(isPtWeight && fabs(JP_Gen->Rapidity()) < 2.4) pt_weight = fptw->Eval(JP_Gen->Pt());
         if(JP_Gen->Pt() > 6.5) hy_gen->Fill(Rapidity_g, weight*pt_weight);
-        if(Rapidity_g > 1.6 && Rapidity_g <2.4) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); }
-        if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<50) { hInt_gen_1->Fill(1,weight*pt_weight); }
-        if(Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 50) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
+        if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<40) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); }
+        if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<40) { hInt_gen_1->Fill(1,weight*pt_weight); }
+        if(Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 40) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
       } else {
         pt_weight = 1;
         if(isPtWeight && fabs(JP_Gen->Rapidity()) < 2.4) pt_weight = fptw->Eval(JP_Gen->Pt());
         if(JP_Gen->Pt() > 6.5) hy_gen->Fill(Rapidity_g, weight*pt_weight);
-        if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<50) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_1->Fill(1,weight*pt_weight); }
-        if(Rapidity_g < 1.6 && JP_Gen->Pt()>6.5 && JP_Gen->Pt()<50) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
+        if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<40) { hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_1->Fill(1,weight*pt_weight); }
+        if(Rapidity_g < 1.6 && JP_Gen->Pt()>6.5 && JP_Gen->Pt()<40) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hInt_gen_2->Fill(1,weight*pt_weight); }
       }
     }
 

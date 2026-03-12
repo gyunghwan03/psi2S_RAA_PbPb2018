@@ -380,7 +380,7 @@ void get_Eff_Jpsi_pp_ctauCut_v4(
         hpt_gen_0->Fill(JP_Gen->Pt(), weight * pt_weight);
         //hpt_gen_0->Fill(JP_Gen->Pt(), weight * pt_weight);
       }
-      if (Rapidity_g > 1.6 && Rapidity_g < 2.4)
+      if (Rapidity_g > 1.6 && Rapidity_g < 2.4 && JP_Gen->Pt() > 3.5 && JP_Gen->Pt() < 40)
       {
         hpt_gen_1->Fill(JP_Gen->Pt(), weight * pt_weight);
         hInt_gen_1->Fill(1, weight * pt_weight);
@@ -511,7 +511,7 @@ void get_Eff_Jpsi_pp_ctauCut_v4(
 	  counts[4]++;
           //hpt_reco_0->Fill(JP_Reco->Pt(), weight * tnp_weight * pt_weight);
         }
-        if (Rapidity > 1.6 && Rapidity < 2.4)
+        if (Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt() > 3.5 && JP_Reco->Pt() < 40)
         {
           hpt_reco_1->Fill(JP_Reco->Pt(), weight * tnp_weight * pt_weight);
           hInt_reco_1->Fill(1, weight * tnp_weight * pt_weight);
