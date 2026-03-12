@@ -8,7 +8,7 @@ using namespace std;
 
 valErr getYield(int isPR = 0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, int cLow=0, int cHigh=0);
 valErr getCtauEff(int isPR=0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, float SiMuPtCut=0, float massLow=3.3, float massHigh=4.1);
-void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
+void dndpt_y0_1p6_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 
   TString fname;
   if(PR==0) fname = "Prompt";
@@ -20,12 +20,10 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   TH1::SetDefaultSumw2();
 
   //// modify by hand according to the pt range of the sample
-  const int nPtBins=8;
-  double ptBin[nPtBins+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBin[nPtBins+1]={3.5,4.5,6.5,8.5,12,15,20,40};
-  const int nPtBinsMC=8;
-  double ptBinMC[nPtBinsMC+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBinMC[nPtBinsMC+1]={3.5,4.5,6.5,8.5,12,15,20,40};
+  const int nPtBins=13;
+  double ptBin[nPtBins+1]={6.5,7.5,8.5,9.5,11,13,15,17.5,20,22.5,25,27.5,30,40};
+  const int nPtBinsMC=13;
+  double ptBinMC[nPtBinsMC+1]={6.5,7.5,8.5,9.5,11,13,15,17.5,20,22.5,25,27.5,30,40};
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double l_cut[nPtBins] = {-10};
@@ -34,7 +32,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 
   // Get MC :
   float massLow = 2.6; float massHigh = 3.5;
-  double ptMin = ptBinMC[1]; double ptMax = ptBinMC[nPtBinsMC];
+  double ptMin = ptBinMC[0]; double ptMax = ptBinMC[nPtBinsMC];
   double yMin = yBin[1];     double yMax = yBin[nYBins];
 
   TH1D* hptData=new TH1D("hptData",";p_{T}(GeV/c);",nPtBins,ptBin);
@@ -134,8 +132,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
             && (mass[j] < massHigh)
             && ( pt[j] > ptMin)
             && ( pt[j] < ptMax)
-            && ( fabs(y[j]) > 1.6) 
-            && ( fabs(y[j]) < 2.4) )
+            && ( fabs(y[j]) > 0) 
+            && ( fabs(y[j]) < 1.6) )
          )
         continue;
       hptMC->Fill      ( pt[j] );
@@ -154,8 +152,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
     //yieldAA = getYield(8.0,12.0,0,2.4,20,120);
     valErr ctauEff;
     if(PR==0){
-    yieldAA = getYield(0,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,180);
-    ctauEff = getCtauEff(0,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,2.6,3.5);
+    yieldAA = getYield(0,ptBin[ipt-1],ptBin[ipt],0,1.6,0,180);
+    ctauEff = getCtauEff(0,ptBin[ipt-1],ptBin[ipt],0,1.6,0,2.6,3.5);
     ctauEff_PR[ipt]=ctauEff.val;
     cout << "ctauEff_PR for pt "<< ptBin[ipt-1]<<"-"<<ptBin[ipt]<<": "<< ctauEff.val << endl;
     cout << Form("yield, pt  ") << ptBin[ipt-1] << " - " << ptBin[ipt] << " : " << yieldAA.val <<" +/- "<< yieldAA.err 
@@ -167,8 +165,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
     hptData1->SetBinError(ipt,yieldAA.err);
     }
     if(PR==1){
-    yieldAA = getYield(1,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,180);
-    ctauEff = getCtauEff(1,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,2.6,3.5);
+    yieldAA = getYield(1,ptBin[ipt-1],ptBin[ipt],0,1.6,0,180);
+    ctauEff = getCtauEff(1,ptBin[ipt-1],ptBin[ipt],0,1.6,0,2.6,3.5);
     ctauEff_NP[ipt]=ctauEff.val;
     cout << "ctauEff_NP for pt "<< ptBin[ipt-1]<<"-"<<ptBin[ipt]<<": "<< ctauEff.val << endl;
     cout << Form("yield, pt  ") << ptBin[ipt-1] << " - " << ptBin[ipt] << " : " << yieldAA.val <<" +/- "<< yieldAA.err 
@@ -335,7 +333,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   c_3->SaveAs("./fraction_vs_pt.pdf");
 
   if(WRITE==1&&PR==0){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_1p6_251103.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -343,7 +341,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   else if(WRITE==1&&PR==1){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_1p6_251103.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -351,8 +349,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   if(WRITE==1){
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.pdf",fname.Data()));
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.png",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y0_1p6.pdf",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y0_1p6.png",fname.Data()));
   }
 }
 

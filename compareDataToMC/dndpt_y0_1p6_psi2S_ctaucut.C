@@ -8,7 +8,7 @@ using namespace std;
 
 valErr getYield(int isPR = 0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, int cLow=0, int cHigh=0);
 valErr getCtauEff(int isPR=0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, float SiMuPtCut=0, float massLow=3.3, float massHigh=4.1);
-void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
+void dndpt_y0_1p6_psi2S_ctaucut(int PR=0, int WRITE=1) {
 
   TString fname;
   if(PR==0) fname = "Prompt";
@@ -20,12 +20,10 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   TH1::SetDefaultSumw2();
 
   //// modify by hand according to the pt range of the sample
-  const int nPtBins=8;
-  double ptBin[nPtBins+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBin[nPtBins+1]={3.5,4.5,6.5,8.5,12,15,20,40};
-  const int nPtBinsMC=8;
-  double ptBinMC[nPtBinsMC+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBinMC[nPtBinsMC+1]={3.5,4.5,6.5,8.5,12,15,20,40};
+  const int nPtBins=10;
+  double ptBin[nPtBins+1]={6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
+  const int nPtBinsMC=10;
+  double ptBinMC[nPtBinsMC+1]={6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double l_cut[nPtBins] = {-10};
@@ -33,8 +31,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   double ctauEff_NP[nPtBins];
 
   // Get MC :
-  float massLow = 2.6; float massHigh = 3.5;
-  double ptMin = ptBinMC[1]; double ptMax = ptBinMC[nPtBinsMC];
+  float massLow = 3.3; float massHigh = 4.1;
+  double ptMin = ptBinMC[0]; double ptMax = ptBinMC[nPtBinsMC];
   double yMin = yBin[1];     double yMax = yBin[nYBins];
 
   TH1D* hptData=new TH1D("hptData",";p_{T}(GeV/c);",nPtBins,ptBin);
@@ -66,8 +64,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   TChain *tree = new TChain("mmepevt");
   TString f1;
   //if(PR==0)  f1 ="/work2/Oniatree/JPsi/skimmed_file/OniaFlowSkim_Jpsi_MC_Prompt_210107.root";
-  if(PR==0)  f1 ="../skimmedFiles/OniaFlowSkim_JpsiTrig_Prompt_miniAOD_JPsi_isMC1_HFNom_240530.root";
-  else if(PR==1) f1 ="../skimmedFiles/OniaFlowSkim_JpsiTrig_NonPrompt_miniAOD_JPsi_isMC1_HFNom_240530.root";
+  if(PR==0)  f1 ="../skimmedFiles/OniaFlowSkim_JpsiTrig_Prompt_miniAOD_Psi2S_isMC1_HFNom_230517.root";
+  else if(PR==1) f1 ="../skimmedFiles/OniaFlowSkim_JpsiTrig_NonPrompt_miniAOD_Psi2S_isMC1_HFNom_230517.root";
 //  if(PR==0)  f1 ="../../skimmedFiles/OniaFlowSkim_Jpsi_MC_Prompt_210107.root";
 //  else if(PR==1) f1 ="../../skimmedFiles/OniaFlowSkim_Jpsi_MC_NonPrompt_210107.root";
   tree->Add(f1.Data());
@@ -134,8 +132,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
             && (mass[j] < massHigh)
             && ( pt[j] > ptMin)
             && ( pt[j] < ptMax)
-            && ( fabs(y[j]) > 1.6) 
-            && ( fabs(y[j]) < 2.4) )
+            && ( fabs(y[j]) > 0) 
+            && ( fabs(y[j]) < 1.6) )
          )
         continue;
       hptMC->Fill      ( pt[j] );
@@ -154,8 +152,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
     //yieldAA = getYield(8.0,12.0,0,2.4,20,120);
     valErr ctauEff;
     if(PR==0){
-    yieldAA = getYield(0,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,180);
-    ctauEff = getCtauEff(0,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,2.6,3.5);
+    yieldAA = getYield(0,ptBin[ipt-1],ptBin[ipt],0,1.6,0,180);
+    ctauEff = getCtauEff(0,ptBin[ipt-1],ptBin[ipt],0,1.6,0,massLow,massHigh);
     ctauEff_PR[ipt]=ctauEff.val;
     cout << "ctauEff_PR for pt "<< ptBin[ipt-1]<<"-"<<ptBin[ipt]<<": "<< ctauEff.val << endl;
     cout << Form("yield, pt  ") << ptBin[ipt-1] << " - " << ptBin[ipt] << " : " << yieldAA.val <<" +/- "<< yieldAA.err 
@@ -167,8 +165,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
     hptData1->SetBinError(ipt,yieldAA.err);
     }
     if(PR==1){
-    yieldAA = getYield(1,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,180);
-    ctauEff = getCtauEff(1,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,2.6,3.5);
+    yieldAA = getYield(1,ptBin[ipt-1],ptBin[ipt],0,1.6,0,180);
+    ctauEff = getCtauEff(1,ptBin[ipt-1],ptBin[ipt],0,1.6,0,2.6,3.5);
     ctauEff_NP[ipt]=ctauEff.val;
     cout << "ctauEff_NP for pt "<< ptBin[ipt-1]<<"-"<<ptBin[ipt]<<": "<< ctauEff.val << endl;
     cout << Form("yield, pt  ") << ptBin[ipt-1] << " - " << ptBin[ipt] << " : " << yieldAA.val <<" +/- "<< yieldAA.err 
@@ -220,11 +218,12 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   fitmc1 = new TF1("fitmc1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,40);
   fitdata1 = new TF1("fitdata1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,40);
   //fitRatio1 = new TF1("fitRatio1","(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))/([2]-1)*([3]-2)/([2]*[3]*([2]*[3] + ([2]-2)*[2])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([2]*[3])),-[2])",0,30);
-  fitRatio1 = new TF1("fitRatio1","( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )",3,40);
+  // Use polynomial ratio with a small constant added to denominator to avoid division by zero
+  fitRatio1 = new TF1("fitRatio1","( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / ( TMath::Max(0.001, (x-[3])*(x-[3])*(x-[3]) ) )",3,40);
   //fitRatio1 = new TF1("fitRatio1","TMath::Exp(-x/[0])*[1]+[2]",6.5,50);
-  //fitRatio1->SetParameters(0.0005,4.5);
-  //fitRatio1->SetParameters(0, 10);
-  //fitRatio1->SetParameters(1, 10);
+  // Set initial parameters to avoid singularity in fit range
+  fitRatio1->SetParameters(1.0, 0.0, 0.0, 1.0, 0.0); // Set [3] to 1 (outside main fit range)
+  fitRatio1->SetParLimits(3, 0.5, 2.5); // Limit [3] to be well outside fit range [3,40]
 
   TLegend *leg1 = new TLegend(0.65,0.75,0.85,0.85);
   leg1->AddEntry(hptData,"Data","p");
@@ -315,6 +314,10 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   //fitRatio2->Draw("same");
   //fitRatio3->Draw("same");
   hptData1->SetAxisRange(0,4.,"Y");
+  // Increase integration tolerance to handle numerical issues
+  ROOT::Math::IntegratorOneDimOptions::SetDefaultAbsTolerance(1e-6);
+  ROOT::Math::IntegratorOneDimOptions::SetDefaultRelTolerance(1e-6);
+  
   hptData1->Fit(fitRatio1,"IE","",3,12);
   TFitResultPtr r = hptData1->Fit(fitRatio1,"S","",3,40);
   //TFitResultPtr r = hptData1->Fit("expo","S");
@@ -335,7 +338,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   c_3->SaveAs("./fraction_vs_pt.pdf");
 
   if(WRITE==1&&PR==0){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_psi2S_DATA_ctauCut_y0_1p6_251103.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -343,7 +346,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   else if(WRITE==1&&PR==1){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y0_1p6_251103.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -351,8 +354,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   if(WRITE==1){
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.pdf",fname.Data()));
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.png",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_psi2S_%s_y0_1p6_251103.pdf",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_psi2S_%s_y0_1p6_251103.png",fname.Data()));
   }
 }
 
@@ -360,7 +363,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 valErr getYield(int isPR, float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
   TString PR = (isPR==0) ? "PRMC" : "NPMC";
-  TFile* inf = new TFile(Form("../Macros/Jpsi_L_cut/roots_1S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel.Data()));
+  TFile* inf = new TFile(Form("../Macros/psi2S_L_cut_250427/roots_2S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel.Data()));
   //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Mass/MassFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   //RooWorkspace* ws = (RooWorkspace*)inf->Get("workspace");
   valErr ret; ret.val = 0; ret.err = 0;
@@ -384,7 +387,7 @@ valErr getCtauEff(int isPR, float ptLow, float ptHigh, float yLow, float yHigh, 
    TString PR;
     if(isPR==0) PR = "PRMC";
     else if(isPR==1) PR = "NPMC";
-    TFile* inf = new TFile(Form("../ctau_eff/roots_1S_Pb/decayL/%s/decay_hist_%s_m2.6-3.5.root", PR.Data(), kineLabel.Data()));
+    TFile* inf = new TFile(Form("../ctau_eff/roots_2S_Pb/decayL/%s/decay_hist_%s_m3.3-4.1.root", PR.Data(), kineLabel.Data()));
     valErr ret; ret.val = 0; ret.err = 0;
     if (!inf || inf->IsZombie()) {
         cout << "파일을 열 수 없습니다: " << inf->GetName() << endl;

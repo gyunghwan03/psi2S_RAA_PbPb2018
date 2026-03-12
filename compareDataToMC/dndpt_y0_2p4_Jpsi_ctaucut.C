@@ -8,7 +8,7 @@ using namespace std;
 
 valErr getYield(int isPR = 0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, int cLow=0, int cHigh=0);
 valErr getCtauEff(int isPR=0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, float SiMuPtCut=0, float massLow=3.3, float massHigh=4.1);
-void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
+void dndpt_y0_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 
   TString fname;
   if(PR==0) fname = "Prompt";
@@ -20,21 +20,19 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   TH1::SetDefaultSumw2();
 
   //// modify by hand according to the pt range of the sample
-  const int nPtBins=8;
-  double ptBin[nPtBins+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBin[nPtBins+1]={3.5,4.5,6.5,8.5,12,15,20,40};
-  const int nPtBinsMC=8;
-  double ptBinMC[nPtBinsMC+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBinMC[nPtBinsMC+1]={3.5,4.5,6.5,8.5,12,15,20,40};
+  const int nPtBins=12;
+  double ptBin[nPtBins+1]={3.0,4.5,6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
+  const int nPtBinsMC=12;
+  double ptBinMC[nPtBinsMC+1]={3.0,4.5,6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double l_cut[nPtBins] = {-10};
-  double ctauEff_PR[nPtBins];
-  double ctauEff_NP[nPtBins];
+  double ctauEff_PR[nPtBins+1];
+  double ctauEff_NP[nPtBins+1];
 
   // Get MC :
   float massLow = 2.6; float massHigh = 3.5;
-  double ptMin = ptBinMC[1]; double ptMax = ptBinMC[nPtBinsMC];
+  double ptMin = ptBinMC[0]; double ptMax = ptBinMC[nPtBinsMC];
   double yMin = yBin[1];     double yMax = yBin[nYBins];
 
   TH1D* hptData=new TH1D("hptData",";p_{T}(GeV/c);",nPtBins,ptBin);
@@ -130,12 +128,18 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
     tree->GetEntry(i);
 
     for(int j=0; j<nDimu; j++){
+      double yLowSel = 0.0;
+      double yHighSel = 2.4;
+      if (pt[j] < 6.5) {
+        yLowSel = 1.6;
+        yHighSel = 2.4;
+      }
       if (  !( (mass[j] > massLow)
             && (mass[j] < massHigh)
             && ( pt[j] > ptMin)
             && ( pt[j] < ptMax)
-            && ( fabs(y[j]) > 1.6) 
-            && ( fabs(y[j]) < 2.4) )
+            && ( fabs(y[j]) > yLowSel)
+            && ( fabs(y[j]) < yHighSel) )
          )
         continue;
       hptMC->Fill      ( pt[j] );
@@ -153,9 +157,11 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
     valErr yieldAA;
     //yieldAA = getYield(8.0,12.0,0,2.4,20,120);
     valErr ctauEff;
+    double yLowBin = (ptBin[ipt-1] < 6.5) ? 1.6 : 0.0;
+    double yHighBin = 2.4;
     if(PR==0){
-    yieldAA = getYield(0,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,180);
-    ctauEff = getCtauEff(0,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,2.6,3.5);
+    yieldAA = getYield(0,ptBin[ipt-1],ptBin[ipt],yLowBin,yHighBin,0,180);
+    ctauEff = getCtauEff(0,ptBin[ipt-1],ptBin[ipt],yLowBin,yHighBin,0,2.6,3.5);
     ctauEff_PR[ipt]=ctauEff.val;
     cout << "ctauEff_PR for pt "<< ptBin[ipt-1]<<"-"<<ptBin[ipt]<<": "<< ctauEff.val << endl;
     cout << Form("yield, pt  ") << ptBin[ipt-1] << " - " << ptBin[ipt] << " : " << yieldAA.val <<" +/- "<< yieldAA.err 
@@ -167,8 +173,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
     hptData1->SetBinError(ipt,yieldAA.err);
     }
     if(PR==1){
-    yieldAA = getYield(1,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,180);
-    ctauEff = getCtauEff(1,ptBin[ipt-1],ptBin[ipt],1.6,2.4,0,2.6,3.5);
+    yieldAA = getYield(1,ptBin[ipt-1],ptBin[ipt],yLowBin,yHighBin,0,180);
+    ctauEff = getCtauEff(1,ptBin[ipt-1],ptBin[ipt],yLowBin,yHighBin,0,2.6,3.5);
     ctauEff_NP[ipt]=ctauEff.val;
     cout << "ctauEff_NP for pt "<< ptBin[ipt-1]<<"-"<<ptBin[ipt]<<": "<< ctauEff.val << endl;
     cout << Form("yield, pt  ") << ptBin[ipt-1] << " - " << ptBin[ipt] << " : " << yieldAA.val <<" +/- "<< yieldAA.err 
@@ -256,6 +262,11 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   hptData->GetYaxis()->SetTitleSize(0.04);
   hptData->GetYaxis()->SetTitleOffset(1.00);
   hptData->GetYaxis()->SetTitle("dN/dp_{T}");
+
+  double posX = 0.15; double posY = 0.85;
+  int textSize = 18;
+  drawText(Form("%s J/#psi in PbPb, |y|<2.4",fname.Data()), posX, posY, kBlack, textSize);
+
   //TPad *pad_A_2 = new TPad("pad_A_2", "pad_A_2",0,0.09,0.98,0.23);
   TPad *pad_A_2 = new TPad("pad_A_2", "pad_A_2", 0, 0.006, 0.98, 0.227);
   c_A->cd();
@@ -334,16 +345,18 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   hfracData->SetMarkerColor(kRed+2);
   c_3->SaveAs("./fraction_vs_pt.pdf");
 
+  TFile *fJpsipb = nullptr;
   if(WRITE==1&&PR==0){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+    fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_2p4_260310.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
 	  fitRatio1->SetName("dataMC_Ratio1");
 	  fitRatio1->Write();
+    c_A->Write();
   }
   else if(WRITE==1&&PR==1){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+    fJpsipb = new TFile("./ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_2p4_260310.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -351,16 +364,17 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   if(WRITE==1){
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.pdf",fname.Data()));
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.png",fname.Data()));
+    c_A->SaveAs(Form("./figs/dNdpt_plot_AA_%s_Jpsi_y0_2p4_260310.pdf",fname.Data()));
+    c_A->SaveAs(Form("./figs/dNdpt_plot_AA_%s_Jpsi_y0_2p4_260310.png",fname.Data()));
   }
+  if(fJpsipb) cout << "File saved : " << fJpsipb->GetName() << endl;
 }
 
 //Get Yield
 valErr getYield(int isPR, float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
   TString PR = (isPR==0) ? "PRMC" : "NPMC";
-  TFile* inf = new TFile(Form("../Macros/Jpsi_L_cut/roots_1S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel.Data()));
+  TFile* inf = new TFile(Form("../Macros/Jpsi_L_cut_pTreweight/roots_1S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel.Data()));
   //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Mass/MassFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   //RooWorkspace* ws = (RooWorkspace*)inf->Get("workspace");
   valErr ret; ret.val = 0; ret.err = 0;
@@ -381,23 +395,23 @@ valErr getYield(int isPR, float ptLow, float ptHigh, float yLow, float yHigh, in
 }
 valErr getCtauEff(int isPR, float ptLow, float ptHigh, float yLow, float yHigh, float SiMuPtCut, float massLow, float massHigh) {
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, 0, 180);
-   TString PR;
-    if(isPR==0) PR = "PRMC";
-    else if(isPR==1) PR = "NPMC";
-    TFile* inf = new TFile(Form("../ctau_eff/roots_1S_Pb/decayL/%s/decay_hist_%s_m2.6-3.5.root", PR.Data(), kineLabel.Data()));
-    valErr ret; ret.val = 0; ret.err = 0;
-    if (!inf || inf->IsZombie()) {
-        cout << "파일을 열 수 없습니다: " << inf->GetName() << endl;
-        return ret;
-    }
-    TH1D* hEff = (TH1D*)inf->Get("h_eff");
-    if (!hEff) {
-        cout << "hEff 히스토그램이 없습니다! 파일: " << inf->GetName() << endl;
-        inf->Close();
-        return ret;
-    }
-    ret.val = hEff->GetBinContent(1);
-    ret.err = hEff->GetBinError(1);
-    inf->Close();
-    return ret;
+  TString PR; TString hPR;
+  if(isPR==0) { PR = "PRMC"; hPR = "h_pr_eff_bin"; }
+  else if(isPR==1) { PR = "NPMC"; hPR = "h_np_res_bin"; }
+  TFile* inf = new TFile(Form("../Eff_Acc_pTreweight/roots_1S_PbPb_pTreweight/ctau3D_cut_%s_pt%.1f-%.1f_y%.1f-%.1f.root", PR.Data(), ptLow, ptHigh, yLow, yHigh));
+  valErr ret; ret.val = 0; ret.err = 0;
+  if (!inf || inf->IsZombie()) {
+      cout << "파일을 열 수 없습니다: " << inf->GetName() << endl;
+      return ret;
+  }
+  TH1D* hEff = (TH1D*)inf->Get(Form("%s", hPR.Data()));
+  if (!hEff) {
+      cout << "hEff 히스토그램이 없습니다! 파일: " << inf->GetName() << endl;
+      inf->Close();
+      return ret;
+  }
+  ret.val = hEff->GetBinContent(1);
+  ret.err = hEff->GetBinError(1);
+  inf->Close();
+  return ret;
 }

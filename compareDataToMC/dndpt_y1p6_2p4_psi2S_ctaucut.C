@@ -8,7 +8,7 @@ using namespace std;
 
 valErr getYield(int isPR = 0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, int cLow=0, int cHigh=0);
 valErr getCtauEff(int isPR=0, float ptLow=0, float ptHigh=0, float yLow=0, float yHigh=0, float SiMuPtCut=0, float massLow=3.3, float massHigh=4.1);
-void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
+void dndpt_y1p6_2p4_psi2S_ctaucut(int PR=0, int WRITE=1) {
 
   TString fname;
   if(PR==0) fname = "Prompt";
@@ -20,12 +20,10 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   TH1::SetDefaultSumw2();
 
   //// modify by hand according to the pt range of the sample
-  const int nPtBins=8;
-  double ptBin[nPtBins+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBin[nPtBins+1]={3.5,4.5,6.5,8.5,12,15,20,40};
-  const int nPtBinsMC=8;
-  double ptBinMC[nPtBinsMC+1]={3,4,5,6.5,8.5,12,15,20,40};
-  //double ptBinMC[nPtBinsMC+1]={3.5,4.5,6.5,8.5,12,15,20,40};
+  const int nPtBins=6;
+  double ptBin[nPtBins+1]={3.5,6.5,8.5,12,15,20,40};
+  const int nPtBinsMC=6;
+  double ptBinMC[nPtBinsMC+1]={3.5,6.5,8.5,12,15,20,40};
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double l_cut[nPtBins] = {-10};
@@ -33,7 +31,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   double ctauEff_NP[nPtBins];
 
   // Get MC :
-  float massLow = 2.6; float massHigh = 3.5;
+  float massLow = 3.3; float massHigh = 4.1;
   double ptMin = ptBinMC[1]; double ptMax = ptBinMC[nPtBinsMC];
   double yMin = yBin[1];     double yMax = yBin[nYBins];
 
@@ -335,7 +333,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   c_3->SaveAs("./fraction_vs_pt.pdf");
 
   if(WRITE==1&&PR==0){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_psi2S_DATA_ctauCut_y1p6_2p4_251103.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -343,7 +341,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   else if(WRITE==1&&PR==1){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y1p6_2p4_251118.root","RECREATE");
+	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y1p6_2p4_251103.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -351,8 +349,8 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 	  fitRatio1->Write();
   }
   if(WRITE==1){
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.pdf",fname.Data()));
-	  c_A->SaveAs(Form("./dNdpt_plot_AA_%s_Jpsi_y1p6_2p4.png",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_psi2S_%s_y1p6_2p4.pdf",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_psi2S_%s_y1p6_2p4.png",fname.Data()));
   }
 }
 
@@ -360,7 +358,7 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
 valErr getYield(int isPR, float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
   TString PR = (isPR==0) ? "PRMC" : "NPMC";
-  TFile* inf = new TFile(Form("../Macros/Jpsi_L_cut/roots_1S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel.Data()));
+  TFile* inf = new TFile(Form("../Macros/psi2S_L_cut_250427/roots_2S_Pb/%s/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", PR.Data(), kineLabel.Data()));
   //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Mass/MassFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   //RooWorkspace* ws = (RooWorkspace*)inf->Get("workspace");
   valErr ret; ret.val = 0; ret.err = 0;
@@ -384,7 +382,7 @@ valErr getCtauEff(int isPR, float ptLow, float ptHigh, float yLow, float yHigh, 
    TString PR;
     if(isPR==0) PR = "PRMC";
     else if(isPR==1) PR = "NPMC";
-    TFile* inf = new TFile(Form("../ctau_eff/roots_1S_Pb/decayL/%s/decay_hist_%s_m2.6-3.5.root", PR.Data(), kineLabel.Data()));
+    TFile* inf = new TFile(Form("../ctau_eff/roots_2S_Pb/decayL/%s/decay_hist_%s_m3.3-4.1.root", PR.Data(), kineLabel.Data()));
     valErr ret; ret.val = 0; ret.err = 0;
     if (!inf || inf->IsZombie()) {
         cout << "파일을 열 수 없습니다: " << inf->GetName() << endl;
