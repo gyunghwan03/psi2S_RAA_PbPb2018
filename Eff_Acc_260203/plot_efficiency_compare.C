@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #include <TCanvas.h>
 #include <TFile.h>
@@ -98,6 +99,50 @@ void StyleHistogram(TH1* h, const EffInput& in, const TString& xTitle, const TSt
   h->SetTitle("");
   h->GetXaxis()->SetTitle(xTitle);
   h->GetYaxis()->SetTitle(yTitle);
+}
+
+void SetAutoRatioYAxis(TH1* h, double fallbackMin = 0.8, double fallbackMax = 1.2) {
+  if (!h) return;
+
+  bool hasValid = false;
+  double minVal = 1e9;
+  double maxVal = -1e9;
+  for (int i = 1; i <= h->GetNbinsX(); ++i) {
+    const double v = h->GetBinContent(i);
+    const double e = h->GetBinError(i);
+    if (!std::isfinite(v) || !std::isfinite(e)) continue;
+    if (v <= 0.0 && e <= 0.0) continue;
+
+    const double lo = v - e;
+    const double hi = v + e;
+    if (!std::isfinite(lo) || !std::isfinite(hi)) continue;
+    if (hi <= 0.0) continue;
+
+    hasValid = true;
+    if (lo < minVal) minVal = lo;
+    if (hi > maxVal) maxVal = hi;
+  }
+
+  if (!hasValid) {
+    h->GetYaxis()->SetRangeUser(fallbackMin, fallbackMax);
+    return;
+  }
+
+  if (minVal > 1.0) minVal = 1.0;
+  if (maxVal < 1.0) maxVal = 1.0;
+
+  double span = maxVal - minVal;
+  if (span < 0.08) span = 0.08;
+  const double pad = 0.25 * span;
+
+  double yMin = minVal - pad;
+  double yMax = maxVal + pad;
+  if (yMin < 0.0) yMin = 0.0;
+  if (yMax <= yMin) {
+    yMin = fallbackMin;
+    yMax = fallbackMax;
+  }
+  h->GetYaxis()->SetRangeUser(yMin, yMax);
 }
 
 }  // namespace
@@ -226,7 +271,7 @@ void draw_efficiency_compare(const std::vector<EffInput>& inputs,
     hRatio->GetYaxis()->SetTitle("Ratio");
     hRatio->GetYaxis()->CenterTitle();
     hRatio->GetYaxis()->SetNdivisions(505);
-    hRatio->GetYaxis()->SetRangeUser(0.9, 1.5);
+    SetAutoRatioYAxis(hRatio);
     hRatio->GetXaxis()->SetLabelSize(0.11);
     hRatio->GetXaxis()->SetTitleSize(0.12);
     hRatio->GetXaxis()->SetTitleOffset(1.0);
@@ -654,7 +699,7 @@ void draw_pp_with_single_integrated_rightpad(const TString& ptHistName,
   hRatioL->GetYaxis()->SetTitle("Ratio");
   hRatioL->GetYaxis()->CenterTitle();
   hRatioL->GetYaxis()->SetNdivisions(505);
-  hRatioL->GetYaxis()->SetRangeUser(0.9, 1.5);
+  SetAutoRatioYAxis(hRatioL);
   hRatioL->GetXaxis()->SetRangeUser(xMin, 40.0);
   hRatioL->GetXaxis()->SetLabelSize(0.11);
   hRatioL->GetXaxis()->SetTitleSize(0.12);
@@ -721,7 +766,7 @@ void draw_pp_with_single_integrated_rightpad(const TString& ptHistName,
   hRatioR->GetYaxis()->SetTitle("");
   hRatioR->GetYaxis()->CenterTitle();
   hRatioR->GetYaxis()->SetNdivisions(505);
-  hRatioR->GetYaxis()->SetRangeUser(0.9, 1.5);
+  SetAutoRatioYAxis(hRatioR);
   hRatioR->GetXaxis()->SetLabelSize(0.20);
   hRatioR->GetXaxis()->SetTitleSize(0.16);
   hRatioR->GetYaxis()->SetLabelSize(0.0);
