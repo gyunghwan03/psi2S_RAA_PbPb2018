@@ -112,9 +112,9 @@ void get_Eff_psi_pbpb_ctauCut_v4_nonprompt(
   //ratioDataMC_AA_Jpsi_DATA_y0.0-2.4_210915.root
   TFile *fPtW;
   if(state==1){
-    fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_psi2S_DATA_ctauCut_y0_2p4_260310.root","read");
+    fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_psi2S_DATA_ctauCut_y0_2p4_260316_2exp.root","read");
   } else {
-    fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y0_2p4_260310.root","read");
+    fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y0_2p4_260316_2exp.root","read");
   }
   //TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root","read");
   //TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230420.root","read");
@@ -822,8 +822,8 @@ void get_Eff_psi_pbpb_ctauCut_v4_nonprompt(
   hInt_eff_2 ->SetName(Form("mc_eff_Integrated_TnP%d_PtW%d_cent_%0.0f_to_%0.0f_absy0_1p6  ",isTnP, isPtWeight, cLow, cHigh));
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260310.root",cLow,cHigh,isPtWeight,isTnP);
-  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260310.root",cLow,cHigh,isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260310_2exp.root",cLow,cHigh,isPtWeight,isTnP);
+  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260310_2exp.root",cLow,cHigh,isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
   hpt_eff_2->Write();

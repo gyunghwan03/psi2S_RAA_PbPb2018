@@ -51,10 +51,10 @@ void get_Eff_psi_pp_ctauCut_v4(
   //pT reweighting function
   TFile *fPtW;
   if(state==1){
-    fPtW = new TFile("../compareDataToMC/ratioDataMC_pp_psi2S_DATA_ctauCut_y0_2p4_260310.root","read");
+    fPtW = new TFile("../compareDataToMC/ratioDataMC_pp_psi2S_DATA_ctauCut_y0_2p4_260310_2exp.root","read");
   }
   if(state==2){
-    fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y0_2p4_260310.root","read");
+    fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y0_2p4_260316_2exp.root","read");
   }
   TF1* fptw = (TF1*) fPtW->Get("dataMC_Ratio1");
 
@@ -532,8 +532,8 @@ void get_Eff_psi_pp_ctauCut_v4(
   hInt_eff_2 ->SetName(Form("mc_eff_Integrated_TnP%d_PtW%d_absy0_1p6",isTnP, isPtWeight));
   hy_eff ->SetName(Form("mc_eff_vs_rap_TnP%d_PtW%d",isTnP, isPtWeight));
 
-  TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260310.root",isPtWeight,isTnP);
-  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260310.root",isPtWeight,isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260310_2exp.root",isPtWeight,isTnP);
+  if(state==2) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260310_2exp.root",isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
   hpt_eff_2->Write();

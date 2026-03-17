@@ -101,8 +101,16 @@ void StyleHistogram(TH1* h, const EffInput& in, const TString& xTitle, const TSt
   h->GetYaxis()->SetTitle(yTitle);
 }
 
-void SetAutoRatioYAxis(TH1* h, double fallbackMin = 0.8, double fallbackMax = 1.2) {
-  if (!h) return;
+void GetAutoRatioYRange(const TH1* h,
+                        double& yMin,
+                        double& yMax,
+                        double fallbackMin = 0.8,
+                        double fallbackMax = 1.2) {
+  if (!h) {
+    yMin = fallbackMin;
+    yMax = fallbackMax;
+    return;
+  }
 
   bool hasValid = false;
   double minVal = 1e9;
@@ -124,7 +132,8 @@ void SetAutoRatioYAxis(TH1* h, double fallbackMin = 0.8, double fallbackMax = 1.
   }
 
   if (!hasValid) {
-    h->GetYaxis()->SetRangeUser(fallbackMin, fallbackMax);
+    yMin = fallbackMin;
+    yMax = fallbackMax;
     return;
   }
 
@@ -142,6 +151,13 @@ void SetAutoRatioYAxis(TH1* h, double fallbackMin = 0.8, double fallbackMax = 1.
     yMin = fallbackMin;
     yMax = fallbackMax;
   }
+}
+
+void SetAutoRatioYAxis(TH1* h, double fallbackMin = 0.8, double fallbackMax = 1.2) {
+  if (!h) return;
+  double yMin = fallbackMin;
+  double yMax = fallbackMax;
+  GetAutoRatioYRange(h, yMin, yMax, fallbackMin, fallbackMax);
   h->GetYaxis()->SetRangeUser(yMin, yMax);
 }
 
@@ -699,7 +715,6 @@ void draw_pp_with_single_integrated_rightpad(const TString& ptHistName,
   hRatioL->GetYaxis()->SetTitle("Ratio");
   hRatioL->GetYaxis()->CenterTitle();
   hRatioL->GetYaxis()->SetNdivisions(505);
-  SetAutoRatioYAxis(hRatioL);
   hRatioL->GetXaxis()->SetRangeUser(xMin, 40.0);
   hRatioL->GetXaxis()->SetLabelSize(0.11);
   hRatioL->GetXaxis()->SetTitleSize(0.12);
@@ -766,7 +781,20 @@ void draw_pp_with_single_integrated_rightpad(const TString& ptHistName,
   hRatioR->GetYaxis()->SetTitle("");
   hRatioR->GetYaxis()->CenterTitle();
   hRatioR->GetYaxis()->SetNdivisions(505);
-  SetAutoRatioYAxis(hRatioR);
+  double yMinL = 0.8, yMaxL = 1.2;
+  double yMinR = 0.8, yMaxR = 1.2;
+  GetAutoRatioYRange(hRatioL, yMinL, yMaxL);
+  GetAutoRatioYRange(hRatioR, yMinR, yMaxR);
+  const double yMinCommon = (yMinL < yMinR) ? yMinL : yMinR;
+  const double yMaxCommon = (yMaxL > yMaxR) ? yMaxL : yMaxR;
+  hRatioL->GetYaxis()->SetRangeUser(yMinCommon, yMaxCommon);
+  hRatioR->GetYaxis()->SetRangeUser(yMinCommon, yMaxCommon);
+
+  padLDn->cd();
+  hRatioL->Draw("PE");
+  l1L->Draw("same");
+
+  padRDn->cd();
   hRatioR->GetXaxis()->SetLabelSize(0.20);
   hRatioR->GetXaxis()->SetTitleSize(0.16);
   hRatioR->GetYaxis()->SetLabelSize(0.0);

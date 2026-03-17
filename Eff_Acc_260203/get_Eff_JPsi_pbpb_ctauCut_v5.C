@@ -97,7 +97,10 @@ void get_Eff_JPsi_pbpb_ctauCut_v5(
   // TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root", "read");
   // TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230621.root", "read");
   // pp Jpsi weight function (all rapidity)
-  TFile *fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_2p4_260310.root", "read");
+  TFile *fPtW;
+  if(state==1) fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_2p4_260310_2exp.root", "read");
+  else if(state==2) fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_2p4_260310_2exp.root", "read");
+
   // if (state == 2) {
   //  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_AA_BtoPsi2S_DATA_y0_1p6_240515.root", "read");
   //  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_AA_BtoPsi2S_DATA_y1p6_2p4_240515.root", "read");
