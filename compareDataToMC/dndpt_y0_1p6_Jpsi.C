@@ -23,8 +23,9 @@ void dndpt_y0_1p6_Jpsi(int PR=0, int WRITE=1) {
   //// modify by hand according to the pt range of the sample
   const int nPtBins=7;
   double ptBin[nPtBins+1]={6.5,9.0,12.0,15.0,20.0,25.0,30.0,50.0};
-  const int nPtBinsMC=7;
-  double ptBinMC[nPtBinsMC+1]={6.5,9.0,12.0,15.0,20.0,25.0,30.0,50.0};
+  const int nPtBinsMC=nPtBins;
+  double ptBinMC[nPtBinsMC+1];
+  for (int i=0; i<=nPtBins; ++i) ptBinMC[i]=ptBin[i];
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double frac[nPtBins];

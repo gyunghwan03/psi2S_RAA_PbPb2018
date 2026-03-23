@@ -22,8 +22,9 @@ void dndpt_y0_2p4_psi2S_ctaucut(int PR=0, int WRITE=1) {
   //// modify by hand according to the pt range of the sample
   const int nPtBins=12;
   double ptBin[nPtBins+1]={3,4.5,6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
-  const int nPtBinsMC=12;
-  double ptBinMC[nPtBinsMC+1]={3.5,4.5,6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
+  const int nPtBinsMC=nPtBins;
+  double ptBinMC[nPtBinsMC+1];
+  for (int i=0; i<=nPtBins; ++i) ptBinMC[i]=ptBin[i];
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double l_cut[nPtBins] = {-10};
@@ -32,7 +33,7 @@ void dndpt_y0_2p4_psi2S_ctaucut(int PR=0, int WRITE=1) {
 
   // Get MC :
   float massLow = 3.3; float massHigh = 4.1;
-  double ptMin = ptBinMC[1]; double ptMax = ptBinMC[nPtBinsMC];
+  double ptMin = ptBinMC[0]; double ptMax = ptBinMC[nPtBinsMC];
   double yMin = yBin[1];     double yMax = yBin[nYBins];
 
   TH1D* hptData=new TH1D("hptData",";p_{T}(GeV/c);",nPtBins,ptBin);
@@ -361,7 +362,7 @@ void dndpt_y0_2p4_psi2S_ctaucut(int PR=0, int WRITE=1) {
 
   TFile *fJpsipb = nullptr;
   if(WRITE==1&&PR==0){
-	  fJpsipb = new TFile("./ratioDataMC_AA_psi2S_DATA_ctauCut_y0_2p4_260310.root","RECREATE");
+	  fJpsipb = new TFile("./ratioDataMC_AA_psi2S_DATA_ctauCut_y0_2p4_260316.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -370,7 +371,7 @@ void dndpt_y0_2p4_psi2S_ctaucut(int PR=0, int WRITE=1) {
     c_A->Write();
   }
   else if(WRITE==1&&PR==1){
-	  fJpsipb = new TFile("./ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y0_2p4_260310.root","RECREATE");
+	  fJpsipb = new TFile("./ratioDataMC_AA_Btopsi2S_DATA_ctauCut_y0_2p4_260316.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
@@ -383,8 +384,8 @@ void dndpt_y0_2p4_psi2S_ctaucut(int PR=0, int WRITE=1) {
       fJpsipb->Write();
       fJpsipb->Close();
     }
-	  c_A->SaveAs(Form("./figs/dNdpt_plot_AA_psi2S_%s_y0_2p4_260310.pdf",fname.Data()));
-	  c_A->SaveAs(Form("./figs/dNdpt_plot_AA_psi2S_%s_y0_2p4_260310.png",fname.Data()));
+	  c_A->SaveAs(Form("./figs/dNdpt_plot_AA_psi2S_%s_y0_2p4_260316.pdf",fname.Data()));
+	  c_A->SaveAs(Form("./figs/dNdpt_plot_AA_psi2S_%s_y0_2p4_260316.png",fname.Data()));
     cout << "File saved : " << fJpsipb->GetName() << endl;
   }
 }

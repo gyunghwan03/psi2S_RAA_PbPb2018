@@ -22,8 +22,9 @@ void dndpt_y0_1p6_psi2S_ctaucut(int PR=0, int WRITE=1) {
   //// modify by hand according to the pt range of the sample
   const int nPtBins=10;
   double ptBin[nPtBins+1]={6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
-  const int nPtBinsMC=10;
-  double ptBinMC[nPtBinsMC+1]={6.5,7.5,8.5,9.5,11,13,15,17.5,20,25,40};
+  const int nPtBinsMC=nPtBins;
+  double ptBinMC[nPtBinsMC+1];
+  for (int i=0; i<=nPtBins; ++i) ptBinMC[i]=ptBin[i];
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
   double l_cut[nPtBins] = {-10};

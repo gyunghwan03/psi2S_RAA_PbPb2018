@@ -23,8 +23,9 @@ void dndpt_y1p6_2p4_Jpsi_ctaucut(int PR=0, int WRITE=1) {
   const int nPtBins=8;
   double ptBin[nPtBins+1]={3,4,5,6.5,8.5,12,15,20,40};
   //double ptBin[nPtBins+1]={3.5,4.5,6.5,8.5,12,15,20,40};
-  const int nPtBinsMC=8;
-  double ptBinMC[nPtBinsMC+1]={3,4,5,6.5,8.5,12,15,20,40};
+  const int nPtBinsMC=nPtBins;
+  double ptBinMC[nPtBinsMC+1];
+  for (int i=0; i<=nPtBins; ++i) ptBinMC[i]=ptBin[i];
   //double ptBinMC[nPtBinsMC+1]={3.5,4.5,6.5,8.5,12,15,20,40};
   const int nYBins=6;
   double yBin[nYBins+1]={0.0,0.4,0.8,1.2,1.6,2.0,2.4};
