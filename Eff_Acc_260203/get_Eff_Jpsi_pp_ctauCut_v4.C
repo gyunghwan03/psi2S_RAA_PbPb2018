@@ -327,6 +327,27 @@ void get_Eff_Jpsi_pp_ctauCut_v4(
 
   int count =0;
   int counttnp =0;
+  struct BinStat { double sPtW, sGenW, sW; int n; };
+  BinStat gen_pt_for[5] = {};
+  BinStat gen_pt_mid[7] = {};
+  BinStat reco_pt_for[5] = {};
+  BinStat reco_pt_mid[7] = {};
+  auto addStat = [&](BinStat &b, double ptw, double genw, double w) {
+    b.sPtW += ptw;
+    b.sGenW += genw;
+    b.sW += w;
+    b.n += 1;
+  };
+  auto printStat = [&](const char *label, BinStat *arr, const double *edges, int nbins) {
+    cout << "[SUMMARY] " << label << endl;
+    for (int i = 0; i < nbins; ++i) {
+      cout << "  bin " << (i+1) << " [" << edges[i] << ", " << edges[i+1] << ")"
+           << " : pT Weight=" << (arr[i].n > 0 ? arr[i].sPtW / arr[i].n : 0.0)
+           << ", Gen Weight=" << (arr[i].n > 0 ? arr[i].sGenW / arr[i].n : 0.0)
+           << ", Weight=" << (arr[i].n > 0 ? arr[i].sW / arr[i].n : 0.0)
+           << " (entries=" << arr[i].n << ")" << endl;
+    }
+  };
   int nevt = mytree->GetEntries();
   int nevt_2 = nevt / 100;
   //const int nevt = mytree->GetEntries();
@@ -384,11 +405,21 @@ void get_Eff_Jpsi_pp_ctauCut_v4(
       {
         hpt_gen_1->Fill(JP_Gen->Pt(), weight * pt_weight);
         hInt_gen_1->Fill(1, weight * pt_weight);
+        for (int ib = 0; ib < 5; ++ib) {
+          if (JP_Gen->Pt() > ptBin_for[ib] && JP_Gen->Pt() < ptBin_for[ib+1]) {
+            addStat(gen_pt_for[ib], pt_weight, weight, weight * pt_weight);
+          }
+        }
       }
       if (Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 40)
       {
         hpt_gen_2->Fill(JP_Gen->Pt(), weight * pt_weight);
         hInt_gen_2->Fill(1, weight * pt_weight);
+        for (int ib = 0; ib < 7; ++ib) {
+          if (JP_Gen->Pt() > ptBin_mid[ib] && JP_Gen->Pt() < ptBin_mid[ib+1]) {
+            addStat(gen_pt_mid[ib], pt_weight, weight, weight * pt_weight);
+          }
+        }
       }
 
       // if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -515,11 +546,21 @@ void get_Eff_Jpsi_pp_ctauCut_v4(
         {
           hpt_reco_1->Fill(JP_Reco->Pt(), weight * tnp_weight * pt_weight);
           hInt_reco_1->Fill(1, weight * tnp_weight * pt_weight);
+          for (int ib = 0; ib < 5; ++ib) {
+            if (JP_Reco->Pt() > ptBin_for[ib] && JP_Reco->Pt() < ptBin_for[ib+1]) {
+              addStat(reco_pt_for[ib], pt_weight, weight, weight * pt_weight);
+            }
+          }
         }
         if (Rapidity < 1.6 && JP_Reco->Pt() > 6.5 && JP_Reco->Pt() < 40)
         {
           hpt_reco_2->Fill(JP_Reco->Pt(), weight * tnp_weight * pt_weight);
           hInt_reco_2->Fill(1, weight * tnp_weight * pt_weight);
+          for (int ib = 0; ib < 7; ++ib) {
+            if (JP_Reco->Pt() > ptBin_mid[ib] && JP_Reco->Pt() < ptBin_mid[ib+1]) {
+              addStat(reco_pt_mid[ib], pt_weight, weight, weight * pt_weight);
+            }
+          }
         }
 
         // if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -532,6 +573,10 @@ void get_Eff_Jpsi_pp_ctauCut_v4(
   for (int i=0; i<5; i++) {
 	  cout << "counts[" << i << "]" << " : " << counts[i] << endl;
   }
+  printStat("GEN values vs pt (forward bins)", gen_pt_for, ptBin_for, 5);
+  printStat("GEN values vs pt (mid bins)", gen_pt_mid, ptBin_mid, 7);
+  printStat("RECO values vs pt (forward bins)", reco_pt_for, ptBin_for, 5);
+  printStat("RECO values vs pt (mid bins)", reco_pt_mid, ptBin_mid, 7);
 
   // Divide
   TH1D *hpt_eff_0;

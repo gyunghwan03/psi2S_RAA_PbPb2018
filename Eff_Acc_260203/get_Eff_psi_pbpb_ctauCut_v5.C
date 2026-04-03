@@ -433,6 +433,31 @@ void get_Eff_psi_pbpb_ctauCut_v5(
   int counts[10]={0,0,0,0,0,0,0,0,0,0};
   int count =0;
   int counttnp =0;
+  struct BinStat { double sPtW, sGenW, sW; int n; };
+  BinStat gen_pt_for[5] = {};
+  BinStat gen_pt_mid[7] = {};
+  BinStat reco_pt_for[5] = {};
+  BinStat reco_pt_mid[7] = {};
+  BinStat gen_cent_for[4] = {};
+  BinStat gen_cent_mid[6] = {};
+  BinStat reco_cent_for[4] = {};
+  BinStat reco_cent_mid[6] = {};
+  auto addStat = [&](BinStat &b, double ptw, double genw, double w) {
+    b.sPtW += ptw;
+    b.sGenW += genw;
+    b.sW += w;
+    b.n += 1;
+  };
+  auto printStat = [&](const char *label, BinStat *arr, const double *edges, int nbins) {
+    cout << "[SUMMARY] " << label << endl;
+    for (int i = 0; i < nbins; ++i) {
+      cout << "  bin " << (i+1) << " [" << edges[i] << ", " << edges[i+1] << ")"
+           << " : pT Weight=" << (arr[i].n > 0 ? arr[i].sPtW / arr[i].n : 0.0)
+           << ", Gen Weight=" << (arr[i].n > 0 ? arr[i].sGenW / arr[i].n : 0.0)
+           << ", Weight=" << (arr[i].n > 0 ? arr[i].sW / arr[i].n : 0.0)
+           << " (entries=" << arr[i].n << ")" << endl;
+    }
+  };
   long long cnt_tnp_combo_total = 0;
   long long cnt_tnp_L2L2 = 0;
   long long cnt_tnp_L2L3 = 0;
@@ -478,17 +503,33 @@ void get_Eff_psi_pbpb_ctauCut_v5(
       if( (Centrality > cLow && Centrality < cHigh) ) { 
       if(Rapidity_g > 1.6 && Rapidity_g <2.4){ hpt_gen_1->Fill(JP_Gen->Pt(),weight*pt_weight); hpt_gen_1_noW->Fill(JP_Gen->Pt(),1.0); counts[5]++;}
       if(Rapidity_g < 1.6 ) { hpt_gen_2->Fill(JP_Gen->Pt(),weight*pt_weight); hpt_gen_2_noW->Fill(JP_Gen->Pt(),1.0); } }
+      if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt() > 3.5 && JP_Gen->Pt() < 40){
+        for (int ib = 0; ib < 5; ++ib) {
+          if (JP_Gen->Pt() > ptBin_for[ib] && JP_Gen->Pt() < ptBin_for[ib+1]) addStat(gen_pt_for[ib], pt_weight, weight, weight * pt_weight);
+        }
+      }
+      if(Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 40){
+        for (int ib = 0; ib < 7; ++ib) {
+          if (JP_Gen->Pt() > ptBin_mid[ib] && JP_Gen->Pt() < ptBin_mid[ib+1]) addStat(gen_pt_mid[ib], pt_weight, weight, weight * pt_weight);
+        }
+      }
       if(Rapidity_g > 1.6 && Rapidity_g <2.4 ){
         if(JP_Gen->Pt() > 3.5 && JP_Gen->Pt() < 40){
         hcent_gen_1->Fill( Centrality,weight*pt_weight);
         hInt_gen_1->Fill(1,weight*pt_weight);
         hInt_gen_1_noW->Fill(1,1.0);
+        for (int ib = 0; ib < 4; ++ib) {
+          if (Centrality > centBin_for[ib] && Centrality < centBin_for[ib+1]) addStat(gen_cent_for[ib], pt_weight, weight, weight * pt_weight);
+        }
       }
     }
     if(Rapidity_g < 1.6 && JP_Gen->Pt() > 6.5 && JP_Gen->Pt() < 40){
       hcent_gen_2->Fill( Centrality,weight*pt_weight);
       hInt_gen_2->Fill(1,weight*pt_weight);
       hInt_gen_2_noW->Fill(1,1.0);
+      for (int ib = 0; ib < 6; ++ib) {
+        if (Centrality > centBin_mid[ib] && Centrality < centBin_mid[ib+1]) addStat(gen_cent_mid[ib], pt_weight, weight, weight * pt_weight);
+      }
     }
     
 
@@ -623,7 +664,7 @@ void get_Eff_psi_pbpb_ctauCut_v5(
                 double ptHigh = ptBin_for[i+1];
                 if(pt > ptLow && pt < ptHigh) {
                   double l_cut = l_cut_for_pt[i];
-                  if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) { hpt_reco_1->Fill(pt, weight* tnp_weight* pt_weight); hpt_reco_1_noW->Fill(pt, 1.0); }
+                  if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) { hpt_reco_1->Fill(pt, weight* tnp_weight* pt_weight); hpt_reco_1_noW->Fill(pt, 1.0); addStat(reco_pt_for[i], pt_weight, weight, weight * pt_weight); }
                 }
               }
             }
@@ -634,7 +675,7 @@ void get_Eff_psi_pbpb_ctauCut_v5(
                 double ptHigh = ptBin_mid[i+1];
                 if(pt > ptLow && pt < ptHigh) {
                   double l_cut = l_cut_mid_pt[i];
-                  if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) { hpt_reco_2->Fill(pt, weight* tnp_weight* pt_weight); hpt_reco_2_noW->Fill(pt, 1.0); }
+                  if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) { hpt_reco_2->Fill(pt, weight* tnp_weight* pt_weight); hpt_reco_2_noW->Fill(pt, 1.0); addStat(reco_pt_mid[i], pt_weight, weight, weight * pt_weight); }
                 }
               }
             }
@@ -646,7 +687,7 @@ void get_Eff_psi_pbpb_ctauCut_v5(
               double cHigh_tmp = centBin_for[i+1];
               if(Centrality > cLow_tmp && Centrality < cHigh_tmp) {
                 double l_cut = l_cut_for_cent[i];
-                if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) hcent_reco_1->Fill(Centrality, weight*tnp_weight*pt_weight);
+                if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) { hcent_reco_1->Fill(Centrality, weight*tnp_weight*pt_weight); addStat(reco_cent_for[i], pt_weight, weight, weight * pt_weight); }
               }
             }
             if(Centrality > 0 && Centrality < 180){
@@ -660,7 +701,7 @@ void get_Eff_psi_pbpb_ctauCut_v5(
               double cHigh_tmp = centBin_mid[i+1];
               if(Centrality > cLow_tmp && Centrality < cHigh_tmp) {
                 double l_cut = l_cut_mid_cent[i];
-                if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) hcent_reco_2->Fill(Centrality, weight*tnp_weight*pt_weight);
+                if(PassCtauCut(state, Reco_QQ_ctau3D[irqq], l_cut)) { hcent_reco_2->Fill(Centrality, weight*tnp_weight*pt_weight); addStat(reco_cent_mid[i], pt_weight, weight, weight * pt_weight); }
               }
             }
             if(Centrality > 0 && Centrality < 180){
@@ -675,6 +716,14 @@ void get_Eff_psi_pbpb_ctauCut_v5(
 
   cout << "count " << count << endl;
   cout << "counttnp " << counttnp << endl;
+  printStat("GEN values vs pt (forward bins)", gen_pt_for, ptBin_for, 5);
+  printStat("GEN values vs pt (mid bins)", gen_pt_mid, ptBin_mid, 7);
+  printStat("RECO values vs pt (forward bins)", reco_pt_for, ptBin_for, 5);
+  printStat("RECO values vs pt (mid bins)", reco_pt_mid, ptBin_mid, 7);
+  printStat("GEN values vs centrality (forward bins)", gen_cent_for, centBin_for, 4);
+  printStat("GEN values vs centrality (mid bins)", gen_cent_mid, centBin_mid, 6);
+  printStat("RECO values vs centrality (forward bins)", reco_cent_for, centBin_for, 4);
+  printStat("RECO values vs centrality (mid bins)", reco_cent_mid, centBin_mid, 6);
   
 
   //Divide

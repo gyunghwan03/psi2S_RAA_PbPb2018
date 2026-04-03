@@ -342,6 +342,27 @@ void get_Eff_psi_pp_ctauCut_v5(
 
   int count =0;
   int counttnp =0;
+  struct BinStat { double sPtW, sGenW, sW; int n; };
+  BinStat gen_pt_for[5] = {};
+  BinStat gen_pt_mid[7] = {};
+  BinStat reco_pt_for[5] = {};
+  BinStat reco_pt_mid[7] = {};
+  auto addStat = [&](BinStat &b, double ptw, double genw, double w) {
+    b.sPtW += ptw;
+    b.sGenW += genw;
+    b.sW += w;
+    b.n += 1;
+  };
+  auto printStat = [&](const char *label, BinStat *arr, const double *edges, int nbins) {
+    cout << "[SUMMARY] " << label << endl;
+    for (int i = 0; i < nbins; ++i) {
+      cout << "  bin " << (i+1) << " [" << edges[i] << ", " << edges[i+1] << ")"
+           << " : pT Weight=" << (arr[i].n > 0 ? arr[i].sPtW / arr[i].n : 0.0)
+           << ", Gen Weight=" << (arr[i].n > 0 ? arr[i].sGenW / arr[i].n : 0.0)
+           << ", Weight=" << (arr[i].n > 0 ? arr[i].sW / arr[i].n : 0.0)
+           << " (entries=" << arr[i].n << ")" << endl;
+    }
+  };
   int nevt = 0;
   if(nEvt == -1) nevt = mytree->GetEntries();
   else nevt = nEvt;
@@ -374,6 +395,11 @@ void get_Eff_psi_pp_ctauCut_v5(
         { 
           hpt_gen_1->Fill(JP_Gen->Pt(),weight_gen*pt_weight); 
           hpt_gen_1_noW->Fill(JP_Gen->Pt(),1.0); 
+          for (int ib = 0; ib < 5; ++ib) {
+            if (JP_Gen->Pt() > ptBin_for[ib] && JP_Gen->Pt() < ptBin_for[ib+1]) {
+              addStat(gen_pt_for[ib], pt_weight, weight_gen, weight_gen * pt_weight);
+            }
+          }
         }
         if(Rapidity_g > 1.6 && Rapidity_g <2.4 && JP_Gen->Pt()>3.5 && JP_Gen->Pt()<40) 
         { 
@@ -386,6 +412,11 @@ void get_Eff_psi_pp_ctauCut_v5(
           hInt_gen_2->Fill(1,weight_gen*pt_weight); 
           hpt_gen_2_noW->Fill(JP_Gen->Pt(),1.0); 
           hInt_gen_2_noW->Fill(1,1.0);
+          for (int ib = 0; ib < 7; ++ib) {
+            if (JP_Gen->Pt() > ptBin_mid[ib] && JP_Gen->Pt() < ptBin_mid[ib+1]) {
+              addStat(gen_pt_mid[ib], pt_weight, weight_gen, weight_gen * pt_weight);
+            }
+          }
         }
       } else {
         pt_weight = EvalPtWeight(applyPtWeight, JP_Gen->Rapidity(), JP_Gen->Pt(), fptwMid, fptwFor);
@@ -396,6 +427,11 @@ void get_Eff_psi_pp_ctauCut_v5(
           hInt_gen_1->Fill(1,weight_gen*pt_weight); 
           hpt_gen_1_noW->Fill(JP_Gen->Pt(),1.0);
           hInt_gen_1_noW->Fill(1,1.0);
+          for (int ib = 0; ib < 5; ++ib) {
+            if (JP_Gen->Pt() > ptBin_for[ib] && JP_Gen->Pt() < ptBin_for[ib+1]) {
+              addStat(gen_pt_for[ib], pt_weight, weight_gen, weight_gen * pt_weight);
+            }
+          }
         }
         if(Rapidity_g < 1.6 && JP_Gen->Pt()>6.5 && JP_Gen->Pt()<40) 
         { 
@@ -403,6 +439,11 @@ void get_Eff_psi_pp_ctauCut_v5(
           hInt_gen_2->Fill(1,weight_gen*pt_weight); 
           hpt_gen_2_noW->Fill(JP_Gen->Pt(),1.0); 
           hInt_gen_2_noW->Fill(1,1.0);
+          for (int ib = 0; ib < 7; ++ib) {
+            if (JP_Gen->Pt() > ptBin_mid[ib] && JP_Gen->Pt() < ptBin_mid[ib+1]) {
+              addStat(gen_pt_mid[ib], pt_weight, weight_gen, weight_gen * pt_weight);
+            }
+          }
         }
       }
     }
@@ -508,11 +549,13 @@ void get_Eff_psi_pp_ctauCut_v5(
                 if(Reco_QQ_ctau3D[irqq] < l_cut) { 
                   hpt_reco_1->Fill(pt, weight_reco* tnp_weight* pt_weight); 
                   hpt_reco_1_noW->Fill(pt, 1.0); 
+                  addStat(reco_pt_for[i], pt_weight, weight_reco, weight_reco * pt_weight);
                 }
               }
               else if(state==2) { if(Reco_QQ_ctau3D[irqq] > l_cut) {
                 hpt_reco_1->Fill(pt, weight_reco* tnp_weight* pt_weight);
                 hpt_reco_1_noW->Fill(pt, 1.0); }
+                if(Reco_QQ_ctau3D[irqq] > l_cut) addStat(reco_pt_for[i], pt_weight, weight_reco, weight_reco * pt_weight);
               }
             }
           }
@@ -539,6 +582,7 @@ void get_Eff_psi_pp_ctauCut_v5(
                 if(Reco_QQ_ctau3D[irqq] < l_cut) { 
                   hpt_reco_2->Fill(pt, weight_reco* tnp_weight* pt_weight); 
                   hpt_reco_2_noW->Fill(pt, 1.0); 
+                  addStat(reco_pt_mid[i], pt_weight, weight_reco, weight_reco * pt_weight);
                   //cout << "pT : " << JP_Reco->Pt() << "\t" << "pT weight =\t" << pt_weight << "\tweight =\t"<< weight_reco * tnp_weight * pt_weight << endl;
                 }
               }
@@ -546,6 +590,7 @@ void get_Eff_psi_pp_ctauCut_v5(
                 if(Reco_QQ_ctau3D[irqq] > l_cut) { 
                   hpt_reco_2->Fill(pt, weight_reco* tnp_weight* pt_weight); 
                   hpt_reco_2_noW->Fill(pt, 1.0); 
+                  addStat(reco_pt_mid[i], pt_weight, weight_reco, weight_reco * pt_weight);
                 }
               }
             }
@@ -572,6 +617,10 @@ void get_Eff_psi_pp_ctauCut_v5(
 
   cout << "count " << count << endl;
   cout << "counttnp " << counttnp << endl;
+  printStat("GEN values vs pt (forward bins)", gen_pt_for, ptBin_for, 5);
+  printStat("GEN values vs pt (mid bins)", gen_pt_mid, ptBin_mid, 7);
+  printStat("RECO values vs pt (forward bins)", reco_pt_for, ptBin_for, 5);
+  printStat("RECO values vs pt (mid bins)", reco_pt_mid, ptBin_mid, 7);
   
 
   //Divide
