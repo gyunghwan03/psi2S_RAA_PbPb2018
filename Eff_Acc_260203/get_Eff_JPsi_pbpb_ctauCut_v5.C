@@ -17,6 +17,29 @@ using namespace std;
 // v4 : ctau Cut from decay_length_OniaTree_v2_PbPb_1S.C
 // v5 : use single pT reweight function from all-rapidity file
 
+static double EvalPtWeight(double rap, double pt, TF1* fptwMid, TF1* fptwFor)
+{
+  double absRap = fabs(rap);
+  if(absRap >= 1.6 && absRap < 2.4 && fptwFor) return fptwFor->Eval(pt);
+  if(absRap < 2.4 && pt > 6.5 && fptwMid) return fptwMid->Eval(pt);
+  return 1.0;
+}
+
+static TF1* BuildPtWeightSys(TF1* src, const char* name, int isPtWeight)
+{
+  if(!src) return nullptr;
+  double p0 = src->GetParameter(0), p1 = src->GetParameter(1), p2 = src->GetParameter(2), p3 = src->GetParameter(3);
+  double e0 = src->GetParError(0), e1 = src->GetParError(1), e2 = src->GetParError(2), e3 = src->GetParError(3);
+  if(isPtWeight == 1){ p0 += e0; p1 += e1; p2 += e2; p3 += e3; }
+  else if(isPtWeight == -1){ p0 -= e0; p1 -= e1; p2 -= e2; p3 -= e3; }
+  TF1 *f = new TF1(name, "( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )", 3.0, 50.0);
+  f->SetParameter(0, p0);
+  f->SetParameter(1, p1);
+  f->SetParameter(2, p2);
+  f->SetParameter(3, p3);
+  return f;
+}
+
 void get_Eff_JPsi_pbpb_ctauCut_v5(
     int state = 2,
     bool isTnP = true, int isPtWeight = 0, // 0 : nominal , 1 : up, -1 : down
@@ -97,15 +120,35 @@ void get_Eff_JPsi_pbpb_ctauCut_v5(
   // TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y0_1p6_230321.root", "read");
   // TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_pp_Psi2S_DATA_y1p6_2p4_230621.root", "read");
   // pp Jpsi weight function (all rapidity)
-  TFile *fPtW;
-  if(state==1) fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_2p4_260310_2exp.root", "read");
-  else if(state==2) fPtW = new TFile("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_2p4_260310_2exp.root", "read");
+  TFile *fPtWMid = nullptr;
+  TFile *fPtWFor = nullptr;
+  if(state==1){
+    fPtWMid = TFile::Open("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_2p4_260310_2exp.root", "READ");
+    if(!fPtWMid || fPtWMid->IsZombie()){
+      fPtWMid = TFile::Open("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y0_2p4_260310.root", "READ");
+    }
+    fPtWFor = TFile::Open("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y1p6_2p4_251118.root", "READ");
+    if(!fPtWFor || fPtWFor->IsZombie()){
+      fPtWFor = TFile::Open("../compareDataToMC/ratioDataMC_AA_Jpsi_DATA_ctauCut_y1p6_2p4_251103.root", "READ");
+    }
+  }
+  else if(state==2){
+    fPtWMid = TFile::Open("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_2p4_260310_2exp.root", "READ");
+    if(!fPtWMid || fPtWMid->IsZombie()){
+      fPtWMid = TFile::Open("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y0_2p4_260310.root", "READ");
+    }
+    fPtWFor = TFile::Open("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y1p6_2p4_251118.root", "READ");
+    if(!fPtWFor || fPtWFor->IsZombie()){
+      fPtWFor = TFile::Open("../compareDataToMC/ratioDataMC_AA_BtoJpsi_DATA_ctauCut_y1p6_2p4_251103.root", "READ");
+    }
+  }
 
   // if (state == 2) {
   //  TFile *fPtW1 = new TFile("../compareDataToMC/ratioDataMC_AA_BtoPsi2S_DATA_y0_1p6_240515.root", "read");
   //  TFile *fPtW2 = new TFile("../compareDataToMC/ratioDataMC_AA_BtoPsi2S_DATA_y1p6_2p4_240515.root", "read");
   //}
-  TF1 *fptw = (TF1 *)fPtW->Get("dataMC_Ratio1");
+  TF1 *fptwMid = (fPtWMid && !fPtWMid->IsZombie()) ? (TF1 *)fPtWMid->Get("dataMC_Ratio1") : nullptr;
+  TF1 *fptwFor = (fPtWFor && !fPtWFor->IsZombie()) ? (TF1 *)fPtWFor->Get("dataMC_Ratio1") : nullptr;
 
   // double ptBin_all[16] = {0,6.5,7.5,8.5,9.5,11,13,15,17.5,20,22.5,25,27.5,30,40,50};
   double ptBin_all[18] = {0, 3., 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 11, 13, 15, 17.5, 20, 22.5, 25, 27.5, 30, 50};
@@ -257,57 +300,8 @@ void get_Eff_JPsi_pbpb_ctauCut_v5(
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-  // parameters for all rapidity
-  double p0 = 0.0, p1 = 0.0, p2 = 0.0, p3 = 0.0;
-  double e0 = 0.0, e1 = 0.0, e2 = 0.0, e3 = 0.0;
-
-  p0 = fptw->GetParameter(0);
-  p1 = fptw->GetParameter(1);
-  p2 = fptw->GetParameter(2);
-  p3 = fptw->GetParameter(3);
-
-  e0 = fptw->GetParError(0);
-  e1 = fptw->GetParError(1);
-  e2 = fptw->GetParError(2);
-  e3 = fptw->GetParError(3);
-
-  TF1 *fptwsys = new TF1("fptwsys", "( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )", 3.0, 50.0);
-
-  cout << "p0 : " << p0 << ", e0 : " << e0 << endl;
-
-  // sys for nominal
-  if (isPtWeight == 0)
-  {
-    p0 = p0;
-    p1 = p1;
-    p2 = p2;
-    p3 = p3;
-  }
-
-  // sys for up
-  if (isPtWeight == 1)
-  {
-    p0 = p0 + e0;
-    p1 = p1 + e1;
-    p2 = p2 + e2;
-    p3 = p3 + e3;
-  }
-
-  // sys for down
-  if (isPtWeight == -1)
-  {
-    p0 = p0 - e0;
-    p1 = p1 - e1;
-    p2 = p2 - e2;
-    p3 = p3 - e3;
-  }
-
-  // cout<<"p10 : "<<p10<<", e10 : "<<e10<<", p20 : "<<p20<<", e20 : "<<e20<<endl;
-
-  fptwsys->SetParameter(0, p0);
-  fptwsys->SetParameter(1, p1);
-  fptwsys->SetParameter(2, p2);
-  fptwsys->SetParameter(3, p3);
+  TF1 *fptwsysMid = BuildPtWeightSys(fptwMid, "fptwsysMid", isPtWeight);
+  TF1 *fptwsysFor = BuildPtWeightSys(fptwFor, "fptwsysFor", isPtWeight);
 
   TF1 *f1 = new TF1("f1", "[0]*TMath::Erf((x-[1])/[2])", 3, 50);
   f1->SetParameters(214, 22, 14);
@@ -515,9 +509,7 @@ void get_Eff_JPsi_pbpb_ctauCut_v5(
       if (Gen_mu_charge[Gen_QQ_mupl_idx[igen]] * Gen_mu_charge[Gen_QQ_mumi_idx[igen]] > 0)
         continue;
 
-      pt_weight = 1;
-      // if(isPtWeight) pt_weight = fptw->Eval(JP_Gen->Pt());
-      pt_weight = fptwsys->Eval(JP_Gen->Pt());
+      pt_weight = EvalPtWeight(JP_Gen->Rapidity(), JP_Gen->Pt(), fptwsysMid, fptwsysFor);
       if (JP_Gen->Pt() > 6.5)
         hy_gen->Fill(Rapidity_g, weight * pt_weight);
       if ((Centrality > cLow && Centrality < cHigh))
@@ -630,12 +622,6 @@ void get_Eff_JPsi_pbpb_ctauCut_v5(
       if ( !(muplSoft && mumiSoft) ) 
         continue;   
 
-      if(isPtWeight){
-        //pt_weight = f1->Eval(JP_Reco->Pt());
-        pt_weight = fptwsys->Eval(JP_Reco->Pt());
-        weight = weight * pt_weight;
-      }
-
 	  if(isTnP){
 		  tnp_weight = 1;
 		  tnp_trig_weight_mupl = -1;
@@ -685,9 +671,7 @@ void get_Eff_JPsi_pbpb_ctauCut_v5(
 		  tnp_weight = tnp_weight * tnp_trig_weight_mupl * tnp_trig_weight_mumi;
 	  }
 
-      pt_weight = 1;
-      // if(isPtWeight) pt_weight = fptw->Eval(JP_Reco->Pt());
-      pt_weight = fptwsys->Eval(JP_Reco->Pt());
+      pt_weight = EvalPtWeight(JP_Reco->Rapidity(), JP_Reco->Pt(), fptwsysMid, fptwsysFor);
 
       // cout<<"pt_Weight in reco : "<<pt_weight<<endl;
       Double_t Rapidity = fabs(JP_Reco->Rapidity());
@@ -1015,9 +999,9 @@ void get_Eff_JPsi_pbpb_ctauCut_v5(
 
   // TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
   //TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260105.root", cLow, cHigh, ptSys.Data(), isTnP);
-  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260310.root", cLow, cHigh, ptSys.Data(), isTnP);
+  TString outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260403.root", cLow, cHigh, ptSys.Data(), isTnP);
   if (state == 2)
-    outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260310.root", cLow, cHigh, ptSys.Data(), isTnP);
+    outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_JPsi_PtW%s_tnp%d_ctauCut_260403.root", cLow, cHigh, ptSys.Data(), isTnP);
   TFile *outFile = new TFile(outFileName, "RECREATE");
   hpt_eff_0->Write();
   hpt_eff_1->Write();

@@ -209,12 +209,12 @@ void plot_efficiency_ptweight_compare_psi2S_pbpb(int state = 1) {
   const TString sample = isPrompt ? "Prompt #psi(2S) PbPb" : "Nonprompt #psi(2S) PbPb";
 
   const TString filePtW = isPrompt
-                              ? "./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260323_2exp.root"
-                              : "./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260323_2exp.root";
+                              ? "./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260403_2exp.root"
+                              : "./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260403_2exp.root";
 
   const TString fileNoPtW = isPrompt
-                                ? "./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260323_2exp_noPtW.root"
-                                : "./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260323_2exp_noPtW.root";
+                                ? "./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260403_noPtW.root"
+                                : "./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_psi2S_PtW1_tnp1_ctauCut_260403_2exp_noPtW.root";
 
   TFile* fPtW = TFile::Open(filePtW, "READ");
   TFile* fNoPtW = TFile::Open(fileNoPtW, "READ");

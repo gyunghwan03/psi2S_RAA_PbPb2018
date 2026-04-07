@@ -209,8 +209,8 @@ void plot_efficiency_ptweight_compare_jpsi_pbpb(int state = 1) {
   const TString sample = isPrompt ? "Prompt J/#psi PbPb" : "Nonprompt J/#psi PbPb";
 
   const TString filePtW = isPrompt
-                              ? "./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root"
-                              : "./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310.root";
+                              ? "./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310_2exp.root"
+                              : "./roots/mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_ctauCut_260310_2exp.root";
 
   const TString fileNoPtW = isPrompt
                                 ? "./roots/mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtW1_tnp1_ctauCut_260310_noPtW.root"

@@ -17,7 +17,7 @@ static double EvalPtWeight(bool isPtWeight, double rap, double pt, TF1* fptwMid,
   if(!isPtWeight) return 1.0;
   double absRap = fabs(rap);
   if(absRap >= 1.6 && absRap < 2.4 && fptwFor) return fptwFor->Eval(pt);
-  if(absRap < 2.4 && fptwMid) return fptwMid->Eval(pt);
+  if(absRap < 2.4 && pt > 6.5 && fptwMid) return fptwMid->Eval(pt);
   return 1.0;
 }
 
@@ -903,10 +903,10 @@ void get_Eff_psi_pbpb_ctauCut_v6(
 
   //TString outFileName = Form("mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_Jpsi_PtW%d_tnp%d_drawsame1.root",cLow,cHigh,isPtWeight,isTnP);
   TString outFileName;
-  if(state==1 && isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260323_2exp.root",cLow,cHigh,1,isTnP);
-  else if(state==1 && !isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260323_noPtW.root",cLow,cHigh,1,isTnP);
-  else if(state==2 && isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260323_2exp.root",cLow,cHigh,1,isTnP);
-  else if(state==2 && !isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260323_noPtW.root",cLow,cHigh,1,isTnP);
+  if(state==1 && isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260403_2exp.root",cLow,cHigh,1,isTnP);
+  else if(state==1 && !isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_prompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260403_noPtW.root",cLow,cHigh,1,isTnP);
+  else if(state==2 && isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260403_2exp.root",cLow,cHigh,1,isTnP);
+  else if(state==2 && !isPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_cent_%0.0f_to_%0.0f_rap_nprompt_pbpb_psi2S_PtW%d_tnp%d_ctauCut_260403_noPtW.root",cLow,cHigh,1,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
   hpt_eff_2->Write();

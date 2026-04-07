@@ -19,7 +19,7 @@ static double EvalPtWeight(bool applyPtWeight, double rap, double pt, TF1* fptwM
   if(!applyPtWeight) return 1.0;
   double absRap = fabs(rap);
   if(absRap >= 1.6 && absRap < 2.4 && fptwFor) return fptwFor->Eval(pt);
-  if(absRap < 2.4 && fptwMid) return fptwMid->Eval(pt);
+  if(absRap < 2.4 && pt > 6.5 && fptwMid) return fptwMid->Eval(pt);
   return 1.0;
 }
 
@@ -729,11 +729,11 @@ void get_Eff_psi_pp_ctauCut_v6(
 
 
   TString outFileName;
-  if(state == 1 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260323_2exp.root",isPtWeight,isTnP);
-  else if(state == 1 && !applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260323_noPtW.root",isPtWeight,isTnP);
-  else if(state==2 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260323_2exp.root",isPtWeight,
+  if(state == 1 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260403_2exp.root",isPtWeight,isTnP);
+  else if(state == 1 && !applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260403_noPtW.root",isPtWeight,isTnP);
+  else if(state==2 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260403_2exp.root",isPtWeight,
   isTnP);
-  else if(state == 2 && !applyPtWeight)  outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260323_noPtW.root",isPtWeight,isTnP);
+  else if(state == 2 && !applyPtWeight)  outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_psi2S_PtW%d_tnp%d_ctauCut_260403_noPtW.root",isPtWeight,isTnP);
   TFile* outFile = new TFile(outFileName,"RECREATE");
   hpt_eff_1->Write();
   hpt_eff_2->Write();
