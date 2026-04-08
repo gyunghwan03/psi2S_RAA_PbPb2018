@@ -77,6 +77,10 @@ void get_Eff_Jpsi_pp_ctauCut_v5(
   else if(isPtWeight==1) ptSys = "up";
   else if(isPtWeight==-1) ptSys = "down";
 
+  TString fname;
+  if(state==1) fname = "PR";
+  else if(state==2) fname = "NP";
+
   //input files
   //PbPb
   //TString inputMC1 = "/work2/Oniatree/JPsi/OniaTree_JpsiMM_5p02TeV_TuneCUETP8M1_nofilter_pp502Fall15-MCRUN2_71_V1-v1_GENONLY.root";
@@ -148,6 +152,58 @@ void get_Eff_Jpsi_pp_ctauCut_v5(
   double centBin_for[4] = {0,40,80,180};
   double centBin_mid[7] = {0,10,20,30,40,50,90};
   float yBin[7] = {0,0.4,0.8,1.2,1.6,2.0,2.4};
+
+  // Precompute and cache ctau cut values (pp 1S) used in reco selection.
+  double l_cut_for_pt[5];
+  double l_cut_mid_pt[7];
+  double l_cut_for_int = -1e6;
+  double l_cut_mid_int = -1e6;
+
+  for(int i=0; i<5; ++i){
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_pp/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root", fname.Data()), "READ");
+    if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("hpt_ctau_1");
+      if(h_Lcut_tmp) l_cut_for_pt[i] = h_Lcut_tmp->GetBinContent(i+1);
+      else l_cut_for_pt[i] = -1e6;
+      f_ctau_tmp->Close();
+      delete f_ctau_tmp;
+    } else {
+      l_cut_for_pt[i] = -1e6;
+    }
+  }
+
+  for(int i=0; i<7; ++i){
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_pp/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root", fname.Data()), "READ");
+    if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("hpt_ctau_2");
+      if(h_Lcut_tmp) l_cut_mid_pt[i] = h_Lcut_tmp->GetBinContent(i+1);
+      else l_cut_mid_pt[i] = -1e6;
+      f_ctau_tmp->Close();
+      delete f_ctau_tmp;
+    } else {
+      l_cut_mid_pt[i] = -1e6;
+    }
+  }
+
+  {
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_pp/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root",fname.Data()), "READ");
+    if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_int_for");
+      if(h_Lcut_tmp) l_cut_for_int = h_Lcut_tmp->GetBinContent(1);
+      f_ctau_tmp->Close();
+      delete f_ctau_tmp;
+    }
+  }
+
+  {
+    TFile *f_ctau_tmp = TFile::Open(Form("roots_1S_pp/ctau3D_cut_ptBin_%sMC_y0.0-2.4.root",fname.Data()), "READ");
+    if(f_ctau_tmp && !f_ctau_tmp->IsZombie()){
+      TH1D *h_Lcut_tmp = (TH1D *)f_ctau_tmp->Get("h_ctau_int_mid");
+      if(h_Lcut_tmp) l_cut_mid_int = h_Lcut_tmp->GetBinContent(1);
+      f_ctau_tmp->Close();
+      delete f_ctau_tmp;
+    }
+  }
 
   TH1D* hpt_reco_0 = new TH1D("hpt_reco_0","hpt_reco_0",17,ptBin_all);
   TH1D* hpt_reco_1 = new TH1D("hpt_reco_1","hpt_reco_1",5,ptBin_for);
@@ -240,6 +296,7 @@ void get_Eff_Jpsi_pp_ctauCut_v5(
   mytree->SetBranchStatus("Reco_mu_nTrkWMea", 1);
   mytree->SetBranchStatus("Reco_mu_nPixWMea", 1);
   mytree->SetBranchStatus("Reco_QQ_sign", 1);
+  mytree->SetBranchStatus("Reco_QQ_ctau3D", 1);
   mytree->SetBranchStatus("Reco_mu_SelectionType", 1);
   mytree->SetBranchStatus("Reco_mu_whichGen", 1);
   mytree->SetBranchStatus("Gen_weight", 1);
@@ -311,6 +368,9 @@ void get_Eff_Jpsi_pp_ctauCut_v5(
   Short_t           Reco_QQ_sign[maxBranchSize];   //[Reco_QQ_size]
   TBranch        *b_Reco_QQ_sign;   //!
   mytree->SetBranchAddress("Reco_QQ_sign", Reco_QQ_sign, &b_Reco_QQ_sign);
+  Float_t         Reco_QQ_ctau3D[maxBranchSize]; //[Reco_QQ_size]
+  TBranch        *b_Reco_QQ_ctau3D;              //!
+  mytree->SetBranchAddress("Reco_QQ_ctau3D", Reco_QQ_ctau3D, &b_Reco_QQ_ctau3D);
 
   Int_t           Reco_mu_SelectionType[maxBranchSize];
   TBranch        *b_Reco_mu_SelectionType;
@@ -540,15 +600,51 @@ void get_Eff_Jpsi_pp_ctauCut_v5(
 	  counts[4]++;
           //hpt_reco_0->Fill(JP_Reco->Pt(), weight * tnp_weight * pt_weight);
         }
-        if (Rapidity > 1.6 && Rapidity < 2.4 && JP_Reco->Pt() > 3.5 && JP_Reco->Pt() < 40)
+        if (Rapidity > 1.6 && Rapidity < 2.4)
         {
-          hpt_reco_1->Fill(JP_Reco->Pt(), weight * tnp_weight * pt_weight);
-          hInt_reco_1->Fill(1, weight * tnp_weight * pt_weight);
+          double pt = JP_Reco->Pt();
+          // Start from i=1 to skip the first bin [0-3.5 GeV]
+          for(int i=1; i < 5 ; i++) {
+            double ptLowBin = ptBin_for[i];
+            double ptHighBin = ptBin_for[i+1];
+            if(pt > ptLowBin && pt < ptHighBin) {
+              double l_cut = l_cut_for_pt[i];
+              if(state==1) {
+                if(Reco_QQ_ctau3D[irqq] < l_cut) hpt_reco_1->Fill(pt, weight * tnp_weight * pt_weight);
+              }
+              else if(state==2) {
+                if(Reco_QQ_ctau3D[irqq] > l_cut) hpt_reco_1->Fill(pt, weight * tnp_weight * pt_weight);
+              }
+            }
+          }
+          if (pt > 3.5 && pt < 40) {
+            double l_cut = l_cut_for_int;
+            if(state==1) { if(Reco_QQ_ctau3D[irqq] < l_cut) hInt_reco_1->Fill(1, weight * tnp_weight * pt_weight); }
+            else if(state==2) { if(Reco_QQ_ctau3D[irqq] > l_cut) hInt_reco_1->Fill(1, weight * tnp_weight * pt_weight); }
+          }
         }
-        if (Rapidity < 1.6 && JP_Reco->Pt() > 6.5 && JP_Reco->Pt() < 40)
+        if (Rapidity < 1.6)
         {
-          hpt_reco_2->Fill(JP_Reco->Pt(), weight * tnp_weight * pt_weight);
-          hInt_reco_2->Fill(1, weight * tnp_weight * pt_weight);
+          double pt = JP_Reco->Pt();
+          // Start from i=1 to skip the first bin [0-6.5 GeV]
+          for(int i=1; i < 7 ; i++) {
+            double ptLowBin = ptBin_mid[i];
+            double ptHighBin = ptBin_mid[i+1];
+            if(pt > ptLowBin && pt < ptHighBin) {
+              double l_cut = l_cut_mid_pt[i];
+              if(state==1) {
+                if(Reco_QQ_ctau3D[irqq] < l_cut) hpt_reco_2->Fill(pt, weight * tnp_weight * pt_weight);
+              }
+              else if(state==2) {
+                if(Reco_QQ_ctau3D[irqq] > l_cut) hpt_reco_2->Fill(pt, weight * tnp_weight * pt_weight);
+              }
+            }
+          }
+          if (pt > 6.5 && pt < 40) {
+            double l_cut = l_cut_mid_int;
+            if(state==1) { if(Reco_QQ_ctau3D[irqq] < l_cut) hInt_reco_2->Fill(1, weight * tnp_weight * pt_weight); }
+            else if(state==2) { if(Reco_QQ_ctau3D[irqq] > l_cut) hInt_reco_2->Fill(1, weight * tnp_weight * pt_weight); }
+          }
         }
 
         // if(! (Centrality > cLow && Centrality < cHigh)) continue;
@@ -694,10 +790,10 @@ void get_Eff_Jpsi_pp_ctauCut_v5(
   //TString outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%d_tnp%d_20230416.root", isPtWeight, isTnP);
   //if (state == 2)
   TString  outFileName;
-  if(state==1 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260403_2exp.root", ptSys.Data(), isTnP);
-  else if(state==1 && !applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260403_2exp_noPtW.root", ptSys.Data(), isTnP);
-  else if(state==2 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260403_2exp.root", ptSys.Data(), isTnP);
-  else if(state==2 && !applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260403_2exp_noPtW.root", ptSys.Data(), isTnP);
+  if(state==1 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260408_2exp.root", ptSys.Data(), isTnP);
+  else if(state==1 && !applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260408_2exp_noPtW.root", ptSys.Data(), isTnP);
+  else if(state==2 && applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260408_2exp.root", ptSys.Data(), isTnP);
+  else if(state==2 && !applyPtWeight) outFileName = Form("./roots/mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtW%s_tnp%d_ctauCut_260408_2exp_noPtW.root", ptSys.Data(), isTnP);
   TFile *outFile = new TFile(outFileName, "RECREATE");
   hpt_eff_0->Write();
   hpt_eff_1->Write();
