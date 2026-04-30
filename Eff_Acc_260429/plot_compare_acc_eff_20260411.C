@@ -434,20 +434,10 @@ void CompareOneAcc(bool isPbPb, bool isPrompt)
   TH1 *newMidInt = LoadHist(fNew, "hAccPt_2021_midy_Int", "newAccMidInt", false);
   TH1 *newFwdInt = LoadHist(fNew, "hAccPt_2021_Fory_Int", "newAccFwdInt", false);
 
-  if (isPbPb)
-  {
-    DrawBasicCompare(Form("%s_mid", tag.Data()), Form("%s: |y| < 1.6", labelBase.Data()),
-                     "Acceptance", "p_{T} (GeV/c)", refMid, newMid, outDir);
-    DrawBasicCompare(Form("%s_fwd", tag.Data()), Form("%s: 1.6 < |y| < 2.4", labelBase.Data()),
-                     "Acceptance", "p_{T} (GeV/c)", refFwd, newFwd, outDir);
-  }
-  else
-  {
-    DrawCompareWithRightIntegrated(Form("%s_mid", tag.Data()), Form("%s: |y| < 1.6", labelBase.Data()),
-                                   "Acceptance", "p_{T} (GeV/c)", refMid, newMid, refMidInt, newMidInt, outDir);
-    DrawCompareWithRightIntegrated(Form("%s_fwd", tag.Data()), Form("%s: 1.6 < |y| < 2.4", labelBase.Data()),
-                                   "Acceptance", "p_{T} (GeV/c)", refFwd, newFwd, refFwdInt, newFwdInt, outDir);
-  }
+  DrawCompareWithRightIntegrated(Form("%s_mid", tag.Data()), Form("%s: |y| < 1.6", labelBase.Data()),
+                                 "Acceptance", "p_{T} (GeV/c)", refMid, newMid, refMidInt, newMidInt, outDir);
+  DrawCompareWithRightIntegrated(Form("%s_fwd", tag.Data()), Form("%s: 1.6 < |y| < 2.4", labelBase.Data()),
+                                 "Acceptance", "p_{T} (GeV/c)", refFwd, newFwd, refFwdInt, newFwdInt, outDir);
 
   fRef->Close();
   fNew->Close();
