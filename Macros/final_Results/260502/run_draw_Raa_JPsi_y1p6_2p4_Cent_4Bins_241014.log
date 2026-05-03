@@ -1,0 +1,80 @@
+
+Processing draw_Raa_JPsi_y1p6_2p4_Cent_4Bins_241014.C(1)...
+FILE Name : ../../Jpsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality0-20_PRw_Effw0_Accw0_PtW0_TnP0.root
+ 
+Cent Bin : 0-10
+PbPb Yield	: 34584.6289,	Yield Err	: 425.078064,	Eff PR	: 0.197014255,	Eff NP	: 0.215448253,	Acc PR	: 0.208311705,	Acc NP  :   0.233144081,	b frac	: 0.228006646,	b frac Err	: 0.0023927982
+pp Yield	: 3478233,	Yield Err	: 2024.8606,	Eff PR	: 0.6176355,	Eff NP	: 0.634917563,	Acc PR	: 0.297703814,	Acc NP  :   0.320552038,	b frac	: 0.223723143,	b frac Err	: 0.000277345913
+PbPb PR Yield  : 26699.1035, Err :   338.430991 ,	weight : 0.0410403754,	Err wgt :	8246.29373, PbPb NP Yield   : 7885.52539    Err :   127.443472
+Cent Frac : 0.111111111, Taa : 23.05
+Xpp_PR : 8.37597016e-07 , Xpp_PR_err : 5.74565745e-10, XPbPb_PR : 3.63430105e-07 , XPbPb_PR_err : 4.60674683e-09
+FILE Name : ../../Jpsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality20-60_PRw_Effw0_Accw0_PtW0_TnP0.root
+ 
+Cent Bin : 10-30
+PbPb Yield	: 67252.4844,	Yield Err	: 489.713043,	Eff PR	: 0.309115218,	Eff NP	: 0.332950066,	Acc PR	: 0.208311705,	Acc NP  :   0.233144081,	b frac	: 0.230545014,	b frac Err	: 0.00173338631
+pp Yield	: 3478233,	Yield Err	: 2024.8606,	Eff PR	: 0.6176355,	Eff NP	: 0.634917563,	Acc PR	: 0.297703814,	Acc NP  :   0.320552038,	b frac	: 0.223723143,	b frac Err	: 0.000277345913
+PbPb PR Yield  : 51747.7578, Err :   394.43251 ,	weight : 0.0643923182,	Err wgt :	6125.45908, PbPb NP Yield   : 15504.7246    Err :   162.284425
+Cent Frac : 0.222222222, Taa : 11.6
+Xpp_PR : 8.37597016e-07 , Xpp_PR_err : 5.74565745e-10, XPbPb_PR : 4.46042218e-07 , XPbPb_PR_err : 3.39982946e-09
+FILE Name : ../../Jpsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality60-100_PRw_Effw0_Accw0_PtW0_TnP0.root
+ 
+Cent Bin : 30-50
+PbPb Yield	: 41744.082,	Yield Err	: 318.630859,	Eff PR	: 0.445022669,	Eff NP	: 0.470866223,	Acc PR	: 0.208311705,	Acc NP  :   0.233144081,	b frac	: 0.240466118,	b frac Err	: 0.00233365991
+pp Yield	: 3478233,	Yield Err	: 2024.8606,	Eff PR	: 0.6176355,	Eff NP	: 0.634917563,	Acc PR	: 0.297703814,	Acc NP  :   0.320552038,	b frac	: 0.223723143,	b frac Err	: 0.000277345913
+PbPb PR Yield  : 31706.0449, Err :   260.881708 ,	weight : 0.0927034309,	Err wgt :	2814.15376, PbPb NP Yield   : 10038.0371    Err :   123.937827
+Cent Frac : 0.222222222, Taa : 3.95
+Xpp_PR : 8.37597016e-07 , Xpp_PR_err : 5.74565745e-10, XPbPb_PR : 5.57475322e-07 , XPbPb_PR_err : 4.58698379e-09
+FILE Name : ../../Jpsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_pt3.5-40.0_y1.6-2.4_muPt0.0_centrality100-180_PRw_Effw0_Accw0_PtW0_TnP0.root
+ 
+Cent Bin : 50-90
+PbPb Yield	: 16553.4531,	Yield Err	: 177.385727,	Eff PR	: 0.502457348,	Eff NP	: 0.523136478,	Acc PR	: 0.208311705,	Acc NP  :   0.233144081,	b frac	: 0.23907426,	b frac Err	: 0.00382590666
+pp Yield	: 3478233,	Yield Err	: 2024.8606,	Eff PR	: 0.6176355,	Eff NP	: 0.634917563,	Acc PR	: 0.297703814,	Acc NP  :   0.320552038,	b frac	: 0.223723143,	b frac Err	: 0.000277345913
+PbPb PR Yield  : 12595.9492, Err :   149.096711 ,	weight : 0.104667747,	Err wgt :	1424.47617, PbPb NP Yield   : 3957.50464    Err :   76.2194683
+Cent Frac : 0.444444444, Taa : 0.5803
+Xpp_PR : 8.37597016e-07 , Xpp_PR_err : 5.74565745e-10, XPbPb_PR : 6.67593253e-07 , XPbPb_PR_err : 7.90221971e-09
+ 
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+ 
+Cent. 50 - 90
+Raa PR : 0.797033944 , PR error : 0.00945022238
+Raa NP : 0.825364462 , NP error : 0.0159363144
+ 
+Cent. 30 - 50
+Raa PR : 0.665565076 , PR error : 0.00549535953
+Raa NP : 0.683401717 , NP error : 0.00848969962
+ 
+Cent. 10 - 30
+Raa PR : 0.532526035 , PR error : 0.00407543213
+Raa NP : 0.508333656 , NP error : 0.00536606427
+ 
+Cent. 0 - 10
+Raa PR : 0.433896132 , PR error : 0.00550800386
+Raa NP : 0.402131993 , NP error : 0.00652247895
+ 
+ 
+ 
+ 
+\multicolumn{2}{c}{$1.6 < |y| < 2.4$, $3.5 < \pt < 40$ (GeV/c)} \\ \hline
+0 -- 10 & 0.434 $\pm$ 0.00551 (stat.) $\pm$ 0.0587 (syst.) \\
+10 -- 30 & 0.533 $\pm$ 0.00408 (stat.) $\pm$ 0.0718 (syst.) \\
+30 -- 50 & 0.666 $\pm$ 0.0055 (stat.) $\pm$ 0.0862 (syst.) \\
+50 -- 90 & 0.797 $\pm$ 0.00945 (stat.) $\pm$ 0.104 (syst.) \\
+ 
+\multicolumn{2}{c}{$1.6 < |y| < 2.4$, $3.5 < \pt < 40$ (GeV/c} \\ \hline
+0 -- 10 & 0.402 $\pm$ 0.00652 (stat.) $\pm$ 0.0482 (syst.) \\
+10 -- 30 & 0.508 $\pm$ 0.00537 (stat.) $\pm$ 0.0606 (syst.) \\
+30 -- 50 & 0.683 $\pm$ 0.00849 (stat.) $\pm$ 0.0763 (syst.) \\
+50 -- 90 & 0.825 $\pm$ 0.0159 (stat.) $\pm$ 0.0976 (syst.) \\
+ 
+ 
+ 
+PbPb 1.7 nb^{-1}, pp 300.0 pb^{-1} (5.02 TeV)
+Info in <TCanvas::Print>: pdf file figs/CrossSection_JPsi_PR_y1p6_2p4_Cent.pdf has been created
+PbPb 1.7 nb^{-1}, pp 300.0 pb^{-1} (5.02 TeV)
+Info in <TCanvas::Print>: pdf file figs/CrossSection_JPsi_NP_y1p6_2p4_Cent.pdf has been created
+Global Uncertainty : 0.0228
+PbPb 1.7 nb^{-1}, pp 300.0 pb^{-1} (5.02 TeV)
+Info in <TCanvas::Print>: pdf file figs/RAA_JPsi_y1p6_2p4_Cent_Sys1_4Bins.pdf has been created

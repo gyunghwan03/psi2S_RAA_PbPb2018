@@ -1,0 +1,84 @@
+
+Processing draw_Raa_JPsi_y1p6_2p4_pT_241014.C(1)...
+ 
+pT 3.5-6.5
+PbPb Yield : 82144.383, yield Err : 625.06866, b frac : 0.1700161, frac Err : 0.0013992125,    Eff PR : 0.2448439,  Eff NP : 0.24942562, Acc PR : 0.18746061,   Acc NP :    0.19553694
+pp Yield   : 2063357.8, yield Err : 1570.6178, b frac : 0.1752654, frac Err : 0.00033934499,    Eff PR : 0.59272107,    Eff NP : 0.59883026, Acc PR : 0.22869673, Acc NP :    0.22124113
+PbPb PR Yield  : 68178.516, Err :   531.3764 ,  weight : 0.045898586,  Err wgt :   11577.184, PbPb NP Yield   : 13965.867    Err :   156.53849
+pp PR Yield    : 1701722.5, pp NP Yield : 361635.22
+ 
+pT 6.5-9
+PbPb Yield : 44742.652, yield Err : 276.02878, b frac : 0.25540486, frac Err : 0.0022872761,    Eff PR : 0.4456656,  Eff NP : 0.43589073, Acc PR : 0.45597095,   Acc NP :    0.46465023
+pp Yield   : 871378.62, yield Err : 1002.2905, b frac : 0.23973089, frac Err : 0.0005561256,    Eff PR : 0.64721162,    Eff NP : 0.66822866, Acc PR : 0.4634323, Acc NP :    0.47278725
+PbPb PR Yield  : 33315.164, Err :   229.59897 ,  weight : 0.20321057,  Err wgt :   1129.8575, PbPb NP Yield   : 11427.491    Err :   124.27129
+pp PR Yield    : 662482.25, pp NP Yield : 208896.38
+ 
+pT 9-12
+PbPb Yield : 21078.703, yield Err : 172.00816, b frac : 0.33320841, frac Err : 0.0036502182,    Eff PR : 0.51862626,  Eff NP : 0.50908733, Acc PR : 0.59684769,   Acc NP :    0.61043535
+pp Yield   : 357173.12, yield Err : 640.96954, b frac : 0.31210437, frac Err : 0.00091691548,    Eff PR : 0.6628217,    Eff NP : 0.67671827, Acc PR : 0.60036549, Acc NP :    0.61475761
+PbPb PR Yield  : 14055.102, Err :   138.11108 ,  weight : 0.30954089,  Err wgt :   446.18043, PbPb NP Yield   : 7023.6011    Err :   95.942744
+pp PR Yield    : 245697.84, pp NP Yield : 111475.3
+ 
+pT 12-40
+PbPb Yield : 12964.1, yield Err : 167.78448, b frac : 0.44410858, frac Err : 0.0048878845,    Eff PR : 0.54987651,  Eff NP : 0.53665366, Acc PR : 0.70302482,   Acc NP :    0.72779288
+pp Yield   : 186265.8, yield Err : 466.81323, b frac : 0.4243097, frac Err : 0.0013141931,    Eff PR : 0.66872377,    Eff NP : 0.6640341, Acc PR : 0.71080857, Acc NP :    0.73932419
+PbPb PR Yield  : 7206.6313, Err :   112.75931 ,  weight : 0.38657684,  Err wgt :   291.68668, PbPb NP Yield   : 5757.4678    Err :   97.815102
+pp PR Yield    : 107231.41, pp NP Yield : 79034.383
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+Warning in <TH1D::Sumw2>: Sum of squares of weights structure already created
+i : 0, RAA PR : 0.47305627,   RaaPR Err : 0.0037096047 x : 5, bin Width : 1.5
+       RAA NP : 0.41941107,   RaaNP_err : 0.0047813228
+i : 1, RAA PR : 0.2967543,   RaaPR Err : 0.0020847702 x : 7.75, bin Width : 1.25
+       RAA NP : 0.34115367,   RaaNP_err : 0.0038136799
+i : 2, RAA PR : 0.29401538,   RaaPR Err : 0.0029629302 x : 10.5, bin Width : 1.5
+       RAA NP : 0.33721278,   RaaNP_err : 0.0047503741
+i : 3, RAA PR : 0.33038238,   RaaPR Err : 0.0052893007 x : 26, bin Width : 14
+       RAA NP : 0.36608492,   RaaNP_err : 0.0063882469
+ 
+ 
+ 
+\multicolumn{2}{c}{$1.6 < |y| < 2.4, 0-90\%$} \\ 
+3.5 -- 6.5 & 0.473 $\pm$ 0.00371 (stat.) $\pm$ 0.0627 (syst.) \\
+6.5 -- 9 & 0.297 $\pm$ 0.00208 (stat.) $\pm$ 0.0252 (syst.) \\
+9 -- 12 & 0.294 $\pm$ 0.00296 (stat.) $\pm$ 0.0229 (syst.) \\
+12 -- 40 & 0.33 $\pm$ 0.00529 (stat.) $\pm$ 0.0297 (syst.) \\
+ 
+\multicolumn{2}{c}{$1.6 < |y| < 2.4, 0-90\%$} \\ 
+3.5 -- 6.5 & 0.419 $\pm$ 0.00478 (stat.) $\pm$ 0.0551 (syst.) \\
+6.5 -- 9 & 0.341 $\pm$ 0.00381 (stat.) $\pm$ 0.0278 (syst.) \\
+9 -- 12 & 0.337 $\pm$ 0.00475 (stat.) $\pm$ 0.0242 (syst.) \\
+12 -- 40 & 0.366 $\pm$ 0.00639 (stat.) $\pm$ 0.0316 (syst.) \\
+ 
+ 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Cross Section  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\multicolumn{2}{c}{$1.6 < |y| < 2.4, 0-90\%$} \\ 
+3.5 -- 6.5 & 8.71e-06 $\pm$ 7.54e-09 (stat.) $\pm$ 4.65e-07 (syst.) \\
+6.5 -- 9 & 1.84e-06 $\pm$ 2.51e-09 (stat.) $\pm$ 2.18e-08 (syst.) \\
+9 -- 12 & 4.28e-07 $\pm$ 9.58e-10 (stat.) $\pm$ 6.83e-09 (syst.) \\
+12 -- 40 & 1.68e-08 $\pm$ 5.69e-11 (stat.) $\pm$ 2.35e-10 (syst.) \\
+ 
+3.5 -- 6.5 & 1.89e-06 $\pm$ 3.94e-09 (stat.) $\pm$ 1.02e-07 (syst.) \\
+6.5 -- 9 & 5.51e-07 $\pm$ 1.43e-09 (stat.) $\pm$ 6.5e-09 (syst.) \\
+9 -- 12 & 1.86e-07 $\pm$ 6.4e-10 (stat.) $\pm$ 2.96e-09 (syst.) \\
+12 -- 40 & 1.2e-08 $\pm$ 4.77e-11 (stat.) $\pm$ 1.69e-10 (syst.) \\
+ 
+\multicolumn{2}{c}{$1.6 < |y| < 2.4, 0-90\%$} \\ 
+3.5 -- 6.5 & 4.12e-06 $\pm$ 9.56e-08 (stat.) $\pm$ 5.43e-07 (syst.) \\
+6.5 -- 9 & 5.46e-07 $\pm$ 1.25e-08 (stat.) $\pm$ 4.59e-08 (syst.) \\
+9 -- 12 & 1.26e-07 $\pm$ 3.02e-09 (stat.) $\pm$ 9.6e-09 (syst.) \\
+12 -- 40 & 5.54e-09 $\pm$ 1.49e-10 (stat.) $\pm$ 4.92e-10 (syst.) \\
+ 
+3.5 -- 6.5 & 7.94e-07 $\pm$ 1.95e-08 (stat.) $\pm$ 1.04e-07 (syst.) \\
+6.5 -- 9 & 1.88e-07 $\pm$ 4.58e-09 (stat.) $\pm$ 1.52e-08 (syst.) \\
+9 -- 12 & 6.27e-08 $\pm$ 1.62e-09 (stat.) $\pm$ 4.39e-09 (syst.) \\
+12 -- 40 & 4.38e-09 $\pm$ 1.21e-10 (stat.) $\pm$ 3.73e-10 (syst.) \\
+PbPb 1.7 nb^{-1}, pp 300.0 pb^{-1} (5.02 TeV)
+Info in <TCanvas::Print>: pdf file ./figs/CrossSection_JPsi_PR_y1p6_2p4_pT.pdf has been created
+PbPb 1.7 nb^{-1}, pp 300.0 pb^{-1} (5.02 TeV)
+Info in <TCanvas::Print>: pdf file ./figs/CrossSection_JPsi_NP_y1p6_2p4_pT.pdf has been created
+Global Uncertainty : 0.0323
+PbPb 1.7 nb^{-1}, pp 300.0 pb^{-1} (5.02 TeV)
+Info in <TCanvas::Print>: pdf file ./figs/RAA_JPsi_y1p6_2p4_pT_Sys1.pdf has been created
