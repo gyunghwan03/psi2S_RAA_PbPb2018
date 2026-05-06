@@ -43,10 +43,10 @@ void draw_Raa_JPsi_y0_1p6_Cent(bool isSys=false)
     TFile *fpp[nCentBins+1];
 
 	TFile *fSys = new TFile("../..//syst_summary_Jpsi/syst_roots/total_syst.root");
-	TFile *fEff_PbPbPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_260430_1d.root");
-    TFile *fEff_PbPbNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_260430_1d.root");
-    TFile *fEff_ppPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_260429_1d.root");
-    TFile *fEff_ppNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_260429_1d.root");
+	TFile *fEff_PbPbPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_260502_v5.root");
+    TFile *fEff_PbPbNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_260502_v5.root");
+    TFile *fEff_ppPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_260504_ptBinScale.root");
+    TFile *fEff_ppNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_260504_ptBinScale.root");
     TFile *fAcc_ppPR = JPsiEffAcc260429::Open("acceptance_PromptJpsi_GenOnly_wgt1_pp_SysUp0_260503_v2_all4_extractCheck.root");
     TFile *fAcc_PbPbPR = JPsiEffAcc260429::Open("acceptance_PromptJpsi_GenOnly_wgt1_PbPb_SysUp0_260503_v2_all4_extractCheck.root");
     TFile *fAcc_ppNP = JPsiEffAcc260429::Open("acceptance_BtoJpsi_GenOnly_wgt1_pp_SysUp0_260503_v2_all4_extractCheck.root");
@@ -55,8 +55,10 @@ void draw_Raa_JPsi_y0_1p6_Cent(bool isSys=false)
 
     TH1D *hEff_PbPbPR = (TH1D*) fEff_PbPbPR -> Get("mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_40_absy0_1p6");
     TH1D *hEff_PbPbNP = (TH1D*) fEff_PbPbNP -> Get("mc_eff_vs_cent_TnP1_PtW1_pt_6p5_to_40_absy0_1p6");
-    TH1D *hEff_ppPR = JPsiEffAcc260429::BuildIntegratedRatioHist(fEff_ppPR, "hist_eff_num_mid", "hist_eff_den_mid", "hEff_ppPR_mid_260429");
-    TH1D *hEff_ppNP = JPsiEffAcc260429::BuildIntegratedRatioHist(fEff_ppNP, "hist_eff_num_mid", "hist_eff_den_mid", "hEff_ppNP_mid_260429");
+    //TH1D *hEff_ppPR = JPsiEffAcc260429::BuildIntegratedRatioHist(fEff_ppPR, "hist_eff_num_mid", "hist_eff_den_mid", "hEff_ppPR_mid_260429");
+    //TH1D *hEff_ppNP = JPsiEffAcc260429::BuildIntegratedRatioHist(fEff_ppNP, "hist_eff_num_mid", "hist_eff_den_mid", "hEff_ppNP_mid_260429");
+	TH1D *hEff_ppPR = (TH1D*) fEff_ppPR -> Get("mc_eff_Integrated_TnP1_PtW1_absy0_1p6");
+	TH1D *hEff_ppNP = (TH1D*) fEff_ppNP -> Get("mc_eff_Integrated_TnP1_PtW1_absy0_1p6");
     TH1D *hAcc_PbPbPR = (TH1D*) fAcc_PbPbPR -> Get("hAccPt_2021_midy_Int");
     TH1D *hAcc_ppPR = (TH1D*) fAcc_ppPR -> Get("hAccPt_2021_midy_Int");
     TH1D *hAcc_PbPbNP = (TH1D*) fAcc_PbPbNP -> Get("hAccPt_2021_midy_Int");

@@ -45,10 +45,10 @@ void draw_Raa_JPsi_y0_1p6_pT_241014(bool isSys = false)
 	TFile *fpp[nPtBins+1];
 
 	TFile *fSys = new TFile("../../syst_summary_Jpsi/syst_roots/total_syst.root");
-	TFile *fEff_PbPbPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_260430_1d.root");
-    TFile *fEff_PbPbNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_260430_1d.root");
-    TFile *fEff_ppPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_260429_1d.root");
-    TFile *fEff_ppNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_260429_1d.root");
+	TFile *fEff_PbPbPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_prompt_pbpb_JPsi_PtWnomi_tnp1_260502_v5.root");
+    TFile *fEff_PbPbNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_cent_0_to_180_rap_nprompt_pbpb_JPsi_PtWnomi_tnp1_260502_v5.root");
+    TFile *fEff_ppPR = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_prompt_pp_Jpsi_PtWnomi_tnp1_260504_ptBinScale.root");
+    TFile *fEff_ppNP = JPsiEffAcc260429::Open("mc_eff_vs_pt_rap_nprompt_pp_Jpsi_PtWnomi_tnp1_260504_ptBinScale.root");
     TFile *fAcc_ppPR = JPsiEffAcc260429::Open("acceptance_PromptJpsi_GenOnly_wgt1_pp_SysUp0_260503_v2_all4_extractCheck.root");
     TFile *fAcc_PbPbPR = JPsiEffAcc260429::Open("acceptance_PromptJpsi_GenOnly_wgt1_PbPb_SysUp0_260503_v2_all4_extractCheck.root");
     TFile *fAcc_ppNP = JPsiEffAcc260429::Open("acceptance_BtoJpsi_GenOnly_wgt1_pp_SysUp0_260503_v2_all4_extractCheck.root");
