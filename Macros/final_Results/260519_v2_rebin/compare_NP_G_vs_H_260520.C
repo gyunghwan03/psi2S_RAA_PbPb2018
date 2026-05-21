@@ -45,7 +45,7 @@ constexpr double lumi_pp_scale = 1e-9;
 constexpr const char *kGDir = "/data/hwan/psi2S_RAA_PbPb2018/Eff_Acc_260519_v2/roots/G_aggregate_full";
 constexpr const char *kGTag = "260519v2_G_aggregate";
 constexpr const char *kHDir = "/data/hwan/psi2S_RAA_PbPb2018/Eff_Acc_260519_v2/roots/H_NP_rational_full";
-constexpr const char *kHTag = "260520_H_NP_rational";
+constexpr const char *kHTag = "260520v3_H_NP_rational";
 
 struct V { double v = 0, e = 0; };
 

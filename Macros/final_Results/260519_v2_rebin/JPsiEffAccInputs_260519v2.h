@@ -16,7 +16,7 @@ namespace JPsiEffAcc260519v2
 // HIN-16-025. PR PtW is unchanged (rational fit is NP-only; PR files in
 // H_NP_rational_full are symlinks back to G_aggregate's PR ROOTs).
 inline TString Dir() { return "/data/hwan/psi2S_RAA_PbPb2018/Eff_Acc_260519_v2/roots/H_NP_rational_full"; }
-inline TString Tag() { return "260520_H_NP_rational"; }
+inline TString Tag() { return "260520v3_H_NP_rational"; }
 
 inline TFile *Open(const char *fileName)
 {
