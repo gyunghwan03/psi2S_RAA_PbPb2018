@@ -78,16 +78,33 @@ YieldErr GetPpYield(bool prompt, double pl, double ph, double yl, double yh)
 {
   YieldErr r;
   TString lab = getKineLabelpp(pl, ph, yl, yh, 0.0);
-  const char *sub = prompt ? "PRMC" : "NPMC";
-  TString p = Form("%s/Macros/Jpsi_L_cut/roots_1S_pp/%s/"
-                   "Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root",
-                   kRepo, sub, lab.Data());
-  std::unique_ptr<TFile> f(TFile::Open(p, "READ"));
-  if (!f || f->IsZombie()) return r;
-  TH1D *h = dynamic_cast<TH1D *>(f->Get("fitResults"));
-  if (!h) return r;
-  r.val = h->GetBinContent(1);
-  r.err = h->GetBinError(1);
+  TString massPath = Form("%s/Macros/pp_Jpsi/roots/2DFit_No_Weight/Mass/"
+                          "Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root",
+                          kRepo, lab.Data());
+  TString fracPath = Form("%s/Macros/pp_Jpsi/roots/2DFit_No_Weight/Final/"
+                          "2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root",
+                          kRepo, lab.Data());
+  if (gSystem->AccessPathName(massPath) || gSystem->AccessPathName(fracPath)) {
+    std::cerr << "[GetPpYield] missing pp_Jpsi Mass/Final input for " << lab
+              << " (legacy fallback is disabled)" << std::endl;
+    return r;
+  }
+
+  std::unique_ptr<TFile> fMass(TFile::Open(massPath, "READ"));
+  std::unique_ptr<TFile> fFrac(TFile::Open(fracPath, "READ"));
+  if (!fMass || fMass->IsZombie() || !fFrac || fFrac->IsZombie()) return r;
+  TH1D *hMass = dynamic_cast<TH1D *>(fMass->Get("fitResults"));
+  TH1D *hFrac = dynamic_cast<TH1D *>(fFrac->Get("2DfitResults"));
+  if (!hMass || !hFrac) return r;
+  const double y = hMass->GetBinContent(1);
+  const double yErr = hMass->GetBinError(1);
+  const double frac = hFrac->GetBinContent(1);
+  const double fracErr = hFrac->GetBinError(1);
+  const double compFrac = prompt ? (1.0 - frac) : frac;
+  const double compFracErr = fracErr;
+  if (y <= 0.0 || compFrac <= 0.0) return r;
+  r.val = y * compFrac;
+  r.err = r.val * std::sqrt(std::pow(yErr / y, 2) + std::pow(compFracErr / compFrac, 2));
   r.ok = r.val > 0.0;
   return r;
 }
@@ -245,6 +262,15 @@ void ProcessNP(bool isPbPb, bool fwd, McSample &mc, const TString &outDir)
   double ymax = std::max(hData->GetMaximum(), hMc->GetMaximum()) * 1.3;
   hData->SetMaximum(ymax > 0 ? ymax : 1.0);
   hData->Draw("e1"); hMc->Draw("hist same");
+  // Identification labels
+  {
+    const TString compLbl = "Nonprompt J/#psi  (B#rightarrowJ/#psi)";
+    const TString sysLbl  = isPbPb ? "PbPb  (5.02 TeV)" : "pp  (5.02 TeV)";
+    const TString rapLbl  = fwd ? "1.6 < |y| < 2.4" : "|y| < 1.6";
+    drawText(compLbl.Data(), 0.17, 0.87, 1, 18);
+    drawText(sysLbl.Data(),  0.17, 0.82, 1, 18);
+    drawText(rapLbl.Data(),  0.17, 0.77, 1, 18);
+  }
   p2.cd();
   hDataR->SetMarkerStyle(20);
   hDataR->SetMinimum(0); hDataR->SetMaximum(4);
