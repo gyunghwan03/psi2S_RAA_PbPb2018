@@ -41,9 +41,11 @@ constexpr double Nmb = 11968044281.;
 constexpr double lumi_pp = 3.002;
 constexpr double lumi_pp_scale = 1e-9;
 
-constexpr const char *kPtWDir = "/data/hwan/psi2S_RAA_PbPb2018/Eff_Acc_260519_v2/roots/G_aggregate_full";
-constexpr const char *kPtWTag = "260519v2_G_aggregate";
-constexpr const char *kNoPtWDir = "/data/hwan/psi2S_RAA_PbPb2018/Eff_Acc_260515/roots/noPtW_full";
+// Nominal PtW-on Eff/Acc: H_NP_rational (option 2 aggregated bins + 2-exp PR
+// + rational NP fit). PtW-off baseline unchanged.
+constexpr const char *kPtWDir = "/data/hwan/psi2S_RAA_PbPb2018/Eff_Acc_260519_v2/roots/H_NP_rational_full";
+constexpr const char *kPtWTag = "260520_H_NP_rational";
+constexpr const char *kNoPtWDir = "/data/hwan/psi2S_RAA_PbPb2018/Eff_Acc_260519_v2/roots/noPtW_full";
 constexpr const char *kNoPtWTag = "260518full_noPtW";
 
 struct V { double v = 0, e = 0; };
