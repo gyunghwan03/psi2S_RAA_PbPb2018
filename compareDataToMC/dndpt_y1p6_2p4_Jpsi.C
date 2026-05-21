@@ -21,8 +21,8 @@ void dndpt_y1p6_2p4_Jpsi(int PR=0, int WRITE=1) {
   TH1::SetDefaultSumw2();
 
   //// modify by hand according to the pt range of the sample
-  const int nPtBins=8;
-  double ptBin[nPtBins+1]={3,4,5,6,7,8,10,12,40};
+  const int nPtBins=6;
+  double ptBin[nPtBins+1]={3.5,4.5,6.5,9,12,15,20};
   const int nPtBinsMC=nPtBins;
   double ptBinMC[nPtBinsMC+1];
   for (int i=0; i<=nPtBins; ++i) ptBinMC[i]=ptBin[i];
@@ -38,7 +38,7 @@ void dndpt_y1p6_2p4_Jpsi(int PR=0, int WRITE=1) {
 
   // Get MC :
   float massLow = 2.6; float massHigh = 3.5;
-  double ptMin = ptBinMC[1]; double ptMax = ptBinMC[nPtBinsMC];
+  double ptMin = ptBinMC[0]; double ptMax = ptBinMC[nPtBinsMC];
   double yMin = yBin[1];     double yMax = yBin[nYBins];
 
   TH1D* hptData=new TH1D("hptData",";p_{T}(GeV/c);",nPtBins,ptBin);
@@ -70,8 +70,8 @@ void dndpt_y1p6_2p4_Jpsi(int PR=0, int WRITE=1) {
   TChain *tree = new TChain("mmepevt");
   TString f1;
   //if(PR==0)  f1 ="/work2/Oniatree/JPsi/skimmed_file/OniaFlowSkim_Jpsi_MC_Prompt_210107.root";
-  if(PR==0)  f1 ="../skimmedFiles/OniaFlowSkim_JpsiTrig_DoubleMuonPD_pp_psi2S_isMC1_230126.root";
-  else if(PR==1) f1 ="../skimmedFiles/OniaFlowSkim_Psi2S_JpsiTrig_NonPrompt_isMC1_HFNom_noNCollw_230127.root";
+  if(PR==0)  f1 ="../skimmedFiles/OniaFlowSkim_JpsiTrig_Prompt_miniAOD_JPsi_isMC1_HFNom_240530.root";
+  else if(PR==1) f1 ="../skimmedFiles/OniaFlowSkim_JpsiTrig_NonPrompt_miniAOD_JPsi_isMC1_HFNom_240530.root";
 //  if(PR==0)  f1 ="../../skimmedFiles/OniaFlowSkim_Jpsi_MC_Prompt_210107.root";
 //  else if(PR==1) f1 ="../../skimmedFiles/OniaFlowSkim_Jpsi_MC_NonPrompt_210107.root";
   tree->Add(f1.Data());
@@ -215,7 +215,8 @@ void dndpt_y1p6_2p4_Jpsi(int PR=0, int WRITE=1) {
   fitmc1 = new TF1("fitmc1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,40);
   fitdata1 = new TF1("fitdata1","[2]*(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))",0,40);
   //fitRatio1 = new TF1("fitRatio1","(([0]-1)*([0]-2)/([0]*[1]*([0]*[1] + ([0]-2)*[0])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([0]*[1])),-[0]))/([2]-1)*([3]-2)/([2]*[3]*([2]*[3] + ([2]-2)*[2])) * x * TMath::Power(( 1+ (TMath::Sqrt(89.4916 + x*x))/([2]*[3])),-[2])",0,30);
-  fitRatio1 = new TF1("fitRatio1","( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )",3,40);
+  //fitRatio1 = new TF1("fitRatio1","( [0] + [1]*x + [2]*x*x +[4]*x*x*x ) / (  (x-[3])*(x-[3])*(x-[3])  )",3,40);
+  fitRatio1 = new TF1("fitRatio1","[0]*TMath::Exp(-[1]*x) + [2]*TMath::Exp(-[3]*x) + [4]",3,40);
   //fitRatio1 = new TF1("fitRatio1","TMath::Exp(-x/[0])*[1]+[2]",6.5,50);
   //fitRatio1->SetParameters(0.0005,4.5);
   //fitRatio1->SetParameters(0, 10);
@@ -329,46 +330,50 @@ void dndpt_y1p6_2p4_Jpsi(int PR=0, int WRITE=1) {
   hfracData->SetMarkerColor(kRed+2);
   c_3->SaveAs("./fraction_vs_pt.pdf");
 
+  TFile *fJpsipb = nullptr;
   if(WRITE==1&&PR==0){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_y1p6_2p4_250201.root","RECREATE");
+	  fJpsipb = new TFile("./ratioDataMC_AA_Jpsi_DATA_y1p6_2p4_260505_2exp.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
 	  fitRatio1->SetName("dataMC_Ratio1");
 	  fitRatio1->Write();
+    c_A->Write();
   }
   else if(WRITE==1&&PR==1){
-	  TFile *fJpsipb = new TFile("./ratioDataMC_pp_BtoPsi2S_DATA_y1p6_2p4_230321.root","RECREATE");
+	  fJpsipb = new TFile("./ratioDataMC_AA_BtoJpsi_DATA_y1p6_2p4_260505_2exp.root","RECREATE");
 	  fJpsipb->cd();
 	  hptData1->SetName("WeightFactor");
 	  hptData1->Write();
 	  fitRatio1->SetName("dataMC_Ratio1");
 	  fitRatio1->Write();
+    c_A->Write();
   }
   if(WRITE==1){
-	  c_A->SaveAs(Form("./dNdpt_plot_%s_y1p6_2p4.pdf",fname.Data()));
-	  c_A->SaveAs(Form("./dNdpt_plot_%s_y1p6_2p4.png",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_%s_y1p6_2p4_260505.pdf",fname.Data()));
+	  c_A->SaveAs(Form("./dNdpt_plot_%s_y1p6_2p4_260505.png",fname.Data()));
   }
+  cout << "File saved : " << fJpsipb->GetName() << endl;
 }
 
 //Get Yield
 valErr getYield(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
   TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
-  TFile* inf = new TFile(Form("../Macros/Jpsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  TFile* inf = new TFile(Form("../Macros/Jpsi_250423/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Mass/MassFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   //RooWorkspace* ws = (RooWorkspace*)inf->Get("workspace");
   TH1D* fitResults = (TH1D*)inf->Get("fitResults");
   valErr ret;
   ret.val = fitResults->GetBinContent(1);
   ret.err = fitResults->GetBinError(1);
-  cout << Form("../Macros/Jpsi/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()) << endl;
+  cout << Form("../Macros/Jpsi_250423/roots/2DFit_No_Weight/Mass/Mass_FixedFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()) << endl;
   //cout << Form("../Macros/2021_04_22/roots/2DFit_210604/Mass/MassFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()) << endl;
   //cout << kineLabel << ": " << " & " << ret.val << " $\pm$ " << ret.err << " & " <<ws->var("nBkg")->getVal() << " $\pm$ "<< ws->var("nBkg")->getError() << "\\\\" << endl;
   return ret;
 }
 double getFrac(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
 	TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
-  TFile* inf = new TFile(Form("../Macros/Jpsi/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  TFile* inf = new TFile(Form("../Macros/Jpsi_250423/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
   double frac;
@@ -377,7 +382,7 @@ double getFrac(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int
 }
 double getFracErr(float ptLow, float ptHigh, float yLow, float yHigh, int cLow, int cHigh) {
 	TString kineLabel = getKineLabel(ptLow, ptHigh, yLow, yHigh, 0.0, cLow, cHigh);
-  TFile* inf = new TFile(Form("../Macros/Jpsi/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
+  TFile* inf = new TFile(Form("../Macros/Jpsi_250423/roots/2DFit_No_Weight/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   //TFile* inf = new TFile(Form("../Macros/2021_04_22/roots/2DFit_210604/Final/2DFitResult_%s_PRw_Effw0_Accw0_PtW0_TnP0.root", kineLabel.Data()));
   TH1D* fitResults = (TH1D*)inf->Get("2DfitResults");
   double frac;
