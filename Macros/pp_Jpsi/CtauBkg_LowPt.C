@@ -33,7 +33,8 @@ void CtauBkg_LowPt(
   TStopwatch *t = new TStopwatch;
   t->Start();
 
-  nCPU = 30;
+  nCPU = 28;
+  if (gSystem->Getenv("FAST_CTAUBKG_NO_PLOT")) nCPU = 4;
 
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
@@ -53,14 +54,14 @@ void CtauBkg_LowPt(
   RooMsgService::instance().getStream(1).removeTopic(Plotting);
   RooMsgService::instance().getStream(0).removeTopic(Integration);
   RooMsgService::instance().getStream(1).removeTopic(Integration);
-  RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
+  RooMsgService::instance().setGlobalKillBelow(RooFit::FATAL) ;
 
   TFile* f1; TFile* fMass; TFile* fCErr; TFile* fCRes;
   TString kineLabel = getKineLabelpp(ptLow, ptHigh, yLow, yHigh, 0.0);
 
-  fMass = new TFile(Form("roots/2DFit_%s/Mass/mass_06/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  fCErr = new TFile(Form("roots/2DFit_%s/CtauErr/err_06/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
-  fCRes = new TFile(Form("roots/2DFit_%s/CtauRes/res_06/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fMass = new TFile(Form("roots/2DFit_%s/Mass/Mass_FixedFitResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fCErr = new TFile(Form("roots/2DFit_%s/CtauErr/CtauErrResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  fCRes = new TFile(Form("roots/2DFit_%s/CtauRes/CtauResResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
 
   RooDataSet *datasetMass = (RooDataSet*)fMass->Get("datasetMass");
   RooAddPdf* pdfMASS_Tot = (RooAddPdf*)fMass->Get("pdfMASS_Tot");
@@ -337,6 +338,18 @@ void CtauBkg_LowPt(
   RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 
+  if (gSystem->Getenv("FAST_CTAUBKG_NO_PLOT")) {
+    RooArgSet* fitargs = new RooArgSet();
+    fitargs->add(fitCtauBkg->floatParsFinal());
+    RooDataSet *datasetCBkg = new RooDataSet("datasetCBkg","dataset with Ctau Background Fit result", *fitargs);
+    TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+    fitCtauBkg->Write();
+    pdfCTAU_Bkg_Tot->Write();
+    datasetCBkg->Write();
+    outFile->Close();
+    return;
+  }
+
   myPlot2_E->updateNormVars(RooArgSet(*ws->var("mass"), *ws->var("ctau3D"), *ws->var("ctau3DErr"))) ;
 
   //ws->data("dataToFit")->plotOn(myPlot2_E, Name("data_ctauBkg"), DataError(RooAbsData::SumW2), XErrorSize(0), MarkerColor(kBlue), LineColor(kBlue), MarkerSize(0.7));
@@ -446,7 +459,7 @@ void CtauBkg_LowPt(
   pad_E_2->Update();
 
   c_E->Update();
-  c_E->SaveAs(Form("figs/2DFit_%s/CtauBkg/bkg_06/Bkg_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
+  c_E->SaveAs(Form("figs/2DFit_%s/CtauBkg/Bkg_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.pdf", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP));
   RooArgSet* fitargs = new RooArgSet();
   fitargs->add(fitCtauBkg->floatParsFinal());
   RooDataSet *datasetCBkg = new RooDataSet("datasetCBkg","dataset with Ctau Background Fit result", *fitargs);
@@ -456,7 +469,7 @@ void CtauBkg_LowPt(
 
   //	ws->Print();
 
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauBkg/bkg_06/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauBkg/CtauBkgResult_%s_%sw_Effw%d_Accw%d_PtW%d_TnP%d.root", DATE.Data(), kineLabel.Data(), fname.Data(), fEffW, fAccW, isPtW, isTnP),"recreate");
   fitCtauBkg->Write();
   fitCtauBkg->Print("V");
   pdfCTAU_Bkg_Tot->Write();

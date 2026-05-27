@@ -336,10 +336,10 @@ void CtauTrue(
   pad_D_2->Update();
 
   c_D->Update();
-  c_D->SaveAs(Form("figs/2DFit_%s/CtauTrue/true_06/ctauTrue_%s_%s.pdf",DATE.Data(),bCont.Data(),kineLabel.Data()));
+  c_D->SaveAs(Form("figs/2DFit_%s/CtauTrue/ctauTrue_%s_%s.pdf",DATE.Data(),bCont.Data(),kineLabel.Data()));
 
   //TH1 *h1 = (TH1*)TrueModel_Tot->createHistogram("ctau3Dtrue",50,50);
-  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/true_06/CtauTrueResult_%s_%s.root",DATE.Data(),bCont.Data(),kineLabel.Data()),"RECREATE");
+  TFile *outFile = new TFile(Form("roots/2DFit_%s/CtauTrue/CtauTrueResult_%s_%s.root",DATE.Data(),bCont.Data(),kineLabel.Data()),"RECREATE");
   RooArgSet* fitargs = new RooArgSet();
   fitargs->add(fitCtauTrue->floatParsFinal());
   ctauTrueModel->Write();
