@@ -1,6 +1,32 @@
 # ignore mac's folder info file (DS_Store)
 *.DS_Store
 
+# ROOT / build outputs
+#*.root
+*.so
+*.d
+*.pcm
+
+# Plot and export outputs
+#*.pdf
+#*.png
+#*.ps
+sheet_exports/
+
+# Local run outputs
+*.log
+*.backup
+__pycache__/
+.vscode/
+.claude/
+#plot_outputs*/
+#**/plot_outputs*/
+
+#figs/
+#roots/
+logs/
+logs_summary/
+
 # txt files: Be careful not to upload experiments datasets
 #*.txt
 #*.csv
