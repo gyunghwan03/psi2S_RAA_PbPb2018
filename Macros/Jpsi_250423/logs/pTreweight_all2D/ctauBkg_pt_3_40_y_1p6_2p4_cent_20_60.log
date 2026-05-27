@@ -1,0 +1,370 @@
+
+Processing CtauBkg_2exp.C(3,40,1.6,2.4,20,60)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+####################################
+pt: 3-40, y: 1.6-2.4
+******** New Combined Dataset ***********
+RooRealVar::ctau3D = 0.281246  L(-3.99 - 6.49) // [mm]
+RooRealVar::ctau3DErr = 0.0328569  L(0.00903374 - 0.175822) // [mm]
+
+************** Start BKG Ctau Fit *****************
+
+N_Bkg : 199610+/-637.98
+ctau1_CtauRes : 0
+s1_CtauRes : 0.819638
+f_CtauRes : 0.474567+/-0.126988
+f2_CtauRes : 0.161849+/-0.0285491
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.218696 +/- 0.0207293)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 65379.4 +/- 123.519)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.218696 +/- 0.0207293)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 65379.4 +/- 123.519)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.218696 +/- 0.0207293)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 65379.4 +/- 123.519)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.218696 +/- 0.0207293)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.164981,ctau3D = -3.99), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 65379.4 +/- 123.519)
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauBkg/Bkg_pt3.0-40.0_y1.6-2.4_muPt0.0_centrality20-60_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+
+  RooFitResult: minimized FCN value: -1.16732e+06, estimated distance to minimum: 23627.9
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=-1 HESSE=4 HESSE=4 
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+                 N_Bkg    6.5379e+04 +/-  1.24e+02
+                 b_Bkg    2.1870e-01 +/-  2.07e-02
+                 fDF12    9.9905e-01 +/-  5.24e-04
+                 fDFSS    1.0000e+00 +/-  9.87e-07
+                 fDLIV    5.9993e-01 +/-  5.25e-02
+                fDSS12    2.9958e-02 +/-  4.96e-01
+         lambdaDDS_Bkg    2.5112e-01 +/-  1.58e-01
+         lambdaDF_Bkg1    4.9938e-01 +/-  8.51e-03
+         lambdaDF_Bkg2    5.0997e-01 +/-  8.51e-03
+        lambdaDSS_Bkg1    1.8911e-01 +/-  3.21e+01
+        lambdaDSS_Bkg2    1.8395e-01 +/-  1.76e-01
+
+RooDataSet::dataw_Bkg[ctau3DErr,ctau3DRes,ctau3D,mass,weight:N_Bkg_sw] = 44775 entries (62853.2 weighted)
+
+###### Fit Convergence Check ######
+Hesse: 4	 edm: 23627.9	 mll: -1.16732e+06
+[31m[Stuck] fDFSS [0m // Final Value : 1 (0.001 ~ 1)
+
+[31m[Stuck] fDSS12 [0m // Final Value : 0.0299583 (1e-06 ~ 1)
+
+[31m[Stuck] lambdaDSS_Bkg1 [0m // Final Value : 0.189107 (0.0001 ~ 1)
+
+RealTime=127.883395 seconds, CpuTime=32.150000 seconds
+# STAGE: ctauBkg
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauBkg_2exp.C(3,40,1.6,2.4,20,60)'
+

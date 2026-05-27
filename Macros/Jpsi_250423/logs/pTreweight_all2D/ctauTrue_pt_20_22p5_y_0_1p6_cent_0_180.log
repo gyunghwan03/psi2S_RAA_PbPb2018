@@ -1,0 +1,115 @@
+
+Processing CtauTrue.C(20,22.5,0,1.6,0,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+pt20.0-22.5_y0.0-1.6_muPt0.0_centrality0-180
+RooDataSet::reducedDS_MC[ctau3Dtrue,mass,pt,y,weight:weight] = 139223 entries (684322 weighted)
+RooRealVar::ctau3Dtrue = 0.128027  L(1e-06 - 3) // [mm]
+
+************ Start MC Ctau True Fit ***************
+
+
+************ 2 ***************
+
+
+************ 3 ***************
+
+
+************ 4 ***************
+
+
+************ 5 ***************
+
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooArgSet::dependents = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+RooSetProxy::!refCoefNorm = (ctau3Dtrue)
+
+  RooFitResult: minimized FCN value: -1.3032e+08, estimated distance to minimum: 1.83351e+09
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=-1 HESSE=4 HESSE=4 
+
+    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+  --------------------  ------------  --------------------------  --------
+             N_Jpsi_MC    1.3922e+05    2.7845e+05 +/-  2.38e-01  <none>
+                  fDSS    5.0000e-01    9.9451e-01 +/-  2.91e-01  <none>
+                 fDSS1    5.0000e-01    8.8319e-01 +/-  2.43e+01  <none>
+             lambdaDSS    5.4000e-01    3.5170e-01 +/-  3.36e+00  <none>
+            lambdaDSS2    4.6200e-01    3.6398e-02 +/-  1.33e+00  <none>
+            lambdaDSS3    3.4100e-01    6.1231e-01 +/-  3.16e+01  <none>
+
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauTrue/ctauTrue_Inclusive_pt20.0-22.5_y0.0-1.6_muPt0.0_centrality0-180.pdf has been created
+RealTime=25.759042 seconds, CpuTime=7.760000 seconds
+
+************ Finished MC Ctau True Fit ***************
+
+# STAGE: ctauTrue
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauTrue.C(20,22.5,0,1.6,0,180)'
+

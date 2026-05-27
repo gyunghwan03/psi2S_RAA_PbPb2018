@@ -1,0 +1,50 @@
+
+Processing CtauRes.C(15,20,1.6,2.4,0,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+******** New Combined Dataset ***********
+RooRealVar::ctau3DRes = 0.973767  L(-100000 - 100000) 
+
+*************** Start Res Fit *****************
+
+N_Jpsi: 1e+08+/-0
+NBins: 72
+Fit Range: -6.66667 - 0
+7.25269e-05 to 7.05541e+08
+###
+Tot evt: (1439)
+Res evt: (1427)
+lost evt: (99.1661)%, 1427evts
+Min: -6.66667, Max: 0
+s1: 0.349287
+
+************* Finished Sig Res Fit ****************
+
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauRes/CtauRes_pt15.0-20.0_y1.6-2.4_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+
+  RooFitResult: minimized FCN value: -4359.47, estimated distance to minimum: 1.0804
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=-1 HESSE=4 HESSE=4 
+
+    Constant Parameter    Value     
+  --------------------  ------------
+                   One    1.0000e+00
+         ctau1_CtauRes    0.0000e+00
+         ctau2_CtauRes    0.0000e+00
+         ctau3_CtauRes    0.0000e+00
+
+    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+  --------------------  ------------  --------------------------  --------
+                N_Jpsi    1.0000e+08    1.0523e+03 +/-  3.22e+01  <none>
+            f2_CtauRes    3.1000e-01    1.5559e-01 +/-  5.09e-02  <none>
+             f_CtauRes    3.1000e-01    7.3538e-02 +/-  4.29e-02  <none>
+          rS21_CtauRes    8.0000e-01    2.9998e+00 +/-  3.05e-02  <none>
+          rS32_CtauRes    2.2000e+00    2.4192e+00 +/-  2.64e-01  <none>
+            s1_CtauRes    5.0000e-01    3.4929e-01 +/-  6.19e-02  <none>
+
+# STAGE: ctauRes
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauRes.C(15,20,1.6,2.4,0,180)'
+

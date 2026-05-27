@@ -1,0 +1,186 @@
+
+Processing MassFit_FixPar_Data.C(15,17.5,0,1.6,0,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+RooDataSet::dataset[mass,pt,y,pt1,pt2,eta1,eta2,weight,cBin,recoQQsign,NumDimu,ctau3D,ctau3DErr,ctau3DRes] = 897667 entries
+pt: 15-17.5, y: 0-1.6, Cent: 0-90%
+####################################
+******** New Combined Dataset ***********
+RooRealVar::mass = 3.17226  L(2.6 - 3.5) // [GeV/c^{2}]
+
+********* Starting Mass Dist. Fit **************
+
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 N_Bkg        1.00000e+08  2.00000e+07    0.00000e+00  2.00000e+08
+ MINUIT WARNING IN PARAM DEF
+ ============== LIMITS ON PARAM1 TOO FAR APART.
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     2 N_Jpsi       1.00000e+08  2.00000e+07    0.00000e+00  2.00000e+08
+ MINUIT WARNING IN PARAM DEF
+ ============== LIMITS ON PARAM2 TOO FAR APART.
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     3 m_{J/#Psi}   3.09600e+00  1.00000e-02    3.04600e+00  3.14600e+00
+     4 sigma_1_A    2.27728e-02  2.00000e-03    1.27728e-02  3.27728e-02
+     5 sl1          0.00000e+00  2.00000e-01   -1.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        2500           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=1.99792e+08 FROM MIGRAD    STATUS=INITIATE       18 CALLS          19 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  N_Bkg        1.00000e+08   2.00000e+07   2.01358e-01   9.93223e+07
+   2  N_Jpsi       1.00000e+08   2.00000e+07   2.01358e-01   9.97270e+07
+   3  m_{J/#Psi}   3.09600e+00   1.00000e-02   2.01358e-01   7.96459e+02
+   4  sigma_1_A    2.27728e-02   2.00000e-03   2.01358e-01   2.94742e+02
+   5  sl1          0.00000e+00   2.00000e-01   2.01358e-01   3.97450e+02
+                               ERR DEF= 0.5
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MINUIT WARNING IN HESSE   
+ ============== Negative diagonal element 4 in Error Matrix
+ MINUIT WARNING IN HESSE   
+ ============== 3083.38 added to diagonal of error matrix
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -9.8743e+00  9.9756e-01  9.9975e-01  1.0002e+00  1.1877e+01
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING 9.886223 TO DIAGONAL.
+ FCN=2.9524e+07 FROM HESSE     STATUS=NOT POSDEF     31 CALLS          84 TOTAL
+                     EDM=4.02307e+07    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  N_Bkg        4.50430e+06   1.00355e+03   1.22659e-01  -2.96388e+07
+   2  N_Jpsi       2.52068e+07   2.36212e+03   4.85983e-02  -6.63508e+07
+   3  m_{J/#Psi}   3.08317e+00   1.71560e-03   2.76509e-02  -8.76103e+03
+   4  sigma_1_A    1.33493e-02   1.04452e-02   6.76986e-02   1.37693e+03
+   5  sl1         -1.19181e-01   6.95615e-03   1.33571e-01  -1.95165e+02
+                               ERR DEF= 0.5
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 1 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 2 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 3 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 4 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== Negative diagonal element 5 in Error Matrix
+ MINUIT WARNING IN MIGRAD  
+ ============== 3409.6 added to diagonal of error matrix
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD TERMINATED WITHOUT CONVERGENCE.
+ FCN=1.48311e+06 FROM MIGRAD    STATUS=FAILED        169 CALLS         170 TOTAL
+                     EDM=7.13604e+09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  N_Bkg        1.50942e+06   1.07965e+08   0.00000e+00  -1.77428e+03
+   2  N_Jpsi       1.23798e+05   1.44025e+08   0.00000e+00  -3.24668e+02
+   3  m_{J/#Psi}   3.05868e+00   7.82793e-02  -0.00000e+00   3.90535e+02
+   4  sigma_1_A    1.69482e-02   5.28061e-03   0.00000e+00  -3.30876e+02
+   5  sl1          5.74998e-01   1.72395e+00   0.00000e+00  -5.23876e+02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+  4.435e+17  3.233e+16  2.297e+04  6.557e+02 -8.045e+04 
+  3.233e+16  2.665e+16 -1.103e+04 -8.967e+01  3.864e+04 
+  2.297e+04 -1.103e+04  1.887e+00 -2.518e-03  1.942e-04 
+  6.557e+02 -8.967e+01 -2.518e-03  3.304e-05  8.684e-03 
+ -8.045e+04  3.864e+04  1.942e-04  8.684e-03  1.141e+03 
+ERR MATRIX NOT POS-DEF
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5
+        1  0.29743   1.000  0.297  0.000  0.000 -0.000
+        2  0.29743   0.297  1.000 -0.000 -0.000  0.000
+        3  0.31922   0.000 -0.000  1.000 -0.319  0.000
+        4  0.32202   0.000 -0.000 -0.319  1.000  0.045
+        5  0.04719  -0.000  0.000  0.000  0.045  1.000
+ ERR MATRIX NOT POS-DEF
+Real time 0:00:00, CP time 0.040
+Real time 0:00:00, CP time 0.040
+ **********
+ **    7 **SET ERR         0.5
+ **********
+ **********
+ **    8 **SET PRINT           1
+ **********
+ **********
+ **    9 **HESSE        2500
+ **********
+ MINUIT WARNING IN HESSE   
+ ============== Negative diagonal element 3 in Error Matrix
+ MINUIT WARNING IN HESSE   
+ ============== 241.469 added to diagonal of error matrix
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -1.7471e+00  9.8464e-01  1.0000e+00  1.0000e+00  3.7624e+00
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING 1.750837 TO DIAGONAL.
+ FCN=1.48311e+06 FROM HESSE     STATUS=NOT POSDEF     37 CALLS         207 TOTAL
+                     EDM=6.69966e+08    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE     INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  N_Bkg        1.50942e+06   6.69367e+05   9.15966e+03  -1.92092e+10
+   2  N_Jpsi       1.23798e+05   1.92688e+05   1.53137e+04   3.21151e+10
+   3  m_{J/#Psi}   3.05868e+00   5.52760e-02   1.30534e+00   2.73751e+06
+   4  sigma_1_A    1.69482e-02   4.79649e-03   2.15171e-01  -4.51246e+05
+   5  sl1          5.74998e-01   3.48631e-02   1.94691e-01   4.08296e+05
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+  4.482e+11 -3.085e+07  2.584e+03  3.446e+01 -2.168e+02 
+ -3.085e+07  3.715e+10 -1.759e+03 -2.344e+01  1.475e+02 
+  2.584e+03 -1.759e+03  1.476e-01  1.968e-03 -1.238e-02 
+  3.446e+01 -2.344e+01  1.968e-03  2.632e-05 -1.650e-04 
+ -2.168e+02  1.475e+02 -1.238e-02 -1.650e-04  1.216e-03 
+ERR MATRIX NOT POS-DEF
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5
+        1  0.01005   1.000 -0.000  0.010  0.010 -0.009
+        2  0.02377  -0.000  1.000 -0.024 -0.024  0.022
+        3  0.99864   0.010 -0.024  1.000  0.999 -0.924
+        4  0.99861   0.010 -0.024  0.999  1.000 -0.922
+        5  0.92392  -0.009  0.022 -0.924 -0.922  1.000
+ ERR MATRIX NOT POS-DEF
+Real time 0:00:00, CP time 0.000
+Real time 0:00:00, CP time 0.040, 2 slices
+
+********* Finished Mass Dist. Fit **************
+
+
+  RooFitResult: minimized FCN value: 1.48311e+06, estimated distance to minimum: 6.69966e+08
+                covariance matrix quality: Full matrix, but forced positive-definite
+                Status : MINIMIZE=-1 HESSE=4 
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+                 N_Bkg    1.5094e+06 +/-  6.69e+05
+                N_Jpsi    1.2380e+05 +/-  1.93e+05
+            m_{J/#Psi}    3.0587e+00 +/-  5.53e-02
+             sigma_1_A    1.6948e-02 +/-  4.80e-03
+                   sl1    5.7500e-01 +/-  3.49e-02
+
+ *** NLL : 1483110.87452051
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/Mass/Mass_Fixed_pt15.0-17.5_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+# STAGE: massFit
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'MassFit_FixPar_Data.C(15,17.5,0,1.6,0,180)'
+

@@ -1,0 +1,83 @@
+
+Processing CtauRes.C(13,15,0,1.6,0,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+******** New Combined Dataset ***********
+RooRealVar::ctau3DRes = 9.63557  L(-100000 - 100000) 
+
+*************** Start Res Fit *****************
+
+N_Jpsi: 1e+08+/-0
+NBins: 72
+Fit Range: -8.88889 - 0
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1.95561e+08) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Jpsi=1316.52, f2_CtauRes=0.0329182, f_CtauRes=0.0798243, rS21_CtauRes=0.140063, rS32_CtauRes=0.623736, s1_CtauRes=0.214434
+RooNLLVar::nll_GaussModel_Tot_ctauResCutDS[ paramSet=(N_Jpsi,One,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,f_CtauRes,rS21_CtauRes,rS32_CtauRes,s1_CtauRes) ]
+     function value is NAN @ paramSet=(N_Jpsi = 1316.52,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.0329182,f_CtauRes = 0.0798243,rS21_CtauRes = 0.140063,rS32_CtauRes = 0.623736,s1_CtauRes = 0.214434)
+PID1430470/RooRealMPFE::nll_GaussModel_Tot_ctauResCutDS_5cfc82bf9b50_MPFE7[ arg=nll_GaussModel_Tot_ctauResCutDS_GOF7 vars=(N_Jpsi,One,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,f_CtauRes,rS21_CtauRes,rS32_CtauRes,s1_CtauRes) ]
+     function value is NAN @ paramSet=(N_Jpsi = 1316.52,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.0329182,f_CtauRes = 0.0798243,rS21_CtauRes = 0.140063,rS32_CtauRes = 0.623736,s1_CtauRes = 0.214434)
+     function value is NAN @ paramSet=(N_Jpsi = 1316.52,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.0329182,f_CtauRes = 0.0798243,rS21_CtauRes = 0.140063,rS32_CtauRes = 0.623736,s1_CtauRes = 0.214434)
+     function value is NAN @ paramSet=(N_Jpsi = 1316.52,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.0329182,f_CtauRes = 0.0798243,rS21_CtauRes = 0.140063,rS32_CtauRes = 0.623736,s1_CtauRes = 0.214434)
+     function value is NAN @ paramSet=(N_Jpsi = 1316.52,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.0329182,f_CtauRes = 0.0798243,rS21_CtauRes = 0.140063,rS32_CtauRes = 0.623736,s1_CtauRes = 0.214434)
+     function value is NAN @ paramSet=(N_Jpsi = 1316.52,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.0329182,f_CtauRes = 0.0798243,rS21_CtauRes = 0.140063,rS32_CtauRes = 0.623736,s1_CtauRes = 0.214434)
+     function value is NAN @ paramSet=(N_Jpsi = 1316.52,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.0329182,f_CtauRes = 0.0798243,rS21_CtauRes = 0.140063,rS32_CtauRes = 0.623736,s1_CtauRes = 0.214434)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (1.95561e+08) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Jpsi=4460.64, f2_CtauRes=0.950438, f_CtauRes=0.396987, rS21_CtauRes=2.91657, rS32_CtauRes=4.6407, s1_CtauRes=0.00363274
+RooNLLVar::nll_GaussModel_Tot_ctauResCutDS[ paramSet=(N_Jpsi,One,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,f_CtauRes,rS21_CtauRes,rS32_CtauRes,s1_CtauRes) ]
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+PID1430470/RooRealMPFE::nll_GaussModel_Tot_ctauResCutDS_5cfc82bf9b50_MPFE7[ arg=nll_GaussModel_Tot_ctauResCutDS_GOF7 vars=(N_Jpsi,One,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,f_CtauRes,rS21_CtauRes,rS32_CtauRes,s1_CtauRes) ]
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+     function value is NAN @ paramSet=(N_Jpsi = 4460.64,One = 1,ctau1_CtauRes = 0,ctau2_CtauRes = 0,ctau3_CtauRes = 0,f2_CtauRes = 0.950438,f_CtauRes = 0.396987,rS21_CtauRes = 2.91657,rS32_CtauRes = 4.6407,s1_CtauRes = 0.00363274)
+    ... (remaining 6 messages suppressed)
+
+0.00201626 to 2.30483e+08
+###
+Tot evt: (4064)
+Res evt: (4036)
+lost evt: (99.311)%, 4036evts
+Min: -8.88889, Max: 0
+s1: 0.720727
+
+************* Finished Sig Res Fit ****************
+
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauRes/CtauRes_pt13.0-15.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+
+  RooFitResult: minimized FCN value: -14722.6, estimated distance to minimum: 720.911
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=-1 HESSE=4 HESSE=4 
+
+    Constant Parameter    Value     
+  --------------------  ------------
+                   One    1.0000e+00
+         ctau1_CtauRes    0.0000e+00
+         ctau2_CtauRes    0.0000e+00
+         ctau3_CtauRes    0.0000e+00
+
+    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+  --------------------  ------------  --------------------------  --------
+                N_Jpsi    1.0000e+08    2.3612e+03 +/-  8.14e+01  <none>
+            f2_CtauRes    3.1000e-01    6.9260e-01 +/-  4.55e-02  <none>
+             f_CtauRes    3.1000e-01    3.3349e-01 +/-  9.52e-02  <none>
+          rS21_CtauRes    8.0000e-01    4.1190e-01 +/-  1.40e-02  <none>
+          rS32_CtauRes    2.2000e+00    4.4963e+00 +/-  8.93e-02  <none>
+            s1_CtauRes    5.0000e-01    7.2073e-01 +/-  3.87e-02  <none>
+
+# STAGE: ctauRes
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauRes.C(13,15,0,1.6,0,180)'
+

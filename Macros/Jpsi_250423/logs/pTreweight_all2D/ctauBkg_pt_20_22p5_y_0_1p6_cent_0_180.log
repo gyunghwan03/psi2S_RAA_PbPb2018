@@ -1,0 +1,1832 @@
+
+Processing CtauBkg_2exp.C(20,22.5,0,1.6,0,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+####################################
+pt: 20-22.5, y: 0-1.6
+******** New Combined Dataset ***********
+RooRealVar::ctau3D = 0.692746  L(-4 - 6.5) // [mm]
+RooRealVar::ctau3DErr = 0.0141485  L(0.0108113 - 0.03571) // [mm]
+
+************** Start BKG Ctau Fit *****************
+
+N_Bkg : 1383.42+/-53.966
+ctau1_CtauRes : 0
+s1_CtauRes : 0.900415
+f_CtauRes : 0.887174+/-1.2118
+f2_CtauRes : 0.1669+/-4.58183
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (-3324.05) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Bkg=452.944, b_Bkg=0.715858, fDF12=0.558782, fDFSS=1.01, fDLIV=0.999995, fDSS12=0.842405, lambdaDDS_Bkg=0.602696, lambdaDF_Bkg1=0.071258, lambdaDF_Bkg2=0.999579, lambdaDSS_Bkg1=0.420559, lambdaDSS_Bkg2=0.410417
+PID1451997/RooRealMPFE::nll_pdfTot_Bkg_dataw_Bkg_64d37610b600_MPFE5[ arg=nll_pdfTot_Bkg_dataw_Bkg_GOF5 vars=(N_Bkg,b_Bkg,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,fDF12,fDFSS,fDLIV,fDSS12,f_CtauRes,lambdaDDS_Bkg,lambdaDF_Bkg1,lambdaDF_Bkg2,lambdaDSS_Bkg1,lambdaDSS_Bkg2,rS21_CtauRes,rS32_CtauRes,s1_CtauRes,zeroMean) ]
+     p.d.f value is less than zero (-0.052555), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0522287,ctau3DErr = 0.0203437), !pdfs=(pdfCTAUDSS = 1.6187/1,pdfCTAUDF = 168.744/1), !coefficients=(fDFSS = 1.01)
+
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026373,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186616/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026622,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186618/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0268709,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018662/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0271199,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186621/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0273689,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186623/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0276179,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186625/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0278669,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186627/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0281159,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186629/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0283649,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186631/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0286139,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186633/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0288628,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186634/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0291118,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186636/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0293608,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186638/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0139236,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186549/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0141726,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018655/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0144216,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186551/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0146706,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186552/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0149196,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186553/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0151686,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186554/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0154176,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186555/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0156666,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186556/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0159155,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186557/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0161645,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186558/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0164135,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186559/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0166625,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018656/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0169115,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186561/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0233851,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186596/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0236341,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186598/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0238831,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186599/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0241321,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186601/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0243811,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186603/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0246301,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186604/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0248791,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186606/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025128,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186607/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025377,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186609/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025626,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186611/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025875,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186613/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026124,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186614/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0296098,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018664/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0298588,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186642/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0301078,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186644/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0306057,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186648/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0311037,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186653/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0313527,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186655/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0316017,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186657/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0318507,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186659/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186663/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186667/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018667/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186672/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186674/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186681/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186688/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186693/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0109358,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186539/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0111848,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018654/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0114338,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018654/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0116828,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186541/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0119318,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186542/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0121807,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186543/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0124297,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186544/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0126787,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186544/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0129277,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186545/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0131767,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186546/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0134257,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186547/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0136747,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186548/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0201483,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186577/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0203973,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186579/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0206463,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018658/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0208953,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186581/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0211443,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186583/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0213932,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186584/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0216422,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186586/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0218912,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186587/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0221402,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186589/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0223892,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018659/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0226382,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186592/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0228872,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186593/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0231362,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186595/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0171605,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186562/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0174095,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186563/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0176584,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186565/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0179074,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186566/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0181564,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186567/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0184054,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186568/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0186544,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186569/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0189034,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186571/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0191524,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186572/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0194014,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186573/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0196503,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186575/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0198993,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186576/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0201483,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186577/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0203973,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186579/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0206463,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018658/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0208953,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186581/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0211443,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186583/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0213932,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186584/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0216422,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186586/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0218912,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186587/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0221402,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186589/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0223892,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018659/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0226382,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186592/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0228872,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186593/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0231362,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186595/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0139236,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186549/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0141726,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018655/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0144216,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186551/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0146706,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186552/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0149196,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186553/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0151686,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186554/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0154176,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186555/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0156666,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186556/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0159155,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186557/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0161645,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186558/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0164135,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186559/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0166625,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018656/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0169115,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186561/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0296098,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018664/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0298588,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186642/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0301078,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186644/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0306057,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186648/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0311037,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186653/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0313527,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186655/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0316017,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186657/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0318507,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186659/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186663/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0233851,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186596/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0236341,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186598/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0238831,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186599/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0241321,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186601/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0243811,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186603/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0246301,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186604/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0248791,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186606/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025128,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186607/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025377,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186609/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025626,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186611/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025875,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186613/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026124,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186614/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186667/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018667/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186672/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186674/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186681/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186688/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186693/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026373,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186616/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026622,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186618/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0268709,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018662/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0271199,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186621/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0273689,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186623/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0276179,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186625/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0278669,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186627/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0281159,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186629/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0283649,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186631/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0286139,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186633/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0288628,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186634/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0291118,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186636/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0293608,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186638/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0171605,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186562/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0174095,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186563/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0176584,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186565/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0179074,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186566/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0181564,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186567/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0184054,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186568/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0186544,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186569/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0189034,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186571/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0191524,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186572/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0194014,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186573/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0196503,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186575/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0198993,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186576/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0109358,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186539/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0111848,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018654/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0114338,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018654/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0116828,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186541/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0119318,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186542/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0121807,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186543/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0124297,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186544/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0126787,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186544/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0129277,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186545/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0131767,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186546/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0134257,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186547/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0136747,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186548/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.01[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026373,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186616/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026622,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186618/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0268709,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018662/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0271199,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186621/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0273689,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186623/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0276179,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186625/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0278669,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186627/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0281159,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186629/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0283649,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186631/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0286139,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186633/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0288628,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186634/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0291118,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186636/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0293608,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186638/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0296098,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018664/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0298588,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186642/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0301078,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186644/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0306057,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186648/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0311037,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186653/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0313527,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186655/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0316017,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186657/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0318507,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186659/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186663/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0323487,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0139236,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186549/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0141726,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018655/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0144216,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186551/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0146706,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186552/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0149196,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186553/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0151686,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186554/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0154176,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186555/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0156666,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186556/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0159155,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186557/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0161645,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186558/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0164135,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186559/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0166625,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018656/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0169115,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186561/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0171605,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186562/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0174095,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186563/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0233851,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186596/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0176584,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186565/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0236341,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186598/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0179074,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186566/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0238831,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186599/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0181564,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186567/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0241321,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186601/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0184054,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186568/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0243811,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186603/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0186544,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186569/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0246301,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186604/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0189034,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186571/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0248791,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186606/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0191524,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186572/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025128,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186607/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0194014,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186573/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025377,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186609/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0196503,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186575/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025626,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186611/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0198993,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186576/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.025875,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186613/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.026124,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186614/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0109358,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186539/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0111848,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018654/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0114338,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018654/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0116828,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186541/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0119318,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186542/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0121807,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186543/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0124297,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186544/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0126787,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186544/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0129277,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186545/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0131767,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186546/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0134257,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186547/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0136747,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186548/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0201483,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186577/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0203973,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186579/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0206463,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018658/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0208953,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186581/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0211443,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186583/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0213932,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186584/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0216422,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186586/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0218912,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186587/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0221402,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186589/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0223892,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018659/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0226382,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186592/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0228872,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186593/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0231362,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186595/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186667/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0328466,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.018667/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0330956,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186672/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0333446,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186674/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0335936,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186681/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0343405,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186688/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0350875,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU1) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU1[ fDFSS * pdfCTAUDSS + [%] * pdfCTAUDF ]
+ message      : p.d.f value is less than zero (-0.000187), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAUDSS = 0/1,pdfCTAUDF = 0.0186693/1), !coefficients=(fDFSS = 1.01 +/- 3.45424e-08)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg[ b_Bkg * pdfCTAU_BkgNoPR + [%] * pdfCTAU_BkgPR ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_BkgNoPR = 0/1,pdfCTAU_BkgPR = 0/1), !coefficients=(b_Bkg = 0.719028 +/- 0.0407946)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(pdfCTAU_Bkg_Tot) evaluation error, 
+ origin       : RooAddPdf::pdfCTAU_Bkg_Tot[ N_Bkg * pdfCTAU_Bkg ]
+ message      : p.d.f value is Not-a-Number (-nan), forcing value to zero
+ server values: !refCoefNorm=(ctau3DErr = 0.0355855,ctau3D = -4), !pdfs=(pdfCTAU_Bkg = -nan/1), !coefficients=(N_Bkg = 453.497 +/- 34.53)
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauBkg/Bkg_pt20.0-22.5_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+
+  RooFitResult: minimized FCN value: -10675.9, estimated distance to minimum: 0.134307
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=0 HESSE=0 HESSE=0 
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+                 N_Bkg    4.5350e+02 +/-  3.45e+01
+                 b_Bkg    7.1903e-01 +/-  4.08e-02
+                 fDF12    2.5802e-06 +/-  1.26e-03
+                 fDFSS    1.0100e+00 +/-  3.45e-08
+                 fDLIV    1.0000e+00 +/-  1.55e-06
+                fDSS12    8.4780e-01 +/-  3.67e-01
+         lambdaDDS_Bkg    6.0274e-01 +/-  4.89e-01
+         lambdaDF_Bkg1    8.7679e-01 +/-  3.29e-01
+         lambdaDF_Bkg2    9.9991e-01 +/-  9.52e-03
+        lambdaDSS_Bkg1    4.1962e-01 +/-  6.21e-02
+        lambdaDSS_Bkg2    4.1960e-01 +/-  2.63e-01
+
+RooDataSet::dataw_Bkg[ctau3DErr,ctau3DRes,ctau3D,mass,weight:N_Bkg_sw] = 175 entries (453.501 weighted)
+
+###### Fit Convergence Check ######
+Hesse: 0	 edm: 0.134307	 mll: -10675.9
+[31m[Stuck] fDF12 [0m // Final Value : 2.58016e-06 (1e-06 ~ 1)
+
+[31m[Stuck] fDFSS [0m // Final Value : 1.01 (0.001 ~ 1.01)
+
+[31m[Stuck] fDLIV [0m // Final Value : 1 (0.001 ~ 1)
+
+[31m[Stuck] fDSS12 [0m // Final Value : 0.847795 (1e-06 ~ 1)
+
+[31m[Stuck] lambdaDDS_Bkg [0m // Final Value : 0.602743 (0.0001 ~ 1)
+
+[31m[Stuck] lambdaDF_Bkg1 [0m // Final Value : 0.876785 (0.0001 ~ 1)
+
+[31m[Stuck] lambdaDF_Bkg2 [0m // Final Value : 0.999912 (0.0001 ~ 1)
+
+RealTime=242.232822 seconds, CpuTime=109.850000 seconds
+# STAGE: ctauBkg
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauBkg_2exp.C(20,22.5,0,1.6,0,180)'
+

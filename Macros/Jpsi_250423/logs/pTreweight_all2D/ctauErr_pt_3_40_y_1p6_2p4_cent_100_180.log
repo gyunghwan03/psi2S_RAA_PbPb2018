@@ -1,0 +1,36 @@
+
+Processing CtauErr.C(3,40,1.6,2.4,100,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+RooDataSet::datasetW[ctau3D,mass,pt,y,weight,ctau3DRes,ctau3DErr,pt1,pt2,eta1,eta2,recoQQsign,cBin] = 26602 entries
+Weight : 1
+pt: 3-40, y: 1.6-2.4, Cent: 100-180%
+####################################
+ nBin : 100
+
+*************** Start SPLOT *****************
+
+Sig Yield: 17396.8 +/- 175.879
+Bkg Yield: 10422.1 +/- 154.79
+[INFO] Jpsi yield -> Mass Fit:17396.8, sWeights :17396.8
+[INFO] Bkg  yield -> Mass Fit:10422.1, sWeights :10422.1
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
+ctauErrMax : 0.1332 ctauErrMin : 0.0108009
+ BinWidth : 0.00179999
+ newBins : 68
+26602
+26602
+0.0108009, 0.1332
+Tot evt: (26602)
+Res evt: (26576)
+lost evt: (0.097737)%, 26576evts
+
+************** Finished SPLOT *****************
+
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauErr/ctauErr_pt3.0-40.0_y1.6-2.4_muPt0.0_centrality100-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+# STAGE: ctauErr
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauErr.C(3,40,1.6,2.4,100,180)'
+

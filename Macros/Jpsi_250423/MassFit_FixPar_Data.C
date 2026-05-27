@@ -240,6 +240,9 @@ void MassFit_FixPar_Data(
   else if (ptLow==12&&ptHigh==50)  {
 	   NBkg_limit = 1e+6;
 	   NJpsi_limit = 1e+5; }
+  else if (ptLow==15&&ptHigh==17.5)  {
+	   NBkg_limit = 1e+7;
+	   NJpsi_limit = 1e+6; }
   else if (ptLow==20&&ptHigh==25)  {
 	   NBkg_limit = 1e+5;
 	   NJpsi_limit = 1e+5; }
@@ -259,6 +262,9 @@ void MassFit_FixPar_Data(
 	  NBkg_limit = 1e+6;
 	  NJpsi_limit = 1e+6; }
   else if (ptLow==6.5&&cLow==100&&cHigh==180) {
+	  NBkg_limit = 1e+6;
+	  NJpsi_limit = 1e+5; }
+  else if (ptLow==3&&cLow==100&&cHigh==180) {
 	  NBkg_limit = 1e+6;
 	  NJpsi_limit = 1e+5; }
 

@@ -1,0 +1,506 @@
+
+Processing CtauBkg_2exp.C(7.5,9,0,1.6,0,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+####################################
+pt: 7.5-9, y: 0-1.6
+******** New Combined Dataset ***********
+RooRealVar::ctau3D = 0.0732593  L(-4 - 6.5) // [mm]
+RooRealVar::ctau3DErr = 0.0238069  L(0.0152958 - 0.132442) // [mm]
+
+************** Start BKG Ctau Fit *****************
+
+N_Bkg : 21526+/-173.188
+ctau1_CtauRes : 0
+s1_CtauRes : 0.583213
+f_CtauRes : 0.411954+/-3.03295e-05
+f2_CtauRes : 0.243159+/-2.64383e-05
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+RooArgSet::dependents = (ctau3D,ctau3DErr)
+RooSetProxy::!refCoefNorm = (ctau3D,ctau3DErr)
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval -- 
+[#0] WARNING:Eval -- RooAddPdf::updateCoefCache(pdfCTAU1 WARNING: sum of PDF coefficients not in range [0-1], value=1.00295[#0] WARNING:Eval --  (no more will be printed)[#0] WARNING:Eval -- 
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (108296) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Bkg=83116.2, b_Bkg=0.219164, fDF12=0.999977, fDFSS=1.00295, fDLIV=0.881089, fDSS12=0.03, lambdaDDS_Bkg=0.221753, lambdaDF_Bkg1=0.995666, lambdaDF_Bkg2=0.510816, lambdaDSS_Bkg1=0.380557, lambdaDSS_Bkg2=0.680923
+PID1450402/RooRealMPFE::nll_pdfTot_Bkg_dataw_Bkg_633856de45c0_MPFE7[ arg=nll_pdfTot_Bkg_dataw_Bkg_GOF7 vars=(N_Bkg,b_Bkg,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,fDF12,fDFSS,fDLIV,fDSS12,f_CtauRes,lambdaDDS_Bkg,lambdaDF_Bkg1,lambdaDF_Bkg2,lambdaDSS_Bkg1,lambdaDSS_Bkg2,rS21_CtauRes,rS32_CtauRes,s1_CtauRes,zeroMean) ]
+     p.d.f value is less than zero (-0.021256), forcing value to zero @ !refCoefNorm=(ctau3D = -0.191931,ctau3DErr = 0.0217415), !pdfs=(pdfCTAUDSS = 2.58655e-10/1,pdfCTAUDF = 7.20123/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.020766), forcing value to zero @ !refCoefNorm=(ctau3D = -0.212009,ctau3DErr = 0.0383745), !pdfs=(pdfCTAUDSS = 7.11801e-05/1,pdfCTAUDF = 7.0594/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.003135), forcing value to zero @ !refCoefNorm=(ctau3D = -0.103642,ctau3DErr = 0.0324064), !pdfs=(pdfCTAUDSS = 0.0199949/1,pdfCTAUDF = 7.85611/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.001933), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0893405,ctau3DErr = 0.0282698), !pdfs=(pdfCTAUDSS = 0.0215238/1,pdfCTAUDF = 7.96841/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.015490), forcing value to zero @ !refCoefNorm=(ctau3D = -0.508084,ctau3DErr = 0.0662986), !pdfs=(pdfCTAUDSS = 3.90829e-08/1,pdfCTAUDF = 5.24783/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.017107), forcing value to zero @ !refCoefNorm=(ctau3D = -0.09461,ctau3DErr = 0.0250564), !pdfs=(pdfCTAUDSS = 0.00630126/1,pdfCTAUDF = 7.93664/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.021125), forcing value to zero @ !refCoefNorm=(ctau3D = -0.178241,ctau3DErr = 0.0364458), !pdfs=(pdfCTAUDSS = 0.000427863/1,pdfCTAUDF = 7.30239/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.018326), forcing value to zero @ !refCoefNorm=(ctau3D = -0.339681,ctau3DErr = 0.0296537), !pdfs=(pdfCTAUDSS = 2.49369e-16/1,pdfCTAUDF = 6.20881/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.022092), forcing value to zero @ !refCoefNorm=(ctau3D = -0.102067,ctau3DErr = 0.0226559), !pdfs=(pdfCTAUDSS = 0.001166/1,pdfCTAUDF = 7.88072/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.022114), forcing value to zero @ !refCoefNorm=(ctau3D = -0.136125,ctau3DErr = 0.0275064), !pdfs=(pdfCTAUDSS = 0.000367554/1,pdfCTAUDF = 7.61675/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.022002), forcing value to zero @ !refCoefNorm=(ctau3D = -0.151848,ctau3DErr = 0.0285135), !pdfs=(pdfCTAUDSS = 0.000128294/1,pdfCTAUDF = 7.49769/1), !coefficients=(fDFSS = 1.00295)
+     p.d.f value is less than zero (-0.019922), forcing value to zero @ !refCoefNorm=(ctau3D = -0.127425,ctau3DErr = 0.030729), !pdfs=(pdfCTAUDSS = 0.00274602/1,pdfCTAUDF = 7.68234/1), !coefficients=(fDFSS = 1.00295)
+    ... (remaining 375 messages suppressed)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (108296) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Bkg=10801, b_Bkg=0.499757, fDF12=0.999999, fDFSS=1.00999, fDLIV=0.422415, fDSS12=0.629571, lambdaDDS_Bkg=0.985061, lambdaDF_Bkg1=0.138529, lambdaDF_Bkg2=0.5098, lambdaDSS_Bkg1=0.83846, lambdaDSS_Bkg2=0.0981134
+PID1450402/RooRealMPFE::nll_pdfTot_Bkg_dataw_Bkg_633856de45c0_MPFE7[ arg=nll_pdfTot_Bkg_dataw_Bkg_GOF7 vars=(N_Bkg,b_Bkg,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,fDF12,fDFSS,fDLIV,fDSS12,f_CtauRes,lambdaDDS_Bkg,lambdaDF_Bkg1,lambdaDF_Bkg2,lambdaDSS_Bkg1,lambdaDSS_Bkg2,rS21_CtauRes,rS32_CtauRes,s1_CtauRes,zeroMean) ]
+     p.d.f value is less than zero (-0.155063), forcing value to zero @ !refCoefNorm=(ctau3D = -0.191931,ctau3DErr = 0.0217415), !pdfs=(pdfCTAUDSS = 7.54177e-10/1,pdfCTAUDF = 15.5238/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.188252), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0931251,ctau3DErr = 0.0344544), !pdfs=(pdfCTAUDSS = 0.127522/1,pdfCTAUDF = 31.7406/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.135923), forcing value to zero @ !refCoefNorm=(ctau3D = -0.212009,ctau3DErr = 0.0383745), !pdfs=(pdfCTAUDSS = 0.000197507/1,pdfCTAUDF = 13.6277/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.167536), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0826967,ctau3DErr = 0.0328081), !pdfs=(pdfCTAUDSS = 0.171317/1,pdfCTAUDF = 34.095/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.071871), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0519177,ctau3DErr = 0.0251183), !pdfs=(pdfCTAUDSS = 0.344726/1,pdfCTAUDF = 42.0516/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.239790), forcing value to zero @ !refCoefNorm=(ctau3D = -0.103642,ctau3DErr = 0.0324064), !pdfs=(pdfCTAUDSS = 0.0543451/1,pdfCTAUDF = 29.5011/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.265811), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0893405,ctau3DErr = 0.0282698), !pdfs=(pdfCTAUDSS = 0.0591739/1,pdfCTAUDF = 32.5944/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.184502), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0630838,ctau3DErr = 0.0259983), !pdfs=(pdfCTAUDSS = 0.203598/1,pdfCTAUDF = 39.0574/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.191195), forcing value to zero @ !refCoefNorm=(ctau3D = -0.070296,ctau3DErr = 0.0280297), !pdfs=(pdfCTAUDSS = 0.178221/1,pdfCTAUDF = 37.1617/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.016787), forcing value to zero @ !refCoefNorm=(ctau3D = -0.508084,ctau3DErr = 0.0662986), !pdfs=(pdfCTAUDSS = 1.06053e-07/1,pdfCTAUDF = 1.68063/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.295604), forcing value to zero @ !refCoefNorm=(ctau3D = -0.09461,ctau3DErr = 0.0250564), !pdfs=(pdfCTAUDSS = 0.0176478/1,pdfCTAUDF = 31.3782/1), !coefficients=(fDFSS = 1.00999)
+     p.d.f value is less than zero (-0.255096), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0870198,ctau3DErr = 0.0287406), !pdfs=(pdfCTAUDSS = 0.0750529/1,pdfCTAUDF = 33.1272/1), !coefficients=(fDFSS = 1.00999)
+    ... (remaining 628 messages suppressed)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (108296) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Bkg=11133.8, b_Bkg=0.483615, fDF12=0.999999, fDFSS=1.00564, fDLIV=0.256208, fDSS12=0.339637, lambdaDDS_Bkg=0.141135, lambdaDF_Bkg1=0.329944, lambdaDF_Bkg2=0.509794, lambdaDSS_Bkg1=0.826496, lambdaDSS_Bkg2=0.91718
+PID1450402/RooRealMPFE::nll_pdfTot_Bkg_dataw_Bkg_633856de45c0_MPFE7[ arg=nll_pdfTot_Bkg_dataw_Bkg_GOF7 vars=(N_Bkg,b_Bkg,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,fDF12,fDFSS,fDLIV,fDSS12,f_CtauRes,lambdaDDS_Bkg,lambdaDF_Bkg1,lambdaDF_Bkg2,lambdaDSS_Bkg1,lambdaDSS_Bkg2,rS21_CtauRes,rS32_CtauRes,s1_CtauRes,zeroMean) ]
+     p.d.f value is less than zero (-0.081611), forcing value to zero @ !refCoefNorm=(ctau3D = -0.191931,ctau3DErr = 0.0217415), !pdfs=(pdfCTAUDSS = 1.95048e-10/1,pdfCTAUDF = 14.4785/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.073330), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0931251,ctau3DErr = 0.0344544), !pdfs=(pdfCTAUDSS = 0.0361815/1,pdfCTAUDF = 19.4645/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.076934), forcing value to zero @ !refCoefNorm=(ctau3D = -0.212009,ctau3DErr = 0.0383745), !pdfs=(pdfCTAUDSS = 5.38346e-05/1,pdfCTAUDF = 13.6585/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.064184), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0826967,ctau3DErr = 0.0328081), !pdfs=(pdfCTAUDSS = 0.0485662/1,pdfCTAUDF = 20.0514/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.026718), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0519177,ctau3DErr = 0.0251183), !pdfs=(pdfCTAUDSS = 0.0959955/1,pdfCTAUDF = 21.8666/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.091337), forcing value to zero @ !refCoefNorm=(ctau3D = -0.103642,ctau3DErr = 0.0324064), !pdfs=(pdfCTAUDSS = 0.0151416/1,pdfCTAUDF = 18.9054/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.094827), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0893405,ctau3DErr = 0.0282698), !pdfs=(pdfCTAUDSS = 0.0162878/1,pdfCTAUDF = 19.7291/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.062986), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0630838,ctau3DErr = 0.0259983), !pdfs=(pdfCTAUDSS = 0.0564516/1,pdfCTAUDF = 21.2457/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.067314), forcing value to zero @ !refCoefNorm=(ctau3D = -0.070296,ctau3DErr = 0.0280297), !pdfs=(pdfCTAUDSS = 0.0496912/1,pdfCTAUDF = 20.8075/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.031621), forcing value to zero @ !refCoefNorm=(ctau3D = -0.508084,ctau3DErr = 0.0662986), !pdfs=(pdfCTAUDSS = 2.96007e-08/1,pdfCTAUDF = 5.60994/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.104788), forcing value to zero @ !refCoefNorm=(ctau3D = -0.09461,ctau3DErr = 0.0250564), !pdfs=(pdfCTAUDSS = 0.00476297/1,pdfCTAUDF = 19.4402/1), !coefficients=(fDFSS = 1.00564)
+     p.d.f value is less than zero (-0.091069), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0870198,ctau3DErr = 0.0287406), !pdfs=(pdfCTAUDSS = 0.0207429/1,pdfCTAUDF = 19.8573/1), !coefficients=(fDFSS = 1.00564)
+    ... (remaining 646 messages suppressed)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (108296) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Bkg=6485.77, b_Bkg=0.744496, fDF12=0.988236, fDFSS=1.01, fDLIV=0.207713, fDSS12=0.515225, lambdaDDS_Bkg=0.0790526, lambdaDF_Bkg1=0.844425, lambdaDF_Bkg2=0.503433, lambdaDSS_Bkg1=0.999687, lambdaDSS_Bkg2=0.0949527
+PID1450402/RooRealMPFE::nll_pdfTot_Bkg_dataw_Bkg_633856de45c0_MPFE7[ arg=nll_pdfTot_Bkg_dataw_Bkg_GOF7 vars=(N_Bkg,b_Bkg,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,fDF12,fDFSS,fDLIV,fDSS12,f_CtauRes,lambdaDDS_Bkg,lambdaDF_Bkg1,lambdaDF_Bkg2,lambdaDSS_Bkg1,lambdaDSS_Bkg2,rS21_CtauRes,rS32_CtauRes,s1_CtauRes,zeroMean) ]
+     p.d.f value is less than zero (-0.081665), forcing value to zero @ !refCoefNorm=(ctau3D = -0.191931,ctau3DErr = 0.0217415), !pdfs=(pdfCTAUDSS = 9.32564e-10/1,pdfCTAUDF = 8.16741/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.079511), forcing value to zero @ !refCoefNorm=(ctau3D = -0.212009,ctau3DErr = 0.0383745), !pdfs=(pdfCTAUDSS = 0.000242572/1,pdfCTAUDF = 7.97652/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.023413), forcing value to zero @ !refCoefNorm=(ctau3D = -0.103642,ctau3DErr = 0.0324064), !pdfs=(pdfCTAUDSS = 0.0665524/1,pdfCTAUDF = 9.06412/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.018872), forcing value to zero @ !refCoefNorm=(ctau3D = -0.0893405,ctau3DErr = 0.0282698), !pdfs=(pdfCTAUDSS = 0.0725818/1,pdfCTAUDF = 9.21901/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.056039), forcing value to zero @ !refCoefNorm=(ctau3D = -0.508084,ctau3DErr = 0.0662986), !pdfs=(pdfCTAUDSS = 1.29849e-07/1,pdfCTAUDF = 5.60451/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.069799), forcing value to zero @ !refCoefNorm=(ctau3D = -0.09461,ctau3DErr = 0.0250564), !pdfs=(pdfCTAUDSS = 0.0217023/1,pdfCTAUDF = 9.17291/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.081573), forcing value to zero @ !refCoefNorm=(ctau3D = -0.178241,ctau3DErr = 0.0364458), !pdfs=(pdfCTAUDSS = 0.00145193/1,pdfCTAUDF = 8.30494/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.068439), forcing value to zero @ !refCoefNorm=(ctau3D = -0.339681,ctau3DErr = 0.0296537), !pdfs=(pdfCTAUDSS = 8.96882e-16/1,pdfCTAUDF = 6.84471/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.086818), forcing value to zero @ !refCoefNorm=(ctau3D = -0.102067,ctau3DErr = 0.0226559), !pdfs=(pdfCTAUDSS = 0.00408179/1,pdfCTAUDF = 9.09506/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.086028), forcing value to zero @ !refCoefNorm=(ctau3D = -0.136125,ctau3DErr = 0.0275064), !pdfs=(pdfCTAUDSS = 0.00127651/1,pdfCTAUDF = 8.73278/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.085241), forcing value to zero @ !refCoefNorm=(ctau3D = -0.151848,ctau3DErr = 0.0285135), !pdfs=(pdfCTAUDSS = 0.000446289/1,pdfCTAUDF = 8.57019/1), !coefficients=(fDFSS = 1.01)
+     p.d.f value is less than zero (-0.078773), forcing value to zero @ !refCoefNorm=(ctau3D = -0.127425,ctau3DErr = 0.030729), !pdfs=(pdfCTAUDSS = 0.0093534/1,pdfCTAUDF = 8.823/1), !coefficients=(fDFSS = 1.01)
+    ... (remaining 381 messages suppressed)
+
+[#0] WARNING:Minization -- RooMinimizerFcn: Minimized function has error status.
+Returning maximum FCN so far (6.19545e+06) to force MIGRAD to back out of this region. Error log follows
+Parameter values: N_Bkg=7457.11, b_Bkg=0.462517, fDF12=0.917415, fDFSS=1.00176, fDLIV=0.0800402, fDSS12=0.18714, lambdaDDS_Bkg=0.0375489, lambdaDF_Bkg1=0.832642, lambdaDF_Bkg2=0.454133, lambdaDSS_Bkg1=0.585046, lambdaDSS_Bkg2=0.358075
+PID1450402/RooRealMPFE::nll_pdfTot_Bkg_dataw_Bkg_633856de45c0_MPFE7[ arg=nll_pdfTot_Bkg_dataw_Bkg_GOF7 vars=(N_Bkg,b_Bkg,ctau1_CtauRes,ctau2_CtauRes,ctau3_CtauRes,f2_CtauRes,fDF12,fDFSS,fDLIV,fDSS12,f_CtauRes,lambdaDDS_Bkg,lambdaDF_Bkg1,lambdaDF_Bkg2,lambdaDSS_Bkg1,lambdaDSS_Bkg2,rS21_CtauRes,rS32_CtauRes,s1_CtauRes,zeroMean) ]
+     p.d.f value is less than zero (-0.015076), forcing value to zero @ !refCoefNorm=(ctau3D = -0.191931,ctau3DErr = 0.0217415), !pdfs=(pdfCTAUDSS = 4.43282e-10/1,pdfCTAUDF = 8.55055/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.014568), forcing value to zero @ !refCoefNorm=(ctau3D = -0.212009,ctau3DErr = 0.0383745), !pdfs=(pdfCTAUDSS = 0.000120973/1,pdfCTAUDF = 8.33125/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.009999), forcing value to zero @ !refCoefNorm=(ctau3D = -0.508084,ctau3DErr = 0.0662986), !pdfs=(pdfCTAUDSS = 6.61603e-08/1,pdfCTAUDF = 5.67103/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.006397), forcing value to zero @ !refCoefNorm=(ctau3D = -0.09461,ctau3DErr = 0.0250564), !pdfs=(pdfCTAUDSS = 0.0107267/1,pdfCTAUDF = 9.723/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.014629), forcing value to zero @ !refCoefNorm=(ctau3D = -0.178241,ctau3DErr = 0.0364458), !pdfs=(pdfCTAUDSS = 0.000726703/1,pdfCTAUDF = 8.71004/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.012420), forcing value to zero @ !refCoefNorm=(ctau3D = -0.339681,ctau3DErr = 0.0296537), !pdfs=(pdfCTAUDSS = 4.27215e-16/1,pdfCTAUDF = 7.04449/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.014987), forcing value to zero @ !refCoefNorm=(ctau3D = -0.102067,ctau3DErr = 0.0226559), !pdfs=(pdfCTAUDSS = 0.0019897/1,pdfCTAUDF = 9.63095/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.015605), forcing value to zero @ !refCoefNorm=(ctau3D = -0.136125,ctau3DErr = 0.0275064), !pdfs=(pdfCTAUDSS = 0.000626462/1,pdfCTAUDF = 9.20685/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.015680), forcing value to zero @ !refCoefNorm=(ctau3D = -0.151848,ctau3DErr = 0.0285135), !pdfs=(pdfCTAUDSS = 0.000218718/1,pdfCTAUDF = 9.01744/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.011744), forcing value to zero @ !refCoefNorm=(ctau3D = -0.127425,ctau3DErr = 0.030729), !pdfs=(pdfCTAUDSS = 0.0046667/1,pdfCTAUDF = 9.31253/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.015062), forcing value to zero @ !refCoefNorm=(ctau3D = -0.192656,ctau3DErr = 0.0240697), !pdfs=(pdfCTAUDSS = 1.67131e-08/1,pdfCTAUDF = 8.54284/1), !coefficients=(fDFSS = 1.00176)
+     p.d.f value is less than zero (-0.015015), forcing value to zero @ !refCoefNorm=(ctau3D = -0.144846,ctau3DErr = 0.030427), !pdfs=(pdfCTAUDSS = 0.0010303/1,pdfCTAUDF = 9.1016/1), !coefficients=(fDFSS = 1.00176)
+    ... (remaining 316 messages suppressed)
+
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet::dependents = (ctau3D)
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+RooArgSet:: = ()
+RooSetProxy::!refCoefNorm = (ctau3DErr,ctau3D)
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauBkg/Bkg_pt7.5-9.0_y0.0-1.6_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+
+  RooFitResult: minimized FCN value: -129352, estimated distance to minimum: 22.4312
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=0 HESSE=0 HESSE=0 
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+                 N_Bkg    7.5065e+03 +/-  1.71e+00
+                 b_Bkg    9.5619e-01 +/-  2.44e-03
+                 fDF12    7.2862e-02 +/-  5.50e-04
+                 fDFSS    7.7890e-01 +/-  8.35e-03
+                 fDLIV    2.6968e-01 +/-  9.48e-03
+                fDSS12    1.0012e-06 +/-  2.95e-02
+         lambdaDDS_Bkg    4.2982e-02 +/-  3.98e-04
+         lambdaDF_Bkg1    5.3160e-01 +/-  2.45e-03
+         lambdaDF_Bkg2    1.6250e-01 +/-  2.53e-04
+        lambdaDSS_Bkg1    8.4924e-01 +/-  3.39e+05
+        lambdaDSS_Bkg2    3.5980e-01 +/-  5.98e-02
+
+RooDataSet::dataw_Bkg[ctau3DErr,ctau3DRes,ctau3D,mass,weight:N_Bkg_sw] = 4771 entries (7506.09 weighted)
+
+###### Fit Convergence Check ######
+Hesse: 0	 edm: 22.4312	 mll: -129352
+[31m[Stuck] fDSS12 [0m // Final Value : 1.00124e-06 (1e-06 ~ 1)
+
+[31m[Stuck] lambdaDSS_Bkg1 [0m // Final Value : 0.849243 (0.0001 ~ 1)
+
+RealTime=255.812158 seconds, CpuTime=114.120000 seconds
+# STAGE: ctauBkg
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauBkg_2exp.C(7.5,9,0,1.6,0,180)'
+

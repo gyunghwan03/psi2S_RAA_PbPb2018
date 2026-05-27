@@ -37,6 +37,8 @@ void CtauBkg_2exp(
   TStopwatch *t = new TStopwatch;
   t->Start();
 
+  nCPU = 28;
+
   TString DATE;
   //if(ptLow==6.5&&ptHigh==50&&!(cLow==0&&cHigh==180)) DATE=Form("%i_%i",0,180);
   //else DATE=Form("%i_%i",cLow/2,cHigh/2);
@@ -82,8 +84,10 @@ void CtauBkg_2exp(
   cout<<"pt: "<<ptLow<<"-"<<ptHigh<<", y: "<<yLow<<"-"<<yHigh<<endl;
 
   cout <<"******** New Combined Dataset ***********" <<endl;
-  ws->var("ctau3D")->setRange(ctauLow, ctauHigh);
-  ws->var("ctau3D")->setRange("ctauRange", ctauLow, ctauHigh);
+  double ctauFitLow = ctauLow + 1e-2;
+  double ctauFitHigh = ctauHigh - 1e-2;
+  ws->var("ctau3D")->setRange(ctauFitLow, ctauFitHigh);
+  ws->var("ctau3D")->setRange("ctauRange", ctauFitLow, ctauFitHigh);
   ws->var("ctau3DErr")->setRange(ctauErrMin, ctauErrMax);
   ws->var("ctau3DErr")->setRange("ctauErrRange",ctauErrMin, ctauErrMax);
   ws->var("ctau3D")->Print();
@@ -175,7 +179,7 @@ void CtauBkg_2exp(
   //else if(ptLow==25 && ptHigh==50){
   //ws->factory("zeroMean[0.0]");
   //ws->factory("b_Bkg[0.4, 1e-3, 1.]");//NP fraction for bkg
-  //ws->factory("fDFSS[0.3, 1e-3, 1.01]");
+  //ws->factory("fDFSS[0.3, 1e-3, 1.0]");
   //ws->factory("fDLIV[0.3, 1e-3, 1.0]");    //7.5-8.5: ~1.07, 
   //ws->factory("lambdaDDS_Bkg[0.4, 1e-4, 1.]");
   //ws->factory("lambdaDF_Bkg1[0.5, 1e-4, 1.]");
@@ -247,13 +251,25 @@ void CtauBkg_2exp(
   ws->factory("lambdaDF_Bkg2[0.431, 1e-4, 1.]");
   ws->factory("lambdaDSS_Bkg1[0.3, 1e-4, 1.]");
   ws->factory("lambdaDSS_Bkg2[0.3, 1e-4, 1.]");
-  ws->factory("fDSS12[0.3, 1e-4, 1.]");
-  ws->factory("fDF12[0.1, 1e-4, 1.]");}
+  ws->factory("fDSS12[0.5, 1e-4, 1.]");
+  ws->factory("fDF12[0.5, 1e-4, 1.]");}
 
+  else if(ptLow==3. && cLow==0 && cHigh==20){
+  ws->factory("zeroMean[0.0]");
+  ws->factory("b_Bkg[0.4, 1e-3, 1.]");//NP fraction for bkg
+  ws->factory("fDFSS[0.5, 1e-3, 1.]");
+  ws->factory("fDLIV[0.3, 1e-3, 1.0]");    //7.5-8.5: ~1.07, 
+  ws->factory("lambdaDDS_Bkg[0.11, 1e-4, 1.]");
+  ws->factory("lambdaDF_Bkg1[0.026, 1e-4, 1.]");
+  ws->factory("lambdaDF_Bkg2[0.05, 1e-4, 1.]");
+  ws->factory("lambdaDSS_Bkg1[0.3, 1e-4, 1.]");
+  ws->factory("lambdaDSS_Bkg2[0.05, 1e-4, 1.]");
+  ws->factory("fDSS12[0.5, 1e-4, 1.]");
+  ws->factory("fDF12[0.5, 1e-4, 1.]");}
   else if(ptLow==3.5 && cLow==20 && cHigh==40){
   ws->factory("zeroMean[0.0]");
   ws->factory("b_Bkg[0.4, 1e-3, 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.3, 1e-3, 1.01]");
+  ws->factory("fDFSS[0.3, 1e-3, 1.0]");
   ws->factory("fDLIV[0.3, 1e-3, 1.0]");    //7.5-8.5: ~1.07, 
   ws->factory("lambdaDDS_Bkg[0.4, 1e-4, 1.]");
   ws->factory("lambdaDF_Bkg1[0.75, 1e-4, 1.]");
@@ -420,7 +436,7 @@ void CtauBkg_2exp(
   else{
   ws->factory("zeroMean[0.0]");
   ws->factory("b_Bkg[0.4, 1e-3, 1.]");//NP fraction for bkg
-  ws->factory("fDFSS[0.3, 1e-3, 1.01]");
+  ws->factory("fDFSS[0.3, 1e-3, 1.0]");
   ws->factory("fDLIV[0.3, 1e-3, 1.0]");    //7.5-8.5: ~1.07, 
   ws->factory("lambdaDDS_Bkg[0.4, 1e-4, 1.]");
   ws->factory("lambdaDF_Bkg1[0.5, 1e-4, 1.]");
@@ -495,12 +511,13 @@ void CtauBkg_2exp(
   //RooAbsPdf* ctauBkgModel = ctauBkgModel = new RooAddPdf("pdfTot_Bkg","pdfTot_Bkg",*ws->pdf("pdfCTAUCOND_Bkg"), *ws->var("N_Bkg"));
   //ws->import(*pdfCTAUCOND_Bkg);
 
-  TH1D* hTot = (TH1D*)ws->data("dataw_Bkg")->createHistogram(("hTot"), *ws->var("ctau3D"),Binning(nCtauBins,ctauLow,ctauHigh));
+  TH1D* hTot = (TH1D*)ws->data("dataw_Bkg")->createHistogram(("hTot"), *ws->var("ctau3D"),Binning(nCtauBins,ctauFitLow,ctauFitHigh));
   double ctauMin=hTot->GetBinLowEdge(hTot->FindFirstBinAbove(1,1));
   //if (cLow==80&&cHigh==100) ctauMin=-1.0;
   //else if (cLow==100&&cHigh==180) ctauMin=-0.6;
   double ctauMax=hTot->GetBinLowEdge(hTot->FindLastBinAbove(2,1))+hTot->GetBinWidth(hTot->FindLastBinAbove(2,1));
   ctauMin=-1.8; ctauMax=2.5;
+  ws->var("ctau3D")->setRange("ctauBkgFitRange", ctauMin, ctauMax);
   //if(ptLow>=15) { ctauMin=-1.5;}
   //if(ptLow==3&&ptHigh==6.5) {ctauMin=-2.; ctauMax=3.65;}
   //else if(ptLow==3&&ptHigh==4.5) {ctauMax=2.65;}
@@ -516,14 +533,14 @@ void CtauBkg_2exp(
   TPad *pad_E_1 = new TPad("pad_E_1", "pad_E_1", 0, 0.16, 0.98, 1.0);
   pad_E_1->SetTicks(1,1);
   pad_E_1->Draw(); pad_E_1->cd();
-  RooPlot* myPlot_E = ws->var("ctau3D")->frame(Bins(nCtauBins), Range(ctauLow, ctauHigh)); // bins
+  RooPlot* myPlot_E = ws->var("ctau3D")->frame(Bins(nCtauBins), Range(ctauFitLow, ctauFitHigh)); // bins
   myPlot_E->SetTitle("");
 
   ws->pdf("pdfCTAU_Bkg_Tot")->setNormRange("ctauWindow");
 
   RooDataSet* dataToFit = (RooDataSet*)dataw_Bkg->reduce(
     Form(
-        "ctau3D>=%.f && ctau3D<=%.f && ((mass>2.7&&mass<2.8)||(mass>3.2&&mass<3.3))"
+        "ctau3D>%.6f && ctau3D<%.6f && ((mass>2.7&&mass<2.8)||(mass>3.2&&mass<3.3))"
         ,ctauMin, ctauMax)
     )->Clone("dataw_Bkg");
 
@@ -542,7 +559,7 @@ void CtauBkg_2exp(
 
   bool isWeighted = ws->data("dataw_Bkg")->isWeighted();
   //RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataw_Bkg, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1));
-  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
+  RooFitResult* fitCtauBkg = ws->pdf("pdfTot_Bkg")->fitTo(*dataToFit, Save(), Range("ctauBkgFitRange"), Extended(kTRUE), NumCPU(nCPU), PrintLevel(-1), SumW2Error(isWeighted));
   ws->import(*fitCtauBkg, "fitCtauBkg");
 
   myPlot2_E->updateNormVars(RooArgSet(*ws->var("mass"), *ws->var("ctau3D"), *ws->var("ctau3DErr"))) ;
@@ -567,7 +584,7 @@ void CtauBkg_2exp(
   Yup = YMax*TMath::Power((YMax/0.01), 0.5);
   Ydown = 0.01;
   myPlot2_E->GetYaxis()->SetRangeUser(Ydown,Yup);
-  myPlot2_E->GetXaxis()->SetRangeUser(-4, 7);
+  myPlot2_E->GetXaxis()->SetRangeUser(ctauFitLow, ctauFitHigh);
   myPlot2_E->GetXaxis()->SetTitle("#font[12]{l}_{J/#psi} (mm)");
   myPlot2_E->SetFillStyle(4000);
   myPlot2_E->GetYaxis()->SetTitleOffset(1.43);
@@ -621,7 +638,7 @@ void CtauBkg_2exp(
   RooPlot* frameTMP = (RooPlot*)myPlot2_E->Clone("TMP");
   RooHist* hpull_E = frameTMP->pullHist("data_ctauBkg","ctauBkg_Tot", true);
   hpull_E->SetMarkerSize(0.8);
-  RooPlot* pullFrame_E = ws->var("ctau3D")->frame(Title("Pull Distribution"), Bins(nCtauBins), Range(ctauLow,ctauHigh)) ;
+  RooPlot* pullFrame_E = ws->var("ctau3D")->frame(Title("Pull Distribution"), Bins(nCtauBins), Range(ctauFitLow,ctauFitHigh)) ;
   pullFrame_E->addPlotable(hpull_E,"PX") ;
   pullFrame_E->SetTitle("");
   pullFrame_E->SetTitleSize(0);
@@ -644,7 +661,7 @@ void CtauBkg_2exp(
   pullFrame_E->GetXaxis()->SetTickSize(0.03);
   pullFrame_E->Draw() ;
 
-  TLine *lD = new TLine(ctauLow, 0, ctauHigh, 0);
+  TLine *lD = new TLine(ctauFitLow, 0, ctauFitHigh, 0);
   lD->SetLineStyle(1);
   lD->Draw("same");
 

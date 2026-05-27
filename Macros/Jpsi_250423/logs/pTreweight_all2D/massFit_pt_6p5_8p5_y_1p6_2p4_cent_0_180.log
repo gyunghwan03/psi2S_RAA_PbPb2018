@@ -1,0 +1,145 @@
+
+Processing MassFit_FixPar_Data.C(6.5,8.5,1.6,2.4,0,180)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+RooDataSet::dataset[mass,pt,y,pt1,pt2,eta1,eta2,weight,cBin,recoQQsign,NumDimu,ctau3D,ctau3DErr,ctau3DRes] = 897667 entries
+pt: 6.5-8.5, y: 1.6-2.4, Cent: 0-90%
+####################################
+******** New Combined Dataset ***********
+RooRealVar::mass = 3.17226  L(2.6 - 3.5) // [GeV/c^{2}]
+
+********* Starting Mass Dist. Fit **************
+
+ **********
+ **    1 **SET PRINT           1
+ **********
+ **********
+ **    2 **SET NOGRAD
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 N_Bkg        1.00000e+08  2.00000e+07    0.00000e+00  2.00000e+08
+ MINUIT WARNING IN PARAM DEF
+ ============== LIMITS ON PARAM1 TOO FAR APART.
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     2 N_Jpsi       1.00000e+08  2.00000e+07    0.00000e+00  2.00000e+08
+ MINUIT WARNING IN PARAM DEF
+ ============== LIMITS ON PARAM2 TOO FAR APART.
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     3 m_{J/#Psi}   3.09600e+00  1.00000e-02    3.04600e+00  3.14600e+00
+     4 sigma_1_A    4.16498e-02  2.00000e-03    3.16498e-02  5.16498e-02
+     5 sl1          0.00000e+00  2.00000e-01   -1.00000e+00  1.00000e+00
+ **********
+ **    3 **SET ERR         0.5
+ **********
+ **********
+ **    4 **SET PRINT           1
+ **********
+ **********
+ **    5 **SET STR           1
+ **********
+ NOW USING STRATEGY  1: TRY TO BALANCE SPEED AGAINST RELIABILITY
+ **********
+ **    6 **MIGRAD        2500           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=1.98224e+08 FROM MIGRAD    STATUS=INITIATE       18 CALLS          19 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  N_Bkg        1.00000e+08   2.00000e+07   2.01358e-01   9.99106e+07
+   2  N_Jpsi       1.00000e+08   2.00000e+07   2.01358e-01   9.99082e+07
+   3  m_{J/#Psi}   3.09600e+00   1.00000e-02   2.01358e-01   3.04401e+03
+   4  sigma_1_A    4.16498e-02   2.00000e-03   2.01358e-01  -8.48867e+02
+   5  sl1          0.00000e+00   2.00000e-01   2.01358e-01   3.24172e+03
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-983595 FROM MIGRAD    STATUS=CONVERGED     233 CALLS         234 TOTAL
+                     EDM=0.000178707    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  N_Bkg        5.25857e+04   2.86962e+02   5.99945e-04   1.67652e+02
+   2  N_Jpsi       3.86946e+04   2.62352e+02   7.61734e-04   3.48508e+01
+   3  m_{J/#Psi}   3.09053e+00   3.44850e-04   4.72128e-03  -2.60563e-02
+   4  sigma_1_A    4.38117e-02   3.20153e-04   2.03360e-02   1.22973e-01
+   5  sl1         -1.76780e-01   7.66356e-03   5.29384e-03  -5.75074e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+  8.235e+04 -2.968e+04  1.864e-03 -3.057e-02  8.977e-02 
+ -2.968e+04  6.883e+04 -1.903e-03  3.107e-02 -8.868e-02 
+  1.864e-03 -1.903e-03  1.189e-07 -5.025e-09 -2.677e-07 
+ -3.057e-02  3.107e-02 -5.025e-09  1.025e-07 -1.243e-07 
+  8.977e-02 -8.868e-02 -2.677e-07 -1.243e-07  5.873e-05 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5
+        1  0.44295   1.000 -0.394  0.019 -0.333  0.041
+        2  0.46889  -0.394  1.000 -0.021  0.370 -0.044
+        3  0.11361   0.019 -0.021  1.000 -0.046 -0.101
+        4  0.42483  -0.333  0.370 -0.046  1.000 -0.051
+        5  0.12010   0.041 -0.044 -0.101 -0.051  1.000
+Real time 0:00:00, CP time 0.040
+Real time 0:00:00, CP time 0.040
+ **********
+ **    7 **SET ERR         0.5
+ **********
+ **********
+ **    8 **SET PRINT           1
+ **********
+ **********
+ **    9 **HESSE        2500
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-983595 FROM HESSE     STATUS=OK             35 CALLS         269 TOTAL
+                     EDM=0.000178907    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  N_Bkg        5.25857e+04   2.88702e+02   5.99945e-05  -1.25818e+03
+   2  N_Jpsi       3.86946e+04   2.63618e+02   7.61734e-05  -1.59747e+03
+   3  m_{J/#Psi}   3.09053e+00   3.44908e-04   1.88851e-04  -1.09719e-01
+   4  sigma_1_A    4.38117e-02   3.21385e-04   8.13439e-04   2.17907e-01
+   5  sl1         -1.76780e-01   7.66429e-03   2.11753e-04  -1.77714e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  5    ERR DEF=0.5
+  8.335e+04 -3.075e+04  1.967e-03 -3.177e-02  9.296e-02 
+ -3.075e+04  6.949e+04 -1.971e-03  3.182e-02 -9.285e-02 
+  1.967e-03 -1.971e-03  1.190e-07 -5.413e-09 -2.674e-07 
+ -3.177e-02  3.182e-02 -5.413e-09  1.033e-07 -1.274e-07 
+  9.296e-02 -9.285e-02 -2.674e-07 -1.274e-07  5.874e-05 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3      4      5
+        1  0.45369   1.000 -0.404  0.020 -0.342  0.042
+        2  0.47684  -0.404  1.000 -0.022  0.375 -0.046
+        3  0.11498   0.020 -0.022  1.000 -0.049 -0.101
+        4  0.43238  -0.342  0.375 -0.049  1.000 -0.052
+        5  0.12087   0.042 -0.046 -0.101 -0.052  1.000
+Real time 0:00:00, CP time 0.020
+Real time 0:00:00, CP time 0.060, 2 slices
+
+********* Finished Mass Dist. Fit **************
+
+
+  RooFitResult: minimized FCN value: -983595, estimated distance to minimum: 0.000178907
+                covariance matrix quality: Full, accurate covariance matrix
+                Status : MINIMIZE=0 HESSE=0 
+
+    Floating Parameter    FinalValue +/-  Error   
+  --------------------  --------------------------
+                 N_Bkg    5.2586e+04 +/-  2.89e+02
+                N_Jpsi    3.8695e+04 +/-  2.64e+02
+            m_{J/#Psi}    3.0905e+00 +/-  3.45e-04
+             sigma_1_A    4.3812e-02 +/-  3.21e-04
+                   sl1   -1.7678e-01 +/-  7.66e-03
+
+ *** NLL : -983594.64245873
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/Mass/Mass_Fixed_pt6.5-8.5_y1.6-2.4_muPt0.0_centrality0-180_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+# STAGE: massFit
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'MassFit_FixPar_Data.C(6.5,8.5,1.6,2.4,0,180)'
+

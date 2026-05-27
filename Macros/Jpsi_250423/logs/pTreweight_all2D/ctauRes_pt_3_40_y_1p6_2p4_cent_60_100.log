@@ -1,0 +1,50 @@
+
+Processing CtauRes.C(3,40,1.6,2.4,60,100)...
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+******** New Combined Dataset ***********
+RooRealVar::ctau3DRes = 6.11409  L(-100000 - 100000) 
+
+*************** Start Res Fit *****************
+
+N_Jpsi: 1e+08+/-0
+NBins: 72
+Fit Range: -10 - 0
+0.0148351 to 8.43757e+08
+###
+Tot evt: (42034)
+Res evt: (41738)
+lost evt: (99.2958)%, 41738evts
+Min: -10, Max: 0
+s1: 0.981239
+
+************* Finished Sig Res Fit ****************
+
+Info in <TCanvas::Print>: pdf file figs/2DFit_No_Weight/CtauRes/CtauRes_pt3.0-40.0_y1.6-2.4_muPt0.0_centrality60-100_PRw_Effw0_Accw0_PtW0_TnP0.pdf has been created
+
+  RooFitResult: minimized FCN value: -108411, estimated distance to minimum: 29.2306
+                covariance matrix quality: Unknown, matrix was externally provided
+                Status : MINIMIZE=-1 HESSE=4 HESSE=4 
+
+    Constant Parameter    Value     
+  --------------------  ------------
+                   One    1.0000e+00
+         ctau1_CtauRes    0.0000e+00
+         ctau2_CtauRes    0.0000e+00
+         ctau3_CtauRes    0.0000e+00
+
+    Floating Parameter  InitialValue    FinalValue +/-  Error     GblCorr.
+  --------------------  ------------  --------------------------  --------
+                N_Jpsi    1.0000e+08    1.7178e+04 +/-  1.24e+02  <none>
+            f2_CtauRes    3.1000e-01    5.2584e-01 +/-  1.14e+00  <none>
+             f_CtauRes    3.1000e-01    7.9511e-01 +/-  2.74e-01  <none>
+          rS21_CtauRes    8.0000e-01    1.2863e+00 +/-  1.36e+00  <none>
+          rS32_CtauRes    2.2000e+00    2.3551e+00 +/-  1.59e+00  <none>
+            s1_CtauRes    5.0000e-01    9.8124e-01 +/-  1.47e-01  <none>
+
+# STAGE: ctauRes
+# CMD: /opt/conda/envs/root618/bin/root -l -b -q 'CtauRes.C(3,40,1.6,2.4,60,100)'
+
